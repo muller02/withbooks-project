@@ -1,0 +1,35 @@
+.background-color\:main-4,
+.bg-color\:main-4{
+    background-color: var(--color-main-4) !important;
+}
+
+.background-color\:main-5,
+.bg-color\:main-5{
+    background-color: var(--color-main-5) !important;
+}
+
+.background-color\:main-6,
+.bg-color\:main-6{
+    background-color: var(--color-main-6) !important;
+}
+
+
+.background-color\:sub-1,
+.bg-color\:sub-1{
+background-color: var(--color-sub-1) !important;
+}
+
+.background-color\:sub-4,
+.bg-color\:sub-4{
+background-color: var(--color-sub-4) !important;
+}
+
+.background-color\:sub-5,
+.bg-color\:sub-5{
+background-color: var(--color-sub-5) !important;
+}
+
+.background-color\:sub-6,
+.bg-color\:sub-6{
+background-color: var(--color-sub-6) !important;
+}

@@ -1,0 +1,236 @@
+/* ===============Outline Toggle============== */
+.with-reg-page .n-toggle-type\:outline-box {
+    /* toggle-type:outline-box */
+    --toggle-outline-color: rgba(var(--rgb-base-10), 0.85);
+    --toggle-outline-background-color: var(--color-main-2);
+    --toggle-outline-border-color: var(--color-base-3);
+    --toggle-outline-checked-color: var(--color-main-6);
+    --toggle-outline-checked-background-color: var(--color-main-5);
+    --toggle-outline-checked-border-color: transparent;
+    border-radius: 12px;
+}
+.with-reg-page .n-toggle-type\:outline-box .n-toggle-status\:checked,
+.with-reg-page .n-toggle-type\:outline-box:checked,
+.with-reg-page .n-toggle-type\:outline-box:has(input:checked),
+.with-reg-page .with-reg-page .n-toggle-type\:outline.n-toggle-status\:checked,
+.with-reg-page .n-toggle-type\:outline:checked,
+.with-reg-page .n-toggle-type\:outline:has(input:checked),
+.with-reg-page .n-toggle\:outline-box.n-toggle-status\:checked,
+.n-toggle\:outline-box:checked,
+.n-toggle\:outline-box:has(input:checked),
+.with-reg-page .n-toggle\:outline.n-toggle-status\:checked,
+.with-reg-page .n-toggle\:outline:checked,
+.with-reg-page .n-toggle\:outline:has(input:checked) {
+    background-color: var(--color-main-5);
+    border-color: var(--toggle-outline-border-color-checked);
+    color: var(--toggle-outline-color-checked);
+}
+
+.with-reg-page .n-item {
+    /* item */
+    --item-padding: 24px;
+    --item-border-radius: 16px;
+    --item-border-color: var(--color-base-3);
+    background-color: var(--color-sub-1);
+    border-radius: var(--item-border-radius);
+    padding: var(--item-padding);
+}
+
+/* 기본: main-6 base-3   */
+.n-btn {
+    --btn-filled-background-color-default: var(--color-main-5);
+    --btn-filled-background-color-hover: var(--color-main-5);
+    --btn-filled-background-color-active: var(--color-main-6);
+    --btn-filled-border: 1px solid transparent;
+    --btn-filled-color: var(--color-base-1);
+}
+
+.n-textbox {
+    --textbox-border-color: var(--color-base-4);
+    --textbox-border-color-focus: var(--color-base-6);
+}
+.n-form {
+    /* textbox-status:success */
+    --textbox-border-color-success: var(--color-sub-5);
+}
+
+/* =============내가 만든 페이지 오버라이딩 section(withlist) Tabbar============== */
+.with-list .n-tabbar .n-tab.active,
+.with-list .n-tabbar-type\:underline > li.active > a,
+.with-list .n-tabbar-type\:underline > li.active > button,
+.with-list .n-tabbar > li.active > a,
+.with-list .n-tabbar > li.active > button,
+.with-list .n-tabbar\:underline > li.active > a,
+.with-list .n-tabbar\:underline > li.active > button {
+    --tabbar-border-width: 0 0 2px 0;
+    --tabbar-border-style: solid;
+    --tabbar-border-color: var(--color-base-3);
+    --tabbar-border-color-active: var(--color-base-8);
+
+    --tab-color-active: var(--color-base-8);
+}
+.with-list .n-tabbar .n-tab.active,
+.with-list .n-tabbar-type\:underline > li.active > a,
+.with-list .n-tabbar-type\:underline > li.active > button,
+.with-list .n-tabbar > li.active > a,
+.with-list .n-tabbar > li.active > button,
+.with-list .n-tabbar\:underline > li.active > a,
+.with-list .n-tabbar\:underline > li.active > button {
+    border-color: var(--tabbar-border-color-active);
+    color: var(--tab-color-active);
+}
+
+.with-list .n-item {
+    /* item */
+    --item-padding: 12px;
+    --item-border-radius: 16px;
+    --item-border-color: var(--color-base-3);
+    background-color: var(--color-base-0);
+    border-radius: var(--item-border-radius);
+    padding: var(--item-padding);
+}
+
+.with-list-sort-con .n-toggle-type\:outline-box {
+    /* toggle-type:outline-box */
+    --toggle-outline-color: rgba(var(--rgb-base-9), 0.85);
+    --toggle-outline-background-color: var(--color-sub-1);
+
+    --toggle-outline-checked-color: var(--color-sub-1);
+    --toggle-outline-checked-background-color: var(--color-sub-1);
+    --toggle-outline-checked-border-color: transparent;
+    border-radius: 20px;
+}
+.with-list-sort-con.n-toggle-type\:outline-box .n-toggle-status\:checked,
+.with-list-sort-con .n-toggle-type\:outline-box:checked,
+.with-list-sort-con .n-toggle-type\:outline-box:has(input:checked),
+.with-list-sort-con .n-toggle-type\:outline.n-toggle-status\:checked,
+.with-list-sort-con .n-toggle-type\:outline:checked,
+.with-list-sort-con .n-toggle-type\:outline:has(input:checked),
+.with-list-sort-con .n-toggle\:outline-box.n-toggle-status\:checked,
+.with-list-sort-con .n-toggle\:outline-box:checked,
+.with-list-sort-con .n-toggle\:outline-box:has(input:checked),
+.with-list-sort-con .n-toggle\:outline.n-toggle-status\:checked,
+.with-list-sort-con .n-toggle\:outline:checked,
+.with-list-sort-con .n-toggle\:outline:has(input:checked) {
+    background-color: var(--color-base-8);
+    border-color: var(--toggle-outline-border-color-checked);
+    color: var(--toggle-outline-color-checked);
+}
+
+/* -=====with-list 상세검색 ======= */
+.with-list .n-btn {
+    --btn-outline-background-color-default: var(--color-sub-1);
+    --btn-outline-background-color-hover: rgba(var(--rgb-base-10), 0.05);
+    --btn-outline-background-color-active: rgba(var(--rgb-base-10), 0.07);
+    --btn-outline-border: 1px solid var(--color-base-8);
+    --btn-outline-color: inherit;
+
+    border-radius: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 27px;
+}
+
+/* ========= with-list item  ========= */
+
+.with-list .n-list > li {
+    background-color: var(--color-sub-1);
+    border-radius: var(--list-item-border-radius);
+    padding: var(--list-item-padding-2);
+}
+
+/*  ========= with-tap-component =========  */
+.with-tap-component .n-tabbar {
+    --tabbar-border-width: 0 0 2px 0;
+    --tabbar-border-style: solid;
+    --tabbar-border-color: var(--color-sub-1);
+    --tabbar-border-color-active: var(--color-main-5);
+    --tab-color-active: var(--color-main-5);
+}
+.with-tap-component .n-tabbar li,
+.n-tabbar button {
+    height: 43px;
+}
+.with-tap-component ul li button:active {
+    color: red;
+}
+
+/*  ========= with-join-btn-component =========  */
+.with-join-btn-1 {
+    width: 648px;
+    height: 72px;
+    padding: 16px 12px;
+
+    /* btn-type:filled */
+    .n-btn,
+    .n-btn-type\:filled {
+        --btn-filled-background-color-default: var(--color-main-3);
+        --btn-filled-background-color-hover: var(--color-main-3);
+        --btn-filled-background-color-active: var(--color-main-4);
+        --btn-filled-border: 1px solid transparent;
+        --btn-filled-color: var(--color-main-5);
+        width: 624px;
+        height: 40px;
+    }
+}
+
+.with-join-btn-2 {
+    width: 648px;
+    height: 72px;
+    padding: 16px 12px;
+
+    .n-btn,
+    .n-btn-type\:filled {
+        --btn-filled-background-color-default: var(--color-main-5);
+        --btn-filled-background-color-hover: var(--color-main-6);
+        --btn-filled-background-color-active: var(--color-main-6);
+        --btn-filled-border: 1px solid transparent;
+        --btn-filled-color: var(--color-sub-1);
+        width: 624px;
+        height: 40px;
+    }
+}
+
+/* ========로그인=============== */
+
+.n-textbox {
+    /* textbox-size */
+    --textbox-padding-x: 1;
+    --textbox-input-height: 36px;
+    --textbox-textarea-min-height: 58px;
+
+    /* textbox-border-color */
+    --textbox-border-color: var(--color-base-3);
+
+    /* textbox-border-radius */
+    --textbox-border-radius: 6px;
+
+    /* textbox-border-width */
+    --textbox-underline-border-width: 1.6px;
+}
+
+/* 북쇼츠 글 등록 버튼 */
+.book-short-reg .n-btn {
+    --btn-filled-background-color-default: var(--color-main-2);
+    --btn-filled-background-color-hover: var(--color-main-1);
+    --btn-filled-background-color-active: var(--color-main-3);
+    --btn-filled-border: 1px solid transparent;
+    --btn-filled-color: var(--color-base-1);
+}
+
+/* 검색  */
+.book-search-textbox .n-textbox {
+    /* textbox-size */
+    --textbox-padding-x: 12px;
+    --textbox-input-height: 36px;
+    --textbox-textarea-min-height: 58px;
+
+    /* textbox-border-color */
+    --textbox-border-color: var(--color-main-4);
+
+    /* textbox-border-radius */
+    --textbox-border-radius: 6px;
+
+    /* textbox-border-width */
+    --textbox-underline-border-width: 1.6px;
+}

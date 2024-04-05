@@ -1,0 +1,64 @@
+.main-menu-width{
+    width: 100%;
+}
+.main-menu-height{
+    height: 62px;
+}
+
+.main-menu-padding{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.main-menu-font{
+    font-size: 12px;
+    color:rgb(184, 184, 184) ;
+}
+
+.main-menu-list li{
+    display: block;
+
+
+}
+.menu-icon{
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+    display: block;
+
+    margin-bottom: 8px;
+
+
+}
+
+.icon\:with{
+    background-image: url(/icon/with.svg);
+    width: 27.23px;
+    height: 20px;
+
+}
+.icon\:book-short{
+    background-image: url(/icon/bookshorts.svg);
+    width: 18.75px;
+    height: 18.75px;
+}
+
+.icon\:my-library{
+    background-image: url(/icon/with.svg);
+    width: 34px;
+    height: 20px;
+}
+
+.icon\:book-search{
+    background-image: url(/icon/book-search.svg);
+    width: 20px;
+    height: 20px;
+
+}
+.icon\:my{
+    background-image: url(/icon/my.svg);
+    width: 20px;
+    height: 20px;
+}
+

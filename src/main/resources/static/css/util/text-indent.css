@@ -1,0 +1,4 @@
+text-indent\:-1,
+txt-indent\:-1{
+    text-indent: var(--gap-hide) !important;
+}

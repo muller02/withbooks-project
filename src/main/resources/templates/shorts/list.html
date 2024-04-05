@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{inc/layout.html}"
+>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css"
+        />
+        <link rel="stylesheet" type="text/css" href="/css/var.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="/css/util/border-radius.css"
+        />
+        <style>
+            .shorts > div {
+                --height-1: 40px;
+                --width-1: 32px;
+            }
+
+            .pager {
+                --height-1: 3px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main layout:fragment="main" class="min-w:7 px:3 pb:11">
+            <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
+                <h1 class="d:none">북쇼츠</h1>
+
+                <span class="lg:d:flex lg:ai:start">
+                    <span>
+                        <section class="shorts d:flex jc:center ai:center px:1">
+                            <h1 class="d:none">북쇼츠 작성관련 정보</h1>
+                            <div class="h:1 w:1 border-radius:full of:hidden">
+                                <img
+                                    class="obj-fit:contain h:10p w:10p"
+                                    src="/image/shorts/profile.png"
+                                    alt="프로필사진"
+                                />
+
+
+                            </div>
+                            <span class="d:flex ai:center ml:1">
+                                <div>
+                                    <a
+                                        href=""
+                                        class="font-size:2 font-weight:3 ml:1"
+                                        >뉴렉이</a
+                                    >
+                                </div>
+                                <div
+                                    class="as:end font-size:1 color:base-4 ml:1"
+                                >
+                                    10분 전
+                                </div>
+                            </span>
+                            <div class="ml:auto">
+                                <a href="" class="font-size:1 color:base-4"
+                                    >도둑맞은 집중력</a
+                                >
+                            </div>
+                        </section>
+
+                        <section class="d:flex jc:end">
+                            <h1 class="d:none">북쇼츠 팝업버튼</h1>
+                            <div>
+                                <a
+                                    href=""
+                                    class="icon icon:dots_three_outline_vertical_fill my:3"
+                                    >점점점</a
+                                >
+                            </div>
+                        </section>
+
+                        <article class="max-h:8">
+                            <h1 class="d:none">북쇼츠 본문</h1>
+                            <p class="ml:2 mr:2 ln-h:1.5 fs:2">
+                                모든 국민은 그 보호하는 자녀에게 적어도
+                                초등교육과 법률이 정하는 교육을 받게 할 의무를
+                                진다. 군인·군무원·경찰공무원 기타 법률이 정하는
+                                자가 전투·훈련등 직무집행과 관련하여 받은 손해에
+                                대하여는 법률이 정하는 보상외에 국가 또는
+                                공공단체에 공무원의 직무상 불법행위로 인한
+                                배상은 청구할 수 없다.<br /><br />
+
+                                모든 국민은 헌법과 법률이 정한 법관에 의하여
+                                법률에 의한 재판을 받을 권리를 가진다. 대통령의
+                                선거에 관한 사항은 법률로 정한다. 헌법개정은
+                                국회재적의원 과반수 또는 대통령의 발의로
+                                제안된다.<br /><br />
+
+                                대한민국은 국제평화의 유지에 노력하고 침략적
+                                전쟁을 부인한다. 모든 국민은 거주·이전의 자유를
+                                가진다. 국무총리는 국무위원의 해임을 대통령에게
+                                건의할 수 있다.<br /><br />
+
+                                대통령은 전시·사변 또는 이에 준하는
+                                국가비상사태에 있어서 병력으로써 군사상의 필요에
+                                응하거나 공공의 안녕질서를 유지할 필요가 있을
+                                때에는 법률이 정하는 바에 의하여 계엄을 선포할
+                                수 있다.<br /><br />
+                            </p>
+                        </article>
+                    </span>
+
+                    <section
+                        class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6"
+                    >
+                        <h1 class="d:none">북쇼츠 본문 이미지</h1>
+                        <div class="h:8 w:8 lg:w:6 mb:1">
+                            <img
+                                src="/image/shorts/uie.jpg"
+                                alt="본문 이미지"
+                                class="h:10p w:10p bd-radius:1"
+                            />
+                        </div>
+                        <section class="pager as:stretch">
+                            <h1 class="d:none">이미지 페이저</h1>
+                            <ul class="d:flex of:hidden">
+                                <li
+                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 h:1"
+                                >
+                                    1
+                                </li>
+                                <li
+                                    class="bd-radius:2 fl-grow:1 bg-color:base-7 ml:2 h:1"
+                                >
+                                    2
+                                </li>
+                                <li
+                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"
+                                >
+                                    3
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                </span>
+
+                <section class="d:flex ai:center jc:end mr:2 mt:5">
+                    <h1 class="d:none">댓글/좋아요 버튼</h1>
+                    <div class="d:flex fl-dir:column ai:center">
+                        <div class="icon icon:chats"></div>
+                        <div class="fs:2 fw:3">132</div>
+                    </div>
+                    <div class="d:flex fl-dir:column ai:center ml:5">
+                        <div class="icon icon:heart"></div>
+                        <div class="fs:2 fw:3">50.2M</div>
+                    </div>
+                </section>
+            </section>
+            <section
+                class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6"
+                th:each="s : ${list}"
+            >
+
+                <h1 class="d:none">북쇼츠</h1>
+
+                <span class="lg:d:flex lg:ai:start">
+                    <span class="d:block w:100p">
+                        <section class="shorts d:flex jc:center ai:center px:1">
+                            <h1 class="d:none">북쇼츠 작성관련 정보</h1>
+                            <div class="h:1 w:1 border-radius:full of:hidden">
+                                <img
+                                    class="obj-fit:contain h:10p w:10p"
+                                    src="/image/shorts/profile.png" th:src="@{|/image/shorts/${s.userImg}|}"
+                                    alt="프로필사진"
+                                />
+                            </div>
+
+                            <span class="d:flex ai:center ml:1">
+                                <div>
+                                    <a
+                                        href=""
+                                        class="font-size:2 font-weight:3 ml:1" th:text="${s.userNickname}"
+                                        >뉴렉이</a
+                                    >
+                                </div>
+                                <div
+                                    class="as:end font-size:1 color:base-4 ml:1" th:text="${s.regDate}"
+                                >
+                                    10분 전
+                                </div>
+                            </span>
+                            <div class="ml:auto">
+                                <a href="" class="font-size:1 color:base-4" th:text="${s.bookTitle}" th:href="@{/book/detail(id=${s.bookId})}"
+                                    >도둑맞은 집중력</a
+                                >
+                            </div>
+                        </section>
+
+                        <section class="d:flex jc:end">
+                            <h1 class="d:none">북쇼츠 팝업버튼</h1>
+                            <div>
+                                <a
+                                    href=""
+                                    class="icon icon:dots_three_outline_vertical_fill my:3"
+                                    >점점점</a
+                                >
+                            </div>
+                        </section>
+
+                        <article class="max-h:8">
+                            <h1 class="d:none">북쇼츠 본문</h1>
+                            <p
+                                class="ml:2 mr:2 ln-h:1.5 fs:2"
+                                th:utext="${s.content}"
+                            >
+                                모든 국민은 그 보호하는 자녀에게 적어도
+                                초등교육과 법률이 정하는 교육을 받게 할 의무를
+                                진다. 군인·군무원·경찰공무원 기타 법률이 정하는
+                                자가 전투·훈련등 직무집행과 관련하여 받은 손해에
+                                대하여는 법률이 정하는 보상외에 국가 또는
+                                공공단체에 공무원의 직무상 불법행위로 인한
+                                배상은 청구할 수 없다.<br /><br />
+
+                                모든 국민은 헌법과 법률이 정한 법관에 의하여
+                                법률에 의한 재판을 받을 권리를 가진다. 대통령의
+                                선거에 관한 사항은 법률로 정한다. 헌법개정은
+                                국회재적의원 과반수 또는 대통령의 발의로
+                                제안된다.<br /><br />
+
+                                대한민국은 국제평화의 유지에 노력하고 침략적
+                                전쟁을 부인한다. 모든 국민은 거주·이전의 자유를
+                                가진다. 국무총리는 국무위원의 해임을 대통령에게
+                                건의할 수 있다.<br /><br />
+
+                                대통령은 전시·사변 또는 이에 준하는
+                                국가비상사태에 있어서 병력으로써 군사상의 필요에
+                                응하거나 공공의 안녕질서를 유지할 필요가 있을
+                                때에는 법률이 정하는 바에 의하여 계엄을 선포할
+                                수 있다.<br /><br />
+                            </p>
+                        </article>
+                    </span>
+
+                    <section
+                        class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6"
+                    >
+                        <h1 class="d:none">북쇼츠 본문 이미지</h1>
+                        <div class="h:8 w:8 lg:w:6 mb:2" th:each="i : ${s.img}" >
+
+                            <img
+                                src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
+                                alt="본문 이미지"
+                                class="h:10p w:10p bd-radius:1"
+                                th:src="'/image/shorts/다진/' + ${i}"
+                            />
+<!--                            <div th:text="${s.img[0]}"></div>-->
+<!--                                        <div th:text="${s.img[num]}"></div>-->
+
+                               <div th:text="${i}"></div>
+                            <div th:text="${iStat}"></div>
+
+                        </div>
+                        <section class="pager as:stretch">
+                            <h1 class="d:none">이미지 페이저</h1>
+                            <ul class="d:flex of:hidden">
+                                <li
+                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 h:1"
+                                >
+                                    1
+                                </li>
+                                <li
+                                    class="bd-radius:2 fl-grow:1 bg-color:base-7 ml:2 h:1"
+                                >
+                                    2
+                                </li>
+                                <li
+                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"
+                                >
+                                    3
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                </span>
+
+                <section class="d:flex ai:center jc:end mr:2 mt:5">
+                    <h1 class="d:none">댓글/좋아요 버튼</h1>
+                    <div class="d:flex fl-dir:column ai:center">
+                        <div class="icon icon:chats"></div>
+                        <div class="fs:2 fw:3" th:text="${s.commentCnt}">
+                            132
+                        </div>
+                    </div>
+                    <div class="d:flex fl-dir:column ai:center ml:5">
+                        <div class="icon icon:heart"></div>
+                        <div class="fs:2 fw:3" th:text="${s.likeCnt}">
+                            50.2M
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h1>플로팅버튼</h1>
+                    <a
+                            href="/shorts/reg"
+                            class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
+                    ></a>
+                </section>
+            </section>
+
+        </main>
+    </body>
+</html>

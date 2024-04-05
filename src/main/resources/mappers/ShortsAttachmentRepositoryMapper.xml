@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.ShortsAttachmentRepository">
+
+
+	<insert id="save" parameterType="ShortsAttachment">
+		INSERT INTO shorts_attachment (
+			 img,shorts_id
+		)
+		VALUES (
+ 		#{img}, #{ShortsId}
+		)
+	</insert>
+
+	<select id="findAll" resultType="ShortsAttachment" >
+		select 
+			* 
+		from shorts_attachment
+	</select>
+
+
+	<select id="findAllById" resultType="ShortsAttachment" >
+		select
+		*
+		from shorts_attachment
+		where shorts_id = #{id}
+	</select>
+
+
+</mapper>

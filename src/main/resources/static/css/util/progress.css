@@ -1,0 +1,11 @@
+/* progress.css */
+.n-progress {
+    --progress-height: 6px;
+    --progress-border-radius: 999px;
+    --progress-background-color: rgba(var(--rgb-base-6), 0.2);
+
+    --progressbar-color-main: var(--color-main-5);
+    --progressbar-color-sub: var(--color-sub-1);
+    --progressbar-color-accent: var(--color-accent-1);
+    --progressbar-color-base: var(--color-base-6);
+}

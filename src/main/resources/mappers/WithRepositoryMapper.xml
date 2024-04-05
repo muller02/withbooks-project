@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.WithRepository">
+
+
+
+	<select id="findAll" resultType="With" >
+		select * from `with`
+
+		<where>
+			<if test="categoryId !=null">
+				category_id IN
+				<foreach collection="categoryId" item="arr"  open="(" close=")" separator=",">
+					#{arr}
+				</foreach>
+
+			</if>
+
+		</where>
+	</select>
+
+
+
+<!--	<select id="findById" resultType="Category" parameterType="Long" >-->
+<!--		select * from sub_category-->
+<!--	<where>-->
+<!--		<if test="id != null">-->
+<!--			  cid = #{id};-->
+<!--		</if>-->
+
+<!--	</where>-->
+
+<!--	</select>-->
+
+
+
+</mapper>

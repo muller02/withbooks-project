@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{inc/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            --width-8: 414px;
+        }
+
+        .bookmark-icon{
+            --top-1: -4px;
+            --left-1: 4px;
+            --icon-size-5: 48px;
+        }
+
+        .book-img{
+            --width-8: 156px;
+            --height-4: 208px;
+        }
+
+
+    </style>
+</head>
+<body>
+<main class="min-width:8 p:3" layout:fragment="main">
+    <section class="pos:relative py:3 d:flex flex-direction:column md:flex-direction:row lg:flex-direction:column jc:center ai:center w:100p border-radius:10 bg-color:main-1 fl-wrap:wrap">
+        <h1 class="d:none">도둑 맞은 집중력</h1>
+
+        <div class="pos:relative">
+            <div><input type="checkbox" class="bookmark-icon icon icon:bookmark_simple icon-size:5 position:absolute top:1 left:1"></input></div>
+            <img class="book-img h:4 w:3" src="/img/bookshorts/detail/도둑맞은집중력.png" th:src="${book.cover}" alt="책이미지">
+        </div>
+        <span class="md:ml:8 lg:ml:0">
+            <div class="d:flex flex-direction:column">
+                <div class="mt:5s:6 fw:3 al-self:center" th:text="${book.title}">도둑 맞은 집중력</div>
+                <span class="d:flex al-self:center">
+                    <span class="d:flex">
+                        <div class="fs:1 color:base-4 " th:text="${book.author}">마틴 푸크너</div>
+                        <div class="fs:1 color:base-4 ">(지은이),</div>
+                    </span>
+                    <span class="d:flex ml:1">
+                        <div class="fs:1 color:base-4 ">허진</div>
+                        <div class="fs:1 color:base-4 ">(옮긴이)</div>
+                    </span>
+                </span>
+            </div>
+            <div class="w:100p">
+                <div class="d:flex jc:center mt:6 w:100p">
+                    <div><a class="deco deco-size:2 deco-mr:0 icon:check_circle_fill fs:3" href="" th:text="${book.publisher}">어크로스</a></div>
+                    <div class="ml:10 deco deco-size:2 deco-mr:0 icon:calendar_blank fs:3" th:text="${book.pubDate}">2023-04-28</div>
+                </div>
+                <div class="d:flex jc:center mt:6">
+                    <div class="deco deco-size:2 deco-mr:0 icon:check_circle_fill fs:3">인문/사회학</div>
+                    <div class="ml:10 deco deco-size:2 deco-mr:0 icon:check_circle_fill fs:3" th:text="${book.price}">18,800원</div>
+                </div>
+                <div class="d:flex jc:center mt:6">
+                    <div class="deco deco-size:2 deco-mr:0 icon:check_circle_fill fs:3" th:text="${book.isbn13}">9791167740984</div>
+                    <div class="ml:10 deco deco-size:2 deco-mr:0 icon:check_circle_fill fs:3">464</div>
+                </div>
+            </div>
+        </span>
+    </section>
+
+    <section class="mt:10 p:3  border-radius:8 border border-color:base-3">
+        <h1 class="deco deco-mr:1 deco icon:shopping_cart_simple fs:4 fw:3">구매하기 / 대여하기</h1>
+        <div class="mt:2"><a class="fs:5 fw:3" href="" th:href="${book.purchaseLink}">알라딘 구매 링크</a></div>
+    </section>
+
+    <section class="mt:10 p:3 border-radius:9 border border-color:base-3">
+        <div class="d:flex jc:space-between px:1">
+            <h1 class="deco deco-mr:1 deco icon:file fs:4 fw:3">소개 간단히 보기</h1>
+            <div><a class="deco-size:1 deco-pos:right color:main-6 fs:1 fw:1 deco icon:arrow_right" href="" th:href="@{/shorts/list(id=${book.id})}">북쇼츠 보러 가기</a></div>
+        </div>
+        <p class="mt:2 fs:2" th:text="${book.description}">▶ 『돈의 속성』 300쇄 기념 개정증보판 발행!<br>▶ 『돈의 속성』 300쇄 기념, 김승호 회장의 추가 메시지를 담다!<br>▶ 중국, 일본, 대만, 태국 4개국 출간!이 책은 초판 발행 후, 경제경영 필도서로 자리매김한 『돈의 속성』 300쇄 기념 개정증보판이다.300쇄에 맞춰 코로나19로 바뀐 경제상황과 돈에 관한 김승호 회장의 추가 메시지를 담았다.</p>
+    </section>
+
+    <section class="mt:10 p:3 border-radius:9 border border-color:base-3 ">
+        <h1 class="fs:4 fw:3 deco icon:user">이 책으로 토론한 위드</h1>
+        <section class="mt:3 d:flex">
+            <h1 class="d:none">책에 퐁당</h1>
+            <div><img class="h:2 w:2 bd-radius:6" src="/img/bookshorts/detail/뚱랑이.png" alt="위드이미지"></div>
+            <div class="ml:3 d:flex flex-direction:column w:100p">
+                <div class="fs:5 fw:3">책에 퐁당</div>
+                <div class="d:flex mt:2">
+                    <span class="deco icon:info_fill deco-size:1 deco-mr:0 d:flex">
+                        <div class="fs:1 color:base-5">5명</div>
+                        <div class="fs:1 color:base-5">/12명</div>
+                    </span>
+                    <div class="deco icon:info_fill deco-size:1 deco-ml:2 deco-mr:0 fs:1 color:base-5">월 1회</div>
+                    <div class="deco icon:info_fill deco-size:1 deco-ml:2 deco-mr:0 fs:1 color:base-5">노고산동</div>
+                </div>
+                <p class="fs:3  mt:2 of:hidden"><span class="ln-clamp:2">월 1회 책을 읽고 생각을 나누는 어쩌구 저쩌구 어쩌구 저쩌구</span></p>
+                <div class="al-self:end mt:1 deco icon:caret_right deco-size:1 deco-color:base-4 deco-pos:right deco-ml:0"><a class="fs:1 color:base-4" href="">더보기</a></div>
+            </div>
+        </section>
+    </section>
+
+</main>
+
+</body>
+</html>

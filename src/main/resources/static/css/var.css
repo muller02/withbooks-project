@@ -1,0 +1,190 @@
+:root{
+    
+    /* ======================color============================== */
+
+    --color-main-1: #ECF0FE;
+    --color-main-2: #D8E0FD;
+    --color-main-3: #C5D1FC;
+    --color-main-4: #8BA3F8;        /*	background-color.css, border-color.css, color.css 유틸 추가 완료 */
+    --color-main-5: #4F74F5;        /*	background-color.css, border-color.css, color.css 유틸 추가 완료 */
+    --color-main-6: #2B56F3;        /*	background-color.css, border-color.css, color.css 유틸 추가 완료 */   
+
+
+    --rgb-main-1: 236, 240, 254;
+    --rgb-main-2: 216, 224, 253;
+    --rgb-main-3: 197, 209, 252;
+    --rgb-main-4: 139, 163, 248;        /*	background-color.css, border-color.css, color.css 유틸 추가 완료 */
+    --rgb-main-5: 79, 116, 245;        /*	background-color.css, border-color.css, color.css 유틸 추가 완료 */
+    --rgb-main-6: 43, 86, 243;        /*	background-color.css, border-color.css, color.css 유틸 추가 완료 */   
+
+
+
+    --color-accent-1: rgb(252, 74, 74);
+    --rgb-accent-1: 252, 74, 74;
+
+
+
+    --color-base-1: #ffffff;
+    --color-base-2: #ebebeb;
+    --color-base-3: #d6d6d6;
+    --color-base-4: #b8b8b8;
+    --color-base-5: #999999;
+    --color-base-6: #7a7a7a;
+    --color-base-7: #525252;
+    --color-base-8: #3c3c3c;
+    --color-base-9:#000000;
+
+    --rgb-base-1: 246, 246, 247;
+    --rgb-base-2: 235, 235, 235;
+    --rgb-base-3: 214, 214, 214;
+    --rgb-base-4: 184, 184, 184;
+    --rgb-base-5: 153, 153, 153;
+    --rgb-base-6: 122, 122, 122;
+    --rgb-base-7: 82, 82, 82;
+    --rgb-base-8: 60, 60, 60;
+    --rgb-base-9: 0, 0, 0;
+
+    /* 서브 숫자는 레벨이 아님 */
+    --color-sub-1:#FFFFFF;
+    --color-sub-2:#AAAABC;
+    --color-sub-3: #495057;
+    --color-sub-4:#0F1419;
+    --color-sub-5:#2FB916;
+    --color-sub-6:#9D9D9D;
+
+    --rgb-sub-1:255, 255, 255;
+    --rgb-sub-2:170, 170, 188;
+    --rgb-sub-3: 73, 80, 87;
+    --rgb-sub-4:15, 20, 25;
+    --rgb-sub-5:47, 185, 22;
+    --rgb-sub-6:57, 157, 157;
+
+
+    /*=====================box-shadow=============== */
+
+    --box-shadow-1: 2px 14px 4px 0px rgba(157, 157, 157, 0.08); 
+    
+
+    /*===================height===================== */
+    --height-0: 0px;
+    --height-1: 50px;
+    --height-2: 100px;
+    --height-3: 150px;
+    --height-4: 200px;
+    --height-5: 250px;
+    --height-6: 300px;
+    --height-7: 350px;
+    --height-8: 400px;
+    --height-9: 450px;
+    --height-10: 500px;
+
+
+
+
+   /* ======================size============================== */
+
+    --border-radius-0: 0;
+    --border-radius-1: 2px;
+    --border-radius-2: 4px;
+    --border-radius-3: 6px;
+    --border-radius-4: 8px;
+    --border-radius-5: 10px;        /*	border-radius.css 유틸 추가 완료 */
+    --border-radius-6: 12px;        /*	border-radius.css 유틸 추가 완료 */
+    --border-radius-7: 14px;        /*	border-radius.css 유틸 추가 완료 */
+    --border-radius-8: 16px;        /*	border-radius.css 유틸 추가 완료 */
+    --border-radius-9: 18px;        /*	border-radius.css 유틸 추가 완료 */
+    --border-radius-10: 20px;       /*	border-radius.css 유틸 추가 완료 */
+    --border-radius-11: 30px;       /*  border-radius.css 유틸 추가 완료 */
+    --border-radius-12: 40px;       /*	border-radius.css 유틸 추가 완료 */
+
+    
+    --gap-hide: -9999px;            /*	text-indent.css 유틸 추가 완료 */ 
+
+
+    
+
+
+
+
+
+   /* ======================icon============================== */
+
+   
+    
+
+    /* 
+
+    이것들은 일단 보류. 필요하면 오버라이드.
+
+    --width-0
+    --height-0
+
+    --top
+    --bottom
+    --right
+    --left
+    
+
+
+    --border-width-1
+    --box-shadow-1
+    -right-1
+    --bottom-1
+
+    */
+
+    /* 임시 */
+    --gap-11: 64px;
+
+    .padding-bottom\:11,
+    .p-bottom\:11,
+    .pb\:11 {
+        padding-bottom: var(--gap-11) !important;
+    }
+
+
+
+
+
+
+}
+
+.icon\:withd::before,
+.icon\:withd::after {
+    -webkit-mask-image: url("/sicon/with.svg");
+    mask-image: url("/icon/with.svg");
+}
+
+.icon\:book-shortd::before,
+.icon\:book-shortd::after {
+    -webkit-mask-image: url("/icon/bookshorts.svg");
+    mask-image: url("/icon/bookshorts.svg");
+}
+
+.icon\:my-libraryd::before,
+.icon\:my-libraryd::after {
+    -webkit-mask-image: url("/icon/my-library.svg");
+    mask-image: url("/icon/my-library.svg");
+}
+
+.icon\:book-logd::before,
+.icon\:book-logd::after {
+    -webkit-mask-image: url("/icon/book-log.svg");
+    mask-image: url("/icon/book-log.svg");
+}
+
+
+.icon\:book-searchd::before,
+.icon\:book-searchd::after {
+    -webkit-mask-image: url("/icon/book-search.svg");
+    mask-image: url("/icon/book-search.svg");
+}
+
+.icon\:myd::before,
+.icon\:myd::after {
+    -webkit-mask-image: url("/icon/my.svg");
+    mask-image: url("/icon/my.svg");
+}
+.icon-color\:main-5:before {
+    background-color: var(--color-main-5)
+}
