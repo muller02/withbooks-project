@@ -1,0 +1,8 @@
+# 공통설정
+spring:
+  profiles:
+    active:
+      - dev
+
+  application:
+    name: withbooks
