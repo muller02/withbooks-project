@@ -30,9 +30,12 @@
                 --height-1: 3px;
             }
         </style>
+
+        <script src="/js/shorts/list.js"></script>
     </head>
 
     <body>
+
         <main layout:fragment="main" class="min-w:7 px:3 pb:11">
             <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
                 <h1 class="d:none">북쇼츠</h1>
@@ -71,14 +74,37 @@
                             </div>
                         </section>
 
-                        <section class="d:flex jc:end">
+                         <section class="d:flex jc:end">
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
-                            <div>
-                                <a
-                                    href=""
-                                    class="icon icon:dots_three_outline_vertical_fill my:3"
-                                    >점점점</a
+                            <div class="n-dropdown">
+                                <button
+                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn" id=""
+                                >점점점</button
                                 >
+
+                                 <ul class="dropdown-list">
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 icon:pencil_simple">
+                                              수정하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
+                                              삭제하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 deco-color:accent-2 icon:share_fat color:accent-2"
+                                            > 공유하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                 </ul>
                             </div>
                         </section>
 
@@ -159,6 +185,8 @@
                     </div>
                 </section>
             </section>
+
+
             <section
                 class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6"
                 th:each="s : ${list}"
@@ -201,12 +229,35 @@
 
                         <section class="d:flex jc:end">
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
-                            <div>
-                                <a
-                                    href=""
-                                    class="icon icon:dots_three_outline_vertical_fill my:3"
-                                    >점점점</a
+                            <div class="n-dropdown">
+                                <button
+                                    class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn"
+                                    >점점점</button
                                 >
+                                <ul class="dropdown-list	">
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 icon:pencil_simple">
+                                              수정하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                      <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2  icon:share_fat "
+                                            > 공유하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
+                                              삭제하기
+                                            </span>
+                                         </button>
+                                     </li>
+
+                                 </ul>
                             </div>
                         </section>
 
@@ -303,7 +354,7 @@
 
                 </section>
                 <section>
-                    <h1>플로팅버튼</h1>
+                    <h1 >플로팅버튼</h1>
                     <a
                             href="/shorts/reg"
                             class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
