@@ -30,10 +30,9 @@
             --height-1: 3px;
         }
 
-        .transform-x{
-            transform: translate(-124px);
+        .img-active{
+            display: block;
         }
-
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -144,7 +143,7 @@
                     </span>
 
                     <section
-                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6"
+                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 "
                     >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
                         <div class="h:8 w:8 lg:w:6 mb:1">
@@ -300,18 +299,18 @@
                     </span>
 
                     <section
-                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6" th:if="${s.img}"
-                    >
+                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section" th:if="${s.img}"
+                     >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <div class="h:8 w:8 lg:w:6 mb:2"  >
+                        <div class="h:8 w:8 lg:w:6 img-list mb:2 "  >
 
                            <img  th:each="i : ${s.img}"     th:classappend="${iStat.index} > 0 ? 'd:none' : ''"
                                  src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
                                  alt="본문 이미지"
                                  class="h:10p w:10p bd-radius:1 "
 
-                                 th:src="'/image/shorts/다진/' + ${i}" />
+                                 th:src="'/image/shorts/' + ${i}" />
 
                             <!--                            <div th:text="${s.img[0]}"></div>-->
                             <!--                                        <div th:text="${s.img[num]}"></div>-->
@@ -322,9 +321,9 @@
                         </div>
                         <section class="pager as:stretch">
                             <h1 class="d:none">이미지 페이저</h1>
-                            <ul class="d:flex of:hidden" th:if="${s.img}">
+                            <ul class="d:flex of:hidden img-paging" th:if="${s.img}">
                                         <li th:each="img : ${s.img}"
-                                            class="bd-radius:2 fl-grow:1   ml:2 h:1" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
+                                            class="bd-radius:2 fl-grow:1  ml:2 h:1" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
                                            </li>
                                 <!--                                <li-->
                                 <!--                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"-->
