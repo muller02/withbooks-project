@@ -18,7 +18,15 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="/js/shorts/reg.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
-
+    <script>
+            let bold = Quill.import('formats/bold');
+            bold.tagName = 'b';   // Quill uses <strong> by default
+            Quill.register(bold, true);
+            
+            let italic = Quill.import('formats/italic');
+            italic.tagName = 'i';   // Quill uses <em> by default
+            Quill.register(italic, true);
+    </script>
     <style>
         .w\:74 {
             width: 80px;
