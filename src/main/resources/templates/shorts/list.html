@@ -30,8 +30,10 @@
             --height-1: 3px;
         }
 
-        .img-active{
-            display: block;
+        .h7{
+            height: 7px;
+
+            cursor: pointer;
         }
     </style>
 
@@ -323,7 +325,7 @@
                             <h1 class="d:none">이미지 페이저</h1>
                             <ul class="d:flex of:hidden img-paging" th:if="${s.img}">
                                         <li th:each="img : ${s.img}"
-                                            class="bd-radius:2 fl-grow:1  ml:2 h:1" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
+                                            class="bd-radius:2 fl-grow:1  ml:2 h7" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
                                            </li>
                                 <!--                                <li-->
                                 <!--                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"-->
