@@ -296,15 +296,14 @@
 
                         <div class="h:8 w:8 lg:w:6 img-list mb:2 "  >
 
-                           <img  th:each="i : ${s.img}"     th:classappend="${iStat.index} > 0 ? 'd:none' : ''"
-                                 src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
-                                 alt="본문 이미지"
-                                 class="h:10p w:10p bd-radius:1 "
-
-                                 th:src="'/image/shorts/' + ${i}" />
-
-                            <!--                            <div th:text="${s.img[0]}"></div>-->
-                            <!--                                        <div th:text="${s.img[num]}"></div>-->
+                            <img
+                                src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
+                                alt="본문 이미지"
+                                class="h:10p w:10p bd-radius:1"
+                                th:src="'/image/shorts/' + ${i}"
+                            />
+<!--                            <div th:text="${s.img[0]}"></div>-->
+<!--                                        <div th:text="${s.img[num]}"></div>-->
 
                             <!--                               <div th:text="${i}"></div>-->
                             <!--                            <div th:text="${iStat}"></div>-->
