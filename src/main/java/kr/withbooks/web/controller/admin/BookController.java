@@ -54,7 +54,7 @@ public class BookController {
     public String detail(){
 
 
-        return "admin/book/list";
+        return "admin/book/detail";
     }
 
     @GetMapping("reg")
