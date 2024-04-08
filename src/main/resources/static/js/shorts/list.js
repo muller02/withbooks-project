@@ -29,12 +29,12 @@ window.addEventListener("load", () => {
     shortSections.forEach(shortSection => {
         const commentBtn = shortSection.querySelector(".comment-btn");
         const commentGroup = shortSection.querySelector(".comment-group");
-
-        console.log(commentBtn);
-
+     
 
         // 각 commentBtn에 클릭 이벤트를 추가합니다.
         commentBtn.addEventListener("click", function (e) {
+
+            
             console.log('clicked');
             // 클릭 이벤트가 발생했을 때 commentGroup 요소에 "d:block" 클래스를 추가하여 보이도록 합니다.
 
