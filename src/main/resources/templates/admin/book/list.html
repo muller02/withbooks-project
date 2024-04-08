@@ -33,7 +33,11 @@
             <div class="d:flex justify-content:space-between mt:4">
                 <div>검색 결과 : 1032 건</div>
                 <div>
-                    <button type="button" class="n-btn n-btn-type:filled">책 등록</button>
+                    <button type="button" class="n-btn n-btn-type:filled">
+                        <a href="reg">
+                            책 등록
+                        </a>
+                    </button>
                     <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button>
                 </div>
             </div>
@@ -70,20 +74,6 @@
                         <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}">도둑 맞은 집중력</a></td>
                         <td th:text="${book.author}">홍길동</td>
                         <td th:text="${book.regDate}">2020-11-01</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">
-                            <label>
-                                <input type="checkbox" class="n-toggle n-toggle-type:check-box  n-toggle-size:1" />
-                            </label>
-                        </th>
-                        <th scope="row">2</th>
-                        <th scope="row">소설/시/희곡</th>
-                        <td><span class="icon icon:eye_slash"></span></td>
-                        <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" class="h:1 w:1" alt=""></td>
-                        <td><a href="detail">도둑 맞은 집중력</a></td>
-                        <td>홍길동</td>
-                        <td>2021-03-01</td>
                     </tr>
                 </tbody>
             </table>
