@@ -14,6 +14,7 @@
 				book_id = ${bookId}
 			</if>
 		</where>
+		order by id desc
 	</select>
 
 </mapper>
