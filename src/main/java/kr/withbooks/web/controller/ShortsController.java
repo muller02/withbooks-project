@@ -39,8 +39,6 @@ public class ShortsController {
 
     @GetMapping("list")
     public String list(Model model, @RequestParam(name = "id", required = false) Long bookId) {
-        // System.out.println();
-
 
         List<ShortsView> list = service.getView(bookId);
         // System.out.println(list);
@@ -60,25 +58,10 @@ public class ShortsController {
             }
         }
 
-
-
         model.addAttribute("list", list);
-
-
-
 
         return "shorts/list";
     }
-
-
-
-
-    // @GetMapping("bookreg")
-    // public String bookregForm(@RequestParam(name = "content", required = false) String content
-    // ) {
-
-    //     return "shorts/bookreg";
-    // }
 
     @GetMapping("reg")
     public String regForm(@RequestParam(name = "content", required = false) String content
