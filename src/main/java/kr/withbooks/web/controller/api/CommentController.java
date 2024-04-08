@@ -1,4 +1,4 @@
-package kr.withbooks.web.api;
+package kr.withbooks.web.controller.api;
 
 import java.util.List;
 
