@@ -347,7 +347,7 @@
         <section class="d:flex ai:center jc:end mr:2 mt:5">
             <h1 class="d:none">댓글/좋아요 버튼</h1>
             <div class="d:flex fl-dir:column ai:center">
-                <div class="icon icon:chats comment-btn"></div>
+                <div class="icon icon:chats comment-btn" th:data-shorts-id="${s.id}"></div>
                 <div class="fs:2 fw:3" th:text="${s.commentCnt}">
                     132
                 </div>
@@ -363,11 +363,11 @@
 
 
         <section
-                class="comment-group  d:flex fl-dir:column  bd-radius:4  p:3 d:none lg:pos:fixed lg:top:1 lg:right:1 lg:border lg:w:7 "
+                class="comment-group  d:flex fl-dir:column  bd-radius:4  p:3  lg:pos:fixed lg:top:1 lg:right:1 lg:border lg:w:7 "
         >
             <h1 class="d:none">북쇼츠 댓글</h1>
             <div class="comments color-base-9 fl-grow:1">
-                <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
+                <!-- <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
                     <div
                             class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
                     >
@@ -478,7 +478,7 @@
                         뭐만하면 남탓~ 보인다
                         보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <section class="d:flex jc:center mt:4">
