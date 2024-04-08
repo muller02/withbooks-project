@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,61 +13,7 @@
 </head>
 <body>
 
-    <header class="n-panel n-top-panel">
-        <div class="n-container px:4 lg:px:10 mx:auto">
-          <h1>책 검색</h1>
-        </div>
-      </header>
-      
-      <aside class="n-panel n-side-panel">
-        <nav class="n-panel n-menu-panel">
-          <h1 class="text-align:center mb:4">메뉴</h1>
-          <ul class="of:hidden">
-            <li class="bg-color:base-2 bd-radius:1">
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:house_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">HOME</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">책 검색</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">위드 관리</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">북쇼츠 관리</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">회원 관리</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-
-
-
-
-
-
-    <main class="n-panel n-main-panel">
+    <main  layout:fragment="main" class="n-panel n-main-panel">
         <div class="n-container px:4 lg:px:10">
             <h1 class="d:none">Main</h1>
 
