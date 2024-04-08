@@ -39,7 +39,7 @@ public class ShortsController {
 
     @GetMapping("list")
     public String list(Model model, @RequestParam(name = "id", required = false) Long bookId) {
-
+        // System.out.println();
 
 
         List<ShortsView> list = service.getView(bookId);

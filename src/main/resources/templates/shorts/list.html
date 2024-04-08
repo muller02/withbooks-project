@@ -1,84 +1,119 @@
 <!DOCTYPE html>
 <html
-    lang="en"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{inc/layout.html}"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/layout.html}"
 >
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
             rel="stylesheet"
             type="text/css"
             href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css"
-        />
-        <link rel="stylesheet" type="text/css" href="/css/var.css" />
-        <link
+    />
+    <link rel="stylesheet" type="text/css" href="/css/var.css" />
+    <link
             rel="stylesheet"
             type="text/css"
             href="/css/util/border-radius.css"
-        />
-        <style>
-            .shorts > div {
-                --height-1: 40px;
-                --width-1: 32px;
-            }
+    />
+    <style>
+        .shorts > div {
+            --height-1: 40px;
+            --width-1: 32px;
+        }
 
-            .pager {
-                --height-1: 3px;
-            }
-        </style>
-    </head>
+        .pager {
+            --height-1: 3px;
+        }
 
-    <body>
-        <main layout:fragment="main" class="min-w:7 px:3 pb:11">
-            <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
-                <h1 class="d:none">북쇼츠</h1>
+        .h7{
+            height: 7px;
 
-                <span class="lg:d:flex lg:ai:start">
+            cursor: pointer;
+        }
+        .transform-x{
+
+            transform: translateX(-122px);
+        }
+    </style>
+
+    <script src="/js/shorts/list.js"></script>
+</head>
+
+<body>
+
+<main layout:fragment="main" class="min-w:7 px:3 pb:11">
+    <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
+        <h1 class="d:none">북쇼츠</h1>
+
+        <span class="lg:d:flex lg:ai:start">
                     <span>
                         <section class="shorts d:flex jc:center ai:center px:1">
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
                             <div class="h:1 w:1 border-radius:full of:hidden">
                                 <img
-                                    class="obj-fit:contain h:10p w:10p"
-                                    src="/image/shorts/profile.png"
-                                    alt="프로필사진"
+                                        class="obj-fit:contain h:10p w:10p"
+                                        src="/image/shorts/profile.png"
+                                        alt="프로필사진"
                                 />
-
-
                             </div>
                             <span class="d:flex ai:center ml:1">
                                 <div>
                                     <a
-                                        href=""
-                                        class="font-size:2 font-weight:3 ml:1"
-                                        >뉴렉이</a
+                                            href=""
+                                            class="font-size:2 font-weight:3 ml:1"
+                                    >뉴렉이</a
                                     >
                                 </div>
                                 <div
-                                    class="as:end font-size:1 color:base-4 ml:1"
+                                        class="as:end font-size:1 color:base-4 ml:1"
                                 >
                                     10분 전
                                 </div>
                             </span>
                             <div class="ml:auto">
                                 <a href="" class="font-size:1 color:base-4"
-                                    >도둑맞은 집중력</a
+                                >도둑맞은 집중력</a
                                 >
                             </div>
                         </section>
 
-                        <section class="d:flex jc:end">
+                         <section class="d:flex jc:end">
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
-                            <div>
-                                <a
-                                    href=""
-                                    class="icon icon:dots_three_outline_vertical_fill my:3"
-                                    >점점점</a
+                            <div class="n-dropdown">
+                                <button
+                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn" id=""
+                                >점점점</button
                                 >
+
+                                 <ul class="dropdown-list">
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 icon:pencil_simple">
+                                              수정하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                          <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 deco-color:accent-2 icon:share_fat color:accent-2"
+                                            > 공유하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
+                                              삭제하기
+                                            </span>
+                                         </button>
+                                     </li>
+
+                                 </ul>
                             </div>
                         </section>
 
@@ -114,31 +149,31 @@
                     </span>
 
                     <section
-                        class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6"
+                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 "
                     >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
                         <div class="h:8 w:8 lg:w:6 mb:1">
                             <img
-                                src="/image/shorts/uie.jpg"
-                                alt="본문 이미지"
-                                class="h:10p w:10p bd-radius:1"
+                                    src="/image/shorts/uie.jpg"
+                                    alt="본문 이미지"
+                                    class="h:10p w:10p bd-radius:1"
                             />
                         </div>
                         <section class="pager as:stretch">
                             <h1 class="d:none">이미지 페이저</h1>
                             <ul class="d:flex of:hidden">
                                 <li
-                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 h:1"
+                                        class="bd-radius:2 fl-grow:1 bg-color:base-4 h:1"
                                 >
                                     1
                                 </li>
                                 <li
-                                    class="bd-radius:2 fl-grow:1 bg-color:base-7 ml:2 h:1"
+                                        class="bd-radius:2 fl-grow:1 bg-color:base-7 ml:2 h:1"
                                 >
                                     2
                                 </li>
                                 <li
-                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"
+                                        class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"
                                 >
                                     3
                                 </li>
@@ -147,74 +182,99 @@
                     </section>
                 </span>
 
-                <section class="d:flex ai:center jc:end mr:2 mt:5">
-                    <h1 class="d:none">댓글/좋아요 버튼</h1>
-                    <div class="d:flex fl-dir:column ai:center">
-                        <div class="icon icon:chats"></div>
-                        <div class="fs:2 fw:3">132</div>
-                    </div>
-                    <div class="d:flex fl-dir:column ai:center ml:5">
-                        <div class="icon icon:heart"></div>
-                        <div class="fs:2 fw:3">50.2M</div>
-                    </div>
-                </section>
-            </section>
-            <section
-                class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6"
-                th:each="s : ${list}"
-            >
+        <section class="d:flex ai:center jc:end mr:2 mt:5">
+            <h1 class="d:none">댓글/좋아요 버튼</h1>
+            <div class="d:flex fl-dir:column ai:center">
+                <div class="icon icon:chats"></div>
+                <div class="fs:2 fw:3">132</div>
+            </div>
+            <div class="d:flex fl-dir:column ai:center ml:5">
+                <div class="icon icon:heart"></div>
+                <div class="fs:2 fw:3">50.2M</div>
+            </div>
+        </section>
+    </section>
 
-                <h1 class="d:none">북쇼츠</h1>
 
-                <span class="lg:d:flex lg:ai:start">
+    <section
+            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6"
+            th:each="s : ${list}"
+    >
+
+        <h1 class="d:none">북쇼츠</h1>
+
+        <span class="lg:d:flex lg:ai:start" >
                     <span class="d:block w:100p">
-                        <section class="shorts d:flex jc:center ai:center px:1">
+                        <section  class="shorts d:flex jc:center ai:center px:1 "  >
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
                             <div class="h:1 w:1 border-radius:full of:hidden">
                                 <img
-                                    class="obj-fit:contain h:10p w:10p"
-                                    src="/image/shorts/profile.png" th:src="@{|/image/shorts/${s.userImg}|}"
-                                    alt="프로필사진"
+                                        class="obj-fit:contain h:10p w:10p"
+                                        src="/image/shorts/profile.png" th:src="@{|/image/shorts/${s.userImg}|}"
+                                        alt="프로필사진"
                                 />
                             </div>
 
                             <span class="d:flex ai:center ml:1">
                                 <div>
                                     <a
-                                        href=""
-                                        class="font-size:2 font-weight:3 ml:1" th:text="${s.userNickname}"
-                                        >뉴렉이</a
+                                            href=""
+                                            class="font-size:2 font-weight:3 ml:1" th:text="${s.userNickname}"
+                                    >뉴렉이</a
                                     >
                                 </div>
                                 <div
-                                    class="as:end font-size:1 color:base-4 ml:1" th:text="${s.regDate}"
+                                        class="as:end font-size:1 color:base-4 ml:1" th:text="${s.regDate}"
                                 >
                                     10분 전
                                 </div>
                             </span>
                             <div class="ml:auto">
                                 <a href="" class="font-size:1 color:base-4" th:text="${s.bookTitle}" th:href="@{/book/detail(id=${s.bookId})}"
-                                    >도둑맞은 집중력</a
+                                >도둑맞은 집중력</a
                                 >
                             </div>
                         </section>
 
                         <section class="d:flex jc:end">
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
-                            <div>
-                                <a
-                                    href=""
-                                    class="icon icon:dots_three_outline_vertical_fill my:3"
-                                    >점점점</a
+                            <div class="n-dropdown">
+                                <button
+                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn"
+                                >점점점</button
                                 >
+                                <ul class="dropdown-list	">
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 icon:pencil_simple">
+                                              수정하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                      <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2  icon:share_fat "
+                                            > 공유하기
+                                            </span>
+                                         </button>
+                                     </li>
+                                     <li>
+                                         <button>
+                                            <span class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
+                                              삭제하기
+                                            </span>
+                                         </button>
+                                     </li>
+
+                                 </ul>
                             </div>
                         </section>
 
                         <article class="max-h:8">
                             <h1 class="d:none">북쇼츠 본문</h1>
                             <p
-                                class="ml:2 mr:2 ln-h:1.5 fs:2"
-                                th:utext="${s.content}"
+                                    class="ml:2 mr:2 ln-h:1.5 fs:2"
+                                    th:utext="${s.content}"
                             >
                                 모든 국민은 그 보호하는 자녀에게 적어도
                                 초등교육과 법률이 정하는 교육을 받게 할 의무를
@@ -245,72 +305,73 @@
                     </span>
 
                     <section
-                        class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6"
-                    >
+                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section" th:if="${s.img}"
+                     >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
-                        <div class="h:8 w:8 lg:w:6 mb:2" th:each="i : ${s.img}" >
 
-                            <img
-                                src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
-                                alt="본문 이미지"
-                                class="h:10p w:10p bd-radius:1"
-                                th:src="'/image/shorts/다진/' + ${i}"
-                            />
-<!--                            <div th:text="${s.img[0]}"></div>-->
-<!--                                        <div th:text="${s.img[num]}"></div>-->
+                        <div class="slide h:8 w:8 of:hidden	pos:relative	tt" style="width: 300px">
+                            <div class="h:8 w:8 lg:w:6 img-list mb:2  images d:flex"  >
+                               <img  th:each="i : ${s.img}"
+                                     src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
+                                     alt="본문 이미지"
+                                     class="h:8 w:8 bd-radius:1 "
 
-                               <div th:text="${i}"></div>
-                            <div th:text="${iStat}"></div>
+                                     th:src="'/image/shorts/' + ${i}" />
+                            </div>
 
+                          <button class="back position:absolute w:1 h:1 border top:1	">이전</button>
+                            <button class="next position:absolute w:1 h:1 border top:1 right:0">다음</button>
                         </div>
                         <section class="pager as:stretch">
                             <h1 class="d:none">이미지 페이저</h1>
-                            <ul class="d:flex of:hidden">
-                                <li
-                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 h:1"
-                                >
-                                    1
-                                </li>
-                                <li
-                                    class="bd-radius:2 fl-grow:1 bg-color:base-7 ml:2 h:1"
-                                >
-                                    2
-                                </li>
-                                <li
-                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"
-                                >
-                                    3
-                                </li>
+                            <ul class="d:flex of:hidden img-paging" th:if="${s.img}">
+                                        <li th:each="img : ${s.img}"
+                                            class="bd-radius:2 fl-grow:1  ml:2 h7" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
+                                           </li>
+                                <!--                                <li-->
+                                <!--                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"-->
+                                <!--                                >-->
+                                <!--                                    2-->
+                                <!--                                </li>-->
+                                <!--                                <li-->
+                                <!--                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"-->
+                                <!--                                >-->
+                                <!--                                    3-->
+                                <!--                                </li>-->
                             </ul>
                         </section>
                     </section>
                 </span>
 
-                <section class="d:flex ai:center jc:end mr:2 mt:5">
-                    <h1 class="d:none">댓글/좋아요 버튼</h1>
-                    <div class="d:flex fl-dir:column ai:center">
-                        <div class="icon icon:chats"></div>
-                        <div class="fs:2 fw:3" th:text="${s.commentCnt}">
-                            132
-                        </div>
-                    </div>
-                    <div class="d:flex fl-dir:column ai:center ml:5">
-                        <div class="icon icon:heart"></div>
-                        <div class="fs:2 fw:3" th:text="${s.likeCnt}">
-                            50.2M
-                        </div>
-                    </div>
+        <section class="d:flex ai:center jc:end mr:2 mt:5">
+            <h1 class="d:none">댓글/좋아요 버튼</h1>
+            <div class="d:flex fl-dir:column ai:center">
+                <div class="icon icon:chats"></div>
+                <div class="fs:2 fw:3" th:text="${s.commentCnt}">
+                    132
+                </div>
+            </div>
+            <div class="d:flex fl-dir:column ai:center ml:5">
+                <div class="icon icon:heart"></div>
+                <div class="fs:2 fw:3" th:text="${s.likeCnt}">
+                    50.2M
+                </div>
+            </div>
 
-                </section>
-                <section>
-                    <h1>플로팅버튼</h1>
-                    <a
-                            href="/shorts/reg"
-                            class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
-                    ></a>
-                </section>
-            </section>
+        </section>
+        <section>
+            <h1 class="d:none">플로팅버튼</h1>
+            <a
+                    href="/shorts/reg"
+                    class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
+            ></a>
+            <a
+                    href="#main"
+                    class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:3"
+            ></a>
+        </section>
+    </section>
 
-        </main>
-    </body>
+</main>
+</body>
 </html>
