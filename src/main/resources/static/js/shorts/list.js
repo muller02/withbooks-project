@@ -23,6 +23,8 @@ window.addEventListener("load", () => {
 
 
     console.log(shortSections);
+
+
     // 댓글 창 관련
     shortSections.forEach(shortSection => {
         const commentBtn = shortSection.querySelector(".comment-btn");
@@ -36,6 +38,7 @@ window.addEventListener("load", () => {
             console.log('clicked');
             // 클릭 이벤트가 발생했을 때 commentGroup 요소에 "d:block" 클래스를 추가하여 보이도록 합니다.
 
+            
             commentGroup.classList.toggle("d:none");
         });
 
