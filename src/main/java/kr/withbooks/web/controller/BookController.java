@@ -1,7 +1,7 @@
 package kr.withbooks.web.controller;
 
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.service.BookService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.BookView;
+import kr.withbooks.web.service.BookService;
 
 
 @Controller
@@ -21,7 +23,7 @@ public class BookController {
 
     @GetMapping("/list")
     public String list(Model model) {
-        List<Book> list = service.getList();
+        List<BookView> list = service.getList();
 
         model.addAttribute("list", list);
         System.out.println(list);
