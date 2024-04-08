@@ -10,18 +10,20 @@ window.addEventListener("load", () => {
     const imgSection = document.querySelectorAll(".img-section");
 
     const divs = document.querySelectorAll(".tt");
-    // -------------------------- 슬라이드
 
+
+    // -------------------------- 슬라이드
     let pages = 0;//현재 인덱스 번호
     let positionValue = 0;//images 위치값
     const IMAGE_WIDTH = 400;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
-
 
     const backBtn = document.querySelector(".back")
     const nextBtn = document.querySelector(".next")
     const images = document.querySelector(".images")
 
 
+    // 댓글 창 관련
+    const commentBtn = s
             function next() {
                 if (pages< 3) {
                     backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
@@ -112,6 +114,9 @@ window.addEventListener("load", () => {
 
         });
     });
+
+
+
 
 
 });
