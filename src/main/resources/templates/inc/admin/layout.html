@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="md:d:flex lg:d:flex">
+            <!-- header부분 -->
+            <div th:replace="~{/inc/admin/header}"></div>
+
+            <!-- main-menu-bar 부분 -->
+            <div th:replace="~{/inc/admin/main-menu-bar}"></div>
+
+            <!-- main 부분 -->
+            <div layout:fragment="main" class="w:100p"></div>
+
+        </div>
+    </body>
+</html>

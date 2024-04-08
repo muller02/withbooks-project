@@ -1,15 +1,17 @@
 package kr.withbooks.web.service;
 
-import kr.withbooks.web.entity.Book;
-
 import java.util.List;
 
+import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.BookView;
+
 public interface BookService {
-    List<Book> getList();
+    List<BookView> getList();
+    
+    List<BookView> getList(String query);
 
     Book get(Long id);
 
-    List<Book> getList(String query);
 
     
 }
