@@ -31,8 +31,8 @@ public class BookServiceImp implements BookService {
 
 
     @Override
-    public Book get(Long id) {
-        Book book = repository.findById(id);
+    public BookView get(Long id) {
+        BookView book = viewRepository.findById(id);
 
         return book;
     }

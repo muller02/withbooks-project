@@ -2,7 +2,6 @@ package kr.withbooks.web.service;
 
 import java.util.List;
 
-import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.BookView;
 
 public interface BookService {
@@ -10,7 +9,7 @@ public interface BookService {
     
     List<BookView> getList(String query);
 
-    Book get(Long id);
+    BookView get(Long id);
 
 
     
