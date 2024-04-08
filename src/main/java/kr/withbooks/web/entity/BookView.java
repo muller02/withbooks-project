@@ -13,15 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BookView {
     private long id;
+    private long categoryId;
     private String title;
-    private String purchaseLink;
     private String author;
     private Date pubDate;
-    private String description;
+    private String publisher;
     private String isbn13;
+    private String description;
+    private String purchaseLink;
     private int price;
     private String cover;
-    private long categoryId;
-    private String publisher;
+    private int publicYn;
+    private Date regDate;
     private String categoryName;
 }

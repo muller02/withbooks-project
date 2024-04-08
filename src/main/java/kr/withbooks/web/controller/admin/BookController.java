@@ -44,6 +44,7 @@ public class BookController {
         //     count = service.getCount();
         // }
         list = service.getList();
+        // System.out.println("BookView = "+list.toString());
         model.addAttribute("list", list);
 
         return "admin/book/list";
