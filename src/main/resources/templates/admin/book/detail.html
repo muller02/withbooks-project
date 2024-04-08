@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +12,53 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
 </head>
 <body>
-    <main class="n-panel n-main-panel">
-        <div class="n-container px:4 lg:px:10">
-            <div class="n-item n-item-type:outline-box">
+    <main layout:fragment="main" class="n-panel n-main-panel d:flex">
+        디테일 페이지 입니다만^^
+        <!-- <section class="n-container px:10 n-item n-item-type:outline-box">
+            <h1 class="d:none">책제목</h1>
 
-                디테일 페이지 입니다만 ^^
-                
-                
+            <div class="d:flex">
+                <div class="d:flex n-item">
+                    <div>
+                        id : 
+                    </div>
+                    <div>
+                        실제
+                    </div>
+                </div>
+                <div class="d:flex n-item">
+                    <div>등록자</div>
+                    <div>실제</div>
+                </div>
+                <div class="d:flex n-item">
+                    <div>등록일</div>
+                    <div>실제</div>
+                </div>
+            </div>
+            <div>
+                <div class="d:flex">
+                    <div>제목</div>
+                    <div>저자</div>
+                </div>
+                <div>
+                    이미지
+                </div>
+            </div>
+            <div>
+                <div>출판사</div>
+                <div>출판일</div>
+                <div>카테고리</div>
+                <div>가격</div>
+                <div>ISBN13</div>
+                <div>소개</div>
+                <div>공개여부</div>
             </div>
 
+            <section>
+                <h1 class="d:none">집계</h1>
+            </section>
 
-
-        </div>
+        </section> -->
     </main>
 </body>
 </html>
