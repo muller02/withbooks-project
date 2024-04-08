@@ -35,6 +35,10 @@
 
             cursor: pointer;
         }
+        .transform-x{
+
+            transform: translateX(-122px);
+        }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -199,7 +203,7 @@
 
         <h1 class="d:none">북쇼츠</h1>
 
-        <span class="lg:d:flex lg:ai:start">
+        <span class="lg:d:flex lg:ai:start" >
                     <span class="d:block w:100p">
                         <section  class="shorts d:flex jc:center ai:center px:1 "  >
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
@@ -305,21 +309,18 @@
                      >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <div class="h:8 w:8 lg:w:6 img-list mb:2 "  >
+                        <div class="slide h:8 w:8 of:hidden	pos:relative	tt" style="width: 300px">
+                            <div class="h:8 w:8 lg:w:6 img-list mb:2  images d:flex"  >
+                               <img  th:each="i : ${s.img}"
+                                     src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
+                                     alt="본문 이미지"
+                                     class="h:8 w:8 bd-radius:1 "
 
-                           <img  th:each="i : ${s.img}"     th:classappend="${iStat.index} > 0 ? 'd:none' : ''"
-                                 src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
-                                 alt="본문 이미지"
-                                 class="h:10p w:10p bd-radius:1 "
+                                     th:src="'/image/shorts/' + ${i}" />
+                            </div>
 
-                                 th:src="'/image/shorts/' + ${i}" />
-
-                            <!--                            <div th:text="${s.img[0]}"></div>-->
-                            <!--                                        <div th:text="${s.img[num]}"></div>-->
-
-                            <!--                               <div th:text="${i}"></div>-->
-                            <!--                            <div th:text="${iStat}"></div>-->
-
+                          <button class="back position:absolute w:1 h:1 border top:1	">이전</button>
+                            <button class="next position:absolute w:1 h:1 border top:1 right:0">다음</button>
                         </div>
                         <section class="pager as:stretch">
                             <h1 class="d:none">이미지 페이저</h1>
@@ -363,6 +364,10 @@
             <a
                     href="/shorts/reg"
                     class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
+            ></a>
+            <a
+                    href="#main"
+                    class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:3"
             ></a>
         </section>
     </section>
