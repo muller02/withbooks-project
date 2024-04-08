@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
     //301Line 이미지를 담는 section
     const imgSection = document.querySelectorAll(".img-section");
 
-    const divs = document.querySelectorAll(".tt");
+    const shortSections = document.querySelectorAll(".short-section");
 
 
     // -------------------------- 슬라이드
@@ -22,8 +22,28 @@ window.addEventListener("load", () => {
     const images = document.querySelector(".images")
 
 
+    console.log(shortSections);
     // 댓글 창 관련
-    const commentBtn = s
+    shortSections.forEach(shortSection => {
+        const commentBtn = shortSection.querySelector(".comment-btn");
+        const commentGroup = shortSection.querySelector(".comment-group");
+
+        console.log(commentBtn);
+
+
+        // 각 commentBtn에 클릭 이벤트를 추가합니다.
+        commentBtn.addEventListener("click", function (e) {
+            console.log('clicked');
+            // 클릭 이벤트가 발생했을 때 commentGroup 요소에 "d:block" 클래스를 추가하여 보이도록 합니다.
+
+            commentGroup.classList.toggle("d:none");
+        });
+
+
+    })
+
+
+
             function next() {
                 if (pages< 3) {
                     backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
