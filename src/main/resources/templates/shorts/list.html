@@ -197,7 +197,7 @@
 
 
     <section
-            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6"
+            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 short-section"
             th:each="s : ${list}"
     >
 
@@ -346,7 +346,7 @@
         <section class="d:flex ai:center jc:end mr:2 mt:5">
             <h1 class="d:none">댓글/좋아요 버튼</h1>
             <div class="d:flex fl-dir:column ai:center">
-                <div class="icon icon:chats"></div>
+                <div class="icon icon:chats comment-btn"></div>
                 <div class="fs:2 fw:3" th:text="${s.commentCnt}">
                     132
                 </div>
@@ -359,19 +359,152 @@
             </div>
 
         </section>
-        <section>
-            <h1 class="d:none">플로팅버튼</h1>
-            <a
-                    href="/shorts/reg"
-                    class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
-            ></a>
-            <a
-                    href="#main"
-                    class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:3"
-            ></a>
+
+
+        <section
+                class="comment-group  d:flex fl-dir:column  bd-radius:4  p:3 d:none  lg:d:none"
+        >
+            <h1 class="d:none">북쇼츠 댓글</h1>
+            <div class="comments color-base-9 fl-grow:1">
+                <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        박지수
+                    </div>
+                    <div class="pl:2 pr:2">뭐만하면 남탓~ 보인다 보여..</div>
+                </div>
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        이기주
+                    </div>
+                    <div class="pl:2 pr:2">뭐만하면 남탓~ 보인다 보여..</div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.ㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+
+                <div class="border-bottom pb:3 pt:3 pr:2 pl:2">
+                    <div
+                            class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3"
+                    >
+                        김지수
+                    </div>
+                    <div class="pl:2 pr:2">
+                        뭐만하면 남탓~ 보인다
+                        보여.ㅁㄴㅇㄹㄴㅁㅇㄻㄴㅇㄻㄴㅇ9ㄹㄴㅁㅇㄻㄴㄹㅇㅁㄴㅇㄹㄴㅁㄻㄴㅇㄻㄴ.
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="d:flex mt:5">
+<!--                    <input-->
+<!--                            type="textarea"-->
+<!--                            class="n-textbox n-textbox-type:outline display:inline-block"-->
+<!--                            placeholder="댓글 입력하기"-->
+<!--                    />-->
+                    <textarea type="text" class="n-textbox" placeholder="Basic Textbox"></textarea>
+
+                    <button type="button" class="n-btn n-btn-color:main">등록</button>
+                </div>
+            </div>
         </section>
     </section>
-
+    <section>
+        <h1 class="d:none">플로팅버튼</h1>
+        <a
+                href="/shorts/reg"
+                class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
+        ></a>
+        <a
+                href="#main"
+                class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:3"
+        ></a>
+    </section>
 </main>
 </body>
 </html>

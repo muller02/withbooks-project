@@ -9,17 +9,39 @@ window.addEventListener("load", () => {
     //301Line 이미지를 담는 section
     const imgSection = document.querySelectorAll(".img-section");
 
-    const divs = document.querySelectorAll(".tt");
-    // -------------------------- 슬라이드
+    const shortSections = document.querySelectorAll(".short-section");
 
+
+    // -------------------------- 슬라이드
     let pages = 0;//현재 인덱스 번호
     let positionValue = 0;//images 위치값
     const IMAGE_WIDTH = 400;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
 
-
     const backBtn = document.querySelector(".back")
     const nextBtn = document.querySelector(".next")
     const images = document.querySelector(".images")
+
+
+    console.log(shortSections);
+    // 댓글 창 관련
+    shortSections.forEach(shortSection => {
+        const commentBtn = shortSection.querySelector(".comment-btn");
+        const commentGroup = shortSection.querySelector(".comment-group");
+
+        console.log(commentBtn);
+
+
+        // 각 commentBtn에 클릭 이벤트를 추가합니다.
+        commentBtn.addEventListener("click", function (e) {
+            console.log('clicked');
+            // 클릭 이벤트가 발생했을 때 commentGroup 요소에 "d:block" 클래스를 추가하여 보이도록 합니다.
+
+            commentGroup.classList.toggle("d:none");
+        });
+
+
+    })
+
 
 
             function next() {
@@ -112,6 +134,9 @@ window.addEventListener("load", () => {
 
         });
     });
+
+
+
 
 
 });
