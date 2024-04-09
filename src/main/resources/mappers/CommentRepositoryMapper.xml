@@ -25,6 +25,19 @@
 		limit #{offset}, #{size} -->
 	</select>
 
+	
+	<insert id="save"  useGeneratedKeys="true" keyProperty="id" parameterType="ShortsComment">
+		INSERT INTO shorts_comment (
+		shorts_id, user_id, content
+		)
+		VALUES (
+		#{shortsId}, #{userId}, #{content}
+		)
+	</insert>
+
+
+
+
 
 
 

@@ -1,3 +1,77 @@
+
+
+
+
+//댓글 
+window.addEventListener("load", function () {
+
+    const shortSections = document.querySelectorAll(".short-section");
+ 
+
+    console.log('btn', shortSections);
+
+    shortSections.forEach(shortSection => {
+        const commentBtn = shortSection.querySelector(".comment-btn");
+        const commentReg = shortSection.querySelector(".comment-reg");
+        const commentContent = shortSection.querySelector(".comment-content");
+
+   
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        commentReg.onclick = function (e) {
+             
+            //shortSection에 있는 shortsId를 가지고 온다.
+            let shortsId = commentBtn.dataset.shortsId;
+
+            //댓글 창 textarea의 value 값을 가지고 온다.
+            let content = commentContent.value;
+
+
+
+            
+
+            //서버에 댓글객체를 전송하기 위해 객체를 생성한다.
+            let shortsComment = {
+                shortsId:shortsId,
+                content:content
+            };
+
+            /* 통신에 사용 될 XMLHttpRequest 객체 정의 */
+		    httpRequest = new XMLHttpRequest();
+
+           // 콜백 함수
+            httpRequest.onreadystatechange = () => {
+          
+          
+            };
+
+            /* Post 방식으로 요청 */
+            httpRequest.open('POST', '/api/comments', true);
+            /* Response Type을 Json으로 사전 정의 */
+            httpRequest.responseType = "json";
+            /* 요청 Header에 컨텐츠 타입은 Json으로 사전 정의 */
+            httpRequest.setRequestHeader('Content-Type', 'application/json');
+            /* 정의된 서버에 Json 형식의 요청 Data를 포함하여 요청을 전송 */
+
+            console.log(JSON.stringify(shortsComment));
+            httpRequest.send(JSON.stringify(shortsComment));
+            
+        
+       
+   
+        };
+
+  
+
+
+    })
+})
+
+
+
+
+
 window.addEventListener("load", () => {
 
     //83Line ... 버튼들
@@ -19,8 +93,10 @@ window.addEventListener("load", () => {
 
 
 
+
+
     // ------------- 슬라이드-------------
-    shortSections.forEach(short =>{
+    shortSections.forEach(short => {
 
 
         let pages = 0;//현재 인덱스 번호
@@ -32,14 +108,14 @@ window.addEventListener("load", () => {
 
 
 
-        const imgLen =  short.querySelectorAll(".images > img").length;
+        const imgLen = short.querySelectorAll(".images > img").length;
 
-        if(nextBtn ==null)
+        if (nextBtn == null)
             return;
-        nextBtn.addEventListener("click",function (){
+        nextBtn.addEventListener("click", function () {
 
 
-            if (pages< imgLen-1) {
+            if (pages < imgLen - 1) {
                 backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
                 positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
                 images.style.transform = `translateX(${positionValue}px)`;
@@ -47,12 +123,12 @@ window.addEventListener("load", () => {
                 //x축으로 positionValue만큼의 px을 이동한다.
                 pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
             }
-            if (pages === imgLen-1) { //
+            if (pages === imgLen - 1) { //
                 nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
             }
         })
 
-        backBtn.addEventListener("click",function (){
+        backBtn.addEventListener("click", function () {
 
             console.log('dasfdsaf')
             if (pages > 0) {
@@ -134,7 +210,7 @@ window.addEventListener("load", () => {
             // shortsid 얻어오기
             var shortsId = e.target.dataset.shortsId;
 
-            xhr.open("GET", `http://localhost:8080/api/comment/list?shorts_id=${shortsId}`);
+            xhr.open("GET", `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`);
             xhr.send();
         });
 
