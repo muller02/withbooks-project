@@ -1,35 +1,34 @@
 
 
-
-
 //댓글 
 window.addEventListener("load", function () {
 
     const shortSections = document.querySelectorAll(".short-section");
- 
+    
+    const clickedShortsIdStorage = [];
 
-    console.log('btn', shortSections);
+
 
     shortSections.forEach(shortSection => {
         const commentBtn = shortSection.querySelector(".comment-btn");
         const commentReg = shortSection.querySelector(".comment-reg");
         const commentContent = shortSection.querySelector(".comment-content");
 
+
+
    
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
         commentReg.onclick = function (e) {
-             
+
+
             //shortSection에 있는 shortsId를 가지고 온다.
             let shortsId = commentBtn.dataset.shortsId;
 
             //댓글 창 textarea의 value 값을 가지고 온다.
             let content = commentContent.value;
 
-
-
-            
 
             //서버에 댓글객체를 전송하기 위해 객체를 생성한다.
             let shortsComment = {
@@ -38,12 +37,10 @@ window.addEventListener("load", function () {
             };
 
             /* 통신에 사용 될 XMLHttpRequest 객체 정의 */
-		    httpRequest = new XMLHttpRequest();
+            httpRequest = new XMLHttpRequest();
 
            // 콜백 함수
             httpRequest.onreadystatechange = () => {
-          
-          
             };
 
             /* Post 방식으로 요청 */
@@ -54,12 +51,22 @@ window.addEventListener("load", function () {
             httpRequest.setRequestHeader('Content-Type', 'application/json');
             /* 정의된 서버에 Json 형식의 요청 Data를 포함하여 요청을 전송 */
 
-            console.log(JSON.stringify(shortsComment));
             httpRequest.send(JSON.stringify(shortsComment));
             
-        
-       
-   
+
+            // 등록한 댓글을 끝에 추가
+            {
+                let addedContent = `
+                <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
+                    <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+                    <div class="pl:2 pr:2">${content}</div>
+                </div>`;
+
+                const commentGroup = shortSection.querySelector(".comment-group");
+                const comments = commentGroup.querySelector(".comments");
+                comments.insertAdjacentHTML("beforeend", addedContent);
+                commentContent.value = "";
+            }
         };
 
   
