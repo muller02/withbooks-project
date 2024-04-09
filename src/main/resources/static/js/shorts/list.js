@@ -38,6 +38,38 @@ function getCommetList(shortsId, comments){
 
 
 
+//자상 해결
+window.addEventListener("load",function (){
+
+    let tmpArr = [];  //엘리먼트 임시 저장소
+
+    const shortSections = document.querySelectorAll(".short-section");
+
+    // shortSections.forEach(shortSection => {
+    //     let commentGroup = shortSection.querySelector(".comment-group");
+    //     let commentBtn = shortSection.querySelector(".comment-btn");
+    //
+    //
+    //         commentBtn.onclick = function () {   //댓글 창 클릭시 이벤트
+    //             if (window.innerWidth >= 1200) {
+    //
+    //             console.log('dsafsad')
+    //             // 배열에 요소를 추가합니다.
+    //             tmpArr.push(commentGroup);  //tmpArr에 commetGroup 추가
+    //
+    //
+    //             if (tmpArr.length > 1) {  //tmArr 하나 이상이라도 있으면
+    //                 tmpArr[0].classList.toggle("d:none"); //첫번째 요소에 d:none 클래스가 있으면 d:none제거, 없으면 d:none 추가
+    //                 tmpArr.shift(); //  작업 후 배열 0번쨰 요소 제거
+    //             }
+    //
+    //             console.log(tmpArr);
+    //         }
+    //     }
+    // });
+
+})
+
 //댓글 
 window.addEventListener("load", function () {
 
@@ -212,6 +244,7 @@ window.addEventListener("load", () => {
 
 
 
+    let tmpArr =[];
     // 댓글 창 관련
     shortSections.forEach(shortSection => {
         const commentBtn = shortSection.querySelector(".comment-btn");
@@ -219,15 +252,26 @@ window.addEventListener("load", () => {
         const comments = commentGroup.querySelector(".comments");
 
 
+        let i = 0;
         // 각 commentBtn에 클릭 이벤트를 추가합니다.
         commentBtn.addEventListener("click", function (e) {
             // shortsid 얻어오기
 
-            commentGroup.classList.toggle("d:none");
+
+
+            // 배열에 요소를 추가합니다.
+            tmpArr.push(commentGroup);  //tmpArr에 commetGroup 추가
+
+            console.log(tmpArr);
+            if (tmpArr.length > 1) {  //tmArr 하나 이상이라도 있으면
+                tmpArr[0].classList.toggle("d:none"); //첫번째 요소에 d:none 클래스가 있으면 d:none제거, 없으면 d:none 추가
+                tmpArr.shift(); //  작업 후 배열 0번쨰 요소 제거
+            }
+
 
             var shortsId = e.target.dataset.shortsId;
 
-            getCommetList(shortsId,comments)
+                getCommetList(shortsId, comments)
 
         });
 
