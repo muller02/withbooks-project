@@ -32,7 +32,7 @@ public class BookController {
 
     @GetMapping("detail")
     public String detail(Model model, @RequestParam Long id) {
-        Book book = service.get(id);
+        BookView book = service.get(id);
         System.out.println("book = " + book);
         model.addAttribute("book", book);
 

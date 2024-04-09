@@ -9,11 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
 </head>
 <body>
 
-    <main  layout:fragment="main" class="n-panel n-main-panel">
+    <main layout:fragment="main" class="n-panel n-main-panel">
         <div class="n-container px:4 lg:px:10">
             <h1 class="d:none">Main</h1>
 
@@ -43,17 +42,17 @@
             </div>
 
             <!--  n-bbs-table n-column-width:3 -->
-            <table class="n-table n-row-height:2 n-table-border n-table-hover">
+            <table class="n-row-height:2 n-table-border n-table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <th scope="col" class="width:1">
                             <label>
                                 <input type="checkbox" class="n-toggle n-toggle-type:check-box n-toggle-size:1" />
                             </label>
                         </th>
-                        <th scope="col">ID</th>
-                        <th scope="col">카테고리</th>
-                        <th scope="col">공개 여부</th>
+                        <th scope="col" class="width:1">ID</th>
+                        <th scope="col" class="width:3">카테고리</th>
+                        <th scope="col" class="width:1">공개 여부</th>
                         <th scope="col">사진</th>
                         <th scope="col">제목</th>
                         <th scope="col">작가</th>
@@ -71,8 +70,8 @@
                         <th scope="row" th:text="${book.categoryName}">소설/시/희곡</th>
                         <td><span class="icon icon:eye" th:text="${book.publicYn}"></span></td>
                         <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" th:src="${book.cover}" class="h:1 w:1" alt=""></td>
-                        <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}">도둑 맞은 집중력</a></td>
-                        <td th:text="${book.author}">홍길동</td>
+                        <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</a></td>
+                        <td th:text="${book.author}"  th:title="${book.author}">홍길동</td>
                         <td th:text="${book.regDate}">2020-11-01</td>
                     </tr>
                 </tbody>
