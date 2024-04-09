@@ -67,41 +67,18 @@
                             </button>
                         </div> -->
                     </div>
-                    <div class="n-expander">
-                        <h1>
-                            <input type="checkbox" />
+                    <div class="n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
+                        <div class="n-expander-title">
+                            <input type="checkbox" class="n-expander-trigger" />
                             상세검색
-                        </h1>
-                        <div class="d:flex jc:space-between">
+                        </div>
+                        <div class="n-expander-content d:flex jc:space-between">
                             <div>
-                                <div class="px:2 py3 bg-color:main-1">
-                                    소설/시/희곡
-                                </div>
-                                <div class="px:2 py3">역사</div>
-                                <div class="px:2 py3">경제경영</div>
-                                <div class="px:2 py3">자기계발</div>
-                                <div class="px:2 py3">예술/대중문화</div>
-                            </div>
-                            <div>
-                                <div class="px:2 py3">인문학</div>
-                                <div class="px:2 py3">사회과학</div>
-                                <div class="px:2 py3">과학</div>
-                                <div class="px:2 py3">여행</div>
-                                <div class="px:2 py3">가정/요리/뷰티</div>
-                            </div>
-                            <div>
-                                <div class="px:2 py3">만화</div>
-                                <div class="px:2 py3">기타</div>
-                                <div class="px:2 py3">에세이</div>
-                                <div class="px:2 py3">건강/스포츠</div>
-                                <div class="px:2 py3">건축/디자인</div>
-                            </div>
-                            <div>
-                                <div class="px:2 py3">법률</div>
-                                <div class="px:2 py3">요리</div>
-                                <div class="px:2 py3">유머</div>
-                                <div class="px:2 py3">전기/자서전</div>
-                                <div class="px:2 py3">컴퓨터</div>
+                                <ul class="d:flex fl-wrap:wrap">
+                                    <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full"  th:each="c : ${category}">
+                                        <span  th:text="${c.name}">카테고리</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

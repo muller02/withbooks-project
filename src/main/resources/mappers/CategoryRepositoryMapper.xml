@@ -4,19 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.CategoryRepository">
 
-
-
 	<select id="findAll" resultType="Category" >
-		select * from sub_category
+		SELECT * 
+		FROM book_category
 	</select>
 
-
-
 	<select id="findById" resultType="Category" parameterType="Long" >
-		select * from sub_category
+		SELECT * 
+		FROM book_category
 	<where>
 		<if test="id != null">
-			  cid = #{id};
+			  id = #{id};
 		</if>
 
 	</where>
