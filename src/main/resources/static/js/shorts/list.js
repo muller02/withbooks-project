@@ -222,6 +222,9 @@ window.addEventListener("load", () => {
         // 각 commentBtn에 클릭 이벤트를 추가합니다.
         commentBtn.addEventListener("click", function (e) {
             // shortsid 얻어오기
+
+            commentGroup.classList.toggle("d:none");
+
             var shortsId = e.target.dataset.shortsId;
 
             getCommetList(shortsId,comments)
