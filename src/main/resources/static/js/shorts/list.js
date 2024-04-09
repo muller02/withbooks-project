@@ -86,11 +86,18 @@ window.addEventListener("load", function () {
         commentReg.onclick = function (e) {
 
 
+
             //shortSection에 있는 shortsId를 가지고 온다.
             let shortsId = commentBtn.dataset.shortsId;
 
+
+            if(commentContent.value===""){
+                alert("댓글을 입력해주세요 !");
+                return;
+            }
             //댓글 창 textarea의 value 값을 가지고 온다.
             let content = commentContent.value;
+
 
 
             //서버에 댓글객체를 전송하기 위해 객체를 생성한다.
