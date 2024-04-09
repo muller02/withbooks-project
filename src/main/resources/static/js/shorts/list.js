@@ -258,13 +258,15 @@ window.addEventListener("load", () => {
             // shortsid 얻어오기
 
 
+            commentGroup.classList.remove("d:none");
 
             // 배열에 요소를 추가합니다.
             tmpArr.push(commentGroup);  //tmpArr에 commetGroup 추가
 
             console.log(tmpArr);
             if (tmpArr.length > 1) {  //tmArr 하나 이상이라도 있으면
-                tmpArr[0].classList.toggle("d:none"); //첫번째 요소에 d:none 클래스가 있으면 d:none제거, 없으면 d:none 추가
+                tmpArr[0].classList.add("d:none"); //첫번째 요소에 d:none 클래스가 있으면 d:none제거, 없으면 d:none 추가
+
                 tmpArr.shift(); //  작업 후 배열 0번쨰 요소 제거
             }
 
