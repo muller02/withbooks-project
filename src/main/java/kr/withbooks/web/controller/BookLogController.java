@@ -14,6 +14,13 @@ public class BookLogController {
 
     @GetMapping("list")
     public String list(){
+        
         return "booklog/list";
+    }
+
+    @GetMapping("detail")
+    public String detail(){
+
+        return "booklog/detail";
     }
 }
