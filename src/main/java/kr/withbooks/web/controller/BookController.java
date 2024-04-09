@@ -9,23 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.BookView;
+import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.service.BookService;
+import kr.withbooks.web.service.CategoryService;
 
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping("book")
 public class BookController {
 
     @Autowired
     private BookService service;
 
-    @GetMapping("/list")
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping("list")
     public String list(Model model) {
         List<BookView> list = service.getList();
+        List<Category> cateList = categoryService.getList();
 
         model.addAttribute("list", list);
+        model.addAttribute("category", cateList);
         System.out.println(list);
         return "/book/list";
     }
