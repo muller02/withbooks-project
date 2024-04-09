@@ -1,4 +1,42 @@
 
+function getCommetList(shortsId, comments){
+
+    // 댓글의 섹션부분 삭제
+    comments.innerHTML = "";
+
+
+    // 비동기로 데이터 가져오기
+    // e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    //비동기 처리
+    xhr.onload = function () {
+
+
+        var list = JSON.parse(this.responseText);
+
+
+        for (cmt of list) {
+            var divHTML = `
+                    <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
+                        <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+                        <div class="pl:2 pr:2">${cmt.content}</div>
+                    </div>`;
+
+            comments.insertAdjacentHTML("beforeend", divHTML);
+
+
+        }
+    };
+
+
+
+    xhr.open("GET", `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`);
+    xhr.send();
+}
+
+
 
 //댓글 
 window.addEventListener("load", function () {
@@ -34,6 +72,14 @@ window.addEventListener("load", function () {
 
            // 콜백 함수
             httpRequest.onload = () => {
+
+                const commentGroup = shortSection.querySelector(".comment-group");
+                const comments = commentGroup.querySelector(".comments");
+
+                getCommetList(shortsId,comments);
+                commentContent.value = "";
+
+
             };
 
             /* Post 방식으로 요청 */
@@ -175,41 +221,11 @@ window.addEventListener("load", () => {
 
         // 각 commentBtn에 클릭 이벤트를 추가합니다.
         commentBtn.addEventListener("click", function (e) {
-
-            // 댓글의 섹션부분 삭제
-            comments.innerHTML = "";
-
-
-            // 비동기로 데이터 가져오기
-            // e.preventDefault();
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
-
-            //비동기 처리
-            xhr.onload = function () {
-
-
-                var list = JSON.parse(this.responseText);
-
-
-                for (cmt of list) {
-                    var divHTML = `
-                    <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
-                        <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
-                        <div class="pl:2 pr:2">${cmt.content}</div>
-                    </div>`;
-
-                    comments.insertAdjacentHTML("beforeend", divHTML);
-
-
-                }
-            };
-
             // shortsid 얻어오기
             var shortsId = e.target.dataset.shortsId;
 
-            xhr.open("GET", `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`);
-            xhr.send();
+            getCommetList(shortsId,comments)
+
         });
 
 
