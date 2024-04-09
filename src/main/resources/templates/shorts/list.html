@@ -30,15 +30,18 @@
             --height-1: 3px;
         }
 
-        .h7{
-            height: 7px;
 
-            cursor: pointer;
-        }
+
+        /*모달창 위치 옮기기 */
         .transform-x{
 
             transform: translateX(-122px);
         }
+    /*   이미지 슬라이드 효과*/
+        .images{
+            transition: transform 1s;
+        }
+
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -50,7 +53,7 @@
     <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
         <h1 class="d:none">북쇼츠</h1>
 
-        <span class="lg:d:flex lg:ai:start">
+        <span class="lg:d:flex lg:ai:start gap:2">
                     <span>
                         <section class="shorts d:flex jc:center ai:center px:1">
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
@@ -61,7 +64,9 @@
                                         alt="프로필사진"
                                 />
                             </div>
-                            <span class="d:flex ai:center ml:1">
+                            <span class="d:flex ai:center ml:1 d">
+
+
                                 <div>
                                     <a
                                             href=""
@@ -74,7 +79,10 @@
                                 >
                                     10분 전
                                 </div>
+
                             </span>
+
+
                             <div class="ml:auto">
                                 <a href="" class="font-size:1 color:base-4"
                                 >도둑맞은 집중력</a
@@ -215,7 +223,7 @@
                                 />
                             </div>
 
-                            <span class="d:flex ai:center ml:1">
+                            <span class="d:flex  ml:1 flex-direction:column	">
                                 <div>
                                     <a
                                             href=""
@@ -306,16 +314,16 @@
                     </span>
 
                     <section
-                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section" th:if="${s.img}"
+                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"
                      >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <div class="slide h:8 w:8 of:hidden	pos:relative	tt" style="width: 300px">
-                            <div class="h:8 w:8 lg:w:6 img-list mb:2  images d:flex"  >
+                        <div class="slide h:8 w:7 of:hidden	pos:relative	" >
+                            <div class="h:8 w:7 lg:w:6 img-list   images d:flex "  >
                                <img  th:each="i : ${s.img}"
                                      src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
                                      alt="본문 이미지"
-                                     class="h:8 w:8 bd-radius:1 "
+                                     class="h:8 w:7 bd-radius:1  "
 
                                      th:src="'/image/shorts/' + ${i}" />
                             </div>
@@ -326,25 +334,17 @@
                         <section class="pager as:stretch">
                             <h1 class="d:none">이미지 페이저</h1>
                             <ul class="d:flex of:hidden img-paging" th:if="${s.img}">
-                                        <li th:each="img : ${s.img}"
-                                            class="bd-radius:2 fl-grow:1  ml:2 h7" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
-                                           </li>
-                                <!--                                <li-->
-                                <!--                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"-->
-                                <!--                                >-->
-                                <!--                                    2-->
-                                <!--                                </li>-->
-                                <!--                                <li-->
-                                <!--                                    class="bd-radius:2 fl-grow:1 bg-color:base-4 ml:2 h:1"-->
-                                <!--                                >-->
-                                <!--                                    3-->
-                                <!--                                </li>-->
+
+                             <li th:each="img : ${s.img}"
+                             class="bd-radius:2 fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
+                             </li>
+
                             </ul>
                         </section>
                     </section>
                 </span>
 
-        <section class="d:flex ai:center jc:end mr:2 mt:5">
+        <section class="d:flex ai:center jc:end mr:2 mt:3">
             <h1 class="d:none">댓글/좋아요 버튼</h1>
             <div class="d:flex fl-dir:column ai:center">
                 <div class="icon icon:chats comment-btn" th:data-shorts-id="${s.id}"></div>
@@ -490,13 +490,9 @@
                 </ul>
             </section>
             <div>
-                <div class="d:flex mt:5">
-<!--                    <input-->
-<!--                            type="textarea"-->
-<!--                            class="n-textbox n-textbox-type:outline display:inline-block"-->
-<!--                            placeholder="댓글 입력하기"-->
-<!--                    />-->
-                    <textarea type="text" class="n-textbox" placeholder="Basic Textbox"></textarea>
+                <div class="d:flex mt:5  ai:center">
+
+                    <textarea type="text" class="n-textbox  mr:2" placeholder="댓글을 입력하세요 ! "></textarea>
 
                     <button type="button" class="n-btn n-btn-color:main">등록</button>
                 </div>

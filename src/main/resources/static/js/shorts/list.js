@@ -12,14 +12,82 @@ window.addEventListener("load", () => {
     const shortSections = document.querySelectorAll(".short-section");
 
 
-    // -------------------------- 슬라이드
-    let pages = 0;//현재 인덱스 번호
-    let positionValue = 0;//images 위치값
-    const IMAGE_WIDTH = 400;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
 
-    const backBtn = document.querySelector(".back")
-    const nextBtn = document.querySelector(".next")
-    const images = document.querySelector(".images")
+
+
+
+
+
+
+    // ------------- 슬라이드-------------
+    shortSections.forEach(short =>{
+
+
+        let pages = 0;//현재 인덱스 번호
+        let positionValue = 0;//images 위치값
+        const IMAGE_WIDTH = 350;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
+        const nextBtn = short.querySelector(".next");
+        const backBtn = short.querySelector(".back");
+        const images = short.querySelector(".images");
+
+
+
+        const imgLen =  short.querySelectorAll(".images > img").length;
+
+        if(nextBtn ==null)
+            return;
+        nextBtn.addEventListener("click",function (){
+
+
+            if (pages< imgLen-1) {
+                backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
+                positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
+                images.style.transform = `translateX(${positionValue}px)`;
+
+                //x축으로 positionValue만큼의 px을 이동한다.
+                pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
+            }
+            if (pages === imgLen-1) { //
+                nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
+            }
+        })
+
+        backBtn.addEventListener("click",function (){
+
+            console.log('dasfdsaf')
+            if (pages > 0) {
+                nextBtn.removeAttribute('disabled')
+
+                positionValue += IMAGE_WIDTH;
+                images.style.transform = `translateX(${positionValue}px)`;
+                pages -= 1; //이전 페이지로 이동해서 pages를 1감소 시킨다.
+            }
+            if (pages === 0) {
+                backBtn.setAttribute('disabled', 'true')//첫 장 일때 back버튼이 disabled된다.
+            }
+            console.log(pages);
+        })
+
+
+
+
+    })
+
+
+
+    function next() {
+
+        console.log(pages);
+    }
+
+
+
+    function init() {  //초기 화면 상태
+        // backBtn.setAttribute('disabled', 'true'); //속성이 disabled가 된다.
+        // backBtn.addEventListener("click", back); //클릭시 다음으로 이동한다.
+    }
+    init();
+
 
 
 
@@ -33,10 +101,10 @@ window.addEventListener("load", () => {
 
         // 각 commentBtn에 클릭 이벤트를 추가합니다.
         commentBtn.addEventListener("click", function (e) {
-        
+
             // 댓글의 섹션부분 삭제
-        comments.innerHTML = "";
-        
+            comments.innerHTML = "";
+
 
             // 비동기로 데이터 가져오기
             // e.preventDefault();
@@ -45,7 +113,7 @@ window.addEventListener("load", () => {
 
             //비동기 처리
             xhr.onload = function () {
-                
+
 
                 var list = JSON.parse(this.responseText);
 
@@ -59,7 +127,7 @@ window.addEventListener("load", () => {
 
                     comments.insertAdjacentHTML("beforeend", divHTML);
 
-                    
+
                 }
             };
 
@@ -74,41 +142,6 @@ window.addEventListener("load", () => {
     })
 
 
-
-            function next() {
-                if (pages< 3) {
-                    backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
-                    positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
-                    images.style.transform = `translateX(${positionValue}px)`;
-
-                    //x축으로 positionValue만큼의 px을 이동한다.
-                    pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
-                }
-                if (pages === 2) { //
-                    nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
-                }
-                console.log(pages);
-            }
-
-            function back() {
-                if (pages > 0) {
-                    nextBtn.removeAttribute('disabled')
-                    positionValue += IMAGE_WIDTH;
-                    images.style.transform = `translateX(${positionValue}px)`;
-                    pages -= 1; //이전 페이지로 이동해서 pages를 1감소 시킨다.
-                }
-                if (pages === 0) {
-                    backBtn.setAttribute('disabled', 'true')//마지막 장일 때 back버튼이 disabled된다.
-                }
-                console.log(pages);
-            }
-
-            function init() {  //초기 화면 상태
-                backBtn.setAttribute('disabled', 'true'); //속성이 disabled가 된다.
-                backBtn.addEventListener("click", back); //클릭시 다음으로 이동한다.
-                nextBtn.addEventListener("click", next);//클릭시 이전으로 이동한다.
-            }
-            init();
 
 
 
@@ -132,7 +165,7 @@ window.addEventListener("load", () => {
     });
 
 
-    
+
     // <이미지 페이징 li 클릭시, 이미지 보이는 이벤트>
     imgSection.forEach((section, index) => {
 
@@ -142,7 +175,7 @@ window.addEventListener("load", () => {
 
         //각 section에 클릭 이벤트 추가 
         section.addEventListener("click", (e) => {
-            
+
             // 'li'가 아닌 경우 함수 종료.
             if (e.target.tagName !== "LI") return;
 
