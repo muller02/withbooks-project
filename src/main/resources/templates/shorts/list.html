@@ -37,7 +37,8 @@
 
             transform: translateX(-122px);
         }
-    /*   이미지 슬라이드 효과*/
+
+        /* 이미지 슬라이드 효과*/
         .images{
             transition: transform 1s;
         }
@@ -50,7 +51,7 @@
 <body>
 <!--gap 오버라이딩 필요 스마트폰 pb 있고, 테블릿 pc 업게 하기 -->
 <main layout:fragment="main" class="min-w:7 px:3 pb:10 lg:pb:0">
-    <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
+    <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative">
         <h1 class="d:none">북쇼츠</h1>
 
         <span class="lg:d:flex lg:ai:start gap:2">
@@ -205,7 +206,7 @@
 
 
     <section
-            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 short-section"
+            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 short-section  lg:pos:relative"
             th:each="s : ${list}"
     >
 
@@ -366,7 +367,7 @@
 
 
         <section
-                class="comment-group  d:none h:auto d:flex fl-dir:column  bd-radius:4  p:3  lg:pos:fixed lg:top:1 lg:right:1 lg:border lg:w:7  zi:4	"
+                class="comment-group  d:none h:auto d:flex fl-dir:column  bd-radius:4  p:3  lg:pos:absolute	 lg:top:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
             <div class="	ml:auto icon icon:x comment-close"></div>
             <h1 class="d:none">북쇼츠 댓글</h1>
@@ -396,11 +397,11 @@
         <h1 class="d:none">플로팅버튼</h1>
         <a
                 href="/shorts/reg"
-                class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
+                class="icon icon:plus icon-color:sub-1 bg-color:main-5  pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:5"
         ></a>
         <a
                 href="#main"
-                class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:3"
+                class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
         ></a>
     </section>
 </main>
