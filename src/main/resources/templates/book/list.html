@@ -32,6 +32,7 @@
                 -webkit-box-orient: vertical;
             } */
         </style>
+        <script src="/js/book/list.js"></script>
     </head>
 
     <body>
@@ -75,8 +76,10 @@
                         <div class="n-expander-content d:flex jc:space-between">
                             <div>
                                 <ul class="d:flex fl-wrap:wrap">
-                                    <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full"  th:each="c : ${category}">
-                                        <span  th:text="${c.name}">카테고리</span>
+                                    <li class="book-cate bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full"  th:each="c : ${category}">
+                                        <a href="#" role="button">
+                                            <span th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
