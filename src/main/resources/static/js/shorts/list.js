@@ -5,18 +5,11 @@ window.addEventListener("load", function () {
 
     const shortSections = document.querySelectorAll(".short-section");
     
-    const clickedShortsIdStorage = [];
-
-
-
     shortSections.forEach(shortSection => {
         const commentBtn = shortSection.querySelector(".comment-btn");
         const commentReg = shortSection.querySelector(".comment-reg");
         const commentContent = shortSection.querySelector(".comment-content");
 
-
-
-   
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
@@ -40,7 +33,7 @@ window.addEventListener("load", function () {
             httpRequest = new XMLHttpRequest();
 
            // 콜백 함수
-            httpRequest.onreadystatechange = () => {
+            httpRequest.onload = () => {
             };
 
             /* Post 방식으로 요청 */
@@ -54,19 +47,17 @@ window.addEventListener("load", function () {
             httpRequest.send(JSON.stringify(shortsComment));
             
 
-            // 등록한 댓글을 끝에 추가
-            {
-                let addedContent = `
-                <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
-                    <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
-                    <div class="pl:2 pr:2">${content}</div>
-                </div>`;
+            // 등록한 댓글을 끝에 추가(수정 필요. 다시 로드 해 와야 함)
+            // let addedContent = `
+            // <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
+            //     <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+            //     <div class="pl:2 pr:2">${content}</div>
+            // </div>`;
 
-                const commentGroup = shortSection.querySelector(".comment-group");
-                const comments = commentGroup.querySelector(".comments");
-                comments.insertAdjacentHTML("beforeend", addedContent);
-                commentContent.value = "";
-            }
+            // const commentGroup = shortSection.querySelector(".comment-group");
+            // const comments = commentGroup.querySelector(".comments");
+            // comments.insertAdjacentHTML("beforeend", addedContent);
+            // commentContent.value = "";
         };
 
   
