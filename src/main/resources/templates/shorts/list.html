@@ -333,7 +333,7 @@
                         </div>
                         <section class="pager as:stretch">
                             <h1 class="d:none">이미지 페이저</h1>
-                            <ul class="d:flex of:hidden img-paging" th:if="${s.img}">
+                            <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img}">
 
                              <li th:each="img : ${s.img}"
                              class="bd-radius:2 fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'bg-color:base-4' : 'bg-color:base-7'">
