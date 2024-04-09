@@ -368,6 +368,7 @@
         <section
                 class="comment-group  d:none h:auto d:flex fl-dir:column  bd-radius:4  p:3  lg:pos:fixed lg:top:1 lg:right:1 lg:border lg:w:7 "
         >
+            <div class="	ml:auto icon icon:x comment-close"></div>
             <h1 class="d:none">북쇼츠 댓글</h1>
             <div class="comments color-base-9 ">
             </div>
@@ -385,7 +386,6 @@
 
                 
                     <textarea type="text" required class="comment-content n-textbox mr:2"  name="comment-content" placeholder="댓글을 입력하세요 ! "></textarea>
-                    <input type="hidden" th:value = ${s.id} name="shorts_id">
 
                     <button type="button" class="n-btn n-btn-color:main comment-reg">등록</button>
                 </form>

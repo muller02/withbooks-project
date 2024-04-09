@@ -38,37 +38,6 @@ function getCommetList(shortsId, comments){
 
 
 
-//자상 해결
-window.addEventListener("load",function (){
-
-    let tmpArr = [];  //엘리먼트 임시 저장소
-
-    const shortSections = document.querySelectorAll(".short-section");
-
-    // shortSections.forEach(shortSection => {
-    //     let commentGroup = shortSection.querySelector(".comment-group");
-    //     let commentBtn = shortSection.querySelector(".comment-btn");
-    //
-    //
-    //         commentBtn.onclick = function () {   //댓글 창 클릭시 이벤트
-    //             if (window.innerWidth >= 1200) {
-    //
-    //             console.log('dsafsad')
-    //             // 배열에 요소를 추가합니다.
-    //             tmpArr.push(commentGroup);  //tmpArr에 commetGroup 추가
-    //
-    //
-    //             if (tmpArr.length > 1) {  //tmArr 하나 이상이라도 있으면
-    //                 tmpArr[0].classList.toggle("d:none"); //첫번째 요소에 d:none 클래스가 있으면 d:none제거, 없으면 d:none 추가
-    //                 tmpArr.shift(); //  작업 후 배열 0번쨰 요소 제거
-    //             }
-    //
-    //             console.log(tmpArr);
-    //         }
-    //     }
-    // });
-
-})
 
 //댓글 
 window.addEventListener("load", function () {
@@ -80,12 +49,12 @@ window.addEventListener("load", function () {
         const commentReg = shortSection.querySelector(".comment-reg");
         const commentContent = shortSection.querySelector(".comment-content");
 
+
+
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
         commentReg.onclick = function (e) {
-
-
 
             //shortSection에 있는 shortsId를 가지고 온다.
             let shortsId = commentBtn.dataset.shortsId;
@@ -170,14 +139,6 @@ window.addEventListener("load", () => {
 
 
 
-
-
-
-
-
-
-
-
     // ------------- 슬라이드-------------
     shortSections.forEach(short => {
 
@@ -233,30 +194,23 @@ window.addEventListener("load", () => {
     })
 
 
-
-    function next() {
-
-        console.log(pages);
-    }
-
-
-
-    function init() {  //초기 화면 상태
-        // backBtn.setAttribute('disabled', 'true'); //속성이 disabled가 된다.
-        // backBtn.addEventListener("click", back); //클릭시 다음으로 이동한다.
-    }
-    init();
-
-
-
-
-
     let tmpArr =[];
     // 댓글 창 관련
     shortSections.forEach(shortSection => {
         const commentBtn = shortSection.querySelector(".comment-btn");
         const commentGroup = shortSection.querySelector(".comment-group");
         const comments = commentGroup.querySelector(".comments");
+        const closeBtn = shortSection.querySelector(".comment-close");
+
+
+        //댓글창 x 버튼 클릭 이벤트
+        closeBtn.onclick = function (e){
+
+            //d:none 클래스 추가
+            commentGroup.classList.add("d:none");
+
+        }
+
 
 
         let i = 0;
