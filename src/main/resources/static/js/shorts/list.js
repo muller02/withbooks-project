@@ -203,13 +203,6 @@ window.addEventListener("load", () => {
         const closeBtn = shortSection.querySelector(".comment-close");
 
 
-        //댓글창 x 버튼 클릭 이벤트
-        closeBtn.onclick = function (e){
-
-            //d:none 클래스 추가
-            commentGroup.classList.add("d:none");
-
-        }
 
 
 
@@ -231,11 +224,21 @@ window.addEventListener("load", () => {
                 tmpArr.shift(); //  작업 후 배열 0번쨰 요소 제거
             }
 
-
+            commentGroup.classList.remove("d:none");
             var shortsId = e.target.dataset.shortsId;
 
                 getCommetList(shortsId, comments)
 
+
+
+            //댓글창 x 버튼 클릭 이벤트
+            closeBtn.onclick = function (e){
+
+                    console.log('asdf')
+                //d:none 클래스 추가
+                commentGroup.classList.add("d:none");
+
+            }
         });
 
 
