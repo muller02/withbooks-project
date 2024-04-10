@@ -27,7 +27,7 @@
         }
 
         .pager {
-            --height-1: 3px;
+            --height-1: 4px;
         }
 
 
@@ -39,10 +39,16 @@
         }
 
         /* 이미지 슬라이드 효과*/
-        .images{
-            transition: transform 1s;
+        .transition-transform{
+            transition: transform 0.8s;
+
         }
 
+        /* 이미지 페이징 효과  */
+
+        .transition-background{
+            transition: background-color 0.6s;
+        }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -50,7 +56,7 @@
 
 <body>
 <!--gap 오버라이딩 필요 스마트폰 pb 있고, 테블릿 pc 업게 하기 -->
-<main layout:fragment="main" class="min-w:7 px:3 pb:10 lg:pb:0">
+<main layout:fragment="main" class="min-w:7 px:3 pb:10 lg:pb:0" id="main">
     <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative">
         <h1 class="d:none">북쇼츠</h1>
 
@@ -95,7 +101,7 @@
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
                             <div class="n-dropdown">
                                 <button
-                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn" id=""
+                                        class="icon icon:dots_three_outline_vertical_fill  my:3 dropdown-btn" id=""
                                 >점점점</button
                                 >
 
@@ -168,7 +174,7 @@
                                     class="h:10p w:10p bd-radius:1"
                             />
                         </div>
-                        <section class="pager as:stretch">
+                        <section class="pager as:stretch ">
                             <h1 class="d:none">이미지 페이저</h1>
                             <ul class="d:flex of:hidden">
                                 <li
@@ -206,7 +212,7 @@
 
 
     <section
-            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 short-section  lg:pos:relative"
+            class="bd bd-color:base-3 bd-radius:6 px:3 py:4 mt:6 short-section  lg:pos:relative"
             th:each="s : ${list}"
     >
 
@@ -250,8 +256,8 @@
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
                             <div class="n-dropdown">
                                 <button
-                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn"
-                                >점점점</button
+                                        class="icon icon:dots_three_outline_vertical_fill   cursor:pointer	 dropdown-btn"
+                                ></button
                                 >
                                 <ul class="dropdown-list	">
                                      <li>
@@ -278,7 +284,7 @@
 
                                  </ul>
                             </div>
-                            
+
                         </section>
 
                         <article class="max-h:8">
@@ -322,24 +328,24 @@
 
                         <div class="d:flex fl-dir:column h:8 w:8 ">
                             <div class="slide w:8 h:8 of:hidden	pos:relative">
-                                <div class="  img-list images d:inline-flex position:relative">
+                                <div class="  img-list transition-transform images d:inline-flex position:relative">
                                     <img  th:each="i : ${s.img}"
                                             src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
                                             alt="본문 이미지"
-                                            class="w:8 h:8 bd-radius:1 pb:1 obj-fit:cover"
+                                            class="w:8 h:8 bd-radius:1 pb:1 object-fit:contain		"
 
                                             th:src="'/image/shorts/' + ${i}" />
                                 </div>
 
-                            <button class="back position:absolute w:1 h:1 border top:1">이전</button>
-                                <button class="next position:absolute w:1 h:1 border top:1 right:0">다음</button>
+                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
+                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
                             </div>
-                            <section class="pager as:stretch">
+                            <section class="pager as:stretch mt:1">
                                 <h1 class="d:none">이미지 페이저</h1>
                                 <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">
 
                                 <li th:each="img : ${s.img}"
-                                    class="bd-radius:2 fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
+                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
                                 </li>
 
                                 </ul>
@@ -351,13 +357,13 @@
         <section class="d:flex ai:center jc:end mr:2 mt:3">
             <h1 class="d:none">댓글/좋아요 버튼</h1>
             <div class="d:flex fl-dir:column ai:center">
-                <div class="icon icon:chats comment-btn" th:data-shorts-id="${s.id}"></div>
+                <div class="icon icon:chats comment-btn cursor:pointer	" th:data-shorts-id="${s.id}"></div>
                 <div class="fs:2 fw:3" th:text="${s.commentCnt}">
                     132
                 </div>
             </div>
             <div class="d:flex fl-dir:column ai:center ml:5">
-                <div class="icon icon:heart"></div>
+                <div class="icon icon:heart cursor:pointer	"></div>
                 <div class="fs:2 fw:3" th:text="${s.likeCnt}">
                     50.2M
                 </div>
@@ -367,9 +373,10 @@
 
 
         <section
-                class="comment-group  d:none h:auto d:flex fl-dir:column  bd-radius:4  p:3  lg:pos:absolute	 lg:top:0 lg:right:-5 lg:border lg:w:7  zi:4	"
+                class="comment-group  d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:top:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
-            <div class="	ml:auto icon icon:x comment-close"></div>
+
+            <div class="	ml:auto icon icon:x cursor:pointer	 comment-close "></div>
             <h1 class="d:none">북쇼츠 댓글</h1>
             <div class="comments color-base-9 ">
             </div>
@@ -383,9 +390,9 @@
                 </ul>
             </section>
             <div>
-                <form class="d:flex mt:5 ai:center" method="post">
+                <form class="d:flex mt:2 ai:center" method="post">
 
-                
+
                     <textarea type="text" required class="comment-content n-textbox mr:2"  name="comment-content" placeholder="댓글을 입력하세요 ! "></textarea>
 
                     <button type="button" class="n-btn n-btn-color:main comment-reg">등록</button>
