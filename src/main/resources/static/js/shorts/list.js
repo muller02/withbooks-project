@@ -51,8 +51,8 @@ window.addEventListener("load", function () {
         const commentReg = shortSection.querySelector(".comment-reg");
         const commentContent = shortSection.querySelector(".comment-content");
 
-         let totalcomment = 0 ;
-         const countComment = shortSection.querySelector(".count-comment")
+
+         const countComment = shortSection.querySelector(".count-comment") //댓글 숫자 표시 엘리먼트
 
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
