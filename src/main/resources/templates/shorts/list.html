@@ -49,6 +49,10 @@
         .transition-background{
             transition: background-color 0.6s;
         }
+
+        .box-shadow-custom{
+            box-shadow: 3px 4px 18px 0 rgba(157,157,157,12%);
+        }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -212,7 +216,7 @@
 
 
     <section
-            class="bd bd-color:base-3 bd-radius:6 px:3 py:4 mt:6 short-section  lg:pos:relative"
+            class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:3 py:4 mt:6 short-section  lg:pos:relative"
             th:each="s : ${list}"
     >
 
@@ -373,7 +377,7 @@
 
 
         <section
-                class="comment-group  d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:top:0 lg:right:-5 lg:border lg:w:7  zi:4	"
+                class="comment-group  box-shadow-custom	 d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:top:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
 
             <div class="	ml:auto icon icon:x cursor:pointer	 comment-close "></div>
