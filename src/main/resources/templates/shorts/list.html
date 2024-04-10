@@ -22,6 +22,10 @@
             href="/css/util/border-radius.css"
     />
     <style>
+        #main{
+            --gap-10: 62px;
+        }
+
         .shorts > div {
             --height-1: 40px;
             --width-1: 32px;
@@ -65,7 +69,7 @@
 
 <body>
 <!--gap 오버라이딩 필요 스마트폰 pb 있고, 테블릿 pc 업게 하기 -->
-<main layout:fragment="main" class="min-w:7 px:3 pb:10 lg:pb:0" id="main">
+<main layout:fragment="main" class="min-w:7 px:3 pb:10 md:pb:0 lg:pb:0" id="main">
     <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative">
         <h1 class="d:none">북쇼츠</h1>
 
