@@ -55,13 +55,23 @@
             transition: background-color 0.6s;
         }
 
+        /*북쇼츠 , 댓글 그림자*/
         .box-shadow-custom{
             box-shadow: 2px 4px 14px 0 rgba(157,157,157,14%);
         }
+        .translate-x-18px{
 
+            @media (min-width: 1200px){
+            transform: translateX(-18px);
+            }
+        }
+
+        /*본문 내용 line-heihgt*/
         article p  span{
             line-height: 1.75;
         }
+
+
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -386,7 +396,7 @@
 
 
         <section
-                class="comment-group  box-shadow-custom	  mt:2 d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:bottom:0 lg:right:-5 lg:border lg:w:7  zi:4	"
+                class="comment-group  box-shadow-custom	 translate-x-18px  mt:2 d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:bottom:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
         <h1 class="d:none">북쇼츠 댓글</h1>
             <div class="	 icon icon:x cursor:pointer	 comment-close "></div>
