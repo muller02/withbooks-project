@@ -245,3 +245,9 @@
 
   transition: visibility 0.1s, padding 0.2s;
 }
+
+/*bookshorts paging btn */
+
+.comment-group .n-pager li.active>* {
+    background: var(--color-main-4);
+}
