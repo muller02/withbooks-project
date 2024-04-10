@@ -1,5 +1,5 @@
 
-//  <댓글 리스트 >
+//  <댓글 리스트 요청 >
 function getCommetList(shortsId, comments ,getCommetnCount){
 
     //getCommentCount ; 댓글 수를 카운트 해서 반환 해주는 콜백함수
@@ -143,7 +143,8 @@ window.addEventListener("load", () => {
             });
         }
 
-        if (nextBtn == null)
+        //각 쇼츠에 nextBtn과 backBtn이 없으면 리턴
+        if (nextBtn == null || backBtn ==null)
             return;
 
         nextBtn.addEventListener("click", function () {
