@@ -1,6 +1,6 @@
 
 //  <댓글 리스트 요청 >
-function getCommetList(shortsId, comments ,getCommetnCount){
+function getCommentList(shortsId, comments ,getCommetnCount){
 
     //getCommentCount ; 댓글 수를 카운트 해서 반환 해주는 콜백함수
 
@@ -52,10 +52,7 @@ window.addEventListener("load", function () {
         const commentContent = shortSection.querySelector(".comment-content");
 
 
-         const countComment = shortSection.querySelector(".count-comment") //댓글 숫자 표시 엘리먼트
-
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+        const countComment = shortSection.querySelector(".count-comment") //댓글 숫자 표시 엘리먼트
 
         commentReg.onclick = function (e) {
             // shortSection에 있는 shortsId를 가지고 온다.
@@ -71,8 +68,8 @@ window.addEventListener("load", function () {
 
             // 서버에 댓글객체를 전송하기 위해 객체를 생성한다.
             let shortsComment = {
-                shortsId:shortsId,
-                content:content
+                shortsId,
+                content
             };
 
             /* 통신에 사용 될 XMLHttpRequest 객체 정의 */
@@ -84,7 +81,7 @@ window.addEventListener("load", function () {
                 const comments = commentGroup.querySelector(".comments");
 
                 //첫번쨰 인자 : 숏츠아이디, 두번쨰 인자 : 댓글 내용, 세번쨰 인자 : 콜백함수 댓글 수 얻는 변수
-                getCommetList(shortsId,comments,function (commentCount){
+                getCommentList(shortsId,comments,function (commentCount){
 
                     countComment.innerHTML = commentCount;
                 });
@@ -187,24 +184,20 @@ window.addEventListener("load", () => {
 
         // 각 commentBtn에 클릭 이벤트를 추가합니다.
         commentBtn.addEventListener("click", function (e) {
-
-
             commentGroup.classList.remove("d:none");
-            tmpArr.push(commentGroup);  //이전 클릭했던 엘리먼트 저장하기
+
+            tmpArr.push(commentGroup);  // 클릭 한 엘리먼트 저장하기
 
 
 
-            if (tmpArr.length > 1) {  // 엘리먼트 저장 배열이 2개가 되면
-                tmpArr[0].classList.add("d:none"); // 이전 댓글 창에 d:none을 추가하여 안보이게 하기 
+            if (tmpArr.length > 1) {  // 엘리먼트 저장 배열이 2개가 되면, 즉 댓글 아이콘을 클릭한 횟수가 2번 이상이라면
+                tmpArr[0].classList.add("d:none"); // 이전 엘리먼트의 댓글 창을 안보이게 하기
                 tmpArr.shift(); // 첫번째 엘리먼트 제거 후 ,두번째 엘리먼트 첫번쨰로이동
             }
-            
-            commentGroup.classList.remove("d:none");
-
 
 
             var shortsId = e.target.dataset.shortsId; //html에서 shortsId를 얻기
-            getCommetList(shortsId, comments,null) // 댓글창 리스트 서버에서 얻어오는 api를 통해 댓글 리스트 얻기
+            getCommentList(shortsId, comments,null) // 댓글창 리스트 서버에서 얻어오는 api를 통해 댓글 리스트 얻기
 
 
             // 댓글창 x 버튼 클릭시 해당 댓글 창 숨기기
