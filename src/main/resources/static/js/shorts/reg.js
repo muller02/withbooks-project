@@ -147,6 +147,7 @@ window.onload = function () {
             e.preventDefault();
 
         }
+        textArea.classList.add("ln-h:1.75");
         textArea.innerHTML = quill.getSemanticHTML();
         console.log(textArea.innerText);
 

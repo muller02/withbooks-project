@@ -54,6 +54,10 @@
         .box-shadow-custom{
             box-shadow: 2px 4px 14px 0 rgba(157,157,157,8%);
         }
+
+        article p  span{
+            line-height: 1.75;
+        }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -137,9 +141,9 @@
                             </div>
                         </section>
 
-                        <article class="max-h:8">
+                        <article class=" max-h:8">
                             <h1 class="d:none">북쇼츠 본문</h1>
-                            <p class="ml:2 mr:2 ln-h:1.5 fs:2">
+                            <p class="ml:2 mr:2 ln-h:2 fs:2">
                                 모든 국민은 그 보호하는 자녀에게 적어도
                                 초등교육과 법률이 정하는 교육을 받게 할 의무를
                                 진다. 군인·군무원·경찰공무원 기타 법률이 정하는
@@ -226,6 +230,7 @@
 
         <span class="lg:d:flex lg:ai:start gap:2" >
                     <span class="d:block w:100p">
+
                         <section  class="shorts d:flex jc:center ai:center px:1 "  >
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
                             <div class="h:1 w:1 border-radius:full of:hidden">
@@ -291,11 +296,42 @@
                             </div>
 
                         </section>
+                           <section
+                                   class="fl-dir:column ai:center my:5  mr:4 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2 float:left" th:if="${s.img}"
+                           >
+                        <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <article class="max-h:8">
+                        <div class="d:flex fl-dir:column h:7 w:7 ">
+                            <div class="slide w:7 h:7 of:hidden	pos:relative">
+                                <div class="  img-list transition-transform images d:inline-flex position:relative">
+                                    <img  th:each="i : ${s.img}"
+                                          src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
+                                          alt="본문 이미지"
+                                          class="w:7 h:7 bd-radius:1 pb:1 object-fit:contain		"
+
+                                          th:src="'/image/shorts/' + ${i}" />
+                                </div>
+
+                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
+                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
+                            </div>
+                            <section class="pager as:stretch mt:1">
+                                <h1 class="d:none">이미지 페이저</h1>
+                                <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">
+
+                                <li th:each="img : ${s.img}"
+                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
+                                </li>
+
+                                </ul>
+                            </section>
+                        </div>
+                    </section>
+                        <!--                        글이 길어지면 박스가 같이 늘어나지 않아 일단 -->
+                        <article class="h:max-content	">
                             <h1 class="d:none">북쇼츠 본문</h1>
                             <p
-                                    class="ml:2 mr:2 ln-h:1.5 fs:2"
+                                    class="ml:2 mr:2 ln-h:2 fs:2"
                                     th:utext="${s.content}"
                             >
                                 모든 국민은 그 보호하는 자녀에게 적어도
@@ -326,37 +362,40 @@
                         </article>
                     </span>
 
-                    <section
-                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"
-                     >
-                        <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <div class="d:flex fl-dir:column h:7 w:7 ">
-                            <div class="slide w:7 h:7 of:hidden	pos:relative">
-                                <div class="  img-list transition-transform images d:inline-flex position:relative">
-                                    <img  th:each="i : ${s.img}"
-                                            src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
-                                            alt="본문 이미지"
-                                            class="w:7 h:7 bd-radius:1 pb:1 object-fit:contain		"
+<!--            글이 길어지면 이부분이 따로 놀게 돼서 299line 추가하여, float:left를 줘서 글과 어울리게 만듬 -->
 
-                                            th:src="'/image/shorts/' + ${i}" />
-                                </div>
+<!--                    <section-->
+<!--                            class="fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"-->
+<!--                     >-->
+<!--                        <h1 class="d:none">북쇼츠 본문 이미지</h1>-->
 
-                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
-                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
-                            </div>
-                            <section class="pager as:stretch mt:1">
-                                <h1 class="d:none">이미지 페이저</h1>
-                                <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">
+<!--                        <div class="d:flex fl-dir:column h:7 w:7 ">-->
+<!--                            <div class="slide w:7 h:7 of:hidden	pos:relative">-->
+<!--                                <div class="  img-list transition-transform images d:inline-flex position:relative">-->
+<!--                                    <img  th:each="i : ${s.img}"-->
+<!--                                            src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"-->
+<!--                                            alt="본문 이미지"-->
+<!--                                            class="w:7 h:7 bd-radius:1 pb:1 object-fit:contain		"-->
 
-                                <li th:each="img : ${s.img}"
-                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
-                                </li>
+<!--                                            th:src="'/image/shorts/' + ${i}" />-->
+<!--                                </div>-->
 
-                                </ul>
-                            </section>
-                        </div>
-                    </section>
+<!--                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>-->
+<!--                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>-->
+<!--                            </div>-->
+<!--                            <section class="pager as:stretch mt:1">-->
+<!--                                <h1 class="d:none">이미지 페이저</h1>-->
+<!--                                <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">-->
+
+<!--                                <li th:each="img : ${s.img}"-->
+<!--                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">-->
+<!--                                </li>-->
+
+<!--                                </ul>-->
+<!--                            </section>-->
+<!--                        </div>-->
+<!--                    </section>-->
                 </span>
 
         <section class="d:flex ai:center jc:end mr:2 mt:4">
