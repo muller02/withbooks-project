@@ -224,7 +224,7 @@
         <h1 class="d:none">북쇼츠</h1>
         <div class="d:none shorts" th:text="${s.id}"  >id</div>
 
-        <span class="lg:d:flex lg:ai:start" >
+        <span class="lg:d:flex lg:ai:start gap:2" >
                     <span class="d:block w:100p">
                         <section  class="shorts d:flex jc:center ai:center px:1 "  >
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
@@ -257,7 +257,7 @@
                             </div>
                         </section>
 
-                        <section class="d:flex jc:end mt:2">
+                        <section class="d:flex jc:end mt:3">
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
                             <div class="n-dropdown">
                                 <button
@@ -331,13 +331,13 @@
                      >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <div class="d:flex fl-dir:column h:8 w:8 ">
-                            <div class="slide w:8 h:8 of:hidden	pos:relative">
+                        <div class="d:flex fl-dir:column h:7 w:7 ">
+                            <div class="slide w:7 h:7 of:hidden	pos:relative">
                                 <div class="  img-list transition-transform images d:inline-flex position:relative">
                                     <img  th:each="i : ${s.img}"
                                             src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
                                             alt="본문 이미지"
-                                            class="w:8 h:8 bd-radius:1 pb:1 object-fit:contain		"
+                                            class="w:7 h:7 bd-radius:1 pb:1 object-fit:contain		"
 
                                             th:src="'/image/shorts/' + ${i}" />
                                 </div>
@@ -359,7 +359,7 @@
                     </section>
                 </span>
 
-        <section class="d:flex ai:center jc:end mr:2 mt:3">
+        <section class="d:flex ai:center jc:end mr:2 mt:4">
             <h1 class="d:none">댓글/좋아요 버튼</h1>
             <div class="d:flex fl-dir:column ai:center">
                 <div class="icon icon:chats comment-btn cursor:pointer	" th:data-shorts-id="${s.id}"></div>
