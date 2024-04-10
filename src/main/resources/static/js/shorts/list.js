@@ -188,13 +188,11 @@ window.addEventListener("load", () => {
 
             tmpArr.push(commentGroup);  // 클릭 한 엘리먼트 저장하기
 
-
-
             if (tmpArr.length > 1) {  // 엘리먼트 저장 배열이 2개가 되면, 즉 댓글 아이콘을 클릭한 횟수가 2번 이상이라면
                 tmpArr[0].classList.add("d:none"); // 이전 엘리먼트의 댓글 창을 안보이게 하기
                 tmpArr.shift(); // 첫번째 엘리먼트 제거 후 ,두번째 엘리먼트 첫번쨰로이동
             }
-
+            commentGroup.classList.remove("d:none");  //이게 있어야, 다음 댓글 버튼 클릭 해도 댓글창이 나타남
 
             var shortsId = e.target.dataset.shortsId; //html에서 shortsId를 얻기
             getCommentList(shortsId, comments,null) // 댓글창 리스트 서버에서 얻어오는 api를 통해 댓글 리스트 얻기
