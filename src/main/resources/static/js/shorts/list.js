@@ -25,8 +25,8 @@ function getCommentList(shortsId, comments ,getCommetnCount){
 
             var divHTML = `
                 <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
-                    <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
-                    <div class="pl:2 pr:2">${cmt.content}</div>
+                    <div class="pb:2 deco comment-title-color icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+                    <div class="pl:2 pr:2 comment-content-color">${cmt.content}</div>
                 </div>`;
             comments.insertAdjacentHTML("beforeend", divHTML);
         }
@@ -116,11 +116,13 @@ window.addEventListener("load", () => {
 
     const shortSections = document.querySelectorAll(".short-section");
 
-
+    let width  = document.querySelector(".img-list > img");
     shortSections.forEach(short => {
         let pages = 0; // 현재 인덱스 번호
         let positionValue = 0; // images 위치값
         const IMAGE_WIDTH = 350; // 한번 이동 시 IMAGE_WIDTH만큼 이동한다.
+
+        console.log("widhth = " , width.offsetWidth);
         const nextBtn = short.querySelector(".next");
         const backBtn = short.querySelector(".back");
         const images = short.querySelector(".images");
