@@ -1,8 +1,8 @@
 
-//<댓글 리스트 >
+//  <댓글 리스트 >
 function getCommetList(shortsId, comments ,getCommetnCount){
 
-    //caback
+    //getCommentCount ; 댓글 수를 카운트 해서 반환 해주는 콜백함수
 
     // 댓글의 섹션부분 삭제
     comments.innerHTML = "";
@@ -41,7 +41,7 @@ function getCommetList(shortsId, comments ,getCommetnCount){
 
 
 
-//<댓글 등록 >
+//  <댓글 등록 >
 window.addEventListener("load", function () {
 
     const shortSections = document.querySelectorAll(".short-section");
@@ -105,6 +105,7 @@ window.addEventListener("load", function () {
     });
 });
 
+// <이미지 슬라이드> , <댓글 창>, <점점점 버튼 클릭 시 모달>
 window.addEventListener("load", () => {
 
     // 83Line ... 버튼들
@@ -118,7 +119,7 @@ window.addEventListener("load", () => {
 
     const shortSections = document.querySelectorAll(".short-section");
 
-    // <이미지 슬라이드>
+
     shortSections.forEach(short => {
         let pages = 0; // 현재 인덱스 번호
         let positionValue = 0; // images 위치값
