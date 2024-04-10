@@ -1,68 +1,9 @@
-window.onload = function () {
-
-    const textArea = document.querySelector(".text-area");
-    const regBtn = document.querySelector(".reg-btn");
-    const queryInput = document.querySelector(".query-input");
-
-    const editer = document.querySelector("#editor");
-    // <!-- Initialize Quill editor -->
-    const quill = new Quill('#editor', {
-        modules: {
-            syntax: true,
-            toolbar: '#toolbar-container'
-        },
-        placeholder: '여기에 입력해 주세요',
-        theme: 'snow'
-    });
-
-
-    // 내용이 변경될 때마다 함수 호출
-    function regBtnbgColorChange() {
-        // 에디터가 텍스트를 넣어주는 div안의 innerText가 빈 문자열이 아니거나, 책 검색 input이 공백이 아닐 때 실행
-        if (editer.innerText.trim() !== '' && queryInput.value!=='') {
-            regBtn.classList.add("bg-color:main-5") //bg-color:main-5 컬러 추가
-        } else {
-            regBtn.classList.remove("bg-color:main-5")
-            regBtn.classList.add("bg-color:main-3")
-        }
-    }
-
-    //keyup
-     editer.addEventListener('keyup', regBtnbgColorChange);
-    queryInput.addEventListener('input', regBtnbgColorChange);
-
-    regBtn.onclick = function (e) {
-
-        if(queryInput.value===""){
-            alert('책을 입력 해주세요');
-            e.preventDefault();
-        }
-        if(textArea.value===""){
-            alert('내용을 입력 해주세요');
-            e.preventDefault();
-
-        }
-        textArea.innerHTML = quill.getSemanticHTML();
-        console.log(textArea.innerText);
-
-
-    }
-
-}
-
-
-
 
 
 
 window.addEventListener("load", function () {
 
-    // var form = this.document.querySelector(".book-search-textbox");
-    // var btn = form.querySelector("button");
-    // var input = form.querySelector("input");
-    // var bookContent = this.document.querySelector(".book-content");
-    // var item = bookContent.querySelector(".item");
-    // var searchCount = bookContent.querySelector(".search-count");
+
 
     let searchBook = this.document.querySelector("#search-book");
     let btn = searchBook.querySelector(".btn");
@@ -136,23 +77,6 @@ window.addEventListener("load", function () {
                                         </div>
                                     </section>`;
 
-                //var book = list[0];
-
-                //     var sectionHTML = `    <a href="reg?b=${book.id}&n=${book.title}"><section class="d:flex h:2 ai:center item  ml:3 pl:3 ho">
-                //     <h1 class="d:none">책 정보</h1>
-                //     <div class=" w:74  mr:5 ">
-                //         <img src="${book.cover}" alt="도둑맞은 집중력" class="w:100p h:100p  border-radius:2">
-                //     </div>
-                //     <div class="d:flex jc:center flex-direction:column "> 
-                
-                //         <div class="fs:4 fw:3">${book.title}</div>
-                //         <div class="fs:2 fw:2 mb:1">${book.author} 저</div>
-                //         <div class="fs:2 color:base-7">${book.publisher}</div>
-                //         <div class="fs:2 color:base-7">${book.pubDate}</div>
-                //     </div>
-            
-                // </section></a>
-                //    `;
 
                 resultList.insertAdjacentHTML("beforeend", sectionHTML);
 
@@ -175,11 +99,67 @@ window.addEventListener("load", function () {
 
 
 
+
+
+window.onload = function () {
+
+    const textArea = document.querySelector(".text-area");
+    const regBtn = document.querySelector(".reg-btn");
+    const queryInput = document.querySelector(".query-input");
+
+    const editer = document.querySelector("#editor");
+    // <!-- Initialize Quill editor -->
+    const quill = new Quill('#editor', {
+        modules: {
+            syntax: true,
+            toolbar: '#toolbar-container'
+        },
+        placeholder: '여기에 입력해 주세요',
+        theme: 'snow'
+    });
+
+
+
+    // 내용이 변경될 때마다 함수 호출
+    function regBtnbgColorChange() {
+        // 에디터가 텍스트를 넣어주는 div안의 innerText가 빈 문자열이 아니거나, 책 검색 input이 공백이 아닐 때 실행
+
+        if (editer.innerText.trim() !== '' || queryInput.value!=='') {
+            regBtn.classList.add("bg-color:main-5") //bg-color:main-5 컬러 추가
+        } else {
+            regBtn.classList.remove("bg-color:main-5")
+            regBtn.classList.add("bg-color:main-3")
+        }
+    }
+
+    //keyup
+    editer.addEventListener('keyup', regBtnbgColorChange);
+    queryInput.addEventListener('input', regBtnbgColorChange);
+
+    regBtn.onclick = function (e) {
+
+        if(queryInput.value===""){
+            alert('책을 입력 해주세요');
+            e.preventDefault();
+        }
+        if(textArea.value===""){
+            alert('내용을 입력 해주세요');
+            e.preventDefault();
+
+        }
+        textArea.innerHTML = quill.getSemanticHTML();
+        console.log(textArea.innerText);
+
+
+    }
+
+}
+
+
+
+
+
 //////////////////////////////////////////////////////////
-
-
-
-
 window.addEventListener("load", function(){
     
     var formGroup = this.document.querySelector(".form-group");

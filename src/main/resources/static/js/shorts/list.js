@@ -1,10 +1,14 @@
 
-
 //<댓글 리스트 >
-function getCommetList(shortsId, comments){
+function getCommetList(shortsId, comments ,getCommetnCount){
+
+    //caback
 
     // 댓글의 섹션부분 삭제
     comments.innerHTML = "";
+
+    // 카운트 변수 선언
+    var commentCount = 0;
 
     // 비동기로 데이터 가져오기
     // e.preventDefault();
@@ -16,6 +20,9 @@ function getCommetList(shortsId, comments){
         var list = JSON.parse(this.responseText);
 
         for (cmt of list) {
+            commentCount++;
+
+
             var divHTML = `
                 <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
                     <div class="pb:2 deco icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
@@ -23,11 +30,15 @@ function getCommetList(shortsId, comments){
                 </div>`;
             comments.insertAdjacentHTML("beforeend", divHTML);
         }
+        if(getCommetnCount !==null)
+            getCommetnCount(commentCount);
+        
     };
 
     xhr.open("GET", `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`);
     xhr.send();
 }
+
 
 
 //<댓글 등록 >
@@ -39,6 +50,9 @@ window.addEventListener("load", function () {
         const commentBtn = shortSection.querySelector(".comment-btn");
         const commentReg = shortSection.querySelector(".comment-reg");
         const commentContent = shortSection.querySelector(".comment-content");
+
+         let totalcomment = 0 ;
+         const countComment = shortSection.querySelector(".count-comment")
 
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
@@ -69,8 +83,14 @@ window.addEventListener("load", function () {
                 const commentGroup = shortSection.querySelector(".comment-group");
                 const comments = commentGroup.querySelector(".comments");
 
-                getCommetList(shortsId,comments);
+                //첫번쨰 인자 : 숏츠아이디, 두번쨰 인자 : 댓글 내용, 세번쨰 인자 : 콜백함수 댓글 수 얻는 변수
+                getCommetList(shortsId,comments,function (commentCount){
+
+                    countComment.innerHTML = commentCount;
+                });
+
                 commentContent.value = "";
+
             };
 
             /* Post 방식으로 요청 */
@@ -110,6 +130,7 @@ window.addEventListener("load", () => {
         const imgPaging = Array.from(short.querySelectorAll(".img-paging > li"));
         const imgLen = short.querySelectorAll(".images > img").length;
 
+        //이미지 슬라이드 되면, 해당 스라이드 패이징 색상 변경 함수
         function imgSlidePaging(pages){
             imgPaging.forEach((img, index) =>{
                 img.classList.add("bg-color:main-3");
@@ -130,7 +151,8 @@ window.addEventListener("load", () => {
                 positionValue -= IMAGE_WIDTH; // IMAGE_WIDTH의 증감을 positionValue에 저장한다.
                 images.style.transform = `translateX(${positionValue}px)`; // x축으로 positionValue만큼의 px을 이동한다.
                 pages += 1; // 다음 페이지로 이동해서 pages를 1증가 시킨다.
-                imgSlidePaging(pages);
+
+                imgSlidePaging(pages); //슬라이드 페이징 색상 변경 함수 호출
             }
             if (pages === imgLen - 1) {
                 nextBtn.setAttribute('disabled', 'true') // 마지막 장일 때 next버튼이 disabled된다.
@@ -143,7 +165,8 @@ window.addEventListener("load", () => {
                 positionValue += IMAGE_WIDTH;
                 images.style.transform = `translateX(${positionValue}px)`;
                 pages -= 1; // 이전 페이지로 이동해서 pages를 1감소 시킨다.
-                imgSlidePaging(pages);
+
+                imgSlidePaging(pages);//슬라이드 페이징 색상 변경 함수 호출
             }
             if (pages === 0) {
                 backBtn.setAttribute('disabled', 'true') // 첫 장 일때 back버튼이 disabled된다.
@@ -179,7 +202,7 @@ window.addEventListener("load", () => {
 
 
             var shortsId = e.target.dataset.shortsId; //html에서 shortsId를 얻기
-            getCommetList(shortsId, comments) // 댓글창 리스트 서버에서 얻어오는 api를 통해 댓글 리스트 얻기 
+            getCommetList(shortsId, comments,null) // 댓글창 리스트 서버에서 얻어오는 api를 통해 댓글 리스트 얻기
 
 
             // 댓글창 x 버튼 클릭시 해당 댓글 창 숨기기
