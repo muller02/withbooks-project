@@ -9,7 +9,7 @@ import kr.withbooks.web.entity.BookView;
 @Mapper
 public interface BookViewRepository {
 
-    List<BookView> findAll(String query);
+    List<BookView> findAll(String query, Long categoryId);
 
     BookView findById(Long id);
 }

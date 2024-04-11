@@ -20,9 +20,13 @@ public class BookController {
     private BookService service;
 
     @GetMapping("list")
-    public List<BookView> list(@RequestParam(name = "q", required = false) String query) {
-        System.out.println(query);
-        List<BookView> list = service.getList(query);
+    public List<BookView> list(
+                                @RequestParam(name = "q", required = false) String query
+                                ,@RequestParam(name = "c", required = false) Long categoryId
+                                ) {
+
+        System.out.println("먼디??"+query);
+        List<BookView> list = service.getList(query, categoryId);
 
         return list;
 
