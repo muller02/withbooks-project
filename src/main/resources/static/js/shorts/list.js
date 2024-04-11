@@ -214,18 +214,50 @@ window.addEventListener("load", () => {
 
 
     // <점점점 버튼 클릭 시 모달 창 나타나는 이벤트>
-    dropdownButtons.forEach((dropdownButton, index) => {
-
-        // dropdownButtons들을 하나 씩 거내어 이벤트 '클릭' 이벤트 추가
-        dropdownButton.addEventListener("click", () => {
-            // 버튼이 클릭 됐을 떄 "active" 클래스가 존재하면 제거하고, 존재하지 않으면 "acteive"를 추가한다
-            dropdownLists[index].classList.toggle("active");
-            // 모달창 왼쪽으로 -60px 이동 클래스 추가
-            dropdownLists[index].classList.add("transform-x");
-
-        });
-
-    });
+    // dropdownButtons.forEach((dropdownButton, index) => {
+    //
+    //     // dropdownButtons들을 하나 씩 거내어 이벤트 '클릭' 이벤트 추가
+    //     // dropdownButton.addEventListener("click", () => {
+    //     //     // 버튼이 클릭 됐을 떄 "active" 클래스가 존재하면 제거하고, 존재하지 않으면 "acteive"를 추가한다
+    //     //     dropdownLists[index].classList.toggle("active");
+    //     //     // 모달창 왼쪽으로 -60px 이동 클래스 추가
+    //     //     dropdownLists[index].classList.add("transform-x");
+    //     //
+    //     // });
+    //
+    // });
 
    
 });
+
+//<점점점 버튼 클릭 시 모달 창 나타나는 이벤트> , <점점점 밖에 영역 클릭시 모달 창 닫힘)
+window.addEventListener("load", function (){
+    const shortSections = document.querySelectorAll(".short-section");
+
+    shortSections.forEach(shortSection =>{
+
+        const nDropdown = shortSection.querySelector(".n-dropdown");
+        const dropDownList = shortSection.querySelector(".dropdown-list");
+
+
+        nDropdown.onclick =function (){
+
+            dropDownList.classList.add("active");
+            dropDownList.classList.add("transform-x");
+        }
+
+        window.addEventListener("click",function (e){
+
+            if(!nDropdown.contains(e.target)){  // 클릭한 현재 요소가 nDropDown의 하위 요소가 아니면
+                dropDownList.classList.remove("active");
+            }
+
+        })
+
+
+    })
+
+
+
+
+})
