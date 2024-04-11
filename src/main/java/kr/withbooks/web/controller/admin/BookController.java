@@ -53,7 +53,7 @@ public class BookController {
     @GetMapping("detail")
     public String detail(@RequestParam("id")Long id
                         ,Model model){
-        BookView book = service.get(id);
+        BookView book = service.getView(id);
         model.addAttribute("book", book);
         return "admin/book/detail";
     }
