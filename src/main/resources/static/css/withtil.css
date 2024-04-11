@@ -245,3 +245,50 @@
 
   transition: visibility 0.1s, padding 0.2s;
 }
+
+/* 북로그 */
+.book-log .icon-color\:main-5::before,
+.book-log .icon-color\:main-5::after {
+    background-color: var(--color-main-5);
+}
+
+.book-log .n-btn {
+    /* btn-type:filled */
+    --btn-filled-background-color-default: var(--color-main-5);
+    --btn-filled-background-color-hover: var(--color-main-1);
+    --btn-filled-background-color-active: var(--color-main-5);
+    --btn-filled-border: 1px solid transparent;
+    --btn-filled-color: var(--color-base-1);
+    --btn-filled-color-hover: var(--color-main-5);
+}
+
+.book-log .n-toggle {
+    /* toggle:outline-box */
+    --toggle-outline-color: rgba(var(--rgb-base-10), 0.85);
+    --toggle-outline-background-color: var(--color-base-1);
+    --toggle-outline-border-color: var(--color-base-3);
+    --toggle-outline-color-checked: var(--color-base-1);
+    --toggle-outline-background-color-checked: var(--color-main-5);
+    --toggle-outline-border-color-checked: transparent;
+}
+
+.book-log .n-toggle-type\:outline-box:has(input:checked) .icon::after,
+.book-log .n-toggle\:outline-box:has(input:checked) .icon::after,
+.book-log .n-toggle-type\:outline-box:has(input:checked) .icon::before,
+.book-log .n-toggle\:outline-box:has(input:checked) .icon::before {
+    background-color: #ffffff;
+}
+
+.book-log .border-top,        
+.bd-top{ 
+    border-top: 2px dashed var(--border-color) !important; 
+}
+
+/* .book-log-btn:hover{    
+    color:var(--color-main-4);
+    toggle-outline-border-color:var(--color-base-1);
+    span{
+        --icon-color:var(--color-main-4);
+    }
+} 
+*/
