@@ -12,4 +12,5 @@ public interface ShrotsService {
     List<ShortsView> getView(Long booId);
     List<ShortsView> getView();
     List<ShortsAttachment> getAttach();
+    Shorts get(Long shortsId);
 }

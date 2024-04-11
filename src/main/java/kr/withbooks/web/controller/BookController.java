@@ -38,7 +38,7 @@ public class BookController {
 
     @GetMapping("detail")
     public String detail(Model model, @RequestParam Long id) {
-        BookView book = service.get(id);
+        BookView book = service.getView(id);
         System.out.println("book = " + book);
         model.addAttribute("book", book);
 

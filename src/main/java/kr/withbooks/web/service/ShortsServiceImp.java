@@ -25,20 +25,34 @@ public class ShortsServiceImp  implements  ShrotsService{
     @Autowired
     private ShortsAttachmentRepository shortsAttachmentRepository;
 
+    // shorts 저장
     @Override
     public void add(Shorts shorts) {
         shortsRepository.save(shorts);
     }
+
+    // shortsview 가져오기
     @Override
     public List<ShortsView> getView() {
         return  getView(null);
     }
+
+
     @Override
     public List<ShortsView> getView(Long bookId) {
         return shortsViewRepository.findAll(bookId);
     }
+
     @Override
     public List<ShortsAttachment> getAttach() {
         return shortsAttachmentRepository.findAll();
     }
+
+    // shorts 가져오기
+    @Override
+    public Shorts get(Long shortsId) {
+        return shortsRepository.findById(shortsId);
+    }
+
+
 }
