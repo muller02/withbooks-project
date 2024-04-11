@@ -99,6 +99,7 @@
         .rg-comment-hover:hover{
             background-color: var(--color-base-2);
 
+
             border-radius: 100px;
 
         }
@@ -357,8 +358,11 @@
                                           th:src="'/image/shorts/' + ${i}" />
                                 </div>
 
-                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
-                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
+                            <button class="back position:absolute cursor:pointer  ml:2	 p:2  border-radius:full   icon-color:sub-1 bg-color:base-2  top:4p  left:0" th:if="${s.img.size > 1}" >
+                                <span class="icon icon:arrow_left"></span></button>
+
+                            <button class="next position:absolute cursor:pointer  mr:2	 p:2  border-radius:full   icon-color:sub-1 bg-color:base-2  top:4p  right:0" th:if="${s.img.size > 1}" >
+                                <span class="icon icon:arrow_right"></span></button>
                             </div>
                             <section class="pager as:stretch mt:1">
                                 <h1 class="d:none">이미지 페이저</h1>
@@ -462,7 +466,7 @@
                 class="comment-group  box-shadow-custom	 translate-x-18px  mt:2 d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:bottom:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
         <h1 class="d:none">북쇼츠 댓글</h1>
-            <div class="	 icon icon:x cursor:pointer	 comment-close rg-comment-hover "></div>
+            <div class="	 icon icon:x cursor:pointer	 comment-close rg-comment-hover  "></div>
             <div class="comments color-base-9 ">
             </div>
 
