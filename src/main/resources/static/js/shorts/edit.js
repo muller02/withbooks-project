@@ -122,7 +122,6 @@ window.onload = function () {
 
     const output = content.replace(/<[^>]*>/g, '');
     const output2 = output.replace(/[-<>]/g, ''); // 추가 코드
-    
     quill.setText(output2);
 
 
