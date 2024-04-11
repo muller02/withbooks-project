@@ -19,6 +19,7 @@ function getCommentList(shortsId, comments ,getCommetnCount){
     xhr.onload = function () {
         var list = JSON.parse(this.responseText);
 
+
         for (cmt of list) {
             commentCount++;
 
@@ -122,7 +123,7 @@ window.addEventListener("load", () => {
         let positionValue = 0; // images 위치값
         const IMAGE_WIDTH = 350; // 한번 이동 시 IMAGE_WIDTH만큼 이동한다.
 
-        console.log("widhth = " , width.offsetWidth);
+
         const nextBtn = short.querySelector(".next");
         const backBtn = short.querySelector(".back");
         const images = short.querySelector(".images");
@@ -147,6 +148,7 @@ window.addEventListener("load", () => {
             return;
 
         nextBtn.addEventListener("click", function () {
+            console.log("widhth = " , width.offsetWidth);
             if (pages < imgLen - 1) {
                 backBtn.removeAttribute('disabled'); // 뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
                 positionValue -= IMAGE_WIDTH; // IMAGE_WIDTH의 증감을 positionValue에 저장한다.
@@ -208,7 +210,9 @@ window.addEventListener("load", () => {
     });
 
 
-    
+
+
+
     // <점점점 버튼 클릭 시 모달 창 나타나는 이벤트>
     dropdownButtons.forEach((dropdownButton, index) => {
 

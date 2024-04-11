@@ -1,4 +1,13 @@
 /* ===============Outline Toggle============== */
+
+body {
+    @media (min-width: 1200px){
+        padding-right: 400px;
+    }
+
+
+}
+
 .with-reg-page .n-toggle-type\:outline-box {
     /* toggle-type:outline-box */
     --toggle-outline-color: rgba(var(--rgb-base-10), 0.85);
