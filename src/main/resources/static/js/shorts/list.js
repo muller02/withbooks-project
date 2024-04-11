@@ -8,7 +8,7 @@ function getCommentList(shortsId, comments ,getCommetnCount){
     comments.innerHTML = "";
 
     // 카운트 변수 선언
-    var commentCount = 0;
+        var commentCount = 0;
 
     // 비동기로 데이터 가져오기
     // e.preventDefault();

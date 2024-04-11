@@ -89,6 +89,19 @@
         .comment-title-color{
             color: #242424;
         }
+        .rg-float-left{
+
+            @media (min-width: 1200px){
+              float: left;
+            }
+        }
+
+        .rg-comment-hover:hover{
+            background-color: var(--color-base-2);
+
+            border-radius: 100px;
+
+        }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -327,6 +340,39 @@
 
                         </section>
                         <!--                        글이 길어지면 박스가 같이 늘어나지 않아 일단 -->
+
+                              <section
+                                      class="fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2 rg-float-left" th:if="${s.img}"
+                              >
+                        <h1 class="d:none">북쇼츠 본문 이미지</h1>
+
+                        <div class="d:flex fl-dir:column h:7 w:7  mx:auto ">
+                            <div class="slide w:7 h:7 of:hidden	pos:relative">
+                                <div class="  img-list transition-transform images d:inline-flex position:relative">
+                                    <img  th:each="i : ${s.img}"
+                                          src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
+                                          alt="본문 이미지"
+                                          class="w:7 h:7  bd-radius:1 pb:1 	"
+
+                                          th:src="'/image/shorts/' + ${i}" />
+                                </div>
+
+                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
+                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
+                            </div>
+                            <section class="pager as:stretch mt:1">
+                                <h1 class="d:none">이미지 페이저</h1>
+                                <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">
+
+                                <li th:each="img : ${s.img}"
+                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
+                                </li>
+
+                                </ul>
+                            </section>
+                        </div>
+                    </section>
+
                         <article class="h:max-content	">
                             <h1 class="d:none">북쇼츠 본문</h1>
                             <p
@@ -361,37 +407,37 @@
                         </article>
                     </span>
 
-                    <section
-                            class="fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"
-                     >
-                        <h1 class="d:none">북쇼츠 본문 이미지</h1>
+<!--                    <section-->
+<!--                            class="fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"-->
+<!--                     >-->
+<!--                        <h1 class="d:none">북쇼츠 본문 이미지</h1>-->
 
-                        <div class="d:flex fl-dir:column h:7 w:7  mx:auto ">
-                            <div class="slide w:7 h:7 of:hidden	pos:relative">
-                                <div class="  img-list transition-transform images d:inline-flex position:relative">
-                                    <img  th:each="i : ${s.img}"
-                                            src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
-                                            alt="본문 이미지"
-                                            class="w:7 h:7  bd-radius:1 pb:1 	"
+<!--                        <div class="d:flex fl-dir:column h:7 w:7  mx:auto ">-->
+<!--                            <div class="slide w:7 h:7 of:hidden	pos:relative">-->
+<!--                                <div class="  img-list transition-transform images d:inline-flex position:relative">-->
+<!--                                    <img  th:each="i : ${s.img}"-->
+<!--                                            src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"-->
+<!--                                            alt="본문 이미지"-->
+<!--                                            class="w:7 h:7  bd-radius:1 pb:1 	"-->
 
-                                            th:src="'/image/shorts/' + ${i}" />
-                                </div>
+<!--                                            th:src="'/image/shorts/' + ${i}" />-->
+<!--                                </div>-->
 
-                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
-                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
-                            </div>
-                            <section class="pager as:stretch mt:1">
-                                <h1 class="d:none">이미지 페이저</h1>
-                                <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">
+<!--                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>-->
+<!--                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>-->
+<!--                            </div>-->
+<!--                            <section class="pager as:stretch mt:1">-->
+<!--                                <h1 class="d:none">이미지 페이저</h1>-->
+<!--                                <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">-->
 
-                                <li th:each="img : ${s.img}"
-                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
-                                </li>
+<!--                                <li th:each="img : ${s.img}"-->
+<!--                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">-->
+<!--                                </li>-->
 
-                                </ul>
-                            </section>
-                        </div>
-                    </section>
+<!--                                </ul>-->
+<!--                            </section>-->
+<!--                        </div>-->
+<!--                    </section>-->
                 </span>
 
         <section class="d:flex ai:center jc:end mr:2 mt:4">
@@ -416,7 +462,7 @@
                 class="comment-group  box-shadow-custom	 translate-x-18px  mt:2 d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:bottom:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
         <h1 class="d:none">북쇼츠 댓글</h1>
-            <div class="	 icon icon:x cursor:pointer	 comment-close "></div>
+            <div class="	 icon icon:x cursor:pointer	 comment-close rg-comment-hover "></div>
             <div class="comments color-base-9 ">
             </div>
 
