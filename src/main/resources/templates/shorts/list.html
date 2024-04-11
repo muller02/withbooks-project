@@ -15,19 +15,24 @@
             href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css"
     />
     <link rel="stylesheet" type="text/css" href="/css/var.css" />
+    <link rel="stylesheet" type="text/css" href="/css/withtil.css" />
     <link
             rel="stylesheet"
             type="text/css"
             href="/css/util/border-radius.css"
     />
     <style>
+        #main{
+            --gap-10: 62px;
+        }
+
         .shorts > div {
             --height-1: 40px;
             --width-1: 32px;
         }
 
         .pager {
-            --height-1: 3px;
+            --height-1: 4px;
         }
 
 
@@ -37,11 +42,53 @@
 
             transform: translateX(-122px);
         }
-    /*   이미지 슬라이드 효과*/
-        .images{
-            transition: transform 1s;
+
+        /* 이미지 슬라이드 효과*/
+        .transition-transform{
+            transition: transform 0.8s;
+
         }
 
+        /* 이미지 페이징 효과  */
+
+        .transition-background{
+            transition: background-color 0.6s;
+        }
+
+        /*북쇼츠 , 댓글 그림자*/
+        .box-shadow-custom{
+            box-shadow: 2px 4px 14px 0 rgba(157,157,157,14%);
+        }
+        .translate-x-18px{
+
+            @media (min-width: 1200px){
+            transform: translateX(-18px);
+            }
+        }
+
+        /*본문 내용 line-heihgt*/
+        article p  span{
+            line-height: 1.75;
+        }
+
+    /*    댓글버튼-숫자 , 좋아요버튼-숫자  이모티콘 색상 */
+        .color-text{
+            color: #343330;
+
+        }
+
+        .color-icon:before{
+            background-color: #343330;
+        }
+
+        /*댓글 컬러*/
+        .comment-content-color{
+            color: #222222;
+
+        }
+        .comment-title-color{
+            color: #242424;
+        }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -49,8 +96,8 @@
 
 <body>
 <!--gap 오버라이딩 필요 스마트폰 pb 있고, 테블릿 pc 업게 하기 -->
-<main layout:fragment="main" class="min-w:7 px:3 pb:10 lg:pb:0">
-    <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6">
+<main layout:fragment="main" class="min-w:7 px:3 pb:10 md:pb:0 lg:pb:0" id="main">
+    <section class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative">
         <h1 class="d:none">북쇼츠</h1>
 
         <span class="lg:d:flex lg:ai:start gap:2">
@@ -94,7 +141,7 @@
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
                             <div class="n-dropdown">
                                 <button
-                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn" id=""
+                                        class="icon icon:dots_three_outline_vertical_fill  color-icon my:3 dropdown-btn" id=""
                                 >점점점</button
                                 >
 
@@ -125,9 +172,9 @@
                             </div>
                         </section>
 
-                        <article class="max-h:8">
+                        <article class=" max-h:8">
                             <h1 class="d:none">북쇼츠 본문</h1>
-                            <p class="ml:2 mr:2 ln-h:1.5 fs:2">
+                            <p class="ml:2 mr:2 ln-h:2 fs:2">
                                 모든 국민은 그 보호하는 자녀에게 적어도
                                 초등교육과 법률이 정하는 교육을 받게 할 의무를
                                 진다. 군인·군무원·경찰공무원 기타 법률이 정하는
@@ -167,7 +214,7 @@
                                     class="h:10p w:10p bd-radius:1"
                             />
                         </div>
-                        <section class="pager as:stretch">
+                        <section class="pager as:stretch ">
                             <h1 class="d:none">이미지 페이저</h1>
                             <ul class="d:flex of:hidden">
                                 <li
@@ -205,14 +252,14 @@
 
 
     <section
-            class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 short-section"
+            class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:3 py:4 mt:6 short-section  lg:pos:relative"
             th:each="s : ${list}"
     >
 
         <h1 class="d:none">북쇼츠</h1>
         <div class="d:none shorts" th:text="${s.id}"  >id</div>
 
-        <span class="lg:d:flex lg:ai:start" >
+        <span class="lg:d:flex lg:ai:start gap:2" >
                     <span class="d:block w:100p">
                         <section  class="shorts d:flex jc:center ai:center px:1 "  >
                             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
@@ -228,7 +275,7 @@
                                 <div>
                                     <a
                                             href=""
-                                            class="font-size:2 font-weight:3 ml:1" th:text="${s.userNickname}"
+                                            class="font-size:2  comment-title-color font-weight:3 ml:1" th:text="${s.userNickname}"
                                     >뉴렉이</a
                                     >
                                 </div>
@@ -245,12 +292,12 @@
                             </div>
                         </section>
 
-                        <section class="d:flex jc:end">
+                        <section class="d:flex jc:end mt:3">
                             <h1 class="d:none">북쇼츠 팝업버튼</h1>
                             <div class="n-dropdown">
                                 <button
-                                        class="icon icon:dots_three_outline_vertical_fill my:3 dropdown-btn"
-                                >점점점</button
+                                        class="icon icon:dots_three_outline_vertical_fill   color-icon cursor:pointer	 dropdown-btn"
+                                ></button
                                 >
                                 <ul class="dropdown-list	">
                                      <li>
@@ -277,13 +324,13 @@
 
                                  </ul>
                             </div>
-                            
-                        </section>
 
-                        <article class="max-h:8">
+                        </section>
+                        <!--                        글이 길어지면 박스가 같이 늘어나지 않아 일단 -->
+                        <article class="h:max-content	">
                             <h1 class="d:none">북쇼츠 본문</h1>
                             <p
-                                    class="ml:2 mr:2 ln-h:1.5 fs:2"
+                                    class="ml:2 mr:2 ln-h:2 fs:2"
                                     th:utext="${s.content}"
                             >
                                 모든 국민은 그 보호하는 자녀에게 적어도
@@ -315,30 +362,30 @@
                     </span>
 
                     <section
-                            class="d:flex fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"
+                            class="fl-dir:column ai:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2" th:if="${s.img}"
                      >
                         <h1 class="d:none">북쇼츠 본문 이미지</h1>
 
-                        <div class="d:flex fl-dir:column h:8 w:8 lg:w:6">
-                            <div class="slide w:10p h:10p of:hidden	pos:relative">
-                                <div class="w:10p h:10p lg:w:6 img-list images d:flex position:relative">
+                        <div class="d:flex fl-dir:column h:7 w:7  mx:auto ">
+                            <div class="slide w:7 h:7 of:hidden	pos:relative">
+                                <div class="  img-list transition-transform images d:inline-flex position:relative">
                                     <img  th:each="i : ${s.img}"
                                             src="/image/shorts/마흔에%20읽는%20쇼펜하우어.PNG"
                                             alt="본문 이미지"
-                                            class="w:10p h:10p bd-radius:1 pb:1 obj-fit:cover"
+                                            class="w:7 h:7  bd-radius:1 pb:1 	"
 
                                             th:src="'/image/shorts/' + ${i}" />
                                 </div>
 
-                            <button class="back position:absolute w:1 h:1 border top:1">이전</button>
-                                <button class="next position:absolute w:1 h:1 border top:1 right:0">다음</button>
+                            <button class="back position:absolute cursor:pointer 	icon icon:arrow_left w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1  left:0" th:if="${s.img.size > 1}" >이전</button>
+                                <button class="next  position:absolute  cursor:pointer	icon icon:arrow_right  w:1 h:1  border-radius:full   icon-color:sub-1 bg-color:base-3  top:1 right:0" th:if="${s.img.size > 1}">다음</button>
                             </div>
-                            <section class="pager as:stretch">
+                            <section class="pager as:stretch mt:1">
                                 <h1 class="d:none">이미지 페이저</h1>
                                 <ul class="d:flex of:hidden img-paging gap:1" th:if="${s.img.size > 1}">
 
                                 <li th:each="img : ${s.img}"
-                                    class="bd-radius:2 fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
+                                    class="bd-radius:2 transition-background fl-grow:1   h:1" th:classappend="${imgStat.index} > 0 ? 'ml:2 bg-color:main-3' : 'bg-color:main-5'">
                                 </li>
 
                                 </ul>
@@ -347,17 +394,17 @@
                     </section>
                 </span>
 
-        <section class="d:flex ai:center jc:end mr:2 mt:3">
+        <section class="d:flex ai:center jc:end mr:2 mt:4">
             <h1 class="d:none">댓글/좋아요 버튼</h1>
             <div class="d:flex fl-dir:column ai:center">
-                <div class="icon icon:chats comment-btn" th:data-shorts-id="${s.id}"></div>
-                <div class="fs:2 fw:3" th:text="${s.commentCnt}">
+                <div class="icon icon:chats comment-btn cursor:pointer color-icon	" th:data-shorts-id="${s.id}"></div>
+                <div class="fs:2 fw:3 count-comment color-text" th:text="${s.commentCnt}">
                     132
                 </div>
             </div>
             <div class="d:flex fl-dir:column ai:center ml:5">
-                <div class="icon icon:heart"></div>
-                <div class="fs:2 fw:3" th:text="${s.likeCnt}">
+                <div class="icon icon:heart cursor:pointer color-icon	 "></div>
+                <div class="fs:2 fw:3 color-text " th:text="${s.likeCnt}">
                     50.2M
                 </div>
             </div>
@@ -366,14 +413,15 @@
 
 
         <section
-                class="comment-group  h:auto d:flex fl-dir:column  bd-radius:4  p:3  lg:pos:fixed lg:top:1 lg:right:1 lg:border lg:w:7 "
+                class="comment-group  box-shadow-custom	 translate-x-18px  mt:2 d:none h:auto  d:flex fl-dir:column  bd-radius:6  p:3  lg:pos:absolute	 lg:bottom:0 lg:right:-5 lg:border lg:w:7  zi:4	"
         >
-            <h1 class="d:none">북쇼츠 댓글</h1>
+        <h1 class="d:none">북쇼츠 댓글</h1>
+            <div class="	 icon icon:x cursor:pointer	 comment-close "></div>
             <div class="comments color-base-9 ">
             </div>
 
             <section class="d:flex jc:center mt:4">
-                <h1 class="d:none">댓글 페이저</h1>
+                <h1 class="d:none">댓글 페이저1</h1>
                 <ul class="n-pager">
                     <li class="active"><a>1</a></li>
                     <li><a>2</a></li>
@@ -381,11 +429,10 @@
                 </ul>
             </section>
             <div>
-                <form class="d:flex mt:5 ai:center" method="post">
+                <form class="d:flex mt:2 ai:center" method="post">
 
-                
-                    <textarea type="text" class="comment-content n-textbox mr:2"  name="comment-content" placeholder="댓글을 입력하세요 ! "></textarea>
-                    <input type="hidden" th:value = ${s.id} name="shorts_id">
+
+                    <textarea type="text" required class="comment-content px:1 py:1 n-textbox mr:2"  name="comment-content" placeholder="댓글을 입력하세요 ! "></textarea>
 
                     <button type="button" class="n-btn n-btn-color:main comment-reg">등록</button>
                 </form>
@@ -396,11 +443,11 @@
         <h1 class="d:none">플로팅버튼</h1>
         <a
                 href="/shorts/reg"
-                class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:3"
+                class="icon icon:plus icon-color:sub-1 bg-color:main-5  pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:5"
         ></a>
         <a
                 href="#main"
-                class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:3"
+                class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
         ></a>
     </section>
 </main>
