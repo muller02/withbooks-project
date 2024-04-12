@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.entity.Book;
@@ -133,8 +131,8 @@ public class ShortsController {
 
     @GetMapping("edit")
     public String editForm(
-        @RequestParam(name = "shorts-id") Long shortsId, 
-        @RequestParam(name = "book-id") Long bookId, 
+        @RequestParam(name = "sid") Long shortsId, 
+        @RequestParam(name = "bid") Long bookId, 
         Model model) {
 
         // shortsId 로 수정할 shorts 찾아오기 

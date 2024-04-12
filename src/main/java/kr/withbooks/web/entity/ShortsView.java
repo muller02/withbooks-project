@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class    ShortsView {
+public class ShortsView {
     private long id;
     private long bookId;
     private long userId;
