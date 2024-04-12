@@ -42,7 +42,7 @@ window.addEventListener("load", function(){
         }
 
         let list = await response.json();
-        await printBookList(list);
+        printBookList(list);
         
     });
 
@@ -71,15 +71,26 @@ window.addEventListener("load", function(){
             a.querySelector("span").classList.remove("color:base-1");
         }
         
-        // 클릭된 li태그와 span에 색상 주기
         // 클릭이벤트 발생한 li에서 클래스를 넣어주기 위한 span 태그 찾기
         let categorySpan = clickedCategoryLi.querySelector("span");
-        categorySpan.classList.add("color:base-1");
-        clickedCategoryLi.classList.remove("bg-color:main-1");
-        clickedCategoryLi.classList.add("bg-color:main-5");
+        
+        // 한번 클릭했던 카테고리를 바로 다시 클릭한 경우, style은 일반적인 형태로 두고
+        // 카테고리 없는 전체 검색결과를 가져오도록 한다.
+        if(categoryValue != categorySpan.dataset.id){
+            
+            // 클릭된 li태그와 span에 색상 주기
 
-        // 클릭한 li span 속 dataset value 찾기
-        categoryValue = categorySpan.dataset.id;
+            categorySpan.classList.add("color:base-1");
+            clickedCategoryLi.classList.remove("bg-color:main-1");
+            clickedCategoryLi.classList.add("bg-color:main-5");
+            categoryValue = categorySpan.dataset.id;
+        }else{
+            // 클릭했던 카테고리를 다시 클릭한 경우 전체 검색을 해야하므로
+            // categoryValue 값을 제거해준다
+            categoryValue = '';
+        }
+        
+        // 카테고리 검색 시 쿼리도 함께 검색해야하므로 쿼리 검색어도 추출
         let queryValue = searchQueryInput.value;
 
         //비동기 fetch 메소드 호출 및 GET 통신
@@ -92,9 +103,9 @@ window.addEventListener("load", function(){
             return;
         }
 
-
+        // 북 리스트를 받아온 후 화면 출력
         let list = await response.json();
-        await printBookList(list);
+        printBookList(list);
         
     })
     
