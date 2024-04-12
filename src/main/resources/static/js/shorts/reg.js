@@ -140,7 +140,14 @@ window.onload = function () {
     function regBtnbgColorChange() {
         // 에디터가 텍스트를 넣어주는 div안의 innerText가 빈 문자열이 아니거나, 책 검색 input이 공백이 아닐 때 실행
 
-        if (editer.innerText.trim() !== '' || queryInput.value!=='') {
+        const qlEditor = document.querySelector(".ql-editor > p "); // qlEditor 클래스 하위 p 선택
+        let qlEditorChild = qlEditor.children  //  p의 자식 => <br>
+
+        let existContent = qlEditorChild.item(0) ===null;
+        let existQuerInput = queryInput.value!=='';
+
+        if (existContent && existQuerInput) {
+
             regBtn.classList.add("bg-color:main-5") //bg-color:main-5 컬러 추가
         } else {
             regBtn.classList.remove("bg-color:main-5")
@@ -148,13 +155,14 @@ window.onload = function () {
         }
     }
 
-    //keyup
-    editer.addEventListener('keyup', regBtnbgColorChange);
-    queryInput.addEventListener('input', regBtnbgColorChange);
+
+    editer.addEventListener('keyup', regBtnbgColorChange); //editer에 키가 입력 될 떄 마다 함수 호출
+    queryInput.addEventListener('input', regBtnbgColorChange); //editer에 키가 입력 될 떄 마다 함수 호출
+
+
 
     const qlEditor = document.querySelector(".ql-editor > p "); // qlEditor 클래스 하위 p 선택
     let qlEditorChild = qlEditor.children  // qlEditor의 자식들
-
     regBtn.onclick = function (e) {
 
         if(queryInput.value===""){
