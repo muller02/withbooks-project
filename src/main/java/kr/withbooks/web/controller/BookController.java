@@ -32,7 +32,7 @@ public class BookController {
 
         model.addAttribute("list", list);
         model.addAttribute("category", cateList);
-        System.out.println(list);
+        // System.out.println(list);
         return "/book/list";
     }
 
