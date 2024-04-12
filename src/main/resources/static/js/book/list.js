@@ -140,7 +140,7 @@ window.addEventListener("load", function(){
             >
                 <div class="w:100p lg:w:3 d:flex jc:center">
                     <a
-                        href="@{./detail(id=${n.id})}"
+                        href="/book/detail?id=${n.id}"
                     >
                         <img
                             src="${n.cover}"
@@ -155,7 +155,7 @@ window.addEventListener("load", function(){
                     <h1 class="fs:3 fw:3">
                         <a
                             
-                            href="@{./detail(id=${n.id})}"
+                     href="/book/detail?id=${n.id}"
                             >${n.title}</a
                         >
                     </h1>
