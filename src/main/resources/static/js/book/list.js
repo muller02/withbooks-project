@@ -14,7 +14,7 @@ window.addEventListener("load", function(){
     const contentUl = this.document.querySelector(".content-ul");
     
     //  쿼리 검색시에도 카테고리 선택값이 필요하므로 전역 변수 생성
-    let categoryValue;
+    let categoryValue = 0;
  
 
     // ===================================== 쿼리로 검색하는 경우 =======================================
@@ -145,7 +145,7 @@ window.addEventListener("load", function(){
                     <div class="w:100p lg:w:3 d:flex jc:center">
                         <img
                             src="${n.cover}"
-                            class="h:3 margin-right:auto"
+                            class="h:3"
                             alt="도둑맞은 집중력.img"
                         />
                     </div>
@@ -153,29 +153,27 @@ window.addEventListener("load", function(){
                     <div class="w:100p d: fl-dir:column ai:center">
                         <h1 class="fs:3 fw:3">
                             <div
-                                text="${n.title}"
                             >
-                                도둑맞은 집중력
+                            ${n.title}
                             </div>
                         </h1>
                         <div
                             class="fs:2 fw:1 mt:1"
-                            text="${n.author}"
                         >
-                                요한하리
+                             ${n.author}
                         </div>
                         <div class="mt:1 fs:1">
-                            <div text="${n.publisher}">
-                                열린마음
+                            <div>
+                            ${n.publisher}
                             </div>
-                            <div text="${n.pubDate}">
-                                2022.01.01
+                            <div>
+                            ${n.pubDate}
                             </div>
                         </div>
                         <div
                             class="description d:none lg:d:block mt:2 w:10p"
-                            text="${n.description}"
                         >
+                        ${n.description}
                         </div>
                     </div>
                 </div>
