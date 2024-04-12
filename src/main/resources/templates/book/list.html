@@ -98,19 +98,22 @@
                             <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
                             <a 
                                 href="#" 
-                                th:href="@{./detail(id=${n.id})}"
+                                th:href="@{./detail(id=${n.id})} " class=""
                             >
                                 <div
-                                    class="gap:4 d:flex fl-dir:column lg:ai:center"
+                                    class="gap:4  fl-dir:column lg:ai:center ai:center"
                                 >
+
+
                                     <div class="w:100p lg:w:3 d:flex jc:center">
                                         <img
                                             src="/puppy.png"
-                                            class="h:3 margin-right:auto"
+                                            class="h:3 "
                                             alt="도둑맞은 집중력.img"
                                             th:src="${n.cover}"
                                         />
                                     </div>
+
 
                                     <div class="w:100p d: fl-dir:column ai:center">
                                         <h1 class="fs:3 fw:3">
