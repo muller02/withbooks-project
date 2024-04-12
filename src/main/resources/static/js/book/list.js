@@ -132,61 +132,54 @@ window.addEventListener("load", function(){
 
         list.forEach(n => {
                 
-            let liHTML = ` <li
+            let liHTML = ` 
+            <li
             class="jc:center ai:center p:3"
-        >
-            <div
-                class="gap:4 d:flex fl-dir:column lg:ai:center"
             >
-                <div class="w:100p lg:w:3 d:flex jc:center">
-                    <a
-                        href="/book/detail?id=${n.id}"
-                    >
+            <a 
+                href="@{./detail(id=${n.id})}"
+            >
+                <div
+                    class="gap:4 d:flex fl-dir:column lg:ai:center"
+                >
+                    <div class="w:100p lg:w:3 d:flex jc:center">
                         <img
                             src="${n.cover}"
                             class="h:3 margin-right:auto"
                             alt="도둑맞은 집중력.img"
                         />
-                    </a>
-                </div>
+                    </div>
 
-                <div class="w:100p d: fl-dir:column ai:center">
-                    <span></span>
-                    <h1 class="fs:3 fw:3">
-                        <a
-                            
-                     href="/book/detail?id=${n.id}"
-                            >${n.title}</a
-                        >
-                    </h1>
-                    <div
-                        class="fs:2 fw:1 mt:1"
-                    >
-                        <a
-                            href="@{./detail(id=${n.id})}"
-                            >${n.author}</a
-                        >
-                    </div>
-                    <div class="mt:1 fs:1">
-                        <div>
-                            <a
-                                href="@{./detail(id=${n.id})}"
-                                >${n.publisher}</a
+                    <div class="w:100p d: fl-dir:column ai:center">
+                        <h1 class="fs:3 fw:3">
+                            <div
+                                text="${n.title}"
                             >
+                                도둑맞은 집중력
+                            </div>
+                        </h1>
+                        <div
+                            class="fs:2 fw:1 mt:1"
+                            text="${n.author}"
+                        >
+                                요한하리
                         </div>
-                        <div>
-                            <a
-                                href="@{./detail(id=${n.id})}"
-                                >${n.pubDate}</a
-                            >
+                        <div class="mt:1 fs:1">
+                            <div text="${n.publisher}">
+                                열린마음
+                            </div>
+                            <div text="${n.pubDate}">
+                                2022.01.01
+                            </div>
                         </div>
-                    </div>
-                    <div
-                        class="description d:none lg:d:block mt:2 w:10p"
-                    >${n.description}
+                        <div
+                            class="description d:none lg:d:block mt:2 w:10p"
+                            text="${n.description}"
+                        >
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </li>
             `;
             contentUl.insertAdjacentHTML("beforeend", liHTML);
