@@ -77,7 +77,7 @@
                         </div>
                         <div class="n-expander-content d:flex jc:space-between">
                             <ul class="d:flex fl-wrap:wrap search-category">
-                                <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full"  th:each="c : ${category}">
+                                <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer	"  th:each="c : ${category}">
                                     <a href="#" class="click-none" role="button">
                                         <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
                                     </a>
