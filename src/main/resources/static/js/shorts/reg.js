@@ -158,20 +158,26 @@ let imgArr = []; // 삭제 이미지 저장소
 
 //////////////////////////////////////////////////////////
 window.addEventListener("load", function () {
-  var formGroup = this.document.querySelector(".form-group");
-  var imgInput = formGroup.querySelector(".img-input");
+  let formGroup = this.document.querySelector(".form-group");
+  let imgInput = formGroup.querySelector(".img-input");
 
-  var previewPanel = formGroup.querySelector(".preview-panel");
-  var imgLabel = formGroup.querySelector(".img-label");
+  let previewPanel = formGroup.querySelector(".preview-panel");
+  let imgLabel = formGroup.querySelector(".img-label");
 
-  var previewPanel = formGroup.querySelector(".preview-panel");
 
   // 이미지 임시 저장소 생성 (이유 : input에 이미지를 또 넣으면 마지막 이미지로 초기화 되기 때문)
-  var datatransfer = new DataTransfer();
+  let datatransfer = new DataTransfer();
 
   // 입력받은 이미지들을 처리(저장 및 img-panel에 이미지 추가)해주는 함수
+
+
+
   function inputImgHandler(files) {
-    for (var file of files) {
+
+
+
+    //파일 타입과 , 크기 검증
+    for (let file of files) {
       if (file.type.indexOf("image/") != 0) {
         alert("이미지만 업로드 할 수 있습니다.");
         return;
@@ -183,22 +189,27 @@ window.addEventListener("load", function () {
       }
     }
 
-    for (var file of files) {
+    //파일을 dataTrasfer에 저장
+    for (let file of files) {
+
+      //전역에 있는 datatransfer에 fiels를 모두 담기
       datatransfer.items.add(file);
+
 
       // 사용자가 등록 버튼을 눌렀을 경우 최신의 이미지파일들을 submit 해야 하기 때문이다
       imgInput.files = datatransfer.files;
 
-      var reader = new FileReader();
 
+      let reader = new FileReader();
+      //콜백 함수
       reader.onload = function (e) {
-        var img = document.createElement("img");
-        var div = document.createElement("div");
-        var deleteDiv = document.createElement("div");
-        img.src = e.target.result;
+        let img = document.createElement("img");
+        let div = document.createElement("div");
+        let deleteDiv = document.createElement("div");
 
-        img.id = file.lastModified; //이미지 고유 값저장
+        img.src = e.target.result;  // 콜백으로 받은 url을 이미지 엘리먼트 src 값으로 저장
 
+        // ========== 엘리먼트 클래스 추가 및 엘리먼트 추가 ==========
         img.classList.add("h:3", "w:3", "bd-radius:3");
         previewPanel.append(div);
 
@@ -214,9 +225,59 @@ window.addEventListener("load", function () {
           "icon",
           "icon:x"
         );
+        // ===================================================
+
+
+        //  ========== 삭제 버튼 클릭시 이미지 삭제 ==========
+        //삭제 버튼에 data 속성을 지정하고, 값을 file의 lastModified를 지정한다.
+        deleteDiv.setAttribute('data-index', file.lastModified);
+
+
+        deleteDiv.addEventListener("click", function (e) {
+
+          //클릭 대상이 삭제 버튼이 아닐시 종료
+          if (!e.target.classList.contains("icon:x")) return;
+
+          //삭제 버튼의 data-index 값을 가지고 와 Number 형으로 변경
+          let removeTargetId = parseInt( e.target.dataset.index);
+
+          const files = imgInput.files;
+
+          //삭제 한 후의 files와 연결하기 위한 DataTransfer
+          const deleteFilterDataTransfer = new DataTransfer();
+
+          //input에 있는 파일 객체를 배열로 변경 한 후 , files에서 file을 하나 씩 꺼낸 후
+          //lastModified 와 삭제 버튼의
+
+
+          Array.from(files).filter(file =>  file.lastModified !==  removeTargetId)
+              .forEach((file,index) =>{
+                // console.log(`${index} = ${file.lastModified}`);
+                // console.log(`remove target id = ${removeTargetId}`);
+                // console.log("result = ", file.lastModified !==  removeTargetId )
+
+            deleteFilterDataTransfer.items.add(file);
+                // console.log('datafiltder= ' , deleteFilterDataTransfer.files);
+
+              })
+
+          imgInput.files = deleteFilterDataTransfer.files;
+
+
+          const deleteBtn = e.target;
+          const deleteBtnParent = deleteBtn.parentNode;
+          deleteBtnParent.remove();
+
+
+
+
+        });
+
+
         div.append(deleteDiv);
       };
 
+      // 주어진 파일을 읽어들이고, 해당 파일의 내용을 Data URL 형식으로 변환하여  콜백함수에 반환
       reader.readAsDataURL(file);
     }
   }
@@ -228,19 +289,19 @@ window.addEventListener("load", function () {
   };
 
   // 드래그 오버 => 사용안함
-  //   imgLabel.ondragover = function (e) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //     console.log("드래그 오버");
+    imgLabel.ondragover = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("드래그 오버");
 
-  //     var valid =
-  //       e.dataTransfer &&
-  //       e.dataTransfer.types &&
-  //       e.dataTransfer.types.indexOf("Files") >= 0; //배열의 indexOf메소드다. 문자열의 메소드와 이름이 같아서 착각할 수 있으니 주의
+      var valid =
+        e.dataTransfer &&
+        e.dataTransfer.types &&
+        e.dataTransfer.types.indexOf("Files") >= 0; //배열의 indexOf메소드다. 문자열의 메소드와 이름이 같아서 착각할 수 있으니 주의
 
-  //     if (valid) imgLabel.classList.add("valid");
-  //     else imgLabel.classList.add("invalid");
-  //   };
+      if (valid) imgLabel.classList.add("valid");
+      else imgLabel.classList.add("invalid");
+    };
 
   // 드래그 앤 드랍 시 처리
   imgLabel.ondrop = function (e) {
@@ -257,22 +318,6 @@ window.addEventListener("load", function () {
   };
 });
 
-window.addEventListener("click", function (e) {
-  //삭제 버튼 클릭시 이미지 삭제
 
-  if (!e.target.classList.contains("icon:x")) return;
-
-  console.log(e.target);
-  const deleteBtn = e.target;
-
-  const deleteBtnParent = deleteBtn.parentNode;
-
-  deleteBtnParent.remove();
-
-  const img = deleteBtn.previousSibling;
-
-  console.log(img.src);
-  imgArr.push(img.src);
-});
 
 // 삭제를 누르면  src d

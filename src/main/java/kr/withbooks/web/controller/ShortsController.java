@@ -81,9 +81,13 @@ public class ShortsController {
         @RequestParam(required = false , name = "book-id") Long bookId,
         HttpServletRequest request) throws IOException {
 
-            System.out.println("book id = " + bookId);
-            System.out.println("files = "  + files);
-            System.out.println("content = "  +content);
+        System.out.println("files = " + files.size());
+
+        for(MultipartFile file : files){
+
+            System.out.println("복숭아 = " + file.getOriginalFilename());
+        }
+
 
         Shorts item = Shorts.builder()
                             .bookId(bookId)
