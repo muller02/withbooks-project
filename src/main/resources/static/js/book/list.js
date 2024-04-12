@@ -111,9 +111,9 @@ window.addEventListener("load", function(){
     
     // ================================= 파라미터 추가하여 서버와 통신  =======================================
     // ======================================================================================================
-    function getByParams(q, c){
+    function getByParams(q, c, s=20, p=1){
         
-        const url = `/api/book/list?q=${q}&c=${c}`;
+        const url = `/api/book/list?q=${q}&c=${c}&s=${s}&p=${p}`;
         // const method = "GET";
         return fetch(url);
     }

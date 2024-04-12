@@ -23,9 +23,12 @@ public class BookController {
     public List<BookView> list(
                                 @RequestParam(name = "q", required = false) String query
                                 ,@RequestParam(name = "c", required = false) Long categoryId
+                                ,@RequestParam(name = "s", required = false) Long size
+                                ,@RequestParam(name = "p", required = false) Long page
                                 ) {
 
         System.out.println("먼디??"+query);
+        System.err.println("size ="+size+", page = "+page);
         List<BookView> list = service.getList(query, categoryId);
 
         return list;
