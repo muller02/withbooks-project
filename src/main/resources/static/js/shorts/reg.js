@@ -315,6 +315,8 @@ window.addEventListener("load", function () {
   // 이미지 직접 input 시 처리
   imgInput.oninput = function (e) {
     inputImgHandler(e.target.files);
+    e.target.files=null;  //이 부분이 있어야, 인풋에 파일 넣고, 다음 또 인풋을 클릭해서 넣을 떄 초기화  가능 중요!
+
   };
 });
 
