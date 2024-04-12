@@ -76,15 +76,13 @@
                             상세검색
                         </div>
                         <div class="n-expander-content d:flex jc:space-between">
-                            <div>
-                                <ul class="d:flex fl-wrap:wrap search-category">
-                                    <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full"  th:each="c : ${category}">
-                                        <a href="#" class="click-none" role="button">
-                                            <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul class="d:flex fl-wrap:wrap search-category">
+                                <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full"  th:each="c : ${category}">
+                                    <a href="#" class="click-none" role="button">
+                                        <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -97,84 +95,53 @@
                             class="jc:center ai:center p:3"
                             th:each="n: ${list}"
                         >
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center"
+                            <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
+                            <a 
+                                href="#" 
+                                th:href="@{./detail(id=${n.id})}"
                             >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <a
-                                        href=""
-                                        th:href="@{./detail(id=${n.id})}"
-                                    >
+                                <div
+                                    class="gap:4 d:flex fl-dir:column lg:ai:center"
+                                >
+                                    <div class="w:100p lg:w:3 d:flex jc:center">
                                         <img
                                             src="/puppy.png"
                                             class="h:3 margin-right:auto"
                                             alt="도둑맞은 집중력.img"
                                             th:src="${n.cover}"
                                         />
-                                    </a>
-                                </div>
+                                    </div>
 
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <span></span>
-                                    <h1 class="fs:3 fw:3">
-                                        <a
-                                            th:text="${n.title}"
-                                            th:href="@{./detail(id=${n.id})}"
-                                            >도둑맞은 집중력</a
+                                    <div class="w:100p d: fl-dir:column ai:center">
+                                        <h1 class="fs:3 fw:3">
+                                            <div
+                                                th:text="${n.title}"
+                                            >
+                                                도둑맞은 집중력
+                                            </div>
+                                        </h1>
+                                        <div
+                                            class="fs:2 fw:1 mt:1"
+                                            th:text="${n.author}"
                                         >
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                        th:text="${n.author}"
-                                    >
-                                        <a
-                                            href=""
-                                            th:href="@{./detail(id=${n.id})}"
-                                            >요한하리</a
+                                                요한하리
+                                        </div>
+                                        <div class="mt:1 fs:1">
+                                            <div th:text="${n.publisher}">
+                                                열린마음
+                                            </div>
+                                            <div th:text="${n.pubDate}">
+                                                2022.01.01
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="description d:none lg:d:block mt:2 w:10p"
+                                            th:text="${n.description}"
                                         >
-                                    </div>
-                                    <div class="mt:1 fs:1">
-                                        <div th:text="${n.publisher}">
-                                            <a
-                                                href=""
-                                                th:href="@{./detail(id=${n.id})}"
-                                                >열린마음</a
-                                            >
                                         </div>
-                                        <div th:text="${n.pubDate}">
-                                            <a
-                                                href=""
-                                                th:href="@{./detail(id=${n.id})}"
-                                                >2022.01.01</a
-                                            >
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="description d:none lg:d:block mt:2 w:10p"
-                                        th:text="${n.description}"
-                                    >
-                                        <!-- <span class="ln-clamp:3">
-                                            <a
-                                                href=""
-                                                th:href="@{./detail(id=${n.id})}"
-                                            >
-                                                어느날 도둑맞은 나의 집중력...
-                                                작가의 상상력을 한껏 발휘한
-                                                어쩌구저쩌구 줄거리 최대 3줄
-                                                ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦
-                                                어느날 도둑맞은 나의 집중력...
-                                                작가의 상상력을 한껏 발휘한
-                                                어쩌구저쩌구 줄거리 최대 3줄
-                                                ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦
-                                                어느날 도둑맞은 나의 집중력...
-                                                작가의 상상력을 한껏 발휘한
-                                                어쩌구저쩌구 줄거리 최대 3줄
-                                                ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦ㄴㅁ어ㅑㅐ조야ㅐ저애ㅔ자애ㅏ재ㅔ엊어ㅔㅈ에ㅐㅈ엦
-                                            </a>
-                                        </span> -->
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                     </ul>
                 </section>
