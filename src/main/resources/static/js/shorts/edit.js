@@ -115,15 +115,38 @@ window.onload = function () {
         theme: 'snow'
     });
 
+    // 글자수 제한
+    const maxLength = 700
+    const restrict = document.querySelector(".restrict");
+
+    quill.on('editor-change', e => {
+        const length = quill.getLength();
+
+        if (length > maxLength) {
+            quill.deleteText(maxLength, length);
+
+            restrict.classList.add("fade-out");
+        }else{
+            restrict.classList.remove("fade-out");
+
+        }
+    })
     const shortsContent = document.querySelector(".shorts-content");
 
 
-    let content = shortsContent.dataset.con;
+    let content = shortsContent.dataset.content;
 
-    const output = content.replace(/<[^>]*>/g, '');
-    const output2 = output.replace(/[-<>]/g, ''); // 추가 코드
+    const output = content.replace(/<[^>]*>/g, ''); //html 태그 제거 1
+    /**
+     * <: 문자열에서 < 문자를 찾기
+     * [^>]: > 문자를 제외한 어떤 문자열.
+     * *: 바로 앞에 있는 패턴이 0번 이상 반복.
+     * >: 문자열에서 > 문자를 찾기.
+     * 찾은 value 를 공백으로 제거
+     */
+    const output2 = output.replace(/[-<>]/g, '');  //html 태그 제거 2
+
     quill.setText(output2);
-
 
     // 내용이 변경될 때마다 함수 호출
     function regBtnbgColorChange() {

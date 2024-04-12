@@ -67,8 +67,8 @@
         }
 
         /*본문 내용 line-heihgt*/
-        article p  span{
-            line-height: 1.75;
+        article p {
+            line-height: 1.7;
         }
 
     /*    댓글버튼-숫자 , 좋아요버튼-숫자  이모티콘 색상 */
@@ -101,6 +101,9 @@
 
                 border-radius: 100px;
             }
+
+
+
         </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -265,7 +268,7 @@
 
 
     <section
-            class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:3 py:4 mt:6 short-section  lg:pos:relative"
+            class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:4 py:4 mt:6 short-section  lg:pos:relative"
             th:each="s : ${list}"
     >
 
@@ -303,7 +306,7 @@
             </div>
         </section>
 
-        <section class="d:flex jc:end mt:3">
+        <section class="d:flex jc:end my:3">
             <h1 class="d:none">북쇼츠 팝업버튼</h1>
             <div class="n-dropdown">
                 <button
