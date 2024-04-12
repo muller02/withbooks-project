@@ -70,6 +70,14 @@
             background: rgba(246, 246, 247, 0.1); /*�ㅽ겕濡ㅻ컮 �� 諛곌꼍 �됱긽*/
         }
 
+        .fade{
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .fade-out{
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -107,7 +115,7 @@
     <section class="">
         <h1 class="d:none">북쇼츠 내용 입력</h1>
         <form class="form-group h:auto" action="edit" method="post" enctype="multipart/form-data">
-            <sect class="form-group mt:3 mb:3">
+            <section  class="form-group mt:3 mb:3">
                 <h1 class="d:none">이미지 입력</h1>
                 <div class="   d:flex  ai:center bd-radius:5 mr:3  img-group pb:2">
                     <label class="img-label d:flex jc:center flex-shrink:0   bg-color:base-2 ai:center w:3 h:3 border-radius:8 d:inline-block  mr:2">
@@ -124,7 +132,8 @@
 
             </section>
             <!-- 수정 페이지에서, 해당  쇼츠 id에 해당하는 내용을 자바스크립트에 변수로 저장  -->
-            <div th:data-con="${shorts.content}" class="shorts-content d:none"></div>
+    <div class="restrict fade mb:1 color:accent-1"> 700 글자를 초과하였습니다.</div>
+    <div th:data-content="${shorts.content}" class="shorts-content d:none"></div>
             <section class="h:10">
                 <h1 class="d:none">폼</h1>
                 <div class="h:100p">
