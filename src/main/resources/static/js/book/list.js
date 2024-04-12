@@ -137,8 +137,7 @@ window.addEventListener("load", function(){
             class="jc:center ai:center p:3"
             >
             <a 
-                href="#" 
-                th:href="@{./detail(id=${n.id})}"
+                href="@{./detail(id=${n.id})}"
             >
                 <div
                     class="gap:4 d:flex fl-dir:column lg:ai:center"
