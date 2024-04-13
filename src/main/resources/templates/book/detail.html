@@ -24,16 +24,23 @@
         }
 
 
+        .background-color-none{
+            background-color:transparent;
+        }
     </style>
+    <script src="/js/book/detail.js"></script>
 </head>
 <body>
+
 <main class="min-width:8 p:3" layout:fragment="main">
     <section class="pos:relative py:3 d:flex flex-direction:column md:flex-direction:row lg:flex-direction:column jc:center ai:center w:100p border-radius:10 bg-color:main-1 fl-wrap:wrap">
         <h1 class="d:none">도둑 맞은 집중력</h1>
 
         <div class="pos:relative">
-            <div><input type="checkbox" class="bookmark-icon icon icon:bookmark_simple icon-size:5 position:absolute top:1 left:1"></input></div>
-            <img class="book-img h:4 w:3" src="/img/bookshorts/detail/도둑맞은집중력.png" th:src="${book.cover}" alt="책이미지">
+            <label id="book-mark" class="bookmark-icon icon  cursor:pointer	   icon:bookmark_simple_fill icon-color:main-1	 icon-size:5 position:absolute top:1 left:1">
+                 <input type="checkbox" class="d:none"/>
+            </label>
+                <img class="book-img h:4 w:3" src="/img/bookshorts/detail/도둑맞은집중력.png" th:src="${book.cover}" alt="책이미지">
         </div>
         <span class="md:ml:8 lg:ml:0">
             <div class="d:flex flex-direction:column">
