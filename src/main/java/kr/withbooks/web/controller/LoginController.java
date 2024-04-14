@@ -14,4 +14,11 @@ public class LoginController {
 
         return  "login/login";
     }
+
+    @GetMapping("join")
+    public String join(){
+
+
+        return "login/join";
+    }
 }

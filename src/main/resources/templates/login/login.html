@@ -22,12 +22,12 @@
 <body>
 <main layout:fragment="main" class="d:flex w:100p">
 
-    <div class="lg:h:100p bg-color:main-3 lg:w:9 lg:mr:4 lg:d:inline-block d:none"></div>
+    <div class=" bg-color:main-3 lg:w:9 lg:mr:4 lg:d:inline-block d:none  "></div>
 
 
     <div class="flex-grow:1 lg:d:flex lg:jc:center lg:fl-dir:column	">
         <div class="ml:3 mr:3 my:8">
-            <div class="mb:3 fs:8 color:main-6">환영합니다,</div>
+            <div class="mb:3  fs:9 color:main-6">환영합니다,</div>
             <span> 위드북스에 가입하여 함께하는 독서를 즐겨 주세요 !</span>
         </div>
 
@@ -42,23 +42,23 @@
 
                 <label class="my:8">
                     <span class="fs:2 fw:3 ">비밀번호</span>
-                    <input type=text name="password" class="n-textbox n-textbox-type:underline n-textbox-label:top">
+                    <input type=text name="pwd" class="n-textbox n-textbox-type:underline n-textbox-label:top">
                     <div class="feld-error"></div>
                 </label>
                 <label class="my:8">
-                    <input type="checkbox" name="logId" class="n-toggle n-toggle-type:check-box" />
+                    <input type="checkbox" name="log-id" class="n-toggle n-toggle-type:check-box" />
                     <span class="font-size:2 font-weight:2 d:flex gap:1">
                           <span>아이디 저장</span>
                     </span>
                 </label>
 
                 <div class="my:8 ml:auto">아이디 또는 비밀번호가 유효하지 않습니다.</div>
-                <button type="submit" class="n-btn w:100p">Button</button>
+                <button type="submit" class="n-btn w:100p">로그인</button>
             </form>
             <nav class="d:flex jc:center my:8">
                 <a href="" class="bd-right pr:5">아이디 찾기</a>
                 <a href="" class="bd-right pr:5 pl:5">비밀번호 찾기</a>
-                <a href="" class="pl:5">회원가입</a>
+                <a href="/join" class="pl:5">회원가입</a>
             </nav>
 
             <div class="d:flex ai:center jc:center my:8">
