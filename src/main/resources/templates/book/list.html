@@ -92,7 +92,7 @@
                     <h1 class="d:none">북 리스트</h1>
                     <ul class="n-list n-card-list content-ul">
                         <li
-                            class="jc:center ai:center p:3"
+                            class="jc:center ai:center p:5"
                             th:each="n: ${list}"
                         >
                             <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
@@ -105,18 +105,18 @@
                                 >
 
 
-                                    <div class="w:100p lg:w:3 d:flex jc:center">
+                                    <div class="w:100p lg:w:3 d:flex jc:center mb:2">
                                         <img
                                             src="/puppy.png"
-                                            class="h:3 "
+                                            class="h:4 w:4 border-radius:3"
                                             alt="도둑맞은 집중력.img"
                                             th:src="${n.cover}"
                                         />
                                     </div>
 
 
-                                    <div class="w:100p d: fl-dir:column ai:center">
-                                        <h1 class="fs:3 fw:3">
+                                    <div class="w:100p d: fl-dir:column ai:center px:2">
+                                        <h1 class="fs:4 fw:3">
                                             <div
                                                 th:text="${n.title}"
                                             >
