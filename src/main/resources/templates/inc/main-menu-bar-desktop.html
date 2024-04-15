@@ -47,15 +47,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
                 <section class="d:flex fl-dir:column mt:6 w:100p ai:center" sec:authorize="isAuthenticated()" >
                     <h1 class="d:none">프로필</h1>
 
-                    <span class="d:flex mb:2">
-                        <div>
-                            <a href=""
+                    <div class="d:flex mb:2 w:100p jc:center">
+                        <div class="mr:2">
+                            <a href="" class="h:100p w:100p d:block"
                                 ><img src="/icon/user.svg" alt="마이"
                             /></a>
                         </div>
                         <div class="ml:5 d:flex fl-dir:column jc:center">
                             <div>
-                                <a class="fs:3 fw:3 color:base-8" href=""
+                                <a class="fs:3 fw:3 color:base-8 " href=""
                                     th:text="${nickname}" >독자 호빵이</a
                                 >
                             </div>
@@ -65,7 +65,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
                                 >
                             </div>
                         </div>
-                    </span>
+                    </div>
                     <div class="d:flex my:4 ai:end jc:center h:1 w:100p">
                         <div class="d:flex fl-dir:column jc:center ai:center">
                             <div

@@ -23,6 +23,9 @@ public class HomeController {
     public String home(Model model){
         //사용자 이름 -> 이메일 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+
         String email = authentication.getName();        // 컨텍스트에서 이메일 가지고오기 
 
         //userdetails에 getNickname을 오버라이딩 해서 꺼내옴  굿 !!! 
