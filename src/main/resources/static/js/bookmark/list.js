@@ -50,13 +50,11 @@ checkAllBox.onchange = function(e){
        = document.querySelectorAll('input[type="checkbox"]');
 
     // 전체 선택 체크박스 checked 변경
-    checkAllBox.checked = e.target.checked;
+    let checked = checkAllBox.checked;
+    checked = e.target.checked;
 
     // 모든 체크박스들 checked 변경
-    if(checkAllBox.checked == true)
-        checkboxes.forEach((checkbox)=>{checkbox.checked = true});
-    else
-        checkboxes.forEach((checkbox)=>{checkbox.checked = false});
+    checkboxes.forEach((checkbox)=>{checkbox.checked = checked});
   };
 
 
