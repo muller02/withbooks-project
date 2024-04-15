@@ -90,7 +90,7 @@
                         <input
                                 type="password"
                                 class="n-textbox n-textbox-type:underline n-textbox-label:top "
-                                name="pwd"
+                                name="password"
                                 placeholder="비밀번호" required minlength="2"
                         />
                     </label>
@@ -113,42 +113,58 @@
                         <input
                                 type="text"
                                 class="n-textbox n-textbox-type:underline n-textbox-label:top "
-                                name="nick-name"
+                                name="nickname"
                                 placeholder="닉네임" required minlength="2"
                         />
                     </label>
                 </div>
             </section>
+<!-- 
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7">
+                <div class="nick-name">
+                    <div class="mb:2 fw:3">생년월일</div>
+                    <label>
+                        <input
+                                type="date"
+                                class="n-textbox n-textbox-type:underline n-textbox-label:top "
+                                name="birth-date"
+                    
+                        />
+                    </label>
+                </div>
+            </section> -->
 
             <section class="n-item n-item:shadow mb:4 pt:4 pb:5 pl:5 pr:5 mb:7">
                 <div class="mb:2 fw:3">성별</div>
                 <ul class="w:full d:flex jc:start gap:2">
                     <li>
                         <label class="n-toggle n-toggle-type:outline-box">
-                            남성
-                            <input type="radio" class="d:none" name="gender"  value="m" />
+                            여성
+                            <input type="radio" class="d:none" name="gender"  value="0" />
                         </label>
                     </li>
                     <li>
                         <label class="n-toggle n-toggle-type:outline-box">
-                            여성
-                            <input type="radio" class="d:none" name="category"  value="w" />
+                            남성
+                            <input type="radio" class="d:none" name="gender"  value="1" />
                         </label>
                     </li>
                 </ul>
             </section>
+            
 
-<!--            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">-->
-<!--                <h1 class="d:none">위드소개</h1>-->
-<!--                <div class="mb:2 fw:3">위드소개(선택)</div>-->
-<!--                <div class="d:flex ai:center">-->
-<!--                    <textarea-->
-<!--                            type="text"-->
-<!--                            class="n-textbox"-->
-<!--                            placeholder="위드를 간단히 소개 해보세요 !"-->
-<!--                    ></textarea>-->
-<!--                </div>-->
-<!--            </section>-->
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:5 pl:5 pr:5 mb:7">
+              <h1 class="d:none">소개</h1>
+               <div class="mb:2 fw:3">소개</div>
+               <div class="d:flex ai:center">
+                   <textarea
+                            type="text"
+                            class="n-textbox"
+                            placeholder="자신을 소개 해보세요 !"
+                            name="intro"
+                    ></textarea>
+               </div>
+           </section>
         </form>
     </section>
 
