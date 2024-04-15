@@ -31,27 +31,35 @@ deleteBtn.onclick = function(){
     
     // book-section을 눌렀을때 해당 책의 체크박스가 눌러지도록 조치
     // XXX 리팩토링 필요
-    bookMarkLists.forEach((list)=>list.onclick = function(e){
+    bookMarkSection.onclick = function(e){
+        console.log(e);
+        console.log(e.target);
+        e.preventDefault();
+
+    };
+
+    // bookMarkLists.forEach((list)=>list.onclick = function(e){
         
-        // 클릭한 책의 부모 section 찾기
-        let clickedElement = e.target;
-        let parentSection = clickedElement.parentElement;
+    //     e.preventDefault();
+
+    //     // 클릭한 책의 부모 section 찾기
+    //     let clickedElement = e.target;
+    //     let parentSection = clickedElement.parentElement;
         
-        for(let i = 1 ;i<10;i++){
-            if(parentSection.tagName == "SECTION")
-                break;
-            if(parentSection.tagName == "A")
-                parentSection.preventDefault();
-            parentSection = parentSection.parentElement;
-        }
+    //     for(let i = 1 ;i<10;i++){
+    //         if(parentSection.tagName == "SECTION")
+    //             break;
+
+    //         parentSection = parentSection.parentElement;
+    //     }
     
-        // 찾은 section의 checkbox 찾기
-        let checkbox = parentSection.querySelector("input");
+    //     // 찾은 section의 checkbox 찾기
+    //     let checkbox = parentSection.querySelector("input");
     
-        // checkbox의 boolean을 찾아 반대로 대입해주기
-        let tmp = checkbox.checked;
-        checkbox.checked =! tmp;
-    });
+    //     // checkbox의 boolean을 찾아 반대로 대입해주기
+    //     let tmp = checkbox.checked;
+    //     checkbox.checked =! tmp;
+    // });
 };
 
 
@@ -70,14 +78,21 @@ checkAllBox.onchange = function(e){
   };
 
 
+  // 취소 버튼 클릭 시 작동
   cancelBtn.onclick = function(){
+    
+    // 모든 체크박스 체크해제 후 숨김
+    let checkboxes = document.querySelectorAll("input");
+    checkboxes.forEach((checkbox)=>{
+                    checkbox.classList.add("d:none");
+                    checkbox.checked=false;});
+    
+    // 취소 버튼 숨김
+    cancelBtn.classList.add("d:none");
 
-    let bookALinks = bookMarkSection.querySelectorAll("a");
-    bookALinks.forEach(
-        (aLink)=>{
-            aLink.onclick = (e)=>e.preventDefault=false;
-        }
-    );
+    // prevented된 a링크들 되살리기..
+
+
   };
 
 
