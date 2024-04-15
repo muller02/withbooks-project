@@ -2,6 +2,7 @@
 // 체크박스 및 전체삭제 변수
 const bookCheckAll = this.document.querySelector(".book-check-all");
 const checkAllBox = bookCheckAll.querySelector("input");
+const cancelBtn = bookCheckAll.querySelector(".cancel-btn");
 const deleteBtn = bookCheckAll.querySelector(".delete-btn");
 
 // 책 리스트 섹션과 그 안의 input들
@@ -13,33 +14,44 @@ const bookCheckAllInput = bookCheckAll.querySelector("input");
 // 삭제버튼 눌렀을 때
 deleteBtn.onclick = function(){
 
+    // 취소 버튼 뜨게 하기
+    cancelBtn.classList.remove("d:none");
+
     // 전체 선택 시 체크박스 뜨게 하기
     let checkboxes = document.querySelectorAll("input");
     checkboxes.forEach((checkbox)=>{checkbox.classList.remove("d:none")});
 
-    // // 모든 a링크를 못누르게 처리하고
-    // bookMarkAs.onclick =(e)=>e.preventDefault();
-    
-    // // book-section을 눌렀을때 해당 책의 체크박스가 눌러지도록 조치
-    // bookMarkLists.onclick = function(e){
-
-    //     // 클릭한 책의 부모 section 찾기
-    //     let clickedElement = e.target;
-    //     let parentSection = clickedElement.parentElement;
-    
-    //     for(let i = 1 ;i<10;i++){
-    //         if(parentSection.tagName == "SECTION")
-    //             break;
-    //         parentSection = parentSection.parentElement;
+    // 모든 a링크를 못누르게 처리하고
+    // let bookALinks = bookMarkSection.querySelectorAll("a");
+    // bookALinks.forEach(
+    //     (aLink)=>{
+    //         aLink.onclick = (e)=>e.preventDefault();
     //     }
+    // );
     
-    //     // 찾은 section의 checkbox 찾기
-    //     let checkbox = parentSection.querySelector("input");
+    // book-section을 눌렀을때 해당 책의 체크박스가 눌러지도록 조치
+    // XXX 리팩토링 필요
+    bookMarkLists.forEach((list)=>list.onclick = function(e){
+        
+        // 클릭한 책의 부모 section 찾기
+        let clickedElement = e.target;
+        let parentSection = clickedElement.parentElement;
+        
+        for(let i = 1 ;i<10;i++){
+            if(parentSection.tagName == "SECTION")
+                break;
+            if(parentSection.tagName == "A")
+                parentSection.preventDefault();
+            parentSection = parentSection.parentElement;
+        }
     
-    //     // checkbox의 boolean을 찾아 반대로 대입해주기
-    //     let tmp = checkbox.checked;
-    //     checkbox.checked =! tmp;
-    // }
+        // 찾은 section의 checkbox 찾기
+        let checkbox = parentSection.querySelector("input");
+    
+        // checkbox의 boolean을 찾아 반대로 대입해주기
+        let tmp = checkbox.checked;
+        checkbox.checked =! tmp;
+    });
 };
 
 
@@ -55,6 +67,17 @@ checkAllBox.onchange = function(e){
 
     // 모든 체크박스들 checked 변경
     checkboxes.forEach((checkbox)=>{checkbox.checked = checked});
+  };
+
+
+  cancelBtn.onclick = function(){
+
+    let bookALinks = bookMarkSection.querySelectorAll("a");
+    bookALinks.forEach(
+        (aLink)=>{
+            aLink.onclick = (e)=>e.preventDefault=false;
+        }
+    );
   };
 
 
