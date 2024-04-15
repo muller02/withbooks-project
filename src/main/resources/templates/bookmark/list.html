@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/js/bookmark/list.js" defer></script>
 </head>
 <body>
 
@@ -25,195 +26,94 @@
                 </li>
             </ul>
         </section>
-        <section class="my:4">
-            <h1 class="d:none">북 리스트</h1>
-            <ul class="d:flex flex-wrap:wrap justify-content:flex-start m:3 px:3">
-                <li
-                    class="jc:center ai:center p:3 mx:3"
-                >
-                    <div
-                        class="gap:4 d:flex fl-dir:column lg:ai:center"
-                    >
-                        <div class="w:100p lg:w:3 d:flex jc:center">
-                            <a
-                                href="/book/detail?id=1"
-                            >
-                                <img
-                                    src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                    class="h:3 margin-right:auto"
-                                    alt="도둑맞은 집중력.img"
-                                />
-                            </a>
-                        </div>
 
-                        <div class="w:100p d: fl-dir:column ai:center">
-                            <span></span>
-                            <h1 class="fs:3 fw:3">
-                                <a
-                                    >도둑맞은 집중력</a
+        <div class="book-check-all d:flex mx:3 justify-content:space-between margin:2">
+            <label>
+                <input type="checkbox" class="d:none n-toggle n-toggle-type:check-box n-toggle-size:1" />
+            </label>
+            <button class="n-btn mr:2 delete-btn">삭제</button>
+        </div>
+
+        <section id="bookmark-section" class="my:4 d:flex flex-wrap:wrap justify-content:flex-start m:3 px:3">
+            <h1 class="d:none">북 리스트</h1>
+            <section class="bookmark-list">
+                <div
+                    class="book-div jc:center ai:center px:3 mx:3"
+                >
+                    <div class="pos:relative">
+                        <label>
+                            <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
+                        </label>
+                       
+                        <div
+                            class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
+                        >
+                            <div class="w:100p lg:w:3 d:flex jc:center">
+                                <a 
+                                href="/book/detail?id=1"
                                 >
-                            </h1>
-                            <div
-                                class="fs:2 fw:1 mt:1"
-                            >
-                                <a
-                                    href=""
-                                    >요한하리</a
-                                >
+                                    <img
+                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
+                                        class="h:3 margin-right:auto"
+                                        alt="도둑맞은 집중력.img"
+                                    />
+                                </a>
+                            </div>
+
+                            <div class="w:100p d: fl-dir:column ai:center">
+                                <h1 class="fs:3 fw:3">
+                                    도둑맞은 집중력
+                                </h1>
+                                <div
+                                    class="fs:2 fw:1 mt:1"
+                                >요한하리
+                                </div>
                             </div>
                         </div>
                     </div>
-                </li>
+                </div>
+            </section>
             <!-- ============================================================================= -->
-            <li
-            class="jc:center ai:center p:3 mx:3"
-        >
-            <div
-                class="gap:4 d:flex fl-dir:column lg:ai:center"
-            >
-                <div class="w:100p lg:w:3 d:flex jc:center">
-                    <a
-                        href=""
-                    >
-                        <img
-                            src="/image/shorts/detail/도둑맞은집중력.PNG"
-                            class="h:3 margin-right:auto"
-                            alt="도둑맞은 집중력.img"
-                        />
-                    </a>
-                </div>
-
-                <div class="w:100p d: fl-dir:column ai:center">
-                    <span></span>
-                    <h1 class="fs:3 fw:3">
-                        <a
-                            >도둑맞은 집중력</a
-                        >
-                    </h1>
-                    <div
-                        class="fs:2 fw:1 mt:1"
-                    >
-                        <a
-                            href=""
-                            >요한하리</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </li>
-            <li
-            class="jc:center ai:center p:3 mx:3"
-        >
-            <div
-                class="gap:4 d:flex fl-dir:column lg:ai:center"
-            >
-                <div class="w:100p lg:w:3 d:flex jc:center">
-                    <a
-                        href=""
-                    >
-                        <img
-                            src="/image/shorts/detail/도둑맞은집중력.PNG"
-                            class="h:3 margin-right:auto"
-                            alt="도둑맞은 집중력.img"
-                        />
-                    </a>
-                </div>
-
-                <div class="w:100p d: fl-dir:column ai:center">
-                    <span></span>
-                    <h1 class="fs:3 fw:3">
-                        <a
-                            >도둑맞은 집중력</a
-                        >
-                    </h1>
-                    <div
-                        class="fs:2 fw:1 mt:1"
-                    >
-                        <a
-                            href=""
-                            >요한하리</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li
-        class="jc:center ai:center p:3 mx:3"
-    >
-        <div
-            class="gap:4 d:flex fl-dir:column lg:ai:center"
-        >
-            <div class="w:100p lg:w:3 d:flex jc:center">
-                <a
-                    href=""
-                >
-                    <img
-                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                        class="h:3 margin-right:auto"
-                        alt="도둑맞은 집중력.img"
-                    />
-                </a>
-            </div>
-
-            <div class="w:100p d: fl-dir:column ai:center">
-                <span></span>
-                <h1 class="fs:3 fw:3">
-                    <a
-                        >도둑맞은 집중력</a
-                    >
-                </h1>
+            <section class="bookmark-list">
                 <div
-                    class="fs:2 fw:1 mt:1"
+                    class="book-div jc:center ai:center px:3 mx:3"
                 >
-                    <a
-                        href=""
-                        >요한하리</a
-                    >
-                </div>
-            </div>
-        </div>
-    </li>
-    
-    <li
-    class="jc:center ai:center p:3 mx:3"
->
-    <div
-        class="gap:4 d:flex fl-dir:column lg:ai:center"
-    >
-        <div class="w:100p lg:w:3 d:flex jc:center">
-            <a
-                href=""
-            >
-                <img
-                    src="/image/shorts/detail/도둑맞은집중력.PNG"
-                    class="h:3 margin-right:auto"
-                    alt="도둑맞은 집중력.img"
-                />
-            </a>
-        </div>
+                    <div class="pos:relative">
+                        <label>
+                            <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
+                        </label>
+                       
+                        <div
+                            class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
+                        >
+                            <div class="w:100p lg:w:3 d:flex jc:center">
+                                <a 
+                                href="/book/detail?id=1"
+                                >
+                                    <img
+                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
+                                        class="h:3 margin-right:auto"
+                                        alt="도둑맞은 집중력.img"
+                                    />
+                                </a>
+                            </div>
 
-        <div class="w:100p d: fl-dir:column ai:center">
-            <span></span>
-            <h1 class="fs:3 fw:3">
-                <a
-                    >도둑맞은 집중력</a
-                >
-            </h1>
-            <div
-                class="fs:2 fw:1 mt:1"
-            >
-                <a
-                    href=""
-                    >요한하리</a
-                >
-            </div>
-        </div>
-    </div>
-</li>
+                            <div class="w:100p d: fl-dir:column ai:center">
+                                <h1 class="fs:3 fw:3">
+                                    도둑맞은 집중력
+                                </h1>
+                                <div
+                                    class="fs:2 fw:1 mt:1"
+                                >요한하리
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 <!-- ======================================================================================== -->
 
-            </ul>
+           
         </section>
 
     </main>
