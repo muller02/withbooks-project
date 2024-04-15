@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+   >
     <!-- <head>
         <style>
             .withbooks-img {
@@ -27,8 +30,23 @@
                         <a class="fs:8 fw:3 d:block" href="">위드북스</a>
                     </div>
                 </div>
-                <section class="d:flex fl-dir:column mt:6 w:100p ai:center">
+
+                    <!--여기 일단 로그인 버튼 피룡  -->
+                    <a class="  mt:6 mb:3	w:100p" href="/login" sec:authorize="isAnonymous()">
+                    <div >
+                        <button type="button" class="n-btn bg-color:main-6 d:flex  flex-direction:column w:100p h:100p px:4 py:3">
+                           <span class=" mb:1 color:sub-1 fw:3 fs:4"> 위드북스 시작하기 </span>
+                           <span class="fs:1 color:sub-1">로그인 / 회원가입</span>
+
+
+                        </button>
+                    </div>
+                    </a>
+                        <!--여기 일단 로그인 버튼 피룡  -->
+
+                <section class="d:flex fl-dir:column mt:6 w:100p ai:center" sec:authorize="isAuthenticated()" >
                     <h1 class="d:none">프로필</h1>
+
                     <span class="d:flex mb:2">
                         <div>
                             <a href=""
@@ -38,7 +56,7 @@
                         <div class="ml:5 d:flex fl-dir:column jc:center">
                             <div>
                                 <a class="fs:3 fw:3 color:base-8" href=""
-                                    >독자 호빵이</a
+                                    th:text="${nickname}" >독자 호빵이</a
                                 >
                             </div>
                             <div class="mt:1">
@@ -77,6 +95,7 @@
                         </div>
                     </div>
                 </section>
+              
                 <span class="d:flex fl-dir:column w:100p">
                     <span class="mt:2 h:1 w:100p bg-color:base-3"></span>
                     <li class="mt:5 px:2 py:1">
