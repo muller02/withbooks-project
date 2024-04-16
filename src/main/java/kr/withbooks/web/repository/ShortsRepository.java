@@ -9,4 +9,6 @@ public interface ShortsRepository {
     void save(Shorts shorts);
 
     Shorts findById(Long shortsId);
+
+    void blindById(Long shortsId);
 }

@@ -7,14 +7,18 @@
 	<select id="findAll" resultType="ShortsView" >
 		select 
 			* 
-		from shorts_view
+		from shorts_view where 	blind_yn = 0 order by id desc
+		
 
-		<where>
+		<!-- <where>
 			<if test="bookId != null">
 				book_id = ${bookId}
 			</if>
-		</where>
-		order by id desc
+		</where> -->
+	
+				
+
+		
 	</select>
 
 </mapper>

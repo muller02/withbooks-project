@@ -89,6 +89,11 @@
 
         border-radius: 100px;
       }
+      .dropdown-transformx{
+
+        transform: translateX(-140px);
+
+      }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -318,13 +323,12 @@
               </li>
 
               <li>
-                <button>
-                  <span
-                    class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2"
-                  >
-                    삭제하기
-                  </span>
-                </button>
+                <form action="delete" method="post" class="px:2 py:1">
+                  <button   class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
+                      삭제하기
+                  </button>
+                  <input type="hidden" name="shorts-id" th:value="${s.id}"/>
+              </form>
               </li>
             </ul>
           </div>

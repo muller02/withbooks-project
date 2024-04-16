@@ -175,5 +175,15 @@ public class ShortsController {
 
         return "redirect:/shorts/list";
     }
+
+    @PostMapping("delete")
+    public String delete(@RequestParam("shorts-id") Long shortsId){
+
+        service.delete(shortsId);
+
+
+        return "redirect:list";
+    }
+
 }
 
