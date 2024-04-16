@@ -85,9 +85,12 @@ window.addEventListener("load", function(){
   
   for(let shortsSection of shortSections){
 
-      let comments = shortsSection.querySelector(".comments") 
+      let comments = shortsSection.querySelector(".comments")
+    const nDropdown = shortsSection.querySelector(".n-dropdown");
+    const dropDownList = shortsSection.querySelector(".dropdown-list");
 
-   
+   let tmpArr = [];
+
 
       comments.onclick = function(e){
 
@@ -98,11 +101,36 @@ window.addEventListener("load", function(){
        
           let parentBtn =  e.target.parentNode;
           let parentDiv = parentBtn.parentNode;
+          console.log(parentDiv);
           let test =parentDiv.querySelector("ul");
 
-           test.classList.toggle("active")
-            
+       test.classList.add("active");
+        tmpArr.push(test);
+
+
+           // test.classList.toggle("active")
+
+
+        if (tmpArr.length > 1) {
+          // 엘리먼트 저장 배열이 2개가 되면, 즉 댓글 아이콘을 클릭한 횟수가 2번 이상이라면
+          tmpArr[0].classList.remove("active"); // 이전 엘리먼트의 댓글 창을 안보이게 하기
+          tmpArr.shift(); // 첫번째 엘리먼트 제거 후 ,두번째 엘리먼트 첫번쨰로이동
+        }
+        test.classList.add("active"); //이게 있어야, 다음 댓글 버튼 클릭 해도 댓글창이 나타남
+
+
+        window.addEventListener("click", function (e) {
+
+          if (!nDropdown.contains(e.target)) {
+            console.log('ggg')
+            // 클릭한 현재 요소가 nDropDown의 하위 요소가 아니면
+
+          }
+        });
+
       }
+
+
 
   }
 
