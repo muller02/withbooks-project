@@ -40,8 +40,8 @@ public class SecurityConfig {
         //                 .permitAll() // 로그인 페이지와 로그인 처리 url에 대한 인증되지 않은 사용자의 접근을 허용 
         //         );
 
-        // http
-        //         .csrf((auth) -> auth.disable());
+         http
+                 .csrf((auth) -> auth.disable());
 
 
         return http.build();
