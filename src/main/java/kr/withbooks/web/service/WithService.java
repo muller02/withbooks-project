@@ -6,8 +6,10 @@ import kr.withbooks.web.entity.WithView;
 import java.util.List;
 
 public interface WithService {
+    // 전체 목록 조회
     List<WithView> getList();
 
-    // List<With> getList(Long[] categoryId);
+    // 카테고리별 목록 조회
+    List<With> getList(Long[] categoryId);
 
 }

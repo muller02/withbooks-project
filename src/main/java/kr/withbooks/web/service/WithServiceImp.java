@@ -25,9 +25,9 @@ public class WithServiceImp implements WithService {
 
     }
 
-    // @Override
-    // public List<With> getList(Long[] categoryId) {
-    // return repository.findAll(categoryId);
-    // }
+    @Override
+    public List<With> getList(Long[] categoryId) {
+        return repository.findAll(categoryId);
+    }
 
 }
