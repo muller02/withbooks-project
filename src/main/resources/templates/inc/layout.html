@@ -3,6 +3,7 @@
     lang="en"
     xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
     <head>
         <meta charset="UTF-8" />
@@ -47,6 +48,7 @@
             href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap"
             rel="stylesheet"
         />
+        <link rel="stylesheet" href="/css/components/comment/comment.css" type="text/css">
         <style>
             * {
                 font-family: "Noto Sans KR", sans-serif;
@@ -57,7 +59,7 @@
         </style>
     </head>
     <body>
-        <div class="md:d:flex lg:d:flex">
+        <div class="md:d:flex lg:d:flex h:100p">
             <!-- header부분 -->
             <div th:replace="~{inc/header}"></div>
 
@@ -73,9 +75,9 @@
             <div layout:fragment="main" class="w:100p"></div>
 
             <!-- 댓글 부분 -->
-            <!--    <div th:replace="~{shorts/commentcopy}"></div>-->
+            <!-- <div th:replace="~{shorts/comment}"></div> -->
 
-            <!-- 여백 부분 -->
+<!--             여백 부분-->
             <div th:replace="~{inc/white-space}"></div>
         </div>
     </body>

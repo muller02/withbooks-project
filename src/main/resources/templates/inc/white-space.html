@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <body>
-        <section class="lg:d:block d:none md:d:none w:8 pos:relative bg-color:main-1">
-            <h1 class="d:none">여백</h1>
-            <div class="bg-color:main-1"></div>
-        </section>
-    </body>
+
+<head>
+    <style>
+        .white-space-section,
+        .white-space-section>div {
+            --height-10: 750px;
+        }
+
+        .comment-group {
+            --right-1: 36px;
+            --top-1: 24px;
+        }
+
+        .comment-input-box {
+            --left-1: 24px;
+            --bottom-1: 24px;
+        }
+
+        .comments {
+            --height-10: 560px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section class="white-space-section lg:d:block d:none md:d:none min-w:8 pos:relative height:10">
+        <h1 class="d:none">여백</h1>
+        <div class=" h:10"></div>
+
+    </section>
+</body>
+
 </html>

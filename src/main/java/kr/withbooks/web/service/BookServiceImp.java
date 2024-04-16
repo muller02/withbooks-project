@@ -1,11 +1,14 @@
 package kr.withbooks.web.service;
 
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.repository.BookRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.BookView;
+import kr.withbooks.web.repository.BookRepository;
+import kr.withbooks.web.repository.BookViewRepository;
 
 @Service
 public class BookServiceImp implements BookService {
@@ -13,27 +16,31 @@ public class BookServiceImp implements BookService {
     @Autowired
     BookRepository repository;
 
+    @Autowired
+    BookViewRepository viewRepository;
+
     @Override
-    public List<Book> getList() {
-
-
-        return getList(null);
+    public List<BookView> getList() {
+        return viewRepository.findAll(null, null);
     }
 
     @Override
-    public List<Book> getList(String query) {
-        List<Book> list = repository.findAll(query);
-
-
-        return list;
+    public List<BookView> getList(String query, Long categoryId) {
+        return viewRepository.findAll(query, categoryId);
     }
 
 
     @Override
-    public Book get(Long id) {
-        Book book = repository.findById(id);
+    public BookView getView(Long id) {
+        BookView book = viewRepository.findById(id);
 
         return book;
+    }
+
+    @Override
+    public Book get(Long bookId) {
+        return repository.findById(bookId);
+        
     }
 
 

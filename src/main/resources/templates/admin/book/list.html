@@ -1,68 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
 </head>
 <body>
 
-    <header class="n-panel n-top-panel">
-        <div class="n-container px:4 lg:px:10 mx:auto">
-          <h1>책 검색</h1>
-        </div>
-      </header>
-      
-      <aside class="n-panel n-side-panel">
-        <nav class="n-panel n-menu-panel">
-          <h1 class="text-align:center mb:4">메뉴</h1>
-          <ul class="of:hidden">
-            <li class="bg-color:base-2 bd-radius:1">
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:house_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">HOME</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">책 검색</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">위드 관리</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">북쇼츠 관리</span>
-              </button>
-            </li>
-            <li>
-              <button
-                class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-              >
-                <span class="d:none lg:d:inline">회원 관리</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-
-
-
-
-
-
-    <main class="n-panel n-main-panel">
+    <main layout:fragment="main" class="n-panel n-main-panel">
         <div class="n-container px:4 lg:px:10">
             <h1 class="d:none">Main</h1>
 
@@ -82,22 +32,27 @@
             <div class="d:flex justify-content:space-between mt:4">
                 <div>검색 결과 : 1032 건</div>
                 <div>
-                    <button type="button" class="n-btn n-btn-type:filled">책 등록</button>
+                    <button type="button" class="n-btn n-btn-type:filled">
+                        <a href="reg">
+                            책 등록
+                        </a>
+                    </button>
                     <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button>
                 </div>
             </div>
 
             <!--  n-bbs-table n-column-width:3 -->
-            <table class="n-table n-row-height:2 n-table-border n-table-hover">
+            <table class="n-row-height:2 n-table-border n-table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <th scope="col" class="width:1">
                             <label>
                                 <input type="checkbox" class="n-toggle n-toggle-type:check-box n-toggle-size:1" />
                             </label>
                         </th>
-                        <th scope="col">ID</th>
-                        <th scope="col">공개 여부</th>
+                        <th scope="col" class="width:1">ID</th>
+                        <th scope="col" class="width:3">카테고리</th>
+                        <th scope="col" class="width:1">공개 여부</th>
                         <th scope="col">사진</th>
                         <th scope="col">제목</th>
                         <th scope="col">작가</th>
@@ -105,31 +60,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr th:each="book : ${list}">
                         <th scope="col">
                             <label>
                                 <input type="checkbox" class="n-toggle n-toggle-type:check-box  n-toggle-size:1" />
                             </label>
                         </th>
-                        <th scope="row">1</th>
-                        <td><span class="icon icon:eye"></span></td>
-                        <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" class="h:1 w:1" alt=""></td>
-                        <td><a href="detail">도둑 맞은 집중력</a></td>
-                        <td>홍길동</td>
-                        <td>2020-11-01</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">
-                            <label>
-                                <input type="checkbox" class="n-toggle n-toggle-type:check-box  n-toggle-size:1" />
-                            </label>
-                        </th>
-                        <th scope="row">2</th>
-                        <td><span class="icon icon:eye_slash"></span></td>
-                        <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" class="h:1 w:1" alt=""></td>
-                        <td><a href="detail">도둑 맞은 집중력</a></td>
-                        <td>홍길동</td>
-                        <td>2021-03-01</td>
+                        <th scope="row" th:text="${book.id}">1</th>
+                        <th scope="row" th:text="${book.categoryName}">소설/시/희곡</th>
+                        <td><span class="icon icon:eye" th:text="${book.publicYn}"></span></td>
+                        <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" th:src="${book.cover}" class="h:1 w:1" alt=""></td>
+                        <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</a></td>
+                        <td th:text="${book.author}"  th:title="${book.author}">홍길동</td>
+                        <td th:text="${book.regDate}">2020-11-01</td>
                     </tr>
                 </tbody>
             </table>

@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.Shorts;
 import kr.withbooks.web.entity.ShortsAttachment;
 import kr.withbooks.web.entity.ShortsView;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.ShortsAttachmentService;
 import kr.withbooks.web.service.ShrotsService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("shorts")
 public class ShortsController {
@@ -39,8 +42,6 @@ public class ShortsController {
 
     @GetMapping("list")
     public String list(Model model, @RequestParam(name = "id", required = false) Long bookId) {
-        // System.out.println();
-
 
         List<ShortsView> list = service.getView(bookId);
         // System.out.println(list);
@@ -60,25 +61,10 @@ public class ShortsController {
             }
         }
 
-
-
         model.addAttribute("list", list);
-
-
-
 
         return "shorts/list";
     }
-
-
-
-
-    // @GetMapping("bookreg")
-    // public String bookregForm(@RequestParam(name = "content", required = false) String content
-    // ) {
-
-    //     return "shorts/bookreg";
-    // }
 
     @GetMapping("reg")
     public String regForm(@RequestParam(name = "content", required = false) String content
@@ -95,9 +81,13 @@ public class ShortsController {
         @RequestParam(required = false , name = "book-id") Long bookId,
         HttpServletRequest request) throws IOException {
 
-            System.out.println("book id = " + bookId);
-            System.out.println("files = "  + files);
-            System.out.println("content = "  +content);
+        System.out.println("files = " + files.size());
+
+        for(MultipartFile file : files){
+
+            System.out.println("복숭아 = " + file.getOriginalFilename());
+        }
+
 
         Shorts item = Shorts.builder()
                             .bookId(bookId)
@@ -141,6 +131,49 @@ public class ShortsController {
    
         return "redirect:/shorts/list";
 
+    }
+
+    @GetMapping("edit")
+    public String editForm(
+        @RequestParam(name = "sid") Long shortsId, 
+        @RequestParam(name = "bid") Long bookId, 
+        Model model) {
+
+        // shortsId 로 수정할 shorts 찾아오기 
+        Shorts shorts = service.get(shortsId);
+        log.info("shorts = {}", shorts);
+        // shortsId 로 수정할 shortsAttachments 찾아오기
+        List<ShortsAttachment> shortsAttachments = shortsAttachmentService.getListById(shortsId);
+        log.info("shortsAttachments = {}", shortsAttachments);
+
+        Book book = bookService.get(bookId);
+        log.info("book = {}", book);
+        // model : view로 전달 하는 저장, 
+        // 조합하기 - view는 결합이다. 어쩔수 없이 view를 사용한다.
+        /*1. 수정하기를 누를 떄 , 쇼츠 섹션에 있는 bookid 와, shots id가 넘어간다.
+         * 2. book service를 통해 booId를 념겨서, title을 얻는다.
+         * 3. 모델에 booktitle을 담는다.
+         * 4. shorts id를 통해 , shorts 테이블에서 해당 shorts 를 얻어온다.
+         * 5. shorts를 모델에 담는다.
+         * 6.
+         */
+
+        // title,  short id 
+        
+        // model에 담기
+        model.addAttribute("shorts", shorts);
+        model.addAttribute("shortsAttachments", shortsAttachments);
+        model.addAttribute("book", book);
+
+
+        return "shorts/edit";
+    }
+
+    @PostMapping("edit")
+    public String edit() {
+        
+
+        return "redirect:/shorts/list";
     }
 }
 

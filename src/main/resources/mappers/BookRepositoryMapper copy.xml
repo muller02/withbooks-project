@@ -28,7 +28,7 @@
 		SELECT 
 		*
 		FROM book
-		WHERE ID = #{id}
+		WHERE id = #{id}
 	</select>
 
 	<!-- <select id="count" resultType="int">

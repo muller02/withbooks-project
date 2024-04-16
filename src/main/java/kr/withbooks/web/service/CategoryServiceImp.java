@@ -10,15 +10,11 @@ import java.util.List;
 @Service
 public class CategoryServiceImp implements  CategoryService{
 
-
    @Autowired
     private CategoryRepository categoryRepository;
 
-
-
     @Override
     public List<Category> getList() {
-
 
         return  categoryRepository.findAll();
     }
