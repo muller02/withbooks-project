@@ -19,12 +19,39 @@ function getCommentList(shortsId, comments, getCommetnCount) {
 
     for (cmt of list) {
       commentCount++;
-
+           // icon icon-size:2 icon-color:accent-2 icon:trash
       var divHTML = `
-                <div class="border-bottom pb:3 pt:6 pr:2 pl:2">
-                    <div class="pb:2 deco comment-title-color icon icon:dots_three_outline_vertical_fill deco-size:2 w:100p deco deco-pos:right jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+                    <div class="border-bottom pb:3 pt:6 pr:2 pl:2 ">
+                    <div class="d:flex">
+                      <div class="pb:2 w:100p jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+                      <div class="n-dropdown comment-dropdown">
+                        <button class="cursor:pointer dropdown-btn">
+                          <span class="comment-dots-icon icon icon:dots_three_outline_vertical_fill icon-size:3 color-icon rg-comment-hover"></span>
+                        </button>
+                        <ul class="dropdown-list w:2 dropdown-transformx ">
+                        
+                          <li>
+               
+                              <button class="va:middle text-align:center	  color:accent-2 " data:${cmt.id}>
+                                삭제하기
+                              </button>
+
+                          </li>
+                          <li>
+               
+                          <button class="va:middle text-align:center	  color:accent-2 ">
+                            수정하기
+                          </button>
+
+                      </li>
+                      
+                          
+                        </ul>
+                      </div>
+                    </div>
                     <div class="pl:2 pr:2 comment-content-color">${cmt.content}</div>
-                </div>`;
+                  </div>
+                  `;
       comments.insertAdjacentHTML("beforeend", divHTML);
     }
     if (getCommetnCount !== null) getCommetnCount(commentCount);
@@ -36,6 +63,57 @@ function getCommentList(shortsId, comments, getCommetnCount) {
   );
   xhr.send();
 }
+
+// // <댓글 삭제>
+// fetch("API 주소", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     email: id,
+//     password: pw,
+//   }),
+// })
+// .then((response) => response.json())
+// .then((result) => console.log(result));
+
+
+
+//<댓글삭제>
+window.addEventListener("load", function(){
+
+  const shortSections = document.querySelectorAll(".short-section");
+
+  
+  for(let shortsSection of shortSections){
+
+      let comments = shortsSection.querySelector(".comments") 
+
+   
+
+      comments.onclick = function(e){
+
+     
+          if(e.target.tagName !="SPAN")
+            return;
+
+       
+          let parentBtn =  e.target.parentNode;
+          let parentDiv = parentBtn.parentNode;
+          let test =parentDiv.querySelector("ul");
+
+           test.classList.toggle("active")
+            
+      }
+
+  }
+
+
+
+
+
+  
+
+})
+
 
 //  <댓글 등록 >
 window.addEventListener("load", function () {

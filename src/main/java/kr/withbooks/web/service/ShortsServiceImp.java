@@ -17,7 +17,7 @@ import kr.withbooks.web.repository.ShortsViewRepository;
 public class ShortsServiceImp  implements  ShrotsService{
 
     @Autowired
-    private ShortsRepository shortsRepository;
+    private ShortsRepository repository;
 
     @Autowired
     private ShortsViewRepository shortsViewRepository;
@@ -28,7 +28,7 @@ public class ShortsServiceImp  implements  ShrotsService{
     // shorts 저장
     @Override
     public void add(Shorts shorts) {
-        shortsRepository.save(shorts);
+        repository.save(shorts);
     }
 
     // shortsview 가져오기
@@ -51,8 +51,16 @@ public class ShortsServiceImp  implements  ShrotsService{
     // shorts 가져오기
     @Override
     public Shorts get(Long shortsId) {
-        return shortsRepository.findById(shortsId);
+        return repository.findById(shortsId);
     }
 
+    @Override
+    public void delete(Long shortsId) {
+        
+        repository.blindById(shortsId);
+
+    }
+
+    
 
 }
