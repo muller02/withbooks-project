@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.entity.WithView;
-import kr.withbooks.web.service.CategoryService;
 import kr.withbooks.web.service.WithService;
 
 @Controller
@@ -19,9 +17,6 @@ public class WithController {
 
     @Autowired
     private WithService service;
-
-    @Autowired
-    private CategoryService categoryService;
 
     @GetMapping("list")
     public String list(Model model) {
