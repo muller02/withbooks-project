@@ -1,115 +1,125 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{inc/layout.html}"
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{inc/layout.html}"
 >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+        <script src="/js/book/list.js"></script>
+        <style>
+            .search {
+                --right-1: 6px;
+                --top-1: 6px;
+            }
+            .click-none{
+                pointer-events: none;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>list</title>
-</head>
+            /*.n-btn {*/
+            /*    --btn-height-2: 32px;*/
+            /*    --btn-padding-2: 4px 8px;*/
+            /*    --btn-font-size-2: 14px;*/
+            /*    --btn-border-radius-2: 8px;*/
+            /*}*/
 
-<body>
+            /* .description {
+                white-space: nowrap;
 
-    <main layout:fragment="main">
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            } */
+        </style>
+    </head>
 
-        <div class="d:flex fl-dir:column gap:10 mt:8">
-
-            <section class="d:none">
-                <h1 class="d:none">토론주제 목록</h1>
-                <div class="d:flex jc:center">
-                    <label class="d:none" for="lang">토론주제</label>
-                    <select class="bd w:6" name="languages" id="lang">
-                        <option class="" value="">토론주제</option>
-                        <option value="">재홍이는 바지인가</option>
-                        <option value="">경인이는 나카무라인가 무라카미인가</option>
-                        <option value="">다진쓰는 진짜 깡패인가</option>
-                    </select>
-                </div>
-            </section>
-
-            <section class="px:3">
-                <h1 class="d:none">토론방 목록</h1>
-                <ul class="d:flex flex-direction:column gap:2">
-
-                    <li>
-                        <h1 class="d:none">토론방</h1>
-                        <div class="d:flex fl-direction:row-reverse h:3 gap:1">
-                            <div>
-                                <img src="/image/with/debate/cat.png" alt="이미지" class="obj-fit:fill max-height:100p">
-                            </div>
-                            <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
-                                <div>
-                                    <h1 class="fs:5 fw:3"><a href="">"재홍이는 바지인가"</a></h1>
-                                </div>
-                                <div class="d:flex ai:center gap:1">
-                                    <div class="d:flex ">
-                                        <span class="icon icon:user icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 ">뉴렉이</span>
-                                    </div>
-                                    <div class="d:flex ">
-                                        <span class="icon icon:calendar_blank icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 ">2024.02.20.18:25</span>
-                                    </div>
-                                    <div class="d:flex ">
-                                        <span class="icon icon:chat_circle_text icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 ">댓글 2건</span>
-                                    </div>
-                                </div>
-                                <div class="ln-clamp:3">
-                                    <span>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus,
-                                        dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur
-                                        amet! Ex, sunt eius.
-                                    </span>
-                                </div>
-                            </div>
+    <body>
+        <!-- <header class="h:1 d:flex jc:center ai:center">
+            <h1 class="fs:3 fw:3"><a href="">위드북스</a></h1>
+        </header> -->
+        <main layout:fragment="main">
+            <div class="p:3">
+                <h1 class="d:none">북리스트</h1>
+                <section id="search-book-form">
+                    <h1 class="d:none">책 검색 폼</h1>
+                    <div class="d:flex">
+                        <div class="flex-grow:1 margin-right:1">
+                            <form class="pos:relative book-search">
+                                <input
+                                    class="search-query-input n-textbox n-textbox:outline txt-al:center bd-radius:4 input"
+                                    type="text"
+                                    placeholder="책 검색"
+                                />
+                                <button
+                                    class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass"
+                                    type="submit"
+                                >
+                                    검색
+                                </button>
+                            </form>
                         </div>
-                    </li>
+                    </div>
+                    
+                </section>
 
-                    <li>
-                        <h1 class="d:none">토론방</h1>
-                        <div class="d:flex fl-direction:row-reverse h:3 gap:1">
-                            <div>
-                                <img src="/image/with/debate/cat.png" alt="이미지" class="obj-fit:fill max-height:100p">
-                            </div>
-                            <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
-                                <div>
-                                    <h1 class="fs:5 fw:3"><a href="">"재홍이는 바지인가"</a></h1>
-                                </div>
-                                <div class="d:flex ai:center gap:1">
-                                    <div class="d:flex ">
-                                        <span class="icon icon:user icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 ">뉴렉이</span>
+                <!--            <section class="my:4 d:grid gap:8 grid-templ-col:2 md:grid-templ-col:3 lg:grid-templ-col:1 ji:center">-->
+                <section class="my:4 book-list">
+                    <h1 class="d:none">북 리스트</h1>
+                    <ul class="n-list n-card-list content-ul">
+                        <li
+                            class="jc:center ai:center p:5"
+                            th:each="n: ${list}"
+                        >
+                            <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
+                            <a 
+                                href="#" 
+                                th:href="@{./board/list(id=${n.id})} " class=""
+                            >
+                                <div
+                                    class="gap:4  d:flex fl-dir:column lg:ai:center ai:center"
+                                >
+
+
+                                    <div class="w:100p lg:w:3 d:flex jc:center mb:2">
+                                        <img
+                                            src="/puppy.png"
+                                            class="h:4 w:4 border-radius:3"
+                                            alt="도둑맞은 집중력.img"
+                                            th:src="${n.cover}"
+                                        />
                                     </div>
-                                    <div class="d:flex ">
-                                        <span class="icon icon:calendar_blank icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 ">2024.02.20.18:25</span>
-                                    </div>
-                                    <div class="d:flex ">
-                                        <span class="icon icon:chat_circle_text icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 ">댓글 2건</span>
+
+
+                                    <div class="w:100p d: fl-dir:column ai:center px:2">
+                                        <h1 class="fs:4 fw:3">
+                                            <div
+                                                th:text="${n.title}"
+                                            >
+                                                도둑맞은 집중력
+                                            </div>
+                                        </h1>
+                                        <span class="d:flex">
+                                            <div
+                                                class="fs:2 fw:1 mt:1"
+                                                th:text="${n.author}"
+                                            >
+                                                    요한하리
+                                            </div>
+                                            <div class="ml:2">
+                                                [<span th:text="${n.boardCnt}">5</span>]
+                                            </div>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="ln-clamp:3">
-                                    <span>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus,
-                                        dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur
-                                        amet! Ex, sunt eius.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
-            </section>
-        </div>
-
-    </main>
-
-</body>
-
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+    </body>
 </html>
