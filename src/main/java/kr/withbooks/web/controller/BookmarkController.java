@@ -15,7 +15,7 @@ import kr.withbooks.web.service.BookmarkService;
 
 @Controller
 @RequestMapping("bookmark")
-public class BookMarkController {
+public class BookmarkController {
     
     @Autowired
     private BookmarkService service;
