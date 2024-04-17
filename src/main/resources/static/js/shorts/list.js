@@ -19,7 +19,7 @@ function getCommentList(shortsId, comments, getCommetnCount) {
 
     for (cmt of list) {
       commentCount++;
-           // icon icon-size:2 icon-color:accent-2 icon:trash
+      // icon icon-size:2 icon-color:accent-2 icon:trash
       var divHTML = `
                     <div class="border-bottom pb:3 pt:6 pr:2 pl:2 ">
                     <div class="d:flex">
@@ -28,7 +28,7 @@ function getCommentList(shortsId, comments, getCommetnCount) {
                         <button class="cursor:pointer dropdown-btn">
                           <span class="comment-dots-icon icon icon:dots_three_outline_vertical_fill icon-size:3 color-icon rg-comment-hover"></span>
                         </button>
-                        <ul class="dropdown-list w:2 dropdown-transformx ">
+                        <ul class="dropdown-list w:2 dropdown-transformx comment-dropdown-list ">
                         
                           <li>
                
@@ -58,8 +58,8 @@ function getCommentList(shortsId, comments, getCommetnCount) {
   };
 
   xhr.open(
-    "GET",
-    `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`
+      "GET",
+      `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`
   );
   xhr.send();
 }
@@ -75,45 +75,49 @@ function getCommentList(shortsId, comments, getCommetnCount) {
 // .then((response) => response.json())
 // .then((result) => console.log(result));
 
-
-
 //<댓글삭제>
-window.addEventListener("load", function(){
-
+window.addEventListener("load", function () {
+  //쇼츠 섹션
   const shortSections = document.querySelectorAll(".short-section");
 
-  
-  for(let shortsSection of shortSections){
+  for (let shortsSection of shortSections) {
+    let comments = shortsSection.querySelector(".comments");
 
-      let comments = shortsSection.querySelector(".comments") 
+    let tmpArr = [];
 
-   
+    comments.onclick = function (e) {
+      if (e.target.tagName != "SPAN") return;
 
-      comments.onclick = function(e){
+      let parentBtn = e.target.parentNode;
+      let parentDiv = parentBtn.parentNode;
+      let test = parentDiv.querySelector("ul");
 
-     
-          if(e.target.tagName !="SPAN")
-            return;
+      test.classList.remove("active");
+      tmpArr.push(test);
 
-       
-          let parentBtn =  e.target.parentNode;
-          let parentDiv = parentBtn.parentNode;
-          let test =parentDiv.querySelector("ul");
+      // test.classList.toggle("active")
 
-           test.classList.toggle("active")
-            
+      if (tmpArr.length > 1) {
+        // 엘리먼트 저장 배열이 2개가 되면, 즉 댓글 아이콘을 클릭한 횟수가 2번 이상이라면
+        tmpArr[0].classList.remove("active"); // 이전 엘리먼트의 댓글 창을 안보이게 하기
+        tmpArr.shift(); // 첫번째 엘리먼트 제거 후 ,두번째 엘리먼트 첫번쨰로이동
       }
+      test.classList.add("active"); //이게 있어야, 다음 댓글 버튼 클릭 해도 댓글창이 나타남
 
+      let commentsDivs = comments.querySelectorAll(".comments>div");
+      for (let commentDiv of commentsDivs) {
+        const nDropdown = commentDiv.querySelector(".comment-dropdown");
+        const dropDownList = commentDiv.querySelector(".comment-dropdown-list");
+
+        window.addEventListener("click", function (e) {
+          if (!nDropdown.contains(e.target)) {
+            dropDownList.classList.remove("active");
+          }
+        });
+      }
+    };
   }
-
-
-
-
-
-  
-
-})
-
+});
 
 //  <댓글 등록 >
 window.addEventListener("load", function () {

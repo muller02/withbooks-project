@@ -1,28 +1,25 @@
 window.addEventListener("load", function () {
+  searchDiv = document.querySelector("#search-detail");
+  searchBtn = document.querySelector("#search-btn");
+  withlist = document.querySelector("#with-list");
+  refreshBtn = document.querySelector("#refresh");
 
-    searchDiv = document.querySelector("#search-detail");
-    searchBtn = document.querySelector("#search-btn");
-    withlist = document.querySelector("#with-list");
-    refreshBtn = document.querySelector("#refresh")
+  // 상세검색 클릭 시
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
 
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
-    searchBtn.onclick = function (e) {
+    //비동기 처리
+    xhr.onload = function () {
+      //콜백 함수
 
-        e.preventDefault();
+      var list = JSON.parse(this.responseText);
 
+      searchDiv.innerHTML = " ";
 
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-
-        //비동기 처리
-        xhr.onload = function () { //콜백 함수
-
-            var list = JSON.parse(this.responseText);
-
-            searchDiv.innerHTML = " ";
-
-
-            var inHTML1 = `<section class="category d:flex fl-dir:column w:7 pl:3">
+      var inHTML1 = `<section class="category d:flex fl-dir:column w:7 pl:3">
       <div class="d:flex ai:center">
         <div class="margin-right:8">카테고리</div>
         <div class="icon icon:arrows_clockwise_fill icon-size:2"></div>
@@ -30,61 +27,56 @@ window.addEventListener("load", function () {
       <div class="mt:3">
         <div class="d:flex fl-wrap:wrap">
           <h1 class="d:none">카테고리 필터</h1>
-        `
-            searchDiv.insertAdjacentHTML("afterbegin", inHTML1);
+        `;
+      searchDiv.insertAdjacentHTML("afterbegin", inHTML1);
 
-            for (item of list) {
-                var inHTML2 = `
+      for (item of list) {
+        var inHTML2 = `
           <label class="n-toggle n-toggle-type:outline-box m:1" >
         ${item.name}
             <input type="checkbox" class="d:none p" name="c"  value="${item.cid}" />
           </label>
-          `
-                searchDiv.insertAdjacentHTML("beforeend", inHTML2);
-            }
-            var inHTML3 = `
+          `;
+        searchDiv.insertAdjacentHTML("beforeend", inHTML2);
+      }
+      var inHTML3 = `
         </div>
       </div>
     </section>
-            `
+            `;
 
+      searchDiv.insertAdjacentHTML("beforeend", inHTML3);
+    };
 
-            searchDiv.insertAdjacentHTML("beforeend", inHTML3);
-        }
+    xhr.open("GET", `http://localhost:8080/api/category/list`);
+    xhr.send();
+  };
 
+  var arr = [];
+  var tmp2;
 
-        xhr.open("GET", `http://localhost:8080/api/category/list`);
-        xhr.send();
-    }
+  searchDiv.addEventListener("change", function (e) {
+    // checkbox = document.getElementsByClassName("p")[0];
 
+    if (e.target.tagName != "INPUT") return;
 
-    var arr = [];
-    var tmp2;
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
-    searchDiv.addEventListener("change", function (e) {
-        // checkbox = document.getElementsByClassName("p")[0];
+    var c = e.target.value;
+    xhr.onload = function () {
+      //콜백 함수
 
+      var list3 = JSON.parse(this.responseText);
 
-        if (e.target.tagName != "INPUT")
-            return;
+      //현재 클릭한 checkbox가 true 일 경우만 insertHtml을 실행한다
 
+      console.log(arr);
 
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+      withlist.innerHTML = ``;
 
-        var c = e.target.value;
-        xhr.onload = function () { //콜백 함수
-
-            var list3 = JSON.parse(this.responseText);
-
-            //현재 클릭한 checkbox가 true 일 경우만 insertHtml을 실행한다
-
-            console.log(arr)
-
-            withlist.innerHTML = ``;
-
-            for (i of list3) {
-                var innerHtml = ` <li class="d:flex h:4 gap:3 n-item:shadow ">
+      for (i of list3) {
+        var innerHtml = ` <li class="d:flex h:4 gap:3 n-item:shadow ">
 
                 <h1 class="d:none">위드 리스트</h1>
 
@@ -135,43 +127,37 @@ window.addEventListener("load", function () {
                 </div>
 
 
-            </li>`
+            </li>`;
 
-                withlist.insertAdjacentHTML("beforeend", innerHtml);
+        withlist.insertAdjacentHTML("beforeend", innerHtml);
+      }
+    };
 
-            }
+    var c = e.target.value; //체크 박스의 카테고리 id를 저장
 
+    if (e.target.checked == true) {
+      //체크박스가 클릭되면 arr에 id 저장
+      arr.push(c);
+    } else {
+      // 클릭이 false면 배열에서 요소 제거
+      arr = arr.filter(function (item) {
+        return item !== c;
+      });
+    }
 
-        }
+    var tmp = "";
+    for (k of arr) {
+      //list를 얻기위해 문자열 결합
+      tmp += k + "&c=";
+    }
+    console.log("tmp = " + tmp);
 
-
-        var c = e.target.value;  //체크 박스의 카테고리 id를 저장
-
-        if (e.target.checked == true) {  //체크박스가 클릭되면 arr에 id 저장
-            arr.push(c);
-
-        } else {  // 클릭이 false면 배열에서 요소 제거
-            arr = arr.filter(function (item) {
-                return item !== c;
-            });
-
-        }
-
-        var tmp = '';
-        for (k of arr) {   //list를 얻기위해 문자열 결합
-            tmp += k + '&c=';
-        }
-        console.log('tmp = ' + tmp);
-
-        if(arr.length==0){
-            xhr.open("GET", `http://localhost:8080/api/with/list`);
-            xhr.send();
-        }else{
-        xhr.open("GET", `http://localhost:8080/api/with/list?c=${tmp}`);
-        xhr.send();
-        }
-
-    })
-
-
-})
+    if (arr.length == 0) {
+      xhr.open("GET", `http://localhost:8080/api/with/list`);
+      xhr.send();
+    } else {
+      xhr.open("GET", `http://localhost:8080/api/with/list?c=${tmp}`);
+      xhr.send();
+    }
+  });
+});

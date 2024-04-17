@@ -1,6 +1,5 @@
 package kr.withbooks.web.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,17 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class With {
-
     private Long id;
+    private Boolean blindYn;
     private Long withRegId;
-    private List<Long> categoryId;
-    private List<String> hashTag;
+    private Boolean faceYn; // 대면여부
     private String name;
     private String intro;
     private String img;
+    private int interval; // 모임주기
+    private String location;
+    private int personnel;// 정원
     private Date regDate;
-    private Boolean blindYn;
-
-
-
+    private List<Long> categoryId;
 }
