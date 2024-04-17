@@ -98,7 +98,7 @@
                             <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
                             <a 
                                 href="#" 
-                                th:href="@{./detail(id=${n.id})} " class=""
+                                th:href="@{./board/list(id=${n.id})} " class=""
                             >
                                 <div
                                     class="gap:4  d:flex fl-dir:column lg:ai:center ai:center"
@@ -123,25 +123,17 @@
                                                 도둑맞은 집중력
                                             </div>
                                         </h1>
-                                        <div
-                                            class="fs:2 fw:1 mt:1"
-                                            th:text="${n.author}"
-                                        >
-                                                요한하리
-                                        </div>
-                                        <div class="mt:1 fs:1">
-                                            <div th:text="${n.publisher}">
-                                                열린마음
+                                        <span class="d:flex">
+                                            <div
+                                                class="fs:2 fw:1 mt:1"
+                                                th:text="${n.author}"
+                                            >
+                                                    요한하리
                                             </div>
-                                            <div th:text="${n.pubDate}">
-                                                2022.01.01
+                                            <div class="ml:2">
+                                                [<span th:text="${n.boardCnt}">3</span>]
                                             </div>
-                                        </div>
-                                        <div
-                                            class="description d:none lg:d:block mt:2 w:10p"
-                                            th:text="${n.description}"
-                                        >
-                                        </div>
+                                        </span>
                                     </div>
                                 </div>
                             </a>

@@ -1,4 +1,4 @@
-package kr.withbooks.web.controller;
+package kr.withbooks.web.controller.with.debate;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,8 @@ public class WithDebateController {
     @GetMapping("/list")
     public String list() {
 
+
+        
         return "with/debate/list";
     }
 }
