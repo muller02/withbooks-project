@@ -1,65 +1,56 @@
 
-// 체크박스 및 전체삭제 변수
+// 체크박스 및 삭제모드 버튼 변수
 const bookCheckAll = this.document.querySelector(".book-check-all");
 const checkAllBox = bookCheckAll.querySelector("input");
+const bookCheckAllInput = bookCheckAll.querySelector("input");
+
+//삭제모드에서 취소, 전체삭제 버튼
 const cancelBtn = bookCheckAll.querySelector(".cancel-btn");
+const deleteAllBtn = bookCheckAll.querySelector(".delete-all-btn");
+
+// 삭제모드로 들어가는 버튼
 const deleteBtn = bookCheckAll.querySelector(".delete-btn");
 
-// 책 리스트 섹션과 그 안의 input들
+// 책 리스트 섹션
 const bookMarkSection = this.document.querySelector("#bookmark-section");
-// 책 리스트 섹션 안의 모든 책들
-const bookMarkLists = bookMarkSection.querySelectorAll(".bookmark-list");
-const bookCheckAllInput = bookCheckAll.querySelector("input");
+// 책 리스트 div
+const bookMarkList = bookMarkSection.querySelector(".bookmark-list");
+// 래핑 div들 -> 삭제모드 시 a링크를 가로막는 역할
+const wrappingDivs = bookMarkList.querySelectorAll("section>div");
+
 
 // 삭제버튼 눌렀을 때
 deleteBtn.onclick = function(){
 
-    // 취소 버튼 뜨게 하기
+    // 취소, 전체 삭제 버튼 노출 및 삭제 버튼 숨김
     cancelBtn.classList.remove("d:none");
+    deleteAllBtn.classList.remove("d:none");
+    deleteBtn.classList.add("d:none");
 
     // 전체 선택 시 체크박스 뜨게 하기
     let checkboxes = document.querySelectorAll("input");
     checkboxes.forEach((checkbox)=>{checkbox.classList.remove("d:none")});
 
-    // 모든 a링크를 못누르게 처리하고
-    // let bookALinks = bookMarkSection.querySelectorAll("a");
-    // bookALinks.forEach(
-    //     (aLink)=>{
-    //         aLink.onclick = (e)=>e.preventDefault();
-    //     }
-    // );
-    
+    // div가 북마크를 감싸서 a링크 비활성화 시키기
+    console.log(wrappingDivs);
+    wrappingDivs.forEach((div)=>{
+        div.classList.add("wrapping");
+    });
+
     // book-section을 눌렀을때 해당 책의 체크박스가 눌러지도록 조치
     // XXX 리팩토링 필요
-    bookMarkSection.onclick = function(e){
-        console.log(e);
-        console.log(e.target);
-        e.preventDefault();
+    bookMarkList.onclick = function(e){
+        
+        let section = e.target;
+
+        // 찾은 section의 checkbox 찾기
+        let checkbox = section.querySelector("input");
+    
+        // checkbox의 boolean을 찾아 반대로 대입해주기
+        let tmp = checkbox.checked;
+        checkbox.checked =! tmp;
 
     };
-
-    // bookMarkLists.forEach((list)=>list.onclick = function(e){
-        
-    //     e.preventDefault();
-
-    //     // 클릭한 책의 부모 section 찾기
-    //     let clickedElement = e.target;
-    //     let parentSection = clickedElement.parentElement;
-        
-    //     for(let i = 1 ;i<10;i++){
-    //         if(parentSection.tagName == "SECTION")
-    //             break;
-
-    //         parentSection = parentSection.parentElement;
-    //     }
-    
-    //     // 찾은 section의 checkbox 찾기
-    //     let checkbox = parentSection.querySelector("input");
-    
-    //     // checkbox의 boolean을 찾아 반대로 대입해주기
-    //     let tmp = checkbox.checked;
-    //     checkbox.checked =! tmp;
-    // });
 };
 
 
@@ -89,10 +80,27 @@ checkAllBox.onchange = function(e){
     
     // 취소 버튼 숨김
     cancelBtn.classList.add("d:none");
-
-    // prevented된 a링크들 되살리기..
-
+    
+    wrappingDivs.forEach((div)=>{
+        div.classList.remove("wrapping");
+    });
+        
 
   };
+
+  deleteAllBtn.onclick = function(){
+    const checkedboxes = document.querySelectorAll("input:checked");
+    if(checkedboxes.length == 0){
+        alert("삭제할 책을 선택해주세요 ! ");
+        return;
+    }
+    
+    const ids = new Array();
+    checkedboxes.forEach((checkbox)=>{
+        ids.push(checkbox.value);
+    });
+    console.log(ids);
+    
+  }
 
 
