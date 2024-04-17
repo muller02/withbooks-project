@@ -94,6 +94,52 @@
         transform: translateX(-140px);
 
       }
+
+    /*  모달창*/
+      /* CSS */
+      .n-modal {
+        transition: transform 0.13s, opacity 0.13s;
+      }
+
+      .modal-fade-in {
+        animation: modal-fade-in 0.13s forwards;
+      }
+
+      .modal-fade-out {
+        animation: modal-fade-out 0.13s forwards;
+      }
+
+      @keyframes modal-fade-in {
+        from {
+          opacity: 0;
+          transform: translate(50%, -48%) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translate(50%, -50%) scale(1);
+        }
+      }
+
+      @keyframes modal-fade-out {
+        from {
+          opacity: 1;
+          transform: translate(50%, -50%) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translate(100%, -48%) scale(0.97);
+        }
+      }
+
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .modal-transform-xy{
+        transform: translateX(-300px) !important;
+      }
+      /*  모달창*/
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -110,7 +156,7 @@
         class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative"
       >
         <h1 class="d:none">북쇼츠</h1>
-
+        <div id="modal-backdrop" class="backdrop d:none w:100p h:100p"></div>
         <span class="lg:d:flex lg:ai:start gap:2">
           <span>
             <section class="shorts d:flex jc:center ai:center px:1">
@@ -323,16 +369,33 @@
               </li>
 
               <li>
-                <form action="delete" method="post" class="px:2 py:1">
-                  <button   class="va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
+                <form  id="form-name" class="px:2 py:1">
+                  <button   id="modal-btn" class="delete-btn va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
                       삭제하기
                   </button>
                   <input type="hidden" name="shorts-id" th:value="${s.id}"/>
-              </form>
+
+
+<!--             모달창 -->
+
+
+              <section id="modal" class="n-modal d:none modal-transform-xy" tabindex="-1">
+                <h1 class="n-font:subtitle text-align:center">게시글을 정말 삭제 하시겠습니까 ?</h1>
+                <div class="mt:4 d:flex">
+                  <button id="ok-btn" type="button" class="n-btn w:3">확인</button>
+                  <button id="close-btn" type="button" class="n-btn w:3 bg-color:main-2">닫기</button>
+                </div>
+              </section>
+
+                </form>
               </li>
+
             </ul>
           </div>
+
         </section>
+
+        <!--             모달창 -->
         <span class="lg:d:flex lg:ai:start gap:2">
           <section
             class="fl-dir:column align-self:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2"
