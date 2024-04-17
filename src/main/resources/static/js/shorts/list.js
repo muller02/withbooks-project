@@ -306,11 +306,72 @@ window.addEventListener("load", function () {
       dropDownList.classList.add("transform-x");
     };
 
-    window.addEventListener("click", function (e) {
+    shortSection.addEventListener("click", function (e) {
       if (!nDropdown.contains(e.target)) {
         // 클릭한 현재 요소가 nDropDown의 하위 요소가 아니면
         dropDownList.classList.remove("active");
       }
     });
   });
+});
+
+
+//삭제하기 모달 추가
+window.addEventListener('load', function () {
+  const modalBackdrop = document.querySelector('#modal-backdrop');
+
+  const shortSections = document.querySelectorAll(".short-section");
+  console.log(shortSections)
+  for(let shortSection of shortSections){
+    const nDropdown = shortSection.querySelector(".n-dropdown");
+    const dropDownList = shortSection.querySelector(".dropdown-list");
+
+    const openButton = shortSection.querySelector('#modal-btn');
+    const closeButton = shortSection.querySelector('#close-btn');
+    const modal = shortSection.querySelector('#modal');
+    const formName = shortSection.querySelector("#form-name");
+    const okButton = shortSection.querySelector("#ok-btn");
+
+    okButton.onclick = function (e){
+
+      formName.action = "/shorts/delete";
+      formName.method = "post";
+      formName.submit();
+
+    }
+
+    openButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      modal.classList.remove('d:none');
+      modalBackdrop.classList.remove('d:none');
+      modal.classList.add('modal-fade-in');
+
+
+    });
+
+
+    closeButton.addEventListener('click', function (e) {
+      modal.classList.replace('modal-fade-in', 'modal-fade-out');
+
+      setTimeout(() => {
+        modal.classList.add('d:none');
+        modalBackdrop.classList.add('d:none');
+        modal.classList.remove('modal-fade-out');
+      }, 130);
+
+
+
+    });
+
+
+
+
+
+
+
+
+  }
+
+
+
 });
