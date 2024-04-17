@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.BooklogRepository">
+	
+	<select id="findAll" resultType="BooklogView">
+		select 
+				  bl.id
+				, bl.book_id 
+				, bl.reg_date reg_date
+				, b.title book_title
+				, b.author book_author
+				, b.cover book_cover
+				, b.publisher book_publisher
+		  from booklog bl left join book b 
+		    on bl.book_id = b.id
+	</select>
+
+	<select id="findById" resultType="BooklogView"  parameterType="Long">
+		select 
+				  bl.id
+				, bl.book_id 
+				, bl.reg_date reg_date
+				, b.title book_title
+				, b.author book_author
+				, b.cover book_cover
+				, b.publisher book_publisher
+		  from booklog bl left join book b 
+		    on bl.book_id = b.id
+		 where bl.id = #{id}
+
+	</select>
+
+</mapper>
