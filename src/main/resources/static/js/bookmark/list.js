@@ -95,11 +95,16 @@ checkAllBox.onchange = function(e){
         return;
     }
     
-    const ids = new Array();
-    checkedboxes.forEach((checkbox)=>{
-        ids.push(checkbox.value);
-    });
-    console.log(ids);
+    // const ids = new Array();
+    // checkedboxes.forEach((checkbox)=>{
+    //     ids.push(checkbox.value);
+    // });
+
+    // const formData = new FormData();
+    // formData.append("ids", ids);
+
+    document.querySelector("#idsForm").submit();
+
     
   }
 

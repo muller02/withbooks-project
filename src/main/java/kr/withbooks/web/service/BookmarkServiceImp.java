@@ -18,5 +18,11 @@ public class BookmarkServiceImp implements BookmarkService {
     public List<BookmarkView> getList(Integer p) {
         return repository.findAll(p);
     }
+
+    @Override
+    public void deleteAllByIds(List<Integer> ids, Long userId) {
+
+        repository.deleteAllByIds(ids, userId);
+    }
     
 }
