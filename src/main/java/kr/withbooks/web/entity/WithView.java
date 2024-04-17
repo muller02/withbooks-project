@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,5 +21,5 @@ public class WithView {
   private String location;
   private int personnel; // 정원
   private int memberCnt; // 가입 멤버 수
-  private String categoryName;
+  private List<String> categoryNames;
 }

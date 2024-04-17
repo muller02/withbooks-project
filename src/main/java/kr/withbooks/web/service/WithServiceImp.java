@@ -30,4 +30,10 @@ public class WithServiceImp implements WithService {
         return repository.findAll(categoryId);
     }
 
+    @Override
+    public List<String> getWithCategoryNames(Long withId) {
+
+        return  viewRepository.findAllByWithId(withId);
+    }
+
 }

@@ -24,6 +24,19 @@
         width: 100px;
         height: 100px;
       }
+
+      .fade {
+        opacity: 1;
+        transition: opacity 1s;
+      }
+
+      .fade-out {
+        opacity: 0;
+      }
+
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
 
@@ -41,9 +54,8 @@
               id="pet-select"
               class="h:100p text-align:center"
             >
-              <option value="m1">전체</option>
-              <option value="m1">서울</option>
-              <option value="m2">대구시</option>
+              <option value="m1">최신순</option>
+              <option value="m2">인기순</option>
             </select>
           </li>
           <li class="d:flex ai:center">
@@ -69,7 +81,37 @@
           </li>
         </ul>
       </section>
-      <div id="search-detail" class="pl:3"></div>
+
+      <div id="search-detail" class="pl:3 fade d:none">
+        <section class="category d:flex fl-dir:column pl:3">
+          <div class="d:flex ai:center">
+            <div class="margin-right:8">카테고리</div>
+            <div
+              class="icon icon:arrows_clockwise_fill icon-size:2"
+              id="refresh"
+            ></div>
+          </div>
+          <div class="mt:3">
+            <div class="d:flex fl-wrap:wrap" id="filterBox">
+              <h1 class="d:none">카테고리 필터</h1>
+
+              <label
+                class="n-toggle n-toggle-type:outline-box m:1 nt"
+                id="cate-list"
+                th:each="item:${cateList}"
+              >
+                <input
+                  type="checkbox"
+                  class="d:none p check-box"
+                  name="c"
+                  th:value="${item.cid}"
+                  th:text="${item.name}"
+                />
+              </label>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <section class="with-list">
         <h1 class="d:none n-tab-grow">전체위드 / 나의위드</h1>
@@ -89,26 +131,29 @@
       <section class="with-list">
         <h1 class="d:none">위드 리스트</h1>
         <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list" id="with-list">
-          <li class="d:flex h:4 gap:3 n-item:shadow" th:each="w: ${list}">
+          <li class="d:flex h:4 gap:3 n-item:shadow" th:each="with: ${list}">
             <img
               data-v-01ad9008=""
               src="/image/with/puppy2.png"
               class="obj-fit:cover w:2 margin-top:10 margin-bottom:auto border-radius:8 va:middle max-width:100p max-height:100p"
-              th:src="${w.img}"
+              th:src="${with.img}"
             />
             <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
               <ul class="d:flex gap:1 flex-wrap:wrap">
                 <li
                   class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1"
                 >
-                  <span class="" th:text="${w.faceYn == 1 ? '대면' : '비대면'}"
+                  <span
+                    class=""
+                    th:text="${with.faceYn == 1 ? '대면' : '비대면'}"
                     >대면</span
                   >
                 </li>
                 <li
                   class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6"
+                  th:each="categoryNames :${with.categoryNames}"
                 >
-                  <span class="color:base-1" th:text="${w.categoryName}"
+                  <span class="color:base-1" th:text="${categoryNames}"
                     >소설</span
                   >
                 </li>
@@ -119,7 +164,7 @@
                 </li> -->
               </ul>
               <div class="fs:5 fw:3">
-                <a th:text="${w.name}" th:href="@{'/with/' + ${w.name}}"
+                <a th:text="${with.name}" th:href="@{'/with/' + ${with.name}}"
                   >책에퐁당</a
                 >
               </div>
@@ -127,11 +172,15 @@
                 <!-- 텍스트 중앙정렬 line-height로 주기  -->
                 <div class="d:flex">
                   <span class="icon icon:chat_circle icon-size:2"></span>
-                  <span class="fs:1 color:base-5 ml:1" th:text="${w.memberCnt}"
+                  <span
+                    class="fs:1 color:base-5 ml:1"
+                    th:text="${with.memberCnt}"
                     >5명</span
                   >
                   <span class="fs:1 color:base-5 ml:1">명/</span>
-                  <span class="fs:1 color:base-5 ml:1" th:text="${w.personnel}"
+                  <span
+                    class="fs:1 color:base-5 ml:1"
+                    th:text="${with.personnel}"
                     >12명</span
                   >
                   <span class="fs:1 color:base-5 ml:1">명</span>
@@ -139,16 +188,26 @@
                 <!-- <span>·</span> -->
                 <div class="d:flex">
                   <span class="icon icon:chat_circle icon-size:2"></span>
-                  <span class="fs:1 color:base-5 ml:1">월 1회</span>
+                  <span class="fs:1 color:base-5 ml:1">월</span>
+                  <span
+                    class="fs:1 color:base-5 ml:1"
+                    th:text="${with.interval}"
+                    >월 1회</span
+                  >
+                  <span class="fs:1 color:base-5 ml:1">회</span>
                 </div>
                 <!-- <span>·</span> -->
                 <div class="d:flex">
                   <span class="icon icon:chat_circle icon-size:2"></span>
-                  <span class="fs:1 color:base-5 ml:1">노고산동</span>
+                  <span
+                    class="fs:1 color:base-5 ml:1"
+                    th:text="${with.location}"
+                    >노고산동</span
+                  >
                 </div>
               </div>
               <div class="ln-clamp:3">
-                <span class=" " th:text="${w.intro}">
+                <span class=" " th:text="${with.intro}">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam
                   velit adipisci quae nisi ad possimus, dolores dolor ex quas
                   molestias temporibus quidem aperiam cupiditate excepturi
@@ -158,62 +217,6 @@
               <!-- <div class="text-align:right"><a href="" class="color:base-4 fs:1">더보기></a></div> -->
             </div>
           </li>
-
-          <!-- <li class="d:flex h:4 gap:3 n-item:shadow">
-            <h1 class="d:none">위드 리스트</h1>
-
-            <img
-              data-v-01ad9008=""
-              src="/image/with/puppy2.png"
-              class="obj-fit:cover w:2 margin-top:10 margin-bottom:auto border-radius:8 va:middle max-width:100p max-height:100p"
-            />
-
-            <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
-              <ul class="d:flex gap:1 flex-wrap:wrap">
-                <li
-                  class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1"
-                >
-                  <span class="">대면</span>
-                </li>
-                <li
-                  class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-5"
-                >
-                  <span class="color:base-1">소설</span>
-                </li>
-                <li
-                  class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6"
-                >
-                  <span class="color:base-1">인문</span>
-                </li>
-              </ul>
-              <div class="fs:5 fw:3">책에퐁당</div>
-              <div class="d:flex ai:center gap:1 flex-wrap:wrap">
-                <div class="d:flex">
-                  <span class="icon icon:chat_circle icon-size:2"></span>
-                  <span class="fs:1 color:base-5 ml:1">5명/12명</span>
-                </div>
-                <span>·</span>
-                <div class="d:flex">
-                  <span class="icon icon:chat_circle icon-size:2"></span>
-                  <span class="fs:1 color:base-5 ml:1">월 1회</span>
-                </div>
-                <span>·</span>
-                <div class="d:flex">
-                  <span class="icon icon:chat_circle icon-size:2"></span>
-                  <span class="fs:1 color:base-5 ml:1">노고산동</span>
-                </div>
-              </div>
-              <div class="ln-clamp:3">
-                <span class=" ">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam
-                  velit adipisci quae nisi ad possimus, dolores dolor ex quas
-                  molestias temporibus quidem aperiam cupiditate excepturi
-                  pariatur amet! Ex, sunt eius.
-                </span>
-              </div>
-              <div class="text-align:right"><a href="" class="color:base-4 fs:1">더보기></a></div>
-            </div>
-          </li> -->
         </ul>
       </section>
     </main>

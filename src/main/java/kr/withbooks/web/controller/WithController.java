@@ -27,11 +27,16 @@ public class WithController {
     public String list(Model model) {
         // 데이터베이스에서 정보 가져와 list에 담기
         List<WithView> list = service.getList();
-        List<Category> cateList = categoryService.getList();
+
+        // 위드별 선택한 주요카테고리 뿌려주기
+        for (WithView withView : list) {
+            Long withId = withView.getId();
+            List<String> categoryNames = service.getWithCategoryNames(withId);
+            withView.setCategoryNames(categoryNames);
+        }
 
         // 뷰에 데이터 전달
         model.addAttribute("list", list);
-        model.addAttribute("category", cateList);
 
         System.out.println(list);
         return "/with/list";
