@@ -178,18 +178,10 @@ window.addEventListener("load", function () {
 
 // <이미지 슬라이드> , <댓글 창>, <점점점 버튼 클릭 시 모달>
 window.addEventListener("load", () => {
-  // 83Line ... 버튼들
-  const dropdownButtons = document.querySelectorAll(".dropdown-btn");
-
-  // 87Line dropdownButtons 들 활성화 시 나타나는 모달
-  const dropdownLists = document.querySelectorAll(".dropdown-list");
-
-  // 301Line 이미지를 담는 section
-  const imgSection = document.querySelectorAll(".img-section");
-
   const shortSections = document.querySelectorAll(".short-section");
 
   let width = document.querySelector(".img-list > img");
+
   shortSections.forEach((short) => {
     let pages = 0; // 현재 인덱스 번호
     let positionValue = 0; // images 위치값
@@ -247,8 +239,16 @@ window.addEventListener("load", () => {
     });
   });
 
-  // <댓글 창 잔상, 댓글 창 하나만 보이기>
+
+
+
+});
+
+window.addEventListener("load", function (e){
+  const shortSections = document.querySelectorAll(".short-section");
+// <댓글 창 잔상, 댓글 창 하나만 보이기>
   let tmpArr = []; //엘리먼트 저장배열
+
   shortSections.forEach((shortSection) => {
     const commentBtn = shortSection.querySelector(".comment-btn");
     const commentGroup = shortSection.querySelector(".comment-group");
@@ -277,21 +277,8 @@ window.addEventListener("load", () => {
       };
     });
   });
+})
 
-  // <점점점 버튼 클릭 시 모달 창 나타나는 이벤트>
-  // dropdownButtons.forEach((dropdownButton, index) => {
-  //
-  //     // dropdownButtons들을 하나 씩 거내어 이벤트 '클릭' 이벤트 추가
-  //     // dropdownButton.addEventListener("click", () => {
-  //     //     // 버튼이 클릭 됐을 떄 "active" 클래스가 존재하면 제거하고, 존재하지 않으면 "acteive"를 추가한다
-  //     //     dropdownLists[index].classList.toggle("active");
-  //     //     // 모달창 왼쪽으로 -60px 이동 클래스 추가
-  //     //     dropdownLists[index].classList.add("transform-x");
-  //     //
-  //     // });
-  //
-  // });
-});
 
 //<점점점 버튼 클릭 시 모달 창 나타나는 이벤트> , <점점점 밖에 영역 클릭시 모달 창 닫힘)
 window.addEventListener("load", function () {
@@ -306,12 +293,13 @@ window.addEventListener("load", function () {
       dropDownList.classList.add("transform-x");
     };
 
-    shortSection.addEventListener("click", function (e) {
+    window.addEventListener("click", function (e) {
       if (!nDropdown.contains(e.target)) {
         // 클릭한 현재 요소가 nDropDown의 하위 요소가 아니면
         dropDownList.classList.remove("active");
       }
     });
+
   });
 });
 
@@ -341,10 +329,12 @@ window.addEventListener('load', function () {
     }
 
     openButton.addEventListener('click', function (e) {
-      e.preventDefault();
+        e.preventDefault();
       modal.classList.remove('d:none');
       modalBackdrop.classList.remove('d:none');
       modal.classList.add('modal-fade-in');
+
+      dropDownList.classList.remove("active");
 
 
     });
