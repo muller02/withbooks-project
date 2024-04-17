@@ -62,29 +62,8 @@
                                 </button>
                             </form>
                         </div>
-                        <!-- <div class="d:flex jc:center ai:center n-expander">
-                            <button
-                                class="n-btn n-btn:outline deco icon:caret_down deco-size:2 fs:1 deco-margin-right:1"
-                            >
-                                상세검색
-                            </button>
-                        </div> -->
                     </div>
-                    <div class="n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
-                        <div class="n-expander-title">
-                            <input type="checkbox" class="n-expander-trigger" />
-                            상세검색
-                        </div>
-                        <div class="n-expander-content d:flex jc:space-between">
-                            <ul class="d:flex fl-wrap:wrap search-category">
-                                <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer	"  th:each="c : ${category}">
-                                    <a href="#" class="click-none" role="button">
-                                        <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </section>
 
                 <!--            <section class="my:4 d:grid gap:8 grid-templ-col:2 md:grid-templ-col:3 lg:grid-templ-col:1 ji:center">-->
@@ -123,25 +102,17 @@
                                                 도둑맞은 집중력
                                             </div>
                                         </h1>
-                                        <div
-                                            class="fs:2 fw:1 mt:1"
-                                            th:text="${n.author}"
-                                        >
-                                                요한하리
-                                        </div>
-                                        <div class="mt:1 fs:1">
-                                            <div th:text="${n.publisher}">
-                                                열린마음
+                                        <span class="d:flex">
+                                            <div
+                                                class="fs:2 fw:1 mt:1"
+                                                th:text="${n.author}"
+                                            >
+                                                    요한하리
                                             </div>
-                                            <div th:text="${n.pubDate}">
-                                                2022.01.01
+                                            <div class="ml:2">
+                                                [<span th:text="${n.boardCnt}">5</span>]
                                             </div>
-                                        </div>
-                                        <div
-                                            class="description d:none lg:d:block mt:2 w:10p"
-                                            th:text="${n.description}"
-                                        >
-                                        </div>
+                                        </span>
                                     </div>
                                 </div>
                             </a>
