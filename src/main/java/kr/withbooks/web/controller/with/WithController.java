@@ -20,6 +20,7 @@ public class WithController {
 
     @GetMapping("list")
     public String list(Model model) {
+
         // 데이터베이스에서 정보 가져와 list에 담기
         List<WithView> list = service.getList();
 
@@ -30,10 +31,11 @@ public class WithController {
             withView.setCategoryNames(categoryNames);
         }
 
+
         // 뷰에 데이터 전달
         model.addAttribute("list", list);
-
         System.out.println(list);
+
         return "/with/list";
     }
 
