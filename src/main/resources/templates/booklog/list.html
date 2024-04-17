@@ -1,225 +1,63 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{inc/layout.html}"
->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
 
-    <main layout:fragment="main">
-        <section>
-            <h1 class="d:none n-tab-grow">내서재 탭바</h1>
+        <style>
+            .book-list div {
+                width: 130px;
 
-            <ul class="n-tabbar">
-                <li class="w:5p">
-                    <button class="w:100p font-weight:3">북로그</button>
-                </li>
-                <li class="w:5p">
-                    <button class="w:100p color:base-3 font-weight:3">
-                        <a href="/bookmark/list">북마크</a></button>
-                </li>
+                a {
+                    display: block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main layout:fragment="main">
+            <section class="booklog">
+                <h1 class="d:none">내서재 탭바</h1>
 
-            </ul>
+                <ul class="n-tabbar n-tab-grow">
+                    <li class="active w:5p">
+                        <button class="w:100p font-weight:3">북로그</button>
+                    </li>
+                    <li class="w:5p">
+                        <button class="w:100p color:base-3 font-weight:3">
+                            <a href="/bookmark/list">북마크</a>
+                        </button>
+                    </li>
+                </ul>
+            </section>
 
-        </section>
+            <section class="book-list my:4">
+                <h1 class="d:none">북 리스트</h1>
+                <ul class="d:flex flex-wrap:wrap justify-content:flex-start">
+                    <li class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
+                        <div class="gap:4 d:flex fl-dir:column lg:ai:center">
+                            <div class="h:4 d:flex jc:center">
+                                <a class="text-align:center h:100p" href="detail" th:href="@{./detail(id=${l.id})} ">
+                                    <img src="/image/shorts/detail/도둑맞은집중력.PNG" th:src="${l.bookCover}" class="h:100p w:100p obj-fit:contain margin-right:auto" alt="도둑맞은 집중력.img" />
+                                </a>
+                            </div>
 
-        <section class="my:4">
-            <h1 class="d:none">북 리스트</h1>
-            <ul class="d:flex flex-wrap:wrap justify-content:flex-start m:3 px:3">
-                <li
-                    class="jc:center ai:center p:3 mx:3"
-                >
-                    <div
-                        class="gap:4 d:flex fl-dir:column lg:ai:center"
-                    >
-                        <div class="w:100p lg:w:3 d:flex jc:center">
-                            <a
-                                href="detail"
-                            >
-                                <img
-                                    src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                    class="h:3 margin-right:auto"
-                                    alt="도둑맞은 집중력.img"
-                                />
-                            </a>
-                        </div>
-
-                        <div class="w:100p d: fl-dir:column ai:center">
-                            <span></span>
-                            <h1 class="fs:3 fw:3">
-                                <a
-                                    >도둑맞은 집중력</a
-                                >
-                            </h1>
-                            <div
-                                class="fs:2 fw:1 mt:1"
-                            >
-                                <a
-                                    href=""
-                                    >요한하리</a
-                                >
+                            <div class="w:100p fl-dir:column ai:center">
+                                <h1 class="fs:3 fw:3">
+                                    <a th:href="@{./detail(id=${l.id})} " th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</a>
+                                </h1>
+                                <div class="fs:2 fw:1 mt:1">
+                                    <a th:href="@{./detail(id=${l.id})} " th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            <!-- ============================================================================= -->
-            <li
-            class="jc:center ai:center p:3 mx:3"
-        >
-            <div
-                class="gap:4 d:flex fl-dir:column lg:ai:center"
-            >
-                <div class="w:100p lg:w:3 d:flex jc:center">
-                    <a
-                        href=""
-                    >
-                        <img
-                            src="/image/shorts/detail/도둑맞은집중력.PNG"
-                            class="h:3 margin-right:auto"
-                            alt="도둑맞은 집중력.img"
-                        />
-                    </a>
-                </div>
-
-                <div class="w:100p d: fl-dir:column ai:center">
-                    <span></span>
-                    <h1 class="fs:3 fw:3">
-                        <a
-                            >도둑맞은 집중력</a
-                        >
-                    </h1>
-                    <div
-                        class="fs:2 fw:1 mt:1"
-                    >
-                        <a
-                            href=""
-                            >요한하리</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </li>
-            <li
-            class="jc:center ai:center p:3 mx:3"
-        >
-            <div
-                class="gap:4 d:flex fl-dir:column lg:ai:center"
-            >
-                <div class="w:100p lg:w:3 d:flex jc:center">
-                    <a
-                        href=""
-                    >
-                        <img
-                            src="/image/shorts/detail/도둑맞은집중력.PNG"
-                            class="h:3 margin-right:auto"
-                            alt="도둑맞은 집중력.img"
-                        />
-                    </a>
-                </div>
-
-                <div class="w:100p d: fl-dir:column ai:center">
-                    <span></span>
-                    <h1 class="fs:3 fw:3">
-                        <a
-                            >도둑맞은 집중력</a
-                        >
-                    </h1>
-                    <div
-                        class="fs:2 fw:1 mt:1"
-                    >
-                        <a
-                            href=""
-                            >요한하리</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li
-        class="jc:center ai:center p:3 mx:3"
-    >
-        <div
-            class="gap:4 d:flex fl-dir:column lg:ai:center"
-        >
-            <div class="w:100p lg:w:3 d:flex jc:center">
-                <a
-                    href=""
-                >
-                    <img
-                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                        class="h:3 margin-right:auto"
-                        alt="도둑맞은 집중력.img"
-                    />
-                </a>
-            </div>
-
-            <div class="w:100p d: fl-dir:column ai:center">
-                <span></span>
-                <h1 class="fs:3 fw:3">
-                    <a
-                        >도둑맞은 집중력</a
-                    >
-                </h1>
-                <div
-                    class="fs:2 fw:1 mt:1"
-                >
-                    <a
-                        href=""
-                        >요한하리</a
-                    >
-                </div>
-            </div>
-        </div>
-    </li>
-    
-    <li
-    class="jc:center ai:center p:3 mx:3"
->
-    <div
-        class="gap:4 d:flex fl-dir:column lg:ai:center"
-    >
-        <div class="w:100p lg:w:3 d:flex jc:center">
-            <a
-                href=""
-            >
-                <img
-                    src="/image/shorts/detail/도둑맞은집중력.PNG"
-                    class="h:3 margin-right:auto"
-                    alt="도둑맞은 집중력.img"
-                />
-            </a>
-        </div>
-
-        <div class="w:100p d: fl-dir:column ai:center">
-            <span></span>
-            <h1 class="fs:3 fw:3">
-                <a
-                    >도둑맞은 집중력</a
-                >
-            </h1>
-            <div
-                class="fs:2 fw:1 mt:1"
-            >
-                <a
-                    href=""
-                    >요한하리</a
-                >
-            </div>
-        </div>
-    </div>
-</li>
-<!-- ======================================================================================== -->
-
-            </ul>
-        </section>
-    </main>
-    
-</body>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </body>
 </html>
