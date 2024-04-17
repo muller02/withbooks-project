@@ -23,6 +23,7 @@ public class WithDebateController {
         List<DebateRoomView> list  = debateRoomService.getList();
 
         model.addAttribute("list", list);
+        System.out.println("list: " + list);
 
         return "with/debate/list";
     }
