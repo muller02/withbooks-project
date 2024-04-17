@@ -182,7 +182,7 @@ public class ShortsController {
         service.delete(shortsId);
 
 
-        return "redirect:list";
+        return "redirect:list"; 
     }
 
 }
