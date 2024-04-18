@@ -24,12 +24,20 @@
       transition: opacity 1s;
     }
 
-
+    .n-list {
+      --card-list-column-sm: 1; /* 모바일에서 컬럼 수 */
+      --card-list-column-md: 2; /* 태블릿에서 컬럼 수 */
+      --card-list-column-lg: 2; /* PC에서 컬럼 수 */
+    }
+    .box-shadow {
+      box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
+    }
+    .tr
   </style>
 </head>
 
 <body>
-<main layout:fragment="main" class="px:4">
+<main layout:fragment="main" class="mx:">
   <section class="with-list-sort-con d:flex ai:center br pt:5 pb:4 pl:3 pr:3">
     <h1 class="d:none">정렬,검색</h1>
 
@@ -96,35 +104,35 @@
   <section class="with-list">
     <h1 class="d:none">위드 리스트</h1>
     <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list" id="with-list">
-      <li class="d:flex h:4 gap:3 flex-direction:column n-item:shadow" th:each="with: ${list}">
+      <li class="d:flex  gap:2 flex-direction:column n-item:shadow" th:each="with: ${list}">
 
         <ul class="d:flex gap:1 flex-wrap:wrap">
-          <li class=" border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1">
+          <li class=" border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2">
             <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
           </li>
-          <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
+          <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 mr:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
             <span class="color:base-1" th:text="${categoryNames}">소설</span>
           </li>
         </ul>
-        <div class="d:flex gap:2 pt:2">
+        <div class="d:flex  pt:2  gap:5" >
           <!--            th:with img-->
-          <div class="w:max-content	 h:2 border border-color:base-2 border-radius:3	  ">
-          <img src="/image/with/puppy2.png" th:src="@{|/image/with/${with.img}|}" class="   object-fit:contain w:100p h:100p">
-          </div>
-            <div class="d:flex gap:1  flex-direction:column">
+            <div class="w:2	 h:3  box-shadow border-color:base-2 border-radius:3	 ">
+              <img src="/image/with/puppy2.png" th:src="@{|/image/with/${with.img}|}" class="w:100p h:100p border-radius:3	">
+            </div>
 
-          <div class="fs:5 fw:3" th:text="${with.name}">책에퐁당</div>
-          <div class="d:flex ai:center gap:1  ai:center">
-            <div class="d:flex ai:center">
-              <span class="icon icon:chat_circle icon-size:2"></span>
-              <span class="fs:1 color:base-5 ml:1" th:text="${with.memberCnt + ' / ' +with.personnel }">5명/12명</span>
-            </div>
-<!--            <span>·</span>-->
-            <div class="d:flex ai:center">
-              <span class="icon icon:chat_circle icon-size:2"></span>
-              <span class="fs:1 color:base-5 ml:1" th:text="'월 ' + ${with.interval} + ' 회'">월 1회</span>
-            </div>
-<!--            <span>·</span>-->
+              <div class="d:flex gap:1  flex-direction:column flex-grow:1">
+            <div class="fs:6 fw:3 mb:2" th:text="${with.name}">책에퐁당</div>
+            <div class="d:flex ai:center gap:1  ai:center">
+              <div class="d:flex ai:center">
+                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="fs:1 color:base-5 ml:1" th:text="${with.memberCnt + ' / ' +with.personnel }">5명/12명</span>
+              </div>
+  <!--            <span>·</span>-->
+              <div class="d:flex ai:center">
+                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="fs:1 color:base-5 ml:1" th:text="'월 ' + ${with.interval} + ' 회'">월 1회</span>
+              </div>
+  <!--            <span>·</span>-->
 
           </div>
 

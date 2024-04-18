@@ -36,20 +36,19 @@ public class WithController {
     @GetMapping("list")
     public String list(Model model) {
 
-        // 데이터베이스에서 정보 가져와 list에 담기
+        //  WithView list 얻기
         List<WithView> list = service.getList();
 
-        // 위드별 선택한 주요카테고리 뿌려주기
+        // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을
+        // 가지고 와서, withView categoryNames에 담기.
         for (WithView withView : list) {
             Long withId = withView.getId();
             List<String> categoryNames = service.getWithCategoryNames(withId);
             withView.setCategoryNames(categoryNames);
         }
 
-
         // 뷰에 데이터 전달
         model.addAttribute("list", list);
-        System.out.println(list);
 
         return "/with/list";
     }
@@ -57,7 +56,8 @@ public class WithController {
     @GetMapping("reg")
     public String regForm(Model model){
 
-        List<Category> categories     = categoryService.getList();
+        // 위드 등록 페이지에서 사용 할 카테고리 이름들을, 카테고리 서비스를 이용해 가지고 오기 
+        List<Category> categories = categoryService.getList();
         model.addAttribute("categories", categories);
 
         return "/with/reg";
@@ -67,7 +67,9 @@ public class WithController {
     @PostMapping("reg")
     public String reg(
                       With with,
+                      // category-id의 체크박스 값들
                       @RequestParam(name = "category-id", required = false) Long[] categoryIds,
+                      // with 대표 이미지 파일
                       @RequestParam(name = "with-img-file", required = false) MultipartFile withImgFile,
                       HttpServletRequest request
 
@@ -76,12 +78,13 @@ public class WithController {
     //With 테이블 등록
 
         //위드 이미지파일 이름
+        //파일이 없을 때, 기본 이미지 적용
         String withImgName = "default.png";
 
 
-        //파일이 없을 때, 기본 이미지 적용
+        //파일이 있을 떄, 파일을 로컬에 저장
         if(!withImgFile.isEmpty()) {
-            //파일이 있을 떄,
+
             withImgName = withImgFile.getOriginalFilename();
 
             String path = "/image/with";
@@ -111,7 +114,8 @@ public class WithController {
         //withcategoryId 배열을 List<Long> 형태로 변환
         List<Long> withCategoryIdList =  Arrays.asList(categoryIds);
 
-        System.out.println("복숭아 = " + withCategoryIdList);
+
+        // WithCategory 객체 생성 후 값 지정
         WithCategory withCategory = new WithCategory();
         withCategory.setWithID(withId);
         withCategory.setCategoryId(withCategoryIdList);
