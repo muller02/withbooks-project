@@ -10,6 +10,7 @@ window.addEventListener("load", function(){
 
     // 검색 결과 list를 뿌려줄 컨텐츠 ul ( li로 리스트가 뿌려짐 )
     const contentUl = this.document.querySelector(".content-ul");
+
     
  
 
@@ -46,7 +47,7 @@ window.addEventListener("load", function(){
     // ======================================================================================================
     function getByParams(q, s=20, p=1){
         
-        const url = `/api/book/list?q=${q}&s=${s}&p=${p}`;
+        const url = `/api/book/list?q=${q}&c=0&s=${s}&p=${p}`;
         // const method = "GET";
         return fetch(url);
     }
@@ -67,10 +68,10 @@ window.addEventListener("load", function(){
                 
             let liHTML = ` 
             <li
-            class="jc:center ai:center p:3"
+                class="jc:center ai:center p:3 searched-book w:100p"
             >
             <a 
-                href="/book/detail?id=${n.id}"
+                
             >
                 <div
                     class="gap:4 d:flex fl-dir:column lg:ai:center"
@@ -120,6 +121,23 @@ window.addEventListener("load", function(){
 
 
 
+    // ================================= 책 검색 결과를 클릭했을때의 이벤트  =======================================
+    // ======================================================================================================
+    contentUl.onclick = (e)=>{
+        if(e.target == contentUl)
+            return;
+        
+        // 선택한 책 li 하나 저장
+        let selectedBook = e.target;
+        for(; contentUl!==selectedBook.parentElement; selectedBook = selectedBook.parentElement);
+            
+        // ul의 li들 싹다 지우기
+        contentUl.innerHTML = "";
+
+        // 저장한 li 다시 뿌리기
+        selectedBook.classList.add("bg-color:main-3");
+        contentUl.innerHTML = selectedBook.outerHTML;
+    };
 
 
 

@@ -31,10 +31,11 @@ public class BookController {
         System.out.println("먼디??"+query);
         System.err.println("size ="+size+", page = "+page);
 
-    //    if(categoryId==0)
-    //        categoryId=null;
+       if(categoryId==0)
+           categoryId=null;
 
         List<BookView> list = service.getList(query, categoryId);
+        System.out.println("list : " + list);
 
         return list;
 
