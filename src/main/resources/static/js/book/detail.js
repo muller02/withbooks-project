@@ -4,10 +4,9 @@ window.addEventListener("load", function (e){
     const bookMark = document.querySelector("#book-mark");
 
     // ============================= 북마크 클릭 동작 ===================================
-    // NOTE 회원인 경우에만 북마크 라벨이 나타므로 여기서는 회원체크를 하지 않아도 됨
+    // XXX 회원인 경우에만 북마크 라벨이 나타므로 여기서는 회원체크를 하지 않아도 됨
     // 북마크 선택 시 데이터 입력 or 데이터 삭제
     bookMark.addEventListener("click",async function(e){
-
 
         const classes = bookMark.classList;
         const iconColor = "icon-color:main-5";
