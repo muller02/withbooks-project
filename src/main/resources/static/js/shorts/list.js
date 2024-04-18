@@ -86,7 +86,7 @@ window.addEventListener("load", function () {
     let tmpArr = [];
 
     comments.onclick = function (e) {
-      if (e.target.tagName != "SPAN") return;
+      if (e.target.tagName !== "SPAN") return;
 
       let parentBtn = e.target.parentNode;
       let parentDiv = parentBtn.parentNode;

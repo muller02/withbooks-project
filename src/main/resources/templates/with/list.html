@@ -99,17 +99,19 @@
       <li class="d:flex h:4 gap:3 flex-direction:column n-item:shadow" th:each="with: ${list}">
 
         <ul class="d:flex gap:1 flex-wrap:wrap">
-          <li class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1">
+          <li class=" border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1">
             <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
           </li>
-          <li class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
+          <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
             <span class="color:base-1" th:text="${categoryNames}">소설</span>
           </li>
         </ul>
-        <div class="d:flex gap:2">
+        <div class="d:flex gap:2 pt:2">
           <!--            th:with img-->
-          <img src="/image/with/puppy2.png" class="obj-fit:cover w:2 margin-bottom:auto border-radius:8 va:middle max-width:100p max-height:100p">
-          <div class="d:flex gap:1  flex-direction:column">
+          <div class="w:max-content	 h:2 border border-color:base-2 border-radius:3	  ">
+          <img src="/image/with/puppy2.png" th:src="@{|/image/with/${with.img}|}" class="   object-fit:contain w:100p h:100p">
+          </div>
+            <div class="d:flex gap:1  flex-direction:column">
 
           <div class="fs:5 fw:3" th:text="${with.name}">책에퐁당</div>
           <div class="d:flex ai:center gap:1  ai:center">
@@ -123,11 +125,13 @@
               <span class="fs:1 color:base-5 ml:1" th:text="'월 ' + ${with.interval} + ' 회'">월 1회</span>
             </div>
 <!--            <span>·</span>-->
-            <div class="d:flex ai:center">
-              <span class="icon icon:chat_circle icon-size:2"></span>
-              <span class="fs:1 color:base-5 ml:1" th:text="${with.location}">노고산동</span>
-            </div>
+
           </div>
+
+              <div class="d:flex ai:center">
+                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="fs:1 color:base-5 ml:1" th:text="${with.location}">노고산동</span>
+              </div>
           <div class=" ln-clamp:3">
                 <span class=" " th:text="${with.intro}">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus, dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur amet! Ex, sunt eius.
