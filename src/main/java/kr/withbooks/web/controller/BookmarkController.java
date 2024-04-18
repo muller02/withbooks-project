@@ -26,6 +26,7 @@ public class BookmarkController {
                         ,Model model
                         ){
         List<BookmarkView> list = service.getList(p);
+        System.out.println(list);
         model.addAttribute("list", list);
         
         return "bookmark/list";
@@ -37,6 +38,9 @@ public class BookmarkController {
                         ){
 
         Long userId = 1L;
+
+        System.out.println(ids);
+
         if(ids!=null && ids.size() > 0)
             service.deleteAllByIds(ids, userId);
 
