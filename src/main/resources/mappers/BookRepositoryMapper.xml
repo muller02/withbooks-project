@@ -31,6 +31,31 @@
 		WHERE id = #{id}
 	</select>
 
+	<select id="findMapById" resultType="hashmap">
+		select b.id
+		,b.title
+		,b.author
+		,b.pub_date pubDate
+		,b.publisher
+		,b.isbn13
+		,b.description
+		,b.purchase_link purchaseLink
+		,b.price
+		,b.cover
+		,bc.name
+		<if test="userId != null">
+			,ifnull(bm.user_id = #{userId}, 0) marked
+		</if> 
+		from book b 
+			left join book_category bc 
+				on b.category_id = bc.id 
+			left join bookmark bm 
+				on b.id = bm.book_id 
+		where
+			b.id = #{bookId}
+		group by b.id
+	</select>
+
 	<!-- <select id="count" resultType="int">
 		SELECT 
 		count(id)

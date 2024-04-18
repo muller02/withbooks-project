@@ -32,4 +32,20 @@
 
 	</select>
 
+	<delete id="deleteAllByIds">
+		delete
+		 
+		from
+			bookmark
+		where
+			id in
+		<foreach collection="ids" item="ids" open="(" close=")" separator=",">
+			#{ids}
+		</foreach>
+		<if test="userId != null">
+			and user_id = #{userId}
+		</if>
+
+	</delete>
+
 </mapper>

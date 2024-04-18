@@ -36,7 +36,7 @@ public class BookmarkController {
                         @RequestParam(name="ids", required= true) List<Integer> ids 
                         ){
 
-        Long userId = null;
+        Long userId = 1L;
         if(ids!=null && ids.size() > 0)
             service.deleteAllByIds(ids, userId);
 

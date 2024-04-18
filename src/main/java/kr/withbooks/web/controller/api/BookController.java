@@ -27,12 +27,10 @@ public class BookController {
                                 ,@RequestParam(name = "p", required = false) Long page
                                 ) {
 
-        System.out.println("먼디??"+query);
-        System.err.println("size ="+size+", page = "+page);
+        // 카테고리 선택하지 않고 책 검색 시 0으로 보내는 값을 null로 처리
+       if(categoryId == 0)
+           categoryId=null;
 
-//        if(categoryId==0)
-//            categoryId=null;
-//
         List<BookView> list = service.getList(query, categoryId);
 
         return list;
