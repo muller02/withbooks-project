@@ -11,4 +11,8 @@ public interface BookmarkRepository {
     List<BookmarkView> findAll(Integer p);
 
     void deleteAllByIds(List<Integer> ids, Long userId);
+
+    int save(Long bookId, Long userId);
+
+    int delete(Long bookId, Long userId);
 }

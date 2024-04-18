@@ -11,5 +11,6 @@ public interface BooklogRepository {
 
     List<BooklogView> findAll(Long id);
     BooklogView findById(Long id);
+    void deleteAllByIds(List<Integer> ids, Long userId);
     
 }

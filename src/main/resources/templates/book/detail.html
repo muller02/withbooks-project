@@ -37,14 +37,15 @@
         <h1 class="d:none">도둑 맞은 집중력</h1>
 
         <div class="pos:relative">
-            <label id="book-mark" class="bookmark-icon icon  cursor:pointer	   icon:bookmark_simple_fill icon-color:main-1	 icon-size:5 position:absolute top:1 left:1">
+            <!-- TODO 회원인지 아닌지 체크해서 회원 아닌 경우 -> 북마크 라벨을 d:none 처리. -->
+            <label id="book-mark" class="bookmark-icon icon cursor:pointer icon:bookmark_simple_fill icon-color:main-1 icon-size:5 position:absolute top:1 left:1">
                  <input type="checkbox" class="d:none"/>
             </label>
                 <img class="book-img h:4 w:3" src="/img/bookshorts/detail/도둑맞은집중력.png" th:src="${book.cover}" alt="책이미지">
         </div>
         <span class="md:ml:8 lg:ml:0">
             <div class="d:flex flex-direction:column">
-                <div class="mt:5s:6 fw:3 al-self:center" th:text="${book.title}">도둑 맞은 집중력</div>
+                <div class="mt:5s:6 fw:3 al-self:center" th:text="${book.title}">도둑 맞은 집중력 돌아와!!!!!!!자지마!!!!</div>
                 <span class="d:flex al-self:center">
                     <span class="d:flex">
                         <div class="fs:1 color:base-4 " th:text="${book.author}">마틴 푸크너</div>
