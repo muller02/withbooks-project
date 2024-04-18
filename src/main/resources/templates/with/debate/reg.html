@@ -1,13 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{inc/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .search {
+            --right-1: 6px;
+            --top-1: 6px;
+        }
+        .click-none{
+            pointer-events: none;
+        }
+    </style>
+    <script src="/js/with/debate/reg.js"></script>
 </head>
 <body>
-     <section>
-        <h1></h1>
-     </section>
+    <main layout:fragment="main">
+        <section id="search-book-form">
+            <h1 class="d:none">책 검색 폼</h1>
+            <div class="d:flex">
+                <div class="flex-grow:1 margin-right:1">
+                    <form class="pos:relative book-search">
+                        <input
+                            class="search-query-input n-textbox n-textbox:outline txt-al:center bd-radius:4 input"
+                            type="text"
+                            placeholder="책 검색"
+                        />
+                        <button
+                            class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass"
+                            type="submit"
+                        >
+                            검색
+                        </button>
+                    </form>
+                </div>
+        </section>
+    </main>
 </body>
 </html>

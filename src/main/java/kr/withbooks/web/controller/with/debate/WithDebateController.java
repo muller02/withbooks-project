@@ -27,4 +27,10 @@ public class WithDebateController {
 
         return "with/debate/list";
     }
+
+    @GetMapping("/reg")
+    public String reg() {
+
+        return "with/debate/reg";
+    }
 }
