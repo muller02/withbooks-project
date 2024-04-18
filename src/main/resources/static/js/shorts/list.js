@@ -89,11 +89,12 @@ window.addEventListener("load", function () {
       if (e.target.tagName !== "SPAN") return;
 
       let parentBtn = e.target.parentNode;
-      let parentDiv = parentBtn.parentNode;
-      let test = parentDiv.querySelector("ul");
+      // let parentDiv = parentBtn.parentNode;
+      let sibling = parentBtn.nextElementSibling;
+      console.log(sibling);
 
-      test.classList.remove("active");
-      tmpArr.push(test);
+      sibling.classList.remove("active");
+      tmpArr.push(sibling);
 
       // test.classList.toggle("active")
 
@@ -102,7 +103,7 @@ window.addEventListener("load", function () {
         tmpArr[0].classList.remove("active"); // 이전 엘리먼트의 댓글 창을 안보이게 하기
         tmpArr.shift(); // 첫번째 엘리먼트 제거 후 ,두번째 엘리먼트 첫번쨰로이동
       }
-      test.classList.add("active"); //이게 있어야, 다음 댓글 버튼 클릭 해도 댓글창이 나타남
+      sibling.classList.add("active"); //이게 있어야, 다음 댓글 버튼 클릭 해도 댓글창이 나타남
 
       let commentsDivs = comments.querySelectorAll(".comments>div");
       for (let commentDiv of commentsDivs) {

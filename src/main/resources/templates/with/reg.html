@@ -54,10 +54,15 @@
             color: red;
 
         }
+        .placeholder-center::placeholder{
+            text-align: center;
+        }
+
 
 
 
     </style>
+<script src="/js/with/reg.js"></script>
 </head>
 
 <body>
@@ -106,7 +111,7 @@
                     <li>
                         <label class="n-toggle n-toggle-type:outline-box">
                             비대면
-                            <input type="radio" class="d:none" name="faceYn"  value="0"/>
+                            <input type="radio" class="d:none" name="faceYn"  value="0" required/>
                         </label>
                     </li>
                 </ul>
@@ -129,19 +134,22 @@
 
             </section>
 
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 category-section">
                 <div class="mb:2 fw:3">주요 카테고리</div>
                 <ul class="w:full d:flex jc:start gap:2 fl-wrap:wrap">
                     <li th:each=" c : ${categories}">
                         <label class="n-toggle n-toggle-type:outline-box" >
                             [[${c.name}]]
 
-                            <input type="checkbox" class="d:none" name="category-id" th:value="${c.id}"/>
+                            <input type="checkbox" class="d:none" th:id="${c.id}" name="category-id" th:value="${c.id}" />
 
                         </label>
+
                     </li>
 
                 </ul>
+                <div class="d:none category-alert color:accent-1">카테고리는 최대 3개 까지만 가능합니다</div>
+
             </section>
 
             <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
@@ -150,7 +158,7 @@
                 <span > 월 </span>
                     <input
                             type="number"
-                            class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 pl:10 mr:1 ml:1"
+                            class="n-textbox n-textbox-type:underline n-textbox-label:top w:2  text-align:center	 mr:1 ml:1"
                             min="1"
                             max="50"
 
@@ -178,7 +186,7 @@
                     <div>
                         <input
                                 type="number" min="1"
-                                class="n-textbox n-textbox-type:underline n-textbox-label:top w:3"
+                                class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center	"
                                 placeholder="정원"
                                 name="personnel"
                         />
@@ -195,7 +203,7 @@
                     <div>
                         <input
                                 type="text"
-                                class="n-textbox n-textbox-type:underline n-textbox-label:top "
+                                class="n-textbox n-textbox-type:underline n-textbox-label:top placeholder-center "
                                 placeholder="지역"
                                 name="location"
                         />
@@ -237,9 +245,10 @@
                 <div class="d:flex ai:center">
                 <textarea
                         type="text"
-                        class="n-textbox"
+                        class="n-textbox min-h:2 px:3 py:3	"
                         placeholder="위드를 간단히 소개 해보세요 !"
                         name="intro"
+
                 ></textarea>
                 </div>
             </section>
