@@ -36,4 +36,10 @@ public class WithServiceImp implements WithService {
         return  viewRepository.findAllByWithId(withId);
     }
 
+    @Override
+    public void add(With with) {
+
+        repository.save(with);
+    }
+
 }

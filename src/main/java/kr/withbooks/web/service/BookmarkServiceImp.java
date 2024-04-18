@@ -24,5 +24,13 @@ public class BookmarkServiceImp implements BookmarkService {
 
         repository.deleteAllByIds(ids, userId);
     }
+    @Override
+    public int add(Long bookId, Long userId) {
+        return repository.save(bookId, userId);
+    }
     
+    @Override
+    public int delete(Long bookId, Long userId) {
+        return repository.delete(bookId, userId);
+    }
 }

@@ -24,5 +24,5 @@ public class With {
     private String location;
     private int personnel;// 정원
     private Date regDate;
-    private List<Long> categoryId;
+
 }

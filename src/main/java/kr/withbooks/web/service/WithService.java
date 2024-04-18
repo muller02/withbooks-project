@@ -15,4 +15,5 @@ public interface WithService {
     // 목록에서 카테고리 리스트 보여줌
     List<String> getWithCategoryNames(Long withId);
 
+    void add(With with);
 }

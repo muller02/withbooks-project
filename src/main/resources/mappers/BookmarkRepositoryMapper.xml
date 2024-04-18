@@ -17,7 +17,7 @@
 
 	<delete id="deleteAllByIds">
 		delete
-		 
+
 		from
 			bookmark
 		where
@@ -29,6 +29,27 @@
 			and user_id = #{userId}
 		</if>
 
+	</delete>
+
+	<insert id="save">
+		insert into
+			bookmark
+				(
+					user_id,
+					book_id
+				)
+			values
+				(
+					#{userId},
+					#{bookId}
+			)
+	</insert>
+
+	<delete id="delete">
+		delete from bookmark
+		where
+			user_id = #{userId}
+			and book_id = #{bookId}
 	</delete>
 
 </mapper>
