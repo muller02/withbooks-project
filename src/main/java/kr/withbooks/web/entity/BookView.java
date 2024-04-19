@@ -1,5 +1,6 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class BookView {
     private long categoryId;
     private String title;
     private String author;
-    private Date pubDate;
+    private LocalDateTime pubDate;
     private String publisher;
     private String isbn13;
     private String description;
@@ -24,6 +25,6 @@ public class BookView {
     private int price;
     private String cover;
     private int publicYn;
-    private Date regDate;
+    private LocalDateTime regDate;
     private String categoryName;
 }

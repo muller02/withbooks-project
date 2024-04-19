@@ -1,5 +1,6 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import groovy.transform.builder.Builder;
@@ -18,6 +19,6 @@ public class BookmarkView {
     private String title; 
     private String author; 
     private String cover;
-    private Date pubDate;
+    private LocalDateTime pubDate;
     
 }

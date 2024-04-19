@@ -1,5 +1,6 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -16,8 +17,8 @@ public class User {
     private String password;
     private int gender;
     private String nickname;
-    private Date brithDate;
-    private Date joinDate;
+    private LocalDateTime brithDate;
+    private LocalDateTime joinDate;
     private int withdrawStatus;
     private int notiYn;
     private String role;

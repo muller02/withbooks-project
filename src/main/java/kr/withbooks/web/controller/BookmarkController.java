@@ -15,7 +15,7 @@ import kr.withbooks.web.service.BookmarkService;
 
 @Controller
 @RequestMapping("bookmark")
-public class BookMarkController {
+public class BookmarkController {
     
     @Autowired
     private BookmarkService service;
@@ -26,6 +26,7 @@ public class BookMarkController {
                         ,Model model
                         ){
         List<BookmarkView> list = service.getList(p);
+        System.out.println(list);
         model.addAttribute("list", list);
         
         return "bookmark/list";
@@ -33,9 +34,16 @@ public class BookMarkController {
 
     @PostMapping("delete")
     public String delete(
-                        @RequestParam(name="ids", required= true) List<Integer> list 
+                        @RequestParam(name="ids", required= true) List<Integer> ids 
                         ){
-        System.out.println(list.toString());
-        return "redirect:bookmark/list";
+
+        Long userId = 1L;
+
+        System.out.println(ids);
+
+        if(ids!=null && ids.size() > 0)
+            service.deleteAllByIds(ids, userId);
+
+        return "redirect:list";
     }
 }

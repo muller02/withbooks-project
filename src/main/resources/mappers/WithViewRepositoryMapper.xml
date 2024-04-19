@@ -20,6 +20,13 @@
   ORDER BY id DESC
 </select>
 
+  <select id="findAllByWithId" resultType="java.lang.String">
+    select b.name category_name from with_category  a join book_category b
+    on a.category_id = b.id
+    where a.with_id =  #{withId}
+
+  </select>
+
 
 
 

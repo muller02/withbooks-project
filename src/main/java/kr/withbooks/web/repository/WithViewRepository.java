@@ -12,4 +12,6 @@ public interface WithViewRepository {
   List<WithView> findAll(String query);
 
   WithView findById(Long id);
+
+    List<String> findAllByWithId(Long withId);
 }

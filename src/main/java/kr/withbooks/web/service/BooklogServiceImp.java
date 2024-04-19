@@ -42,5 +42,10 @@ public class BooklogServiceImp implements BooklogService{
     @Override
     public void update(Booklog bookLog) {
     }
+
+    @Override
+    public void deleteAllByIds(List<Integer> ids, Long userId) {
+        repository.deleteAllByIds(ids, userId);
+    }
     
 }

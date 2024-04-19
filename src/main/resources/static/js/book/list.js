@@ -29,7 +29,7 @@ window.addEventListener("load", function(){
 
         // 쿼리 검색 시 카테고리 선택 없는 경우 undefined 값처리
         if(categoryValue === undefined)
-            categoryValue = null;
+            categoryValue = 0;
         
         // fetch 통신 후 response 받는 절
         let response = await getByParams(queryValue, categoryValue);
@@ -87,7 +87,7 @@ window.addEventListener("load", function(){
         }else{
             // 클릭했던 카테고리를 다시 클릭한 경우 전체 검색을 해야하므로
             // categoryValue 값을 제거해준다
-            categoryValue = '';
+            categoryValue = 0;
         }
         
         // 카테고리 검색 시 쿼리도 함께 검색해야하므로 쿼리 검색어도 추출

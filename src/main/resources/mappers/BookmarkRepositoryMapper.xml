@@ -15,4 +15,39 @@
 		</where> -->
 	</select>
 
+	<delete id="deleteAllByIds">
+		delete
+
+		from
+			bookmark
+		where
+			book_id in
+		<foreach collection="ids" item="ids" open="(" close=")" separator=",">
+			#{ids}
+		</foreach>
+			and user_id = #{userId}
+
+	</delete>
+
+	<insert id="save">
+		insert into
+			bookmark
+				(
+					user_id,
+					book_id
+				)
+			values
+				(
+					#{userId},
+					#{bookId}
+			)
+	</insert>
+
+	<delete id="delete">
+		delete from bookmark
+		where
+			user_id = #{userId}
+			and book_id = #{bookId}
+	</delete>
+
 </mapper>
