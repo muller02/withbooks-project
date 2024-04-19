@@ -23,8 +23,22 @@
 </head>
 <body>
     <main layout:fragment="main" class=" flex-grow:1">
-        <form action="">
-            <section id="search-book-form" class="   bd-radius:9  n-item n-item:shadow px:5 py:2 m:3">
+        <section class="pb:4 pt:4 pl:4 pr:">
+            <h1 class="d:none">위드 토론 등록 페이지</h1>
+
+
+        <form action="" class="">
+            <div class="d:flex jc:end">
+                <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">등록</button>
+            </div>
+
+            <h1 class="d:none">위드 등록 페이지</h1>
+            <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8">
+                <span class="font-size:7"> 뉴렉위드,</span><br/>
+                토론 방을 개설 해보세요 !
+            </p>
+
+            <section id="search-book-form" class="   bd-radius:9  n-item n-item:shadow px:5 py:3  m:3">
                 <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">책 등록</h1>
                 <div class="d:flex fl-dir:column ai:center">
                     <div class="flex-grow:1 margin-right:1 al-self:stretch pos:relative ">
@@ -48,7 +62,7 @@
                     </section>
                 </div>
             </section>
-            <section class=" bd-radius:9 px:5 py:2 m:3  n-item n-item:shadow" >
+            <section class=" bd-radius:9 px:5 py:3 m:3  n-item n-item:shadow" >
                 <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">토론일</h1>
                 <div class="mt:4"><input type="date" name="" id=""></div>
             </section>
@@ -56,7 +70,7 @@
                 <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">공지사항</h1>
                 <div class="mt:4"><textarea class="w:100p" placeholder="공지사항을 작성 하세요." name="notice" id="" cols="30" rows="10"></textarea></div>
             </section>
-            <section class=" bd-color:base-3 bd-radius:9 px:5 py:2 m:3  n-item n-item:shadow" >
+            <section class=" bd-color:base-3 bd-radius:9 px:5 py:3 m:3  n-item n-item:shadow" >
                 <h1 class="deco icon:sun bd-bottom w:100p h:1 fw:3">토론주제</h1>
                 <span class="d:flex fl-dir:column ai:center">
                     <span class="d:flex ai:center topic-list al-self:stretch">
@@ -67,8 +81,8 @@
                 </span>
                 
             </section>
-            <button class="reg-btn n-btn bg-color:main-6  pos:absolute top:0 right:0 " type="submit">등록</button>
         </form>
+        </section>
     </main>
 </body>
 </html>
