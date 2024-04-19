@@ -27,7 +27,7 @@
     .n-list {
       --card-list-column-sm: 1; /* 모바일에서 컬럼 수 */
       --card-list-column-md: 2; /* 태블릿에서 컬럼 수 */
-      --card-list-column-lg: 2; /* PC에서 컬럼 수 */
+      --card-list-column-lg: 3; /* PC에서 컬럼 수 */
     }
     .box-shadow {
       box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
@@ -37,7 +37,7 @@
 </head>
 
 <body>
-<main layout:fragment="main" class="mx:">
+<main layout:fragment="main" class=" flex-grow:1">
   <section class="with-list-sort-con d:flex ai:center br pt:5 pb:4 pl:3 pr:3">
     <h1 class="d:none">정렬,검색</h1>
 
@@ -116,7 +116,7 @@
         </ul>
         <div class="d:flex  pt:2  gap:5" >
           <!--            th:with img-->
-            <div class="w:2	 h:3  box-shadow border-color:base-2 border-radius:3	 ">
+            <div class="w:2	 h:2  box-shadow border-color:base-2 border-radius:3	my:auto ">
               <img src="/image/with/puppy2.png" th:src="@{|/image/with/${with.img}|}" class="w:100p h:100p border-radius:3	">
             </div>
 

@@ -12,7 +12,7 @@
 // import org.springframework.ui.Model;
 // import org.springframework.web.bind.annotagtion.GetMapping;
 
-// import kr.withbooks.web.controller.dto.CustomUserDetails;
+// import kr.withbooks.web.config.CustomUserDetails;
 // import kr.withbooks.web.entity.User;
 
 

@@ -1,4 +1,4 @@
-package kr.withbooks.web.controller.dto;
+package kr.withbooks.web.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
