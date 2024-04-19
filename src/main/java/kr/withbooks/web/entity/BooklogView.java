@@ -16,7 +16,7 @@ public class BooklogView {
     private Long id;
     private Long bookId;
     private Date regDate;
-    private int publicYn;
+    private Integer publicYn;
     private String bookTitle;
     private String bookAuthor;
     private String bookCover;

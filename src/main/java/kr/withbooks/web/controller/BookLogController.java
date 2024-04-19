@@ -22,7 +22,7 @@ public class BooklogController {
     @GetMapping("list")
     public String list(Model model){
 
-        //[x]  제거 예정
+        //[ ]  제거 예정
         Long id = 4L;
         
         List<BooklogView> list = service.getList(id);
@@ -33,11 +33,13 @@ public class BooklogController {
     }
 
     @GetMapping("detail")
-    public String detail(Model model, @RequestParam Long id){
+    public String detail(Model model, @RequestParam(name="id", required= false) Long id ){
 
         BooklogView log = service.getById(id);
 
         model.addAttribute("log", log);
+
+        System.out.println("log : " + log);
         
         return "booklog/detail";
     }

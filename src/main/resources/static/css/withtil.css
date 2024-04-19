@@ -294,15 +294,6 @@
     border-top: 2px dashed var(--border-color) !important; 
 }
 
-/* .booklog-btn:hover{    
-    color:var(--color-main-4);
-    toggle-outline-border-color:var(--color-base-1);
-    span{
-        --icon-color:var(--color-main-4);
-    }
-} 
-*/
-
 .booklog .n-tabbar .n-tab.active,
 .booklog .n-tabbar-type\:underline > li.active > a,
 .booklog .n-tabbar-type\:underline > li.active > button,
@@ -326,4 +317,9 @@
 .booklog .n-tabbar\:underline > li.active > button {
     border-color: var(--color-main-5);
     color: var(--color-main-5);
+}
+
+.booklog .n-toggle-type\:outline-box:has(input:checked) span.public
+{
+    color:#ffffff;
 }
