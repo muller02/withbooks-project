@@ -1,5 +1,6 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -17,6 +18,6 @@ public class ShortsCommentView {
     private long shortsId;
     private long userId;
     private String content;
-    private Date regDate;
+    private LocalDateTime regDate;
     private String nickname;
 }

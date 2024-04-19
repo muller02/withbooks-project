@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -19,8 +20,8 @@ public class DebateRoomView {
     private Long bookId;
     private String notice;
     private Integer deadline;
-    private Date reserveDate;
-    private Date regDate;
+    private LocalDateTime reserveDate;
+    private LocalDateTime regDate;
     private String title;
     private String author;
     private String cover;

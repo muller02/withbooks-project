@@ -1,5 +1,6 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +18,6 @@ public class ShortsComment {
     private Long shortsId;
     private Long userId;
     private String content;
-    private Date regDate;
+    private LocalDateTime regDate;
 
 }

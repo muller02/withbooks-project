@@ -1,5 +1,6 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import groovy.transform.builder.Builder;
@@ -18,7 +19,7 @@ public class DebateBoardView {
     private Long userId;
     private String title;
     private String content;
-    private Date regDate;
+    private LocalDateTime regDate;
     private Integer blindYn;
     private Long topicId;
     private String topic;

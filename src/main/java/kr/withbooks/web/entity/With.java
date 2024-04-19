@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +25,6 @@ public class With {
     private int interval; // 모임주기
     private String location;
     private int personnel;// 정원
-    private Date regDate;
+    private LocalDateTime regDate;
 
 }

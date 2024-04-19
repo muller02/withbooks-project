@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -18,6 +19,6 @@ public class Shorts {
     private Long bookId;
     private Long userId;
     private String content;
-    private Date regDate;
+    private LocalDateTime regDate;
     private int blindYn;
 }
