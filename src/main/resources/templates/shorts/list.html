@@ -317,7 +317,7 @@
             </div>
             <div
               class="as:end font-size:1 color:base-4 ml:1"
-              th:text="${s.regDate}"
+              th:text="${#temporals.format(s.regDate,'yyyy-MM-dd HH:mm:ss')}"
             >
               10분 전
             </div>
