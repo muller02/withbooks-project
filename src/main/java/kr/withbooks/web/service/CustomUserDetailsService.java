@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import kr.withbooks.web.controller.dto.CustomUserDetails;
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.User;
 import kr.withbooks.web.repository.UserRepository;
 
