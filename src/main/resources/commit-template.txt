@@ -1,0 +1,89 @@
+Commit Message Convention에 대한 안내문
+
+### type
+
+    * feat: 새로운 기능 추가
+    * fix: 버그 수정
+    * design: CSS 등 사용자 UI 디자인 변경
+    * !BREAKING CHANGE: 커다란 API 변경
+    * !HOTFIX: 급하게 치명적인 버그 수정
+    * style: 코드 포맷, 세미 콜론 누락 등의 변경으로 코드 의미에 영향주지 않음
+    * refactor: 프로덕션 코드 리팩토링
+    * comment: 필요한 주석 추가 및 변경
+    * docs: 문서 수정
+    * test: 테스트 코드, 리팩토링 테스트 코드 추가
+    * chore: 빌드 부분 혹은 패키지 매니저 수정사항
+    * rename: 파일 혹은 폴더명을 수정하거나 옮기는 작업만 수행
+    * remove: 파일, 폴더 삭제하는 작업만 수행
+
+### Subject-한글 참고
+
+    * Add: 추가
+    * Remove: 삭제
+    * Simplify: 단순화
+    * Update: 보완/ 수정
+    * Implement: 구현
+    * Prevent: 방지
+    * Move: 이동
+    * Rename: 이름 변경
+  
+  **예시**
+  
+	feat: 회원 가입 기능 구현
+	fix: 버그 수정
+
+## 주요 명령어
+### 버전 관리 관련
+1. git add . <br>
+  commit의 전 단계 <br>
+  로컬 디렉토리의 전체 변경 내용을 staging 영역으로 추가 <br>
+  
+2. git commit -m "커밋메세지" <br>
+  실제로 저장하는 명령어 <br>
+
+3. git pull <br>
+  원격 저장소에 있는 데이터를 받아오는 명령어 <br>
+
+4. git push origin main <br>
+  로컬 브랜치의 commit  파일을 원격 저장소로 보내는 명령어 <br>
+
+### branch 관련(더욱 안전한 버전 관리 시-권장 사항)
+
+1. git branch 브랜치명 <br>
+	브랜치 생성 <br>
+	원본 파일 변경하지 않고, 새 브랜치에 따로 작업하고 싶을 때 <br>
+
+2. git checkout 브랜치명 <br>
+	브랜치 이동 <br>
+	
+	git checkout -b 브랜치명 <br>
+	-> 1+2 위 두 개를 합친 것으로, 브랜치 생성 후 바로 생성된 브랜치로 이동 <br>
+
+3. git merge 브랜치명 <br>
+	(develop 브랜치로 이동: git checkout develop) <br>
+	새브랜치에서 작업한 후 병합할 때 <br>
+
+4. git branch -d 브랜치명 <br>
+	브랜치 삭제 <br>
+	
+> **작업순서**
+> 1. 새 브랜치에서 작업 후, git commit(현 위치: 새 브랜치)
+> 2. develop으로 이동하여 pull(현 위치: develop) -> git checkout develop
+> 3. merge하기(현 위치: develop) -> git merge 새브랜치명
+> 4. push하기(현 위치: develop) -> git push origin develop
+
+### 기타
+- git branch <br>
+모든 로컬 브랜치 조회 <br>
+
+- git branch -r <br>
+모든 원격 브랜치 조회 <br>
+
+- git status <br>
+로컬 브랜치에서 작업 디렉토리와 스테이징 영역의 현재 파일 상태 확인 <br>
+
+- git log <br>
+git 커밋 히스토리 확인 <br>
+
+- touch .gitignore <br>
+새로운 .gitignore 파일을 생성 <br>

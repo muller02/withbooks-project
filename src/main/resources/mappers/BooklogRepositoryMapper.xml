@@ -21,6 +21,7 @@
 		select 
 				  bl.id
 				, bl.book_id 
+				, bl.public_yn
 				, bl.reg_date reg_date
 				, b.title book_title
 				, b.author book_author

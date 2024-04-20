@@ -60,7 +60,7 @@
         </style>
     </head>
     <body>
-        <div class="md:d:flex lg:d:flex h:100p">
+        <div class="md:d:flex lg:d:flex min-height:100vh">
             <!-- header부분 -->
             <div th:replace="~{inc/header}"></div>
 
@@ -73,7 +73,7 @@
             <div th:replace="~{inc/main-menu-bar-mobile}"></div>
 
             <!-- main 부분 -->
-            <div layout:fragment="main" class="w:100p"></div>
+            <div layout:fragment="main" class="w:100p pb:11"></div>
 
             <!-- 댓글 부분 -->
             <!-- <div th:replace="~{shorts/comment}"></div> -->
