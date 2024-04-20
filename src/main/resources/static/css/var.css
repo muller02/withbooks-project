@@ -83,15 +83,28 @@
     /*===================right===================== */
 
     --right-1: 0;
-    --right-2: 100px;
-    --right-3: 200px;
-    --right-4: 300px;
-    --right-5: 400px;
-    --right-6: 500px;
-    --right-7: 600px;
-    --right-8: 700px;
-    --right-9: 800px;
-    --right-10: 900px;
+    --right-2: 24px;
+    --right-3: 36px;
+    --right-4: 48px;
+    --right-5: 60px;
+    --right-6: 72px;
+    --right-7: 84px;
+    --right-8: 96px;
+    --right-9: 108px;
+    --right-10: 120px;
+
+    /*===================bottom===================== */
+    
+    --bottom-1: 0;
+    --bottom-2: 24px;
+    --bottom-3: 36px;
+    --bottom-4: 48px;
+    --bottom-5: 60px;
+    --bottom-6: 72px;
+    --bottom-7: 84px;
+    --bottom-8: 96px;
+    --bottom-9: 108px;
+    --bottom-10: 120px;
 
    /* ======================size============================== */
 
@@ -110,7 +123,17 @@
     --border-radius-12: 40px;       /*	border-radius.css 유틸 추가 완료 */
 
     
+    /* ====================== gap ============================== */
+    /* mobile-main-menu-bar-padding-bottom */
     --gap-hide: -9999px;            /*	text-indent.css 유틸 추가 완료 */ 
+
+    --gap-11: 64px;
+ 
+    .padding-bottom\:11,
+    .p-bottom\:11,
+    .pb\:11 {
+        padding-bottom: var(--gap-11) !important;
+    }
 
 
     
@@ -144,15 +167,6 @@
     --bottom-1
 
     */
-
-    /* 임시 */
-    --gap-11: 64px;
-
-    .padding-bottom\:11,
-    .p-bottom\:11,
-    .pb\:11 {
-        padding-bottom: var(--gap-11) !important;
-    }
 
 
 
