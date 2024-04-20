@@ -83,28 +83,28 @@
     /*===================right===================== */
 
     --right-1: 0;
-    --right-2: 8px;
-    --right-3: 12px;
-    --right-4: 16px;
-    --right-5: 20px;
-    --right-6: 24px;
-    --right-7: 28px;
-    --right-8: 32px;
-    --right-9: 36px;
-    --right-10: 40px;
+    --right-2: 16px;
+    --right-3: 24px;
+    --right-4: 32px;
+    --right-5: 40px;
+    --right-6: 48px;
+    --right-7: 56px;
+    --right-8: 64px;
+    --right-9: 72px;
+    --right-10: 80px;
 
     /*===================bottom===================== */
     
     --bottom-1: 0;
-    --bottom-2: 8px;
-    --bottom-3: 12px;
-    --bottom-4: 16px;
-    --bottom-5: 20px;
-    --bottom-6: 24px;
-    --bottom-7: 28px;
-    --bottom-8: 32px;
-    --bottom-9: 36px;
-    --bottom-10: 40px;
+    --bottom-2: 16px;
+    --bottom-3: 24px;
+    --bottom-4: 32px;
+    --bottom-5: 40px;
+    --bottom-6: 48px;
+    --bottom-7: 56px;
+    --bottom-8: 64px;
+    --bottom-9: 72px;
+    --bottom-10: 80px;
 
    /* ======================size============================== */
 
@@ -127,7 +127,7 @@
     /* mobile-main-menu-bar-padding-bottom */
     --gap-hide: -9999px;            /*	text-indent.css 유틸 추가 완료 */ 
 
-    --gap-11: 64px;
+    --gap-11: 100px;
  
     .padding-bottom\:11,
     .p-bottom\:11,
