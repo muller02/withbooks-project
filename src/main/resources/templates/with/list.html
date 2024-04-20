@@ -121,7 +121,9 @@
             </div>
 
               <div class="d:flex gap:1  flex-direction:column flex-grow:1">
-            <div class="fs:6 fw:3 mb:2" th:text="${with.name}">책에퐁당</div>
+            <div class="fs:6 fw:3 mb:2" >
+            <a th:text="${with.name}" th:href="@{/with/detail(id=${with.id})}">  책에퐁당</a>
+            </div>
             <div class="d:flex ai:center gap:1  ai:center">
               <div class="d:flex ai:center">
                 <span class="icon icon:chat_circle icon-size:2"></span>

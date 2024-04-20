@@ -18,4 +18,9 @@
 
 	</insert>
 
+	<select id="findById" resultType="java.lang.String">
+		select b.name from with_category   a join book_category b  on a.category_id = b.id where a.with_id =#{withId};
+
+	</select>
+
 </mapper>

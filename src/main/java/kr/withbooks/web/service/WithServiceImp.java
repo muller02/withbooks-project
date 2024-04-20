@@ -19,6 +19,7 @@ public class WithServiceImp implements WithService {
     @Autowired
     private WithViewRepository viewRepository;
 
+
     @Override
     public List<WithView> getList() {
         return viewRepository.findAll(null);
@@ -40,6 +41,14 @@ public class WithServiceImp implements WithService {
     public void add(With with) {
 
         repository.save(with);
+    }
+
+    @Override
+    public With get(Long withId) {
+
+        With with =  repository.findById(withId);
+
+        return with;
     }
 
 }

@@ -9,4 +9,7 @@ import java.util.List;
 public interface WithCategoryRepository {
 
     void save(Long withId, List<Long> withCategoryIdList);
+
+    List<String> findById(Long withId);
+
 }

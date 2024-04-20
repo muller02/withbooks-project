@@ -5,17 +5,15 @@ import java.io.IOException;
 import java.util.*;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.entity.Category;
-import kr.withbooks.web.entity.With;
-import kr.withbooks.web.entity.WithCategory;
+import kr.withbooks.web.entity.*;
 import kr.withbooks.web.service.CategoryService;
 import kr.withbooks.web.service.WithCategoryService;
+import kr.withbooks.web.service.WithMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import kr.withbooks.web.entity.WithView;
 import kr.withbooks.web.service.WithService;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +29,10 @@ public class WithController {
 
     @Autowired
     private WithCategoryService withCategoryService;
+
+    @Autowired
+    private WithMemberService withMemberService;
+
 
 
     @GetMapping("list")
@@ -52,6 +54,34 @@ public class WithController {
 
         return "/with/list";
     }
+
+    @GetMapping("detail")
+    public String detail(Model model , @RequestParam( name = "id" , required = false) Long withId ){
+
+        //withId에 해당하는 위드 얻기
+        With with = service.get(withId);
+
+        System.out.println(with.toString());
+
+        //withId에 해당하는 위드 카테고리 리스트를 얻기
+       List<String> withCategoryNames   = withCategoryService.getListByWithId(withId);
+
+       //withMember 테이블에서 withId에 해당하는 맴버들을 얻기
+       List<WithMember> withMemberList = withMemberService.getListById(withId);
+        int withMemberCnt = withMemberList.size();
+
+
+
+        model.addAttribute("with",with);
+        model.addAttribute("withCategoryNames",withCategoryNames);
+        model.addAttribute("withMemberCnt",withMemberCnt);
+
+
+
+
+        return "/with/detail";
+    }
+
 
     @GetMapping("reg")
     public String regForm(Model model){
@@ -102,9 +132,8 @@ public class WithController {
         with.setWithRegId(1L); // 위드 등록 사용자 id 임시 1L
 
         with.setImg(withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
+
         service.add(with);  // with 저장
-
-
 
 
     //WithCategory 테이블 등록

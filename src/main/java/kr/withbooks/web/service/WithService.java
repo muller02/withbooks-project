@@ -16,4 +16,7 @@ public interface WithService {
     List<String> getWithCategoryNames(Long withId);
 
     void add(With with);
+
+    With get(Long withId);
+
 }
