@@ -1,47 +1,44 @@
 package kr.withbooks.web.config;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import kr.withbooks.web.entity.User;
 
+@Setter
 public class CustomUserDetails implements UserDetails {
 
+
+    @Getter
+    private LocalDateTime joinDate;
     @Getter
     private Long id;
+    @Getter
     private String email;
+    @Getter
     private String password;
+    @Getter
     private List<GrantedAuthority> authorities;
+    @Getter
+    private int gender;
+    @Getter
+    private LocalDateTime brithDate;
+    @Getter
+    private String intro;
+    @Getter
+    private String img;
 
     @Getter
     private  String nickName;
 
-
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAuthorities(List<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -23,12 +23,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         System.out.println("사과 = " + email);
         User user = userRepository.findByEmail(email);
+        System.out.println("user = " + user);
         CustomUserDetails userDetails = new CustomUserDetails();
 
         userDetails.setNickName(user.getNickname());
         userDetails.setId(user.getId());
         userDetails.setPassword(user.getPassword());
         userDetails.setEmail(user.getEmail());
+        userDetails.setGender(user.getGender());
+        userDetails.setIntro(user.getIntro());
+        userDetails.setImg(user.getImg());
+        userDetails.setJoinDate(user.getJoinDate());
+        userDetails.setBrithDate(user.getBrithDate());
+
+
 //        if (user != null) {
 //
 //            return new CustomUserDetails(user);
