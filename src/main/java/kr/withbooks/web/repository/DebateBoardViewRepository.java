@@ -8,5 +8,7 @@ import java.util.List;
 @Mapper
 public interface DebateBoardViewRepository {
 
-    List<DebateBoardView> findAllById(Long id);
+    List<DebateBoardView> findAllById(Long roomId);
+
+    DebateBoardView findById(Long id);
 }

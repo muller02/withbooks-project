@@ -9,10 +9,15 @@
   SELECT
     *
   FROM debate_board_view
-  where room_id = #{id}
+  where room_id = #{roomId}
 </select>
 
-
+<select id="findById" resultType="DebateBoardView">
+  SELECT
+  *
+  FROM debate_board_view
+  where id = #{id}
+</select>
 
 
 </mapper>
