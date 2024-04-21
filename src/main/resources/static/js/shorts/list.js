@@ -21,9 +21,13 @@ function getCommentList(shortsId, comments, getCommetnCount) {
       commentCount++;
       // icon icon-size:2 icon-color:accent-2 icon:trash
       var divHTML = `
-                    <div class="border-bottom pb:3 pt:6 pr:2 pl:2 ">
-                    <div class="d:flex">
-                      <div class="pb:2 w:100p jc:space-between mr:3 fw:3">${cmt.nickname}</div>
+                    <div class="border-bottom  pt:4  pl:2 ">
+                    <div class="d:flex ai:center " >
+                    <div class="border-radius:full of:hidden mr:1  h:1 w:1"> 
+                        <img src="/image/shorts/totoro.jpg" class="obj-fit:contain h:1 w:1 "">
+                     </div>
+                     <span></span>
+                      <div class=" mr:auto  fw:3 ">${cmt.nickname}</div>
                       <div class="n-dropdown comment-dropdown">
                         <button class="cursor:pointer dropdown-btn">
                           <span class="comment-dots-icon icon icon:dots_three_outline_vertical_fill icon-size:3 color-icon rg-comment-hover"></span>
@@ -49,7 +53,8 @@ function getCommentList(shortsId, comments, getCommetnCount) {
                         </ul>
                       </div>
                     </div>
-                    <div class="pl:2 pr:2 comment-content-color">${cmt.content}</div>
+                    <div class=" mt:2 comment-content-color pb:2 pl:2">${cmt.content}</div>
+                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${cmt.regDate}</div>
                   </div>
                   `;
       comments.insertAdjacentHTML("beforeend", divHTML);

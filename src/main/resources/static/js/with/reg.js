@@ -34,16 +34,8 @@ window.addEventListener("load", function (){
             categoryAlert.classList.add("d:none");
         }
 
-
-
-
-
-
-
     }
 
 
-
 })
-
 
