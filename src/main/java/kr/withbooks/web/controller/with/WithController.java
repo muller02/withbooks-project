@@ -6,15 +6,13 @@ import java.util.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.entity.*;
-import kr.withbooks.web.service.CategoryService;
-import kr.withbooks.web.service.WithCategoryService;
-import kr.withbooks.web.service.WithMemberService;
+import kr.withbooks.web.repository.DebateRoomViewRepository;
+import kr.withbooks.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import kr.withbooks.web.service.WithService;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -33,7 +31,8 @@ public class WithController {
     @Autowired
     private WithMemberService withMemberService;
 
-
+    @Autowired
+    private DebateRoomViewRepository debateRoomViewRepository;
 
     @GetMapping("list")
     public String list(Model model) {
@@ -70,8 +69,10 @@ public class WithController {
        List<WithMember> withMemberList = withMemberService.getListById(withId);
         int withMemberCnt = withMemberList.size();
 
+          List<DebateRoomView> debateRoomList =   debateRoomViewRepository.findAllById(withId);
+        System.out.println("사과 = " + debateRoomList);
 
-
+          model.addAttribute("debateRoomList", debateRoomList);
         model.addAttribute("with",with);
         model.addAttribute("withCategoryNames",withCategoryNames);
         model.addAttribute("withMemberCnt",withMemberCnt);

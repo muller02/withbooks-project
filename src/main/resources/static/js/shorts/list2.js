@@ -37,7 +37,10 @@ function getCommentList(shortsId, comments, getCommentCount) {
     }
     if (getCommentCount !== null) getCommentCount(commentCount);
   };
-  xhr.open("GET", `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`);
+  xhr.open(
+    "GET",
+    `http://localhost:8080/api/comments/list?shorts_id=${shortsId}`,
+  );
   xhr.send();
 }
 
@@ -138,7 +141,7 @@ window.addEventListener("load", function () {
     dropdownList.classList.add("active");
     document.addEventListener("click", function (e) {
       if (!e.target.contains(btn)) {
-        dropdownList.classList.remove("active")
+        dropdownList.classList.remove("active");
       }
     });
   });

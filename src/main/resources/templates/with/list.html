@@ -1,168 +1,232 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <script src="/js/with/list.js" defer></script>
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/js/with/list.js" defer></script>
 
-  <style>
-    * {
-      font-family: "Noto Sans KR", sans-serif;
-      font-size: 15px;
-      color: var(--color-base-8);
-    }
+    <style>
+      * {
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 15px;
+        color: var(--color-base-8);
+      }
 
-    .puppy {
-      background-image: url(/image/with/puppy2.png);
-      width: 100px;
-      height: 100px;
-    }
+      .puppy {
+        background-image: url(/image/with/puppy2.png);
+        width: 100px;
+        height: 100px;
+      }
 
-    .fade {
-      opacity: 1;
-      transition: opacity 1s;
-    }
+      .fade {
+        opacity: 1;
+        transition: opacity 1s;
+      }
 
-    .n-list {
-      --card-list-column-sm: 1; /* 모바일에서 컬럼 수 */
-      --card-list-column-md: 2; /* 태블릿에서 컬럼 수 */
-      --card-list-column-lg: 3; /* PC에서 컬럼 수 */
-    }
-    .box-shadow {
-      box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
-    }
-    .tr
-  </style>
-</head>
+      .n-list {
+        --card-list-column-sm: 1; /* 모바일에서 컬럼 수 */
+        --card-list-column-md: 2; /* 태블릿에서 컬럼 수 */
+        --card-list-column-lg: 2; /* PC에서 컬럼 수 */
+      }
+      .box-shadow {
+        box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
+      }
+      .tr
+    </style>
+  </head>
 
-<body>
-<main layout:fragment="main" class=" flex-grow:1">
-  <section class="with-list-sort-con d:flex ai:center br pt:5 pb:4 pl:3 pr:3">
-    <h1 class="d:none">정렬,검색</h1>
+  <body>
+    <main layout:fragment="main" class="flex-grow:1">
+      <section
+        class="with-list-sort-con d:flex ai:center br pt:5 pb:4 pl:3 pr:3"
+      >
+        <h1 class="d:none">정렬,검색</h1>
 
-    <ul class="w:full d:flex jc:start gap:2">
-      <li>
-        <select name="space" id="pet-select" class="h:100p text-align:center">
-          <option value="m1">최신순</option>
-          <option value="m2">인기순</option>
-        </select>
-      </li>
-      <li class="d:flex ai:center">
-        <label class="n-toggle n-toggle-type:outline-box">
-          대면
-          <input type="radio" class="d:none" name="category" checked />
-        </label>
-      </li>
-      <li class="d:flex ai:center">
-        <label class="n-toggle n-toggle-type:outline-box">
-          비대면
-          <input type="radio" class="d:none" name="category" />
-        </label>
-      </li>
-      <li class="d:flex ai:center with-list" id="search-li">
-        <button type="button" id="search-btn" class="n-btn n-btn-type:outline h:100p deco-pos:right border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3">
-          <span class="mr:auto ml:1">상세검색</span>
-        </button>
-      </li>
-    </ul>
-  </section>
-
-  <div id="search-detail" class="pl:3 fade d:none">
-    <section class="category d:flex fl-dir:column pl:3">
-      <div class="d:flex ai:center">
-        <div class="margin-right:8">카테고리</div>
-        <div class="icon icon:arrows_clockwise_fill icon-size:2" id="refresh"></div>
-      </div>
-      <div class="mt:3">
-        <div class="d:flex fl-wrap:wrap" id="filterBox">
-          <h1 class="d:none">카테고리 필터</h1>
-
-          <label class="n-toggle n-toggle-type:outline-box m:1 nt" id="cate-list" th:each="item:${cateList}">
-            <input type="checkbox" class="d:none p check-box" name="c" th:value="${item.cid}" th:text="${item.name}" />
-          </label>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="with-list">
-    <h1 class="d:none n-tab-grow">전체위드 / 나의위드</h1>
-
-    <ul class="n-tabbar">
-      <li class="active w:5p">
-        <button class="w:100p font-weight:3">전체 위드</button>
-      </li>
-      <li class="w:5p">
-        <button class="w:100p color:base-3 font-weight:3" id="container1">
-          나의 위드
-        </button>
-      </li>
-    </ul>
-  </section>
-
-  <section class="with-list">
-    <h1 class="d:none">위드 리스트</h1>
-    <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list" id="with-list">
-      <li class="d:flex  gap:2 flex-direction:column n-item:shadow" th:each="with: ${list}">
-
-        <ul class="d:flex gap:1 flex-wrap:wrap">
-          <li class=" border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2">
-            <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
+        <ul class="w:full d:flex jc:start gap:2">
+          <li>
+            <select
+              name="space"
+              id="pet-select"
+              class="h:100p text-align:center"
+            >
+              <option value="m1">최신순</option>
+              <option value="m2">인기순</option>
+            </select>
           </li>
-          <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 mr:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
-            <span class="color:base-1" th:text="${categoryNames}">소설</span>
+          <li class="d:flex ai:center">
+            <label class="n-toggle n-toggle-type:outline-box">
+              대면
+              <input type="radio" class="d:none" name="category" checked />
+            </label>
+          </li>
+          <li class="d:flex ai:center">
+            <label class="n-toggle n-toggle-type:outline-box">
+              비대면
+              <input type="radio" class="d:none" name="category" />
+            </label>
+          </li>
+          <li class="d:flex ai:center with-list" id="search-li">
+            <button
+              type="button"
+              id="search-btn"
+              class="n-btn n-btn-type:outline h:100p deco-pos:right border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3"
+            >
+              <span class="mr:auto ml:1">상세검색</span>
+            </button>
           </li>
         </ul>
-        <div class="d:flex  pt:2  gap:5" >
-          <!--            th:with img-->
-            <div class="w:2	 h:2  box-shadow border-color:base-2 border-radius:3	my:auto ">
-              <img src="/image/with/puppy2.png" th:src="@{|/image/with/${with.img}|}" class="w:100p h:100p border-radius:3	">
+      </section>
+
+      <div id="search-detail" class="pl:3 fade d:none">
+        <section class="category d:flex fl-dir:column pl:3">
+          <div class="d:flex ai:center">
+            <div class="margin-right:8">카테고리</div>
+            <div
+              class="icon icon:arrows_clockwise_fill icon-size:2"
+              id="refresh"
+            ></div>
+          </div>
+          <div class="mt:3">
+            <div class="d:flex fl-wrap:wrap" id="filterBox">
+              <h1 class="d:none">카테고리 필터</h1>
+
+              <label
+                class="n-toggle n-toggle-type:outline-box m:1 nt"
+                id="cate-list"
+                th:each="item:${cateList}"
+              >
+                <input
+                  type="checkbox"
+                  class="d:none p check-box"
+                  name="c"
+                  th:value="${item.cid}"
+                  th:text="${item.name}"
+                />
+              </label>
             </div>
+          </div>
+        </section>
+      </div>
 
-              <div class="d:flex gap:1  flex-direction:column flex-grow:1">
-            <div class="fs:6 fw:3 mb:2" >
-            <a th:text="${with.name}" th:href="@{/with/detail(id=${with.id})}">  책에퐁당</a>
+      <section class="with-list">
+        <h1 class="d:none n-tab-grow">전체위드 / 나의위드</h1>
+
+        <ul class="n-tabbar">
+          <li class="active w:5p">
+            <button class="w:100p font-weight:3">전체 위드</button>
+          </li>
+          <li class="w:5p">
+            <button class="w:100p color:base-3 font-weight:3" id="container1">
+              나의 위드
+            </button>
+          </li>
+        </ul>
+      </section>
+
+      <section class="with-list">
+        <h1 class="d:none">위드 리스트</h1>
+        <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list" id="with-list">
+          <li
+            class="d:flex gap:2 flex-direction:column n-item:shadow"
+            th:each="with: ${list}"
+          >
+            <ul class="d:flex gap:1 flex-wrap:wrap">
+              <li
+                class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
+              >
+                <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}"
+                  >대면</span
+                >
+              </li>
+              <li
+                class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 mr:1 pb:1 background-color:main-6"
+                th:each="categoryNames :${with.categoryNames}"
+              >
+                <span class="color:base-1" th:text="${categoryNames}"
+                  >소설</span
+                >
+              </li>
+            </ul>
+            <div class="d:flex pt:1 gap:5">
+              <!--            th:with img-->
+              <div
+                class="w:2 h:2 box-shadow border-color:base-2 border-radius:3 my:auto flex-shrink:0"
+              >
+                <img
+                  src="/image/with/puppy2.png"
+                  th:src="@{|/image/with/${with.img}|}"
+                  class="w:100p h:100p border-radius:3"
+                />
+              </div>
+
+              <div class="d:flex gap:1 flex-direction:column flex-grow:1">
+                <div class="fs:6 fw:3 mb:2">
+                  <a
+                    th:text="${with.name}"
+                    th:href="@{/with/detail(id=${with.id})}"
+                  >
+                    책에퐁당</a
+                  >
+                </div>
+                <div class="d:flex ai:center gap:1 ai:center">
+                  <div class="d:flex ai:center">
+                    <span class="icon icon:chat_circle icon-size:2"></span>
+                    <span
+                      class="fs:1 color:base-5 ml:1"
+                      th:text="${with.memberCnt + ' / ' +with.personnel }"
+                      >5명/12명</span
+                    >
+                  </div>
+                  <!--            <span>·</span>-->
+                  <div class="d:flex ai:center">
+                    <span class="icon icon:chat_circle icon-size:2"></span>
+                    <span
+                      class="fs:1 color:base-5 ml:1"
+                      th:text="'월 ' + ${with.interval} + ' 회'"
+                      >월 1회</span
+                    >
+                  </div>
+                  <!--            <span>·</span>-->
+                </div>
+
+                <div class="d:flex ai:center">
+                  <span class="icon icon:chat_circle icon-size:2"></span>
+                  <span
+                    class="fs:1 color:base-5 ml:1"
+                    th:text="${with.location}"
+                    >노고산동</span
+                  >
+                </div>
+                <div class="ln-clamp:3">
+                  <span class=" " th:text="${with.intro}">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Nam velit adipisci quae nisi ad possimus, dolores dolor ex
+                    quas molestias temporibus quidem aperiam cupiditate
+                    excepturi pariatur amet! Ex, sunt eius.
+                  </span>
+                </div>
+              </div>
             </div>
-            <div class="d:flex ai:center gap:1  ai:center">
-              <div class="d:flex ai:center">
-                <span class="icon icon:chat_circle icon-size:2"></span>
-                <span class="fs:1 color:base-5 ml:1" th:text="${with.memberCnt + ' / ' +with.personnel }">5명/12명</span>
-              </div>
-  <!--            <span>·</span>-->
-              <div class="d:flex ai:center">
-                <span class="icon icon:chat_circle icon-size:2"></span>
-                <span class="fs:1 color:base-5 ml:1" th:text="'월 ' + ${with.interval} + ' 회'">월 1회</span>
-              </div>
-  <!--            <span>·</span>-->
-
-          </div>
-
-              <div class="d:flex ai:center">
-                <span class="icon icon:chat_circle icon-size:2"></span>
-                <span class="fs:1 color:base-5 ml:1" th:text="${with.location}">노고산동</span>
-              </div>
-          <div class=" ln-clamp:3">
-                <span class=" " th:text="${with.intro}">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus, dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur amet! Ex, sunt eius.
-                </span>
-          </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h1 class="d:none">플로팅버튼</h1>
-    <a
-            href="/with/reg"
-            class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:5"
-    ></a>
-    <a
-            href="#main"
-            class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
-    ></a>
-  </section>
-</main>
-</body>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="d:none">플로팅버튼</h1>
+        <a
+          href="/with/reg"
+          class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:2 icon-size:5 border-radius:full h:1 w:1 zi:5"
+        ></a>
+        <a
+          href="#main"
+          class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:2 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
+        ></a>
+      </section>
+    </main>
+  </body>
 </html>
