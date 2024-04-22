@@ -90,8 +90,8 @@
       </section>
 
 
-      <div class="search-box pos:absolute top:2 right:2  d:none border-color:sub-4  border-radius:5 zi:4	 box-shadow-custom bg-color:main-1">
-      <section class="category w:7 p:3">
+      <div class="search-box lg:pos:absolute top:2  mx:3 right:2  d:none border-color:sub-4  border-radius:5 zi:4	 box-shadow-custom bg-color:main-1">
+      <section class="category lg:w:7 p:3">
         <!-- 책 검색창 부분 -->
         <div class="search d:flex pos:relative idth:fit-content ai:center">
           <input
@@ -106,15 +106,15 @@
       </section>
 
 
-      <section id="category" class=" d:flex fl-dir:column w:7 p:5 ">
-        <div class="d:flex ai:center">
-          <div class="margin-right:8">카테고리</div>
+      <section id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5 px:3   ">
+        <div class="d:flex ai:center mb:1">
+          <div class="margin-right:8 ml:2 ">카테고리</div>
           <div class="init-icon icon icon:arrows_clockwise_fill icon-size:2"></div>
         </div>
-        <div class="mt:3">
+        <div class="rg:mt:3">
           <div class="d:flex fl-wrap:wrap category-list">
             <h1 class="d:none">카테고리 필터</h1>
-            <label class="n-toggle n-toggle-type:outline-box m:1" th:each="c, iterStat : ${categoryList}" th:classappend="${iterStat.last} ? '' : 'flex-grow:1'">
+            <label class="n-toggle n-toggle-type:outline-box m:1" th:each="c, iterStat : ${categoryList}" th:classappend="${iterStat.last} ? '' : 'lg:flex-grow:1'">
               <input type="checkbox" class="d:none" th:value="${c.id}"  th:text="${c.name}"/>
 
 
@@ -122,7 +122,7 @@
 
           </div>
 
-          <div class="d:flex justify-content:center mt:8 gap:5">
+          <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">
             <button type="button" class="n-btn n-btn-type:outline flex-grow:1">
               취소
             </button>
@@ -136,8 +136,8 @@
 
       <div id="search-detail" class="pl:3 fade d:none">
         <section class="category d:flex fl-dir:column pl:3">
-          <div class="d:flex ai:center">
-            <div class="margin-right:8">카테고리</div>
+          <div class="d:flex ai:center   ">
+            <div class="margin-right:4 ml:3">카테고리</div>
             <div
               class="icon icon:arrows_clockwise_fill icon-size:2"
               id="refresh"
@@ -229,8 +229,8 @@
                   <div class="d:flex ai:center">
                     <span class="icon icon:chat_circle icon-size:2"></span>
                     <span
-                      class="fs:1 color:base-5 ml:1"
-                      th:text="${with.memberCnt + ' / ' +with.personnel }"
+                      class="fs:2 color:base-5 ml:1"
+                      th:text="${with.memberCnt + ' / ' +with.personnel +' 명' }"
                       >5명/12명</span
                     >
                   </div>
@@ -238,7 +238,7 @@
                   <div class="d:flex ai:center">
                     <span class="icon icon:chat_circle icon-size:2"></span>
                     <span
-                      class="fs:1 color:base-5 ml:1"
+                      class="fs:2 color:base-5 ml:1"
                       th:text="'월 ' + ${with.interval} + ' 회'"
                       >월 1회</span
                     >
@@ -249,7 +249,7 @@
                 <div class="d:flex ai:center">
                   <span class="icon icon:chat_circle icon-size:2"></span>
                   <span
-                    class="fs:1 color:base-5 ml:1"
+                    class="fs:2 color:base-5 ml:1"
                     th:text="${with.location}"
                     >노고산동</span
                   >
