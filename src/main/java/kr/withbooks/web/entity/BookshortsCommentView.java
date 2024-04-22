@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ShortsCommentView {
+public class BookshortsCommentView {
     private long id;
     private long shortsId;
     private long userId;

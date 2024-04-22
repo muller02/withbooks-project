@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ShortsAttachment {
+public class BookshortsAttachment {
 
    private Long id;
-   private Long ShortsId;
+   private Long shortsId;
    private String img;
 
 }

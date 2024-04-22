@@ -1,4 +1,4 @@
-package kr.withbooks.web.controller.with.debate.board;
+package kr.withbooks.web.controller.with.debate;
 
 import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.DebateBoard;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/with/debate/board")
-public class WithDebateBoardController {
+public class BoardController {
 
     @Autowired
     private DebateBoardService debateBoardService;

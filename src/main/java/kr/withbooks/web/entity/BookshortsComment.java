@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShortsComment {
+public class BookshortsComment {
 
     private Long id;
     private Long shortsId;

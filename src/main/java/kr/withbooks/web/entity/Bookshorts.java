@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Shorts {
+public class Bookshorts {
 
     private Long id;
     private Long bookId;

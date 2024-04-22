@@ -149,11 +149,10 @@ window.addEventListener("load", function () {
       let content = commentContent.value;
 
       // 서버에 댓글객체를 전송하기 위해 객체를 생성한다.
-      let shortsComment = {
+      let BookshortsComment = {
         shortsId,
         content,
       };
-
       /* 통신에 사용 될 XMLHttpRequest 객체 정의 */
       httpRequest = new XMLHttpRequest();
 
@@ -170,6 +169,7 @@ window.addEventListener("load", function () {
         commentContent.value = "";
       };
 
+      console.log
       /* Post 방식으로 요청 */
       httpRequest.open("POST", "/api/comments", true);
       /* Response Type을 Json으로 사전 정의 */
@@ -177,7 +177,7 @@ window.addEventListener("load", function () {
       /* 요청 Header에 컨텐츠 타입은 Json으로 사전 정의 */
       httpRequest.setRequestHeader("Content-Type", "application/json");
       /* 정의된 서버에 Json 형식의 요청 Data를 포함하여 요청을 전송 */
-      httpRequest.send(JSON.stringify(shortsComment));
+      httpRequest.send(JSON.stringify(BookshortsComment));
     };
   });
 });

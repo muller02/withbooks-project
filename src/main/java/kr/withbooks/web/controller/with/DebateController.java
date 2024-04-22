@@ -1,4 +1,4 @@
-package kr.withbooks.web.controller.with.debate;
+package kr.withbooks.web.controller.with;
 
 import kr.withbooks.web.entity.DebateRoomView;
 import kr.withbooks.web.service.DebateRoomService;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/with/debate")
-public class WithDebateController {
+public class DebateController {
 
     @Autowired
     private DebateRoomService debateRoomService;
