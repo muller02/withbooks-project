@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.withbooks.web.repository.CommentRepository">
+<mapper namespace="kr.withbooks.web.repository.BookshortsCommentRepository">
 
 
-	<select id="findAll" resultType="ShortsCommentView">
+	<select id="findAll" resultType="BookshortsCommentView">
 		SELECT 
 		*
 		FROM shorts_comment_view
@@ -26,7 +26,7 @@
 	</select>
 
 	
-	<insert id="save"  useGeneratedKeys="true" keyProperty="id" parameterType="ShortsComment">
+	<insert id="save"  useGeneratedKeys="true" keyProperty="id" parameterType="BookshortsComment">
 		INSERT INTO shorts_comment (
 		shorts_id, user_id, content
 		)

@@ -16,45 +16,45 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.Shorts;
-import kr.withbooks.web.entity.ShortsAttachment;
-import kr.withbooks.web.entity.ShortsView;
+import kr.withbooks.web.entity.Bookshorts;
+import kr.withbooks.web.entity.BookshortsAttachment;
+import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.service.BookService;
-import kr.withbooks.web.service.ShortsAttachmentService;
-import kr.withbooks.web.service.ShrotsService;
+import kr.withbooks.web.service.BookshortsAttachmentService;
+import kr.withbooks.web.service.BookshrotsService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 @RequestMapping("shorts")
-public class ShortsController {
+public class BookshortsController {
 
     @Autowired
-    private ShrotsService service;
+    private BookshrotsService service;
 
     @Autowired
     private BookService bookService;
 
 
     @Autowired
-    private ShortsAttachmentService shortsAttachmentService;
+    private BookshortsAttachmentService shortsAttachmentService;
 
 
     @GetMapping("list")
     public String list(Model model, @RequestParam(name = "id", required = false) Long bookId) {
 
-        List<ShortsView> list = service.getView(bookId);
+        List<BookshortsView> list = service.getView(bookId);
         // System.out.println(list);
 
 
-        for (ShortsView view : list) {
+        for (BookshortsView view : list) {
             Long id = view.getId();
-            List<ShortsAttachment> attachList = shortsAttachmentService.getListById(id);
+            List<BookshortsAttachment> attachList = shortsAttachmentService.getListById(id);
 
             List<String> imgList = new ArrayList<>();
             // null이 아닐 떄는, attachlist만큼의 반복을 돌면서 , list.img에 attahlist의 img를 꺼내서  담아주기
             System.out.println(attachList);
-            for (ShortsAttachment shortsAttachment : attachList) {
+            for (BookshortsAttachment shortsAttachment : attachList) {
 
                 imgList.add(shortsAttachment.getImg());
                 view.setImg(imgList);
@@ -89,7 +89,7 @@ public class ShortsController {
         }
 
 
-        Shorts item = Shorts.builder()
+        Bookshorts item = Bookshorts.builder()
                             .bookId(bookId)
                             .userId(1L)
                             .content(content)
@@ -123,7 +123,7 @@ public class ShortsController {
                 files.get(i).transferTo(filePath);
                 
             
-                ShortsAttachment shortsAttachment = ShortsAttachment.builder().ShortsId(item.getId()).img(fileName).build();
+               BookshortsAttachment shortsAttachment =BookshortsAttachment.builder().shortsId(item.getId()).img(fileName).build();
                 //for문을 돌면서 다중 파일 이미지 이름을 db(shorts_attachment)에 저장
                 shortsAttachmentService.add(shortsAttachment);
             }
@@ -140,10 +140,10 @@ public class ShortsController {
         Model model) {
 
         // shortsId 로 수정할 shorts 찾아오기 
-        Shorts shorts = service.get(shortsId);
+        Bookshorts shorts = service.get(shortsId);
         log.info("shorts = {}", shorts);
         // shortsId 로 수정할 shortsAttachments 찾아오기
-        List<ShortsAttachment> shortsAttachments = shortsAttachmentService.getListById(shortsId);
+        List<BookshortsAttachment> shortsAttachments = shortsAttachmentService.getListById(shortsId);
         log.info("shortsAttachments = {}", shortsAttachments);
 
         Book book = bookService.get(bookId);

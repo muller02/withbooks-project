@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.withbooks.web.entity.ShortsComment;
-import kr.withbooks.web.entity.ShortsCommentView;
-import kr.withbooks.web.service.CommentService;
+import kr.withbooks.web.entity.BookshortsComment;
+import kr.withbooks.web.entity.BookshortsCommentView;
+import kr.withbooks.web.service.BookshortsCommentService;
 
 @RestController("apiCommentController")
 @RequestMapping("api/comments")
-public class ShortsCommentController {
+public class BookshortsCommentController {
     
     @Autowired
-    private CommentService service;
+    private BookshortsCommentService service;
 
+
+    
     @PostMapping
-    public int reg(@RequestBody ShortsComment shortsComment ) {
+    public int reg(@RequestBody BookshortsComment shortsComment) {
 
         System.out.println("딸기= " + shortsComment.toString());
                                         
-        // ShortsComment shortsComment = shortsComment;
+        //BookshortsComment shortsComment = shortsComment;
 
         // spring security 한 후에 set 할 것임. 현재 상수로 박아둠.
         shortsComment.setUserId(1L);
@@ -40,9 +42,9 @@ public class ShortsCommentController {
     
 
     @GetMapping("list")
-    public List<ShortsCommentView> list(@RequestParam(name = "shorts_id", required = false) Long shortsId) {
+    public List<BookshortsCommentView> list(@RequestParam(name = "shorts_id", required = false) Long shortsId) {
         
-        List<ShortsCommentView> list = service.getList(shortsId);
+        List<BookshortsCommentView> list = service.getList(shortsId);
 
         return list;
 
