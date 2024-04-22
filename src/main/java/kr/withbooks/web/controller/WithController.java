@@ -37,6 +37,11 @@ public class WithController {
     @GetMapping("list")
     public String list(Model model) {
 
+        //카테고리 모델 얻기
+        List<Category> categoryList = categoryService.getList();
+        model.addAttribute("categoryList", categoryList );
+
+
         //  WithView list 얻기
         List<WithView> list = service.getList();
 

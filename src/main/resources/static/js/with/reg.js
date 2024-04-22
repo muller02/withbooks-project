@@ -39,3 +39,34 @@ window.addEventListener("load", function (){
 
 })
 
+
+window.addEventListener("load",function (e){
+
+
+
+
+    const imgInput =document.querySelector("input[type='file']")
+
+
+ imgInput.oninput = function (e){
+     const file = imgInput.files[0];
+     let reader = new FileReader();
+     console.log(file)
+     reader.onload = function (e) {
+
+
+
+     }
+
+
+     // 주어진 파일을 읽어들이고, 해당 파일의 내용을 Data URL 형식으로 변환하여  콜백함수에 반환
+     reader.readAsDataURL(file);
+
+ }
+
+
+
+
+
+})
+
