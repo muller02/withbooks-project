@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.WithCategoryRepository">
+	
+	
+<insert id="save" >
+		INSERT INTO with_category (
+			with_id, category_id
+		)
+	VALUES
+	<foreach collection="withCategoryIdList" item="item"   separator=",">
+
+		(#{withId}, #{item}
+		)
+	</foreach>
+
+	</insert>
+
+	<select id="findById" resultType="java.lang.String">
+		select b.name from with_category   a join book_category b  on a.category_id = b.id where a.with_id =#{withId};
+
+	</select>
+
+</mapper>

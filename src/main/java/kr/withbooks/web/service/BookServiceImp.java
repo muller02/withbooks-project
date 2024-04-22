@@ -1,6 +1,7 @@
 package kr.withbooks.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,8 @@ public class BookServiceImp implements BookService {
     }
 
 
+    @Override
+    public Map<String, Object> getMapById(Long bookId, Long userId) {
+        return repository.findMapById(bookId, userId);
+    }
 }

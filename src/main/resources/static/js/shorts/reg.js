@@ -74,11 +74,13 @@ window.addEventListener("load", function () {
     // false 를 붙이면 동기
     var q = queryInput.value;
 
-    xhr.open("GET", `http://localhost:8080/api/book/list?q=${q}`);
+    xhr.open("GET", `http://localhost:8080/api/book/list?q=${q}&c=0`);
     xhr.send();
   };
 });
 
+
+// 텍스트 에디터
 window.onload = function () {
   const textArea = document.querySelector(".text-area");
   const regBtn = document.querySelector(".reg-btn");
@@ -110,6 +112,8 @@ window.onload = function () {
       restrict.classList.remove("fade-out");
     }
   });
+
+
 
   // 내용이 변경될 때마다 함수 호출
   function regBtnbgColorChange() {
@@ -154,9 +158,9 @@ window.onload = function () {
   };
 };
 
-let imgArr = []; // 삭제 이미지 저장소
-
 //////////////////////////////////////////////////////////
+
+let imgArr = []; // 삭제 이미지 저장소
 window.addEventListener("load", function () {
   let formGroup = this.document.querySelector(".form-group");
   let imgInput = formGroup.querySelector(".img-input");
@@ -173,8 +177,6 @@ window.addEventListener("load", function () {
 
 
   function inputImgHandler(files) {
-
-
 
     //파일 타입과 , 크기 검증
     for (let file of files) {

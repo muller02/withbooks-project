@@ -257,12 +257,12 @@
 }
 
 /* 북로그 */
-.book-log .icon-color\:main-5::before,
-.book-log .icon-color\:main-5::after {
+.booklog .icon-color\:main-5::before,
+.booklog .icon-color\:main-5::after {
     background-color: var(--color-main-5);
 }
 
-.book-log .n-btn {
+.booklog .n-btn {
     /* btn-type:filled */
     --btn-filled-background-color-default: var(--color-main-5);
     --btn-filled-background-color-hover: var(--color-main-1);
@@ -272,7 +272,7 @@
     --btn-filled-color-hover: var(--color-main-5);
 }
 
-.book-log .n-toggle {
+.booklog .n-toggle {
     /* toggle:outline-box */
     --toggle-outline-color: rgba(var(--rgb-base-10), 0.85);
     --toggle-outline-background-color: var(--color-base-1);
@@ -282,23 +282,44 @@
     --toggle-outline-border-color-checked: transparent;
 }
 
-.book-log .n-toggle-type\:outline-box:has(input:checked) .icon::after,
-.book-log .n-toggle\:outline-box:has(input:checked) .icon::after,
-.book-log .n-toggle-type\:outline-box:has(input:checked) .icon::before,
-.book-log .n-toggle\:outline-box:has(input:checked) .icon::before {
+.booklog .n-toggle-type\:outline-box:has(input:checked) .icon::after,
+.booklog .n-toggle\:outline-box:has(input:checked) .icon::after,
+.booklog .n-toggle-type\:outline-box:has(input:checked) .icon::before,
+.booklog .n-toggle\:outline-box:has(input:checked) .icon::before {
     background-color: #ffffff;
 }
 
-.book-log .border-top,        
+.booklog .border-top,        
 .bd-top{ 
     border-top: 2px dashed var(--border-color) !important; 
 }
 
-/* .book-log-btn:hover{    
-    color:var(--color-main-4);
-    toggle-outline-border-color:var(--color-base-1);
-    span{
-        --icon-color:var(--color-main-4);
-    }
-} 
-*/
+.booklog .n-tabbar .n-tab.active,
+.booklog .n-tabbar-type\:underline > li.active > a,
+.booklog .n-tabbar-type\:underline > li.active > button,
+.booklog .n-tabbar > li.active > a,
+.booklog .n-tabbar > li.active > button,
+.booklog .n-tabbar\:underline > li.active > a,
+.booklog .n-tabbar\:underline > li.active > button {
+    --tabbar-border-width: 0 0 2px 0;
+    --tabbar-border-style: solid;
+    --tabbar-border-color: var(--color-main-1);
+    --tabbar-border-color-active: var(--color-main-5);
+
+    --tab-color-active: var(--color-main-5);
+}
+.booklog .n-tabbar .n-tab.active,
+.booklog .n-tabbar-type\:underline > li.active > a,
+.booklog .n-tabbar-type\:underline > li.active > button,
+.booklog .n-tabbar > li.active > a,
+.booklog .n-tabbar > li.active > button,
+.booklog .n-tabbar\:underline > li.active > a,
+.booklog .n-tabbar\:underline > li.active > button {
+    border-color: var(--color-main-5);
+    color: var(--color-main-5);
+}
+
+.booklog .n-toggle-type\:outline-box:has(input:checked) span.public
+{
+    color:#ffffff;
+}

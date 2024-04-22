@@ -19,7 +19,9 @@
 		where id = #{shortsId}
 	</select>
 
-
+	<update id="blindById">
+		update shorts set blind_yn = 1 where id =#{shortsId}
+	</update>
 
 
 

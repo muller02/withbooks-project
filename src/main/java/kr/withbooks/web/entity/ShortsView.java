@@ -4,7 +4,9 @@ import groovy.transform.builder.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class ShortsView {
     private long bookId;
     private long userId;
     private String content;
-    private Date regDate;
+
+    private LocalDateTime regDate;
     private int blindYn;
     private List<String> img;
     private int likeCnt;

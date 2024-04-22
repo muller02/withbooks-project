@@ -8,13 +8,22 @@
 		select 
 			* 
 		from shorts_view
+		 <where>
+        <if test="bookId != null">
+            book_id = ${bookId}
+        </if>
+			 and
+			 blind_yn = 0
+    </where>
 
-		<where>
-			<if test="bookId != null">
-				book_id = ${bookId}
-			</if>
-		</where>
 		order by id desc
+		
+
+
+	
+				
+
+		
 	</select>
 
 </mapper>

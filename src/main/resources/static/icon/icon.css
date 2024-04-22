@@ -1,0 +1,4 @@
+.icon\:tmp::before{
+    -webkit-mask-image: url("/icon/book-log.svg");
+    mask-image: url("/icon/book-log.svg");
+  }

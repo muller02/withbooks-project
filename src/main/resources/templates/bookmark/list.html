@@ -10,6 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="/js/bookmark/list.js" defer></script>
+    <style>
+        .wrapping{
+            position:relative;
+            opacity: 1;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
 
@@ -35,247 +42,61 @@
             </div>
             <div>
                 <!-- 취소 버튼 빈색, 삭제버튼 빨간색 -->
-                <button class="n-btn n-btn-color:accent mr:2 cancel-btn d:none">취소</button>
+                <button class="n-btn mr:2 cancel-btn d:none">취소</button>
+                <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">전체 삭제</button>
                 <button class="n-btn mr:2 delete-btn">삭제</button>
             </div>
         </div>
 
-        <section id="bookmark-section" class="my:4 d:flex flex-wrap:wrap justify-content:flex-start m:3 px:3">
+        <section id="bookmark-section">
             <h1 class="d:none">북 리스트</h1>
-            <section class="bookmark-list">
-                <a 
-                href="/book/detail?id=1"
-                >
-                    <div
-                        class="d:flex jc:center ai:center px:3 mx:3"
-                    >
-                        <div class="pos:relative">
-                        
-                            <label>
-                                <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
-                            </label>
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
+            <form action="/bookmark/delete" method="post" id="idsForm">
+                <div class="bookmark-list my:4 d:flex flex-wrap:wrap justify-content:flex-start m:3 px:3">
+                    <section class="bookmark" th:each="b : ${list}">
+                        <div class="w:100p h:100p">
+                            <a class=""
+                            href="/book/detail"
+                            th:href="@{/book/detail(id=${b.bookId})}"
                             >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <img
-                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                        class="h:3"
-                                        alt="도둑맞은 집중력.img"
-                                    />
-                                </div>
+                                <div
+                                    class="d:flex jc:center ai:center px:3 mx:3"
+                                >
+                                    <div class="pos:relative">
+                                    
+                                        <label>
+                                            <input type="checkbox" name="ids" th:value="${b.bookId}" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
+                                        </label>
+                                        <div
+                                            class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
+                                        >
+                                            <div class="w:100p lg:w:3 d:flex jc:center">
+                                                <img
+                                                    src="/image/shorts/detail/도둑맞은집중력.PNG"
+                                                    class="h:3"
+                                                    alt="도둑맞은 집중력.img"
+                                                    th:src="${b.cover}"
+                                                />
+                                            </div>
 
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        도둑맞은 집중력
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                    >요한하리
+                                            <div class="w:100p d: fl-dir:column ai:center">
+                                                <h1 class="fs:3 fw:3" th:text="${b.title}">
+                                                    도둑맞은 집중력
+                                                </h1>
+                                                <div
+                                                    class="fs:2 fw:1 mt:1" th:text="${b.author}">
+                                                    요한하리
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
                                     </div>
                                 </div>
-                            </div>
-                        
+                            </a>
                         </div>
-                    </div>
-                </a>
-            </section>
-            <!-- ============================================================================= -->
-            <section class="bookmark-list">
-                <a 
-                href="/book/detail?id=1"
-                >
-                    <div
-                        class="d:flex jc:center ai:center px:3 mx:3"
-                    >
-                        <div class="pos:relative">
-                        
-                            <label>
-                                <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
-                            </label>
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
-                            >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <img
-                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                        class="h:3"
-                                        alt="도둑맞은 집중력.img"
-                                    />
-                                </div>
-
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        도둑맞은 집중력
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                    >요한하리
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </a>
-            </section>
-            <section class="bookmark-list">
-                <a 
-                href="/book/detail?id=1"
-                >
-                    <div
-                        class="d:flex jc:center ai:center px:3 mx:3"
-                    >
-                        <div class="pos:relative">
-                        
-                            <label>
-                                <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
-                            </label>
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
-                            >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <img
-                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                        class="h:3"
-                                        alt="도둑맞은 집중력.img"
-                                    />
-                                </div>
-
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        도둑맞은 집중력
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                    >요한하리
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </a>
-            </section>
-            <section class="bookmark-list">
-                <a 
-                href="/book/detail?id=1"
-                >
-                    <div
-                        class="d:flex jc:center ai:center px:3 mx:3"
-                    >
-                        <div class="pos:relative">
-                        
-                            <label>
-                                <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
-                            </label>
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
-                            >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <img
-                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                        class="h:3"
-                                        alt="도둑맞은 집중력.img"
-                                    />
-                                </div>
-
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        도둑맞은 집중력
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                    >요한하리
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </a>
-            </section>
-            <section class="bookmark-list">
-                <a 
-                href="/book/detail?id=1"
-                >
-                    <div
-                        class="d:flex jc:center ai:center px:3 mx:3"
-                    >
-                        <div class="pos:relative">
-                        
-                            <label>
-                                <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
-                            </label>
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
-                            >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <img
-                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                        class="h:3"
-                                        alt="도둑맞은 집중력.img"
-                                    />
-                                </div>
-
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        도둑맞은 집중력
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                    >요한하리
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </a>
-            </section>
-            <section class="bookmark-list">
-                <a 
-                href="/book/detail?id=1"
-                >
-                    <div
-                        class="d:flex jc:center ai:center px:3 mx:3"
-                    >
-                        <div class="pos:relative">
-                        
-                            <label>
-                                <input type="checkbox" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1"></input>
-                            </label>
-                            <div
-                                class="gap:4 d:flex fl-dir:column lg:ai:center pt:3"
-                            >
-                                <div class="w:100p lg:w:3 d:flex jc:center">
-                                    <img
-                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
-                                        class="h:3"
-                                        alt="도둑맞은 집중력.img"
-                                    />
-                                </div>
-
-                                <div class="w:100p d: fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        도둑맞은 집중력
-                                    </h1>
-                                    <div
-                                        class="fs:2 fw:1 mt:1"
-                                    >요한하리
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </a>
-            </section>
-<!-- ======================================================================================== -->
-
-           
+                    </section>
+                </div>
+            </form>
         </section>
-
     </main>
     
 </body>

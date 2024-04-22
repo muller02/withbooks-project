@@ -1,60 +1,59 @@
-package kr.withbooks.web.controller.dto;
+package kr.withbooks.web.config;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import kr.withbooks.web.entity.User;
 
+@Setter
 public class CustomUserDetails implements UserDetails {
 
 
+    @Getter
+    private LocalDateTime joinDate;
+    @Getter
+    private Long id;
+    @Getter
+    private String email;
+    @Getter
+    private String password;
+    @Getter
+    private List<GrantedAuthority> authorities;
+    @Getter
+    private int gender;
+    @Getter
+    private LocalDateTime brithDate;
+    @Getter
+    private String intro;
+    @Getter
+    private String img;
 
-    private User user;
-
-    public CustomUserDetails(User user) {
-
-        System.out.println("사과 = " + user.toString());
-        this.user = user;
-    }
+    @Getter
+    private  String nickName;
 
 
-    //권한 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        Collection<GrantedAuthority> collection = new ArrayList<>();
-
-        collection.add(new GrantedAuthority() {
-
-            @Override
-            public String getAuthority() {
-
-                return user.getRole();
-            }
-        });
-
-        return collection;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return email;
     }
-
-    public String getNickName() {
-        return user.getNickname();
-    }
-
-
-    // ----------------------------------
 
     @Override
     public boolean isAccountNonExpired() {
@@ -75,5 +74,4 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
 }

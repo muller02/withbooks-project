@@ -20,8 +20,23 @@
 
 		</where>
 	</select>
+	<select id="findById" resultType="With">
+
+		select * from `with` where id = #{withId}
+
+	</select>
 
 
+
+	<insert id="save"  useGeneratedKeys="true" keyProperty="id" parameterType="With">
+		INSERT INTO `with` (
+		with_reg_id, face_yn, name, intro, img, `interval`, location, personnel
+		)
+		VALUES (
+		#{withRegId},
+		#{faceYn}, #{name}, #{intro}, #{img}, #{interval}, #{location}, #{personnel}
+		)
+	</insert>
 
 <!--	<select id="findById" resultType="Category" parameterType="Long" >-->
 <!--		select * from sub_category-->

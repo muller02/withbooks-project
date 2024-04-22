@@ -10,6 +10,7 @@ public interface WithRepository {
 
     List<With> findAll(Long[] categoryId);
 
+    void save(With with);
 
-
+    With findById(Long wihtId);
 }
