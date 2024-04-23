@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.BooklogRepository">
 	
-	<select id="findAll" resultType="BooklogView">
+	<select id="findAll" resultType="BooklogView" parameterType="Long">
 		select 
 				  bl.id
 				, bl.book_id 
@@ -15,9 +15,11 @@
 				, b.publisher book_publisher
 		  from booklog bl left join book b 
 		    on bl.book_id = b.id
+		 where user_id = #{id}
+		 order by id desc
 	</select>
 
-	<select id="findById" resultType="BooklogView"  parameterType="Long">
+	<select id="findById" resultType="BooklogView" parameterType="Long">
 		select 
 				  bl.id
 				, bl.book_id 
@@ -29,11 +31,35 @@
 				, b.publisher book_publisher
 		  from booklog bl left join book b 
 		    on bl.book_id = b.id
-		 where bl.id = #{id}
-
+		 where bl.id = #{booklogId}
 	</select>
 
-	<delete id="deleteAllByIds">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="Booklog">
+		insert into
+			booklog
+				(
+					user_id
+				   ,book_id
+				   ,public_yn
+				)
+			values
+				(
+					#{userId}
+				   ,#{bookId}
+				   ,#{publicYn}
+			)
+	</insert>
+
+	<update id="update" parameterType="Booklog">
+		update 
+				booklog 
+		   set 
+		   		public_yn = #{publicYn}
+         where
+		 		id = #{id};
+	</update>
+
+	<delete id="deleteAllByIds" parameterType="Long">
 		delete
 		 
 		from

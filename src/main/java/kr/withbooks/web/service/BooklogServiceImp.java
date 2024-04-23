@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.withbooks.web.entity.Booklog;
+import kr.withbooks.web.entity.BooklogLogs;
 import kr.withbooks.web.entity.BooklogView;
+import kr.withbooks.web.repository.BooklogLogsRepository;
 import kr.withbooks.web.repository.BooklogRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class BooklogServiceImp implements BooklogService{
 
     @Autowired
     private BooklogRepository repository;
+
+    @Autowired
+    private BooklogLogsRepository logsRepository;
 
     @Override
     public List<BooklogView> getList(Long id) {
@@ -32,7 +37,8 @@ public class BooklogServiceImp implements BooklogService{
     }
 
     @Override
-    public void add(Booklog booklog) {
+    public void reg(Booklog booklog) {
+        repository.save(booklog);
     }
 
     @Override
@@ -47,5 +53,16 @@ public class BooklogServiceImp implements BooklogService{
     public void deleteAllByIds(List<Integer> ids, Long userId) {
         repository.deleteAllByIds(ids, userId);
     }
+
+    @Override
+    public void addLogs(BooklogLogs logs) {
+        logsRepository.save(logs);
+    }
+
+    @Override
+    public List<BooklogLogs> getLogs(Long id) {
+        return logsRepository.findAll(id);
+    }
+
     
 }

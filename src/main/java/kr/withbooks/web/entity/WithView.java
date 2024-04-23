@@ -21,5 +21,8 @@ public class WithView {
   private String location;
   private int personnel; // 정원
   private int memberCnt; // 가입 멤버 수
+
+
+
   private List<String> categoryNames;
 }
