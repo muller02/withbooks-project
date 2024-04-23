@@ -1,7 +1,6 @@
 package kr.withbooks.web.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +16,7 @@ public class Booklog {
     private Long id;
     private Long userId;
     private Long bookId;
+    private Integer publicYn;
     private LocalDateTime regDate;
     
 }
