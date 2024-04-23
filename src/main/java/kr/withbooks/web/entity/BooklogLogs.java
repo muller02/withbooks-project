@@ -11,15 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BooklogView {
-
-    private Long id;
-    private Long bookId;
-    private LocalDateTime regDate;
-    private int publicYn;
-    private String bookTitle;
-    private String bookAuthor;
-    private String bookCover;
-    private String bookPublisher;
+public class BooklogLogs {
     
+    private Long id;
+    private String content;
+    private String img;
+    private LocalDateTime regDate;
+    private Long booklogId;
 }

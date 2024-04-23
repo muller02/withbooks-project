@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface WithRepository {
 
-    List<With> findAll(Long[] categoryId);
+    List<With> findAll();
 
     void save(With with);
 

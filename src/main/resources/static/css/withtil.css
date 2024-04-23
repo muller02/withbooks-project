@@ -1,11 +1,9 @@
 /* ===============Outline Toggle============== */
 
-
 /*body {*/
 /*    @media (min-width: 1200px){*/
 /*        padding-right: 400px;*/
 /*    }*/
-
 
 /*}*/
 
@@ -248,31 +246,31 @@
 /* expander-content */
 .n-expander > h1 + *,
 .n-expander .n-expander-content {
-  visibility: hidden;
-  grid-column-start: 1;
-  grid-row-start: 2; /** expander-content를 두번째 행으로 지정 */
-  min-height: 0;
+    visibility: hidden;
+    grid-column-start: 1;
+    grid-row-start: 2; /** expander-content를 두번째 행으로 지정 */
+    min-height: 0;
 
-  transition: visibility 0.1s, padding 0.2s;
+    transition: visibility 0.1s, padding 0.2s;
 }
 
 /* 북로그 */
-.booklog .icon-color\:main-5::before,
-.booklog .icon-color\:main-5::after {
+.booklog-style .icon-color\:main-5::before,
+.booklog-style .icon-color\:main-5::after {
     background-color: var(--color-main-5);
 }
 
-.booklog .n-btn {
+.booklog-style .n-btn {
     /* btn-type:filled */
     --btn-filled-background-color-default: var(--color-main-5);
-    --btn-filled-background-color-hover: var(--color-main-1);
+    --btn-filled-background-color-hover: var(--color-main-2);
     --btn-filled-background-color-active: var(--color-main-5);
     --btn-filled-border: 1px solid transparent;
     --btn-filled-color: var(--color-base-1);
     --btn-filled-color-hover: var(--color-main-5);
 }
 
-.booklog .n-toggle {
+.booklog-style .n-toggle {
     /* toggle:outline-box */
     --toggle-outline-color: rgba(var(--rgb-base-10), 0.85);
     --toggle-outline-background-color: var(--color-base-1);
@@ -282,16 +280,16 @@
     --toggle-outline-border-color-checked: transparent;
 }
 
-.booklog .n-toggle-type\:outline-box:has(input:checked) .icon::after,
-.booklog .n-toggle\:outline-box:has(input:checked) .icon::after,
-.booklog .n-toggle-type\:outline-box:has(input:checked) .icon::before,
-.booklog .n-toggle\:outline-box:has(input:checked) .icon::before {
+.booklog-style .n-toggle-type\:outline-box:has(input:checked) .icon::after,
+.booklog-style .n-toggle\:outline-box:has(input:checked) .icon::after,
+.booklog-style .n-toggle-type\:outline-box:has(input:checked) .icon::before,
+.booklog-style .n-toggle\:outline-box:has(input:checked) .icon::before {
     background-color: #ffffff;
 }
 
-.booklog .border-top,        
-.bd-top{ 
-    border-top: 2px dashed var(--border-color) !important; 
+.booklog-style .border-top,
+.booklog-style .bd-top {
+    border-top: 2px dashed var(--border-color) !important;
 }
 
 .booklog .n-tabbar .n-tab.active,
@@ -319,7 +317,18 @@
     color: var(--color-main-5);
 }
 
-.booklog .n-toggle-type\:outline-box:has(input:checked) span.public
-{
-    color:#ffffff;
+.booklog-style .n-toggle-type\:outline-box:has(input:checked) span.public {
+    color: #ffffff;
+}
+
+.booklog-style textarea.n-textbox {
+    width: 100%;
+    min-height: 150px;
+    /* font-size: 16px; */
+    padding: 4px;
+    color: rgba(var(--rgb-base-10), 0.85);
+    background-color: var(--color-base-1);
+    border: 1px solid var(--textbox-border-color);
+    border-radius: var(--textbox-border-radius);
+    box-shadow: 0px 1px 1.5px 0px rgba(0, 0, 0, 0.05);
 }

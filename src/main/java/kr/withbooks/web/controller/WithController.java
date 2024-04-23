@@ -35,18 +35,26 @@ public class WithController {
     private DebateRoomViewRepository debateRoomViewRepository;
 
     @GetMapping("list")
-    public String list(Model model) {
+
+    public String list(Model model,
+                       @RequestParam(name = "c", required = false) Long[] categoryIds) {
+
+        //카테고리 모델 얻기
+        List<Category> categoryList = categoryService.getList();
+        model.addAttribute("categoryList", categoryList );
+
 
         //  WithView list 얻기
-        List<WithView> list = service.getList();
+        List<WithView> list = service.getList(categoryIds);
 
-        // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을
-        // 가지고 와서, withView categoryNames에 담기.
-        for (WithView withView : list) {
-            Long withId = withView.getId();
-            List<String> categoryNames = service.getWithCategoryNames(withId);
-            withView.setCategoryNames(categoryNames);
-        }
+        //service 로 이동 시킴 why ? Api에서도 사용해야 하므로
+//        // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을
+//        // 가지고 와서, withView categoryNames에 담기.
+//        for (WithView withView : list) {
+//            Long withId = withView.getId();
+//            List<String> categoryNames = service.getWithCategoryNames(withId);
+//            withView.setCategoryNames(categoryNames);
+//        }
 
         // 뷰에 데이터 전달
         model.addAttribute("list", list);
