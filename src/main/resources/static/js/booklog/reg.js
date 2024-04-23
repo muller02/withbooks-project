@@ -5,8 +5,6 @@ window.addEventListener("load", function () {
     let resultList = searchBox.querySelector(".result-list");
     let searchBtn = searchBox.querySelector(".search-btn");
 
-    let booklogContent = searchBox.querySelector(".booklog-content");
-
     // 검색창 리셋
     resetBtn.onclick = function () {
         queryInput.value = "";
@@ -40,7 +38,7 @@ window.addEventListener("load", function () {
                 let emptyList = `
                                 <div class="h:100p d:flex fl-dir:column jc:center ai:center">
                                     <div class="icon icon:file icon-color:base-5">아이콘</div>
-                                    <div class="color:base-5">검색된 책이 없습니다.</div>
+                                    <div class="color:base-5">'${queryInput.value}'에 대한 검색 결과가 없습니다.</div>
                                 </div>  
                 `;
                 resultList.insertAdjacentHTML("beforeend", emptyList);
