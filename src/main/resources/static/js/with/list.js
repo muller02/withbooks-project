@@ -3,7 +3,7 @@
 window.addEventListener("load", function (e){
  const searchBtn=document.querySelector("#search-btn");
  const searchBox=document.querySelector(".search-box");
- const  categorySection=document.querySelector("#category");
+ const categorySection=document.querySelector("#category");
     const initIcon=categorySection.querySelector(".init-icon");
  const categoryList = categorySection.querySelector(".category-list");
  const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");

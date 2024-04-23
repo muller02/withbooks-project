@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
@@ -14,7 +14,7 @@
 
     <style>
       * {
-        font-family: "Noto Sans KR", sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
         font-size: 15px;
         color: var(--color-base-8);
       }
@@ -35,26 +35,55 @@
         --card-list-column-md: 2; /* 태블릿에서 컬럼 수 */
         --card-list-column-lg: 2; /* PC에서 컬럼 수 */
       }
+      
       .box-shadow {
         box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
       }
+
       /*북쇼츠 , 댓글 그림자*/
       .box-shadow-custom {
         box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
       }
-
-
     </style>
   </head>
 
   <body>
     <main layout:fragment="main" class="flex-grow:1">
+      <!-- 검색 섹션 -->
       <section
-        class="with-list-sort-con d:flex ai:center br pt:5 pb:4 pl:3 pr:3"
+        class="lg:w:7 p:3 d:flex ai:center br pt:5 pb:4 pl:3 pr:3"
       >
-        <h1 class="d:none">정렬,검색</h1>
+        <h1 class="d:none">통합검색, 상세검색</h1>
+        <!-- 통합 검색 -->
+        <div class="d:flex pos:relative ai:center">
+          <input
+            type="text"
+            class="n-textbox n-textbox-type:outline text-align:center"
+            placeholder="통합 검색"
+          />
+          <button
+            class="icon icon:magnifying_glass pos:absolute right:1 mr:2"
+          ></button>
+        </div>
+        <!-- 상세 검색 -->
+        <div class="d:flex ai:center">
+          <button
+            type="button"
+            id="search-btn"
+            class="n-btn n-btn-type:outline h:100p deco-pos:right border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3"
+          >
+            <span class="mr:auto ml:1">상세검색</span>
+          </button>
+        </div>
+      </section>
 
+      <section
+        class="search-box lg:pos:absolute top:2 mx:3 right:2 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1"
+      >
+
+        <!-- 상세 검색 창 -->
         <ul class="w:full d:flex jc:start gap:2">
+          <!-- 정렬 방법 -->
           <li>
             <select
               name="space"
@@ -65,10 +94,12 @@
               <option value="m2">인기순</option>
             </select>
           </li>
+
+          <!-- 대면 여부 -->
           <li class="d:flex ai:center">
             <label class="n-toggle n-toggle-type:outline-box">
               대면
-              <input type="radio" class="d:none" name="category" checked />
+              <input type="radio" class="d:none" name="category" />
             </label>
           </li>
           <li class="d:flex ai:center">
@@ -77,52 +108,36 @@
               <input type="radio" class="d:none" name="category" />
             </label>
           </li>
-          <li class="d:flex ai:center with-list" id="search-li">
-            <button
-              type="button"
-              id="search-btn"
-              class="n-btn n-btn-type:outline h:100p deco-pos:right  border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3"
-            >
-              <span class="mr:auto ml:1">상세검색</span>
-            </button>
-          </li>
         </ul>
-      </section>
 
-
-      <div class="search-box lg:pos:absolute top:2  mx:3 right:2  d:none border-color:sub-4  border-radius:5 zi:4	 box-shadow-custom bg-color:main-1">
-      <section class="category lg:w:7 p:3">
-        <!-- 책 검색창 부분 -->
-        <div class="search d:flex pos:relative idth:fit-content ai:center">
-          <input
-                  type="text"
-                  class="n-textbox n-textbox-type:outline text-align:center"
-                  placeholder="책 검색"
-          />
-          <button
-                  class="icon icon:magnifying_glass pos:absolute right:1 mr:2"
-          ></button>
-        </div>
-      </section>
-
-
-      <section id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5 px:3   ">
+        <!-- 카테고리 검색 -->
+        <div id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5 px:3   ">
         <div class="d:flex ai:center mb:1">
-          <div class="margin-right:8 ml:2 ">카테고리</div>
-          <div class="init-icon icon icon:arrows_clockwise_fill icon-size:2"></div>
+          <div class="margin-right:8 ml:2">카테고리</div>
+          <div
+            class="init-icon icon icon:arrows_clockwise_fill icon-size:2"
+          ></div>
         </div>
         <div class="rg:mt:3">
-          <div class="d:flex fl-wrap:wrap category-list">
+          <div class="category-list d:flex fl-wrap:wrap">
             <h1 class="d:none">카테고리 필터</h1>
-            <label class="n-toggle n-toggle-type:outline-box m:1" th:each="c, iterStat : ${categoryList}" th:classappend="${iterStat.last} ? '' : 'lg:flex-grow:1'">
-              <input type="checkbox" class="d:none" th:value="${c.id}"  th:text="${c.name}"/>
-
-
+            <label
+              class="n-toggle n-toggle-type:outline-box m:1"
+              th:each="c, iterStat : ${categoryList}"
+              th:classappend="${iterStat.last} ? '' : 'lg:flex-grow:1'"
+            >
+              <input
+                type="checkbox"
+                class="d:none"
+                th:value="${c.id}"
+                th:text="${c.name}"
+              />
             </label>
-
           </div>
-
-          <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">
+          
+          <div
+            class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none"
+          >
             <button type="button" class="n-btn n-btn-type:outline flex-grow:1">
               취소
             </button>
@@ -130,17 +145,15 @@
               완료
             </button>
           </div>
-        </div>
-      </section>
-      </div>
+        </section>
 
+      <!-- 카테고리 상세: 정렬 후 코드 -->
       <div id="search-detail" class="pl:3 fade d:none">
-        <section class="category d:flex fl-dir:column pl:3">
-          <div class="d:flex ai:center   ">
+          <div class="d:flex ai:center">
             <div class="margin-right:4 ml:3">카테고리</div>
             <div
-              class="icon icon:arrows_clockwise_fill icon-size:2"
               id="refresh"
+              class="icon icon:arrows_clockwise_fill icon-size:2"
             ></div>
           </div>
           <div class="mt:3">
@@ -162,7 +175,6 @@
               </label>
             </div>
           </div>
-        </section>
       </div>
 
       <section class="with-list">
@@ -205,7 +217,7 @@
               </li>
             </ul>
             <div class="d:flex pt:1 gap:5">
-              <!--            th:with img-->
+              <!-- th:with img-->
               <div
                 class="w:2 h:2 box-shadow border-color:base-2 border-radius:3 my:auto flex-shrink:0"
               >
@@ -267,6 +279,7 @@
           </li>
         </ul>
       </section>
+
       <section>
         <h1 class="d:none">플로팅버튼</h1>
         <a
