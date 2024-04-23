@@ -159,7 +159,7 @@ function updateHTML(list){
                 class="w:2 h:2 box-shadow border-color:base-2 border-radius:3 my:auto flex-shrink:0"
               >
                 <img
-                  src="/image/with/puppy2.png"
+                  src="/image/with/${item.img}"
      
                   class="w:100p h:100p border-radius:3"
                 />

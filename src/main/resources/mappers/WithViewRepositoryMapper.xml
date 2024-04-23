@@ -24,7 +24,12 @@
   </where>
 
   group by
-          b.id;
+          b.id
+    order by b.reg_date desc
+
+
+
+
 
 <!--  카테고리 아이디 where 필요-->
 </select>
