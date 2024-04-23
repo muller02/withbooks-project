@@ -58,15 +58,20 @@ initIcon.onclick = async function (e) {
 
 
 
-    window.addEventListener("click", async (e) => {
+
+    categoryList.addEventListener("click", async (e) => {
 
 
-        if (e.target.nodeName !== "INPUT")
+        if (e.target.nodeName !== "INPUT"  && e.target.type !== "checkbox")
             return;
 
 
         // 이거는 체크 박스 클릭하면 넣고 아니면 뺴기
-        let categoryId = e.target.value;
+        let categoryId
+        if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
+            categoryId  = e.target.value;
+        }
+
         if (e.target.checked) {
             categoryIdArr.push(e.target.value);
         } else {

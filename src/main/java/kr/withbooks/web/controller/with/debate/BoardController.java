@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/with/debate/board")
+@RequestMapping("with/debate/board")
 public class BoardController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class BoardController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String list(
             @RequestParam(name = "rid") Long roomId,
             Model model) {
@@ -41,7 +41,7 @@ public class BoardController {
         return "with/debate/board/list";
     }
 
-    @GetMapping("/detail")
+    @GetMapping("detail")
     public String detail(
             @RequestParam Long id,
             Model model) {
@@ -58,5 +58,11 @@ public class BoardController {
         model.addAttribute("book", book);
 
         return "with/debate/board/detail";
+    }
+
+    @GetMapping("reg")
+    public String regForm(){
+
+        return "with/debate/board/reg";
     }
 }

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Booklog-list</title>
 
         <style>
             .book-list div {
@@ -15,6 +15,9 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+            }
+            .box-shadow-custom {
+                box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
             }
         </style>
     </head>
@@ -41,7 +44,7 @@
                     <ul class="d:flex flex-wrap:wrap justify-content:flex-start">
                         <li class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
                             <div class="gap:4 d:flex fl-dir:column lg:ai:center">
-                                <div class="h:4 d:flex jc:center ">
+                                <div class="h:4 d:flex jc:center box-shadow-custom">
                                     <a class="text-align:center h:100p" href="detail" th:href="@{./detail(id=${l.id})} ">
                                         <img src="/image/shorts/detail/도둑맞은집중력.PNG" th:src="${l.bookCover}" class="h:100p w:100p obj-fit:contain margin-right:auto" alt="도둑맞은 집중력.img" />
                                     </a>
@@ -60,10 +63,12 @@
                     </ul>
                 </section>
 
-                <section class="pos:absolute b">
+                <div class="pos:fixed right:2 bottom:9 zi:5">
                     <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
-                    <div>버튼</div>
-                </section>
+                    <div class="bg-color:main-5 border-radius:full p:3">
+                        <a href="/booklog/reg" th:title="${'새 북로그 작성하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
+                    </div>
+                </div>
             </div>
         </main>
     </body>
