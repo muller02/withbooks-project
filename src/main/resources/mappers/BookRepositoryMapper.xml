@@ -6,7 +6,7 @@
 	
 	<select id="findAll" resultType="Book">
 		SELECT 
-		*
+			*
 		FROM book
 		<where>
 			<if test="query != null">
@@ -26,23 +26,26 @@
 	
 	<select id="findById" resultType="Book" parameterType="Long" >
 		SELECT 
-		*
-		FROM book
-		WHERE id = #{id}
+			*
+		FROM
+			book
+		WHERE
+			id = #{id}
 	</select>
 
 	<select id="findMapById" resultType="hashmap">
-		select b.id
-		,b.title
-		,b.author
-		,b.pub_date pubDate
-		,b.publisher
-		,b.isbn13
-		,b.description
-		,b.purchase_link purchaseLink
-		,b.price
-		,b.cover
-		,bc.name
+		select
+				b.id
+				,b.title
+				,b.author
+				,b.pub_date pubDate
+				,b.publisher
+				,b.isbn13
+				,b.description
+				,b.purchase_link purchaseLink
+				,b.price
+				,b.cover
+				,bc.name
 		<if test="userId != null">
 			,ifnull(bm.user_id = #{userId}, 0) marked
 		</if> 

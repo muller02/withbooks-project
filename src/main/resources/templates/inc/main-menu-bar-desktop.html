@@ -56,8 +56,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
                         <div class="ml:5 d:flex fl-dir:column jc:center">
                             <div>
                                 <a class="fs:3 fw:3 color:base-8 " href=""
-                                    th:text="${nickname}" >독자 호빵이</a
+                                   th:text="${#authentication.principal.nickName}" >독자 호빵이</a
                                 >
+
                             </div>
                             <div class="mt:1">
                                 <a class="fs:1 color:main-6" href=""

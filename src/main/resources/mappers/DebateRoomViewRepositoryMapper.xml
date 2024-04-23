@@ -10,6 +10,15 @@
     *
   FROM debate_room_view
 </select>
+  <select id="findAllById" resultType="DebateRoomView">
+
+    select
+    *
+    from debate_room_view
+    where with_id = #{withId}
+
+  </select>
+
 
 
 

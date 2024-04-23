@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{inc/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         .profile-image,
+        .writer{
+            --width-1: 16px;
+            --height-1: 16px;
+        }
+        .comment-area{
+            --gap-10:80px;
+        }
+        .delete-button{
+            --right-1:10px;
+            --bottom-1:26px;
+        }
+        main{
+            --gap-10:80px;
+        }
+    </style>
+</head>
+<body>
+    <main class="min-width:8 pb:10 px:3" layout:fragment="main">
+        <div class="card-content">
+            <div class="card-note-container">
+                <section class="card-note">
+                    <h1 class="d:none">토론카드 컨텐츠</h1>
+                    <div class="mb:3 bd-bottom">
+                        <section class="d:flex fl-dir:column ai:center gap:1 mx:9 pt:2 pb:5">
+                            <div class="fs:1" th:text="${book.title}">도둑맞은 집중력</div>
+                            <h1 class="fs:6">"<span th:text="${board.topic}">재홍이는 진짜 일뽕인가</span>"</h1>
+                            <div class="fs:4" th:text="${board.title}">일뽕재홍</div>
+                            <div class="d:flex gap:1 jc:center ai:center">
+                                <span><img src="" alt="이치고경인"></span>
+                                <span class="gap:1" >
+                                    <i class="fs:1">by</i>
+                                    <span class="fs=1" th:text="${board.nickname}">이치고경인</span>
+                                </span>
+                            </div>
+                            <span class="fs:1" th:text="${board.regDate}">2024-03-27 23:03:26</span>
+                        </section>
+                    </div>
+                    <div class="card-note-media">
+                        <section class="d:flex fl-dir:column jc:center ai:center mt:8 mb:2">
+                            <h1 class="d:none">토론카드 이미지</h1>
+                            <div>
+                                <img src="" alt="도둑맞은 집중력 이미지">
+                            </div>
+                        </section>
+                    </div>
+                    <div class="card-note-body bd-bottom px:6">
+                        <section class="h:100p ln-h:1.5 px:4 py:3 txt-al:left of-y:auto">
+                            <h1 class="d:none">토론카드 코멘트</h1>
+                            <div --th:text="${board.content}">
+                                <p>
+                                    우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해 자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다. 저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
+                                    정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼, 집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
+                                </p>
+                                <p>
+                                    <br>
+                                </p>
+                                <p>
+                                    우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해
+                                    자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다.
+                                    저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
+                                    정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼,
+                                    집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
+                                </p>
+                                <p>
+                                    <br>
+                                </p>
+                                <p>
+                                    우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해
+                                    자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다.
+                                    저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
+                                    정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼,
+                                    집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
+                                </p>
+                                <p>
+                                    <br>
+                                </p>
+                                <p>
+                                    우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해
+                                    자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다.
+                                    저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
+                                    정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼,
+                                    집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
+                                </p>
+                                <p>
+                                    <br>
+                                </p>
+                                <p>
+                                    우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해
+                                    자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다.
+                                    저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
+                                    정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼,
+                                    집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
+                                </p>
+                                <p>
+                                    <br>
+                                </p>
+                                <p>
+                                    우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해
+                                    자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다.
+                                    저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
+                                    정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼,
+                                    집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div class="card-note-comment mt:4">
+                <section class="comment-list p:2 bd-bottom">
+                    <h1 class="d:none">댓글목록</h1>
+                    <div>
+                        <section>
+                            <h1 class="d:none">타인 댓글</h1>
+                            <div class="d:flex fl-dir:column">
+                                <a class="d:flex ai:center" href="">
+                                    <div class="d:flex ai:center"><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" alt="프로필사진"></div>
+                                    <div class="writer fs:2 fw:3 h:10p ml:1">뉴렉이</div>
+                                </a>
+                                <span class="comment-area mt:2 ml:6 mr:10">
+                                    <p class="fs:3 bg-color:base-2 bd-radius:4 bd-tl-radius:0 px:3 pt:2 pb:3">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </p>
+                                    <div class="d:none"><button>삭제</button></div>
+                                    <div class="fs:1 color:base-6 ml:1 mt:1">오후 10:46</div>
+                                </span>
+                            </div>
+                        </section>
+            
+                        <section class="mt:6">
+                            <h1 class="d:none">내 댓글</h1>
+                            <div class="d:flex fl-dir:column">
+                                <a class="d:none" href="">
+                                    <div><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" alt="프로필사진"></div>
+                                    <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
+                                </a>
+                                <span class="comment-area ml:10 pos:relative d:flex fl-dir:column ai:end">
+                                    <p class="fs:3 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:2 pt:2 pb:8">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </p>
+                                    <div class="delete-button pos:absolute right:1 bottom:1"><a href="" class="icon icon:trash icon-color:accent-3 icon-size:3">삭제</a></div>
+                                    <div class="fs:1 color:base-6 mr:1 mt:1">오후 10:46</div>
+                                </span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section class="pt:3 ">
+                    <h1 class="d:none">댓글 입력란</h1>
+                    <form class="d:flex" action="" method="post">
+                        <label class="d:none">댓글</label>
+                        <textarea class="bd-radius:4 bg-color:base-2 fl-grow:1 px:4 py:2 resize:none" rows="1" name="comment" ></textarea>
+                        <button class="cursor:pointer ml:3 bg-color:main-5 bd-radius:4 px:3 color:base-1">등록</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -9,7 +9,7 @@ import kr.withbooks.web.entity.WithView;
 @Mapper
 public interface WithViewRepository {
 
-  List<WithView> findAll(String query);
+  List<WithView> findAll(Long[] categoryIds);
 
   WithView findById(Long id);
 

@@ -1,88 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html
-    lang="en"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{inc/layout.html}"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
 >
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .search {
-            --right-1: 6px;
-            --top-1: 6px;
-        }
-        .click-none{
-            pointer-events: none;
-        }
-
+      .search {
+        --right-1: 6px;
+        --top-1: 6px;
+      }
+      .click-none {
+        pointer-events: none;
+      }
     </style>
     <script src="/js/with/debate/reg.js"></script>
-</head>
-<body>
-    <main layout:fragment="main" class=" flex-grow:1">
-        <section class="pb:4 pt:4 pl:4 pr:4">
-            <h1 class="d:none">위드 토론 등록 페이지</h1>
-
+  </head>
+  <body>
+    <main layout:fragment="main" class="flex-grow:1">
+      <section class="pb:4 pt:4 pl:4 pr:4">
+        <h1 class="d:none">위드 토론 등록 페이지</h1>
 
         <form action="" class="">
-            <div class="d:flex jc:end">
-                <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">등록</button>
+          <div class="d:flex jc:end">
+            <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
+              등록
+            </button>
+          </div>
+
+          <h1 class="d:none">위드 등록 페이지</h1>
+          <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8 px:2">
+            <span class="font-size:7"> 뉴렉위드,</span><br />
+            토론 방을 개설 해보세요 !
+          </p>
+
+          <section
+            id="search-book-form"
+            class="bd-radius:9 n-item n-item:shadow px:5 py:3 m:3"
+          >
+            <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">책 등록</h1>
+            <div class="d:flex fl-dir:column ai:center">
+              <div
+                class="flex-grow:1 margin-right:1 al-self:stretch pos:relative"
+              >
+                <form class="book-search">
+                  <input
+                    class="search-query-input n-textbox n-textbox:outline txt-al:center bd-radius:4 input mt:4"
+                    type="text"
+                    placeholder="책 검색"
+                  />
+                  <button
+                    class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass"
+                    type="submit"
+                  >
+                    검색
+                  </button>
+                </form>
+              </div>
+              <section class="my:4 book-list w:100p">
+                <h1 class="d:none">검색된 책 리스트</h1>
+                <ul class="n-list n-card-list content-ul"></ul>
+              </section>
             </div>
-
-            <h1 class="d:none">위드 등록 페이지</h1>
-            <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8 px:2">
-                <span class="font-size:7"> 뉴렉위드,</span><br/>
-                토론 방을 개설 해보세요 !
-            </p>
-
-            <section id="search-book-form" class="   bd-radius:9  n-item n-item:shadow px:5 py:3  m:3">
-                <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">책 등록</h1>
-                <div class="d:flex fl-dir:column ai:center">
-                    <div class="flex-grow:1 margin-right:1 al-self:stretch pos:relative ">
-                        <form class=" book-search " >
-                            <input
-                                class="search-query-input n-textbox n-textbox:outline  txt-al:center bd-radius:4 input mt:4"
-                                type="text"
-                                placeholder="책 검색"
-                            />
-                            <button
-                                class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass"
-                                type="submit"
-                            >
-                                검색
-                            </button>
-                        </form>
-                    </div>
-                    <section class="my:4 book-list w:100p">
-                        <h1 class="d:none">검색된 책 리스트</h1>
-                        <ul class="n-list n-card-list content-ul"></ul>
-                    </section>
+          </section>
+          <section class="bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
+            <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">토론일</h1>
+            <div class="mt:4"><input type="date" name="" id="" /></div>
+          </section>
+          <section
+            class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow"
+          >
+            <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">공지사항</h1>
+            <div class="mt:4">
+              <textarea
+                class="w:100p"
+                placeholder="공지사항을 작성 하세요."
+                name="notice"
+                id=""
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+          </section>
+          <section
+            class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
+          >
+            <h1 class="deco icon:sun bd-bottom w:100p h:1 fw:3">토론주제</h1>
+            <span class="d:flex fl-dir:column ai:center">
+              <span class="d:flex ai:center topic-list al-self:stretch">
+                <div class="mt:4 flex-grow:1">
+                  <input
+                    type="text"
+                    name="topic"
+                    class="n-textbox w:100p"
+                    placeholder="토론 주제를 입력하세요."
+                  />
                 </div>
-            </section>
-            <section class=" bd-radius:9 px:5 py:3 m:3  n-item n-item:shadow" >
-                <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">토론일</h1>
-                <div class="mt:4"><input type="date" name="" id=""></div>
-            </section>
-            <section class=" bd-color:base-3 bd-radius:9 px:5 py:2 m:3  n-item n-item:shadow" >
-                <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">공지사항</h1>
-                <div class="mt:4"><textarea class="w:100p" placeholder="공지사항을 작성 하세요." name="notice" id="" cols="30" rows="10"></textarea></div>
-            </section>
-            <section class=" bd-color:base-3 bd-radius:9 px:5 py:3 m:3  n-item n-item:shadow" >
-                <h1 class="deco icon:sun bd-bottom w:100p h:1 fw:3">토론주제</h1>
-                <span class="d:flex fl-dir:column ai:center">
-                    <span class="d:flex ai:center topic-list al-self:stretch">
-                        <div class="mt:4 flex-grow:1"><input type="text" name="topic" class="n-textbox w:100p" placeholder="토론 주제를 입력하세요." /></div>
-                        <div class="icon icon:trash">삭제</div>
-                    </span>
-                    <div><a class="icon icon:tmp">추가</a></div>
-                </span>
-                
-            </section>
+                <div class="icon icon:trash">삭제</div>
+              </span>
+              <div><a class="icon icon:tmp">추가</a></div>
+            </span>
+          </section>
         </form>
-        </section>
+      </section>
     </main>
-</body>
+  </body>
 </html>

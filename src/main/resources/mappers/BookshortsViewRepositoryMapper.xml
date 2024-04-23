@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.BookshortsViewRepository">
+
+	<select id="findAll" resultType="BookshortsView" >
+		select 
+			* 
+		from shorts_view
+		 <where>
+        <if test="bookId != null">
+            book_id = ${bookId}
+        </if>
+			 and
+			 blind_yn = 0
+    </where>
+
+		order by id desc
+		
+
+
+	
+				
+
+		
+	</select>
+
+</mapper>

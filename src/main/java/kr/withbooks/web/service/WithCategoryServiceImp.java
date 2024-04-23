@@ -18,4 +18,14 @@ public class WithCategoryServiceImp implements  WithCategoryService{
         repository.save(withId,withCategoryIdList);
 
     }
+
+    @Override
+    public List<String> getListByWithId(Long withId) {
+
+        //with id 를 통해 , repository에게 위드 아이디에 해당하는 카테고리 이름을 얻기
+
+        return repository.findById(withId);
+    }
+
+
 }

@@ -16,9 +16,9 @@ import java.util.List;
 @Builder
 public class With {
     private Long id;
-    private Boolean blindYn; // 숨김처리여부
+    private int blindYn;
     private Long withRegId;
-    private Boolean faceYn; // 대면여부
+    private int faceYn; // 대면여부
     private String name;
     private String intro;
     private String img;

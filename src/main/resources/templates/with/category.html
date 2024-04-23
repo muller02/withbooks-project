@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html
-        lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{inc/layout.html}"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
 >
   <head>
     <meta charset="UTF-8" />
@@ -29,106 +29,110 @@
     </style>
   </head>
   <body>
-<!--    <section class="search w:7 p:3">-->
-<!--      &lt;!&ndash; 책 검색창 부분 &ndash;&gt;-->
-<!--      <div class="search d:flex pos:relative idth:fit-content ai:center">-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          class="n-textbox n-textbox-type:outline text-align:center"-->
-<!--          placeholder="책 검색"-->
-<!--        />-->
-<!--        <button-->
-<!--          class="icon icon:magnifying_glass pos:absolute right:1 mr:2"-->
-<!--        ></button>-->
-<!--      </div>-->
-<!--    </section>-->
+    <!--    <section class="search w:7 p:3">-->
+    <!--      &lt;!&ndash; 책 검색창 부분 &ndash;&gt;-->
+    <!--      <div class="search d:flex pos:relative idth:fit-content ai:center">-->
+    <!--        <input-->
+    <!--          type="text"-->
+    <!--          class="n-textbox n-textbox-type:outline text-align:center"-->
+    <!--          placeholder="책 검색"-->
+    <!--        />-->
+    <!--        <button-->
+    <!--          class="icon icon:magnifying_glass pos:absolute right:1 mr:2"-->
+    <!--        ></button>-->
+    <!--      </div>-->
+    <!--    </section>-->
 
-<main layout:fragment="main" class="px:4">
-    <section class="category d:flex fl-dir:column w:7 p:5">
-      <div class="d:flex ai:center">
-        <div class="margin-right:8">카테고리</div>
-        <div class="icon icon:arrows_clockwise_fill icon-size:2"></div>
-      </div>
-      <div class="mt:3">
-        <div class="d:flex fl-wrap:wrap">
-          <h1 class="d:none">카테고리 필터</h1>
-
-          <label class="n-toggle n-toggle-type:outline-box m:1" th:each="c : ${cateList}" th:text="${c.name}">
-            인문
-            <input type="checkbox" class="d:none" />
-          </label>
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            소설-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            에세이-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            자기계발-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            경제·경영-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            여행-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            인문·철학-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            시-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            종교-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            역사-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            경제-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            예술-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            사회·정치-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            건강·취미-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            유아-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
-<!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
-<!--            가정·살림-->
-<!--            <input type="checkbox" class="d:none" />-->
-<!--          </label>-->
+    <main layout:fragment="main" class="px:4">
+      <section class="category d:flex fl-dir:column w:7 p:5">
+        <div class="d:flex ai:center">
+          <div class="margin-right:8">카테고리</div>
+          <div class="icon icon:arrows_clockwise_fill icon-size:2"></div>
         </div>
+        <div class="mt:3">
+          <div class="d:flex fl-wrap:wrap">
+            <h1 class="d:none">카테고리 필터</h1>
 
-<!--        <div class="d:flex justify-content:center mt:8 gap:5">-->
-<!--          <button type="button" class="n-btn n-btn-type:outline flex-grow:1">-->
-<!--            취소-->
-<!--          </button>-->
-<!--          <button type="button" class="n-btn n-btn-type:filled flex-grow:1">-->
-<!--            완료-->
-<!--          </button>-->
-<!--        </div>-->
-      </div>
-    </section>
-</main>
+            <label
+              class="n-toggle n-toggle-type:outline-box m:1"
+              th:each="c : ${cateList}"
+              th:text="${c.name}"
+            >
+              인문
+              <input type="checkbox" class="d:none" />
+            </label>
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            소설-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            에세이-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            자기계발-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            경제·경영-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            여행-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            인문·철학-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            시-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            종교-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            역사-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            경제-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            예술-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            사회·정치-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            건강·취미-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            유아-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+            <!--          <label class="n-toggle n-toggle-type:outline-box m:1">-->
+            <!--            가정·살림-->
+            <!--            <input type="checkbox" class="d:none" />-->
+            <!--          </label>-->
+          </div>
+
+          <!--        <div class="d:flex justify-content:center mt:8 gap:5">-->
+          <!--          <button type="button" class="n-btn n-btn-type:outline flex-grow:1">-->
+          <!--            취소-->
+          <!--          </button>-->
+          <!--          <button type="button" class="n-btn n-btn-type:filled flex-grow:1">-->
+          <!--            완료-->
+          <!--          </button>-->
+          <!--        </div>-->
+        </div>
+      </section>
+    </main>
   </body>
 </html>

@@ -9,4 +9,6 @@ import java.util.List;
 public interface DebateRoomViewRepository {
 
     List<DebateRoomView> findAll();
+
+    List<DebateRoomView> findAllById(Long withId);
 }

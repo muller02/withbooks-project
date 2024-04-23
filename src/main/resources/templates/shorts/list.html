@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
@@ -89,16 +89,16 @@
 
         border-radius: 100px;
       }
-      .dropdown-transformx{
-
+      .dropdown-transformx {
         transform: translateX(-140px);
-
       }
 
-    /*  모달창*/
+      /*  모달창*/
       /* CSS */
       .n-modal {
-        transition: transform 0.13s, opacity 0.13s;
+        transition:
+          transform 0.13s,
+          opacity 0.13s;
       }
 
       .modal-fade-in {
@@ -136,10 +136,12 @@
         inset: 0;
         background-color: rgba(0, 0, 0, 0.06);
       }
-      .modal-transform-xy{
+      .modal-transform-xy {
         transform: translateX(170px) !important;
       }
       /*  모달창*/
+
+
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -147,6 +149,10 @@
 
   <body>
     <!--gap 오버라이딩 필요 스마트폰 pb 있고, 테블릿 pc 업게 하기 -->
+
+<!--    dsff-->
+    <!--    dsff-->
+    <!--    dsff-->
     <main
       layout:fragment="main"
       class="min-w:7 px:3 pb:10 md:pb:0 lg:pb:0"
@@ -273,7 +279,7 @@
           </section>
         </span>
 
-        <section class="d:flex ai:center jc:end mr:2 mt:5">
+        <section class="d:flex ai:center jc:end mr:2 mt:5 comment-box">
           <h1 class="d:none">댓글/좋아요 버튼</h1>
           <div class="d:flex fl-dir:column ai:center">
             <div class="icon icon:chats">
@@ -317,7 +323,7 @@
             </div>
             <div
               class="as:end font-size:1 color:base-4 ml:1"
-              th:text="${s.regDate}"
+              th:text="${#temporals.format(s.regDate,'yyyy-MM-dd HH:mm:ss')}"
             >
               10분 전
             </div>
@@ -338,7 +344,7 @@
           <div class="n-dropdown">
             <button class="cursor:pointer dropdown-btn">
               <span
-                class="icon icon:dots_three_outline_vertical_fill color-icon rg-comment-hover"
+                class="icon icon:dots_three_outline_vertical_fill color-icon rg-comment-hover shorts-content-dots"
               ></span>
             </button>
             <ul class="dropdown-list">
@@ -369,32 +375,41 @@
               </li>
 
               <li>
-                <form  id="form-name" class="px:2 py:1">
-                  <button   id="modal-btn" class="delete-btn va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2">
-                      삭제하기
+                <form id="form-name" class="px:2 py:1">
+                  <button
+                    id="modal-btn"
+                    class="delete-btn va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2"
+                  >
+                    삭제하기
                   </button>
-                  <input type="hidden" name="shorts-id" th:value="${s.id}"/>
+                  <input type="hidden" name="shorts-id" th:value="${s.id}" />
 
-
-<!--             모달창 -->
-
-
-
-
+                  <!--             모달창 -->
                 </form>
               </li>
-
             </ul>
-
           </div>
-          <section id="modal" class="n-modal d:none modal-transform-xy" tabindex="-1">
-            <h1 class="n-font:subtitle text-align:center">게시글을 정말 삭제 하시겠습니까 ?</h1>
+          <section
+            id="modal"
+            class="n-modal d:none modal-transform-xy"
+            tabindex="-1"
+          >
+            <h1 class="n-font:subtitle text-align:center">
+              게시글을 정말 삭제 하시겠습니까 ?
+            </h1>
             <div class="mt:4 d:flex">
-              <button id="ok-btn" type="button" class="n-btn w:2 mr:4">확인</button>
-              <button id="close-btn" type="button" class="n-btn w:2 bg-color:main-2">닫기</button>
+              <button id="ok-btn" type="button" class="n-btn w:2 mr:4">
+                확인
+              </button>
+              <button
+                id="close-btn"
+                type="button"
+                class="n-btn w:2 bg-color:main-2"
+              >
+                닫기
+              </button>
             </div>
           </section>
-
         </section>
 
         <!--             모달창 -->
@@ -547,7 +562,7 @@
           <!--                    </section>-->
         </span>
 
-        <section class="d:flex ai:center jc:end mr:2 mt:4">
+        <section class="d:flex ai:center jc:end mr:2 mt:4 cmt-like-section">
           <h1 class="d:none">댓글/좋아요 버튼</h1>
           <div class="d:flex fl-dir:column ai:center">
             <div
@@ -568,7 +583,7 @@
         </section>
 
         <section
-          class="comment-group box-shadow-custom translate-x-18px mt:2 d:none h:auto d:flex fl-dir:column bd-radius:6 p:3 lg:pos:absolute lg:bottom:0 lg:right:-5 lg:border lg:w:7 zi:4"
+          class="comment-group box-shadow-custom bg-color:sub-1 translate-x-18px mt:2 d:none h:auto d:flex fl-dir:column bd-radius:6 p:3 lg:pos:absolute lg:bottom:0 lg:right:-5 lg:border lg:w:7 zi:4"
         >
           <h1 class="d:none">북쇼츠 댓글</h1>
           <div
@@ -594,7 +609,8 @@
                 placeholder="댓글을 입력하세요 ! "
               ></textarea>
 
-              <button type="button" class="n-btn n-btn-color:main comment-reg">
+<!--              list2 에서는 disabled 필요 -->
+              <button type="button" class="n-btn n-btn-color:main comment-reg" >
                 등록
               </button>
             </form>
