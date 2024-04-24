@@ -70,4 +70,10 @@ public class BoardController {
 
         return "with/debate/board/detail";
     }
+
+    @GetMapping("/reg")
+    public String reg(){
+        
+        return "with/debate/board/reg";
+    }
 }
