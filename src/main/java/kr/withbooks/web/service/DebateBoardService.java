@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DebateBoardService {
 
-    List<DebateBoardView> getList(Long roomId);
+    List<DebateBoardView> getList(Long roomId, Long topicId);
 
     DebateBoardView getById(Long id);
 }

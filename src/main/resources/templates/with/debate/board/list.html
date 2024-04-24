@@ -23,9 +23,9 @@
                 <div class="d:flex jc:center">
                     <label class="d:none" for="lang">토론주제</label>
                     <select class="bd w:6" name="languages" id="lang"> <!--onchange="redirectToController(this.value)">-->
-                        <option class="" value="">토론주제</option>
-                        <option th:each="val : ${list}" th:data-roomId="${val.roomId}"
-                                th:value="${val.topicId}" th:utext="${val.topic}" th:selected="${selectedOption == val.topic}">재홍이는 바지인가</option>
+                        <option class="" value=" ">토론주제</option>
+                        <option th:each="val : ${topicList}" 
+                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>
                         <!--<option value="">경인이는 나카무라인가 무라카미인가</option>
                         <option value="">다진쓰는 진짜 깡패인가</option>-->
                     </select>
