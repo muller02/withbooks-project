@@ -37,17 +37,16 @@ public class BoardController {
             @RequestParam(name = "tid", required = false) Long topicId,
             Model model) {
 
-        System.out.println("roomId = " + roomId);
-        System.out.println("topicId = " + topicId);
-
-        List<DebateBoardView> list = debateBoardService.getList(roomId);
-        System.out.println("list: " + list);
+        List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
         model.addAttribute("list", list);
+
+        List<DebateTopic> topicList = debateTopicService.getList(roomId);
+        model.addAttribute("topicList", topicList);
+
 
         if (topicId != null) {
             DebateTopic findTopic = debateTopicService.getById(topicId);
-            System.out.println("findTopic: " + findTopic);
-            model.addAttribute("selectedOption", findTopic.getContent());
+            model.addAttribute("selectedOption", findTopic.getId());
         }
 
         return "with/debate/board/list";

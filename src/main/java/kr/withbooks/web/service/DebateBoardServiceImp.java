@@ -16,9 +16,9 @@ public class DebateBoardServiceImp implements DebateBoardService {
     private DebateBoardViewRepository debateBoardViewRepository;
 
     @Override
-    public List<DebateBoardView> getList(Long roomId) {
+    public List<DebateBoardView> getList(Long roomId, Long topicId) {
 
-        List<DebateBoardView> list = debateBoardViewRepository.findAllById(roomId);
+        List<DebateBoardView> list = debateBoardViewRepository.findAllById(roomId, topicId);
 
         return list;
     }

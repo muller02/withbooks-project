@@ -10,6 +10,9 @@
     *
   FROM debate_board_view
   where room_id = #{roomId}
+  <if test="topicId != null">
+    and topic_id = #{topicId}
+  </if>
 </select>
 
 <select id="findById" resultType="DebateBoardView">

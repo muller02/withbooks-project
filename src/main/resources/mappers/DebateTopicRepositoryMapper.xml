@@ -9,6 +9,11 @@
         where id = #{id}
     </select>
 
+    <select id="findAll">
+        select * from debate_topic
+        where room_id = #{roomId}
+    </select>
+
 
 
 
