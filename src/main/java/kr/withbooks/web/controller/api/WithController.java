@@ -19,8 +19,9 @@ public class WithController {
     @Autowired
     private WithService service;
     @GetMapping
-    List<WithView> list(@RequestParam(name = "c", required = false) Long[] categoryIds){
+    List<WithView> list(@RequestParam(name = "c", required = false) Long[] categoryIds,
+                        @RequestParam(name = "q" ,required = false) String query){
 
-        return service.getList(categoryIds);
+        return service.getList(categoryIds,query);
     }
 }
