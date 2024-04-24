@@ -41,8 +41,8 @@
     <h1 class="d:none">통합검색, 상세검색</h1>
     <!-- 통합 검색 -->
     <div class="d:flex pos:relative ai:center">
-      <input type="text" class="n-textbox n-textbox-type:outline text-align:center" placeholder="통합 검색" />
-      <button class="icon icon:magnifying_glass pos:absolute right:1 mr:2"></button>
+      <input type="text" class="query-search n-textbox n-textbox-type:outline text-align:center" placeholder="통합 검색" />
+      <button class="query-btn icon icon:magnifying_glass pos:absolute right:1 mr:2"></button>
     </div>
     <!-- 상세 검색 -->
     <div class="d:flex ai:center">
@@ -60,28 +60,35 @@
   <section class="search-box lg:pos:absolute top:2 mx:3 right:2 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">
 
     <!-- 상세 검색 창 -->
-    <ul class="w:full d:flex jc:start  px:3 flex-direction:column">
+    <div class=" w:full d:flex jc:start  px:3 flex-direction:column">
       <!-- 정렬 방법 -->
 
+      <div class="face-yn ">
       <div class="margin-right:8 ml:2 mb:1 ">대면 / 비대면</div>
       <!-- 대면 여부 -->
 
-      <ul class="d:flex ">
-        <li class="d:flex ai:center m:1">
-          <label class="n-toggle n-toggle-type:outline-box">
-            대면
-            <input type="radio" class="d:none" name="category" />
-          </label>
-        </li>
-        <li class="d:flex ai:center m:1">
-          <label class="n-toggle n-toggle-type:outline-box">
-            비대면
-            <input type="radio" class="d:none" name="category" />
-          </label>
-        </li>
-      </ul>
-    </ul>
+            <ul class="d:flex   ">
+              <li class="d:flex ai:center m:1">
+                <label class="n-toggle n-toggle-type:outline-box">
+                  전체
+                  <input type="radio" class="d:none" name="f" value=" " checked />
+                </label>
+              </li>
+              <li class="d:flex ai:center m:1">
+                <label class="n-toggle n-toggle-type:outline-box">
+                  대면
+                  <input type="radio" class="d:none" name="f" value="1" />
+                </label>
+              </li>
+              <li class="d:flex ai:center m:1">
+                <label class="n-toggle n-toggle-type:outline-box">
+                  비대면
+                  <input type="radio" class="d:none" name="f" value="0"/>
+                </label>
+              </li>
 
+          </ul>
+      </div>
     <!-- 카테고리 검색 -->
     <div id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5 px:3   ">
       <div class="d:flex ai:center mb:1">
