@@ -20,8 +20,11 @@ public class WithController {
     private WithService service;
     @GetMapping
     List<WithView> list(@RequestParam(name = "c", required = false) Long[] categoryIds,
-                        @RequestParam(name = "q" ,required = false) String query){
+                        @RequestParam(name = "q" ,required = false) String query,
+                        @RequestParam(name = "f", required = false) Long faceYn){
 
-        return service.getList(categoryIds,query);
+
+
+        return service.getList(categoryIds,query,faceYn);
     }
 }

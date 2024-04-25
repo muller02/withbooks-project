@@ -24,6 +24,13 @@
         <if test="query != null">
             and (name like '%${query}%' or location like '%${query}%')
         </if>
+
+        <if test="faceYn != null">
+            <if test="faceYn != 2">
+                and face_yn=#{faceYn}
+            </if>
+        </if>
+
     </where>
     group by
     b.id

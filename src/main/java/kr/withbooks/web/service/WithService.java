@@ -9,7 +9,7 @@ import java.util.List;
 public interface WithService {
     // 전체 목록 조회
 
-    List<WithView> getList(Long[] categoryId,String query);
+    List<WithView> getList(Long[] categoryId,String query,Long faceYn);
 
     void add(With with);
 

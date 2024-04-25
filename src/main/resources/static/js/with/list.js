@@ -4,27 +4,36 @@ window.addEventListener("load", function (e){
  const searchBtn=document.querySelector("#search-btn");
  const searchBox=document.querySelector(".search-box");
  const categorySection=document.querySelector("#category");
- const initIcon=categorySection.querySelector(".init-icon");
+ const initIcon=document.querySelector(".init-icon");
  const categoryList = categorySection.querySelector(".category-list");
  const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");
 
+
  const faceYnDiv = searchBox.querySelector(".face-yn");
+    const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
 
-
-
+    console.log(faceYnRadio[0])
 
  let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
+    let faceYn;
+    let query;
 
-
-    faceYnDiv.onclick=function (e) {
+    faceYnDiv.onclick=async function (e) {
 
         if (e.target.nodeName !== "INPUT")
             return;
+        faceYn = e.target.value;
 
-        let faceYn
-        faceYn  = e.target.value;
 
-console.log(faceYn);
+        //비동기 fetch 메소드 호출 및 GET 통신
+        let response = await getByParams(categoryIdArr, query, faceYn);
+
+        // 위드 리스트를 받아옴
+        let list = await response.json();
+
+        updateHTML(list);
+        console.log(faceYn);
+
     }
 
 
@@ -52,8 +61,13 @@ initIcon.onclick = async function (e) {
     categoryIdArr.length =0;
 
     //비동기 fetch 메소드 호출 및 GET 통신
-    let response = await getByParams(categoryIdArr,null);
+    let response = await getByParams(categoryIdArr,null,null);
 
+    for(let i of faceYnRadio){
+        i.checked=false
+    }
+
+    faceYnRadio[0].checked = true;
     // 위드 리스트를 받아옴
     let list = await response.json();
 
@@ -79,9 +93,9 @@ initIcon.onclick = async function (e) {
 
 // querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
     async function handleQuery() {
-        let query = querySearch.value;
+      query = querySearch.value;
         // 비동기 fetch 메소드 호출 및 GET 통신
-        let response = await getByParams(null, query);
+        let response = await getByParams(categoryIdArr, query,faceYn);
         // 위드 리스트를 받아옴
         let list = await response.json();
         updateHTML(list);
@@ -127,7 +141,7 @@ initIcon.onclick = async function (e) {
 
 
         //비동기 fetch 메소드 호출 및 GET 통신
-        let response = await getByParams(categoryIdArr);
+        let response = await getByParams(categoryIdArr,query,faceYn);
 
         // 위드 리스트를 받아옴
         let list = await response.json();
@@ -144,7 +158,7 @@ initIcon.onclick = async function (e) {
 
 
 //
-function getByParams(categoryIdArr, query) {
+function getByParams(categoryIdArr, query, faceYn) {
 
     let categoryIds = '';
 
@@ -161,18 +175,30 @@ function getByParams(categoryIdArr, query) {
 
     let url;
 
-    if (    (query && query !== '') && (categoryIdArr && categoryIdArr.length !== 0)) {
-        url = `/api/with?c=${categoryIds}&q=${query}`;
+        console.log('f=',faceYn);
+        console.log('q=' ,query)
+    console.log('c=' ,categoryIds)
 
-    } else if (categoryIdArr && categoryIdArr.length !== 0) {
-        url = `/api/with?c=${categoryIds}`;
+    if (    (query && query !== '') && (categoryIdArr && categoryIdArr.length !== 0) && (faceYn && faceYn !== '')) {
+        url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
+
+    } else if ((categoryIdArr && categoryIdArr.length !== 0)&&(faceYn && faceYn !== '')  ) {
+
+        console.log(232323);
+        url = `/api/with?f=${faceYn}&c=${categoryIds}`;
 
 
     }else if(query && query !== ''){
-        console.log('여기왔어요')
-
 
         url = `/api/with?q=${query}`;
+
+    }else if(categoryIdArr && categoryIdArr.length !== 0){
+        url = `/api/with?c=${categoryIds}`;
+    }
+    else if(faceYn && faceYn !== ''){
+        console.log('여기왔어요2')
+        url = `/api/with?f=${faceYn}`;
+
     }
     else {
         url = `/api/with`;
@@ -233,7 +259,7 @@ function updateHTML(list){
               <div class="d:flex gap:1 flex-direction:column flex-grow:1">
                 <div class="fs:6 fw:3 mb:2">
                   <a
-   
+                        href="/with/detail?id=${item.id}"
         
                   >
                    ${item.name}</a
