@@ -37,11 +37,11 @@
 <body>
 <main layout:fragment="main" class="flex-grow:1">
   <!-- 검색 섹션 -->
-  <section class="lg:w:7 p:3 d:flex ai:center br pt:5 pb:4 pl:3 pr:3">
+  <section class="p:3 d:flex ai:center br pt:5 pb:4 pl:3 pr:3">
     <h1 class="d:none">통합검색, 상세검색</h1>
     <!-- 통합 검색 -->
-    <div class="d:flex pos:relative ai:center">
-      <input type="text" class="query-search n-textbox n-textbox-type:outline text-align:center" placeholder="통합 검색" />
+    <div class="d:flex pos:relative ai:center flex-grow:1">
+      <input type="text" class="query-search n-textbox n-textbox-type:outline text-align:center " placeholder="통합 검색" />
       <button class="query-btn icon icon:magnifying_glass pos:absolute right:1 mr:2"></button>
     </div>
     <!-- 상세 검색 -->
@@ -51,24 +51,24 @@
       </button>
     </div>
 
-    <select name="space" id="pet-select" class="h:100p text-align:center">
-      <option value="m1">최신순</option>
-      <option value="m2">인기순</option>
-    </select>
+<!--    <select name="space" id="pet-select" class="h:100p text-align:center">-->
+<!--      <option value="m1">최신순</option>-->
+<!--      <option value="m2">인기순</option>-->
+<!--    </select>-->
   </section>
 
-  <section class="search-box lg:pos:absolute top:2 mx:3 right:2 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">
+  <section class="search-box lg:pos:absolute top:2 mx:3 right:1 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">
 
     <!-- 상세 검색 창 -->
     <div class=" w:full d:flex jc:start  p:3 flex-direction:column">
       <!-- 정렬 방법 -->
 
       <div class="ml:auto d:flex ai:center">
-        <span class="fs:3 fw:3">초기화</span>
+        <span class="fs:3 fw:3 color:main-5">초기화</span>
       <span class="init-icon icon icon:arrows_clockwise_fill icon-size:2 ml:auto"></span>
 
       </div>
-      <div class="face-yn  mb:3">
+      <div class="face-yn mb:3 ">
       <div class="margin-right:8 ml:2 mb:1 fw:3 ">대면 / 비대면</div>
       <!-- 대면 여부 -->
 
@@ -95,7 +95,7 @@
           </ul>
       </div>
     <!-- 카테고리 검색 -->
-    <div id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5    ">
+    <div id="category" class=" d:flex fl-dir:column lg:w:7     ">
       <div class="d:flex ai:center mb:1">
         <div class="margin-right:8 ml:2 fw:3">카테고리</div>
 
