@@ -1,10 +1,8 @@
 package kr.withbooks.web.controller.with.debate;
 
-import kr.withbooks.web.entity.*;
-import kr.withbooks.web.service.BookService;
-import kr.withbooks.web.service.DebateBoardService;
-import kr.withbooks.web.service.DebateRoomService;
-import kr.withbooks.web.service.DebateTopicService;
+import java.io.File;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.DebateAttachment;
+import kr.withbooks.web.entity.DebateBoard;
+import kr.withbooks.web.entity.DebateBoardView;
+import kr.withbooks.web.entity.DebateRoom;
+import kr.withbooks.web.entity.DebateTopic;
+import kr.withbooks.web.service.BookService;
+import kr.withbooks.web.service.DebateBoardService;
+import kr.withbooks.web.service.DebateRoomService;
+import kr.withbooks.web.service.DebateTopicService;
 
 @Controller
 @RequestMapping("/with/debate/board")
@@ -73,7 +82,53 @@ public class BoardController {
 
     @GetMapping("/reg")
     public String reg(){
-        
-        return "with/debate/board/reg";
+
+        return "with/debate/board/reg"; 
+    }
+
+    @PostMapping("/reg")
+    public String reg(
+        @RequestParam(name = "files", required = false) List<MultipartFile> files, 
+        Long roomId,
+        Long topicId,
+        String title,
+        String content,
+        // @RequestParam(name = "text-area", required = false) String content,
+        // @RequestParam(required = false , name = "book-id") Long bookId,
+        HttpServletRequest request){
+
+
+
+        // DebateBoard board = DebateBoard.builder().roomId(roomId).topicId(topicId).title(title).content(content).userId(4L).build();
+
+        // String fileName = null;
+
+        // String fileFullPath = null;
+
+        // for(int i=0; i<files.size(); i++){
+
+        //     if (!files.get(i).isEmpty()) {
+
+        //         fileName = files.get(i).getOriginalFilename();
+
+        //         String path = "/image/debate";
+        //         String realPath = request.getServletContext().getRealPath(path);
+        //         File file = new File(realPath);
+        //         if(!file.exists())
+        //             file.mkdirs();              
+
+        //         File filePath = new File(realPath+File.separator+fileName);
+                
+        //         files.get(i).transferTo(filePath);
+                
+            
+        //         DebateAttachment debateAttachment = DebateAttachment.builder().
+        //         //for문을 돌면서 다중 파일 이미지 이름을 db(shorts_attachment)에 저장
+        //         // DebateAttachmentService.add(shortsAttachment);
+        //     }
+        // }
+   
+        return "redirect:/with/debate/board/list";
+
     }
 }
