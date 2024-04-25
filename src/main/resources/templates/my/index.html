@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            --width-2:80px;
+            --height-2:80px;
+        }
+    </style>
+</head>
+<body>
+    <main layout:fragment="main" class="flex-grow:1">
+        <section class="bg-color:main-1 bd-radius:8 px:5 py:4">
+            <h1 class="d:none">내 정보</h1>
+            <div>
+                <span class="d:flex ai:center">
+                    <div><img class="w:2 h:2" src="/image/my/profile.png" alt="프로필 사진"></div>
+                    <div class="fs:6 fw:3 ml:3">뉴렉이</div>
+                    <div class="ml:auto as:start"><a class="fs:2 color:base-7" href="">프로필 관리</a></div>
+                </span>
+                <div class="fs:3 mt:4 color:base-7">안녕하세요. 뉴렉이입니다.</div>
+            </div>
+        </section>
+        <section>
+            <h1 class="d:none">메뉴 리스트</h1>
+            <ul class="d:flex fl-dir:column ai:start">
+                <li><a class="deco icon:bell deco-size:4 deco-mr:5 fs:2 mt:3" href="">알림</a></li>
+                <li><a class="deco icon:sign_out deco-size:4 deco-mr:5 fs:2 mt:3" href="">로그아웃</a></li>
+                <li><a class="deco icon:envelope_simple deco-size:4 deco-mr:5 fs:2 mt:3" href="">문의하기</a></li>
+                <li><a class="deco icon:gear_six deco-size:4 deco-mr:5 fs:2 mt:3" href="">환경설정</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
