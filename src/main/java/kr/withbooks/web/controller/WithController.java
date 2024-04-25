@@ -38,7 +38,8 @@ public class WithController {
 
     public String list(Model model,
                        @RequestParam(name = "c", required = false) Long[] categoryIds,
-                       @RequestParam(name = "q", required = false) String query) {
+                       @RequestParam(name = "q", required = false) String query,
+                       @RequestParam(name = "f" , required = false) Long faceYn) {
 
         //카테고리 모델 얻기
         List<Category> categoryList = categoryService.getList();
@@ -46,7 +47,7 @@ public class WithController {
 
 
         //  WithView list 얻기
-        List<WithView> list = service.getList(categoryIds,query);
+        List<WithView> list = service.getList(categoryIds,query,faceYn);
 
         //service 로 이동 시킴 why ? Api에서도 사용해야 하므로
 //        // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을

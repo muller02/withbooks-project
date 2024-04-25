@@ -60,18 +60,23 @@
   <section class="search-box lg:pos:absolute top:2 mx:3 right:2 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">
 
     <!-- 상세 검색 창 -->
-    <div class=" w:full d:flex jc:start  px:3 flex-direction:column">
+    <div class=" w:full d:flex jc:start  p:3 flex-direction:column">
       <!-- 정렬 방법 -->
 
-      <div class="face-yn ">
-      <div class="margin-right:8 ml:2 mb:1 ">대면 / 비대면</div>
+      <div class="ml:auto d:flex ai:center">
+        <span class="fs:3 fw:3">초기화</span>
+      <span class="init-icon icon icon:arrows_clockwise_fill icon-size:2 ml:auto"></span>
+
+      </div>
+      <div class="face-yn  mb:3">
+      <div class="margin-right:8 ml:2 mb:1 fw:3 ">대면 / 비대면</div>
       <!-- 대면 여부 -->
 
             <ul class="d:flex   ">
               <li class="d:flex ai:center m:1">
                 <label class="n-toggle n-toggle-type:outline-box">
                   전체
-                  <input type="radio" class="d:none" name="f" value=" " checked />
+                  <input type="radio" class="d:none" name="f" value="2" checked />
                 </label>
               </li>
               <li class="d:flex ai:center m:1">
@@ -90,10 +95,10 @@
           </ul>
       </div>
     <!-- 카테고리 검색 -->
-    <div id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5 px:3   ">
+    <div id="category" class=" d:flex fl-dir:column lg:w:7 lg:p:5    ">
       <div class="d:flex ai:center mb:1">
-        <div class="margin-right:8 ml:2">카테고리</div>
-        <div class="init-icon icon icon:arrows_clockwise_fill icon-size:2"></div>
+        <div class="margin-right:8 ml:2 fw:3">카테고리</div>
+
       </div>
       <div class="rg:mt:3">
         <div class="category-list d:flex fl-wrap:wrap">
@@ -103,14 +108,14 @@
           </label>
         </div>
 
-        <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">
-          <button type="button" class="n-btn n-btn-type:outline flex-grow:1">
-            취소
-          </button>
-          <button type="button" class="n-btn n-btn-type:filled flex-grow:1">
-            완료
-          </button>
-        </div>
+          <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">
+            <button type="button" class="n-btn n-btn-type:outline flex-grow:1">
+              취소
+            </button>
+            <button type="button" class="n-btn n-btn-type:filled flex-grow:1">
+              완료
+            </button>
+          </div>
       </div>
     </div>
   </section>
