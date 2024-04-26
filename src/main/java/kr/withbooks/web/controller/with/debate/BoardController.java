@@ -81,7 +81,12 @@ public class BoardController {
     }
 
     @GetMapping("/reg")
-    public String reg(){
+    public String reg(
+        @RequestParam(name = "rid") Long roomId,
+        Model model){
+
+        List<DebateTopic> topicList = debateTopicService.getList(roomId);
+        model.addAttribute("topicList", topicList);
 
         return "with/debate/board/reg"; 
     }

@@ -10,5 +10,10 @@
 }
 
 
+.icon\:new-label::before,
+.icon\:new-label::after{
+    -webkit-mask-image: url("/icon/new-label.svg");
+    mask-image: url("/icon/new-label.svg");
+}
 
 /* 아이콘 오버라이딩 시 , before after 둘 다 해야함 */
