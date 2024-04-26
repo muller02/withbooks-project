@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            --color-base-3:var(--color-base-2);
+        }
+        img{
+            --width-1:36px;
+            --height-1:36px;
+
+            --width-2:125px;
+            --height-2:125px;
+        }
+    </style>
+</head>
+<body>
+    <main layout:fragment="main" class="flex-grow:1 ">
+        <section class="d:flex jc:center pb:10">
+            <h1 class="d:none">프로필 이미지</h1>
+            <span class="pos:relative">
+                <div><img class="h:2 w:2" src="/image/my/profile.png" alt=""></div>
+                <div class="pos:absolute bottom:1 right:1"><img class="h1: w:1" src="/icon/pencil.svg" alt="연필아이콘"></div>
+            </span>
+        </section>
+        <section id="profile-manage">
+            <h1 class="fs:7 fw:3 color:base-8 pb:6">프로필 관리</h1>
+            <div>
+                <span class="d:flex ai:center">
+                    <label class="fs:4 color:base-8 w:5 max-w:10">닉네임</label>
+                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                </span>
+                <span class="d:flex ai:start mt:4">
+                    <label class="fs:4 color:base-8">소개</label>
+                    <div class="flex-grow:1 js:end"><textarea class="fs:5 w:10p h:3 bd-bottom" name="" id="" cols="30" rows="10"></textarea></div>
+                </span>
+                <span class="d:flex ai:center mt:4">
+                    <label class="fs:4 color:base-8">생년월일</label>
+                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                </span>
+                <span class="d:flex ai:center mt:4">
+                    <label class="fs:4 color:base-8">성별</label>
+                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                </span>
+            </div>
+        </section>
+        <section>
+            <h1 class="fs:7 fw:3 color:base-8 pb:6">로그인 관리</h1>
+            <div>
+                <div>
+                    <label class="fs:4 color:base-8">아이디</label>
+                    <div><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                </div>
+                <div><a class="fs:4 fw:3 color:base-8 deco icon:key deco-mr:5" href="">비밀번호 변경하기</a></div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
