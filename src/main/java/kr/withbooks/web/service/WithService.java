@@ -15,4 +15,6 @@ public interface WithService {
 
     With get(Long withId);
 
+
+    boolean getName(String withName);
 }

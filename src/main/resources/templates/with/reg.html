@@ -17,9 +17,9 @@
         color: var(--color-base-9);
       }
 
-      /* 깃 테스트 용!!! */
+
       input[type="text"]:invalid , input[type=number]:invalid{
-        border-color: var(--color-main-4);
+        border-color: var(--color-base-4);
       }
 
       .with-name label::after {
@@ -31,7 +31,7 @@
       }
       .with-name label:has(input:invalid)::after {
         content: "두 글자 이상 입력 필수입니다.";
-        color: red;
+        color: var(--color-main-5);
       }
 
       .with-member label::after {
@@ -48,13 +48,23 @@
       .placeholder-center::placeholder {
         text-align: center;
       }
+
+     #with-reg .n-textbox {
+
+        --textbox-border-color-focus: var(--color-main-5);
+
+      }
+     #with-reg .n-toggle-type\:outline-box{
+       border: none
+     ;
+     }
     </style>
     <script src="/js/with/reg.js"></script>
   </head>
 
   <body>
     <main layout:fragment="main" class="n-container mx:auto">
-      <section class="pb:4 pt:4 pl:4 pr:4 with-reg-page">
+      <section class="pb:4 pt:4 pl:4 pr:4 with-reg-page" id="with-reg">
         <h1 class="d:none">위드 등록 페이지</h1>
         <form
           action="/with/reg"
@@ -102,7 +112,7 @@
                     class="d:none"
                     name="faceYn"
                     value="1"
-                    checked
+
                   />
                 </label>
               </li>
@@ -137,14 +147,21 @@
                   name="name"
                 />
               </label>
-              <button  class="n-btn  bg-color:main-3 ml:5">중복확인</button>
+              <button  class="valid-btn n-btn  bg-color:base-5 ml:5 fw:1 ">중복확인</button>
             </div>
+            <div class="name-alert-true color:accent-1 d:none">
+              이미 사용중인 위드명입니다.
+            </div>
+
+            <div class="name-alert-false color:main-5 d:none">
+              좋은 위드명이네요 !
+                  </div>
           </section>
 
           <section
             class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 category-section"
           >
-            <div class="mb:2 fw:3">주요 카테고리</div>
+            <div class="mb:2 fs:3 fw:3">주요 카테고리<span class="color:base-5 fs:2 fw:1"> (최대 3개)</span> </div>
             <ul class="w:full d:flex jc:start gap:2 fl-wrap:wrap">
               <li th:each=" c : ${categories}">
                 <label class="n-toggle n-toggle-type:outline-box">
@@ -164,28 +181,31 @@
             </div>
           </section>
 
-          <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
-            <h1 class="d:none">토론주기</h1>
-            <div class="mb:2 fw:3">토론 주기</div>
-            <span> 월 </span>
-            <input
-              type="number"
-              class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 text-align:center mr:1 ml:1"
-              min="1"
-              max="50"
-              name="interval"
-              required
-            />
-            <span> 회</span>
 
-            <!--                <select name="interval" id="" class="with-reg-select-component">-->
-            <!--                    <option value="m1">월 1회</option>-->
-            <!--                    <option value="m2">월 2회</option>-->
-            <!--                    <option value="m2d1">2개월 1회</option>-->
-            <!--                    <option value="m3d2">3개월 1회</option>-->
-            <!--                    <option value="oth">기타</option>-->
-            <!--                </select>-->
+
+
+          <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
+
+            <div class="mb:2 fw:3">토론 주기</div>
+
+            <label>
+              <div>
+                <input
+                        type="number"
+                        class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 text-align:center mr:1 ml:1"
+                        min="1"
+                        max="50"
+                        name="interval"
+                        required
+                />
+                <span> 회</span>
+                <div class="interval-alert color:accent-1 d:none">
+                  최대 50회 까지 입력 가능합니다.
+                </div>
+              </div>
+            </label>
           </section>
+
 
           <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
             <div class="mb:2 fw:3">위드 정원</div>
@@ -201,6 +221,9 @@
                   required
                 />
                 <span> 명</span>
+                <div class="personnel-alert color:accent-1 d:none">
+                  최대 100명 까지 입력 가능합니다.
+                </div>
               </div>
             </label>
           </section>
@@ -253,7 +276,7 @@
             <h1 class="d:none">위드소개</h1>
             <div class="mb:2 fw:3">위드소개(선택)</div>
             <div class="d:flex ai:center">
-              <textarea id="with-intro" class="n-textbox min-h:2 px:3 py:3" placeholder="위드를 간단히 소개 해보세요 !" name="intro"></textarea>
+              <label for="with-intro"></label><textarea id="with-intro" class="n-textbox  px:3 py:3 overflow:hidden	" placeholder="위드를 간단히 소개 해보세요 !" name="intro"></textarea>
 
 
             </div>

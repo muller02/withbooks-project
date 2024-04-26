@@ -57,4 +57,12 @@ public class WithServiceImp implements WithService {
         return with;
     }
 
+    @Override
+    public boolean getName(String withName) {
+
+        With with = repository.findByName(withName);
+
+        return with != null;
+    }
+
 }

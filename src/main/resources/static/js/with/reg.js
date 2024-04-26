@@ -1,3 +1,104 @@
+
+window.addEventListener("load",function (){
+    const withReg=document.querySelector("#with-reg")
+
+    const validBtn = withReg.querySelector(".valid-btn");
+
+    const nameAlertTrue = withReg.querySelector(".name-alert-true");
+    const nameAlertFalse = withReg.querySelector(".name-alert-false");
+
+    const withNameInput = withReg.querySelector("input[name='name']");
+
+
+
+    console.log(nameAlertFalse)
+    validBtn.onclick = async (e) => {
+
+        e.preventDefault();
+
+        let withName = withNameInput.value;
+
+        let url = "/api/with/check-name?n=" + withName;
+        let checkName;
+
+        await fetch(url).then(response => {
+
+                return response.text(); // 응답으로부터 텍스트 데이터를 반환합니다
+            }
+        ).then(data => {
+
+            checkName = data;
+        })
+
+        console.log(checkName);
+
+        if (checkName === 'true') {
+            nameAlertTrue.classList.remove("d:none")
+            nameAlertFalse.classList.add("d:none");
+        } else {
+            nameAlertFalse.classList.remove("d:none");
+            nameAlertTrue.classList.add("d:none")
+        }
+        withNameInput.addEventListener("input",function (e){
+
+            nameAlertTrue.classList.add("d:none");
+            nameAlertFalse.classList.add("d:none");
+
+        })
+
+
+    }
+
+})
+
+// 위듸소개 유효성
+window.addEventListener("load", function () {
+    const withIntro=document.querySelector("#with-intro")
+
+    withIntro.oninput = function (e){
+        withIntro.style.height = 'auto';
+        withIntro.style.height = (withIntro.scrollHeight) + 'px';
+
+    }
+
+})
+
+// 위드 정원 유효성 검사
+window.addEventListener("load", function (e){
+    const withReg=document.querySelector("#with-reg")
+    const personnelInput=withReg.querySelector("input[name='personnel']")
+    const personnelAlert=withReg.querySelector(".personnel-alert");
+
+    personnelInput.oninput=function (e) {
+        if(personnelInput.value>100){
+            personnelAlert .classList.remove("d:none");
+        } else{
+            personnelAlert.classList.add("d:none")
+            }
+    }
+
+
+
+})
+
+
+// 토론 횟수 유효성 검사
+window.addEventListener("load",function (e){
+const withReg=document.querySelector("#with-reg")
+const intervalInput=withReg.querySelector("input[name='interval']")
+const intervalAlert = withReg.querySelector(".interval-alert");
+intervalInput.oninput=function () {
+    if(intervalInput.value>50) {
+
+        intervalAlert.classList.remove("d:none");
+    }else{
+        intervalAlert.classList.add("d:none");
+    }
+}
+
+})
+
+
 window.addEventListener("load", function (){
 
 // 위드 등록 카테고리 체크박스 갯수 제한 3개
@@ -37,11 +138,18 @@ window.addEventListener("load", function (){
     }
 
 
+
+
+
+
+
+
+
+
 })
 
-
+// 위드 등록 카테고리 체크박스 갯수 제한 3개
 window.addEventListener("load", function () {
-    // 위드 등록 카테고리 체크박스 갯수 제한 3개
     // for 문, checked 하기 ,
     const categorySection = document.querySelector(".category-section");
     const categoryAlert = categorySection.querySelector(".category-alert");
@@ -72,6 +180,7 @@ window.addEventListener("load", function () {
     };
 });
 
+// 위드 이미지 미리보기
 window.addEventListener("load", function (e) {
     const imgInput = document.querySelector("input[type='file']");
     const preViewImg = document.querySelector(".preview-img");

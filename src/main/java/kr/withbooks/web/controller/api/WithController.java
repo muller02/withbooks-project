@@ -5,10 +5,7 @@ import kr.withbooks.web.entity.WithView;
 import kr.withbooks.web.service.WithCategoryService;
 import kr.withbooks.web.service.WithService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,15 @@ public class WithController {
 
 
         return service.getList(categoryIds,query,faceYn);
+    }
+
+
+
+    @GetMapping("check-name")
+    boolean checkWithName(@RequestParam(name = "n", required = false) String withName){
+
+            boolean checkName = service.getName(withName);
+
+        return checkName;
     }
 }

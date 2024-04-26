@@ -13,4 +13,6 @@ public interface WithRepository {
     void save(With with);
 
     With findById(Long wihtId);
+
+    With findByName(String withName);
 }
