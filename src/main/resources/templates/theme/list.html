@@ -12,14 +12,19 @@
 </head>
 <body>
     <main layout:fragment="main" class="d:flex flex-direction:column px:3 py:4 w:10p">
+        
         <div class="w:10p">
-            <label class="fs:4 deco icon:bell deco-mr:3 w:10p">
-                모든 알림
-                <input type="checkbox" class="n-toggle ml:auto" />
+            <label class="fs:4 deco icon:moon deco-mr:5 w:10p">
+                어두운 테마
+                <input class="ml:auto" type="radio" name="theme"/>
             </label>
         </div>
-        <div class="fs:4 fs:4 deco icon:palette deco-mr:5 mt:5"><a href="">테마 색상</a></div>
-        <div class="fs:4 fs:4 deco icon:text_aa deco-mr:5 mt:5"><a href="">글씨크기/글씨체</a></div>
+        <div class="w:10p mt:5">
+            <label class="fs:4 deco icon:sun deco-mr:5 w:10p">
+                밝은 테마
+                <input class="ml:auto" type="radio" name="theme"/>
+            </label>
+        </div>
     </main>
 </body>
 </html>
