@@ -59,9 +59,13 @@
 
                 color: var(--color-base-9);
             }
+            .background-theme-color{
+                background-color: var(--background-theme-color);
+            }
         </style>
+        <script type="module" src="/js/theme.js"></script>
     </head>
-    <body>
+    <body class="background-theme-color">
         <div class="md:d:flex lg:d:flex min-height:100vh">
             <!-- header부분 -->
             <div th:replace="~{inc/header}"></div>

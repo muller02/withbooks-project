@@ -60,6 +60,11 @@
     --rgb-sub-6:57, 157, 157;
 
 
+    /*=====================theme-color=============== */
+
+    --background-theme-color:#ffffff;
+
+
     /*=====================box-shadow=============== */
 
     --box-shadow-1: 2px 14px 4px 0px rgba(157, 157, 157, 0.08); 
