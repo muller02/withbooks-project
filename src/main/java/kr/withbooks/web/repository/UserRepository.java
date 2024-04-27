@@ -9,4 +9,6 @@ public interface UserRepository {
     
 
     User findByEmail(String email);
+
+    User findById(Long userId);
 }
