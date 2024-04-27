@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+    <style>
+        .Noto-Sans-KR{
+            font-family: "Noto Sans KR", sans-serif;
+            font-size: 15px;
+
+            color: var(--color-base-9);
+        }
+        #Hi-Melody{
+            font-family: "Hi Melody", sans-serif !important; 
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+    </style>
+</head>
+<body>
+    <main layout:fragment="main" class="d:flex flex-direction:column px:3 py:4 w:10p">
+        
+        <div class="Noto-Sans-KR w:10p">
+            <label class="fs:4 deco icon:moon deco-mr:5 w:10p">
+                Noto Sans KR 가나다
+                <input class="ml:auto" type="radio" name="theme"/>
+            </label>
+        </div>
+        <div id="Hi-Melody" class="Hi-Melody w:10p">
+            <label class="fs:4 deco icon:moon deco-mr:5 w:10p">
+                Hi Melody 가나다
+                <input class="ml:auto" type="radio" name="theme"/>
+            </label>
+        </div>
+    </main>
+</body>
+</html>
