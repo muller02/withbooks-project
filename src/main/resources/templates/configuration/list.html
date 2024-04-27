@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main layout:fragment="main" class="d:flex flex-direction:column px:3 py:4 w:10p">
+        <span class="d:flex">
+            <div class="w:10p">
+                <label class="fs:4 deco icon:bell w:10p">
+                    모든 알림
+                    <input type="checkbox" class="n-toggle ml:auto" />
+                </label>
+            </div>
+        </span>
+        <div class="fs:4 fs:4 deco icon:palette mt:5">테마 색상</div>
+        <div class="fs:4 fs:4 deco icon:text_aa mt:5">글씨크기/글씨체</div>
+    </main>
+</body>
+</html>
