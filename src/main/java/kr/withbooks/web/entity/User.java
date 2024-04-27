@@ -16,7 +16,7 @@ public class User {
     private String password;
     private int gender;
     private String nickname;
-    private LocalDateTime brithDate;
+    private LocalDateTime birthDate;
     private LocalDateTime joinDate;
     private int withdrawStatus;
     private int notiYn;

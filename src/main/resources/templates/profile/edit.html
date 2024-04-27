@@ -40,19 +40,19 @@
             <div>
                 <span class="d:flex ai:center">
                     <div class="w:2"><label class="fs:4 color:base-8 w:5 max-w:10">닉네임</label></div>
-                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text" th:value="${user.nickname}"></div>
                 </span>
                 <span class="d:flex ai:start mt:8">
                     <div class="w:2"><label class="fs:4 color:base-8">소개</label></div>
-                    <div class="flex-grow:1 js:end"><textarea class="fs:5 w:10p h:2 bd-bottom" name="" id="" cols="30" rows="10"></textarea></div>
+                    <div class="flex-grow:1 js:end"><textarea class="fs:5 w:10p h:2 bd-bottom" name="" id="" cols="30" rows="10" th:value="${user.intro}"></textarea></div>
                 </span>
                 <span class="d:flex ai:center mt:8">
                     <div class="w:2"><label class="fs:4 color:base-8">생년월일</label></div>
-                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text" th:value="${user.birthDate}"></div>
                 </span>
                 <span class="d:flex ai:center mt:8">
                     <div class="w:2"><label class="fs:4 color:base-8">성별</label></div>
-                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                    <div class="flex-grow:1 js:end"><input class="n-textbox n-textbox-type:underline fs:5" type="text" th:value="${user.gender}"></div>
                 </span>
             </div>
         </section>
@@ -61,7 +61,7 @@
             <div>
                 <div>
                     <label class="fs:4 color:base-8">아이디</label>
-                    <div class="mt:5"><input class="n-textbox n-textbox-type:underline fs:5" type="text"></div>
+                    <div class="mt:5"><input class="n-textbox n-textbox-type:underline fs:5" type="text" th:value="${user.email}"></div>
                 </div>
                 <div class="mt:7"><a class="fs:4 fw:3 color:base-8 deco icon:key deco-mr:5" href="">비밀번호 변경하기</a></div>
             </div>

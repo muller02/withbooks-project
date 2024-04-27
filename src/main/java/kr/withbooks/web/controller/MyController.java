@@ -25,7 +25,7 @@ public class MyController {
         // userId = userDetails.getId();
         User user = userService.getById(userId);
 
-        // 근데 유저의 알림의 수를  NotificationService 에게 얻어오는게 맞나? 유저 관련이니까 UserService에서 해야하는거 아닌가?
+        // 근데 유저의 알림의 수를  NotificationService 에게 얻어오는게 맞나? 유저의 알림 관련이니까 UserService에서 해야하는거 아닌가?
         // 그래서 NotificationService대신 UserService에게 얻어왔다.(질문 후 수정필요하면 수정하자)
         // int notiCnt = notificationService.getNotiCount();
         int notiCnt = userService.getNotiCount(userId);
