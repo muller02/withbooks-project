@@ -7,5 +7,7 @@ public interface UserService {
     User getById(Long userId);
 
     int getNotiCount(Long userId);
+
+    void modify(User user);
     
 }

@@ -27,5 +27,10 @@ public class UserServiceImp implements UserService{
         int notiCnt = notificationRepository.countById(userId);
         return notiCnt;
     }
+
+    @Override
+    public void modify(User user) {
+        repository.update(user);
+    }
     
 }

@@ -3,8 +3,8 @@ package kr.withbooks.web.entity;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import groovy.transform.builder.Builder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
