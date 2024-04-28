@@ -15,6 +15,9 @@ public class DebateBoardServiceImp implements DebateBoardService {
     @Autowired
     private DebateBoardViewRepository debateBoardViewRepository;
 
+    @Autowired
+    private DebateBoardRepository debateBoardRepository;
+
     @Override
     public List<DebateBoardView> getList(Long roomId, Long topicId) {
 
@@ -29,6 +32,13 @@ public class DebateBoardServiceImp implements DebateBoardService {
         DebateBoardView DebateBoardView = debateBoardViewRepository.findById(id);
 
         return DebateBoardView;
+    }
+
+    @Override
+    public Long save(DebateBoard debateBoard) {
+
+        debateBoardRepository.save(debateBoard);
+        return debateBoard.getId();
     }
 
 

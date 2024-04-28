@@ -1,15 +1,16 @@
 package kr.withbooks.web.controller.with.debate;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import kr.withbooks.web.service.*;
+import kr.withbooks.web.util.FileStore;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,11 +20,8 @@ import kr.withbooks.web.entity.DebateBoard;
 import kr.withbooks.web.entity.DebateBoardView;
 import kr.withbooks.web.entity.DebateRoom;
 import kr.withbooks.web.entity.DebateTopic;
-import kr.withbooks.web.service.BookService;
-import kr.withbooks.web.service.DebateBoardService;
-import kr.withbooks.web.service.DebateRoomService;
-import kr.withbooks.web.service.DebateTopicService;
 
+@Slf4j
 @Controller
 @RequestMapping("/with/debate/board")
 public class BoardController {
@@ -39,6 +37,12 @@ public class BoardController {
 
     @Autowired
     private DebateTopicService debateTopicService;
+
+    @Autowired
+    private DebateAttachmentService debateAttachmentService;
+
+    @Autowired
+    private FileStore fileStore;
 
     @GetMapping("/list")
     public String list(
@@ -93,46 +97,29 @@ public class BoardController {
 
     @PostMapping("/reg")
     public String reg(
-        @RequestParam(name = "files", required = false) List<MultipartFile> files, 
-        Long roomId,
-        Long topicId,
-        String title,
-        String content,
-        // @RequestParam(name = "text-area", required = false) String content,
-        // @RequestParam(required = false , name = "book-id") Long bookId,
-        HttpServletRequest request){
+            @ModelAttribute BoardForm boardForm,
+            @RequestParam("rid") Long roomId,
+            HttpServletRequest request) throws IOException {
 
+        Long userId = 4L;
 
+        // board
+        DebateBoard board = DebateBoard.builder()
+                .roomId(roomId)
+                .userId(userId)
+                .title(boardForm.getTitle())
+                .content(boardForm.getContent())
+                .topicId(boardForm.getTopicId())
+                .build();
 
-        // DebateBoard board = DebateBoard.builder().roomId(roomId).topicId(topicId).title(title).content(content).userId(4L).build();
+        Long boardId = debateBoardService.save(board);
+        log.info("board id is {}", boardId);
 
-        // String fileName = null;
+        List<DebateAttachment> debateAttachments = fileStore.storeFiles(boardForm.getFiles(), request);
+        log.info("debateAttachments is {}", debateAttachments);
 
-        // String fileFullPath = null;
+        debateAttachmentService.add(boardId, debateAttachments);
 
-        // for(int i=0; i<files.size(); i++){
-
-        //     if (!files.get(i).isEmpty()) {
-
-        //         fileName = files.get(i).getOriginalFilename();
-
-        //         String path = "/image/debate";
-        //         String realPath = request.getServletContext().getRealPath(path);
-        //         File file = new File(realPath);
-        //         if(!file.exists())
-        //             file.mkdirs();              
-
-        //         File filePath = new File(realPath+File.separator+fileName);
-                
-        //         files.get(i).transferTo(filePath);
-                
-            
-        //         DebateAttachment debateAttachment = DebateAttachment.builder().
-        //         //for문을 돌면서 다중 파일 이미지 이름을 db(shorts_attachment)에 저장
-        //         // DebateAttachmentService.add(shortsAttachment);
-        //     }
-        // }
-   
         return "redirect:/with/debate/board/list";
 
     }

@@ -4,10 +4,34 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.DebateBoardRepository">
 
+    <!-- 테이블 전체 컬럼 -->
+    <sql id="debateBoard">
+        id
+        , room_id
+        , user_id
+        , title
+        , content
+        , reg_date
+        , blind_yn
+        , topic_id
+    </sql>
 
 
-
-
+    <!-- 게시글 저장 -->
+    <insert id="save" parameterType="DebateBoard" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO debate_board (
+        <include refid="debateBoard" />
+        ) VALUES (
+        #{id}
+        , #{roomId}
+        , #{userId}
+        , #{title}
+        , #{content}
+        , NOW()
+        , 0
+        , #{topicId}
+        )
+    </insert>
 
 </mapper>
 
