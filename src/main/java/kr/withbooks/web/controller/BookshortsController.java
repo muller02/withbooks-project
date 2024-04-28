@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,9 +44,15 @@ public class BookshortsController {
 
 
     @GetMapping("list")
-    public String list(Model model, @RequestParam(name = "id", required = false) Long bookId) {
+    public String list(Model model, @RequestParam(name = "id", required = false) Long bookId,
+                       @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        List<BookshortsView> list = service.getView(bookId);
+        Long userId = null;
+        if(userDetails != null)
+            userId = userDetails.getId();
+
+        System.out.println("딸기 = " + userId);
+        List<BookshortsView> list = service.getView(bookId,userId);
         // System.out.println(list);
 
 
@@ -61,6 +70,7 @@ public class BookshortsController {
             }
         }
 
+        System.out.println("복숭아 = "  + list);
         model.addAttribute("list", list);
 
         return "shorts/list";

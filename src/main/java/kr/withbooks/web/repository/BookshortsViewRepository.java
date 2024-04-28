@@ -9,5 +9,5 @@ import kr.withbooks.web.entity.BookshortsView;
 @Mapper
 public interface BookshortsViewRepository {
     
-    List<BookshortsView> findAll(Long bookId);
+    List<BookshortsView> findAll(Long bookId, Long userId);
 }

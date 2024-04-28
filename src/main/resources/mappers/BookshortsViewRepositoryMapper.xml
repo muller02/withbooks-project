@@ -5,9 +5,11 @@
 <mapper namespace="kr.withbooks.web.repository.BookshortsViewRepository">
 
 	<select id="findAll" resultType="BookshortsView" >
-		select 
-			* 
-		from shorts_view
+
+		select sv.*,
+		IF(sl.user_id IS NULL, 0, 1) AS liked
+		from shorts_view sv left join shorts_like sl
+		on sv.id =sl.shorts_id and sl.user_id = #{userId}
 		 <where>
         <if test="bookId != null">
             book_id = ${bookId}

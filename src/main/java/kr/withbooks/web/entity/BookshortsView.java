@@ -28,4 +28,5 @@ public class BookshortsView {
     private String userNickname;
     private String userImg;
     private String bookTitle;
+    private String liked;
 }
