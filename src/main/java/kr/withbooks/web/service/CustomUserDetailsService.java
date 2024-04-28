@@ -34,7 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         userDetails.setIntro(user.getIntro());
         userDetails.setImg(user.getImg());
         userDetails.setJoinDate(user.getJoinDate());
-        userDetails.setBrithDate(user.getBrithDate());
+        userDetails.setBrithDate(user.getBirthDate());
+
+        userDetails.setBrithDate(user.getBirthDate());
 
 
 //        if (user != null) {

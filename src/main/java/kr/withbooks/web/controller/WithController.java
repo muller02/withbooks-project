@@ -31,8 +31,12 @@ public class WithController {
     @Autowired
     private WithMemberService withMemberService;
 
+    // 서비스 필요할 것 같습니다.
     @Autowired
     private DebateRoomViewRepository debateRoomViewRepository;
+
+    @Autowired
+    private  FreeBoardService freeBoardService;
 
     @GetMapping("list")
 
@@ -82,7 +86,13 @@ public class WithController {
           List<DebateRoomView> debateRoomList =   debateRoomViewRepository.findAllById(withId);
         System.out.println("사과 = " + debateRoomList);
 
-          model.addAttribute("debateRoomList", debateRoomList);
+
+        List<FreeBoardView> freeBoardList =  freeBoardService.getView();
+
+
+
+        model.addAttribute("freeBoardList",freeBoardList);
+        model.addAttribute("debateRoomList", debateRoomList);
         model.addAttribute("with",with);
         model.addAttribute("withCategoryNames",withCategoryNames);
         model.addAttribute("withMemberCnt",withMemberCnt);

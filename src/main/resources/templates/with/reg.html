@@ -91,6 +91,7 @@
                 <input
                   type="file"
                   name="with-img-file"
+
                   class="n-textbox n-textbox-type:underline n-textbox-label:top d:none"
                 />
               </label>
@@ -143,11 +144,12 @@
                   class="n-textbox n-textbox-type:underline n-textbox-label:top"
                   placeholder="위드명"
                   required
+                  MAXLENGTH="5"
                   minlength="2"
                   name="name"
                 />
               </label>
-              <button  class="valid-btn n-btn  bg-color:base-5 ml:5 fw:1 ">중복확인</button>
+              <button  class="valid-btn n-btn  bg-color:base-5 ml:5 fw:1  " disabled>중복확인</button>
             </div>
             <div class="name-alert-true color:accent-1 d:none">
               이미 사용중인 위드명입니다.

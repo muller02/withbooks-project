@@ -32,7 +32,6 @@
 
     </style>
 
-
 </head>
 
 <body>
@@ -225,9 +224,45 @@
 
 <section class="pt:4  pl:4 mb:5 pr:5 board-list ">
     <h1 class="fs:4 fw:3 mb:3">자유게시판</h1>
-    <section>
+
+    <section class="border-bottom  pb:2 " th:each="b : ${freeBoardList}">
         <h1 class="d:none">게시글</h1>
-        <div class="d:flex ai:center">
+        <div class="d:flex ai:center mb:3">
+            <div class="w:1 h:1">
+                <img src="/image/shorts/uie.jpg" class=" w:100p h:100p border-radius:5">
+            </div>
+            <div>
+                <div th:text="${b.nickname}">뉴렉이</div>
+                <div th:text="${b.regDate}">10분전</div>
+            </div>
+
+            <div class="ml:auto icon icon:dots_three_outline_vertical_fill	" ></div>
+        </div>
+
+        <div>
+            <h1 class="fs:3 fw:3 mb:3 " th:text="${b.title}">오늘 작가님 오셨습니다.</h1>
+            <p class="mb:2" th:text="${b.content}">what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
+                what i like what i like what i like what i like what i likewhat i like what i like what ilike what i like what i like
+                what i like what i like what i like what i like what i likewhat i like what i like what ilike what i like what i like</p>
+
+            <div class="border border-color:base-3 w:100p  h:4 border-radius:5">
+
+                <img src="/image/shorts/">
+            </div>
+        </div>
+
+
+        <div class="mt:2">
+            <span class="deco icon:thumbs_up mr:3" th:text="${b.likeCnt}">12</span>
+            <span class="deco icon:chat" th:text="${b.commentCnt}">12</span>
+        </div>
+
+    </section>
+
+<!--  사진 있을 떄 없을 떄, 구분해서 section이 달라짐 -->
+    <section class="border-bottom  pb:2 ">
+        <h1 class="d:none">게시글</h1>
+        <div class="d:flex ai:center mb:3">
             <div class="w:1 h:1">
                 <img src="/image/shorts/uie.jpg" class=" w:100p h:100p border-radius:5">
             </div>
@@ -235,9 +270,62 @@
                 <div>뉴렉이</div>
                 <div>10분전</div>
             </div>
+
+            <div class="ml:auto icon icon:dots_three_outline_vertical_fill		" ></div>
+        </div>
+
+        <div>
+            <h1 class="fs:3 fw:3 mb:3 ">오늘 작가님 오셨습니다.</h1>
+            <p class="mb:2">what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
+                what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
+                what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like</p>
+
+        </div>
+
+
+        <div class="mt:2">
+            <span class="deco icon:chat mr:3">12</span>
+            <span class="deco icon:chat">12</span>
+        </div>
+
+
+
+    </section>
+    <section class="border-bottom  pb:2 ">
+        <h1 class="d:none">게시글</h1>
+        <div class="d:flex ai:center mb:3">
+            <div class="w:1 h:1">
+                <img src="/image/shorts/uie.jpg" class=" w:100p h:100p border-radius:5">
+            </div>
+            <div>
+                <div>뉴렉이</div>
+                <div>10분전</div>
+            </div>
+
+            <div class="ml:auto icon icon:dots_three_outline_vertical_fill		" ></div>
+
+        </div>
+
+        <div>
+            <h1 class="fs:3 fw:3 mb:3 ">오늘 작가님 오셨습니다.</h1>
+            <div class="d:flex gap:1 ">
+                <p class="mb:2">what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
+                    what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
+                    what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like</p>
+                <div>
+                    <img src="" class="border w:2 h:2 ">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt:2">
+            <span class="deco  icon:thumbs_up mr:3">12</span>
+            <span class="deco icon:chat">12</span>
         </div>
 
     </section>
+
 </section>
 </main>
 

@@ -12,12 +12,24 @@ window.addEventListener("load",function (){
 
 
     console.log(nameAlertFalse)
+
+    withNameInput.addEventListener("input",(e)=>{
+
+        if(withNameInput.value){
+            validBtn.classList.add("bg-color:main-5");
+            validBtn.disabled =false;
+        }else{
+            validBtn.classList.remove("bg-color:main-5");
+            validBtn.disabled =true;
+        }
+
+    })
+
     validBtn.onclick = async (e) => {
 
         e.preventDefault();
 
         let withName = withNameInput.value;
-
         let url = "/api/with/check-name?n=" + withName;
         let checkName;
 
@@ -51,13 +63,13 @@ window.addEventListener("load",function (){
 
 })
 
-// 위듸소개 유효성
+// 위드 소개 Texarea 자동 늘어지게 하는 이벤트 추가
 window.addEventListener("load", function () {
     const withIntro=document.querySelector("#with-intro")
 
     withIntro.oninput = function (e){
         withIntro.style.height = 'auto';
-        withIntro.style.height = (withIntro.scrollHeight) + 'px';
+        withIntro.style.height = (withIntro.scrollHeight) + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
 
     }
 
@@ -70,7 +82,7 @@ window.addEventListener("load", function (e){
     const personnelAlert=withReg.querySelector(".personnel-alert");
 
     personnelInput.oninput=function (e) {
-        if(personnelInput.value>100){
+        if(personnelInput.value>100){  // 위드 정원 100 이상 시 알람 표시
             personnelAlert .classList.remove("d:none");
         } else{
             personnelAlert.classList.add("d:none")
@@ -99,54 +111,49 @@ intervalInput.oninput=function () {
 })
 
 
-window.addEventListener("load", function (){
+
 
 // 위드 등록 카테고리 체크박스 갯수 제한 3개
-// for 문, checked 하기 ,
-    const categorySection = document.querySelector(".category-section");
-    const  categoryAlert = categorySection.querySelector(".category-alert");
-
-    // 선택 된 체크 박스 카운트
-    let checkBoxCnt = 0 ;
-
-    // 최대 체크 박스 갯수
-    const checkBoxMaxCnt = 3;
-
-
-    categorySection.onclick = function (e){
-
-        if(e.target.tagName !== "INPUT")
-            return;
-
-        if(e.target.checked){
-            checkBoxCnt++;
-        }else{
-            checkBoxCnt--;
-        }
-
-        if(checkBoxCnt > checkBoxMaxCnt ){
-            e.target.checked =false;
-            checkBoxCnt--;
-
-            categoryAlert.classList.remove("d:none");
-
-
-        }else{
-            categoryAlert.classList.add("d:none");
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-
-})
+// window.addEventListener("load", function (){
+//
+// // for 문, checked 하기 ,
+//     const categorySection = document.querySelector(".category-section");
+//     const  categoryAlert = categorySection.querySelector(".category-alert");
+//
+//     // 선택 된 체크 박스 카운트
+//     let checkBoxCnt = 0 ;
+//
+//     // 최대 체크 박스 갯수
+//     const checkBoxMaxCnt = 3;
+//
+//
+//     categorySection.onclick = function (e){
+//
+//         if(e.target.tagName !== "INPUT")
+//             return;
+//
+//         if(e.target.checked){
+//             checkBoxCnt++;
+//         }else{
+//             checkBoxCnt--;
+//         }
+//
+//         if(checkBoxCnt > checkBoxMaxCnt ){
+//             e.target.checked =false;
+//             checkBoxCnt--;
+//
+//             categoryAlert.classList.remove("d:none");
+//
+//
+//         }else{
+//             categoryAlert.classList.add("d:none");
+//         }
+//
+//     }
+//
+//
+//
+// })
 
 // 위드 등록 카테고리 체크박스 갯수 제한 3개
 window.addEventListener("load", function () {
