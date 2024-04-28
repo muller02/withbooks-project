@@ -1,9 +1,7 @@
 package kr.withbooks.web.controller.with.debate;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.entity.*;
 import kr.withbooks.web.service.*;
 import kr.withbooks.web.util.FileStore;
 import lombok.extern.slf4j.Slf4j;
@@ -11,15 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.DebateAttachment;
-import kr.withbooks.web.entity.DebateBoard;
-import kr.withbooks.web.entity.DebateBoardView;
-import kr.withbooks.web.entity.DebateRoom;
-import kr.withbooks.web.entity.DebateTopic;
+import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -120,7 +112,7 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/with/debate/board/list";
+        return "redirect:/with/debate/board/list?rid=" + roomId;
 
     }
 }
