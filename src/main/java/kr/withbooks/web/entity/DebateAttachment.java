@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 public class DebateAttachment {
     private Long id;
     private Long boardId;
-    private String img;
+    private String originalImg;
+    private String saveImg;
 }
