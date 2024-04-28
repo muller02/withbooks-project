@@ -12,14 +12,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+    <script type="module" src="/js/font/list.js"></script>
     <style>
-        .Noto-Sans-KR{
+        .Noto-Sans-KR-box{
             font-family: "Noto Sans KR", sans-serif;
             font-size: 15px;
 
             color: var(--color-base-9);
         }
-        .Hi-Melody{
+        .Hi-Melody-box{
             font-family: "Hi Melody", sans-serif; 
             font-weight: 400;
             font-style: normal;
@@ -29,19 +30,20 @@
 </head>
 <body>
     <main layout:fragment="main" class="d:flex flex-direction:column px:3 py:4 w:10p">
-        
-        <div class="Noto-Sans-KR w:10p">
-            <label class="fs:4 deco icon:moon deco-mr:5 w:10p">
-                Noto Sans KR 가나다
-                <input class="ml:auto" type="radio" name="theme"/>
-            </label>
-        </div>
-        <div class="Hi-Melody w:10p mt:5">
-            <label class="fs:4 deco icon:moon deco-mr:5 w:10p">
-                Hi Melody 가나다
-                <input class="ml:auto" type="radio" name="theme"/>
-            </label>
-        </div>
+        <span class="font-list">
+            <div class="Noto-Sans-KR-box w:10p">
+                <label class="fs:4 deco icon:moon deco-mr:5 w:10p" data-font="Noto Sans KR">
+                    Noto Sans KR
+                    <input class="Noto-Sans-KR ml:auto" type="radio" name="theme" data-font="Noto Sans KR"/>
+                </label>
+            </div>
+            <div class="Hi-Melody-box w:10p mt:5">
+                <label class="fs:4 deco icon:moon deco-mr:5 w:10p" data-font="Hi Melody">
+                    Hi Melody
+                    <input class="Hi-Melody ml:auto" type="radio" name="theme" data-font="Hi Melody"/>
+                </label>
+            </div>
+        </span>
     </main>
 </body>
 </html>

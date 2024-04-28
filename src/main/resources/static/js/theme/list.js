@@ -32,8 +32,8 @@ import applyTheme from '/js/theme.js';
         if(valid){
             let selectedTheme = e.target.dataset.theme;
             localStorage.setItem("theme", selectedTheme);
+            applyTheme();
         }
-        applyTheme();
     }
 
 }

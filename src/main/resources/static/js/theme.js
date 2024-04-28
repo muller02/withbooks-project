@@ -5,8 +5,6 @@ export default function theme(){
         case 'white':
             {
                 const root = document.querySelector(':root');
-        
-                root.style.setProperty('--background-theme-color', '#ffffff');
                 
                 root.style.setProperty('--color-base-1', '#ffffff');
                 root.style.setProperty('--color-base-2', '#ebebeb');
@@ -36,8 +34,6 @@ export default function theme(){
         case 'dark':
             {
                 const root = document.querySelector(':root');
-        
-                root.style.setProperty('--background-theme-color', '#171A2A');
                 
                 root.style.setProperty('--color-base-9', '#ECF1FA');
                 root.style.setProperty('--color-base-8', '#C6D6F8');
