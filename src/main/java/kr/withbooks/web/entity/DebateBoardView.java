@@ -23,7 +23,8 @@ public class DebateBoardView {
     private Integer blindYn;
     private Long topicId;
     private String topic;
-    private String img;
+    private String originalImg;
+    private String saveImg;
     private String nickname;
     private Long cmtCnt;
 }
