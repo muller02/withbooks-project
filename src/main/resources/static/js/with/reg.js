@@ -2,19 +2,22 @@
 window.addEventListener("load",function (){
     const withReg=document.querySelector("#with-reg")
 
+    //중복검사 버튼
     const validBtn = withReg.querySelector(".valid-btn");
 
+    // 중복검사에서 통과 했을 떄 알람
     const nameAlertTrue = withReg.querySelector(".name-alert-true");
+
+    // 중복검사에서 실패 했을 떄 알람
     const nameAlertFalse = withReg.querySelector(".name-alert-false");
 
+    // 위드명 입력 인풋
     const withNameInput = withReg.querySelector("input[name='name']");
 
 
-
-    console.log(nameAlertFalse)
-
+    // 인풋 이벤트 추가
     withNameInput.addEventListener("input",(e)=>{
-
+        // 인풋 창에 값이 있을 때, 중복검사 버튼이 활성화 되면서, 배경색 변경
         if(withNameInput.value){
             validBtn.classList.add("bg-color:main-5");
             validBtn.disabled =false;
@@ -25,6 +28,7 @@ window.addEventListener("load",function (){
 
     })
 
+    // 중복검사 버튼을 클릭 했을 때
     validBtn.onclick = async (e) => {
 
         e.preventDefault();
@@ -34,25 +38,25 @@ window.addEventListener("load",function (){
         let checkName;
 
         await fetch(url).then(response => {
-
-                return response.text(); // 응답으로부터 텍스트 데이터를 반환합니다
+                return response.text(); // 응답으로 json 형태가 아닌 기본형으로 반환 되는 값을 받기 위해
             }
         ).then(data => {
 
-            checkName = data;
+            checkName = data;  // true, false 를 반환하게 됨
         })
 
         console.log(checkName);
 
-        if (checkName === 'true') {
+        if (checkName === 'true') {  // 문자열로 비교를 해야  진행이 됨
             nameAlertTrue.classList.remove("d:none")
             nameAlertFalse.classList.add("d:none");
         } else {
             nameAlertFalse.classList.remove("d:none");
             nameAlertTrue.classList.add("d:none")
         }
-        withNameInput.addEventListener("input",function (e){
 
+        // 위드 명 입력창에 입력이 되면, 두 알람창 모두 숨김
+        withNameInput.addEventListener("input",function (e){
             nameAlertTrue.classList.add("d:none");
             nameAlertFalse.classList.add("d:none");
 
@@ -67,8 +71,8 @@ window.addEventListener("load",function (){
 window.addEventListener("load", function () {
     const withIntro=document.querySelector("#with-intro")
 
+    // witnIntro Textarea에 input 이벤트 추가
     withIntro.oninput = function (e){
-        withIntro.style.height = 'auto';
         withIntro.style.height = (withIntro.scrollHeight) + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
 
     }
@@ -79,6 +83,8 @@ window.addEventListener("load", function () {
 window.addEventListener("load", function (e){
     const withReg=document.querySelector("#with-reg")
     const personnelInput=withReg.querySelector("input[name='personnel']")
+
+    // reg.html personnel input 밑 알람 창이 있음
     const personnelAlert=withReg.querySelector(".personnel-alert");
 
     personnelInput.oninput=function (e) {
@@ -111,49 +117,6 @@ intervalInput.oninput=function () {
 })
 
 
-
-
-// 위드 등록 카테고리 체크박스 갯수 제한 3개
-// window.addEventListener("load", function (){
-//
-// // for 문, checked 하기 ,
-//     const categorySection = document.querySelector(".category-section");
-//     const  categoryAlert = categorySection.querySelector(".category-alert");
-//
-//     // 선택 된 체크 박스 카운트
-//     let checkBoxCnt = 0 ;
-//
-//     // 최대 체크 박스 갯수
-//     const checkBoxMaxCnt = 3;
-//
-//
-//     categorySection.onclick = function (e){
-//
-//         if(e.target.tagName !== "INPUT")
-//             return;
-//
-//         if(e.target.checked){
-//             checkBoxCnt++;
-//         }else{
-//             checkBoxCnt--;
-//         }
-//
-//         if(checkBoxCnt > checkBoxMaxCnt ){
-//             e.target.checked =false;
-//             checkBoxCnt--;
-//
-//             categoryAlert.classList.remove("d:none");
-//
-//
-//         }else{
-//             categoryAlert.classList.add("d:none");
-//         }
-//
-//     }
-//
-//
-//
-// })
 
 // 위드 등록 카테고리 체크박스 갯수 제한 3개
 window.addEventListener("load", function () {

@@ -27,9 +27,11 @@ public class WithController {
 
 
 
+    // 위드 이름 중복 확인
     @GetMapping("check-name")
     boolean checkWithName(@RequestParam(name = "n", required = false) String withName){
 
+        // 이름을 전달 받아서, 중복을 확인
             boolean checkName = service.getName(withName);
 
         return checkName;
