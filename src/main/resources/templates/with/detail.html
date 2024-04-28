@@ -129,6 +129,7 @@
             </div>
         </div>
     </div>
+
     <div>
         <div class="border d:inline-block d:flex flex-direction:column border-radius:8">
             <div class="text-align:center fw:3">토론 Best</div>
@@ -189,33 +190,20 @@
 
 <div class="w:100p border border-color:main-1 "><span class="d:none">선</span></div>
 
-<section class="  pl:4 my:5 pr:5 ">
-    <h1 class="fs:4 fw:3 mb:3">위드맴버 <span th:text="${withMemberCnt +' 명'}">7명</span></h1>
+<section class="  pl:4 my:5 pr:5 " >
+    <h1 class="fs:4 fw:3 mb:3">위드맴버
+        <span th:text="${withMemberCnt +' 명'}">7명</span>
+    </h1>
 
     <!-- 여기 inline flex 추가  -->
-    <div class="d:inline-flex	ai:center mr:3 mt:4 pl:3">
-        <img class="mr:3 d:inline-block" src="/ppang.png"></img>
+    <div class="d:inline-flex	ai:center mr:3 mt:4 pl:3" th:each=" wm : ${withMemberList}">
+        <img class="mr:4 d:inline-block" src="/ppang.png"></img>
         <div class="d:flex ai:center flex-direction:column ">
-            <div class="mr:auto">뉴렉이</div>
-            <div>2023.02.23</div>
+            <div class="mr:auto " th:text="${wm.nickName}" th:classappend="${wm.masterYn} ?'deco  deco-pos:right  icon:star_fill' :''" >뉴렉이</div>
+            <div th:text="${wm.joinDate}">2023.02.23</div>
         </div>
     </div>
 
-    <div class="d:inline-flex	ai:center mr:3">
-        <img class="mr:3 d:inline-block" src="/ppang.png"></img>
-        <div class="d:flex ai:center flex-direction:column ">
-            <div class="mr:auto">뉴렉이</div>
-            <div>2023.02.23</div>
-        </div>
-    </div>
-
-    <div class="d:inline-flex	ai:center mr:2">
-        <img class="mr:3 d:inline-block" src="/ppang.png"></img>
-        <div class="d:flex ai:center flex-direction:column ">
-            <div class="mr:auto">뉴렉이</div>
-            <div>2023.02.23</div>
-        </div>
-    </div>
 
 
 </section>
@@ -225,22 +213,22 @@
 <section class="pt:4  pl:4 mb:5 pr:5 board-list ">
     <h1 class="fs:4 fw:3 mb:3">자유게시판</h1>
 
-    <section class="border-bottom  pb:2 " th:each="b : ${freeBoardList}">
+    <section class="border-bottom  pb:2 mb:3 " th:each="b : ${freeBoardList}">
         <h1 class="d:none">게시글</h1>
         <div class="d:flex ai:center mb:3">
-            <div class="w:1 h:1">
-                <img src="/image/shorts/uie.jpg" class=" w:100p h:100p border-radius:5">
+            <div class="w:1 h:100p mr:2">
+                <img src="/image/shorts/uie.jpg" class=" w:100p h:100p border-radius:5 ">
             </div>
             <div>
-                <div th:text="${b.nickname}">뉴렉이</div>
-                <div th:text="${b.regDate}">10분전</div>
+                <div  th:text="${b.nickname}">뉴렉이</div>
+                <div th:text="${b.regDate}" class="fs:2 color:base-3">10분전</div>
             </div>
 
             <div class="ml:auto icon icon:dots_three_outline_vertical_fill	" ></div>
         </div>
 
         <div>
-            <h1 class="fs:3 fw:3 mb:3 " th:text="${b.title}">오늘 작가님 오셨습니다.</h1>
+            <h1 class="fs:5 fw:3 mb:3 " th:text="${b.title}">오늘 작가님 오셨습니다.</h1>
             <p class="mb:2" th:text="${b.content}">what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
                 what i like what i like what i like what i like what i likewhat i like what i like what ilike what i like what i like
                 what i like what i like what i like what i like what i likewhat i like what i like what ilike what i like what i like</p>
@@ -260,7 +248,7 @@
     </section>
 
 <!--  사진 있을 떄 없을 떄, 구분해서 section이 달라짐 -->
-    <section class="border-bottom  pb:2 ">
+    <section class="border-bottom  pb:2 mb:2  ">
         <h1 class="d:none">게시글</h1>
         <div class="d:flex ai:center mb:3">
             <div class="w:1 h:1">

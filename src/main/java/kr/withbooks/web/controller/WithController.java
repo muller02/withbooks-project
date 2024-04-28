@@ -39,7 +39,6 @@ public class WithController {
     private  FreeBoardService freeBoardService;
 
     @GetMapping("list")
-
     public String list(Model model,
                        @RequestParam(name = "c", required = false) Long[] categoryIds,
                        @RequestParam(name = "q", required = false) String query,
@@ -50,7 +49,7 @@ public class WithController {
         model.addAttribute("categoryList", categoryList );
 
 
-        //  WithView list 얻기
+        //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
         List<WithView> list = service.getList(categoryIds,query,faceYn);
 
         //service 로 이동 시킴 why ? Api에서도 사용해야 하므로
@@ -74,23 +73,26 @@ public class WithController {
         //withId에 해당하는 위드 얻기
         With with = service.get(withId);
 
-        System.out.println(with.toString());
-
         //withId에 해당하는 위드 카테고리 리스트를 얻기
        List<String> withCategoryNames   = withCategoryService.getListByWithId(withId);
 
        //withMember 테이블에서 withId에 해당하는 맴버들을 얻기
-       List<WithMember> withMemberList = withMemberService.getListById(withId);
-        int withMemberCnt = withMemberList.size();
+       List<WithMemberView> withMemberList = withMemberService.getViewById(withId);
 
-          List<DebateRoomView> debateRoomList =   debateRoomViewRepository.findAllById(withId);
-        System.out.println("사과 = " + debateRoomList);
+       //WithViewService 를 통해 with Id에 해당하는 view 리스트를 얻고 사이즈를 얻기
+       int withMemberCnt = withMemberList.size();
 
-
-        List<FreeBoardView> freeBoardList =  freeBoardService.getView();
-
+       // 토론 요약에 데이터를 제공 해줄 , de
+       List<DebateRoomView> debateRoomList =   debateRoomViewRepository.findAllById(withId);
 
 
+       // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
+       List<FreeBoardView> freeBoardList =  freeBoardService.getViewById(withId);
+
+
+
+
+        model.addAttribute("withMemberList", withMemberList);
         model.addAttribute("freeBoardList",freeBoardList);
         model.addAttribute("debateRoomList", debateRoomList);
         model.addAttribute("with",with);

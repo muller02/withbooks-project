@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface FreeBoardViewRepository {
 
-    List<FreeBoardView> findAll();
+    List<FreeBoardView> findById(Long withId);
 
 
 

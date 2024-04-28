@@ -16,9 +16,9 @@ public class FreeBoardServiceImp implements  FreeBoardService{
     private FreeBoardViewRepository freeBoardViewRepository;
 
     @Override
-    public List<FreeBoardView> getView() {
+    public List<FreeBoardView> getViewById(Long withId) {
 
-        List<FreeBoardView> list = freeBoardViewRepository.findAll();
+        List<FreeBoardView> list = freeBoardViewRepository.findById(withId);
 
         return  list;
     }

@@ -22,10 +22,6 @@ public class FreeBoardControoler {
     @GetMapping("/list")
     public  String list(Model model){
 
-        List<FreeBoardView> boardList = service.getView();
-
-        model.addAttribute("boardList", boardList);
-
         return  "/with/freeboard/list";
     }
 }

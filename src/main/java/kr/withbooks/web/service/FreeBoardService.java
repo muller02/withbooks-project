@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface FreeBoardService {
 
-    List<FreeBoardView> getView();
+    List<FreeBoardView> getViewById(Long withId);
 
 }

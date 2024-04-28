@@ -4,11 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.FreeBoardViewRepository">
 	
-	<select id="findAll" resultType="FreeBoardView" >
+	<select id="findById" resultType="FreeBoardView" >
 		select 
 				* 
 		  from 
-		  		free_board_view
+		  		free_board_view where with_id = #{withId}
 	</select>
 
 
