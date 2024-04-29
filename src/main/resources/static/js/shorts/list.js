@@ -1,5 +1,4 @@
 // <좋아요 >
-
 window.addEventListener("load", function (e) {
 
     // 버블리을 위해 main 얻기
@@ -22,66 +21,55 @@ window.addEventListener("load", function (e) {
         // Api 요청 url
         const url = `http://localhost:8080/api/shorts-like?si=`;
 
-        //credentials : session 쿠키를 함께 보낸다
-        const response = await fetch(url + shortsId,
-            {
-
+        try {
+            const response = await fetch(url + shortsId, {
                 method: "GET",
                 credentials: 'include'
+            });
 
-            }).then(response => {
-            return response.text(); //response로 받은 결과 boolean을 통해  조건 처리
+            if (!response.ok) {
+                throw new Error("서버 요청에 실패");
+            }
 
-        }).then(async data => {
+            const data = await response.text(); // response로 받은 결과 boolean을 통해 조건 처리
 
             if (data == 'true') {  // 내가 이전에 좋아요 했으면, 좋아요 취소
 
-                try {  // 로그인을 하지 않고 누르면 서버 오류 발생
-                    const deleteResponse = await fetch(url + shortsId, {
-                        method: "DELETE",
-                    })
-                    if (!deleteResponse.ok) {
-                        throw new Error("서버요청에 실패");
-                        return;
-                    }
-                    // 좋아요 취소 후 , 아이콘과 색상 변경
-                    e.target.classList.remove("icon-color:main-5", "icon:heart_fill");
-                    e.target.classList.add("icon:heart")
-
-                  // 좋아요 취소 후, 해당 쇼츠의 좋아요 갯수 리로드 후  삽입
-                    let count = getLikeCount(shortsId);
-                    shortsNumber.textContent = await count;
-
-                } catch (error) {
-                    console.log("예외", error);
+                // 로그인을 하지 않고 누르면 서버 오류 발생
+                const deleteResponse = await fetch(url + shortsId, {
+                    method: "DELETE",
+                })
+                if (!deleteResponse.ok) {
+                    throw new Error("서버요청에 실패");
                 }
+                // 좋아요 취소 후 , 아이콘과 색상 변경
+                e.target.classList.remove("icon-color:main-5", "icon:heart_fill");
+                e.target.classList.add("icon:heart")
 
+                // 좋아요 취소 후, 해당 쇼츠의 좋아요 갯수 리로드 후  삽입
+                let count = getLikeCount(shortsId);
+                shortsNumber.textContent = await count;
 
             } else if (data == 'false') {  // 내가 좋아요를 한 적이 없으면 실행
 
-
-                try {  // 로그인을 하지 않으면  서버 오류 발생
-                    const postResponse = await fetch(url + shortsId, {
-                        method: "POST"
-                    })
-                    if (!postResponse.ok) {
-                        throw new Error("서버요청에 실패");
-                        return;
-                    }
-                    // 좋아요 후, 아이콴과 색상 변경
-                    e.target.classList.add("icon-color:main-5", "icon:heart_fill");
-                    e.target.classList.remove("icon:heart")
-
-                  //  좋아요 후 해당 쇼츠의 좋아요 갯수 리로드 후 삽입
-                    let count = getLikeCount(shortsId);
-                    shortsNumber.textContent = await count;
-
-                } catch (error) {
-                    console.log("예외", error);
-
+                const postResponse = await fetch(url + shortsId, {
+                    method: "POST"
+                })
+                if (!postResponse.ok) {
+                    throw new Error("서버요청에 실패");
                 }
+                // 좋아요 후, 아이콴과 색상 변경
+                e.target.classList.add("icon-color:main-5", "icon:heart_fill");
+                e.target.classList.remove("icon:heart")
+
+                //  좋아요 후 해당 쇼츠의 좋아요 갯수 리로드 후 삽입
+                let count = getLikeCount(shortsId);
+                shortsNumber.textContent = await count;
             }
-        });
+        } catch (error) {
+            alert("로그인을 해주세요 !")
+            console.error("fetch 호출 중 에러 발생:", error);
+        }
 
 
         // 좋아요 리로드 함수
@@ -102,7 +90,6 @@ window.addEventListener("load", function (e) {
 
 
 })
-
 
 //  <댓글 리스트 요청 >
 function getCommentList(shortsId, comments, getCommetnCount) {

@@ -9,6 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module" src="/js/admin/book/list.js" defer></script>
 </head>
 <body>
 
@@ -18,15 +20,35 @@
 
             <section class="mt:4">
                 <h1 class="d:none">검색</h1>
-                <form class="n-form n-field-textbox:underline d:flex justify-content:space-around">
-                    <label>검색
-                        <input
-                        type="text"
-                        class="n-textbox n-textbox-type:outline n-textbox-status:focus"
-                        placeholder="Outline Focus" />
-                    </label>
-                    <button type="button" class="n-btn n-btn-type:filled">검색</button>
+                <form class="search-form n-form n-field-textbox:underline d:flex justify-content:space-around">
+                    <select name="query-type" v-model="queryType">
+                        <option value="all" selected>전체</option>
+                        <option value="author">저자</option>
+                        <option value="title">제목</option>
+                        <option value="isbn13">ISBN13</option>
+                    </select>
+                    <input
+                    type="text"
+                    class="n-textbox n-textbox-type:outline n-textbox-status:focus"
+                    placeholder="Outline Focus"
+                    v-model="query"/>
+                    <button type="submit" @click.prevent="submitHandler" class="n-btn n-btn-type:filled">검색</button>
                   </form>
+                  <div class="n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
+                    <div class="n-expander-title">
+                        <input type="checkbox" class="n-expander-trigger" />
+                        카테고리 검색
+                    </div>
+                    <div class="n-expander-content d:flex jc:space-between">
+                        <ul class="d:flex fl-wrap:wrap search-category">
+                            <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer"  th:each="c : ${category}">
+                                <a href="#" class="click-none" role="button">
+                                    <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
 
             <div class="d:flex justify-content:space-between mt:4">
@@ -37,7 +59,7 @@
                             책 등록
                         </a>
                     </button>
-                    <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button>
+                    <!-- <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button> -->
                 </div>
             </div>
 
@@ -60,20 +82,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="book : ${list}">
-                        <th scope="col">
-                            <label>
-                                <input type="checkbox" class="n-toggle n-toggle-type:check-box  n-toggle-size:1" />
-                            </label>
-                        </th>
-                        <th scope="row" th:text="${book.id}">1</th>
-                        <th scope="row" th:text="${book.categoryName}">소설/시/희곡</th>
-                        <td><span class="icon icon:eye" th:text="${book.publicYn}"></span></td>
-                        <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" th:src="${book.cover}" class="h:1 w:1" alt=""></td>
-                        <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</a></td>
-                        <td th:text="${book.author}"  th:title="${book.author}">홍길동</td>
-                        <td th:text="${book.regDate}">2020-11-01</td>
-                    </tr>
+                    <div th:each="book : ${list}">
+                        <tr data-row-id="{{book.id}}" v-on:click="toggleRow({book.id})">
+                            <th scope="col">
+                                <label>
+                                    <input type="checkbox" class="n-toggle n-toggle-type:check-box  n-toggle-size:1" />
+                                </label>
+                            </th>
+                            <th scope="row" th:text="${book.id}">1</th>
+                            <th scope="row" th:text="${book.categoryName}">소설/시/희곡</th>
+                            <td><span class="icon icon:eye" th:text="${book.publicYn}"></span></td>
+                            <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" th:src="${book.cover}" class="h:1 w:1" alt=""></td>
+                            <!-- <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</a></td> -->
+                            <td th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</td>
+                            <td th:text="${book.author}"  th:title="${book.author}">홍길동</td>
+                            <td th:text="${book.regDate}">2020-11-01</td>
+                        </tr>
+                        <tr v-if="showDetailRow(book.id)">
+                            <td colspan="8">
+                                <div class="bg-color:main-1">
+                                    들어가니ㅜ
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
                 </tbody>
             </table>
             <section class="mt:4">
