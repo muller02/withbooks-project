@@ -34,23 +34,28 @@
                     <div class="mb:3 bd-bottom">
                         <section class="d:flex fl-dir:column ai:center gap:1 mx:9 pt:2 pb:5">
                             <div class="fs:1" th:text="${book.title}">도둑맞은 집중력</div>
-                            <div class="fs:3">"<span th:text="${board.topic}">재홍이는 진짜 일뽕인가</span>"</div>
+                            <div class="fs:3">"<span th:text="${topic.content}">재홍이는 진짜 일뽕인가</span>"</div>
                             <h1 class="fs:6" th:text="${board.title}">일뽕재홍</h1>
                             <div class="d:flex gap:1 jc:center ai:center">
                                 <span class="d:flex jc:center"><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" alt="이치고경인"></span>
                                 <span class="gap:1" >
                                     <i class="fs:1">by</i>
-                                    <span class="fs=1" th:text="${board.nickname}">이치고경인</span>
+                                    <span class="fs=1">이치고경인</span>
                                 </span>
                             </div>
-                            <span class="fs:1" th:text="${board.regDate}">2024-03-27 23:03:26</span>
+                            <span class="fs:1" th:text="${#dates.format(board.regDate, 'yyyy-MM-dd HH:mm:ss')}">2024-03-27 23:03:26</span>
                         </section>
                     </div>
                     <div class="card-note-media">
                         <section class="d:flex fl-dir:column jc:center ai:center mt:8 mb:2">
                             <h1 class="d:none">토론카드 이미지</h1>
                             <div>
-                                <img src="" th:src="@{|/image/debate/board/${board.saveImg}|}" alt="도둑맞은 집중력 이미지">
+                                <img
+                                        th:each="i : ${imgList}"
+                                        class="w:7 h:7"
+                                        src=""
+                                        th:src="@{|/image/debate/board/${i.saveImg}|}"
+                                        alt="도둑맞은 집중력 이미지">
                             </div>
                         </section>
                     </div>

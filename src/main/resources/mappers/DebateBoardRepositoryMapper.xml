@@ -33,5 +33,12 @@
         )
     </insert>
 
+    <select id="findById" resultType="DebateBoard">
+        SELECT
+        *
+        FROM debate_board
+        where id = #{id}
+    </select>
+
 </mapper>
 
