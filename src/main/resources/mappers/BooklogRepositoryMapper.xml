@@ -50,13 +50,13 @@
 			)
 	</insert>
 
-	<update id="update" parameterType="Booklog">
+	<update id="updatePublic" parameterType="Long">
 		update 
 				booklog 
 		   set 
 		   		public_yn = #{publicYn}
          where
-		 		id = #{id};
+		 		id = #{booklogId};
 	</update>
 
 	<delete id="deleteAllByIds" parameterType="Long">
