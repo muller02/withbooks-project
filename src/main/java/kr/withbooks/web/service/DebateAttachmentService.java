@@ -7,4 +7,6 @@ import java.util.List;
 public interface DebateAttachmentService {
 
     void add(Long boardId, List<DebateAttachment> debateAttachments);
+
+    List<DebateAttachment> getListById(Long boardId);
 }

@@ -34,4 +34,10 @@ public class DebateAttachmentServiceIml implements DebateAttachmentService {
         debateAttachmentRepository.save(debateAttachments);
 
     }
+
+    @Override
+    public List<DebateAttachment> getListById(Long boardId) {
+        return debateAttachmentRepository.findAllById(boardId);
+    }
+
 }
