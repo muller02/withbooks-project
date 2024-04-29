@@ -157,6 +157,18 @@ window.addEventListener("load", (e)=>{
 `;
 
             contentDiv.insertAdjacentHTML("afterbegin", innerHtml);
+
+        //===================== 해당 텝의 스크립트 추가 ============================//
+
+            let queryForm = document.querySelector("#search-book-form");
+            let queryBtn = queryForm.querySelector(".search");
+            queryBtn.onclick = function (e){
+                e.preventDefault();
+
+            }
+
+
+
         }
 
 
