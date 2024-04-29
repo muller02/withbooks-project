@@ -140,5 +140,28 @@ window.addEventListener("load", function(){
     };
 
 
+    // =================================  토론 주제 추가, 삭제를 클릭했을때 이벤트  =======================================
+    // ======================================================================================================
+    // 추가 버튼
+    document.querySelector('.add-btn').addEventListener("click", function(){
+        let spanHTML = `
+                <span class="topic-input d:flex ai:center al-self:stretch">
+                  <div class="d:flex mt:4 flex-grow:1">
+                    <input type="text" name="topic" class="n-textbox w:100p mr:3" placeholder="토론 주제를 입력하세요." />
+                    <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>
+                  </div>
+                </span> `
+        document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
+    });
 
-})
+    // 삭제 버튼
+    document.querySelector('.topic-list').addEventListener('click', function(e){
+        if(e.target.classList.contains('add-btn'))
+            return
+        // 클릭된 요소가 삭제 버튼인지 확인
+        if(e.target.classList.contains('del-btn')) {
+            // 클릭된 요소의 부모 요소를 찾아서 삭제
+            e.target.parentElement.parentElement.remove();
+        }
+    });
+});
