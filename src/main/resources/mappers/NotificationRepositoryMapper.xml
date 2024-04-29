@@ -12,4 +12,10 @@
 				checked_yn=0;
 	</select>
 
+	<select id="findAllById" resultType="Notification">
+		SELECT * FROM notification 
+		where 
+			user_id = #{userId};
+	</select>
+
 </mapper>
