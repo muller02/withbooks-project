@@ -16,6 +16,8 @@ public interface BooklogService {
     void delete(Long booklogId);
     void update(Booklog booklog);
 
+    int changePublic(Long booklogId, Long publicYn);
+
     // BooklogLogs
     List<BooklogLogs> getLogs(Long id);
     

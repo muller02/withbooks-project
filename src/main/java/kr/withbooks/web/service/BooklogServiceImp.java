@@ -64,5 +64,10 @@ public class BooklogServiceImp implements BooklogService{
         return logsRepository.findAll(id);
     }
 
+    @Override
+    public int changePublic(Long booklogId, Long publicYn) {
+        return repository.updatePublic(booklogId, publicYn);
+    }
+
     
 }

@@ -64,7 +64,6 @@ window.addEventListener("load", function () {
             }
         };
 
-        // false 를 붙이면 동기
         let q = queryInput.value;
 
         xhr.open("GET", `/api/book/list?q=${q}&c=0`);
@@ -79,6 +78,7 @@ window.addEventListener("load", function () {
         // 찾은 h1 요소의 textContent 읽는다
         // textContent를 queryInput에 넣는다
         if (e.target.closest(".book")) {
+            //
             const book = e.target.closest(".book");
             const bookTitle = book.querySelector(".book-title").textContent;
             const bookAuthor = book.querySelector(".book-author").textContent;
@@ -132,44 +132,73 @@ window.addEventListener("load", function () {
                                     <div class="bd-top pt:3">
                                         <input class="d:none" type="number" name="book-id" value="${bookId}"/>
                                         <div class="d:flex mb:4 pos:relative">
-                                            <div class="booklog-date fl-grow:1 fw:3">${year}.${month}.${date}</div>
-                                            <button class="reg-btn n-btn bg-color:main-1 color:main-3 top:0 right:0" type="submit">등록</button>
-                                        </div>
-                                        <div class="d:flex fl-dir:column md:fl-dir:row lg:fl-dir:row">
-                                            <section class="mb:2">
-                                                <h1 class="d:none">이미지 입력</h1>
-                                                <div class="img-group d:flex ai:center bd-radius:5 mr:3">
-                                                    <label class="img-label d:flex jc:center flex-shrink:0 bg-color:base-2 ai:center border-radius:8 d:inline-block mr:2 w:3 h:3">
-                                                        <span class="icon icon:image icon-color:base-9 icon-size:5">이미지</span>
-                                                        <input class="booklog-img d:none img-input" name="file" type="file" multiple />
-                                                    </label>
-                                                    <div>
-                                                        <div class="preview-panel h:4">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                            <textarea class="booklog-content n-textbox" type="text" name="text-area" placeholder="새로운 북로그를 작성해주세요 :"></textarea>
-                                        </div>
+                                        <div class="booklog-date fl-grow:1 fw:3">${year}.${month}.${date}</div>
+                                        <div class="reg-cantle n-btn bg-color:base-2 mr:1"><span>취소</span></div>
+                                        <button class="reg-btn n-btn bg-color:main-1 color:main-3 top:0 right:0" type="submit">등록</button>
+                                    </div>
+                                    <div>
+                                        <label class="img-label n-btn n-btn:outline mr:1">
+                                            <span class="deco icon:camera icon-color:base-9">사진 추가</span>
+                                            <input class="booklog-img d:none" name="file" type="file" multiple accept=".jpg,.png,.jpeg" />
+                                        </label>
+                                        <div class="img-delete d:none n-btn bg-color:accent-1 mr:1"><span class="icon icon:x icon-color:base-1">사진 삭제</span></div>
+                                    </div>
+                                    <div class="ment fs:2 color:main-4">* 사진은 한 장만 업로드 가능합니다.</div>
+                                    <div class="log-content-section d:flex fl-dir:column md:fl-dir:row lg:fl-dir:row">
+                                        <section class="d:none mb:1">
+                                            <h1 class="d:none">이미지 입력</h1>
+                                            <div class="img-group d:flex ai:center bd-radius:5 mr:3">
+                                                <div class="preview-panel"></div>
+                                            </div>
+                                        </section>
+                                        <textarea class="booklog-content n-textbox" type="text" name="text-area" placeholder="새로운 북로그를 작성해주세요 :)"></textarea>
+                                    </div>
                                 </section>
                             </form>
                             `;
+
             resultList.insertAdjacentHTML("beforeend", sectionHTML);
 
+            // 공개비공개 텍스트 부분
+            let publicSpan = searchBox.querySelector(".public");
+            // 공개비공개 input checkbox 부분
             let publicInput = searchBox.querySelector(".public-input");
-            // 공개/비공개 버튼 클릭시 value값 0 또는 1로 셋팅 ( DB 저장할 값으로 보내기 위해서 )
-            publicInput.onclick = function () {
-                if (publicInput.checked) publicInput.value = 1;
-                else publicInput.value = 0;
 
-                console.log(publicInput.value);
+            // 공개-비공개 버튼 클릭시 value값 0 또는 1로 셋팅 ( DB 저장할 값으로 보내기 위해서 )
+            publicInput.onclick = function () {
+                if (publicInput.checked) {
+                    // 체크된 경우에는 input value에 1값 셋팅
+                    publicInput.value = 1;
+                    // 보여지는 텍스트를 '공개'로 변경
+                    publicSpan.textContent = "공개";
+                } else {
+                    // 체크가 해제된 경우에 0값 셋팅
+                    publicInput.value = 0;
+                    // 보여지는 텍스트는 '비공개'로 변경
+                    publicSpan.textContent = "비공개";
+                }
             };
 
-            let inputImg = searchBox.querySelector(".booklog-img");
-            let previewPanel = searchBox.querySelector(".preview-panel");
-            console.log(inputImg);
-            console.log(previewPanel);
+            // 로그 작성 폼
+            let booklogRegForm = searchBox.querySelector("#booklog-reg-form");
+            // 이미지 선택하는 label 세션부분
+            let imgLabel = booklogRegForm.querySelector(".img-label");
+            // 이미지 선택하는 input type:file
+            let inputImg = booklogRegForm.querySelector(".booklog-img");
+            // 선택된 이미지가 들어가는 부분
+            let previewPanel = booklogRegForm.querySelector(".preview-panel");
+            // 선택된 이미지 삭제하는 버튼
+            let imgDeleteBtn = booklogRegForm.querySelector(".img-delete");
+            // 로그 등록 버튼
+            let submitBtn = booklogRegForm.querySelector(".reg-btn");
+            // 로그 작성 섹션
+            let logContentSection = booklogRegForm.querySelector(".log-content-section");
+            // 로그 작성 섹션 중 사진 섹션
+            let logContentImg = logContentSection.querySelector("section");
+            // 로그 textarea
+            let logTextarea = logContentSection.querySelector("textarea");
 
+            // 이미지 선택하기
             inputImg.oninput = function () {
                 let file = inputImg.files["0"];
 
@@ -190,17 +219,35 @@ window.addEventListener("load", function () {
                 reader.onload = function (e) {
                     let img = document.createElement("img");
                     img.src = e.target.result;
-                    img.classList.add("h:100p");
+                    img.classList.add("h:5");
+
+                    // 사진 들어가는 섹션 보이기
+                    logContentImg.classList.remove("d:none");
 
                     // 이미지 한개만 가능. 선택한 이미지가 있으면 지우기.
                     if (previewPanel.childNodes.length > 0) {
                         previewPanel.removeChild(previewPanel.firstChild);
                     }
 
+                    // 가져온 이미지 삽입
                     previewPanel.append(img);
                 };
                 // 바이너리 파일 읽어온다.
                 reader.readAsDataURL(file);
+
+                // 이미지 선택시 이미지 삭제버튼 활성화
+                if (imgDeleteBtn.classList.contains("d:none")) imgDeleteBtn.classList.remove("d:none");
+            };
+
+            // 이미지 삭제 버튼 클릭시
+            imgDeleteBtn.onclick = function (e) {
+                e.preventDefault();
+                // 선택된 이미지 태그 지우기
+                previewPanel.removeChild(previewPanel.firstChild);
+                // 삭제 버튼 숨기기
+                imgDeleteBtn.classList.add("d:none");
+                // 사진 들어간 섹션 숨기기
+                logContentImg.classList.add("d:none");
             };
         }
     };
