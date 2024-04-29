@@ -26,7 +26,6 @@ public class SecurityConfig {
 
                          .requestMatchers("/", "/login","/join", "/shorts/list","/css/**","/image/**","/icon/**","js/**").permitAll()
                          .requestMatchers("/admin").hasRole("ADMIN")
-                         .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
                          .anyRequest().permitAll()
                  );
 
