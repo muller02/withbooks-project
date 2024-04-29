@@ -12,4 +12,6 @@ public interface BookshortsCommentRepository {
     List<BookshortsCommentView> findAll(Long shortsId);
 
     int save(BookshortsComment shortsComment);
+
+    int delete(Long cmtId);
 }

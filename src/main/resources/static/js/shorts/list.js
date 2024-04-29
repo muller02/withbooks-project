@@ -240,9 +240,10 @@ function getCommentList(shortsId, comments, getCommentCount) {
                         
                           <li>
                
-                              <button class="va:middle text-align:center	  color:accent-2 " data:${cmt.id}>
-                                삭제하기
-                              </button>
+                             <button class="va:middle delete-comment text-align:center color:accent-2" data-commentId="${cmt.id}" >
+    삭제하기
+</button>
+
 
                           </li>
                           <li>
@@ -272,6 +273,49 @@ function getCommentList(shortsId, comments, getCommentCount) {
     .catch((error) => console.error("Error:", error));
 }
 
+
+window.addEventListener("load",function (e){
+
+  document.addEventListener("click", function (e){
+
+    // 내가 선택한 것이 delete-comment가 아니면 종료
+    if(!e.target.closest(".delete-comment"))
+      return
+
+    let target =e.target;
+
+    let commentGroup = target.closest(".comment-group");
+    let commentBtn = commentGroup.previousElementSibling.querySelector(".comment-btn")
+    let shortsId = commentBtn.dataset.shortsId;
+    let comments = commentGroup.querySelector(".comments");
+    let countComment = commentBtn.nextElementSibling;
+
+    // 선택한 댓글의 commentId  저장
+    let commentId = target.dataset.commentid
+
+    //api delete 요청
+    let url  =`http://localhost:8080/api/comments?cmtId=${commentId}`;
+
+    fetch(url,{method:"DELETE"}).then(response=>{
+      if (!response.ok) {
+        throw new Error("서버 요청에 실패");
+      }
+    })
+        .catch(error=>{
+          console.error("fetch 호출 중 에러 발생:", error);
+
+        })
+
+    // 코멘틀 리스트  출력 , 코멘트 숫자 갱신
+    getCommentList(shortsId,comments,function (commentCount) {
+      countComment.innerHTML = commentCount;
+    })
+
+
+
+  })
+
+})
 
 
 
@@ -356,9 +400,6 @@ window.addEventListener("load", function (e) {
     };
   });
 });
-
-
-
 
 
 
