@@ -27,11 +27,11 @@ public class DebateBoardServiceImp implements DebateBoardService {
     }
 
     @Override
-    public DebateBoardView getById(Long id) {
+    public DebateBoard getById(Long id) {
 
-        DebateBoardView DebateBoardView = debateBoardViewRepository.findById(id);
+        DebateBoard debateBoard = debateBoardRepository.findById(id);
 
-        return DebateBoardView;
+        return debateBoard;
     }
 
     @Override

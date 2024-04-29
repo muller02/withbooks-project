@@ -10,5 +10,5 @@ public interface DebateBoardViewRepository {
 
     List<DebateBoardView> findAllById(Long roomId, Long topicId);
 
-    DebateBoardView findById(Long id);
+    //DebateBoardView findById(Long id);
 }

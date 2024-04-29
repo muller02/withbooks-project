@@ -9,4 +9,6 @@ import java.util.List;
 public interface DebateBoardRepository {
 
     void save(DebateBoard debateBoard);
+
+    DebateBoard findById(Long id);
 }
