@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface DebateBoardRepository {
 
-
+    void save(DebateBoard debateBoard);
 }

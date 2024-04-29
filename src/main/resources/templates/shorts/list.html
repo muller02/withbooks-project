@@ -141,7 +141,9 @@
       }
       /*  모달창*/
 
-
+    *{
+      font-family: "Noto Sans KR", sans-serif;
+    }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -577,8 +579,9 @@
             </div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="icon icon:heart cursor:pointer color-icon"></div>
-            <div class="fs:2 fw:3 color-text" th:text="${s.likeCnt}">50.2M</div>
+            <div class="likeBtn icon  cursor:pointer "   th:data-shorts-id="${s.id}"  th:classappend="${s.liked}==1  ? 'icon:heart_fill icon-color:main-5' : 'icon:heart'"></div>
+
+            <div class="fs:2 fw:3 color-text" th:text="${s.likeCnt}" >50.2M</div>
           </div>
         </section>
 

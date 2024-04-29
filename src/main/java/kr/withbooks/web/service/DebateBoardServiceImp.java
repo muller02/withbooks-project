@@ -15,10 +15,13 @@ public class DebateBoardServiceImp implements DebateBoardService {
     @Autowired
     private DebateBoardViewRepository debateBoardViewRepository;
 
-    @Override
-    public List<DebateBoardView> getList(Long roomId) {
+    @Autowired
+    private DebateBoardRepository debateBoardRepository;
 
-        List<DebateBoardView> list = debateBoardViewRepository.findAllById(roomId);
+    @Override
+    public List<DebateBoardView> getList(Long roomId, Long topicId) {
+
+        List<DebateBoardView> list = debateBoardViewRepository.findAllById(roomId, topicId);
 
         return list;
     }
@@ -29,6 +32,13 @@ public class DebateBoardServiceImp implements DebateBoardService {
         DebateBoardView DebateBoardView = debateBoardViewRepository.findById(id);
 
         return DebateBoardView;
+    }
+
+    @Override
+    public Long save(DebateBoard debateBoard) {
+
+        debateBoardRepository.save(debateBoard);
+        return debateBoard.getId();
     }
 
 

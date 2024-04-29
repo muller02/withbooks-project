@@ -81,82 +81,82 @@ window.addEventListener("load", function () {
 
 
 // 텍스트 에디터
-window.onload = function () {
-  const textArea = document.querySelector(".text-area");
-  const regBtn = document.querySelector(".reg-btn");
-  const queryInput = document.querySelector(".query-input");
+// window.onload = function () {
+//   const textArea = document.querySelector(".text-area");
+//   const regBtn = document.querySelector(".reg-btn");
+//   const queryInput = document.querySelector(".query-input");
 
-  const editer = document.querySelector("#editor");
-  // <!-- Initialize Quill editor -->
-  const quill = new Quill("#editor", {
-    modules: {
-      syntax: true,
-      toolbar: "#toolbar-container",
-    },
-    placeholder: "여기에 입력해 주세요",
-    theme: "snow",
-  });
+//   const editer = document.querySelector("#editor");
+//   // <!-- Initialize Quill editor -->
+//   const quill = new Quill("#editor", {
+//     modules: {
+//       syntax: true,
+//       toolbar: "#toolbar-container",
+//     },
+//     placeholder: "여기에 입력해 주세요",
+//     theme: "snow",
+//   });
 
-  // 글자수 제한
-  const maxLength = 700;
-  const restrict = document.querySelector(".restrict");
+//   // 글자수 제한
+//   const maxLength = 700;
+//   const restrict = document.querySelector(".restrict");
 
-  quill.on("editor-change", (e) => {
-    const length = quill.getLength();
+//   quill.on("editor-change", (e) => {
+//     const length = quill.getLength();
 
-    if (length > maxLength) {
-      quill.deleteText(maxLength, length);
+//     if (length > maxLength) {
+//       quill.deleteText(maxLength, length);
 
-      restrict.classList.add("fade-out");
-    } else {
-      restrict.classList.remove("fade-out");
-    }
-  });
+//       restrict.classList.add("fade-out");
+//     } else {
+//       restrict.classList.remove("fade-out");
+//     }
+//   });
 
 
 
-  // 내용이 변경될 때마다 함수 호출
-  function regBtnbgColorChange() {
-    // 에디터가 텍스트를 넣어주는 div안의 innerText가 빈 문자열이 아니거나, 책 검색 input이 공백이 아닐 때 실행
+//   // 내용이 변경될 때마다 함수 호출
+//   function regBtnbgColorChange() {
+//     // 에디터가 텍스트를 넣어주는 div안의 innerText가 빈 문자열이 아니거나, 책 검색 input이 공백이 아닐 때 실행
 
-    const qlEditor = document.querySelector(".ql-editor > p "); // qlEditor 클래스 하위 p 선택
-    let qlEditorChild = qlEditor.children; //  p의 자식 => <br>
+//     const qlEditor = document.querySelector(".ql-editor > p "); // qlEditor 클래스 하위 p 선택
+//     let qlEditorChild = qlEditor.children; //  p의 자식 => <br>
 
-    let existContent = qlEditorChild.item(0) === null;
-    let existQuerInput = queryInput.value !== "";
+//     let existContent = qlEditorChild.item(0) === null;
+//     let existQuerInput = queryInput.value !== "";
 
-    if (existContent && existQuerInput) {
-      regBtn.classList.add("bg-color:main-5"); //bg-color:main-5 컬러 추가
-    } else {
-      regBtn.classList.remove("bg-color:main-5");
-      regBtn.classList.add("bg-color:main-3");
-    }
-  }
+//     if (existContent && existQuerInput) {
+//       regBtn.classList.add("bg-color:main-5"); //bg-color:main-5 컬러 추가
+//     } else {
+//       regBtn.classList.remove("bg-color:main-5");
+//       regBtn.classList.add("bg-color:main-3");
+//     }
+//   }
 
-  editer.addEventListener("keyup", regBtnbgColorChange); //editer에 키가 입력 될 떄 마다 함수 호출
-  queryInput.addEventListener("input", regBtnbgColorChange); //editer에 키가 입력 될 떄 마다 함수 호출
+//   editer.addEventListener("keyup", regBtnbgColorChange); //editer에 키가 입력 될 떄 마다 함수 호출
+//   queryInput.addEventListener("input", regBtnbgColorChange); //editer에 키가 입력 될 떄 마다 함수 호출
 
-  const qlEditor = document.querySelector(".ql-editor > p "); // qlEditor 클래스 하위 p 선택
-  let qlEditorChild = qlEditor.children; // qlEditor의 자식들
-  regBtn.onclick = function (e) {
-    if (queryInput.value === "") {
-      alert("책을 입력 해주세요");
-      e.preventDefault();
-    }
+//   const qlEditor = document.querySelector(".ql-editor > p "); // qlEditor 클래스 하위 p 선택
+//   let qlEditorChild = qlEditor.children; // qlEditor의 자식들
+//   regBtn.onclick = function (e) {
+//     if (queryInput.value === "") {
+//       alert("책을 입력 해주세요");
+//       e.preventDefault();
+//     }
 
-    let qlEditorChildTagName; // qlEditorChild의 tagName 을 저장 할 변수
-    if (qlEditorChild.item(0) !== null) {
-      qlEditorChildTagName = qlEditorChild.item(0).tagName; //qlEditor 자식들 중 첫번째 자식 br 선택
-    }
-    if (qlEditorChildTagName === "BR") {
-      alert("내용을 입력 해주세요");
-      e.preventDefault();
-    }
-    textArea.classList.add("ln-h:1.75");
+//     let qlEditorChildTagName; // qlEditorChild의 tagName 을 저장 할 변수
+//     if (qlEditorChild.item(0) !== null) {
+//       qlEditorChildTagName = qlEditorChild.item(0).tagName; //qlEditor 자식들 중 첫번째 자식 br 선택
+//     }
+//     if (qlEditorChildTagName === "BR") {
+//       alert("내용을 입력 해주세요");
+//       e.preventDefault();
+//     }
+//     textArea.classList.add("ln-h:1.75");
 
-    textArea.innerHTML = quill.getSemanticHTML();
-  };
-};
+//     textArea.innerHTML = quill.getSemanticHTML();
+//   };
+// };
 
 //////////////////////////////////////////////////////////
 

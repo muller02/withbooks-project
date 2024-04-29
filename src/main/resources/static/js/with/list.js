@@ -4,12 +4,38 @@ window.addEventListener("load", function (e){
  const searchBtn=document.querySelector("#search-btn");
  const searchBox=document.querySelector(".search-box");
  const categorySection=document.querySelector("#category");
-    const initIcon=categorySection.querySelector(".init-icon");
+ const initIcon=document.querySelector(".init-icon");
  const categoryList = categorySection.querySelector(".category-list");
  const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");
 
 
-    let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
+ const faceYnDiv = searchBox.querySelector(".face-yn");
+    const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
+
+    console.log(faceYnRadio[0])
+
+ let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
+    let faceYn;
+    let query;
+
+    faceYnDiv.onclick=async function (e) {
+
+        if (e.target.nodeName !== "INPUT")
+            return;
+        faceYn = e.target.value;
+
+
+        //비동기 fetch 메소드 호출 및 GET 통신
+        let response = await getByParams(categoryIdArr, query, faceYn);
+
+        // 위드 리스트를 받아옴
+        let list = await response.json();
+
+        updateHTML(list);
+        console.log(faceYn);
+
+    }
+
 
 
 searchBtn.onclick=function (e){
@@ -35,8 +61,13 @@ initIcon.onclick = async function (e) {
     categoryIdArr.length =0;
 
     //비동기 fetch 메소드 호출 및 GET 통신
-    let response = await getByParams(categoryIdArr,null);
+    let response = await getByParams(categoryIdArr,null,null);
 
+    for(let i of faceYnRadio){
+        i.checked=false
+    }
+
+    faceYnRadio[0].checked = true;
     // 위드 리스트를 받아옴
     let list = await response.json();
 
@@ -57,8 +88,34 @@ initIcon.onclick = async function (e) {
         //문자열 결합
 
 
+    const querySearch = document.querySelector(".query-search");
+    const queryBtn = document.querySelector(".query-btn");
+
+// querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
+    async function handleQuery() {
+      query = querySearch.value;
+        // 비동기 fetch 메소드 호출 및 GET 통신
+        let response = await getByParams(categoryIdArr, query,faceYn);
+        // 위드 리스트를 받아옴
+        let list = await response.json();
+        updateHTML(list);
+    }
+
+// querySearch 엘리먼트에서 keypress 이벤트를 감지하여 엔터 키를 눌렀을 때 handleQuery 함수를 호출합니다.
+    querySearch.addEventListener("keypress", async function(event) {
+        // event.key가 "Enter"일 때만 동작하도록 합니다.
+        if (event.key === "Enter") {
+            await handleQuery();
+        }
+    });
+
+// queryBtn 클릭 시 handleQuery 함수를 호출합니다.
+    queryBtn.onclick = handleQuery;
 
 
+
+
+    // 카테고리 검색
     categoryList.addEventListener("click", async (e) => {
 
 
@@ -81,20 +138,10 @@ initIcon.onclick = async function (e) {
         console.log(categoryIdArr);
 
 
-        let queryTmp = '';
-
-        for(let i=0; i<categoryIdArr.length; i++){
-
-            queryTmp +=categoryIdArr[i];
-            // c?=2 &c=
-            if (i < categoryIdArr.length - 1) {
-                queryTmp += '&c='
-            }
-        }
 
 
         //비동기 fetch 메소드 호출 및 GET 통신
-        let response = await getByParams(categoryIdArr,queryTmp);
+        let response = await getByParams(categoryIdArr,query,faceYn);
 
         // 위드 리스트를 받아옴
         let list = await response.json();
@@ -105,21 +152,58 @@ initIcon.onclick = async function (e) {
         updateHTML(list);
 
 
-        console.log(queryTmp);
     })
 
 })
 
 
 //
-function getByParams(categoryIdArr,queryTmp) {
-    let url;
-    if (categoryIdArr===null || categoryIdArr.length === 0) {
-         url = `/api/with`;
-    } else {
-         url = `/api/with?c=${queryTmp}`;
+function getByParams(categoryIdArr, query, faceYn) {
+
+    let categoryIds = '';
+
+    if(categoryIdArr !== null){
+    for(let i=0; i<categoryIdArr.length; i++){
+        categoryIds +=categoryIdArr[i];
+        // c?=2 &c=
+        if (i < categoryIdArr.length - 1) {
+            categoryIds += '&c='
+        }
+      }
     }
 
+
+    let url;
+
+        console.log('f=',faceYn);
+        console.log('q=' ,query)
+    console.log('c=' ,categoryIds)
+
+    if (    (query && query !== '') && (categoryIdArr && categoryIdArr.length !== 0) && (faceYn && faceYn !== '')) {
+        url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
+
+    } else if ((categoryIdArr && categoryIdArr.length !== 0)&&(faceYn && faceYn !== '')  ) {
+
+        console.log(232323);
+        url = `/api/with?f=${faceYn}&c=${categoryIds}`;
+
+
+    }else if(query && query !== ''){
+
+        url = `/api/with?q=${query}`;
+
+    }else if(categoryIdArr && categoryIdArr.length !== 0){
+        url = `/api/with?c=${categoryIds}`;
+    }
+    else if(faceYn && faceYn !== ''){
+        console.log('여기왔어요2')
+        url = `/api/with?f=${faceYn}`;
+
+    }
+    else {
+        url = `/api/with`;
+
+    }
 
     // const method = "GET";
     return fetch(url);
@@ -128,10 +212,12 @@ function getByParams(categoryIdArr,queryTmp) {
 
 
 
+
 function updateHTML(list){
     const withListUl = document.querySelector(".with-list-ul")
 
     withListUl.innerHTML=``;
+
     for(let item of list){
         let categoryHtml = '';
 
@@ -173,7 +259,7 @@ function updateHTML(list){
               <div class="d:flex gap:1 flex-direction:column flex-grow:1">
                 <div class="fs:6 fw:3 mb:2">
                   <a
-   
+                        href="/with/detail?id=${item.id}"
         
                   >
                    ${item.name}</a

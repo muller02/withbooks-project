@@ -26,6 +26,12 @@
 
 	</select>
 
+	<select id="findByName" resultType="With">
+
+		select * from `with` where name = '${withName}';
+
+	</select>
+
 
 
 	<insert id="save"  useGeneratedKeys="true" keyProperty="id" parameterType="With">

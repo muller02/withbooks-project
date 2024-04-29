@@ -9,4 +9,16 @@
     mask-image: url("/icon/minus.svg");
 }
 
+.icon\:key::before,
+.icon\:key::after{
+    -webkit-mask-image: url("/icon/key.svg");
+    mask-image: url("/icon/key.svg");
+}
+
+.icon\:palette::before,
+.icon\:palette::after{
+    -webkit-mask-image: url("/icon/palette.svg");
+    mask-image: url("/icon/palette.svg");
+}
+
 /* 아이콘 오버라이딩 시 , before after 둘 다 해야함 */

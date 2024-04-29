@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" defer src="/js/theme/list.js"></script>
+</head>
+<body>
+    <main layout:fragment="main" class="d:flex flex-direction:column px:3 py:4 w:10p">
+        <span class="theme-list">
+            <div class="w:10p">
+                <label class="fs:4 deco icon:moon deco-mr:5 w:10p" data-theme="dark">
+                    어두운 테마
+                    <input class="dark ml:auto" type="radio" name="theme" data-theme="dark"/>
+                </label>
+            </div>
+            <div class="w:10p mt:5">
+                <label class="fs:4 deco icon:sun deco-mr:5 w:10p" data-theme="white">
+                    밝은 테마
+                    <input class="white ml:auto" type="radio" name="theme" data-theme="white"/>
+                </label>
+            </div>
+        </span>
+    </main>
+</body>
+</html>

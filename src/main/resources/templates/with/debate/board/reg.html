@@ -1,11 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.49/dist/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/var.css" />
+    <link rel="stylesheet" type="text/css" href="/css/util/background-color.css" />
+    <link rel="stylesheet" type="text/css" href="/css/util/border-color.css" />
+    <link rel="stylesheet" type="text/css" href="/css/util/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="/css/util/progress.css" />
+    <link rel="stylesheet" type="text/css" href="/css/util/color.css" />
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <style>
+        .w\:74 {
+            width: 80px;
+            height: 80px;
+        }
+
+
+
+        .item:hover{
+            background-color: #8BA3F8 !important;
+
+        }
+
+        .img-group {
+
+            scroll-behavior: smooth;
+            overflow-x: scroll;
+
+
+
+        }
+
+        .img-group::-webkit-scrollbar {
+
+            width: 2px;
+            height: 8px;
+
+        }
+
+        .img-group::-webkit-scrollbar-thumb {
+
+            background: var(--color-base-5);
+            border-radius: 12px;
+        }
+
+        .img-group::-webkit-scrollbar-track {
+            background: rgba(246, 246, 247, 0.1); /*�ㅽ겕濡ㅻ컮 �� 諛곌꼍 �됱긽*/
+        }
+
+
+        .fade{
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .fade-out{
+            opacity: 1;
+        }
+        select{
+            appearance: none;
+        }
+
+    </style>
 </head>
 <body>
-    
+    <header class="d:flex jc:start ai:center h:1 px:2 pt:2">
+
+        <h1 class="d:none">상단바</h1>
+
+        <div class="mr:auto"><a class="icon icon:x icon-size:5" href="">나가기</a></div>
+
+    </header>
+    <main class=" p:2">
+        <section class="">
+            <h1 class="d:none">토론 카드 내용 입력</h1>
+            <form class="form-group h:auto" action="reg" method="post" enctype="multipart/form-data">
+                <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3">
+                    <h1 class="deco icon:sun bd-bottom w:10p h:1 pl:2">토론주제 등록</h1>
+                    <div class="d:flex jc:center mt:2">
+                        <div class="n-select">
+                            <select name="topicId">
+                              <option value=" ">토론주제</option>
+                              <option th:each="val : ${topicList}"
+                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3 mt:6">
+                    <h1 class="deco icon:pencil_simple bd-bottom w:10p h:1 pl:2 ">제목</h1>
+                    <div class="d:flex jc:center mt:2">
+                        <input class="w:10p n-textbox" type="text" name="title">
+                    </div>
+                </section>
+
+                <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3 h:5 mt:6">
+
+                    <h1 class="deco icon:pencil_simple bd-bottom w:10p h:1 pl:2 ">의견</h1>
+
+                    <textarea class="text-area w:100p h:2 mt:5" name="content" ></textarea>
+<!--                    <div class="d:flex jc:center mt:2">-->
+<!--                       -->
+<!--                    </div>-->
+                </section>
+
+                <section class="form-group mt:3 ">
+                    <h1 class="d:none">이미지 입력</h1>
+                    <div>
+                        <input type="file" multiple="multiple" name="files" >
+                    </div>
+                    <!--                    <div class="d:flex ai:center bd-radius:5 mr:3  img-group">-->
+                    <!--                        <label class="img-label d:flex jc:center flex-shrink:0   bg-color:base-2 ai:center w:3 h:3 border-radius:8 d:inline-block  mr:2">-->
+                    <!--                            <span class="icon icon:image  icon-color:base-9 icon-size:5">이미지</span>-->
+                    <!--                            <input class="d:none img-input" name="files" type="file" multiple>-->
+                    <!--                        </label>-->
+                    <!--                        <div>-->
+                    <!--                            <div class="preview-panel bd-radius:4 d:flex flex-grow:1"></div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </section>
+
+                <div><input type="hidden" name="rid" th:value="${param.rid}"></div>
+                <button class="reg-btn n-btn bg-color:main-4  pos:absolute top:0 right:0 " type="submit">등록</button>
+            </form>
+        </section>
+    </main>
+<!--<script>-->
+<!--    const editor = new toastui.Editor({-->
+<!--        el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)-->
+<!--        height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)-->
+<!--        initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)-->
+<!--        // initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함-->
+<!--        previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)-->
+<!--        toolbarItems: [-->
+<!--            ['heading', 'bold', 'italic', 'strike'],-->
+<!--            ['ul', 'ol', 'task', 'indent', 'outdent'],-->
+<!--            ['image', 'link'],-->
+<!--            // ['scrollSync']-->
+<!--        ],-->
+<!--         /* start of hooks */-->
+<!--         hooks: {-->
+<!--            addImageBlobHook(blob, callback) {  // 이미지 업로드 로직 커스텀-->
+<!--                console.log(blob);-->
+<!--                console.log(callback);-->
+<!--            }-->
+<!--        }-->
+<!--        /* end of hooks */-->
+<!--    });-->
+<!--</script>-->
 </body>
+
 </html>

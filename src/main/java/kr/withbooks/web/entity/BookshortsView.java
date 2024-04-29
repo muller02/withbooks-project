@@ -1,7 +1,7 @@
 package kr.withbooks.web.entity;
 
-import groovy.transform.builder.Builder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,4 +28,5 @@ public class BookshortsView {
     private String userNickname;
     private String userImg;
     private String bookTitle;
+    private String liked;
 }
