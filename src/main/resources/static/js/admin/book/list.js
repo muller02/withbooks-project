@@ -54,3 +54,26 @@ window.addEventListener("load", function(){
     }
   }
 }
+
+
+// ================ 수정 된 항목 표시 ===================
+
+{
+  let bookList = document.querySelector(".book-list");
+
+  bookList.onchange = (e)=>{
+    
+    if(e.target.type == 'text' || e.target.type == 'textarea'){
+      e.target.classList.add('bd-color:accent-3');
+    }
+
+    if(e.target.type == 'checkbox'){
+      let labelClassList = e.target.parentNode.querySelector("label").classList;
+      labelClassList.add("bd");
+      labelClassList.add("bd-color:accent-3")
+    }
+
+
+    // console.log(e.target.tagName);
+  }
+}
