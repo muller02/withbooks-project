@@ -29,6 +29,10 @@
         --width-1: 32px;
       }
 
+      .cmt-like-section > * {
+        --icon-size-5: 28px;
+
+      }
       .pager {
         --height-1: 4px;
       }
@@ -150,6 +154,15 @@
     .comment-user-img{
       width: 32px;
       height: 32px;
+    }
+
+    .likeBtn{
+      transition: transform 0.3s ease;
+
+    }
+    .likeBtn-transition{
+      transform: scale(1.8);
+
     }
     </style>
 
@@ -297,7 +310,7 @@
             <div class="fs:2 fw:3">132</div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="icon icon:heart"></div>
+            <div class="icon icon:heart "></div>
             <div class="fs:2 fw:3">50.2M</div>
           </div>
         </section>
@@ -596,20 +609,20 @@
           <h1 class="d:none">댓글/좋아요 버튼</h1>
           <div class="d:flex fl-dir:column ai:center">
             <div
-              class="icon icon:chats comment-btn cursor:pointer color-icon"
+              class="icon icon:chats  icon-size:5 comment-btn cursor:pointer color-icon"
               th:data-shorts-id="${s.id}"
             ></div>
             <div
-              class="fs:2 fw:3 count-comment color-text"
+              class="fs:3 fw:3 count-comment  color-text"
               th:text="${s.commentCnt}"
             >
               132
             </div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="likeBtn icon  cursor:pointer "   th:data-shorts-id="${s.id}"  th:classappend="${s.liked}==1  ? 'icon:heart_fill icon-color:main-5' : 'icon:heart'"></div>
+            <div class="likeBtn icon  icon-size:5  cursor:pointer "   th:data-shorts-id="${s.id}"  th:classappend="${s.liked}==1  ? 'icon:heart_fill icon-color:main-5' : 'icon:heart'"></div>
 
-            <div class="fs:2 fw:3 color-text" th:text="${s.likeCnt}" >50.2M</div>
+            <div class="fs:3 fw:3 color-text" th:text="${s.likeCnt}" >50.2M</div>
             <section
                     id="modal-like"
                     class="n-modal d:none modal-transform-xy"
