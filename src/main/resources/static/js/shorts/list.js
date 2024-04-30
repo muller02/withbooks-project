@@ -219,8 +219,11 @@ function getCommentList(shortsId, comments, getCommentCount) {
   fetch(`http://localhost:8080/api/comments/list?shorts_id=${shortsId}`)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
+      let commentList = data.list;
+      let userId = data.userId;
 
-      data.forEach((cmt) => {
+      commentList.forEach((cmt) => {
 
         commentCount++; //댓글 갯수 카운트
         // icon icon-size:2 icon-color:accent-2 icon:trash
@@ -232,6 +235,12 @@ function getCommentList(shortsId, comments, getCommentCount) {
                      </div>
                      <span></span>
                       <div class=" mr:auto  fw:3 ">${cmt.nickname}</div>
+                      `;
+
+        console.log("cmt = ",cmt.userId , "userid = ", userId);
+                      
+                      if(cmt.userId == userId){
+                      divHTML+=`
                       <div class="n-dropdown comment-dropdown">
                         <button class="cursor:pointer dropdown-btn">
                           <span class="comment-dots-icon icon icon:dots_three_outline_vertical_fill icon-size:3 color-icon rg-comment-hover"></span>
@@ -240,9 +249,10 @@ function getCommentList(shortsId, comments, getCommentCount) {
                         
                           <li>
                
-                              <button class="va:middle text-align:center	  color:accent-2 " data:${cmt.id}>
-                                삭제하기
-                              </button>
+                             <button class="va:middle delete-comment text-align:center color:accent-2" data-commentId="${cmt.id}" >
+                              삭제하기
+                          </button>
+
 
                           </li>
                           <li>
@@ -251,11 +261,14 @@ function getCommentList(shortsId, comments, getCommentCount) {
                             수정하기
                           </button>
 
-                      </li>
-                      
-                          
-                        </ul>
+                        </li>
+            
+                          </ul>
                       </div>
+                      `;
+                      };
+
+                      divHTML+=`
                     </div>
                     <div class=" mt:2 comment-content-color pb:2 pl:2">${cmt.content}</div>
                     <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${cmt.regDate}</div>
@@ -272,6 +285,49 @@ function getCommentList(shortsId, comments, getCommentCount) {
     .catch((error) => console.error("Error:", error));
 }
 
+
+window.addEventListener("load",function (e){
+
+  document.addEventListener("click", function (e){
+
+    // 내가 선택한 것이 delete-comment가 아니면 종료
+    if(!e.target.closest(".delete-comment"))
+      return
+
+    let target =e.target;
+
+    let commentGroup = target.closest(".comment-group");
+    let commentBtn = commentGroup.previousElementSibling.querySelector(".comment-btn")
+    let shortsId = commentBtn.dataset.shortsId;
+    let comments = commentGroup.querySelector(".comments");
+    let countComment = commentBtn.nextElementSibling;
+
+    // 선택한 댓글의 commentId  저장
+    let commentId = target.dataset.commentid
+
+    //api delete 요청
+    let url  =`http://localhost:8080/api/comments?cmtId=${commentId}`;
+
+    fetch(url,{method:"DELETE"}).then(response=>{
+      if (!response.ok) {
+        throw new Error("서버 요청에 실패");
+      }
+    })
+        .catch(error=>{
+          console.error("fetch 호출 중 에러 발생:", error);
+
+        })
+
+    // 코멘틀 리스트  출력 , 코멘트 숫자 갱신
+    getCommentList(shortsId,comments,function (commentCount) {
+      countComment.innerHTML = commentCount;
+    })
+
+
+
+  })
+
+})
 
 
 
@@ -356,9 +412,6 @@ window.addEventListener("load", function (e) {
     };
   });
 });
-
-
-
 
 
 

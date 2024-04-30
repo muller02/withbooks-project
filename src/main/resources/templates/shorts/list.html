@@ -2,8 +2,10 @@
 <html
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{inc/layout.html}"
+
 >
   <head>
     <meta charset="UTF-8" />
@@ -364,7 +366,24 @@
                   </span>
                 </button>
               </li>
-              <li>
+
+
+<!--              <span th:text=""></span>-->
+<!--                <p th:text="${#authentication.principal.username}"></p>-->
+
+<!--              <span th:text="${s.userId}"></span>-->
+<!--              <div th:if="sec:authentication=principal.id>-->
+<!--              <div th:text="${#authentication.principal != null}"></div>-->
+
+
+
+<!--              <div th:if="${#authentication.principal == null}">-->
+
+<!--                <div th:if="${#authentication.principal.id eq s.userId}">-->
+
+
+
+              <li th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq s.userId}">
                 <button>
                   <a
                     href=""
@@ -376,7 +395,7 @@
                 </button>
               </li>
 
-              <li>
+              <li th:if="${#authentication.principal != 'anonymousUser' and #authentication.principal.id eq s.userId}">
                 <form id="form-name" class="px:2 py:1">
                   <button
                     id="modal-btn"
@@ -389,6 +408,10 @@
                   <!--             모달창 -->
                 </form>
               </li>
+
+<!--              </div>-->
+
+
             </ul>
           </div>
           <section
@@ -616,14 +639,15 @@
           ></div>
           <div class="comments color-base-9"></div>
 
-          <section class="d:flex jc:center mt:4">
-            <h1 class="d:none">댓글 페이저1</h1>
-            <ul class="n-pager">
-              <li class="active"><a>1</a></li>
-              <li><a>2</a></li>
-              <li><a>3</a></li>
-            </ul>
-          </section>
+<!--          댓글 페이징 일단 제외 -->
+<!--          <section class="d:flex jc:center mt:4">-->
+<!--            <h1 class="d:none">댓글 페이저1</h1>-->
+<!--            <ul class="n-pager">-->
+<!--              <li class="active"><a>1</a></li>-->
+<!--              <li><a>2</a></li>-->
+<!--              <li><a>3</a></li>-->
+<!--            </ul>-->
+<!--          </section>-->
           <div>
             <form class="d:flex mt:2 ai:center" method="post">
               <textarea
