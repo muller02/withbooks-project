@@ -1,6 +1,8 @@
 package kr.withbooks.web.controller;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,12 @@ public class MyController {
     @GetMapping("/index")
     public String index(
         // @AuthenticationPrincipal WebUserDetails userDetails,
+        @AuthenticationPrincipal CustomUserDetails userDetails,
         Model model){
-        
-        Long userId = 6L;
+
+
+        Long userId = userDetails.getId();
+
         // userId = userDetails.getId();
         User user = userService.getById(userId);
 

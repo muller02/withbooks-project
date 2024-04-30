@@ -44,9 +44,13 @@ searchBtn.onclick=function (e){
     if (searchBtn.classList.toggle("icon:plus")) {
         searchBtn.classList.remove("icon:minus");
         searchBtn.classList.add("icon:plus");
+        searchBtn.classList.add(".ani2")
+
     } else {
         searchBtn.classList.remove("icon:plus");
         searchBtn.classList.add("icon:minus");
+        searchBtn.classList.add(".ani2")
+
     }
 }
 
