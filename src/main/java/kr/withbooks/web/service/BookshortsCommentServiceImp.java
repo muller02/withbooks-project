@@ -29,5 +29,15 @@ public class BookshortsCommentServiceImp implements  BookshortsCommentService{
         return result; 
     }
 
+    @Override
+    public boolean blindById(Long cmtId) {
+
+
+       int result =  repository.delete(cmtId);
+
+
+       return result!=0? true:false;
+    }
+
 
 }

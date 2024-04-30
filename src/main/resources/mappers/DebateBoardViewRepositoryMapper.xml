@@ -15,12 +15,12 @@
   </if>
 </select>
 
-<select id="findById" resultType="DebateBoardView">
-  SELECT
-  *
-  FROM debate_board_view
-  where id = #{id}
-</select>
+<!--<select id="findById" resultType="DebateBoardView">-->
+<!--  SELECT-->
+<!--  *-->
+<!--  FROM debate_board_view-->
+<!--  where id = #{id}-->
+<!--</select>-->
 
 
 </mapper>

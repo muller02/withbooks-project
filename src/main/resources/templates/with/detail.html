@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/js/book/list.js"></script>
 
-
+    <script src="/js/with/detail.js"></script>
     <style>
         /* *{
             font-family: "Noto Sans KR", sans-serif;
@@ -78,17 +79,20 @@
     </div>
 </section>
 <div class="with-tap-component ">
-    <ul class="n-tabbar justify-content:space-between">
-        <li class="active "><button class="fw:3">홈</button></li>
-        <li><button>토론서재</button></li>
+    <ul class="n-tabbar justify-content:space-between menu-tap">
+        <li class="active "><button class="fw:3" id="home2">홈</button></li>
+        <li><button th:data-with-id="${with.id}" id="debate">토론서재</button></li>
         <li><button>모임일정</button></li>
-        <li><button>자유게시판</button></li>
+        <li><button th:data-with-id="${with.id}" id="board">자유게시판</button></li>
         <li><button>북추천</button></li>
         <li><button>위드맴버</button></li>
 
     </ul>
 </div>
-<section class="pt:4   ">
+
+
+    <div id="content">
+<section class="pt:4  px:3  ">
     <h1 class="fs:6 fw:3 color:base-8 ">소개</h1>
    <pre class="mb:3 "> <div class=" h:100p" th:text="${with.intro}">
         좋은 분들이 모여서 이야기하다 보면 공감대가 생기고 친밀감이 쌓여서 좋은 독자들로 이어나갔으면 좋겠다는 생각에 만들게 되었습니다.<br><br>
@@ -108,8 +112,8 @@
 </section>
 <div class="w:100p border-bottom border-width:3	 border-color:base-2 "><span class="d:none">선</span></div>
 
-<section class="  my:5 ">
-    <h1 class="fs:6 fw:3 mb:4 color:base-8">토론서재</h1>
+<section class="  my:5 px:3 ">
+    <h1 class="fs:6 fw:3 mb:4  color:base-8">토론서재</h1>
 
     <div class="mt:4  d:flex mb:4 mt:4 ">
         <div class="d:flex    ">
@@ -156,8 +160,8 @@
     </div>
 </section>
 
-    <div class="w:100p border-bottom border-width:3	 border-color:main-2 "><span class="d:none">선</span></div>
-<section class="   my:5 ">
+    <div class="w:100p  border-bottom border-width:3	 border-color:main-2 "><span class="d:none">선</span></div>
+<section class="   px:3  my:5 ">
     <h1 class="fs:6 fw:3 color:base-8 mb:4">모임일정</h1>
 
     <div class="border w:fit-content  d:flex jc:center ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3">
@@ -201,7 +205,7 @@
 
     <div class="w:100p border-bottom border-width:3	 border-color:main-2 "><span class="d:none">선</span></div>
 
-<section class="   my:5  " >
+<section class="   my:5  px:3 " >
     <h1 class="fs:6 fw:3  color:base-8 mb:4">위드맴버
         <span th:text="${withMemberCnt +' 명'}">7명</span>
     </h1>
@@ -214,17 +218,14 @@
             <div th:text="${wm.joinDate}" class="color:base-3 fs:2">2023.02.23</div>
         </div>
     </div>
-
-
-
 </section>
 
     <div class="w:100p border-bottom border-width:3	 border-color:main-2 "><span class="d:none">선</span></div>
 
-<section class="  my:5 board-list ">
+<section class="   my:5 board-list ">
     <h1 class="fs:6 fw:3  color:base-8 mb:4">자유게시판</h1>
 
-    <section class="border-bottom   pb:2 mb:3 " th:each="b : ${freeBoardList}">
+    <section class="border-bottom px:3   pb:2 mb:3 " th:each="b : ${freeBoardList}">
         <h1 class="d:none">게시글</h1>
         <div class="d:flex ai:center mb:3">
             <div class="w:1 h:1 mr:2">
@@ -326,6 +327,7 @@
     </section>
 
 </section>
+    </div>
 </main>
 
 
