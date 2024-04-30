@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class DebateAttachmentServiceIml implements DebateAttachmentService {
+public class DebateAttachmentServiceImp implements DebateAttachmentService {
 
     @Autowired
     private DebateAttachmentRepository debateAttachmentRepository;
