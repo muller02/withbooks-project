@@ -369,12 +369,21 @@
 
 
 <!--              <span th:text=""></span>-->
-<!--              <span th:text="${#authentication.principal.id}"></span>-->
-<!--              <span th:text="${s.userId}"></span>-->
-<!--              <div th:if=" sec:authentication="principal.id">-->
-              <div th:if="${#authentication.principal.id eq s.userId}">
+<!--                <p th:text="${#authentication.principal.username}"></p>-->
 
-              <li>
+<!--              <span th:text="${s.userId}"></span>-->
+<!--              <div th:if="sec:authentication=principal.id>-->
+<!--              <div th:text="${#authentication.principal != null}"></div>-->
+
+
+
+<!--              <div th:if="${#authentication.principal == null}">-->
+
+<!--                <div th:if="${#authentication.principal.id eq s.userId}">-->
+
+
+
+              <li th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq s.userId}">
                 <button>
                   <a
                     href=""
@@ -386,7 +395,7 @@
                 </button>
               </li>
 
-              <li>
+              <li th:if="${#authentication.principal != 'anonymousUser' and #authentication.principal.id eq s.userId}">
                 <form id="form-name" class="px:2 py:1">
                   <button
                     id="modal-btn"
@@ -400,7 +409,8 @@
                 </form>
               </li>
 
-              </div>
+<!--              </div>-->
+
 
             </ul>
           </div>
