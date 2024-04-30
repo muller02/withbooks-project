@@ -18,6 +18,8 @@ window.addEventListener("load",function (e){
 
   })
 
+  list['서울'] =2;
+
 
 })
 

@@ -7,5 +7,7 @@ public interface UserService {
     User getById(Long userId);
 
     void modify(User user);
+
+    String getNickNameById(Long userId);
     
 }

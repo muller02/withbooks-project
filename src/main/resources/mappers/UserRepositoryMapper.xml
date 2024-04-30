@@ -16,6 +16,11 @@
 	  	select * from user where id = #{id}
 
 	</select>
+	<select id="findByNickName">
+
+		select nickname from user where id = #{id}
+
+	</select>
 
 	<update id="update">
 		update user 
