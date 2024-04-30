@@ -59,6 +59,8 @@ public class BookshortsCommentController {
         dataMap.put("list",list);
         dataMap.put("userId",userId);
 
+        System.out.println(list);
+
         return dataMap;
 
     }

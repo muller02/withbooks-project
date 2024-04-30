@@ -1,3 +1,26 @@
+// <댓글 창 textarea 자동으로 글 늘어나게 하기
+window.addEventListener("load",function (e){
+
+  document.addEventListener("click",function (e){
+    let target = e.target;
+
+    if(!target.closest(".comment-content"))
+      return;
+    let section = target
+        // let textarea =
+
+    // witnIntro Textarea에 input 이벤트 추가
+    target.oninput = function (e) {
+      target.style.height="auto";
+     target.style.height = target.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
+
+    };
+
+  })
+
+
+})
+
 
 // <좋아요 >
 window.addEventListener("load", function (e) {
@@ -228,16 +251,16 @@ function getCommentList(shortsId, comments, getCommentCount) {
         commentCount++; //댓글 갯수 카운트
         // icon icon-size:2 icon-color:accent-2 icon:trash
         var divHTML = `
-                    <div class="border-bottom  pt:4  pl:2 ">
+                    <div class="border-bottom  pt:3  pl:2 ">
                     <div class="d:flex ai:center " >
-                    <div class="border-radius:full of:hidden mr:1  h:1 w:1"> 
-                        <img src="/image/shorts/totoro.jpg" class="obj-fit:contain h:1 w:1 "">
+                    <div class="border-radius:full of:hidden mr:1  comment-user-img  "> 
+                        <img src="/image/user/${cmt.img}" class="obj-fit:contain  w:100p h:100p">
                      </div>
                      <span></span>
-                      <div class=" mr:auto  fw:3 ">${cmt.nickname}</div>
+                      <div class=" mr:auto  fw:2 ">${cmt.nickname}</div>
                       `;
 
-        console.log("cmt = ",cmt.userId , "userid = ", userId);
+
                       
                       if(cmt.userId == userId){
                       divHTML+=`
@@ -270,7 +293,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
 
                       divHTML+=`
                     </div>
-                    <div class=" mt:2 comment-content-color pb:2 pl:2">${cmt.content}</div>
+                    <div class=" mt:2 comment-content-color  pl:2 fs:2">${cmt.content}</div>
                     <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${cmt.regDate}</div>
                   </div>
                   `;
