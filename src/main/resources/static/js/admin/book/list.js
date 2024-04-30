@@ -41,3 +41,16 @@ window.addEventListener("load", function(){
 
 
 });
+
+
+// ================ 책 토글 ===================
+{
+  let bookList = document.querySelector(".book-list");
+
+  bookList.onclick = (e)=>{
+    if(e.target.classList.contains("toggle-btn")){
+      let bookDetail = e.target.parentNode.parentNode.querySelector(".book-detail");
+      bookDetail.classList.toggle("toggle");
+    }
+  }
+}
