@@ -63,11 +63,11 @@
 
             <div class="md:d:flex lg:d:block ">
                 <div class="mb:2 md:mr:auto"><span class="color:base-6 fw:3 mr:3">모임주기</span><span th:text="${'월 ' +with.interval +'회'}">월 1회</span></div>
-                <div class="mb:2 md:mr:6 md:w:4"><span class="color:base-6 fw:3 mr:3">개설일</span><span th:text="${with.regDate}">2023년 11월 15일</span></div>
+                <div class="mb:2 md:mr:6 md:w:4"><span class="color:base-6 fw:3 mr:3">개설일</span><span th:text="${#temporals.format(with.regDate,'yyyy-MM-dd')}">2023년 11월 15일</span></div>
             </div>
 
             <div class="md:d:flex lg:d:block ">
-                <div class="mb:2 md:mr:auto"><span class="color:base-6 fw:3 mr:3">위드장</span><span th:text="${with.withRegId}">책친자</span></div>
+                <div class="mb:2 md:mr:auto"><span class="color:base-6 fw:3 mr:3">위드장</span><span th:text="${nickName}">책친자</span></div>
                 <div class="mb:2 md:mr:6 md:w:4"><span class="color:base-6 fw:3 mr:3">정원</span><span th:text="${withMemberCnt + ' / ' + with.personnel +'명'} ">7 / 12</span></div>
             </div>
         </div>

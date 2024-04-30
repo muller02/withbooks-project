@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/admin/book/list.js" defer></script>
+    <style>
+        .core div{
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .checkbox-parent:has( .checkbox-toggle:checked){
+            background: mediumaquamarine;
+        }
+    </style>
+    <style>
+        .toggle{
+            padding: 0 !important;
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <main layout:fragment="main" class="n-panel n-main-panel">
+
+
+        <section class="n-container p:4 lg:px:10">
+            <h1 class="d:none">Main</h1>
+            <section class="book-list">
+                <h1 class="d:none">책 리스트</h1>
+
+                <section class="d:flex align-items:center pb:4 bd-bottom">
+                    <h1 class="d:none">헤더</h1>
+                    <div class="w:1p text-align:center">ID</div>
+                    <div class="w:2p text-align:center">카테고리</div>
+                    <div class="w:5p text-align:center">제목</div>
+                    <div class="w:2p text-align:center">저자</div>
+                    <div class="w:2p text-align:center">ISBN13</div>
+                    <div class="w:1p text-align:center">공개여부</div>
+                </section>
+
+                <section th:each="book : ${list}">
+                    <h1 class="d:none">본문</h1>
+
+                    <section class="d:flex jc:space-between align-items:center py:2 bd-top bd-right bd-left bd-color:main-3 bg-color:main-1 pos:relative">
+                        <h1 class="d:none">요약</h1>
+                        <div class="w:1p text-align:center ln-clamp:1" th:text="${book.id}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.categoryName}"></div>
+                        <div class="w:5p text-align:center ln-clamp:1" th:text="${book.title}" th:title="${book.title}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.author}" th:title="${book.author}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.isbn13}"></div>
+                        <div class="w:1p text-align:center ln-clamp:1" th:text="${book.publicYn}"></div>
+                        <div class="toggle-btn icon icon:arrow_down_left pos:absolute right:1 mr:2">토글버튼</div>
+                    </section>
+
+
+                    <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 p:5 toggle">
+                        <h1 class="d:none">디테일</h1>
+                        <div class="d:flex fl-dir:column">
+                            <div class="">
+                                <img class="w:3 h:5 bd-radius:2" src="" alt="" th:src="${book.cover}">
+                            </div>
+                            <div>
+                                <label class="d:flex jc:center color:main-6 cursor:pointer">
+                                    이미지 변경
+                                    <input class="d:none bd w:3" type="file">
+                                </label>
+                            </div>
+                        </div>
+    
+                        <span class="ml:6 w:10p">
+                            <span class="d:flex">
+                                <div>
+                                    <div>ID : <span th:text="${book.id}"></span></div>
+                                </div>
+        
+                                <div class="ml:auto">
+                                    <div>카테고리 : <span th:text="${book.categoryName}"></span></div>
+                                </div>
+        
+                                <div class="ml:auto">
+                                    <div>제목 : <span th:text="${book.title}"></span></div>
+                                </div>
+        
+                                <div class="ml:auto">
+                                    <div>저자 : <span th:text="${book.author}"></span></div>
+                                </div>
+                            </span>
+    
+                            <span class="d:flex mt:3">
+                                <div>ISBN : <span th:text="${book.isbn13}"></span></div>
+                                <div class="ml:auto">출판일 : <span th:text="${book.pubDate}"></span></div>
+                                <div class="ml:auto">출판사 : <span th:text="${book.publisher}"></span></div>
+                            </span>
+                            
+                            <div class="d:flex mt:3 ai:center">
+                                <label class="w:1">가격</label>
+                                <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.price}"></input>
+                            </div>
+    
+                            <div class="d:flex mt:3">
+                                <label class="w:1">설명</label>
+                                <textarea class="bd bd-radius:2 w:10p pl:3 py:1" th:utext="${book.description}"></textarea>
+                            </div>
+    
+                            <div class="d:flex mt:3">
+                                <label class="w:2">구매링크</label>
+                                <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.purchaseLink}"></input>
+                                
+                                <div class="d:flex jc:center ai:center"><a href="" th:href="${book.purchaseLink}" class="icon icon:share_fat ml:2">링크</a></div>
+                            </div>
+    
+                            
+                            <div class="d:flex mt:3">
+                                <label>베스트셀러(Y/N) </label>
+                                <input class="ml:3" type="checkbox" th:checked="${book.publicYn} == 1">
+                            </div>
+    
+                            <div class="d:flex mt:3">
+                                <label>공개 </label>
+                                <input class="ml:3" type="checkbox" th:checked="${book.publicYn} == 1">
+                            </div>
+                        </span>
+                        
+                        <span class="d:flex pos:absolute bottom:1 right:1 mb:3 mr:3">
+                            <div>
+                                <button class="n-btn n-btn-type:outline">찾아와줘😀</button>
+                            </div>
+                            <div class="ml:6">
+                                <button class="n-btn">수정내용 저장</button>
+                            </div>
+                        </span>
+                    </section>
+
+                </section>
+            </section>
+            
+        </section>
+    </main>
+</body>
+</html>

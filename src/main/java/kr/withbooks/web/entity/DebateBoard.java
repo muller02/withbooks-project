@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,8 +19,8 @@ public class DebateBoard {
     private Long userId;
     private String title;
     private String content;
-    private Date regDate;
-    private Integer blindYn;
+    private LocalDateTime regDate;
+    private int blindYn;
     private Long topicId;
 
 }

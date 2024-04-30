@@ -89,7 +89,11 @@ public class BookshortsController {
         @RequestParam(name = "files", required = false) List<MultipartFile> files, 
         @RequestParam(name = "text-area", required = false) String content,
         @RequestParam(required = false , name = "book-id") Long bookId,
+        @AuthenticationPrincipal CustomUserDetails userDetails,
         HttpServletRequest request) throws IOException {
+
+
+        Long userId = userDetails.getId();
 
         System.out.println("files = " + files.size());
 
@@ -99,9 +103,10 @@ public class BookshortsController {
         }
 
 
+
         Bookshorts item = Bookshorts.builder()
                             .bookId(bookId)
-                            .userId(1L)
+                            .userId(userId)
                             .content(content)
                             .build();
 

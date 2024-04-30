@@ -149,10 +149,11 @@
     <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list-ul">
       <li class="d:flex with-ul gap:2 flex-direction:column n-item:shadow" th:each="with: ${list}">
         <ul class="d:flex gap:1 flex-wrap:wrap">
-          <li class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2">
-            <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
+          <li
+                  class=" bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
+          >            <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
           </li>
-          <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 mr:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
+          <li class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0" th:each="categoryNames :${with.categoryNames}">
             <span class="color:base-1" th:text="${categoryNames}">소설</span>
           </li>
         </ul>

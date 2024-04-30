@@ -219,10 +219,10 @@ function updateHTML(list){
     withListUl.innerHTML=``;
 
     for(let item of list){
-        let categoryHtml = '';
+        let categoryHtml =  '';
 
         for(let category of item.categoryNames){
-            categoryHtml += `<li class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0">
+            categoryHtml += `<li class=" bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0">
                         <span class="color:base-1">${category}</span>
                           </li>`;
 
@@ -280,7 +280,8 @@ function updateHTML(list){
                     <span
                       class="fs:2 color:base-5 ml:1"
      
-                      >${item.location}</span
+                      >월 ${item.interval} 회</span
+                      
                     >
                   </div>
                   <!--            <span>·</span>-->

@@ -23,8 +23,11 @@
     </style>
 </head>
 <body>
+    
 
     <main layout:fragment="main" class="n-panel n-main-panel">
+
+
         <section class="n-container px:4 lg:px:10">
             <h1 class="d:none">Main</h1>
 <!-- 테스트 -->
@@ -47,7 +50,7 @@
                     />
                     <button type="submit" class="n-btn n-btn-type:filled">검색</button>
                 </div>
-                  <div class="search-category-div n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
+                <div class="search-category-div n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
                     <div class="n-expander-title">
                         <input type="checkbox" class="n-expander-trigger" />
                         카테고리 검색
@@ -77,11 +80,11 @@
             <!-- book list -->
             <section>
                 <div class="d:flex align-items:center">
-                    <div class="width:1 align-content:center">
+                    <!-- <div class="width:1 align-content:center">
                         <label>
                             <input type="checkbox" class="ml:3 n-toggle n-toggle-type:check-box n-toggle-size:1" />
                         </label>
-                    </div>
+                    </div> -->
                     <div class="width:1p text-align:center">ID</div>
                     <div class="width:2p text-align:center">카테고리</div>
                     <div class="width:5p text-align:center">제목</div>
@@ -95,17 +98,17 @@
                     <div class="n-expander-title checkbox-parent">
                         <input type="checkbox" class="n-expander-trigger checkbox-toggle"/>
                         <div class="d:flex align-items:center">
-                            <input type="checkbox" class="ml:1 n-toggle n-toggle-type:check-box n-toggle-size:1" data-id="${book.id}"/>
+                            <!-- <input type="checkbox" class="ml:1 n-toggle n-toggle-type:check-box n-toggle-size:1" data-id="${book.id}"/> -->
                             <div class="width:1p text-align:center" th:text="${book.id}"></div>
                             <div class="width:2p text-align:center" th:text="${book.categoryName}"></div>
                             <div class="width:5p text-align:center" th:text="${book.title}" th:title="${book.title}"></div>
                             <div class="width:2p text-align:center" th:text="${book.author}" th:title="${book.author}"></div>
                             <div class="width:2p text-align:center" th:text="${book.isbn13}"></div>
                             <div class="width:1p text-align:center" th:text="${book.publicYn}"></div>
-                            <div class="width:1p"></div>
+                            <!-- <div class="width:1p"></div> -->
                         </div>
                     </div>
-                    <div class="n-expander-content px:2">
+                    <div class="n-expander-content px:2 bd">
                         <div class="d:flex align-items:center">
                             
 

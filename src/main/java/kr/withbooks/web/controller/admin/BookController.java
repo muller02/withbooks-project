@@ -65,7 +65,7 @@ public class BookController {
         model.addAttribute("category", categoryList);
         model.addAttribute("list", list);
 
-        return "admin/book/list";
+        return "admin/book/list-dev";
     }
 
     @GetMapping("detail")
