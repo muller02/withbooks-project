@@ -37,6 +37,8 @@ public class SecurityConfig {
                          .loginProcessingUrl("/loginProc") // 로그인 폼의 제출 url을 설정, 이 url을 통해 제출된 사용자 인증 정보를 처리\
                          .usernameParameter("email")
                          .defaultSuccessUrl("/shorts/list",true) //로그인 성공시 이동, 900 erorr 방지
+                         .successHandler(new CustomAuthenticationSuccessHandler())
+                         .failureHandler(new CustomAuthenticationFailureHandler())
                          .permitAll() // 로그인 페이지와 로그인 처리 url에 대한 인증되지 않은 사용자의 접근을 허용
                  );
 //
