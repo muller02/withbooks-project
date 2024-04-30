@@ -10,17 +10,15 @@ import java.util.Date;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class DebateBoard {
+@AllArgsConstructor
+public class DebateComment {
 
     private Long id;
-    private Long roomId;
+    private Long boardId;
     private Long userId;
-    private String title;
     private String content;
     private LocalDateTime regDate;
     private int blindYn;
-    private Long topicId;
 
 }

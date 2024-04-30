@@ -146,6 +146,11 @@
     *{
       font-family: "Noto Sans KR", sans-serif;
     }
+
+    .comment-user-img{
+      width: 32px;
+      height: 32px;
+    }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -639,20 +644,21 @@
           ></div>
           <div class="comments color-base-9"></div>
 
-          <section class="d:flex jc:center mt:4">
-            <h1 class="d:none">댓글 페이저1</h1>
-            <ul class="n-pager">
-              <li class="active"><a>1</a></li>
-              <li><a>2</a></li>
-              <li><a>3</a></li>
-            </ul>
-          </section>
+<!--          댓글 페이징 일단 제외 -->
+<!--          <section class="d:flex jc:center mt:4">-->
+<!--            <h1 class="d:none">댓글 페이저1</h1>-->
+<!--            <ul class="n-pager">-->
+<!--              <li class="active"><a>1</a></li>-->
+<!--              <li><a>2</a></li>-->
+<!--              <li><a>3</a></li>-->
+<!--            </ul>-->
+<!--          </section>-->
           <div>
             <form class="d:flex mt:2 ai:center" method="post">
               <textarea
                 type="text"
                 required
-                class="comment-content px:1 py:1 n-textbox mr:2"
+                class="comment-content px:1 py:1 n-textbox mr:2 of:hidden "
                 name="comment-content"
                 placeholder="댓글을 입력하세요 ! "
               ></textarea>

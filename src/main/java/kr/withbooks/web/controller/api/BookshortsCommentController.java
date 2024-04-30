@@ -1,6 +1,9 @@
 package kr.withbooks.web.controller.api;
 
+import java.lang.runtime.ObjectMethods;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +47,21 @@ public class BookshortsCommentController {
     
 
     @GetMapping("list")
-    public List<BookshortsCommentView> list(@RequestParam(name = "shorts_id", required = false) Long shortsId) {
-        
-        List<BookshortsCommentView> list = service.getList(shortsId);
+    public Map<String, Object> list(@RequestParam(name = "shorts_id", required = false) Long shortsId, @AuthenticationPrincipal CustomUserDetails details) {
 
-        return list;
+        Long userId = details.getId();
+
+        Map<String, Object> dataMap = new HashMap<>();
+
+
+        System.out.println("user id  = "  + userId);
+        List<BookshortsCommentView> list = service.getList(shortsId);
+        dataMap.put("list",list);
+        dataMap.put("userId",userId);
+
+        System.out.println(list);
+
+        return dataMap;
 
     }
 
