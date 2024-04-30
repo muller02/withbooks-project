@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.util.*;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
 import kr.withbooks.web.repository.DebateRoomViewRepository;
 import kr.withbooks.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,10 +37,6 @@ public class WithController {
 
     @Autowired
     private  FreeBoardService freeBoardService;
-
-    @Autowired
-    private UserService userService;
-
 
     @GetMapping("list")
     public String list(Model model,
@@ -78,10 +72,6 @@ public class WithController {
 
         //withId에 해당하는 위드 얻기
         With with = service.get(withId);
-        Long userId = with.getWithRegId();
-        String nickName = userService.getNickNameById(userId);
-
-        System.out.println("nickname = "  + nickName);
 
         //withId에 해당하는 위드 카테고리 리스트를 얻기
        List<String> withCategoryNames   = withCategoryService.getListByWithId(withId);
@@ -101,7 +91,7 @@ public class WithController {
 
 
 
-        model.addAttribute("nickName",nickName);
+
         model.addAttribute("withMemberList", withMemberList);
         model.addAttribute("freeBoardList",freeBoardList);
         model.addAttribute("debateRoomList", debateRoomList);
@@ -129,17 +119,14 @@ public class WithController {
 
     @PostMapping("reg")
     public String reg(
-            With with,
-            // category-id의 체크박스 값들
-            @RequestParam(name = "category-id", required = false) Long[] categoryIds,
-            // with 대표 이미지 파일
-            @RequestParam(name = "with-img-file", required = false) MultipartFile withImgFile
-                      , @RequestParam(name = "w_area1") String sido,
-            @RequestParam(name = "w_area2") String sigugun,
-            HttpServletRequest request,
-            @AuthenticationPrincipal CustomUserDetails details
+                      With with,
+                      // category-id의 체크박스 값들
+                      @RequestParam(name = "category-id", required = false) Long[] categoryIds,
+                      // with 대표 이미지 파일
+                      @RequestParam(name = "with-img-file", required = false) MultipartFile withImgFile,
+                      HttpServletRequest request
 
-            ) throws IOException {
+    ) throws IOException {
 
 
     //With 테이블 등록
@@ -147,14 +134,6 @@ public class WithController {
         //위드 이미지파일 이름
         //파일이 없을 때, 기본 이미지 적용
         String withImgName = "default.png";
-
-        Long userId = details.getId();
-
-
-        String location = sido +" "+sigugun;
-        System.out.println(location);
-
-        with.setLocation(location);
 
 
         //파일이 있을 떄, 파일을 로컬에 저장
@@ -174,14 +153,15 @@ public class WithController {
             withImgFile.transferTo(filePath);
         }
 
-        with.setWithRegId(userId); // 위드 등록 사용자 id 임시 1L
+        with.setWithRegId(1L); // 위드 등록 사용자 id 임시 1L
 
         with.setImg(withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
 
         service.add(with);  // with 저장
 
 
-        //WithCategory 테이블 등록
+    //WithCategory 테이블 등록
+
         Long withId = with.getId();   // 위에서  등록한 with ID 반환받기
 
         //withcategoryId 배열을 List<Long> 형태로 변환
