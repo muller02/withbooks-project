@@ -49,7 +49,10 @@ public class BookshortsCommentController {
     @GetMapping("list")
     public Map<String, Object> list(@RequestParam(name = "shorts_id", required = false) Long shortsId, @AuthenticationPrincipal CustomUserDetails details) {
 
-        Long userId = details.getId();
+        Long userId = null;
+
+        if(details !=null)
+            userId=  details.getId();
 
         Map<String, Object> dataMap = new HashMap<>();
 
