@@ -45,9 +45,10 @@ public class BoardController {
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
         model.addAttribute("list", list);
 
+        log.info("list = {}", list);
+
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
         model.addAttribute("topicList", topicList);
-
 
         if (topicId != null) {
             DebateTopic findTopic = debateTopicService.getById(topicId);
@@ -62,16 +63,25 @@ public class BoardController {
             @RequestParam Long id,
             Model model) {
 
-        DebateBoardView findBoard = debateBoardService.getById(id);
-
+        DebateBoard findBoard = debateBoardService.getById(id);
         Long roomId = findBoard.getRoomId();
-        DebateRoom findRoom = debateRoomService.getById(roomId);
+        Long topicId = findBoard.getTopicId();
 
+
+        DebateRoom findRoom = debateRoomService.getById(roomId);
         Long bookId = findRoom.getBookId();
         Book book = bookService.get(bookId);
 
+        DebateTopic findTopic = debateTopicService.getById(topicId);
+        log.info("findTopic = {}", findTopic);
+
+        List<DebateAttachment> imgList = debateAttachmentService.getListById(id);
+        log.info("imgList = {}", imgList);
+
         model.addAttribute("board", findBoard);
         model.addAttribute("book", book);
+        model.addAttribute("topic", findTopic);
+        model.addAttribute("imgList", imgList);
 
         return "with/debate/board/detail";
     }

@@ -36,6 +36,13 @@
 	</insert>
 
 
+	<delete id="delete">
+		delete from shorts_comment
+		where id = #{cmtId}
+
+	</delete>
+
+
 
 
 
