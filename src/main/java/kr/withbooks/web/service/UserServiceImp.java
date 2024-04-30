@@ -22,5 +22,13 @@ public class UserServiceImp implements UserService{
     public void modify(User user) {
         repository.update(user);
     }
-    
+
+    @Override
+    public String getNickNameById(Long userId) {
+
+
+        return repository.findByNickName(userId);
+    }
+
+
 }
