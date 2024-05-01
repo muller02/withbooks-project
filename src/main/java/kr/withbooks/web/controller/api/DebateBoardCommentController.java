@@ -3,12 +3,13 @@ package kr.withbooks.web.controller.api;
 import kr.withbooks.web.entity.DebateComment;
 import kr.withbooks.web.service.DebateCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/debate/board")
+@RequestMapping("/api/with/debate/board")
 public class DebateBoardCommentController {
 
     @Autowired
@@ -21,6 +22,7 @@ public class DebateBoardCommentController {
         return commentList;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{boardId}/comments")
     public DebateComment reg(@PathVariable Long boardId, @RequestBody DebateComment debateComment) {
         Long userId = 4L;
@@ -28,7 +30,8 @@ public class DebateBoardCommentController {
         debateComment.setUserId(userId);
         debateComment.setBoardId(boardId);
         Long commentId = debateCommentService.save(debateComment);
-        return debateCommentService.getById(commentId);
+        DebateComment findComment = debateCommentService.getById(commentId);
+        return findComment;
     }
 
     @DeleteMapping("/{boardId}/comments/{id}")
