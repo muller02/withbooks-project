@@ -1,17 +1,35 @@
 package kr.withbooks.web.controller.with.debate;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.entity.*;
-import kr.withbooks.web.service.*;
-import kr.withbooks.web.util.FileStore;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.DebateAttachment;
+import kr.withbooks.web.entity.DebateBoard;
+import kr.withbooks.web.entity.DebateBoardView;
+import kr.withbooks.web.entity.DebateCommentView;
+import kr.withbooks.web.entity.DebateRoom;
+import kr.withbooks.web.entity.DebateTopic;
+import kr.withbooks.web.service.BookService;
+import kr.withbooks.web.service.DebateAttachmentService;
+import kr.withbooks.web.service.DebateBoardService;
+import kr.withbooks.web.service.DebateCommentService;
+import kr.withbooks.web.service.DebateRoomService;
+import kr.withbooks.web.service.DebateTopicService;
+import kr.withbooks.web.util.FileStore;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
@@ -69,7 +87,7 @@ public class BoardController {
         DebateBoard findBoard = debateBoardService.getById(id);
         Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
-        List<DebateCommentView> debateCommentViewList = debateCommentService.getListById(id);
+        List<DebateCommentView> debateCommentList = debateCommentService.getListById(id);
 
 
         DebateRoom findRoom = debateRoomService.getById(roomId);
@@ -86,9 +104,9 @@ public class BoardController {
         model.addAttribute("book", book);
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
-        model.addAttribute("debateCommentList", debateCommentViewList);
+        model.addAttribute("debateCommentList", debateCommentList);
 
-        System.out.println(debateCommentViewList);
+        System.out.println("debateCommentList : " + debateCommentList);
         
 
         return "with/debate/board/detail";
