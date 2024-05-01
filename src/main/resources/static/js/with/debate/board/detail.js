@@ -1,22 +1,22 @@
 
 // <댓글 창 textarea 자동으로 글 늘어나게 하기
-// window.addEventListener('load', function(e) {
-//
-//
-//
-//
-//     let textarea = document.querySelector("#new-comment");
-//
-//     console.log(textarea)
-//
-//
-//
-//
-//     textarea.style.height = "auto";
-//     textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
-//
-//
-// })
+window.addEventListener('load', function(e) {
+
+
+
+
+    let textarea = document.querySelector("#new-comment");
+
+    console.log(textarea)
+
+
+textarea.oninput = function (e) {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
+
+}
+
+})
    
 
 
