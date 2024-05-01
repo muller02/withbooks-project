@@ -5,8 +5,8 @@ window.addEventListener("load", function(){
   const searchSection = this.document.querySelector("#search-section")
   const searchDiv = searchSection.querySelector(".search-div");
   // 쿼리 타입과 쿼리
-  const queryType = searchDiv.querySelector("select[name='query-type']");
-  const query = searchDiv.querySelector(".query");
+  const queryTypeInput = searchDiv.querySelector("select[name='query-type']");
+  const queryInput = searchDiv.querySelector(".query");
   // submit 버튼
   const submitBtn = searchDiv.querySelector("button");
 
@@ -14,10 +14,14 @@ window.addEventListener("load", function(){
   submitBtn.onclick = function(e){
     e.preventDefault();
 
-    // console.log(queryType.value);
-    // console.log(query.value);
-    
+    const query = queryInput.value;
+    const queryType = queryTypeInput.value;
 
+    window.location = 
+        `list?queryType=${queryType}&query=${query}&page=1`;
+
+
+    
   }
 
 
@@ -35,7 +39,11 @@ window.addEventListener("load", function(){
     
     //categoryId 추출
     const categoryId = categorySpan.dataset.id;
-    
+    const queryType =queryTypeInput.value;
+    const query = queryInput.value;
+
+    window.location = 
+        `list?categoryId=${categoryId}&queryType=${queryType}&query=${query}&page=1`;
     
   }
 
@@ -49,8 +57,14 @@ window.addEventListener("load", function(){
 
   bookList.onclick = (e)=>{
     if(e.target.classList.contains("toggle-btn-area")){
+
+      // 디테일 토글
       let bookDetail = e.target.parentNode.parentNode.querySelector(".book-detail");
       bookDetail.classList.toggle("toggle");
+
+      // 디테일 열린 행 색칠
+      let bookRow = e.target.parentNode.parentNode.querySelector(".book-row");
+      bookRow.classList.toggle("bg-color:main-2");
     }
   }
 }
@@ -70,6 +84,8 @@ window.addEventListener("load", function(){
 
     if(e.target.type == 'checkbox'){
       let labelClassList = e.target.parentNode.querySelector("label").classList;
+      if(labelClassList.contains("none-active"))
+        return;
       labelClassList.add("bd");
       labelClassList.add("bd-color:accent-3")
     }
