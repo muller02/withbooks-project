@@ -33,8 +33,8 @@ public class BoardController {
     @Autowired
     private DebateAttachmentService debateAttachmentService;
 
-    @Autowired
-    private DebateCommentService debateCommentViewService;
+    // @Autowired
+    // private DebateCommentService debateCommentService;
 
     @Autowired
     private FileStore fileStore;
@@ -69,7 +69,7 @@ public class BoardController {
         DebateBoard findBoard = debateBoardService.getById(id);
         Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
-        List<DebateCommentView> debateCommentViewList = debateCommentViewService.getListById(id);
+        // List<DebateCommentView> debateCommentViewList = debateCommentService.getListById(id);
 
 
         DebateRoom findRoom = debateRoomService.getById(roomId);
@@ -86,7 +86,9 @@ public class BoardController {
         model.addAttribute("book", book);
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
-        model.addAttribute("debateCommentViewList", debateCommentViewList);
+        // model.addAttribute("debateCommentList", debateCommentViewList);
+
+        
 
         return "with/debate/board/detail";
     }

@@ -51,11 +51,11 @@ window.addEventListener('load', function(e) {
     })
 
     //============================== 삭제 ====================================
-    const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
+    // const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
 
-    commentDeleteBtns.forEach(deleteBtn => {
+    // commentDeleteBtns.forEach(deleteBtn => {
 
-    })
+    // })
 
     
     
