@@ -48,12 +48,13 @@ window.addEventListener("load", function(){
   let bookList = document.querySelector(".book-list");
 
   bookList.onclick = (e)=>{
-    if(e.target.classList.contains("toggle-btn")){
+    if(e.target.classList.contains("toggle-btn-area")){
       let bookDetail = e.target.parentNode.parentNode.querySelector(".book-detail");
       bookDetail.classList.toggle("toggle");
     }
   }
 }
+
 
 
 // ================ 수정 된 항목 표시 ===================

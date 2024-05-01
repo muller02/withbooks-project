@@ -3,12 +3,13 @@ window.addEventListener("load", function () {
     let bookLabel = bookInfo.querySelector("label");
     let publicSpan = bookLabel.querySelector(".public");
     let publicInput = bookLabel.querySelector("input");
-    let publicYn = publicSpan.dataset.public;
+    // let publicYn = publicSpan.dataset.public;
+    let publicYn = bookInfo.querySelector(".public-yn").value;
     let logSection = this.document.querySelector("#log-section");
     let logList = logSection.querySelector(".log-list");
 
     let addLog = this.document.querySelector("#add-log");
-    let addLogBtn = addLog.querySelector("button");
+    let addLogBtn = addLog.querySelector("div");
 
     let booklogId = this.document.querySelector(".booklog-id").value;
     // 북로그 디테일 페이지에서 공개상태일 때 '공개/비공개' 버튼을 활성화 한다.
@@ -22,14 +23,14 @@ window.addEventListener("load", function () {
             publicInput.value = 1;
             publicSpan.textContent = "공개";
 
-            let reponse = await fetch("/api/booklog?booklogId=26&publicYn=1");
+            let reponse = await fetch(`/api/booklog?booklogId=${booklogId}&publicYn=1`);
             let result = await reponse.json();
             console.log(result);
         } else {
             publicInput.value = 0;
             publicSpan.textContent = "비공개";
 
-            let reponse = await fetch("/api/booklog?booklogId=26&publicYn=0");
+            let reponse = await fetch(`/api/booklog?booklogId=${booklogId}&publicYn=0`);
             let result = await reponse.json();
             console.log(result);
         }
@@ -58,10 +59,10 @@ window.addEventListener("load", function () {
 
         // 로그 작성창 만들기
         let sectionHTML = ` 
-                        <div class="new-log bd-top pt:3">
+                        <div id="new-log" class="new-log bd-top pt:3">
                             <div class="d:flex mb:4 pos:relative">
                                 <div class="booklog-date fl-grow:1 fw:3">${year}.${month}.${date}</div>
-                                <div class="reg-cantle n-btn bg-color:base-2 mr:1"><span>취소</span></div>
+                                <div class="reg-cancel n-btn bg-color:base-2 mr:1"><span>취소</span></div>
                                 <button class="reg-btn n-btn bg-color:main-1 color:main-3 top:0 right:0" type="submit">등록</button>
                             </div>
                             <div>
@@ -87,6 +88,12 @@ window.addEventListener("load", function () {
 
         logList.insertAdjacentHTML("beforeend", sectionHTML);
 
+        // 생성된 작성창으로 포커스 맞추기
+        // 가상의 a 태그를 만들어서
+        let aTag = document.createElement("a");
+        aTag.href = "#new-log";
+        aTag.click();
+
         let newLogSection = logList.querySelector(".new-log");
         // 사진 추가 버튼
         let inputImg = newLogSection.querySelector(".booklog-img");
@@ -104,6 +111,15 @@ window.addEventListener("load", function () {
         let logContentImg = logContentSection.querySelector("section");
         // 로그 textarea
         let logTextarea = logContentSection.querySelector("textarea");
+        // 취소버튼
+        let regCancelBtn = newLogSection.querySelector(".reg-cancel");
+
+        // 작성 취소버튼 클릭시
+        // 작성창 없애고 로그 추가 버튼 살리기
+        function addLogCancel() {
+            newLogSection.remove();
+            addLog.classList.remove("d:none");
+        }
 
         // 사진 추가시 필요한 동작들 ( 제약조건, 이미 선택된 사진 있을 경우 지우고 새로운 사진 삽입 )
         inputImg.oninput = function () {
@@ -156,6 +172,11 @@ window.addEventListener("load", function () {
             logContentImg.classList.add("d:none");
         };
 
+        // 취소버튼 클릭시 로그 작성창 숨기기
+        regCancelBtn.onclick = function () {
+            addLogCancel();
+        };
+
         // 등록 전 유효성 검사
         logContentSection.onchange = function (e) {
             console.log("changing");
@@ -166,28 +187,65 @@ window.addEventListener("load", function () {
             e.preventDefault();
             console.log("등록합니다.");
 
-            const formData = new FormData();
-            formData.append("content", logTextarea.value);
-            formData.append("booklogId", booklogId);
-            formData.append("file", inputImg.files[0]);
+            let content = logTextarea.value.replace(/\n/g, "<br/>");
+            let file = inputImg.files[0];
 
-            await fetch("/api/booklog/reg", {
+            const formData = new FormData();
+            formData.append("content", content);
+            formData.append("booklogId", booklogId);
+            formData.append("file", file);
+
+            let reponse = await fetch("/api/booklog/reg", {
                 method: "POST",
                 headers: {
-                    // "Content-Type": "application/json",
-                    // ContentType: "multipart/form-data",
+                    "ContentType": "multipart/form-data",
                 },
-                // contentType: "application/json; charset=utf-8",
                 body: formData,
-                // body: JSON.stringify({
-                //     // img: fileName,
-                //     file: inputImg.files[0],
-                //     content: logTextarea.value,
-                //     booklogId: booklogId,
-                // }),
-            })
-                .then((reponse) => reponse.json())
-                .then((result) => console.log(result));
+            });
+
+            await reponse.json().then((result) => {
+                // 작성창 없애고 추가버튼 나타내기
+                addLogCancel();
+
+                // 이미지가 없을 때 태그를 대입하지 않기 위해서
+                // 태그를 추출해서 조건처리.
+                let imgSection = "";
+                if (result.img) {
+                    imgSection = `
+                        <div class="h:5 text-align:center mb:8 md:mb:0 lg:mb:0">
+                            <img class="h:100p mr:5" src="/image/booklog/${result.img}" alt="로그이미지" />
+                        </div>
+                        `;
+                }
+
+                let sectionHTML = ` 
+                    <div class="bd-top py:3">
+                        <div class="d:flex mb:4 pos:relative">
+                            <div class="d:none logs-id">${result.id}</div>
+                            <div class="fl-grow:1 fw:3">2024.01.01</div>
+                            <div class="n-dropdown position:absolute right:1">
+                                <button class="cursor:pointer rg-comment-hover dropdown-btn">
+                                    <span class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴버튼</span>
+                                </button>
+                                <ul class="n-dropdown-list right:0">
+                                    <li class="n-dropdown-item">
+                                        <button>
+                                            <span class="deco icon:trash deco-color:accent-2 color:accent-2"> 삭제하기 </span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d:flex fl-dir:column md:fl-dir:row lg:fl-dir:row">
+                            ${imgSection}
+                            <div class="fs:3 py:3 md:py:0 lg:py:0">${result.content}</div>
+                        </div>
+                    </div>
+        
+                `;
+
+                logList.insertAdjacentHTML("beforeend", sectionHTML);
+            });
         };
     });
 });

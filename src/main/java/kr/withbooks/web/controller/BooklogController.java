@@ -19,6 +19,7 @@ import kr.withbooks.web.entity.BooklogLogs;
 import kr.withbooks.web.entity.BooklogView;
 import kr.withbooks.web.service.BooklogService;
 
+// 북로그 리스트
 @Controller
 @RequestMapping("booklog")
 public class BooklogController {
@@ -26,6 +27,7 @@ public class BooklogController {
     @Autowired
     private BooklogService service;
 
+    // 북로그 리스트
     @GetMapping("list")
     public String list(Model model){
 
@@ -39,10 +41,13 @@ public class BooklogController {
         return "booklog/list";
     }
 
+    // 북로그 디테일
     @GetMapping("detail")
     public String detail(Model model, @RequestParam(name="id", required= false) Long id ){
 
+        // 북로그 정보
         BooklogView booklog = service.getById(id);
+        // 북로그의 로그들
         List<BooklogLogs> logs = service.getLogs(id);
 
         model.addAttribute("booklog", booklog);
@@ -50,13 +55,14 @@ public class BooklogController {
         
         return "booklog/detail";
     }
-
+    
     @GetMapping("reg")
     public String regForm(){
 
         return "booklog/reg";
     }
 
+    // 새 북로그 저장
     @PostMapping("reg")
     public String reg(
         @RequestParam(name = "file", required = false) MultipartFile imgFile, 
@@ -64,29 +70,22 @@ public class BooklogController {
         @RequestParam(name = "book-id", required = false) Long bookId,
         @RequestParam(name = "booklog-id", required = false) Long bookLogId,
         @RequestParam(name = "public-yn", required = false, defaultValue = "0") Integer publicChecked,
-        @RequestParam(name = "addLog", required = false) String addLogValid,
         Booklog booklog, BooklogLogs logs,
         HttpServletRequest request) throws IOException {
 
-
             // =============== 먼저 북로그를 저장한다 ========================================================================
-            // =============== 이미 생성된 북로그에서 로그 추가일 경우엔 북로그를 저장하지 않는다. ===============================
-            if(addLogValid != "addLog"){
-                booklog = Booklog.builder()
-                                        .userId(4L)
-                                        .bookId(bookId)
-                                        .publicYn(publicChecked)
-                                        .build();
-                service.reg(booklog);
-                System.out.println("******북로그 저장 완료********");
-            }
-            //===============================================================================================================
+            booklog = Booklog.builder()
+                                    .userId(4L)
+                                    .bookId(bookId)
+                                    .publicYn(publicChecked)
+                                    .build();
+            service.reg(booklog);
+
+            System.out.println("******북로그 저장 완료********");
 
             // =============== 다음으로 로그를 저장한다 ========================================================================
             String fileName = null;
-            // 파일 저장
 
-            System.out.println("imgFile : "+imgFile);
             if(imgFile != null && !imgFile.isEmpty())
             {
                 fileName = imgFile.getOriginalFilename();
@@ -110,6 +109,10 @@ public class BooklogController {
             if(bookLogId == null)
                 bookLogId = booklog.getId();
 
+            if(content.length() > 0 ){
+                content = content.replace("\n", "<br/>");
+            }
+
             // 받아온 booklog ID로 booklog_logs를 저장한다. 
             logs = BooklogLogs.builder()
                                     .booklogId(bookLogId)
@@ -117,8 +120,9 @@ public class BooklogController {
                                     .img(fileName)
                                     .build();
                                     
-            System.out.println("fileName : " + fileName);
             service.addLogs(logs);
+            
+            System.out.println("로그 저장 완료");
             //=============================================================================================================
 
         return "redirect:detail?id="+bookLogId;

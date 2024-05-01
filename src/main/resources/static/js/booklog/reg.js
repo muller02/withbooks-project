@@ -5,6 +5,15 @@ window.addEventListener("load", function () {
     let resultList = searchBox.querySelector(".result-list");
     let searchBtn = searchBox.querySelector(".search-btn");
 
+    // =============== 로컬스토리지에서 책 아이디 가져오기 ======================
+    let getBookIdList = JSON.parse(localStorage.getItem("bookids"));
+    let bookIdList = [];
+
+    for (const key in getBookIdList) {
+        bookIdList.push(getBookIdList[key]);
+    }
+    //========================================================================
+
     // 검색창 리셋
     resetBtn.onclick = function () {
         queryInput.value = "";
@@ -71,20 +80,34 @@ window.addEventListener("load", function () {
     };
 
     // =============================== 검색된 책 선택시 새로운 북로그 작성창 생성 ================================================
-    resultList.onclick = function (e) {
+    resultList.onclick = async function (e) {
+        // TODO 등록된 북로그라면 알려주고 리턴하기
+        // 사용자가 등록한 북로그의 아이디 값들을 가져온다
+
         // 사용자가 클릭한게 책이라면
         // .book 요소를 선택한다
         // 그 요소 안에서 h1을 찾는다
         // 찾은 h1 요소의 textContent 읽는다
         // textContent를 queryInput에 넣는다
         if (e.target.closest(".book")) {
-            //
             const book = e.target.closest(".book");
+            const bookId = book.querySelector(".book-id").textContent;
             const bookTitle = book.querySelector(".book-title").textContent;
             const bookAuthor = book.querySelector(".book-author").textContent;
             const bookPublisher = book.querySelector(".book-publisher").textContent;
             const bookCover = book.querySelector(".book-cover").src;
-            const bookId = book.querySelector(".book-id").textContent;
+
+            let whatId = bookIdList.filter((id) => id == bookId);
+            if (whatId.length != 0) {
+                book.classList.add("bg-color:base-2");
+                book.insertAdjacentHTML("beforeend", "<div class='del color:accent-1 flex-grow:1 text-align:end'>이미 등록된 책입니다.</div>");
+                setTimeout(function () {
+                    book.classList.remove("bg-color:base-2");
+                    let del = book.querySelector(".del");
+                    del.remove();
+                }, 700);
+                return;
+            }
 
             resultList.innerHTML = "";
 
@@ -134,7 +157,7 @@ window.addEventListener("load", function () {
                                         <div class="d:flex mb:4 pos:relative">
                                         <div class="booklog-date fl-grow:1 fw:3">${year}.${month}.${date}</div>
                                         <div class="reg-cantle n-btn bg-color:base-2 mr:1"><span>취소</span></div>
-                                        <button class="reg-btn n-btn bg-color:main-1 color:main-3 top:0 right:0" type="submit">등록</button>
+                                        <button class="reg-btn n-btn bg-color:main-1 color:main-5 top:0 right:0" type="submit">등록</button>
                                     </div>
                                     <div>
                                         <label class="img-label n-btn n-btn:outline mr:1">
@@ -195,8 +218,8 @@ window.addEventListener("load", function () {
             let logContentSection = booklogRegForm.querySelector(".log-content-section");
             // 로그 작성 섹션 중 사진 섹션
             let logContentImg = logContentSection.querySelector("section");
-            // 로그 textarea
-            let logTextarea = logContentSection.querySelector("textarea");
+            // 로그 작성 취소
+            let regCantleBtn = booklogRegForm.querySelector(".reg-cantle");
 
             // 이미지 선택하기
             inputImg.oninput = function () {
@@ -248,6 +271,11 @@ window.addEventListener("load", function () {
                 imgDeleteBtn.classList.add("d:none");
                 // 사진 들어간 섹션 숨기기
                 logContentImg.classList.add("d:none");
+            };
+
+            // 취소 버튼 클릭시 북로그 리스트 페이지로 이동
+            regCantleBtn.onclick = function () {
+                window.location = "list";
             };
         }
     };
