@@ -15,6 +15,7 @@ public class DebateBoardCommentController {
     @Autowired
     private DebateCommentService debateCommentService;
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{boardId}/comments")
     public List<DebateComment> list(@PathVariable Long boardId) {
 
