@@ -96,7 +96,7 @@ window.addEventListener("load", function (e) {
         // 좋아요 취소 후 , 아이콘과 색상 변경
         e.target.classList.remove("icon-color:main-5", "icon:heart_fill");
         e.target.classList.add("icon:heart")
-        e.target.classList.remove("likeBtn-transition");
+        e.target.classList.remove("like");
 
         // 좋아요 취소 후, 해당 쇼츠의 좋아요 갯수 리로드 후  삽입
         let count = getLikeCount(shortsId);
@@ -113,15 +113,7 @@ window.addEventListener("load", function (e) {
         // 좋아요 후, 아이콴과 색상 변경
         e.target.classList.add("icon-color:main-5", "icon:heart_fill");
         e.target.classList.remove("icon:heart")
-
-        //좋아요 에니메이션  커지는 효과  추가
-        e.target.classList.add("likeBtn-transition");
-
-        // 커지고 나서 좀 있다, 줄어들게 하기 위해서
-        setTimeout(function (){
-          e.target.classList.remove("likeBtn-transition");
-
-        },200)
+        e.target.classList.add("like");
 
         //  좋아요 후 해당 쇼츠의 좋아요 갯수 리로드 후 삽입
         let count = getLikeCount(shortsId);

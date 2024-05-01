@@ -10,6 +10,7 @@ import kr.withbooks.web.entity.BooklogLogs;
 public interface BooklogLogsRepository {
     
     List<BooklogLogs> findAll(Long id);
-    void save(BooklogLogs booklogs);
+    int save(BooklogLogs booklogs);
+    int delete(Long id);
 
 }

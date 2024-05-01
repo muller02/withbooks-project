@@ -4,7 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
         <script src="/js/booklog/detail.js"></script>
+        <!-- <script src="/js/booklog/detail-vue.js"></script> -->
         <style>
             .rg-comment-hover:hover {
                 background-color: var(--color-base-2);
@@ -26,13 +28,21 @@
                 <section id="book-info">
                     <h1 class="d:none">책 정보</h1>
 
+                    <a href="list" class="m:2">
+                        <span class="n-btn n-btn:void mb:3 pl:0 pr:2">
+                            <span class="icon icon:arrow_left icon-size:3 mx:1">아이콘</span>
+                            목록으로
+                        </span>
+                    </a>
+
                     <div class="d:flex px:2 pos:relative">
+                        <input class="booklog-id d:none" name="booklog-id" th:value="${booklog.id}" />
                         <img class="h:4 border-color:base-2 mr:4 box-shadow-custom" src="/image/shorts/detail/푸바오.png" th:src="${booklog.bookCover}" alt="책 이미지" />
                         <div class="d:flex fl-dir:column fl-grow:1 position:relative">
                             <label class="n-btn n-toggle n-toggle-type:outline-box n-toggle-size:2 margin-bottom:3 font-size:1">
                                 <span class="icon icon:lock_simple icon-size:2 margin-right:1">아이콘</span>
                                 <span class="public" th:text="${{booklog.publicYn}} == 1 ? '공개' : '비공개'" th:data-public="${booklog.publicYn}">공개</span>
-                                <input name="public-yn" type="checkbox" class="d:none" th:value="${booklog.publicYn}" />
+                                <input name="public-yn" type="checkbox" class="public-yn d:none" th:value="${booklog.publicYn}" />
                             </label>
                             <!-- <div class="d:flex align-content:center position:absolute right:0">
                                 <a href="#" class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴</a>
@@ -67,10 +77,10 @@
             <section id="log-section" class="booklog-style d:flex fl-dir:column px:2 py:3">
                 <h1 class="d:none">로그</h1>
                 <!-- <form action="/api/booklog/reg" method="post" enctype="multipart/form-data" novalidate> -->
-                <input class="booklog-id d:none" name="booklog-id" th:value="${booklog.id}" />
                 <div class="log-list px:2">
                     <div class="bd-top py:3" th:each="log : ${logs}">
                         <div class="d:flex mb:4 pos:relative">
+                            <input type="hidden" name="logs-id" th:value="${log.id}" />
                             <div class="fl-grow:1 fw:3" th:text="${#temporals.format(log.regDate, 'yyyy-MM-dd')}">2024.01.01</div>
                             <div class="n-dropdown position:absolute right:1">
                                 <button class="cursor:pointer rg-comment-hover dropdown-btn">
@@ -89,7 +99,7 @@
                             <div class="h:5 text-align:center mb:8 md:mb:0 lg:mb:0" th:if="${log.img}">
                                 <img class="h:100p mr:5" th:src="@{|/image/booklog/${log.img}|}" src="/image/shorts/다진/스크린샷 2024-01-13 235253.jpg" alt="로그이미지" />
                             </div>
-                            <div class="fs:3 py:3 md:py:0 lg:py:0" th:text="${log.content}">Bust nevermore above word i till reply or oer.</div>
+                            <div class="fs:3 py:3 md:py:0 lg:py:0" th:utext="${log.content}">Bust nevermore above word i till reply or oer.</div>
                         </div>
                     </div>
                 </div>
@@ -98,10 +108,7 @@
             <div id="add-log" class="pos:fixed right:2 bottom:9 zi:5">
                 <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
-                    <form>
-                        <input type="hidden" name="addLog" value="1" />
-                        <button class="icon icon:plus icon-size:5 icon-color:base-1">로그 추가</button>
-                    </form>
+                    <div class="icon icon:plus icon-size:5 icon-color:base-1">로그 추가</div>
                 </div>
             </div>
         </main>
