@@ -13,4 +13,6 @@ public interface DebateCommentService {
     List<DebateComment> getAllById(Long boardId);
 
     Long deleteById(Long id);
+
+//    DebateComment getByBoardId(Long boardId);
 }

@@ -49,6 +49,31 @@ window.addEventListener('load', function(e) {
             return response.json();
         }).then((data) => console.log(data))
     })
+
+    //============================== 삭제 ====================================
+    const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
+
+    commentDeleteBtns.forEach(deleteBtn => {
+
+    })
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 })
     //============================== 삭제 ====================================
     // <button id="deleteButton" data-board-id="your_board_id_here" data-comment-id="your_comment_id_here">삭제</button>

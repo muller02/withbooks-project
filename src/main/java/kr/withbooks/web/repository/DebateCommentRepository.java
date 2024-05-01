@@ -15,4 +15,6 @@ public interface DebateCommentRepository {
     List<DebateComment> findAllById(Long boardId);
 
     void deleteById(Long id);
+
+//    DebateComment findByBoardId(Long boardId);
 }

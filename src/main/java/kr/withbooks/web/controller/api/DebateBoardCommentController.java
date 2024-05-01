@@ -35,6 +35,7 @@ public class DebateBoardCommentController {
         return findComment;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{boardId}/comments/{id}")
     public Long delete(@PathVariable Long boardId, @PathVariable Long id) {
         return debateCommentService.deleteById(id);

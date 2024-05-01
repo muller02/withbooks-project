@@ -34,6 +34,9 @@ public class BoardController {
     private DebateAttachmentService debateAttachmentService;
 
     @Autowired
+    private DebateCommentService debateCommentService;
+
+    @Autowired
     private FileStore fileStore;
 
     @GetMapping("/list")
