@@ -1,3 +1,19 @@
+
+//로그인 체크 쿠키 확인 함수
+  function getJSessionID() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      if (cookie.startsWith("lck=")) {
+        return cookie.split('=')[1];
+      }
+    }
+    return null;
+  }
+
+
+
+
 // <댓글 창 textarea 자동으로 글 늘어나게 하기
 window.addEventListener("load",function (e){
 
@@ -6,8 +22,18 @@ window.addEventListener("load",function (e){
 
     if(!target.closest(".comment-content"))
       return;
+
+    let regBtn = target.nextElementSibling;
+    console.log(regBtn);
+    if (getJSessionID() !=1) {
+      alert('로그인을 먼저하세요 ')
+      regBtn.disabled  =true;
+
+    }
+
     let section = target
-        // let textarea =
+
+
 
     // witnIntro Textarea에 input 이벤트 추가
     target.oninput = function (e) {
@@ -18,7 +44,6 @@ window.addEventListener("load",function (e){
 
   })
 
-  list['서울'] =2;
 
 
 })
@@ -71,6 +96,7 @@ window.addEventListener("load", function (e) {
         // 좋아요 취소 후 , 아이콘과 색상 변경
         e.target.classList.remove("icon-color:main-5", "icon:heart_fill");
         e.target.classList.add("icon:heart")
+        e.target.classList.remove("likeBtn-transition");
 
         // 좋아요 취소 후, 해당 쇼츠의 좋아요 갯수 리로드 후  삽입
         let count = getLikeCount(shortsId);
@@ -87,6 +113,15 @@ window.addEventListener("load", function (e) {
         // 좋아요 후, 아이콴과 색상 변경
         e.target.classList.add("icon-color:main-5", "icon:heart_fill");
         e.target.classList.remove("icon:heart")
+
+        //좋아요 에니메이션  커지는 효과  추가
+        e.target.classList.add("likeBtn-transition");
+
+        // 커지고 나서 좀 있다, 줄어들게 하기 위해서
+        setTimeout(function (){
+          e.target.classList.remove("likeBtn-transition");
+
+        },200)
 
         //  좋아요 후 해당 쇼츠의 좋아요 갯수 리로드 후 삽입
         let count = getLikeCount(shortsId);
@@ -249,13 +284,14 @@ function getCommentList(shortsId, comments, getCommentCount) {
       let userId = data.userId;
 
       commentList.forEach((cmt) => {
+        let formattedDate = moment(cmt.regDate).format('YY-MM-DD HH:mm');
 
         commentCount++; //댓글 갯수 카운트
         // icon icon-size:2 icon-color:accent-2 icon:trash
-        var divHTML = `
+        let divHTML = `
                     <div class="border-bottom  pt:3  pl:2 ">
                     <div class="d:flex ai:center " >
-                    <div class="border-radius:full of:hidden mr:1  comment-user-img  "> 
+                    <div class="border-radius:full of:hidden mr:1  comment-user-img mr:2 "> 
                         <img src="/image/user/${cmt.img}" class="obj-fit:contain  w:100p h:100p">
                      </div>
                      <span></span>
@@ -295,8 +331,8 @@ function getCommentList(shortsId, comments, getCommentCount) {
 
                       divHTML+=`
                     </div>
-                    <div class=" mt:2 comment-content-color  pl:2 fs:2">${cmt.content}</div>
-                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${cmt.regDate}</div>
+                    <div class=" mt:3 comment-content-color  pl:2 fs:2">${cmt.content}</div>
+                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${formattedDate}</div>
                   </div>
                   `;
 

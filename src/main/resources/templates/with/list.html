@@ -24,6 +24,11 @@
     .box-shadow-custom {
       box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
     }
+    /*돋보기 위치 수정 */
+    .translate-x{
+      transform: translateX(-10px);
+    }
+
   </style>
 </head>
 <body>
@@ -33,8 +38,8 @@
     <h1 class="d:none">통합검색, 상세검색</h1>
     <!-- 통합 검색 -->
     <div class="d:flex pos:relative ai:center flex-grow:1">
-      <input type="text" class="query-search n-textbox n-textbox-type:outline text-align:center  mr:2" placeholder="통합 검색" />
-      <button class="query-btn icon icon:magnifying_glass pos:absolute right:1 mr:2"></button>
+      <input type="text" class="query-search n-textbox n-textbox-type:outline text-align:center  mr:2" placeholder="위드명 / 지역 " />
+      <button class="query-btn icon  translate-x  icon:magnifying_glass pos:absolute right:1 mr:2"></button>
     </div>
     <!-- 상세 검색 -->
     <div class="d:flex ai:center">
@@ -52,7 +57,7 @@
   <section class="search-box lg:pos:absolute top:2 mx:3 right:1 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">
 
     <!-- 상세 검색 창 -->
-    <div class=" w:full d:flex jc:start  p:3 flex-direction:column">
+    <div class=" w:full d:flex jc:start  p:3 flex-direction:column gap:3">
       <!-- 정렬 방법 -->
 
       <div class="ml:auto d:flex ai:center">
@@ -61,7 +66,7 @@
 
       </div>
       <div class="face-yn mb:3 ">
-      <div class="margin-right:8 ml:2 mb:1 fw:3 ">대면 / 비대면</div>
+      <div class="margin-right:8 ml:2 mb:2 fw:3 ">📢 대면 / 비대면</div>
       <!-- 대면 여부 -->
 
             <ul class="d:flex   ">
@@ -89,7 +94,7 @@
     <!-- 카테고리 검색 -->
     <div id="category" class=" d:flex fl-dir:column lg:w:7     ">
       <div class="d:flex ai:center mb:1">
-        <div class="margin-right:8 ml:2 fw:3">카테고리</div>
+        <div class="margin-right:8 ml:2 fw:3 mb:2 ">📢 카테고리</div>
 
       </div>
       <div class="rg:mt:3">
@@ -149,10 +154,11 @@
     <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list-ul">
       <li class="d:flex with-ul gap:2 flex-direction:column n-item:shadow" th:each="with: ${list}">
         <ul class="d:flex gap:1 flex-wrap:wrap">
-          <li class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2">
-            <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
+          <li
+                  class=" bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
+          >            <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
           </li>
-          <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 mr:1 pb:1 background-color:main-6" th:each="categoryNames :${with.categoryNames}">
+          <li class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0" th:each="categoryNames :${with.categoryNames}">
             <span class="color:base-1" th:text="${categoryNames}">소설</span>
           </li>
         </ul>

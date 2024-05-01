@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +12,29 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
 </head>
 <body>
-    <main class="n-panel n-main-panel">
-        <div class="n-container px:4 lg:px:10">
-            책 등록 페이지 입니다만 ^^
+    <main layout:fragment="main" class="n-panel n-main-panel">
 
+        <!-- api 검색부 -->
+        <section id="search-section" class="mt:4">
+            <h1 class="d:none">검색</h1>
+                <div class="n-container px:4 lg:px:10">
+                    <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
+                        <select name="query-type">
+                            <option value="all" selected>전체</option>
+                            <option value="author">저자</option>
+                            <option value="title">제목</option>
+                            <option value="isbn13">ISBN13</option>
+                        </select>
+                        <input
+                        type="text"
+                        class="query n-textbox n-textbox-type:outline n-textbox-status:focus"
+                        placeholder="Outline Focus"
+                        />
+                        <button type="submit" class="n-btn n-btn-type:filled">검색</button>
+                    </div>
+                </div>
+            </section>
 
-        </div>
     </main>
 </body>
 </html>

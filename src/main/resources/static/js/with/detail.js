@@ -9,15 +9,16 @@ window.addEventListener("load", (e)=>{
     console.log(tmpContetnDiv);
 
     menuTap.addEventListener("click",async function (e) {
+        e.preventDefault();
+        if (e.target.tagName != "BUTTON")
+            return;
 
         for(let li of lis){
             li.classList.remove("active");
         }
 
-        e.preventDefault();
 
-        if (e.target.tagName != "BUTTON")
-            return;
+
 
 
         if(e.target.id == "board"){
