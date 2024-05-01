@@ -49,5 +49,63 @@
 		</where>
 	</select> -->
 
+	<select id="findAllByParams" resultType="BookView">
+		select 
+			*
+		from
+			(
+				select 
+					b.id,
+					b.category_id,
+					b.title,
+					b.author,
+					b.pub_date,
+					b.publisher,
+					b.isbn13,
+					b.description,
+					b.purchase_link,
+					b.price,
+					b.cover,
+					b.public_yn,
+					b.reg_date,
+					c.name,
+					count(bs.id) best_count
+				from
+					book b left join book_category c on b.category_id = c.id 
+					left join bestseller bs on b.id = bs.book_id
+				group by 
+					b.id
+				order by 
+					b.reg_date desc
+			) v
+		<where>
+			<if test="params.query != null and params.queryType != null">
+				${params.queryType} like '%${params.query}%'
+			</if>
+			<if test="params.categoryId != null">
+				and category_id = #{params.categoryId}
+			</if>
+		</where>
+		order by
+			id desc
+		LIMIT #{offset}, #{size}
+
+	</select>
+
+	<select id="findCountByParams" resultType="int">
+		select 
+			count(id) count
+		from
+			book_view
+
+		<where>
+			<if test="params.query != null and params.queryType != null">
+				${params.queryType} like '%${params.query}%'
+			</if>
+			<if test="params.categoryId != null">
+				and category_id = #{params.categoryId}
+			</if>
+		</where>
+	</select>
 
 </mapper>
