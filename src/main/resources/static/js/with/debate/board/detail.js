@@ -46,7 +46,8 @@ window.addEventListener('load', function(e) {
                     console.error("댓글 등록 실패:", error.message);
                 });
             }
-        });
+            return response.json();
+        }).then((data) => console.log(data))
     })
 })
     //============================== 삭제 ====================================
