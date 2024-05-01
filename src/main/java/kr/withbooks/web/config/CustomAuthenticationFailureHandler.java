@@ -1,6 +1,7 @@
 package kr.withbooks.web.config;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
@@ -18,6 +19,10 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         String errorMessage = "아이디 또는 비밀번호가 일치하지 않습니다.";
 
         request.getSession().setAttribute("errorMessage", errorMessage);
+        Cookie cookie = new Cookie("JSESSIONID",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
 
         response.sendRedirect("/login?error");
 

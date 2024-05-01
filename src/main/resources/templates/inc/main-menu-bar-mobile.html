@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
     <nav
         class="position:fixed bottom:1 left:1 w:100p md:d:none lg:d:none z-index:3"
     >
@@ -36,7 +38,7 @@
                 </a>
             </li>
             <li>
-                <a href="/my/index" class="d:flex fl-dir:column ai:center">
+                <a href="/my/index"  class="d:flex fl-dir:column ai:center" th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/login'">
                     <span class="menu-icon icon:my"></span>
                     <span class="main-menu-font">마이</span>
                 </a>
