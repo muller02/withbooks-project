@@ -1,22 +1,22 @@
 
 // <댓글 창 textarea 자동으로 글 늘어나게 하기
-window.addEventListener('load', function(e) {
-
-
-
-
-    let textarea = document.querySelector("#new-comment");
-    
-    console.log(textarea)
-  
-
-  
-  
-        textarea.style.height="auto";
-      textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
-  
-  
-    })
+// window.addEventListener('load', function(e) {
+//
+//
+//
+//
+//     let textarea = document.querySelector("#new-comment");
+//
+//     console.log(textarea)
+//
+//
+//
+//
+//     textarea.style.height = "auto";
+//     textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
+//
+//
+// })
    
 
 
@@ -36,7 +36,7 @@ window.addEventListener('load', function(e) {
         console.log(debateComment.content)
         console.log(debateComment.boardId)
 
-        const url = `/api/with/debate/board/${debateComment.boardId}/comments`;
+        const url = `/with/debate/board/${debateComment.boardId}/comments`;
         console.log(url)
 
         fetch(url, {
@@ -49,38 +49,49 @@ window.addEventListener('load', function(e) {
             if (response.ok) {
                 console.log("댓글이 등록되었습니다.");
                 window.location.reload();
-
-                // let divHTML = `
-                //             <div class="d:flex fl-dir:column">
-                //                 <a class="d:none" href="">
-                //                     <div><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" alt="프로필사진"></div>
-                //                     <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
-                //                 </a>
-                //                 <span class="comment-area ml:10 pos:relative d:flex fl-dir:column ai:end">
-                //                     <p class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:2 pt:2 pb:8">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </p>
-                //                     <div class="delete-button pos:absolute right:1 bottom:1"><button class="icon icon:trash icon-color:accent-3 icon-size:3">삭제</button></div>
-                //                     <div class="fs:1 color:base-6 mr:1 mt:1">오후 10:46</div>
-                //                 </span>
-                //             </div>
-                // `
-                // document.querySelector(".my-comment").insertAdjacentHTML("beforeend", divHTML);
-               
-                // document.querySelector("#new-comment").value = "";
             } else {
                 response.json().then(error => {
                     console.error("댓글 등록 실패:", error.message);
                 });
             }
-            return response.json();
-        }).then((data) => console.log(data))
+
+        })
     })
 
     //============================== 삭제 ====================================
-    // const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
+    const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
+    // console.log(commentDeleteBtns);
 
-    // commentDeleteBtns.forEach(deleteBtn => {
+    commentDeleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener("click", function(e) {
 
-    // })
+            const params = new URLSearchParams(window.location.search);
+            const boardId = params.get("id");
+            const id = e.target.getAttribute("data-commentId");
+
+            console.log(boardId);
+            console.log(id);
+
+            const url = `/with/debate/board/${boardId}/comments/${id}`;
+            console.log(url)
+
+            fetch(url, {
+                method: "delete",
+            }).then(response => {
+                if (response.ok) {
+                    console.log("삭제 성공")
+                    window.location.reload();
+                } else {
+                    console.log("삭제 실패")
+                    return;
+                }
+            })
+        })
+    })
+
+
+
+
 
     
 
