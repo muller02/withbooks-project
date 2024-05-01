@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script defer src="/js/my/list.js"></script>
     <style>
         img{
             --width-2:80px;
@@ -20,6 +21,9 @@
 
             --top-1:-4px;
             --left-2:10px;
+        }
+        .logout-modal{
+            --color-main-3:#1a1a1a9b;
         }
     </style>
 </head>
@@ -37,6 +41,7 @@
                 <div class="fs:3 mt:4 color:base-7" th:text="${user.intro}">안녕하세요. 뉴렉이입니다.</div>
             </div>
         </section>
+
         <section class="bd-top bd-color:base-2 mt:3">
             <h1 class="d:none">메뉴 리스트</h1>
             <div>
@@ -46,11 +51,25 @@
                         th:if="${notiCnt}"
                         th:text="${notiCnt}">1</div>
                 </div>
-                <div class="mt:2 bd-bottom bd-color:base-2"><a class="deco icon:sign_out deco-size:4 deco-mr:5 fs:2 w:10p" href="/logout">로그아웃</a></div>
+                <div class="mt:2 bd-bottom bd-color:base-2"><a class="logout-link deco icon:sign_out deco-size:4 deco-mr:5 fs:2 w:10p" href="">로그아웃</a></div>
                 <div class="mt:2"><a class="deco icon:envelope_simple deco-size:4 deco-mr:5 fs:2 w:10p" href="">문의하기</a></div>
                 <div class="mt:2"><a class="deco icon:gear_six deco-size:4 deco-mr:5 fs:2 w:10p" href="/configuration/list">환경설정</a></div>
             </div>
         </section>
+
+
+        <section class="logout-modal pos:fixed top:0 bottom:0 left:0 right:0 bg-color:main-3 d:flex jc:center ai:center zi:3 d:none">
+            <h1 class="d:none">로그아웃 확인 버튼</h1>
+            <div class="bg-color:base-1 bd-radius:4 d:flex fl-dir:column jc:center ai:center p:6">
+                <p class="fs:4 fw:3">정말로 로그아웃 하시겠습니까?</p>
+                <span class="d:flex jc:center ai:center w:10p mt:4">
+                    <div><a class="color:base-1 bg-color:accent-1 bd-radius:4 p:2" href="/logout">로그아웃</a></div>
+                    <div class="ml:4"><button class="logout-cancel-btn bd bd-radius:3 bd-radius:4 py:2 px:5">취소</button></div>
+                </span>
+            </div>
+        </section>
+
+       
     </main>
 </body>
 </html>
