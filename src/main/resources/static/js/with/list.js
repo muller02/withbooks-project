@@ -1,238 +1,191 @@
-
 // 카테고리 검색  클릭 시 모달창 표시
-window.addEventListener("load", function (e){
- const searchBtn=document.querySelector("#search-btn");
- const searchBox=document.querySelector(".search-box");
- const categorySection=document.querySelector("#category");
- const initIcon=document.querySelector(".init-icon");
- const categoryList = categorySection.querySelector(".category-list");
- const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");
+window.addEventListener('load', function (e) {
+  const searchBtn = document.querySelector('#search-btn');
+  const searchBox = document.querySelector('.search-box');
+  const resetIcon = document.querySelector('.reset-icon');
+  const categorySection = document.querySelector('#category');
+  const categoryList = categorySection.querySelector('.category-list');
+  const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");
+  const faceYnDiv = searchBox.querySelector('.face-yn');
+  const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
+  const querySearch = document.querySelector('.query-search');
+  const queryBtn = document.querySelector('.query-btn');
 
+  console.log(faceYnRadio[0]);
 
- const faceYnDiv = searchBox.querySelector(".face-yn");
-    const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
+  let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
+  let faceYn;
+  let query;
 
-    console.log(faceYnRadio[0])
-
- let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
-    let faceYn;
-    let query;
-
-    faceYnDiv.onclick=async function (e) {
-
-        if (e.target.nodeName !== "INPUT")
-            return;
-        faceYn = e.target.value;
-
-
-        //비동기 fetch 메소드 호출 및 GET 통신
-        let response = await getByParams(categoryIdArr, query, faceYn);
-
-        // 위드 리스트를 받아옴
-        let list = await response.json();
-
-        updateHTML(list);
-        console.log(faceYn);
-
-    }
-
-
-
-searchBtn.onclick=function (e){
-  searchBox.classList.toggle("d:none");
-
-    if (searchBtn.classList.toggle("icon:plus")) {
-        searchBtn.classList.remove("icon:minus");
-        searchBtn.classList.add("icon:plus");
-        searchBtn.classList.add(".ani2")
-
-    } else {
-        searchBtn.classList.remove("icon:plus");
-        searchBtn.classList.add("icon:minus");
-        searchBtn.classList.add(".ani2")
-
-    }
-}
-
-// reset 아이콘 클릭시 모든 checkbox false 상태로 변환
-initIcon.onclick = async function (e) {
-
-    for (let i of inputCheckBox) {
-        i.checked = false;
-    }
-
-
-    categoryIdArr.length =0;
+  faceYnDiv.onclick = async function (e) {
+    if (e.target.nodeName !== 'INPUT') return;
+    faceYn = e.target.value;
 
     //비동기 fetch 메소드 호출 및 GET 통신
-    let response = await getByParams(categoryIdArr,null,null);
+    let response = await getByParams(categoryIdArr, query, faceYn);
 
-    for(let i of faceYnRadio){
-        i.checked=false
-    }
-
-    faceYnRadio[0].checked = true;
     // 위드 리스트를 받아옴
     let list = await response.json();
 
-
     updateHTML(list);
+    console.log(faceYn);
+  };
 
+  searchBtn.onclick = function (e) {
+    searchBox.classList.toggle('d:none');
 
-}
+    if (searchBtn.classList.toggle('icon:plus')) {
+      searchBtn.classList.remove('icon:minus');
+      searchBtn.classList.add('icon:plus');
+      searchBtn.classList.add('.ani2');
+    } else {
+      searchBtn.classList.remove('icon:plus');
+      searchBtn.classList.add('icon:minus');
+      searchBtn.classList.add('.ani2');
+    }
+  };
 
-        // 체크박스 클릭시 그에 해당하는 value를 가지고온다 e.target을 통해
+  // reset 아이콘 클릭시 모든 checkbox false 상태로 변환
+  resetIcon.onclick = async function (e) {
+    querySearch.value = null;
 
+    for (let i of inputCheckBox) {
+      i.checked = false;
+    }
+    categoryIdArr.length = 0;
 
+    //비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, null, null);
+    for (let i of faceYnRadio) {
+      i.checked = false;
+    }
+    faceYnRadio[0].checked = true;
+    // 위드 리스트를 받아옴
+    let list = await response.json();
+    updateHTML(list);
+  };
 
-        // 가지고 온 value값을 배열에 담아준다 .
+  // 체크박스 클릭시 그에 해당하는 value를 가지고온다 e.target을 통해
+  // 가지고 온 value값을 배열에 담아준다 .
+  // locahostL8080/ ? c=2&c=3&c=4
+  //문자열 결합
 
-        // locahostL8080/ ? c=2&c=3&c=4
+  // querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
+  async function handleQuery() {
+    query = querySearch.value;
+    // 비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, query, faceYn);
+    // 위드 리스트를 받아옴
+    let list = await response.json();
+    updateHTML(list);
+  }
 
-        //문자열 결합
+  // querySearch 엘리먼트에서 keypress 이벤트를 감지하여 엔터 키를 눌렀을 때 handleQuery 함수를 호출합니다.
+  querySearch.addEventListener('keypress', async function (event) {
+    // event.key가 "Enter"일 때만 동작하도록 합니다.
+    if (event.key === 'Enter') {
+      await handleQuery();
+    }
+  });
 
+  // queryBtn 클릭 시 handleQuery 함수를 호출합니다.
+  queryBtn.onclick = handleQuery;
 
-    const querySearch = document.querySelector(".query-search");
-    const queryBtn = document.querySelector(".query-btn");
+  // 카테고리 검색
+  categoryList.addEventListener('click', async (e) => {
+    if (e.target.nodeName !== 'INPUT' && e.target.type !== 'checkbox') return;
 
-// querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
-    async function handleQuery() {
-      query = querySearch.value;
-        // 비동기 fetch 메소드 호출 및 GET 통신
-        let response = await getByParams(categoryIdArr, query,faceYn);
-        // 위드 리스트를 받아옴
-        let list = await response.json();
-        updateHTML(list);
+    // 이거는 체크 박스 클릭하면 넣고 아니면 뺴기
+    let categoryId;
+    if (e.target.nodeName === 'INPUT' && e.target.type === 'checkbox') {
+      categoryId = e.target.value;
     }
 
-// querySearch 엘리먼트에서 keypress 이벤트를 감지하여 엔터 키를 눌렀을 때 handleQuery 함수를 호출합니다.
-    querySearch.addEventListener("keypress", async function(event) {
-        // event.key가 "Enter"일 때만 동작하도록 합니다.
-        if (event.key === "Enter") {
-            await handleQuery();
-        }
-    });
+    if (e.target.checked) {
+      categoryIdArr.push(e.target.value);
+    } else {
+      categoryIdArr = categoryIdArr.filter((item) => item !== categoryId);
+    }
 
-// queryBtn 클릭 시 handleQuery 함수를 호출합니다.
-    queryBtn.onclick = handleQuery;
+    console.log(categoryIdArr);
 
+    //비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, query, faceYn);
 
+    // 위드 리스트를 받아옴
+    let list = await response.json();
 
-
-    // 카테고리 검색
-    categoryList.addEventListener("click", async (e) => {
-
-
-        if (e.target.nodeName !== "INPUT"  && e.target.type !== "checkbox")
-            return;
-
-
-        // 이거는 체크 박스 클릭하면 넣고 아니면 뺴기
-        let categoryId
-        if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
-            categoryId  = e.target.value;
-        }
-
-        if (e.target.checked) {
-            categoryIdArr.push(e.target.value);
-        } else {
-            categoryIdArr = categoryIdArr.filter(item => item !== categoryId);
-        }
-
-        console.log(categoryIdArr);
-
-
-
-
-        //비동기 fetch 메소드 호출 및 GET 통신
-        let response = await getByParams(categoryIdArr,query,faceYn);
-
-        // 위드 리스트를 받아옴
-        let list = await response.json();
-
-
-
-
-        updateHTML(list);
-
-
-    })
-
-})
-
+    updateHTML(list);
+  });
+});
 
 //
 function getByParams(categoryIdArr, query, faceYn) {
+  let categoryIds = '';
 
-    let categoryIds = '';
-
-    if(categoryIdArr !== null){
-    for(let i=0; i<categoryIdArr.length; i++){
-        categoryIds +=categoryIdArr[i];
-        // c?=2 &c=
-        if (i < categoryIdArr.length - 1) {
-            categoryIds += '&c='
-        }
+  if (categoryIdArr !== null) {
+    for (let i = 0; i < categoryIdArr.length; i++) {
+      categoryIds += categoryIdArr[i];
+      // c?=2 &c=
+      if (i < categoryIdArr.length - 1) {
+        categoryIds += '&c=';
       }
     }
+  }
 
+  let url;
 
-    let url;
+  console.log('f=', faceYn);
+  console.log('q=', query);
+  console.log('c=', categoryIds);
 
-        console.log('f=',faceYn);
-        console.log('q=' ,query)
-    console.log('c=' ,categoryIds)
+  if (
+    query &&
+    query !== '' &&
+    categoryIdArr &&
+    categoryIdArr.length !== 0 &&
+    faceYn &&
+    faceYn !== ''
+  ) {
+    url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
+  } else if (
+    categoryIdArr &&
+    categoryIdArr.length !== 0 &&
+    faceYn &&
+    faceYn !== ''
+  ) {
+    console.log(232323);
+    url = `/api/with?f=${faceYn}&c=${categoryIds}`;
+  } else if (query && query !== '') {
+    url = `/api/with?q=${query}`;
+  } else if (categoryIdArr && categoryIdArr.length !== 0) {
+    url = `/api/with?c=${categoryIds}`;
+  } else if (faceYn && faceYn !== '') {
+    console.log('여기왔어요2');
+    url = `/api/with?f=${faceYn}`;
+  } else {
+    url = `/api/with`;
+  }
 
-    if (    (query && query !== '') && (categoryIdArr && categoryIdArr.length !== 0) && (faceYn && faceYn !== '')) {
-        url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
-
-    } else if ((categoryIdArr && categoryIdArr.length !== 0)&&(faceYn && faceYn !== '')  ) {
-
-        console.log(232323);
-        url = `/api/with?f=${faceYn}&c=${categoryIds}`;
-
-
-    }else if(query && query !== ''){
-
-        url = `/api/with?q=${query}`;
-
-    }else if(categoryIdArr && categoryIdArr.length !== 0){
-        url = `/api/with?c=${categoryIds}`;
-    }
-    else if(faceYn && faceYn !== ''){
-        console.log('여기왔어요2')
-        url = `/api/with?f=${faceYn}`;
-
-    }
-    else {
-        url = `/api/with`;
-
-    }
-
-    // const method = "GET";
-    return fetch(url);
+  // const method = "GET";
+  return fetch(url);
 }
 
+function updateHTML(list) {
+  const withListUl = document.querySelector('.with-list-ul');
 
+  withListUl.innerHTML = ``;
 
+  for (let item of list) {
+    let categoryHtml = '';
 
-
-function updateHTML(list){
-    const withListUl = document.querySelector(".with-list-ul")
-
-    withListUl.innerHTML=``;
-
-    for(let item of list){
-        let categoryHtml =  '';
-
-        for(let category of item.categoryNames){
-            categoryHtml += `<li class=" bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0">
+    for (let category of item.categoryNames) {
+      categoryHtml += `<li class=" bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0">
                         <span class="color:base-1">${category}</span>
                           </li>`;
+    }
 
-        }
-
-        let innerHtml =`
+    let innerHtml = `
        
              <li
             class="d:flex with-ul gap:2 flex-direction:column n-item:shadow"
@@ -243,7 +196,7 @@ function updateHTML(list){
                 class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
               >
                 <span class="" 
-                  >${item.faceYn ==1 ? '대면' : '비대면' }</span
+                  >${item.faceYn == 1 ? '대면' : '비대면'}</span
                 >
               </li>
               ${categoryHtml}
@@ -307,10 +260,8 @@ function updateHTML(list){
               </div>
             </div>
           </li>
-       `
+       `;
 
-
-        withListUl.insertAdjacentHTML("beforeend",innerHtml);
-    }
-
+    withListUl.insertAdjacentHTML('beforeend', innerHtml);
+  }
 }
