@@ -29,7 +29,6 @@ public class ProfileController {
         User user =  userService.getById(userId);
         
         model.addAttribute("user", user);
-        System.out.println(user);
 
         return "profile/edit";
     }
@@ -58,7 +57,6 @@ public class ProfileController {
                     .email(email)
                     .build();
 
-        // System.out.println(user);
 
         userService.modify(user);
 

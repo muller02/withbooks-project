@@ -20,4 +20,5 @@ public class BookshortsCommentView {
     private String content;
     private LocalDateTime regDate;
     private String nickname;
+    private  String img;
 }

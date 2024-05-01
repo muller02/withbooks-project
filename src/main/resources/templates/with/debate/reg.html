@@ -90,19 +90,19 @@
             class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
           >
             <h1 class="deco icon:sun bd-bottom w:100p h:1 fw:3">토론주제</h1>
-            <span class="d:flex fl-dir:column ai:center">
-              <span class="d:flex ai:center topic-list al-self:stretch">
-                <div class="mt:4 flex-grow:1">
+            <span class="topic-list d:flex fl-dir:column ai:center">
+              <span class="topic-input d:flex ai:center al-self:stretch">
+                <div class="d:flex mt:4 flex-grow:1">
                   <input
                     type="text"
                     name="topic"
-                    class="n-textbox w:100p"
+                    class="n-textbox w:100p mr:3"
                     placeholder="토론 주제를 입력하세요."
                   />
+<!--                  <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>-->
+                  <button type="button" class=""><span class="add-btn icon icon:tmp">추가</span></button>
                 </div>
-                <div class="icon icon:trash">삭제</div>
               </span>
-              <div><a class="icon icon:tmp">추가</a></div>
             </span>
           </section>
         </form>

@@ -14,5 +14,6 @@ public interface BookshortsCommentService {
 
     int reg(BookshortsComment shortsComment);
 
-    
+
+    boolean blindById(Long cmtId);
 }

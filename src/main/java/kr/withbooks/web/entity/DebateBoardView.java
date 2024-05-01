@@ -20,7 +20,7 @@ public class DebateBoardView {
     private String title;
     private String content;
     private LocalDateTime regDate;
-    private Integer blindYn;
+    private int blindYn;
     private Long topicId;
     private String topic;
     private String originalImg;

@@ -20,4 +20,5 @@ public class BookshortsComment {
     private String content;
     private LocalDateTime regDate;
 
+
 }

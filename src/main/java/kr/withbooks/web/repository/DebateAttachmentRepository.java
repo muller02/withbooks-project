@@ -9,4 +9,6 @@ import java.util.List;
 public interface DebateAttachmentRepository {
 
     void save(List<DebateAttachment> debateAttachments);
+
+    List<DebateAttachment> findAllById(Long boardId);
 }

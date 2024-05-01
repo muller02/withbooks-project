@@ -13,4 +13,6 @@ public interface UserRepository {
     User findById(Long userId);
 
     void update(User user);
+    String findByNickName(Long userId);
+
 }
