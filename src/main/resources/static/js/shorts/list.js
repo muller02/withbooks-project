@@ -1,4 +1,6 @@
 
+
+
 //로그인 체크 쿠키 확인 함수
   function getJSessionID() {
     var cookies = document.cookie.split(';');
@@ -11,7 +13,30 @@
     return null;
   }
 
+// <댓글, 좋아요 클릭 시 로그인 안내 모달  창>
+function loginModal(){
 
+  const openButton = document.getElementById('modal-btn');
+  const closeButton = document.getElementById('login-close-btn');
+  const modal = document.getElementById('login-modal');
+  const modalBackdrop = document.getElementById('login-modal-backdrop');
+
+  modal.classList.remove('d:none');
+  modalBackdrop.classList.remove('d:none');
+  modal.classList.add('modal-fade-in');
+
+  closeButton.addEventListener('click', function () {
+    modal.classList.replace('modal-fade-in', 'modal-fade-out');
+
+    setTimeout(() => {
+      modal.classList.add('d:none');
+      modalBackdrop.classList.add('d:none');
+      modal.classList.remove('modal-fade-out');
+    }, 130);
+  });
+
+
+}
 
 
 // <댓글 창 textarea 자동으로 글 늘어나게 하기
@@ -26,7 +51,8 @@ window.addEventListener("load",function (e){
     let regBtn = target.nextElementSibling;
     console.log(regBtn);
     if (getJSessionID() !=1) {
-      alert('로그인을 먼저하세요 ')
+      // alert('로그인을 먼저하세요 ')
+      loginModal();
       regBtn.disabled  =true;
 
     }
@@ -120,7 +146,8 @@ window.addEventListener("load", function (e) {
         shortsNumber.textContent = await count;
       }
     } catch (error) {
-      alert("로그인을 해주세요 !")
+      // alert("로그인을 해주세요 !")
+      loginModal();
       console.error("fetch 호출 중 에러 발생:", error);
     }
 

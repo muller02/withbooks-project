@@ -1,20 +1,19 @@
 package kr.withbooks.web.service;
 
 import kr.withbooks.web.entity.With;
-import kr.withbooks.web.entity.WithCategory;
 import kr.withbooks.web.entity.WithView;
 
 import java.util.List;
 
 public interface WithService {
-    // 전체 목록 조회
+  // 전체 목록 조회
 
-    List<WithView> getList(Long[] categoryId,String query,Long faceYn);
+  List<WithView> getList(Long[] categoryId, String query, Long faceYn);
 
-    void add(With with);
+  void add(With with);
 
-    With get(Long withId);
+  With get(Long withId);
 
 
-    boolean getName(String withName);
+  boolean getName(String withName);
 }
