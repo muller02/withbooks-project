@@ -13,7 +13,7 @@
     return null;
   }
 
-// <댓글, 좋아요 클릭 시 로그인 안내 모달  창>
+// <댓글, 좋아요 클릭 시 로그인 안내 모달  창 함수 >
 function loginModal(){
 
   const openButton = document.getElementById('modal-btn');
@@ -37,6 +37,21 @@ function loginModal(){
 
 
 }
+
+window.addEventListener("load",function (e){
+
+  const writeBtn = document.querySelector(".write-btn");
+
+  writeBtn.addEventListener("click",(e)=>{
+    if(getJSessionID() ==null){
+      loginModal();
+      e.preventDefault();
+    }
+
+
+  })
+
+})
 
 
 // <댓글 창 textarea 자동으로 글 늘어나게 하기
