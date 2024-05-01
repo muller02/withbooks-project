@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -46,6 +48,23 @@ public class BookshortsController {
     @GetMapping("list")
     public String list(Model model, @RequestParam(name = "id", required = false) Long bookId,
                        @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+
+
+//        Cookie[] cookies = request.getCookies();
+//
+//        for(Cookie cookie : cookies){
+//
+//
+//            if(cookie.getName().equals("lck")){
+//
+//                System.out.println("ciookie = " + cookie.getValue());
+//                cookie.setMaxAge(0);
+//                response.addCookie(cookie);
+//            }
+//
+//        }
+
 
         Long userId = null;
         if(userDetails != null)

@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -41,11 +43,24 @@ public class SecurityConfig {
                          .failureHandler(new CustomAuthenticationFailureHandler())
                          .permitAll() // 로그인 페이지와 로그인 처리 url에 대한 인증되지 않은 사용자의 접근을 허용
                  );
+
+          http.logout()
+                          .logoutUrl("/logout")
+                  .addLogoutHandler(new CustomLogoutHandler())
+                  .invalidateHttpSession(true) // 로그아웃 후 세션 초기화 설정
+                  .deleteCookies("JSESSIONID") // 로그아웃 후 쿠기 삭제 설정
+          ;
+
 //
          http
                  .csrf((auth) -> auth.disable());
 
 
         return http.build();
+    }
+
+    @Bean
+    public LogoutHandler logoutSuccessHandler() {
+        return new CustomLogoutHandler(); // 로그아웃 핸들러 등록
     }
 }
