@@ -6,289 +6,294 @@
         xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Document</title>
-    <style>
-        * {
-            font-family: "Noto Sans KR", sans-serif;
-            font-size: 15px;
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Document</title>
+  <style>
+    * {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
 
-            color: var(--color-base-9);
-        }
+      color: var(--color-base-9);
+    }
 
-        input[type="text"]:invalid,
-        input[type="number"]:invalid {
-            border-color: var(--color-base-4);
-        }
+    input[type='text']:invalid,
+    input[type='number']:invalid {
+      border-color: var(--color-base-4);
+    }
 
-        .with-name label::after {
-            margin-top: 6px;
-            color: var(--color-accent-1);
-            display: block;
-            width: 100%;
-            height: 20px;
-        }
+    .with-name label::after {
+      margin-top: 6px;
+      color: var(--color-accent-1);
+      display: block;
+      width: 100%;
+      height: 20px;
+    }
 
-        .with-name label:has(input:invalid)::after {
-            content: "두 글자 이상 입력 필수입니다.";
-            color: var(--color-main-5);
-        }
+    .with-name label:has(input:invalid)::after {
+      content: '두 글자 이상 입력 필수입니다.';
+      color: var(--color-main-5);
+    }
 
-        .with-member label::after {
-            margin-top: 6px;
-            color: var(--color-accent-1);
-            display: block;
-            width: 100%;
-            height: 20px;
-        }
+    .with-member label::after {
+      margin-top: 6px;
+      color: var(--color-accent-1);
+      display: block;
+      width: 100%;
+      height: 20px;
+    }
 
-        .with-member label:has(input:invalid)::after {
-            content: "";
-            color: red;
-        }
+    .with-member label:has(input:invalid)::after {
+      content: '';
+      color: red;
+    }
 
-        .placeholder-center::placeholder {
-            text-align: center;
-        }
+    .placeholder-center::placeholder {
+      text-align: center;
+    }
 
-        #with-reg .n-textbox {
-            --textbox-border-color-focus: var(--color-main-5);
-        }
+    #with-reg .n-textbox {
+      --textbox-border-color-focus: var(--color-main-5);
+    }
 
-        #with-reg .n-toggle-type\:outline-box {
-            border: none;
-        }
-    </style>
-    <script src="/js/with/reg.js"></script>
+    #with-reg .n-toggle-type\:outline-box {
+      border: none;
+    }
+  </style>
+  <script src="/js/with/reg.js"></script>
 </head>
 
 <body>
 <main class="n-container mx:auto" layout:fragment="main">
-    <section class="pb:4 pt:4 pl:4 pr:4 with-reg-page" id="with-reg">
-        <h1 class="d:none">위드 등록 페이지</h1>
-        <form
-                action="/with/reg"
-                class="n-form2"
-                enctype="multipart/form-data"
-                method="post"
-        >
-            <div class="d:flex jc:end">
-                <button class="n-btn mt:3 bg-color:main-5" id="btn" type="submit">
-                    등록
-                </button>
-            </div>
-            <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8">
-                <span class="font-size:7"> 북버그(유저명) 님,</span><br/>
-                위드를 만들어볼까요?
-            </p>
+  <section class="with-reg-page p:4" id="with-reg">
+    <h1 class="d:none">위드 등록 페이지</h1>
+    <form
+            action="/with/reg"
+            class="n-form2"
+            enctype="multipart/form-data"
+            method="post"
+    >
+      <div class="d:flex jc:end">
+        <button class="n-btn mt:3 bg-color:main-5" id="btn" type="submit">
+          등록
+        </button>
+      </div>
+      <p class="fw:3 fs:5 mr:3 ml:3 mb:8">
+        <span class="font-size:7"> 북버그(유저명) 님,</span><br/>
+        위드를 만들어볼까요?
+      </p>
 
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
-                <div class="mb:2 fw:3">위드대표사진</div>
-                <div class="d:flex">
-                    <div
-                            class="bd bd-color:main-1 mr:3 w:3 h:3 bd-radius:4 bg-color:base-2"
-                    >
-                        <label class="d:flex justify-content:center ai:center h:100p">
-                            <span class="icon icon:plus d:inline-block">사진</span>
-                            <input
-                                    class="n-textbox n-textbox-type:underline n-textbox-label:top d:none"
-                                    name="with-img-file"
-                                    type="file"
-                            />
-                        </label>
-                    </div>
-                    <div class="preview-img"></div>
-                </div>
-            </section>
+      <section class="n-item n-item:shadow mb:4 p:4">
+        <div class="mb:2 fw:3">위드대표사진</div>
+        <div class="d:flex">
+          <div
+                  class="bd bd-color:main-1 mr:3 w:3 h:3 bd-radius:4 bg-color:base-2"
+          >
+            <label class="d:flex justify-content:center ai:center h:100p">
+              <span class="icon icon:plus d:inline-block">사진</span>
+              <input
+                      class="n-textbox n-textbox-type:underline n-textbox-label:top d:none"
+                      name="with-img-file"
+                      type="file"
+              />
+            </label>
+          </div>
+          <div class="preview-img"></div>
+        </div>
+      </section>
 
-            <section
-                    class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 face-section"
-            >
-                <div class="mb:2 fw:3">대면/비대면</div>
-                <ul class="w:full d:flex jc:start gap:2">
-                    <li>
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            대면
-                            <input
-                                    class="d:none"
-                                    name="faceYn"
-                                    required
-                                    type="radio"
-                                    value="1"
-                            />
-                        </label>
-                    </li>
-                    <li>
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            비대면
-                            <input
-                                    class="d:none"
-                                    name="faceYn"
-                                    required
-                                    type="radio"
-                                    value="0"
-                            />
-                        </label>
-                    </li>
-                </ul>
-                <div class="d:none face-alert color:accent-1">
-                    대면 또는 비대면을 선택 해주세요 !
-                </div>
-            </section>
+      <section
+              class="face-section n-item n-item:shadow mb:4 p:4"
+      >
+        <div class="mb:2 fw:3">대면/비대면</div>
+        <ul class="w:full d:flex jc:start gap:2">
+          <li>
+            <label class="n-toggle n-toggle-type:outline-box">
+              대면
+              <input
+                      class="face-yn d:none"
+                      name="faceYn"
+                      required
+                      type="radio"
+                      value="1"
+              />
+            </label>
+          </li>
+          <li>
+            <label class="n-toggle n-toggle-type:outline-box">
+              비대면
+              <input
+                      class="face-yn d:none"
+                      name="faceYn"
+                      required
+                      type="radio"
+                      value="0"
+              />
+            </label>
+          </li>
+        </ul>
+        <div class="d:none face-alert color:accent-1">
+          대면 또는 비대면을 선택 해주세요 !
+        </div>
+      </section>
 
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
-                <div class="mb:2 fw:3">위드명</div>
-                <div class="with-name d:flex">
-                    <label>
-                        <input
-                                class="n-textbox n-textbox-type:underline n-textbox-label:top"
-                                maxlength="5"
-                                minlength="2"
-                                name="name"
-                                placeholder="위드명"
-                                required
-                                type="text"
-                        />
-                    </label>
-                    <button
-                            class="valid-btn n-btn bg-color:base-4 ml:5 fw:1"
-                            disabled
-                    >
-                        중복확인
-                    </button>
-                </div>
-                <div class="name-alert-true color:accent-1 d:none">
-                    이미 사용중인 위드명입니다.
-                </div>
+      <section class="n-item n-item:shadow mb:4 p:4">
+        <div class="mb:2 fw:3">위드명</div>
+        <div class="with-name d:flex">
+          <label>
+            <input
+                    class="n-textbox n-textbox-type:underline n-textbox-label:top"
+                    maxlength="5"
+                    minlength="2"
+                    name="name"
+                    placeholder="위드명"
+                    required
+                    type="text"
+            />
+          </label>
+          <button
+                  class="valid-btn n-btn bg-color:base-4 ml:5 fw:1"
+                  disabled
+          >
+            중복확인
+          </button>
+        </div>
+        <div class="name-alert-true color:accent-1 d:none">
+          이미 사용중인 위드명입니다.
+        </div>
 
-                <div class="name-alert-false color:main-5 d:none">
-                    좋은 위드명이네요 !
-                </div>
-            </section>
+        <div class="name-alert-false color:main-5 d:none">
+          좋은 위드명이네요 !
+        </div>
+      </section>
 
-            <section
-                    class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 category-section"
-            >
-                <div class="mb:2 fs:3 fw:3">
-                    주요 카테고리<span class="color:base-5 fs:2 fw:1">
+      <section
+              class="n-item n-item:shadow mb:4 p:4 category-section"
+      >
+        <div class="mb:2 fs:3 fw:3">
+          주요 카테고리<span class="color:base-5 fs:2 fw:1">
                 (최대 3개)</span
-                >
-                </div>
-                <ul class="w:full d:flex jc:start gap:2 fl-wrap:wrap">
-                    <li th:each=" c : ${categories}">
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            [[${c.name}]]
-                            <input
-                                    class="d:none"
-                                    name="category-id"
-                                    th:id="${c.id}"
-                                    th:value="${c.id}"
-                                    type="checkbox"
-                            />
-                        </label>
-                    </li>
-                </ul>
-                <div class="d:none category-alert color:accent-1">
-                    카테고리는 최대 3개 까지만 가능합니다
-                </div>
-            </section>
+        >
+        </div>
+        <ul class="w:full d:flex jc:start gap:2 fl-wrap:wrap">
+          <li th:each=" c : ${categories}">
+            <label class="n-toggle n-toggle-type:outline-box">
+              [[${c.name}]]
+              <input
+                      class="d:none"
+                      name="category-id"
+                      th:id="${c.id}"
+                      th:value="${c.id}"
+                      type="checkbox"
+              />
+            </label>
+          </li>
+        </ul>
+        <div class="d:none category-alert color:accent-1">
+          카테고리는 최대 3개 까지만 가능합니다
+        </div>
+      </section>
 
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
-                <div class="mb:2 fw:3">토론 주기</div>
+      <section class="n-item n-item:shadow mb:4 p:4">
+        <div class="mb:2 fw:3">토론 주기</div>
 
-                <label>
-                    <div>
-                        <input
-                                class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 text-align:center mr:1 ml:1"
-                                max="50"
-                                min="1"
-                                name="interval"
-                                required
-                                type="number"
-                        />
-                        <span> 회</span>
-                        <div class="interval-alert color:accent-1 d:none">
-                            최대 50회 까지 입력 가능합니다.
-                        </div>
-                    </div>
-                </label>
-            </section>
+        <label>
+          <div>
+            <input
+                    class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 text-align:center mr:1 ml:1"
+                    max="50"
+                    min="1"
+                    name="interval"
+                    required
+                    type="number"
+            />
+            <span> 회</span>
+            <div class="interval-alert color:accent-1 d:none">
+              최대 50회 까지 입력 가능합니다.
+            </div>
+          </div>
+        </label>
+      </section>
 
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
-                <div class="mb:2 fw:3">위드 정원</div>
+      <section class="n-item n-item:shadow mb:4 p:4">
+        <div class="mb:2 fw:3">위드 정원</div>
+        <label>
+          <div>
+            <input
+                    class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center"
+                    min="1"
+                    name="personnel"
+                    placeholder="정원"
+                    required
+                    type="number"
+            />
+            <span> 명</span>
+            <div class="personnel-alert color:accent-1 d:none">
+              최대 100명 까지 입력 가능합니다.
+            </div>
+          </div>
+        </label>
+      </section>
 
-                <label>
-                    <div>
-                        <input
-                                class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center"
-                                min="1"
-                                name="personnel"
-                                placeholder="정원"
-                                required
-                                type="number"
-                        />
-                        <span> 명</span>
-                        <div class="personnel-alert color:accent-1 d:none">
-                            최대 100명 까지 입력 가능합니다.
-                        </div>
-                    </div>
-                </label>
-            </section>
+      <!-- 기본 비활성화, 대면 버튼 클릭시 활성화 -->
+      <section
+              class="location n-item n-item:shadow mb:4 p:4"
+      >
+        <h1 class="d:none">모임장소</h1>
+        <div class="mb:2 fw:3">
+          <div>모임장소</div>
+          <label class="d:none" for="area1">모임장소</label>
+        </div>
+        <div class="d:flex w:4">
+          <select
+                  class="area1 n-select"
+                  id="area1"
+                  name="sido"
+                  onChange="cate1_change(this.value, area2)"
+          >
+            <option>시/도</option>
+            <option value="강원">강원</option>
+            <option value="경기">경기</option>
+            <option value="경남">경남</option>
+            <option value="경북">경북</option>
+            <option value="광주">광주</option>
+            <option value="대구">대구</option>
+            <option value="대전">대전</option>
+            <option value="부산">부산</option>
+            <option value="서울">서울</option>
+            <option value="세종">세종</option>
+            <option value="울산">울산</option>
+            <option value="인천">인천</option>
+            <option value="전남">전남</option>
+            <option value="전북">전북</option>
+            <option value="제주">제주</option>
+            <option value="충남">충남</option>
+            <option value="충북">충북</option>
+          </select>
+          <div class="mb:2 fw:3">
+            <label class="d:none" for="area2">시/군/구</label>
+          </div>
+          <select class="area2 n-select" id="area2" name="sigungu">
+            <option>-선택-</option>
+          </select>
+        </div>
+      </section>
 
-            <section
-                    class="location d:none n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5"
-            >
-                <h1 class="d:none">모임장소</h1>
-                <div class="mb:2 fw:3">
-                    <label for="location">모임장소</label>
-                </div>
-                <div class="w:5 d:flex">
-                    <select
-                            class="w_area1 n-select"
-                            name="w_area1"
-                            onChange="cate1_change(this.value, w_area2)"
-                    >
-                        <option>-선택-</option>
-                        <option value="강원">강원도</option>
-                        <option value="경기">경기도</option>
-                        <option value="경남">경상남도</option>
-                        <option value="경북">경상북도</option>
-                        <option value="광주">광주광역시</option>
-                        <option value="대구">대구광역시</option>
-                        <option value="대전">대전광역시</option>
-                        <option value="부산">부산광역시</option>
-                        <option value="서울">서울특별시</option>
-                        <option value="세종">세종특별자치시</option>
-                        <option value="울산">울산광역시</option>
-                        <option value="인천">인천광역시</option>
-                        <option value="전남">전라남도</option>
-                        <option value="전북">전라북도</option>
-                        <option value="제주">제주특별자치도</option>
-                        <option value="충남">충청남도</option>
-                        <option value="충북">충청북도</option>
-                    </select>
-                    <select class="w_area2 n-select" name="w_area2">
-                        <option>-선택-</option>
-                    </select>
-                </div>
-            </section>
-
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5">
-                <h1 class="d:none  ">위드소개</h1>
-                <div class="mb:2 fw:3">위드소개(선택)</div>
-                <div class="d:flex ai:center">
-                    <label for="with-intro"></label
-                    ><textarea
-                        class="n-textbox px:3 py:3 overflow:hidden"
-                        id="with-intro"
-                        name="intro"
-                        placeholder="위드를 간단히 소개 해보세요 !"
-                ></textarea>
-                </div>
-            </section>
-        </form>
-    </section>
+      <section class="n-item n-item:shadow mb:4 p:4">
+        <h1 class="d:none">위드소개</h1>
+        <div class="mb:2 fw:3">위드소개(선택)</div>
+        <div class="d:flex ai:center">
+          <label for="with-intro"></label
+          ><textarea
+                class="n-textbox px:3 py:3 overflow:hidden"
+                id="with-intro"
+                name="intro"
+                placeholder="위드를 간단히 소개 해보세요 !"
+        ></textarea>
+        </div>
+      </section>
+    </form>
+  </section>
 </main>
 </body>
 </html>
