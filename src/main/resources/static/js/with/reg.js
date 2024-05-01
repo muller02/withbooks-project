@@ -64,10 +64,11 @@ window.addEventListener("load", function () {
 window.addEventListener("load", function () {
   const withIntro = document.querySelector("#with-intro");
 
-  // witnIntro Textarea에 input 이벤트 추가
-  withIntro.oninput = function (e) {
-    withIntro.style.height = withIntro.scrollHeight + "px"; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
-  };
+  // withIntro textarea에 input 이벤트 추가
+  withIntro.addEventListener("input", function (e) {
+    this.style.height = "auto"; // 기본 높이로 설정
+    this.style.height = this.scrollHeight + "px"; // 스크롤의 높이 만큼 textarea의 높이 설정
+  });
 });
 
 // 위드 정원 유효성 검사
@@ -88,7 +89,7 @@ window.addEventListener("load", function (e) {
   };
 });
 
-// 토론 횟수 유효성 검사
+// 토론주기 유효성 검사
 window.addEventListener("load", function (e) {
   const withReg = document.querySelector("#with-reg");
   const intervalInput = withReg.querySelector("input[name='interval']");
@@ -102,7 +103,7 @@ window.addEventListener("load", function (e) {
   };
 });
 
-// 위드 등록 카테고리 체크박스 갯수 제한 3개
+// 카테고리 체크박스 갯수 제한 3개
 window.addEventListener("load", function () {
   // for 문, checked 하기 ,
   const categorySection = document.querySelector(".category-section");

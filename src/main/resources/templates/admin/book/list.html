@@ -11,7 +11,7 @@
     <title>Document</title>
     <script src="/js/admin/book/list.js" defer></script>
     <style>
-        div{
+        .core div{
             display: block;
             white-space: nowrap;
             overflow: hidden;
@@ -21,6 +21,14 @@
             background: mediumaquamarine;
         }
     </style>
+    <style>
+        .toggle{
+            
+            padding: 0 !important;
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
     
@@ -28,163 +36,117 @@
     <main layout:fragment="main" class="n-panel n-main-panel">
 
 
-        <section class="n-container px:4 lg:px:10">
+        <section class="n-container p:4 lg:px:10">
             <h1 class="d:none">Main</h1>
-<!-- 테스트 -->
-            <section class="mt:4">
+            <section class="book-list">
+                <h1 class="d:none">책 리스트</h1>
 
-            <section id="search-section" class="mt:4">
-                <h1 class="d:none">검색</h1>
-                
-                <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
-                    <select name="query-type">
-                        <option value="all" selected>전체</option>
-                        <option value="author">저자</option>
-                        <option value="title">제목</option>
-                        <option value="isbn13">ISBN13</option>
-                    </select>
-                    <input
-                    type="text"
-                    class="query n-textbox n-textbox-type:outline n-textbox-status:focus"
-                    placeholder="Outline Focus"
-                    />
-                    <button type="submit" class="n-btn n-btn-type:filled">검색</button>
-                </div>
-                <div class="search-category-div n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
-                    <div class="n-expander-title">
-                        <input type="checkbox" class="n-expander-trigger" />
-                        카테고리 검색
-                    </div>
-                    <div class="n-expander-content d:flex jc:space-between">
-                        <ul class="d:flex fl-wrap:wrap search-category">
-                            <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer" th:each="c : ${category}">
-                                <span class="category-value" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+                <section class="d:flex align-items:center pb:4 bd-bottom">
+                    <h1 class="d:none">헤더</h1>
+                    <div class="w:1p text-align:center">ID</div>
+                    <div class="w:2p text-align:center">카테고리</div>
+                    <div class="w:5p text-align:center">제목</div>
+                    <div class="w:2p text-align:center">저자</div>
+                    <div class="w:2p text-align:center">ISBN13</div>
+                    <div class="w:1p text-align:center">공개여부</div>
+                </section>
 
-            <div class="d:flex justify-content:space-between mt:4">
-                <div>검색 결과 : 1032 건</div>
-                <div>
-                    <button type="button" class="n-btn n-btn-type:filled">
-                        <a href="reg">
-                            책 등록
-                        </a>
-                    </button>
-                    <!-- <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button> -->
-                </div>
-            </div>
+                <section th:each="book : ${list}">
+                    <h1 class="d:none">본문</h1>
 
-            <!-- book list -->
-            <section>
-                <div class="d:flex align-items:center">
-                    <!-- <div class="width:1 align-content:center">
-                        <label>
-                            <input type="checkbox" class="ml:3 n-toggle n-toggle-type:check-box n-toggle-size:1" />
-                        </label>
-                    </div> -->
-                    <div class="width:1p text-align:center">ID</div>
-                    <div class="width:2p text-align:center">카테고리</div>
-                    <div class="width:5p text-align:center">제목</div>
-                    <div class="width:2p text-align:center">저자</div>
-                    <div class="width:2p text-align:center">ISBN13</div>
-                    <div class="width:1p text-align:center">공개여부</div>
-                    <div class="width:1p text-align:center"></div>
-                </div>
+                    <section class="d:flex jc:space-between align-items:center py:2 bd-top bd-right bd-left bd-color:main-3 bg-color:main-1 pos:relative">
+                        <h1 class="d:none">요약</h1>
+                        <div class="w:1p text-align:center ln-clamp:1" th:text="${book.id}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.categoryName}"></div>
+                        <div class="w:5p text-align:center ln-clamp:1" th:text="${book.title}" th:title="${book.title}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.author}" th:title="${book.author}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.isbn13}"></div>
+                        <div class="w:1p text-align:center ln-clamp:1" th:text="${book.publicYn}"></div>
+                        <div class="toggle-btn-area w:10p h:10p pos:absolute bg-color:transparent text-indent:-1 of:hidden"></div>
+                    </section>
 
-                <div class="n-expander" th:each="book : ${list}">
-                    <div class="n-expander-title checkbox-parent">
-                        <input type="checkbox" class="n-expander-trigger checkbox-toggle"/>
-                        <div class="d:flex align-items:center">
-                            <!-- <input type="checkbox" class="ml:1 n-toggle n-toggle-type:check-box n-toggle-size:1" data-id="${book.id}"/> -->
-                            <div class="width:1p text-align:center" th:text="${book.id}"></div>
-                            <div class="width:2p text-align:center" th:text="${book.categoryName}"></div>
-                            <div class="width:5p text-align:center" th:text="${book.title}" th:title="${book.title}"></div>
-                            <div class="width:2p text-align:center" th:text="${book.author}" th:title="${book.author}"></div>
-                            <div class="width:2p text-align:center" th:text="${book.isbn13}"></div>
-                            <div class="width:1p text-align:center" th:text="${book.publicYn}"></div>
-                            <!-- <div class="width:1p"></div> -->
+
+                    <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle">
+                        <h1 class="d:none">디테일</h1>
+                        <div class="d:flex fl-dir:column">
+                            <div class="">
+                                <img class="w:3 h:5 bd-radius:2" src="" alt="" th:src="${book.cover}">
+                            </div>
+                            <div>
+                                <label class="d:flex jc:center color:main-6 cursor:pointer">
+                                    이미지 변경
+                                    <input class="d:none bd w:3" type="file">
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="n-expander-content px:2 bd">
-                        <div class="d:flex align-items:center">
-                            <!-- <input type="checkbox" class="ml:1 n-toggle n-toggle-type:check-box n-toggle-size:1" data-id="${book.id}"/> -->
-                            <div class="width:1p text-align:center" th:text="${book.id}"></div>
-                            <div class="width:2p text-align:center" th:text="${book.categoryName}"></div>
-                            <div class="width:5p text-align:center" th:text="${book.title}" th:title="${book.title}"></div>
-                            <div class="width:2p text-align:center" th:text="${book.author}" th:title="${book.author}"></div>
-                            <div class="width:2p text-align:center" th:text="${book.isbn13}"></div>
-                            <div class="width:1p text-align:center" th:text="${book.publicYn}"><input type="text"></div>
-                            <div class="width:1p"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-   
-
-            <!--  n-bbs-table n-column-width:3 -->
-            <!-- <table class="n-row-height:2 n-table-border n-table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col" class="width:1">
-                            <label>
-                                <input type="checkbox" class="n-toggle n-toggle-type:check-box n-toggle-size:1" />
-                            </label>
-                        </th>
-                        <th scope="col" class="width:1">ID</th>
-                        <th scope="col" class="width:3">카테고리</th>
-                        <th scope="col" class="width:1">공개 여부</th>
-                        <th scope="col">사진</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작가</th>
-                        <th scope="col">등록일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div th:each="book : ${list}" class="n-expander">
-                        <div class="n-expander-title">
-                            <tr data-row-id="{{book.id}}">
+    
+                        <span class="ml:6 w:10p">
+                            <span class="d:flex">
                                 <div>
-                                    <th scope="col">
-                                        <label>
-                                            <input type="checkbox" class="n-toggle n-toggle-type:check-box n-toggle-size:1" />
-                                        </label>
-                                    </th>
-                                    <th scope="row" th:text="${book.id}">1</th>
-                                    <th scope="row" th:text="${book.categoryName}">소설/시/희곡</th>
-                                    <td><span class="icon icon:eye" th:text="${book.publicYn}"></span></td>
-                                    <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" th:src="${book.cover}" class="h:1 w:1" alt=""></td>
-                                    <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</a></td> 
-                                    <td th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</td>
-                                    <td th:text="${book.author}"  th:title="${book.author}">홍길동</td>
-                                    <td th:text="${book.regDate}">2020-11-01</td>
+                                    <div>ID : <span th:text="${book.id}"></span></div>
                                 </div>
-                            </tr>
-                            <input type="checkbox" class="n-expander-trigger" />
-                        </div>
-                        <div class="n-expander-content px:2">
-                            <tr>
-                                <td colspan="8">
-                                    <div class="bg-color:main-1">
-                                        들어가니ㅜ
-                                    </div>
-                                </td>
-                            </tr>
-                        </div>
-                    </div>
-                </tbody>
-            </table> -->
-            <section class="mt:4">
-                <h1 class="d:none">페이저</h1>
-                <ul class="n-pager justify-content:center">
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                </ul>
-            </section>
+        
+                                <div class="ml:auto">
+                                    <div>카테고리 : <span th:text="${book.categoryName}"></span></div>
+                                </div>
+        
+                                <div class="ml:auto">
+                                    <div>제목 : <span th:text="${book.title}"></span></div>
+                                </div>
+        
+                                <div class="ml:auto">
+                                    <div>저자 : <span th:text="${book.author}"></span></div>
+                                </div>
+                            </span>
+    
+                            <span class="d:flex mt:3">
+                                <div>ISBN : <span th:text="${book.isbn13}"></span></div>
+                                <div class="ml:auto">출판일 : <span th:text="${book.pubDate}"></span></div>
+                                <div class="ml:auto">출판사 : <span th:text="${book.publisher}"></span></div>
+                            </span>
+                            
+                            <div class="d:flex mt:3 ai:center">
+                                <label class="w:1">가격</label>
+                                <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.price}"></input>
+                            </div>
+    
+                            <div class="d:flex mt:3">
+                                <label class="w:1">설명</label>
+                                <textarea class="bd bd-radius:2 w:10p pl:3 py:1" th:utext="${book.description}"></textarea>
+                            </div>
+    
+                            <div class="d:flex mt:3">
+                                <label class="w:2">구매링크</label>
+                                <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.purchaseLink}"></input>
+                                
+                                <div class="d:flex jc:center ai:center"><a href="" th:href="${book.purchaseLink}" class="icon icon:share_fat ml:2">링크</a></div>
+                            </div>
+    
+                            
+                            <div class="d:flex mt:3">
+                                <label>베스트셀러(Y/N) </label>
+                                <input class="ml:3" type="checkbox" th:checked="${book.publicYn} == 1">
+                            </div>
+    
+                            <div class="d:flex mt:3">
+                                <label>공개 </label>
+                                <input class="ml:3" type="checkbox" th:checked="${book.publicYn} == 1">
+                            </div>
+                        </span>
+                        
+                        <span class="btn-box d:flex pos:absolute bottom:1 right:1 mb:3 mr:3">
+                            <div>
+                                <button class="n-btn n-btn-type:outline">찾아와줘😀</button>
+                            </div>
+                            <div class="ml:6">
+                                <button class="n-btn">수정내용 저장</button>
+                            </div>
+                        </span>
+                    </section>
 
+                </section>
+            </section>
+            
         </section>
     </main>
 </body>

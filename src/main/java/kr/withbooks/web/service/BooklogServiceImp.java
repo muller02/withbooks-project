@@ -55,8 +55,8 @@ public class BooklogServiceImp implements BooklogService{
     }
 
     @Override
-    public void addLogs(BooklogLogs logs) {
-        logsRepository.save(logs);
+    public int addLogs(BooklogLogs logs) {
+        return logsRepository.save(logs);
     }
 
     @Override
@@ -69,5 +69,9 @@ public class BooklogServiceImp implements BooklogService{
         return repository.updatePublic(booklogId, publicYn);
     }
 
+    @Override
+    public int deleteLog(Long logId) {
+        return logsRepository.delete(logId);
+    }
     
 }

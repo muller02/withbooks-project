@@ -199,6 +199,7 @@
 
         <label>
           <div>
+            <span>월 </span>
             <input
                     class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 text-align:center mr:1 ml:1"
                     max="50"
@@ -235,7 +236,6 @@
         </label>
       </section>
 
-      <!-- 기본 비활성화, 대면 버튼 클릭시 활성화 -->
       <section
               class="location n-item n-item:shadow mb:4 p:4"
       >
@@ -244,7 +244,7 @@
           <div>모임장소</div>
           <label class="d:none" for="area1">모임장소</label>
         </div>
-        <div class="d:flex w:4">
+        <div class="d:flex w:4 mr:3">
           <select
                   class="area1 n-select"
                   id="area1"
@@ -270,6 +270,7 @@
             <option value="충남">충남</option>
             <option value="충북">충북</option>
           </select>
+          <div style="margin-right: 10px;"></div> <!-- 간격 조절을 위한 빈 div -->
           <div class="mb:2 fw:3">
             <label class="d:none" for="area2">시/군/구</label>
           </div>
@@ -288,7 +289,7 @@
                 class="n-textbox px:3 py:3 overflow:hidden"
                 id="with-intro"
                 name="intro"
-                placeholder="위드를 간단히 소개 해보세요 !"
+                placeholder="위드에 대해 간단히 소개해보세요."
         ></textarea>
         </div>
       </section>

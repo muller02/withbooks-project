@@ -17,6 +17,9 @@
             border-color: red;
             color: red;
         }
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -52,7 +55,11 @@
                     </span>
                 </label>
 
-                <div class="my:8 ml:auto">아이디 또는 비밀번호가 유효하지 않습니다.</div>
+                <div class="my:8 ml:auto" th:if="${session.errorMessage}"  >
+                    <p th:text="${session.errorMessage}" class="color:accent-1">
+                        아이디 또는 비밀번호가 유효하지 않습니다.
+                    </p>
+                   </div>
                 <button type="submit" class="n-btn w:100p">로그인</button>
             </form>
             <nav class="d:flex jc:center my:8">

@@ -5,7 +5,6 @@
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{inc/layout.html}"
-
 >
   <head>
     <meta charset="UTF-8" />
@@ -16,6 +15,9 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css"
     />
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!--    자바스크립트 날짜 형식 바꿔주는 라이브러리 -->
+
     <link rel="stylesheet" type="text/css" href="/css/var.css" />
     <link rel="stylesheet" type="text/css" href="/css/withtil.css" />
     <link rel="stylesheet" type="text/css" href="/css/util/border-radius.css" />
@@ -29,6 +31,11 @@
         --width-1: 32px;
       }
 
+      /*좋아요 댓글 이모티콘 크기 */
+      .cmt-like-section > * {
+        --icon-size-5: 28px;
+
+      }
       .pager {
         --height-1: 4px;
       }
@@ -55,7 +62,7 @@
       }
       .translate-x-18px {
         @media (min-width: 1200px) {
-          transform: translateX(-18px);
+          transform: translateX(330px);
         }
       }
 
@@ -148,9 +155,37 @@
     }
 
     .comment-user-img{
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
     }
+
+    /*.likeBtn{*/
+    /*  transition: transform 0.3s ease;*/
+
+    /*}*/
+    /*.likeBtn-transition{*/
+    /*  transform: scale(1.8);*/
+
+    /*}*/
+
+
+      @keyframes scaleAnimation {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.8);
+        }
+
+        100%{
+          transform: scale(1);
+
+        }
+      }
+
+      .like {
+        animation: scaleAnimation 0.6s ease; /* 1초 동안 애니메이션을 적용하고, 입출력 속도는 ease-in-out */
+      }
     </style>
 
     <script src="/js/shorts/list.js"></script>
@@ -297,7 +332,7 @@
             <div class="fs:2 fw:3">132</div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="icon icon:heart"></div>
+            <div class="icon icon:heart "></div>
             <div class="fs:2 fw:3">50.2M</div>
           </div>
         </section>
@@ -316,7 +351,7 @@
             <img
               class="obj-fit:contain h:10p w:10p"
               src="/image/shorts/profile.png"
-              th:src="@{|/image/shorts/${s.userImg}|}"
+              th:src="@{|/image/user/${s.userImg}|}"
               alt="프로필사진"
             />
           </div>
@@ -332,7 +367,7 @@
             </div>
             <div
               class="as:end font-size:1 color:base-4 ml:1"
-              th:text="${#temporals.format(s.regDate,'yyyy-MM-dd HH:mm:ss')}"
+              th:text="${#temporals.format(s.regDate,'yy-MM-dd HH:mm')}"
             >
               10분 전
             </div>
@@ -359,14 +394,16 @@
             <ul class="dropdown-list">
               <li>
                 <button>
-                  <span class="va:middle deco deco-size:2 icon:share_fat">
+                  <span class="va:middle deco deco-size:2 icon:share_fat w:100p">
                     공유하기
                   </span>
                 </button>
               </li>
-              <li>
+
+
+              <li th:if="${#authentication.principal ne 'anonymousUser'}">
                 <button>
-                  <span class="va:middle deco deco-size:2 icon:share_fat">
+                  <span class="va:middle deco deco-size:2 icon:share_fat w:100p">
                     신고하기
                   </span>
                 </button>
@@ -393,7 +430,7 @@
                   <a
                     href=""
                     th:href="@{edit(sid=${s.id},bid=${s.bookId})}"
-                    class="va:middle deco deco-size:2 icon:pencil_simple"
+                    class="va:middle deco deco-size:2 icon:pencil_simple w:100p"
                   >
                     수정하기
                   </a>
@@ -404,7 +441,7 @@
                 <form id="form-name" class="px:2 py:1">
                   <button
                     id="modal-btn"
-                    class="delete-btn va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2"
+                    class="delete-btn w:100p va:middle deco deco-size:2 ai:center deco-color:accent-2 icon:trash color:accent-2 fs:2 fw:2"
                   >
                     삭제하기
                   </button>
@@ -596,20 +633,20 @@
           <h1 class="d:none">댓글/좋아요 버튼</h1>
           <div class="d:flex fl-dir:column ai:center">
             <div
-              class="icon icon:chats comment-btn cursor:pointer color-icon"
+              class="icon icon:chats  icon-size:5 comment-btn cursor:pointer color-icon"
               th:data-shorts-id="${s.id}"
             ></div>
             <div
-              class="fs:2 fw:3 count-comment color-text"
+              class="fs:3 fw:3 count-comment  color-text"
               th:text="${s.commentCnt}"
             >
               132
             </div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="likeBtn icon  cursor:pointer "   th:data-shorts-id="${s.id}"  th:classappend="${s.liked}==1  ? 'icon:heart_fill icon-color:main-5' : 'icon:heart'"></div>
+            <div class="likeBtn icon  icon-size:5  cursor:pointer "   th:data-shorts-id="${s.id}"  th:classappend="${s.liked}==1  ? 'icon:heart_fill icon-color:main-5' : 'icon:heart'"></div>
 
-            <div class="fs:2 fw:3 color-text" th:text="${s.likeCnt}" >50.2M</div>
+            <div class="fs:3 fw:3 color-text" th:text="${s.likeCnt}" >50.2M</div>
             <section
                     id="modal-like"
                     class="n-modal d:none modal-transform-xy"
@@ -636,7 +673,7 @@
         </section>
 
         <section
-          class="comment-group box-shadow-custom bg-color:sub-1 translate-x-18px mt:2 d:none h:auto d:flex fl-dir:column bd-radius:6 p:3 lg:pos:absolute lg:bottom:0 lg:right:-5 lg:border lg:w:7 zi:4"
+          class="comment-group box-shadow-custom bg-color:sub-1 translate-x-18px mt:2 d:none h:auto d:flex fl-dir:column bd-radius:6 p:3 lg:pos:absolute lg:bottom:0 lg:right:-7 lg:border lg:w:7 zi:4"
         >
           <h1 class="d:none">북쇼츠 댓글</h1>
           <div

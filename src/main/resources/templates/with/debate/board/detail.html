@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/with/debate/board/detail.js" defer></script>
     <title>Document</title>
     <style>
          .profile-image,
@@ -43,7 +44,7 @@
                                     <span class="fs=1">이치고경인</span>
                                 </span>
                             </div>
-                            <span class="fs:1" th:text="${#dates.format(board.regDate, 'yyyy-MM-dd HH:mm:ss')}">2024-03-27 23:03:26</span>
+                            <span class="fs:1" th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm:ss')}">2024-03-27 23:03:26</span>
                         </section>
                     </div>
                     <div class="card-note-media">
@@ -141,7 +142,7 @@
                             </div>
                         </section>
             
-                        <section class="mt:6">
+                        <section class="my-comment mt:6">
                             <h1 class="d:none">내 댓글</h1>
                             <div class="d:flex fl-dir:column">
                                 <a class="d:none" href="">
@@ -150,7 +151,7 @@
                                 </a>
                                 <span class="comment-area ml:10 pos:relative d:flex fl-dir:column ai:end">
                                     <p class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:2 pt:2 pb:8">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </p>
-                                    <div class="delete-button pos:absolute right:1 bottom:1"><a href="" class="icon icon:trash icon-color:accent-3 icon-size:3">삭제</a></div>
+                                    <div class="delete-button pos:absolute right:1 bottom:1"><button class="icon icon:trash icon-color:accent-3 icon-size:3">삭제</button></div>
                                     <div class="fs:1 color:base-6 mr:1 mt:1">오후 10:46</div>
                                 </span>
                             </div>
@@ -159,14 +160,22 @@
                 </section>
                 <section class="pt:3 ">
                     <h1 class="d:none">댓글 입력란</h1>
-                    <form class="d:flex" action="" method="post">
-                        <label class="d:none">댓글</label>
-                        <textarea class="bd-radius:4 bg-color:base-2 fl-grow:1 px:4 py:2 resize:none" rows="1" name="comment" ></textarea>
-                        <button class="cursor:pointer ml:3 bg-color:main-5 bd-radius:4 px:3 color:base-1">등록</button>
+                    <form class="d:flex">
+                        <div>
+                            <label class="d:none">댓글</label>
+                            <textarea id="new-comment" class="bd-radius:4 bg-color:base-2 fl-grow:1 px:4 py:2 resize:none" rows="1"></textarea>
+                        </div>
+                        <input type="hidden" id="new-comment-board-id" th:value="${board.id}">
+                        <button type="button" id="comment-create-btn" class="cursor:pointer ml:3 bg-color:main-5 bd-radius:4 px:3 color:base-1">등록</button>
                     </form>
                 </section>
             </div>
         </div>
     </main>
+<script>
+
+</script>
 </body>
+
+
 </html>

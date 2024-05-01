@@ -21,12 +21,10 @@ public interface BooklogService {
     // BooklogLogs
     List<BooklogLogs> getLogs(Long id);
     
-    void addLogs(BooklogLogs logs);
+    int addLogs(BooklogLogs logs);
     
     void deleteAllByIds(List<Integer> ids, Long userId);
 
-
-
-
+    int deleteLog(Long logId);
     
 }

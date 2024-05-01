@@ -132,9 +132,7 @@ public class WithController {
     // sido와 sigungu를 공백으로 구분하여 location으로 결합
     String location = sido + " " + sigungu;
     with.setLocation(location);
-
-    System.out.println("location" + location);
-
+    
     //With 테이블 등록
 
     //위드 이미지파일 이름

@@ -15,9 +15,11 @@ public class LoginController {
     @GetMapping("login")
     public  String login(HttpServletRequest request){
 
-        
-      
-
+//       HttpSession session =   request.getSession(false);
+//       if(session != null)
+//           return "redirect:/shorts/list";
+//
+//
         return  "login/login";
     }
 
