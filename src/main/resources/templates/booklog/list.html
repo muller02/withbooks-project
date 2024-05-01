@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Booklog-list</title>
-
+        <script src="/js/booklog/list.js"></script>
         <style>
             .book-list div {
                 width: 130px;
@@ -43,6 +43,7 @@
                     <h1 class="d:none">북 리스트</h1>
                     <ul class="d:flex flex-wrap:wrap justify-content:flex-start">
                         <li class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
+                            <input type="hidden" th:value="${l.bookId}" />
                             <div class="gap:4 d:flex fl-dir:column lg:ai:center">
                                 <div class="h:4 d:flex jc:center box-shadow-custom">
                                     <a class="text-align:center h:100p" href="detail" th:href="@{./detail(id=${l.id})} ">
@@ -63,7 +64,7 @@
                     </ul>
                 </section>
 
-                <div class="pos:fixed right:2 bottom:9 zi:5">
+                <div id="new-log-reg" class="pos:fixed right:2 bottom:9 zi:5">
                     <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
                     <div class="bg-color:main-5 border-radius:full p:3">
                         <a href="/booklog/reg" th:title="${'새 북로그 작성하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
