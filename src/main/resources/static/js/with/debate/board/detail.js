@@ -1,8 +1,31 @@
+
+// <댓글 창 textarea 자동으로 글 늘어나게 하기
+window.addEventListener('load', function(e) {
+
+
+
+
+    let textarea = document.querySelector("#new-comment");
+    
+    console.log(textarea)
+  
+
+  
+  
+        textarea.style.height="auto";
+      textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
+  
+  
+    })
+   
+
+
 window.addEventListener('load', function(e) {
 
     //============================== 등록 ====================================
 
     const commentCreateBtn  = document.querySelector("#comment-create-btn");
+
 
     commentCreateBtn.addEventListener('click', () => {
 
@@ -25,22 +48,24 @@ window.addEventListener('load', function(e) {
         }).then(response => {
             if (response.ok) {
                 console.log("댓글이 등록되었습니다.");
+                window.location.reload();
 
-                let divHTML = `
-                            <div class="d:flex fl-dir:column">
-                                <a class="d:none" href="">
-                                    <div><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" alt="프로필사진"></div>
-                                    <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
-                                </a>
-                                <span class="comment-area ml:10 pos:relative d:flex fl-dir:column ai:end">
-                                    <p class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:2 pt:2 pb:8">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </p>
-                                    <div class="delete-button pos:absolute right:1 bottom:1"><button class="icon icon:trash icon-color:accent-3 icon-size:3">삭제</button></div>
-                                    <div class="fs:1 color:base-6 mr:1 mt:1">오후 10:46</div>
-                                </span>
-                            </div>
-                `
-                document.querySelector(".my-comment").insertAdjacentHTML("beforeend", divHTML);
-                document.querySelector("#new-comment").value = "";
+                // let divHTML = `
+                //             <div class="d:flex fl-dir:column">
+                //                 <a class="d:none" href="">
+                //                     <div><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" alt="프로필사진"></div>
+                //                     <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
+                //                 </a>
+                //                 <span class="comment-area ml:10 pos:relative d:flex fl-dir:column ai:end">
+                //                     <p class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:2 pt:2 pb:8">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </p>
+                //                     <div class="delete-button pos:absolute right:1 bottom:1"><button class="icon icon:trash icon-color:accent-3 icon-size:3">삭제</button></div>
+                //                     <div class="fs:1 color:base-6 mr:1 mt:1">오후 10:46</div>
+                //                 </span>
+                //             </div>
+                // `
+                // document.querySelector(".my-comment").insertAdjacentHTML("beforeend", divHTML);
+               
+                // document.querySelector("#new-comment").value = "";
             } else {
                 response.json().then(error => {
                     console.error("댓글 등록 실패:", error.message);
@@ -58,6 +83,12 @@ window.addEventListener('load', function(e) {
     // })
 
     
+
+  
+  
+  })
+
+      
     
     
     
@@ -72,9 +103,7 @@ window.addEventListener('load', function(e) {
     
     
     
-    
-    
-})
+
     //============================== 삭제 ====================================
     // <button id="deleteButton" data-board-id="your_board_id_here" data-comment-id="your_comment_id_here">삭제</button>
 

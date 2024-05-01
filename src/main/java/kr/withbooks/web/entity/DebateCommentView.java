@@ -20,4 +20,5 @@ public class DebateCommentView {
     private LocalDateTime regDate;
     private int blindYn;
     private String userNickname;
+    private String userImg;
 }

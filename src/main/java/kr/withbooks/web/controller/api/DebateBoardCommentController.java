@@ -1,10 +1,12 @@
 package kr.withbooks.web.controller.api;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.DebateComment;
 import kr.withbooks.web.entity.DebateCommentView;
 import kr.withbooks.web.service.DebateCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +28,9 @@ public class DebateBoardCommentController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{boardId}/comments")
-    public DebateComment reg(@PathVariable Long boardId, @RequestBody DebateComment debateComment) {
-        Long userId = 4L;
+    public DebateComment reg(@PathVariable Long boardId, @RequestBody DebateComment debateComment,
+                            @AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getId();
 
         debateComment.setUserId(userId);
         debateComment.setBoardId(boardId);
