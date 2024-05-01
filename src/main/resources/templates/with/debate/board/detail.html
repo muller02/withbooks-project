@@ -125,10 +125,11 @@
             </div>
 
             <div class="card-note-comment mt:4">
-                <section class="comment-list p:2 bd-bottom">
+                <section class="comment-list p:2 bd-bottom"  th:with="valid = ${#authentication.principal ne 'anonymousUser' ? #authentication.principal.id : -1}">
                     <h1 class="d:none">댓글목록</h1>
+                    
                     <div th:each="cmt : ${debateCommentList}"> 
-                        <section th:if="${#authentication.principal.id != cmt.userId}">
+                        <section th:if="${valid != cmt.userId}">
                             <h1 class="d:none">타인 댓글</h1>
                             <div class="d:flex fl-dir:column">
                                 <a class="d:flex ai:center" href="">
@@ -143,7 +144,8 @@
                             </div>
                         </section>
                    
-                        <section class="my-comment mt:6" th:if="${#authentication.principal.id == cmt.userId}">
+
+                        <section class="my-comment mt:6" th:if="${valid == cmt.userId}">
                             <h1 class="d:none">내 댓글</h1>
                             <div class="d:flex fl-dir:column">
                                 <a class="d:none" href="">

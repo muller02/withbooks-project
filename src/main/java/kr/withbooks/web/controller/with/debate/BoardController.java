@@ -82,6 +82,7 @@ public class BoardController {
     @GetMapping("/detail")
     public String detail(
             @RequestParam Long id,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
         DebateBoard findBoard = debateBoardService.getById(id);
@@ -105,6 +106,7 @@ public class BoardController {
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
         model.addAttribute("debateCommentList", debateCommentList);
+        // model.addAttribute("userId", userDetails.getId());
 
         System.out.println("debateCommentList : " + debateCommentList);
         
