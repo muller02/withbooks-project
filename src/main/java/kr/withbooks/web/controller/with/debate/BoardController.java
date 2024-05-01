@@ -85,6 +85,7 @@ public class BoardController {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
+        System.out.println("진입  토마토 ");
         DebateBoard findBoard = debateBoardService.getById(id);
         Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
@@ -94,6 +95,7 @@ public class BoardController {
         DebateRoom findRoom = debateRoomService.getById(roomId);
         Long bookId = findRoom.getBookId();
         Book book = bookService.get(bookId);
+        System.out.println("진입  토마토 ");
 
         DebateTopic findTopic = debateTopicService.getById(topicId);
         log.info("findTopic = {}", findTopic);
