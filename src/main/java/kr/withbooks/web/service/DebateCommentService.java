@@ -1,6 +1,7 @@
 package kr.withbooks.web.service;
 
 import kr.withbooks.web.entity.DebateComment;
+import kr.withbooks.web.entity.DebateCommentView;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface DebateCommentService {
 
     DebateComment getById(Long id);
 
-    List<DebateComment> getAllById(Long boardId);
+    List<DebateCommentView> getListById(Long boardId);
 
     Long deleteById(Long id);
 

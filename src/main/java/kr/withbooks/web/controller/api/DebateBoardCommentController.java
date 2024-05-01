@@ -1,6 +1,7 @@
 package kr.withbooks.web.controller.api;
 
 import kr.withbooks.web.entity.DebateComment;
+import kr.withbooks.web.entity.DebateCommentView;
 import kr.withbooks.web.service.DebateCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,9 @@ public class DebateBoardCommentController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{boardId}/comments")
-    public List<DebateComment> list(@PathVariable Long boardId) {
+    public List<DebateCommentView> list(@PathVariable Long boardId) {
 
-        List<DebateComment> commentList = debateCommentService.getAllById(boardId);
+        List<DebateCommentView> commentList = debateCommentService.getListById(boardId);
         return commentList;
     }
 

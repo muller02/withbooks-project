@@ -34,7 +34,7 @@ public class BoardController {
     private DebateAttachmentService debateAttachmentService;
 
     @Autowired
-    private DebateCommentViewService debateCommentViewService;
+    private DebateCommentService debateCommentViewService;
 
     @Autowired
     private FileStore fileStore;

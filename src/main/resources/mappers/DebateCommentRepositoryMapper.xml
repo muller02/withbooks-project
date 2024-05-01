@@ -44,14 +44,14 @@
 <!--    </select>-->
 
     <!-- 댓글 리스트 조회 -->
-    <select id="findAllById" parameterType="Long" resultType="DebateComment">
+    <select id="findAllById" parameterType="Long" resultType="DebateCommentView">
         SELECT
-        <include refid="debateComment" />
+        *
         FROM
-        debate_comment
+        debate_comment_view
         WHERE
-        blind_yn = 0
-        AND board_id = #{boardId}
+            blind_yn = 0
+            AND board_id = #{boardId}
         ORDER BY
         id DESC
     </select>

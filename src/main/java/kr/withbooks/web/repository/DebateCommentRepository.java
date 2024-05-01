@@ -1,6 +1,8 @@
 package kr.withbooks.web.repository;
 
 import kr.withbooks.web.entity.DebateComment;
+import kr.withbooks.web.entity.DebateCommentView;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +14,7 @@ public interface DebateCommentRepository {
 
     DebateComment findById(Long commentId);
 
-    List<DebateComment> findAllById(Long boardId);
+    List<DebateCommentView> findAllById(Long boardId);
 
     void deleteById(Long id);
 
