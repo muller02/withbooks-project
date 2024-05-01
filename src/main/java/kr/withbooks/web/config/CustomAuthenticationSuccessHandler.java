@@ -23,6 +23,9 @@ public class CustomAuthenticationSuccessHandler  implements AuthenticationSucces
         cookie.setMaxAge(24 * 60 * 60); //  쿠키 유효기간 설정
         cookie.setPath("/");  // 쿠키 저장 경로 설정 모든 경로
         response.addCookie(cookie);
+        request.getSession().setAttribute("errorMessage", null);
+
+
 
         response.sendRedirect("/shorts/list");  // 로그인 성공후 갈 페이지
 
