@@ -49,4 +49,20 @@ public class BookServiceImp implements BookService {
     public Map<String, Object> getMapById(Long bookId, Long userId) {
         return repository.findMapById(bookId, userId);
     }
+
+    @Override
+    public List<BookView> getListByParams(Map<String, String> params) {
+        int size = 20;
+        int page = Integer.parseInt(params.get("page"));
+        int offset = (page-1)*size;
+
+        return viewRepository.findAllByParams(params, size, offset);
+    }
+    @Override
+    public int getCountByParams(Map<String, String> params) {
+        int size = 20;
+        int page = Integer.parseInt(params.get("page"));
+        int offset = (page-1)*size;
+        return viewRepository.findCountByParams(params, size, offset);
+    }
 }

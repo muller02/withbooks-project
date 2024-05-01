@@ -12,24 +12,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/with/debate/board")
+@RequestMapping("/with/debate/board")
 public class DebateBoardCommentController {
 
     @Autowired
     private DebateCommentService debateCommentService;
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{boardId}/comments")
-    public List<DebateCommentView> list(@PathVariable Long boardId) {
-
-        List<DebateCommentView> commentList = debateCommentService.getListById(boardId);
-        return commentList;
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping("/{boardId}/comments")
+//    public List<DebateCommentView> list(@PathVariable Long boardId) {
+//
+//        List<DebateCommentView> commentList = debateCommentService.getListById(boardId);
+//        return commentList;
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{boardId}/comments")
     public DebateComment reg(@PathVariable Long boardId, @RequestBody DebateComment debateComment,
                             @AuthenticationPrincipal CustomUserDetails userDetails) {
+
         Long userId = userDetails.getId();
 
         debateComment.setUserId(userId);
