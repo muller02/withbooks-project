@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/js/profile/edit.js" defer></script>
     <style>
         main{
             --color-base-3:var(--color-base-2);
@@ -26,6 +27,9 @@
         }
         .save-button{
             --top-1: -222px;
+        }
+        .withdrawal-modal{
+            --color-main-3:#1a1a1a9b;
         }
     </style>
 </head>
@@ -82,8 +86,19 @@
             <div class="save-button pos:absolute top:1 right:1"><button class="px:4 py:2 bg-color:main-5 color:base-1 border-radius:2 cursor:pointer">저장</button></div>
         </form>
         <div class="h:1 mt:9">
-            <a class="fs:4 color:base-1 bg-color:accent-1 d:flex jc:center ai:center w:10p h:10p bd-radius:4" href="">회원 탈퇴</a>
+            <a class="withdrawal-link fs:4 color:base-1 bg-color:accent-1 d:flex jc:center ai:center w:10p h:10p bd-radius:4" href="">회원 탈퇴</a>
         </div>
+
+        <section class="withdrawal-modal pos:fixed top:0 bottom:0 left:0 right:0 bg-color:main-3 d:flex jc:center ai:center zi:3 d:none">
+            <h1 class="d:none">회원탈퇴 확인 버튼</h1>
+            <div class="bg-color:base-1 bd-radius:4 d:flex fl-dir:column jc:center ai:center p:6">
+                <p class="fs:4 fw:3">정말로 회원 탈퇴를 하시겠습니까?</p>
+                <span class="d:flex jc:center ai:center w:10p mt:4">
+                    <div><a class="color:base-1 bg-color:accent-1 bd-radius:4 p:2" href="">회원탈퇴</a></div>
+                    <div class="ml:4"><button class="withdrawal-cancel-btn bd bd-radius:3 bd-radius:4 py:2 px:5">취소</button></div>
+                </span>
+            </div>
+        </section>
     </main>
 </body>
 </html>
