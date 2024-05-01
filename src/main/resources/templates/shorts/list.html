@@ -159,14 +159,33 @@
       height: 28px;
     }
 
-    .likeBtn{
-      transition: transform 0.3s ease;
+    /*.likeBtn{*/
+    /*  transition: transform 0.3s ease;*/
 
-    }
-    .likeBtn-transition{
-      transform: scale(1.8);
+    /*}*/
+    /*.likeBtn-transition{*/
+    /*  transform: scale(1.8);*/
 
-    }
+    /*}*/
+
+
+      @keyframes scaleAnimation {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.8);
+        }
+
+        100%{
+          transform: scale(1);
+
+        }
+      }
+
+      .like {
+        animation: scaleAnimation 0.6s ease; /* 1초 동안 애니메이션을 적용하고, 입출력 속도는 ease-in-out */
+      }
     </style>
 
     <script src="/js/shorts/list.js"></script>
