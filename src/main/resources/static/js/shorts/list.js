@@ -318,7 +318,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
       let userId = data.userId;
 
       commentList.forEach((cmt) => {
-        let formattedDate = moment(cmt.regDate).format('YY-MM-DD HH:mm');
+        // let formattedDate = moment(cmt.regDate).format('YY-MM-DD HH:mm');
 
         commentCount++; //댓글 갯수 카운트
         // icon icon-size:2 icon-color:accent-2 icon:trash
@@ -366,7 +366,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
                       divHTML+=`
                     </div>
                     <div class=" mt:3 comment-content-color  pl:2 fs:2">${cmt.content}</div>
-                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${formattedDate}</div>
+                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${cmt.regDate}</div>
                   </div>
                   `;
 
