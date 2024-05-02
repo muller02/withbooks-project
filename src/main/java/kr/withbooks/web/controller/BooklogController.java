@@ -130,15 +130,21 @@ public class BooklogController {
 
     @PostMapping("delete")
     public String delete(
-                        // @RequestParam(name="ids", required= true) List<Integer> ids ,
                         @RequestParam(name = "booklog-id") Long id
                         ){
-
-        // Long userId = null;
-        // if(ids!=null && ids.size() > 0)
-        //     service.deleteAllByIds(ids, userId);
-
         service.delete(id);
+        return "redirect:list";
+    }
+
+    @PostMapping("deleteAllByIds")
+    public String deleteAllByIds( 
+                            @RequestParam(name="ids", required= true) List<Integer> ids
+                            ){
+        
+       Long userId = 4L;
+        if(ids!=null && ids.size() > 0)
+            service.deleteAllByIds(ids);
+
         return "redirect:list";
     }
 
