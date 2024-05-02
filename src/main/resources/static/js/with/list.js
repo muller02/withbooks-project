@@ -1,15 +1,15 @@
 // 카테고리 검색  클릭 시 모달창 표시
-window.addEventListener('load', function (e) {
-  const searchBtn = document.querySelector('#search-btn');
-  const searchBox = document.querySelector('.search-box');
-  const resetIcon = document.querySelector('.reset-icon');
-  const categorySection = document.querySelector('#category');
-  const categoryList = categorySection.querySelector('.category-list');
+window.addEventListener("load", function (e) {
+  const searchBtn = document.querySelector("#search-btn");
+  const searchBox = document.querySelector(".search-box");
+  const resetIcon = document.querySelector(".reset-icon");
+  const categorySection = document.querySelector("#category");
+  const categoryList = categorySection.querySelector(".category-list");
   const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");
-  const faceYnDiv = searchBox.querySelector('.face-yn');
+  const faceYnDiv = searchBox.querySelector(".face-yn");
   const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
-  const querySearch = document.querySelector('.query-search');
-  const queryBtn = document.querySelector('.query-btn');
+  const querySearch = document.querySelector(".query-search");
+  const queryBtn = document.querySelector(".query-btn");
 
   console.log(faceYnRadio[0]);
 
@@ -18,7 +18,7 @@ window.addEventListener('load', function (e) {
   let query;
 
   faceYnDiv.onclick = async function (e) {
-    if (e.target.nodeName !== 'INPUT') return;
+    if (e.target.nodeName !== "INPUT") return;
     faceYn = e.target.value;
 
     //비동기 fetch 메소드 호출 및 GET 통신
@@ -32,16 +32,16 @@ window.addEventListener('load', function (e) {
   };
 
   searchBtn.onclick = function (e) {
-    searchBox.classList.toggle('d:none');
+    searchBox.classList.toggle("d:none");
 
-    if (searchBtn.classList.toggle('icon:plus')) {
-      searchBtn.classList.remove('icon:minus');
-      searchBtn.classList.add('icon:plus');
-      searchBtn.classList.add('.ani2');
+    if (searchBtn.classList.toggle("icon:plus")) {
+      searchBtn.classList.remove("icon:minus");
+      searchBtn.classList.add("icon:plus");
+      searchBtn.classList.add(".ani2");
     } else {
-      searchBtn.classList.remove('icon:plus');
-      searchBtn.classList.add('icon:minus');
-      searchBtn.classList.add('.ani2');
+      searchBtn.classList.remove("icon:plus");
+      searchBtn.classList.add("icon:minus");
+      searchBtn.classList.add(".ani2");
     }
   };
 
@@ -60,8 +60,8 @@ window.addEventListener('load', function (e) {
       i.checked = false;
     }
     faceYnRadio[0].checked = true;
-    // 위드 리스트를 받아옴
-    let list = await response.json();
+    // 위드 리스트를 받아옴o
+    let list = await response.jsn();
     updateHTML(list);
   };
 
@@ -81,9 +81,9 @@ window.addEventListener('load', function (e) {
   }
 
   // querySearch 엘리먼트에서 keypress 이벤트를 감지하여 엔터 키를 눌렀을 때 handleQuery 함수를 호출합니다.
-  querySearch.addEventListener('keypress', async function (event) {
+  querySearch.addEventListener("keypress", async function (event) {
     // event.key가 "Enter"일 때만 동작하도록 합니다.
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       await handleQuery();
     }
   });
@@ -92,12 +92,12 @@ window.addEventListener('load', function (e) {
   queryBtn.onclick = handleQuery;
 
   // 카테고리 검색
-  categoryList.addEventListener('click', async (e) => {
-    if (e.target.nodeName !== 'INPUT' && e.target.type !== 'checkbox') return;
+  categoryList.addEventListener("click", async (e) => {
+    if (e.target.nodeName !== "INPUT" && e.target.type !== "checkbox") return;
 
     // 이거는 체크 박스 클릭하면 넣고 아니면 뺴기
     let categoryId;
-    if (e.target.nodeName === 'INPUT' && e.target.type === 'checkbox') {
+    if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
       categoryId = e.target.value;
     }
 
@@ -121,47 +121,47 @@ window.addEventListener('load', function (e) {
 
 //
 function getByParams(categoryIdArr, query, faceYn) {
-  let categoryIds = '';
+  let categoryIds = "";
 
   if (categoryIdArr !== null) {
     for (let i = 0; i < categoryIdArr.length; i++) {
       categoryIds += categoryIdArr[i];
       // c?=2 &c=
       if (i < categoryIdArr.length - 1) {
-        categoryIds += '&c=';
+        categoryIds += "&c=";
       }
     }
   }
 
   let url;
 
-  console.log('f=', faceYn);
-  console.log('q=', query);
-  console.log('c=', categoryIds);
+  console.log("f=", faceYn);
+  console.log("q=", query);
+  console.log("c=", categoryIds);
 
   if (
     query &&
-    query !== '' &&
+    query !== "" &&
     categoryIdArr &&
     categoryIdArr.length !== 0 &&
     faceYn &&
-    faceYn !== ''
+    faceYn !== ""
   ) {
     url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
   } else if (
     categoryIdArr &&
     categoryIdArr.length !== 0 &&
     faceYn &&
-    faceYn !== ''
+    faceYn !== ""
   ) {
     console.log(232323);
     url = `/api/with?f=${faceYn}&c=${categoryIds}`;
-  } else if (query && query !== '') {
+  } else if (query && query !== "") {
     url = `/api/with?q=${query}`;
   } else if (categoryIdArr && categoryIdArr.length !== 0) {
     url = `/api/with?c=${categoryIds}`;
-  } else if (faceYn && faceYn !== '') {
-    console.log('여기왔어요2');
+  } else if (faceYn && faceYn !== "") {
+    console.log("여기왔어요2");
     url = `/api/with?f=${faceYn}`;
   } else {
     url = `/api/with`;
@@ -172,12 +172,12 @@ function getByParams(categoryIdArr, query, faceYn) {
 }
 
 function updateHTML(list) {
-  const withListUl = document.querySelector('.with-list-ul');
+  const withListUl = document.querySelector(".with-list-ul");
 
   withListUl.innerHTML = ``;
 
   for (let item of list) {
-    let categoryHtml = '';
+    let categoryHtml = "";
 
     for (let category of item.categoryNames) {
       categoryHtml += `<li class=" bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0">
@@ -196,7 +196,7 @@ function updateHTML(list) {
                 class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
               >
                 <span class="" 
-                  >${item.faceYn == 1 ? '대면' : '비대면'}</span
+                  >${item.faceYn == 1 ? "대면" : "비대면"}</span
                 >
               </li>
               ${categoryHtml}
@@ -262,6 +262,6 @@ function updateHTML(list) {
           </li>
        `;
 
-    withListUl.insertAdjacentHTML('beforeend', innerHtml);
+    withListUl.insertAdjacentHTML("beforeend", innerHtml);
   }
 }
