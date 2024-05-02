@@ -2,7 +2,7 @@
 // 체크박스 및 삭제모드 버튼 변수
 const bookCheckAll = this.document.querySelector(".book-check-all");
 const checkAllBox = bookCheckAll.querySelector("input");
-const bookCheckAllInput = bookCheckAll.querySelector("input");
+const checkBoxLabel = bookCheckAll.querySelector("span");
 
 //삭제모드에서 취소, 전체삭제 버튼
 const cancelBtn = bookCheckAll.querySelector(".cancel-btn");
@@ -23,9 +23,10 @@ const wrappingDivs = bookMarkList.querySelectorAll("section>div");
 deleteBtn.onclick = function(){
 
     // 취소, 전체 삭제 버튼 노출 및 삭제 버튼 숨김
-    cancelBtn.classList.remove("d:none");
-    deleteAllBtn.classList.remove("d:none");
-    deleteBtn.classList.add("d:none");
+    cancelBtn.classList.toggle("d:none");
+    deleteAllBtn.classList.toggle("d:none");
+    deleteBtn.classList.toggle("d:none");
+    checkBoxLabel.classList.toggle("d:none")
 
     // 전체 선택 시 체크박스 뜨게 하기
     let checkboxes = document.querySelectorAll("input");
@@ -79,7 +80,10 @@ checkAllBox.onchange = function(e){
                     checkbox.checked=false;});
     
     // 취소 버튼 숨김
-    cancelBtn.classList.add("d:none");
+    cancelBtn.classList.toggle("d:none");
+    deleteAllBtn.classList.toggle("d:none");
+    deleteBtn.classList.toggle("d:none");
+    checkBoxLabel.classList.toggle("d:none")
     
     wrappingDivs.forEach((div)=>{
         div.classList.remove("wrapping");
@@ -103,7 +107,10 @@ checkAllBox.onchange = function(e){
     // const formData = new FormData();
     // formData.append("ids", ids);
 
-    document.querySelector("#idsForm").submit();
+    
+    let deleteYes = confirm("북마크를 삭제하시겠습니다 ?");
+    if(deleteYes)
+        document.querySelector("#idsForm").submit();
 
     
   }
