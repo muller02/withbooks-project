@@ -3,12 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.FreeBoardRepository">
+
+	<resultMap id="FreeBoardViewResult" type="FreeBoardView">	
+		<id property="id" column="id" />
+		<result property="withId" column="with_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="blindYn" column="blind_yn"/>
+		<result property="userImg" column="user_img"/>
+		<result property="nickname" column="nickname"/>
+		<result property="commentCnt" column="comment_cnt"/>
+		<result property="likeCnt" column="like_cnt"/>
+
+		<collection property="imgs" column="id" ofType="String" select="selectFreeAttachmentForFreeBoardView"/>
+	</resultMap>
+
 	
-	<select id="findAll" resultType="FreeBoard" >
+
+	<select id="selectFreeAttachmentForFreeBoardView" resultType="String">
+		SELECT img FROM free_attachment WHERE board_id = #{id}
+	</select>
+
+
+	
+	<select id="findAllByWithId" resultMap="FreeBoardViewResult" >
 		select 
-				* 
-		  from 
-		  		free_board
+			* 
+		from 
+			free_board_view
+		where 
+			with_id = #{withId}
+
 	</select>
 
 

@@ -76,8 +76,11 @@ public class BooklogController {
                         .build();
 
             service.addLogs(logs);
-            
-            return logs;
+
+            // 새로 저장된 로그의 아이디로 다시 가져온다 ( id, regDate 를 가져오기 위해서 ) 
+            BooklogLogs newlog = service.getLog(logs.getId());
+
+            return newlog;
     }
 
     @PostMapping("deleteByLogId")

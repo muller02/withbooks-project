@@ -1,12 +1,13 @@
 package kr.withbooks.web.service;
 
-import kr.withbooks.web.entity.FreeBoard;
-import kr.withbooks.web.entity.FreeBoardView;
-
 import java.util.List;
+
+import kr.withbooks.web.entity.FreeBoardView;
 
 public interface FreeBoardService {
 
-    List<FreeBoardView> getViewById(Long withId);
+    // List<FreeBoardView> getViewById(Long withId);
+
+    List<FreeBoardView> getListByWithId(Long withId);
 
 }

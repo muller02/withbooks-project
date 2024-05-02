@@ -4,16 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.BooklogLogsRepository">
 	
+	<select id="findById" resultType="BooklogLogs" parameterType="Long">
+		select 
+				*
+		  from 
+		  		booklog_logs 
+		 where 
+		 		id = #{id};
+	</select>
+
 	<select id="findAll" resultType="BooklogLogs" parameterType="Long">
 		select 
 				*
 		  from 
 		  		booklog_logs 
 		 where 
-		 		booklog_id = #{booklogId};
+		 		booklog_id = #{id};
 	</select>
 
-	<insert id="save" parameterType="BooklogLogs">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id"  parameterType="BooklogLogs">
 		insert into
 			booklog_logs
 				(
