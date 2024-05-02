@@ -34,6 +34,10 @@ public class WithController {
   @Autowired
   private WithMemberService withMemberService;
 
+  @Autowired
+  private UserService userService;
+
+
   // 서비스 필요할 것 같습니다.
   @Autowired
   private DebateRoomViewRepository debateRoomViewRepository;
@@ -76,6 +80,11 @@ public class WithController {
     //withId에 해당하는 위드 얻기
     With with = service.get(withId);
 
+    Long withCapId = with.getWithRegId();
+
+     String nickname = userService.getNickNameById(withCapId);
+
+
     //withId에 해당하는 위드 카테고리 리스트를 얻기
     List<String> withCategoryNames = withCategoryService.getListByWithId(withId);
 
@@ -92,6 +101,9 @@ public class WithController {
     // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
     // List<FreeBoardView> freeBoardList = freeBoardService.getViewById(withId);
 
+    model.addAttribute("nickname",nickname);
+
+    System.out.println("토마토  = "  + nickname);
 
     model.addAttribute("withMemberList", withMemberList);
     // model.addAttribute("freeBoardList", freeBoardList);

@@ -777,6 +777,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function validateForm() {
+    // 추가
+    const withForm = document.querySelector(".with-form");
+
     let isValid = true;
     let firstInvalidField = null; // 첫 번째 유효하지 않은 필드를 저장할 변수
     const requiredFields = Array.from(form.querySelectorAll("[required]")); // required 속성이 지정된 모든 요소를 배열로 변환
@@ -819,7 +822,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } else {
       // 유효성 검사 통과 시 폼 제출
-      withReg.submit();
+      // withReg.submit();
+      withForm.submit();
+
     }
   }
 
