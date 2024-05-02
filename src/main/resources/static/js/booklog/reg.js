@@ -216,15 +216,11 @@ window.addEventListener("load", function () {
             // 로그 작성 폼
             let booklogRegForm = searchBox.querySelector("#booklog-reg-form");
             // 이미지 선택하는 label 세션부분
-            let imgLabel = booklogRegForm.querySelector(".img-label");
-            // 이미지 선택하는 input type:file
             let inputImg = booklogRegForm.querySelector(".booklog-img");
             // 선택된 이미지가 들어가는 부분
             let previewPanel = booklogRegForm.querySelector(".preview-panel");
             // 선택된 이미지 삭제하는 버튼
             let imgDeleteBtn = booklogRegForm.querySelector(".img-delete");
-            // 로그 등록 버튼
-            let submitBtn = booklogRegForm.querySelector(".reg-btn");
             // 로그 작성 섹션
             let logContentSection = booklogRegForm.querySelector(".log-content-section");
             // 로그 작성 섹션 중 사진 섹션

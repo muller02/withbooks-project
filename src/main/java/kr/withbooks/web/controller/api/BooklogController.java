@@ -2,7 +2,6 @@ package kr.withbooks.web.controller.api;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,9 +77,9 @@ public class BooklogController {
 
             service.addLogs(logs);
 
+            // 새로 저장된 로그의 아이디로 다시 가져온다 ( id, regDate 를 가져오기 위해서 ) 
             BooklogLogs newlog = service.getLog(logs.getId());
-            System.out.println("newlog.getRegDate() : "+newlog.getRegDate());
-            
+
             return newlog;
     }
 
