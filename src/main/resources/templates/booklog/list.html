@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
     <head>
         <meta charset="UTF-8" />
@@ -6,10 +6,10 @@
         <title>Booklog-list</title>
         <script src="/js/booklog/list.js"></script>
         <style>
-            .book-list div {
+            .book-list .book-info {
                 width: 130px;
 
-                a {
+                span {
                     display: block;
                     white-space: nowrap;
                     overflow: hidden;
@@ -41,33 +41,46 @@
 
                 <section class="book-list my:4">
                     <h1 class="d:none">북 리스트</h1>
-                    <ul class="d:flex flex-wrap:wrap justify-content:flex-start">
-                        <li class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
-                            <input type="hidden" th:value="${l.bookId}" />
-                            <div class="gap:4 d:flex fl-dir:column lg:ai:center">
-                                <div class="h:4 d:flex jc:center box-shadow-custom">
-                                    <a class="text-align:center h:100p" href="detail" th:href="@{./detail(id=${l.id})} ">
-                                        <img src="/image/shorts/detail/도둑맞은집중력.PNG" th:src="${l.bookCover}" class="h:100p w:100p obj-fit:contain margin-right:auto" alt="도둑맞은 집중력.img" />
+                    <form>
+                        <div class="d:flex flex-wrap:wrap justify-content:flex-start">
+                            <section class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
+                                <div>
+                                    <a th:href="@{./detail(id=${l.id})} ">
+                                        <input type="hidden" th:value="${l.bookId}" />
+                                        <div class="book-info gap:4 d:flex fl-dir:column lg:ai:center">
+                                            <div class="h:4 d:flex jc:center box-shadow-custom">
+                                                <span class="text-align:center h:100p" href="detail">
+                                                    <img
+                                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
+                                                        th:src="${l.bookCover}"
+                                                        class="h:100p w:100p obj-fit:contain margin-right:auto"
+                                                        alt="도둑맞은 집중력.img"
+                                                    />
+                                                </span>
+                                            </div>
+
+                                            <div class="w:100p fl-dir:column ai:center">
+                                                <h1>
+                                                    <span class="fs:2 fw:3" th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</span>
+                                                </h1>
+                                                <div class="fs:1 fw:1 mt:1">
+                                                    <span th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a>
                                 </div>
-
-                                <div class="w:100p fl-dir:column ai:center">
-                                    <h1>
-                                        <a class="fs:2 fw:3" th:href="@{./detail(id=${l.id})} " th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</a>
-                                    </h1>
-                                    <div class="fs:1 fw:1 mt:1">
-                                        <a th:href="@{./detail(id=${l.id})} " th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </section>
+                        </div>
+                    </form>
                 </section>
 
                 <div id="new-log-reg" class="pos:fixed right:2 bottom:9 zi:5">
                     <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
                     <div class="bg-color:main-5 border-radius:full p:3">
-                        <a href="/booklog/reg" th:title="${'새 북로그 작성하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
+                        <a href="/booklog/reg" th:title="${'새 북로그 작성하기'}">
+                            <span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span>
+                        </a>
                     </div>
                 </div>
             </div>

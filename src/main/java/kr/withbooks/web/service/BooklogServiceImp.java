@@ -68,5 +68,10 @@ public class BooklogServiceImp implements BooklogService{
     public int deleteLog(Long logId) {
         return logsRepository.delete(logId);
     }
+
+    @Override
+    public BooklogLogs getLog(Long id) {
+        return logsRepository.findById(id);
+    }
     
 }
