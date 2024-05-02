@@ -17,6 +17,25 @@ window.addEventListener("load", function () {
         publicInput.checked = true;
     }
 
+    // 메뉴 버튼 =========================================================
+    const bookInfoMenuSection = bookInfo.querySelector("#dropdown-menu");
+    const bookInfoMenuBtn = bookInfo.querySelector("button");
+    const bookinfoMenuUl = bookInfo.querySelector("ul");
+    const bookInfoMenuLi = bookinfoMenuUl.querySelector("li");
+
+    bookInfoMenuBtn.addEventListener("click", function () {
+        bookinfoMenuUl.classList.toggle("active");
+    });
+
+    bookInfoMenuLi.onclick = function(e){
+        e.preventDefault();
+        let deleteYes = confirm("북로그를 삭제하시겠습니다 ?");
+        if(deleteYes){
+            document.deletebooklog.submit();
+        }
+    }
+    // ===================================================================
+
     // PUBLIC 버튼 클릭시 값과 텍스트 바꾸기
     publicInput.onclick = async function () {
         if (publicInput.checked) {
@@ -56,6 +75,7 @@ window.addEventListener("load", function () {
 
         // 일
         let date = today.getDate();
+        if (date.toString.length == 1) date = "0" + date;
 
         // 로그 작성창 만들기
         let sectionHTML = ` 
@@ -222,7 +242,7 @@ window.addEventListener("load", function () {
                     <div class="bd-top py:3">
                         <div class="d:flex mb:4 pos:relative">
                             <div class="d:none logs-id">${result.id}</div>
-                            <div class="fl-grow:1 fw:3">2024.01.01</div>
+                            <div class="fl-grow:1 fw:3" >${result.regDate}</div>
                             <div class="n-dropdown position:absolute right:1">
                                 <button class="cursor:pointer rg-comment-hover dropdown-btn">
                                     <span class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴버튼</span>

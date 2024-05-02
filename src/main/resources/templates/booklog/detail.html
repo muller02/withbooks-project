@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
     <head>
         <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
         <script src="/js/booklog/detail.js"></script>
         <!-- <script src="/js/booklog/detail-vue.js"></script> -->
         <style>
-            .rg-comment-hover:hover {
+            .menu-hover:hover {
                 background-color: var(--color-base-2);
                 border-radius: 100px;
             }
@@ -36,7 +36,9 @@
                     </a>
 
                     <div class="d:flex px:2 pos:relative">
-                        <input class="booklog-id d:none" name="booklog-id" th:value="${booklog.id}" />
+                        <form action="delete" name="deletebooklog" method="post">
+                            <input class="booklog-id d:none" name="booklog-id" th:value="${booklog.id}" />
+                        </form>
                         <img class="h:4 border-color:base-2 mr:4 box-shadow-custom" src="/image/shorts/detail/푸바오.png" th:src="${booklog.bookCover}" alt="책 이미지" />
                         <div class="d:flex fl-dir:column fl-grow:1 position:relative">
                             <label class="n-btn n-toggle n-toggle-type:outline-box n-toggle-size:2 margin-bottom:3 font-size:1">
@@ -44,11 +46,23 @@
                                 <span class="public" th:text="${{booklog.publicYn}} == 1 ? '공개' : '비공개'" th:data-public="${booklog.publicYn}">공개</span>
                                 <input name="public-yn" type="checkbox" class="public-yn d:none" th:value="${booklog.publicYn}" />
                             </label>
-                            <!-- <div class="d:flex align-content:center position:absolute right:0">
-                                <a href="#" class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴</a>
-                            </div> -->
-                            <div class="n-dropdown position:absolute right:1">
-                                <button class="cursor:pointer rg-comment-hover dropdown-btn">
+                            <div class="fs:3 fw:3 pb:4" th:text="${booklog.bookTitle}">푸바오, 언제나 사랑해</div>
+                            <div class="d:flex fs:1 pb:2">
+                                <div class="mr:1 fs:1 color:base-4 min-w:fit-content">저자</div>
+                                <div class="min-w:fit-content" th:text="${booklog.bookAuthor}">에버랜드 동물원</div>
+                            </div>
+                            <div class="d:flex fs:1">
+                                <div class="mr:1 fs:1 color:base-4">출판사</div>
+                                <div th:text="${booklog.bookPublisher}">민음사</div>
+                            </div>
+
+                            <div id="dropdown-menu" class="n-dropdown position:absolute right:1">
+                                <button type="button" class="cursor:pointer menu-hover"><span class="icon icon:dots_three_outline_vertical_fill icon-size:2">버튼</span></button>
+                                <ul class="dropdown-transformx">
+                                    <li class="booklog-delete n-dropdown-item d:flex p:1"><span class="icon icon:trash mr:2">아이콘</span>삭제</li>
+                                </ul>
+                            </div>
+                            <!-- <button class="cursor:pointer rg-comment-hover dropdown-btn">
                                     <span class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴버튼</span>
                                 </button>
                                 <ul class="n-dropdown-list right:0">
@@ -57,17 +71,7 @@
                                             <span class="deco icon:trash deco-color:accent-2 color:accent-2"> 삭제하기 </span>
                                         </button>
                                     </li>
-                                </ul>
-                            </div>
-                            <div class="fs:3 fw:3 pb:4" th:text="${booklog.bookTitle}">푸바오, 언제나 사랑해</div>
-                            <div class="d:flex fs:1 pb:2">
-                                <div class="mr:1 fs:1 color:base-4">저자</div>
-                                <div th:text="${booklog.bookAuthor}">에버랜드 동물원</div>
-                            </div>
-                            <div class="d:flex fs:1">
-                                <div class="mr:1 fs:1 color:base-4">출판사</div>
-                                <div th:text="${booklog.bookPublisher}">민음사</div>
-                            </div>
+                                </ul> -->
                         </div>
                     </div>
                 </section>
@@ -83,7 +87,7 @@
                             <input type="hidden" name="logs-id" th:value="${log.id}" />
                             <div class="fl-grow:1 fw:3" th:text="${#temporals.format(log.regDate, 'yyyy-MM-dd')}">2024.01.01</div>
                             <div class="n-dropdown position:absolute right:1">
-                                <button class="cursor:pointer rg-comment-hover dropdown-btn">
+                                <button class="cursor:pointer menu-hover dropdown-btn">
                                     <span class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴버튼</span>
                                 </button>
                                 <ul class="n-dropdown-list right:0">

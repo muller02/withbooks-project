@@ -19,6 +19,7 @@ public interface BooklogService {
     int changePublic(Long booklogId, Long publicYn);
 
     // BooklogLogs
+    BooklogLogs getLog(Long id);
     List<BooklogLogs> getLogs(Long id);
     
     int addLogs(BooklogLogs logs);

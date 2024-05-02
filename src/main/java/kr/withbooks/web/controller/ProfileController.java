@@ -3,12 +3,14 @@ package kr.withbooks.web.controller;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.User;
 import kr.withbooks.web.service.UserService;
 
@@ -21,11 +23,10 @@ public class ProfileController {
 
     @GetMapping("edit")
     public String editForm(
-        // @AuthenticationPrincipal WebUserDetails userDetails,
+        @AuthenticationPrincipal CustomUserDetails userDetails,
         Model model){
 
-        Long userId = 6L;
-        // userId = userDetails.getId();
+        Long userId = userDetails.getId();
         User user =  userService.getById(userId);
         
         model.addAttribute("user", user);
@@ -40,12 +41,11 @@ public class ProfileController {
         LocalDateTime birthDate,
         int gender,
         String email,
-        // @AuthenticationPrincipal WebUserDetails userDetails,
+        @AuthenticationPrincipal CustomUserDetails userDetails,
         Model model
     ){
 
-        Long id = 6L;
-        // userId = userDetails.getId();
+        Long id = userDetails.getId();
 
         User user = User
                     .builder()

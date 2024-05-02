@@ -17,6 +17,13 @@ public interface BookService {
 
     Map<String, Object> getMapById(Long bookId, Long userId);
 
+    List<BookView> getListByParams(Map<String, String> params);
+
+    int getCountByParams(Map<String, String> params);
+
+
+    
+
 
     
 }

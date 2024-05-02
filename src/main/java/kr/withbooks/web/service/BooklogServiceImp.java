@@ -22,18 +22,12 @@ public class BooklogServiceImp implements BooklogService{
 
     @Override
     public List<BooklogView> getList(Long id) {
-        
-        List<BooklogView> list = repository.findAll(id);
-
-        return list;
+        return repository.findAll(id);
     }
 
     @Override
     public BooklogView getById(Long id) {
-
-        BooklogView log = repository.findById(id);
-
-        return log;
+        return repository.findById(id);
     }
 
     @Override
@@ -43,6 +37,7 @@ public class BooklogServiceImp implements BooklogService{
 
     @Override
     public void delete(Long booklogId) {
+        repository.deleteBooklog(booklogId);
     }
 
     @Override
@@ -72,6 +67,11 @@ public class BooklogServiceImp implements BooklogService{
     @Override
     public int deleteLog(Long logId) {
         return logsRepository.delete(logId);
+    }
+
+    @Override
+    public BooklogLogs getLog(Long id) {
+        return logsRepository.findById(id);
     }
     
 }

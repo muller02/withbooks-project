@@ -50,22 +50,6 @@ public class BookshortsController {
                        @AuthenticationPrincipal CustomUserDetails userDetails) {
 
 
-
-//        Cookie[] cookies = request.getCookies();
-//
-//        for(Cookie cookie : cookies){
-//
-//
-//            if(cookie.getName().equals("lck")){
-//
-//                System.out.println("ciookie = " + cookie.getValue());
-//                cookie.setMaxAge(0);
-//                response.addCookie(cookie);
-//            }
-//
-//        }
-
-
         Long userId = null;
         if(userDetails != null)
             userId = userDetails.getId();
@@ -96,8 +80,11 @@ public class BookshortsController {
     }
 
     @GetMapping("reg")
-    public String regForm(@RequestParam(name = "content", required = false) String content
+    public String regForm(@RequestParam(name = "content", required = false) String content , @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
+
+            if(userDetails ==null)
+                return  "redirect:/shorts/list";
 
         return "shorts/reg";
     }

@@ -37,21 +37,21 @@ window.addEventListener("load", function () {
             let bookCount = list.length;
 
             // 검색된 책이 있을 경우 검색결과 개수 띄우기
-            if (bookCount > 0) {
+            // if (bookCount > 0) {
                 searchResultHtml = `<div class="mb:3 ml:2 fw:3 mt:3">검색결과 <span class="fw:3 mt:2">${bookCount} 개</span></div>`;
                 resultList.insertAdjacentHTML("beforeend", searchResultHtml);
-            }
+            // }
 
             // 검색된 책이 없을 경우 검색결과 없음 멘트 띄우기
-            else {
-                let emptyList = `
-                                <div class="h:100p d:flex fl-dir:column jc:center ai:center">
-                                    <div class="icon icon:file icon-color:base-5">아이콘</div>
-                                    <div class="color:base-5">'${queryInput.value}'에 대한 검색 결과가 없습니다.</div>
-                                </div>  
-                `;
-                resultList.insertAdjacentHTML("beforeend", emptyList);
-            }
+            // else {
+            //     let emptyList = `
+            //                     <div class="h:100p d:flex fl-dir:column jc:center ai:center">
+            //                         <div class="icon icon:file icon-color:base-5">아이콘</div>
+            //                         <div class="color:base-5">'${queryInput.value}'에 대한 검색 결과가 없습니다.</div>
+            //                     </div>  
+            //     `;
+            //     resultList.insertAdjacentHTML("beforeend", emptyList);
+            // }
 
             // 검색된 책 리스트 보여주기
             for (book of list) {
@@ -90,6 +90,7 @@ window.addEventListener("load", function () {
         // 찾은 h1 요소의 textContent 읽는다
         // textContent를 queryInput에 넣는다
         if (e.target.closest(".book")) {
+
             const book = e.target.closest(".book");
             const bookId = book.querySelector(".book-id").textContent;
             const bookTitle = book.querySelector(".book-title").textContent;
@@ -97,18 +98,27 @@ window.addEventListener("load", function () {
             const bookPublisher = book.querySelector(".book-publisher").textContent;
             const bookCover = book.querySelector(".book-cover").src;
 
-            let whatId = bookIdList.filter((id) => id == bookId);
-            if (whatId.length != 0) {
+            // 로컬스토리지에 저장된 책 아이디 값들 중에 선택한 책 아이디와 같은 값을 뽑아낸다.
+            let booklogValid = bookIdList.filter((id) => id == bookId);
+            // 만약 같은 아이디의 값이 있으면 유효성 멘트를 날리고 새로 작성하지 못하게 한다.
+            if (booklogValid.length != 0 ) {
+                // 이미 유효성 멘트가 있는 경우엔 리턴
+                if(book.querySelector(".del")) return;
+                // 백그라운드 컬러를 바꾸고
                 book.classList.add("bg-color:base-2");
+                // 유효성 멘트를 삽입한다.
                 book.insertAdjacentHTML("beforeend", "<div class='del color:accent-1 flex-grow:1 text-align:end'>이미 등록된 책입니다.</div>");
+                // 700밀리세컨드 뒤에 자동으로 지운다.
                 setTimeout(function () {
                     book.classList.remove("bg-color:base-2");
                     let del = book.querySelector(".del");
                     del.remove();
                 }, 700);
+                // 그리고 리턴
                 return;
             }
 
+            // 검색된 책 결과 리스트를 지운다.
             resultList.innerHTML = "";
 
             // 북로그 작성시 오늘날짜 받아오기
@@ -124,6 +134,7 @@ window.addEventListener("load", function () {
 
             // 일
             let date = today.getDate();
+            if(date.toString.length == 1) date = "0" + date;
 
             // 북로그 작성창 ( 책정보 + 이미지/글 작성란 )
             let sectionHTML = ` 
@@ -275,7 +286,8 @@ window.addEventListener("load", function () {
 
             // 취소 버튼 클릭시 북로그 리스트 페이지로 이동
             regCantleBtn.onclick = function () {
-                window.location = "list";
+                // window.location = "list";
+                history.back();
             };
         }
     };
