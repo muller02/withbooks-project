@@ -47,9 +47,9 @@
                                 <div>
                                     <a th:href="@{./detail(id=${l.id})} ">
                                         <input type="hidden" th:value="${l.bookId}" />
-                                        <div class="book-info gap:4 d:flex fl-dir:column lg:ai:center">
-                                            <div class="h:4 d:flex jc:center box-shadow-custom">
-                                                <span class="text-align:center h:100p" href="detail">
+                                        <div class="book-info gap:4 d:flex fl-dir:column">
+                                            <div class="h:4 w:100p box-shadow-custom">
+                                                <span class="h:100p">
                                                     <img
                                                         src="/image/shorts/detail/도둑맞은집중력.PNG"
                                                         th:src="${l.bookCover}"
@@ -58,14 +58,9 @@
                                                     />
                                                 </span>
                                             </div>
-
-                                            <div class="w:100p fl-dir:column ai:center">
-                                                <h1>
-                                                    <span class="fs:2 fw:3" th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</span>
-                                                </h1>
-                                                <div class="fs:1 fw:1 mt:1">
-                                                    <span th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</span>
-                                                </div>
+                                            <div class="w:100p">
+                                                <span class="fs:2 fw:3" th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</span>
+                                                <span class="fs:1 fw:1 mt:1" th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</span>
                                             </div>
                                         </div>
                                     </a>
