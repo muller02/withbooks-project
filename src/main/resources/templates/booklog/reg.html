@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
     <head>
         <meta charset="UTF-8" />
@@ -13,9 +13,17 @@
     </head>
     <body>
         <main layout:fragment="main">
-            <section id="search-box" class="h:100p">
+            <section id="search-box" class="d:flex fl-dir:column">
                 <h1 class="d:none">책 검색창</h1>
-                <div class="h:100p">
+                <div>
+                    <div>
+                        <a href="list" class="m:2">
+                            <span class="n-btn n-btn:void pl:0 pr:2">
+                                <span class="icon icon:arrow_left icon-size:3 mx:1">아이콘</span>
+                                목록으로
+                            </span>
+                        </a>
+                    </div>
                     <form class="m:2">
                         <label class="d:flex al-items:center n-textbox px:2">
                             <input type="text" class="query-input pos:relative flex-grow:1" name="title" placeholder="책 제목을 검색하세요!" />
@@ -26,65 +34,66 @@
                             <button class="search-btn icon icon:magnifying_glass icon-color:main-4">돋보기</button>
                         </label>
                     </form>
-                    <section class="h:100p">
+                    <section>
                         <h1 class="d:none">검색 결과 목록</h1>
-                        <div class="h:100p result-list"></div>
+                        <div class="result-list"></div>
                     </section>
                 </div>
             </section>
 
-            <section class="booklog-style d:flex fl-dir:column px:2 py:3">
-                <h1 class="d:none">로그</h1>
-                <div>
-                    <!-- <form action="reg" method="post" enctype="multipart/form-data" novalidate>
-                        <section id="book-info" class="booklog-style">
-                            <h1 class="d:none">책 정보</h1>
-                            <div class="d:flex px:2 pos:relative">
-                                <img class="book-cover h:4 border-color:base-2 mr:2 box-shadow-custom" src=${bookCover} />
-                                <div class="d:flex fl-dir:column fl-grow:1 px:2 position:relative">
-                                    <label class="n-btn n-toggle n-toggle-type:outline-box n-toggle-size:2 margin-bottom:3 font-size:1">
-                                        <span class="icon icon:lock_simple icon-size:2 margin-right:1">아이콘</span>
-                                        <span class="public">공개</span>
-                                        <input type="checkbox" class="public-input d:none" name="public-yn" value="1" checked />
-                                    </label>
-                                    <div class="book-title fs:3 fw:3 pb:4">${bookTitle}</div>
-                                    <div class="d:flex fs:1 pb:2">
-                                        <div class="mr:1 fs:1 color:base-4">저자</div>
-                                        <div class="book-author">${bookAuthor}</div>
-                                    </div>
-                                    <div class="d:flex fs:1">
-                                        <div class="book-publisher mr:1 fs:1 color:base-4">출판사</div>
-                                        <div>${bookPublisher}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>                                 -->
-                        <!-- <section id="booklog-reg-form" class="booklog-style d:flex fl-dir:column px:2 py:3">
-                            <h1 class="d:none">로그</h1>
-                            <div class="bd-top pt:3">
-                                <input class="d:none" type="number" name="book-id" value="${bookId}" />
-                                <div class="d:flex mb:4 pos:relative">
-                                    <div class="booklog-date fl-grow:1 fw:3">2024.01.01</div>
-                                    <label class="img-label n-btn bg-color:base-2 color:base-10 mr:1">
-                                        <span class="icon icon:camera icon-color:base-9">이미지</span>
-                                        <input class="booklog-img d:none img-input" name="file" type="file" multiple accept=".jpg,.png,.jpeg" />
-                                    </label>
-                                    <button class="reg-btn n-btn bg-color:main-1 color:main-3" type="submit">등록</button>
-                                </div>
-                                <div class="d:flex fl-dir:column md:fl-dir:row lg:fl-dir:row">
-                                    <section class="mb:2">
-                                        <h1 class="d:none">이미지 입력</h1>
-                                        <div class="img-group d:flex ai:center bd-radius:5 mr:3">
-                                            <div class="preview-panel"></div>
-                                        </div>
-                                    </section>
-                                    <textarea class="booklog-content n-textbox" type="text" name="text-area" placeholder="새로운 북로그를 작성해주세요"></textarea>
-                                </div>
-                            </div>
-                        </section> 
-                    </form>-->
-                </div>
-            </section>
+            <!-- <section class="booklog-style d:flex fl-dir:column px:2 py:3">
+                    <h1 class="d:none">로그</h1>
+                    <div>
+                    </div>
+                </section> -->
         </main>
     </body>
 </html>
+
+<!-- <form action="reg" method="post" enctype="multipart/form-data" novalidate>
+                    <section id="book-info" class="booklog-style">
+                        <h1 class="d:none">책 정보</h1>
+                        <div class="d:flex px:2 pos:relative">
+                            <img class="book-cover h:4 border-color:base-2 mr:2 box-shadow-custom" src=${bookCover} />
+                            <div class="d:flex fl-dir:column fl-grow:1 px:2 position:relative">
+                                <label class="n-btn n-toggle n-toggle-type:outline-box n-toggle-size:2 margin-bottom:3 font-size:1">
+                                    <span class="icon icon:lock_simple icon-size:2 margin-right:1">아이콘</span>
+                                    <span class="public">공개</span>
+                                    <input type="checkbox" class="public-input d:none" name="public-yn" value="1" checked />
+                                </label>
+                                <div class="book-title fs:3 fw:3 pb:4">${bookTitle}</div>
+                                <div class="d:flex fs:1 pb:2">
+                                    <div class="mr:1 fs:1 color:base-4">저자</div>
+                                    <div class="book-author">${bookAuthor}</div>
+                                </div>
+                                <div class="d:flex fs:1">
+                                    <div class="book-publisher mr:1 fs:1 color:base-4">출판사</div>
+                                    <div>${bookPublisher}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>                                 -->
+<!-- <section id="booklog-reg-form" class="booklog-style d:flex fl-dir:column px:2 py:3">
+                        <h1 class="d:none">로그</h1>
+                        <div class="bd-top pt:3">
+                            <input class="d:none" type="number" name="book-id" value="${bookId}" />
+                            <div class="d:flex mb:4 pos:relative">
+                                <div class="booklog-date fl-grow:1 fw:3">2024.01.01</div>
+                                <label class="img-label n-btn bg-color:base-2 color:base-10 mr:1">
+                                    <span class="icon icon:camera icon-color:base-9">이미지</span>
+                                    <input class="booklog-img d:none img-input" name="file" type="file" multiple accept=".jpg,.png,.jpeg" />
+                                </label>
+                                <button class="reg-btn n-btn bg-color:main-1 color:main-3" type="submit">등록</button>
+                            </div>
+                            <div class="d:flex fl-dir:column md:fl-dir:row lg:fl-dir:row">
+                                <section class="mb:2">
+                                    <h1 class="d:none">이미지 입력</h1>
+                                    <div class="img-group d:flex ai:center bd-radius:5 mr:3">
+                                        <div class="preview-panel"></div>
+                                    </div>
+                                </section>
+                                <textarea class="booklog-content n-textbox" type="text" name="text-area" placeholder="새로운 북로그를 작성해주세요"></textarea>
+                            </div>
+                        </div>
+                    </section> 
+                </form>-->

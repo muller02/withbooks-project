@@ -59,7 +59,7 @@
 		 		id = #{booklogId};
 	</update>
 
-	<delete id="deleteAllByIds" parameterType="Long">
+	<!-- <delete id="deleteAllByIds" parameterType="Long">
 		delete
 		 
 		from
@@ -72,6 +72,15 @@
 		<if test="userId != null">
 			and user_id = #{userId}
 		</if>
+
+	</delete> -->
+
+	<delete id="deleteBooklog" parameterType="Long">
+		delete
+		from
+			booklog
+		where
+			id = #{id}
 
 	</delete>
 
