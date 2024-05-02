@@ -2,6 +2,7 @@ package kr.withbooks.web.controller.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,8 +77,11 @@ public class BooklogController {
                         .build();
 
             service.addLogs(logs);
+
+            BooklogLogs newlog = service.getLog(logs.getId());
+            System.out.println("newlog.getRegDate() : "+newlog.getRegDate());
             
-            return logs;
+            return newlog;
     }
 
     @PostMapping("deleteByLogId")
