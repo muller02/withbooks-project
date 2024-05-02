@@ -25,10 +25,22 @@ public class BookServiceImp implements BookService {
         return viewRepository.findAll(null, null);
     }
 
+
+    //=====================================================================
+    // book/list
     @Override
-    public List<BookView> getList(String query, Long categoryId) {
-        return viewRepository.findAll(query, categoryId);
+    public List<BookView> getListByParams(int size, int page, String query, Long categoryId) {
+        int offset = (page-1)*size;
+       return viewRepository.findByParams(offset, size, query, categoryId);
     }
+
+    @Override
+    public int getCountByParams(int size, Integer page, String query, Long categoryId) {
+       int offset = (page-1)*size;
+       return viewRepository.findCntByParams(offset, size, query, categoryId);
+    }
+    //=====================================================================
+
 
 
     @Override
@@ -50,6 +62,12 @@ public class BookServiceImp implements BookService {
         return repository.findMapById(bookId, userId);
     }
 
+
+
+
+
+    //=====================================================================
+    // admin/book/list
     @Override
     public List<BookView> getListByParams(Map<String, String> params) {
         int size = 20;
@@ -58,6 +76,7 @@ public class BookServiceImp implements BookService {
 
         return viewRepository.findAllByParams(params, size, offset);
     }
+    
     @Override
     public int getCountByParams(Map<String, String> params) {
         int size = 20;
@@ -65,4 +84,5 @@ public class BookServiceImp implements BookService {
         int offset = (page-1)*size;
         return viewRepository.findCountByParams(params, size, offset);
     }
+     //=====================================================================
 }
