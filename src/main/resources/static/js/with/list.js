@@ -61,7 +61,7 @@ window.addEventListener("load", function (e) {
     }
     faceYnRadio[0].checked = true;
     // 위드 리스트를 받아옴o
-    let list = await response.jsn();
+    let list = await response.json();
     updateHTML(list);
   };
 

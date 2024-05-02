@@ -332,3 +332,31 @@
     border-radius: var(--textbox-border-radius);
     box-shadow: 0px 1px 1.5px 0px rgba(0, 0, 0, 0.05);
 }
+
+
+
+
+.bookmark .n-tabbar .n-tab.active,
+.bookmark .n-tabbar-type\:underline > li.active > a,
+.bookmark .n-tabbar-type\:underline > li.active > button,
+.bookmark .n-tabbar > li.active > a,
+.bookmark .n-tabbar > li.active > button,
+.bookmark .n-tabbar\:underline > li.active > a,
+.bookmark .n-tabbar\:underline > li.active > button {
+    --tabbar-border-width: 0 0 2px 0;
+    --tabbar-border-style: solid;
+    --tabbar-border-color: var(--color-main-1);
+    --tabbar-border-color-active: var(--color-main-5);
+
+    --tab-color-active: var(--color-main-5);
+}
+.bookmark .n-tabbar .n-tab.active,
+.bookmark .n-tabbar-type\:underline > li.active > a,
+.bookmark.n-tabbar-type\:underline > li.active > button,
+.bookmark .n-tabbar > li.active > a,
+.bookmark .n-tabbar > li.active > button,
+.bookmark.n-tabbar\:underline > li.active > a,
+.bookmark .n-tabbar\:underline > li.active > button {
+    border-color: var(--color-main-5);
+    color: var(--color-main-5);
+}
