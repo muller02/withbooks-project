@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
    >
     <!-- <head>
         <style>
@@ -99,33 +99,49 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
               
                 <span class="d:flex fl-dir:column w:100p">
                     <span class="mt:2 h:1 w:100p bg-color:base-3"></span>
-                    <li class="mt:5 px:2 py:1">
+                    <li class="mt:5 px:2 py:1"
+                        th:classappend="${#strings.contains(requestURI, '/book/list')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    >
                         <a
                             class="deco icon:book-searchd fs:3 fw:3 color:base-8 deco-mr:3"
                             href="/book/list"
-                            >책검색</a
+                            th:classappend="${#strings.contains(requestURI, '/book/list')} ? 'color:main-5 icon-color:main-5' : ''"
+
+                        >책검색</a
                         >
                     </li>
-                    <li class="mt:5 px:2 py:1">
+                    <li class="mt:5 px:2 py:1"
+                        th:classappend="${#strings.contains(requestURI, '/with/list')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    >
                         <a
                             class="deco icon:withd fs:3 fw:3 color:base-8 deco-mr:3"
                             href="/with/list"
-                            >위드</a
+                            th:classappend="${#strings.contains(requestURI, '/with/list')} ? 'color:main-5 icon-color:main-5' : ''"
+
+                        >위드</a
                         >
                     </li>
                     <li
-                        class="mt:5 px:2 py:1 w:100p border-radius:6 bg-color:main-2"
+                        class="mt:5 px:2 py:1 w:100p "
+                        th:classappend="${#strings.contains(requestURI, '/shorts/list')} ? 'border-radius:6 bg-color:main-2' : ''"
+
                     >
                         <a
-                            class="deco icon:book-shortd deco-mr:3 fs:3 fw:3 color:main-5 icon-color:main-5"
+                            class="deco icon:book-shortd deco-mr:3 fs:3 fw:3 "
                             href="/shorts/list"
-                            >북쇼츠</a
+                            th:classappend="${#strings.contains(requestURI, '/shorts/list')} ? 'color:main-5 icon-color:main-5' : ''"
+
+                        >북쇼츠</a
                         >
                     </li>
-                    <li class="mt:5 px:2 py:1">
+                    <li class="mt:5 px:2 py:1"
+                        th:classappend="${#strings.contains(requestURI, '/booklog/list')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    >
                         <a
                             class="deco icon:book-logd fs:3 fw:3 color:base-8 deco-mr:3"
                             href="/booklog/list"
+                            th:classappend="${#strings.contains(requestURI, '/booklog/list')} ? 'color:main-5 icon-color:main-5' : ''"
+
                             >북로그</a
                         >
                     </li>
