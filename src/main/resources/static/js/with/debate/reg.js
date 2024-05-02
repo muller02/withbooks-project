@@ -11,7 +11,8 @@ window.addEventListener("load", function(){
     // 검색 결과 list를 뿌려줄 컨텐츠 ul ( li로 리스트가 뿌려짐 )
     const contentUl = this.document.querySelector(".content-ul");
 
-    
+    //
+    const topicListAlert = document.querySelector(".topic-list-alert");
  
 
     // ===================================== 쿼리로 검색하는 경우 =======================================
@@ -70,6 +71,7 @@ window.addEventListener("load", function(){
             <li
                 class="jc:center ai:center p:3 searched-book w:100p"
             >
+            <input type="hidden" name="bookId" value="${n.id}">
             <a 
                 
             >
@@ -123,7 +125,10 @@ window.addEventListener("load", function(){
 
     // ================================= 책 검색 결과를 클릭했을때의 이벤트  =======================================
     // ======================================================================================================
+
+
     contentUl.onclick = (e)=>{
+
         if(e.target == contentUl)
             return;
         
@@ -143,12 +148,28 @@ window.addEventListener("load", function(){
     // =================================  토론 주제 추가, 삭제를 클릭했을때 이벤트  =======================================
     // ======================================================================================================
     // 추가 버튼
-    document.querySelector('.add-btn').addEventListener("click", function(){
+    let count =0;
+    let maxCount = 2;
+    const addBtn = document.querySelector('.add-btn')
+
+
+       addBtn.addEventListener("click", function(){
+
+
+
+           console.log(count)
+           if(count > maxCount){
+
+               topicListAlert.classList.remove("d:none");
+               return;
+           }
+           count++;
+
         let spanHTML = `
                 <span class="topic-input d:flex ai:center al-self:stretch">
                   <div class="d:flex mt:4 flex-grow:1">
                     <input type="text" name="topic" class="n-textbox w:100p mr:3" placeholder="토론 주제를 입력하세요." />
-                    <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>
+                    <button type="button" class=""><span class="del-btn icon icon:minus">삭제</span></button>
                   </div>
                 </span> `
         document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
@@ -156,12 +177,74 @@ window.addEventListener("load", function(){
 
     // 삭제 버튼
     document.querySelector('.topic-list').addEventListener('click', function(e){
+;
+
+
         if(e.target.classList.contains('add-btn'))
             return
         // 클릭된 요소가 삭제 버튼인지 확인
         if(e.target.classList.contains('del-btn')) {
+
             // 클릭된 요소의 부모 요소를 찾아서 삭제
             e.target.parentElement.parentElement.remove();
+
+            count--;
+            console.log(count)
+            topicListAlert.classList.add("d:none")
         }
     });
+});
+
+// 토론일자 , 예약일
+window.addEventListener("DOMContentLoaded", function() {
+    let reserveDate = document.getElementById("reserve-date");
+    let debatePeriod = document.getElementById("debate-period");
+    let deadline = document.getElementById("deadline");
+    let  deadlineBox = document.querySelector(".deadline-box");
+    let deadlineValue;
+    let statDateValue;
+    let debateEndDate
+
+
+    // 현재 날짜를 Moment 객체로 가져오기
+    let today = moment();
+
+    // 현재 날짜를 YYYY-MM-DD 형식의 문자열로 변환하기
+    let maxDate = today.format('YYYY-MM-DD');
+
+    // 시작일의 최소값을 오늘로 설정합니다.
+    reserveDate.min = maxDate;
+
+    // 입력된 값이 변경될 때마다 이벤트를 설정합니다.
+    reserveDate.addEventListener("change", function(e) {
+        let selectedDate = new Date(reserveDate.value);
+
+        // 선택한 날짜가 오늘 이전인 경우 값을 초기화합니다.
+        if (selectedDate < today) {
+            startInput.value = "";
+            console.log("오늘 이전의 날짜는 선택할 수 없습니다.");
+        }
+        statDateValue =  reserveDate.value
+        deadlineBox.classList.remove("d:none");
+        debateEndDate  = moment(reserveDate.value).add(deadlineValue, 'days').format('YYYY-MM-DD');
+        debatePeriod.innerHTML=` (${statDateValue} ~ ${debateEndDate})`
+
+    });
+
+    deadline.oninput = function (e){
+
+        deadlineValue = deadline.value;
+        console.log(deadlineValue)
+       debateEndDate  = moment(reserveDate.value).add(deadlineValue, 'days').format('YYYY-MM-DD');
+
+        debatePeriod.innerHTML=` (${statDateValue} ~ ${debateEndDate})`
+
+    }
+
+
+
+
+
+
+
 });

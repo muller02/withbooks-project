@@ -39,4 +39,11 @@ public class DebateRoomServiceImp implements DebateRoomService {
         List<DebateRoomView> list =  debateRoomViewRepository.findAllById(withId);
         return list;
     }
+
+    @Override
+    public Long add(DebateRoom debateRoom) {
+        debateRoomRepository.save(debateRoom);
+
+        return debateRoom.getId();
+    }
 }

@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DebateRoomRepository {
 
     DebateRoom findById(Long id);
+    Long save(DebateRoom debateRoom);
 }

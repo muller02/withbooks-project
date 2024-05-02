@@ -15,7 +15,7 @@
     select
     *
     from debate_room_view
-    where with_id = #{withId}
+    where with_id = #{withId} and blind_yn = 0
 
   </select>
 

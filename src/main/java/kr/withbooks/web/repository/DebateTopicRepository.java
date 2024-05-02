@@ -12,4 +12,6 @@ public interface DebateTopicRepository {
     DebateTopic findById(Long id);
 
     List<DebateTopic> findAll(Long roomId);
+
+    void save(DebateTopic debateTopic);
 }

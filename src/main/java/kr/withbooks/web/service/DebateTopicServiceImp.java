@@ -14,6 +14,10 @@ public class DebateTopicServiceImp implements DebateTopicService {
     @Autowired
     private DebateTopicRepository repository;
 
+    @Autowired
+    private DebateTopicRepository debateTopicRepository;
+
+
     @Override
     public DebateTopic getById(Long id) {
 
@@ -26,4 +30,10 @@ public class DebateTopicServiceImp implements DebateTopicService {
         List<DebateTopic> list = repository.findAll(roomId);
         return list;
     }
+
+    @Override
+    public void add(DebateTopic debateTopic) {
+
+        debateTopicRepository.save(debateTopic)
+;    }
 }
