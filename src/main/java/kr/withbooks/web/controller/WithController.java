@@ -90,11 +90,11 @@ public class WithController {
 
 
     // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
-    List<FreeBoardView> freeBoardList = freeBoardService.getViewById(withId);
+    // List<FreeBoardView> freeBoardList = freeBoardService.getViewById(withId);
 
 
     model.addAttribute("withMemberList", withMemberList);
-    model.addAttribute("freeBoardList", freeBoardList);
+    // model.addAttribute("freeBoardList", freeBoardList);
     model.addAttribute("debateRoomList", debateRoomList);
     model.addAttribute("with", with);
     model.addAttribute("withCategoryNames", withCategoryNames);
