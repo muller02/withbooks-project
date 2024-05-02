@@ -2,6 +2,7 @@ package kr.withbooks.web.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class FreeBoardView {
 
     private Long id;
@@ -19,11 +21,12 @@ public class FreeBoardView {
     private String title;
     private String content;
     private LocalDateTime regDate;
+    private String userImg;
     private int blindYn;
     private String nickname;
-    private int commentCnt;
     private int likeCnt;
-    private List<String> img;
-
+    private int commentCnt;
+    
+    private List<String> imgs;
 
 }
