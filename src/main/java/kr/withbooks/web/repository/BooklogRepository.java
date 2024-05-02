@@ -16,7 +16,7 @@ public interface BooklogRepository {
     void save(Booklog booklog);
     void update(Booklog booklog);
     void deleteBooklog(Long booklogId);
-    void deleteAllByIds(List<Integer> ids, Long userId);
+    void deleteAllByIds(List<Integer> ids);
 
     int updatePublic(Long booklogId, Long publicYn);
     

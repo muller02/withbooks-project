@@ -24,7 +24,7 @@ public interface BooklogService {
     
     int addLogs(BooklogLogs logs);
     
-    void deleteAllByIds(List<Integer> ids, Long userId);
+    void deleteAllByIds(List<Integer> ids);
 
     int deleteLog(Long logId);
     
