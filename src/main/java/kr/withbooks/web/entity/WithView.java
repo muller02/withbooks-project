@@ -18,10 +18,11 @@ public class WithView {
   private String intro;
   private String img;
   private String interval; // 모임주기
-  private String location;
+  private String location; // 모임장소
   private int personnel; // 정원
   private int memberCnt; // 가입 멤버 수
-
+  private String sido; // 모임장소-시도
+  private String sigungu; // 모임장소-시군구
 
 
   private List<String> categoryNames;

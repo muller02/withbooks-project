@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -47,6 +49,7 @@ public class BookshortsController {
     public String list(Model model, @RequestParam(name = "id", required = false) Long bookId,
                        @AuthenticationPrincipal CustomUserDetails userDetails) {
 
+
         Long userId = null;
         if(userDetails != null)
             userId = userDetails.getId();
@@ -77,8 +80,11 @@ public class BookshortsController {
     }
 
     @GetMapping("reg")
-    public String regForm(@RequestParam(name = "content", required = false) String content
+    public String regForm(@RequestParam(name = "content", required = false) String content , @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
+
+            if(userDetails ==null)
+                return  "redirect:/shorts/list";
 
         return "shorts/reg";
     }

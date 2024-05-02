@@ -3,6 +3,9 @@ package kr.withbooks.web.controller;
 
 import java.util.Enumeration;
 
+import jakarta.servlet.http.HttpServletResponse;
+import kr.withbooks.web.config.CustomUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,13 +16,11 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
 
     @GetMapping("login")
-    public  String login(HttpServletRequest request){
+    public  String login(HttpServletRequest request , HttpServletResponse response, @AuthenticationPrincipal CustomUserDetails userDetails){
 
-       HttpSession session =   request.getSession(false);
+        if(userDetails !=null)
+            return "redirect:/shorts/list";
 
-       if(session != null)
-           return "redirect:/shorts/list";
-      
 
         return  "login/login";
     }

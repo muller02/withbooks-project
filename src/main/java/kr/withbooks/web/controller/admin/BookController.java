@@ -2,6 +2,7 @@ package kr.withbooks.web.controller.admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,13 +28,17 @@ public class BookController {
     private CategoryService categoryService;
 
     @GetMapping("list")
-    public String list( @RequestParam(name = "c", required = false) Long categoryId, 
-                        @RequestParam(name = "qt", required = false) String queryType, 
-                        @RequestParam(name = "q", required = false) String query, 
-                        @RequestParam(name = "p", required = false, defaultValue = "1") Integer page,
+    public String list( 
+                        // @RequestParam(name = "c", required = false) Long categoryId, 
+                        // @RequestParam(name = "qt", required = false) String queryType, 
+                        // @RequestParam(name = "q", required = false) String query, 
+                        // @RequestParam(name = "p", required = false, defaultValue = "1") Integer page,
+                        @RequestParam Map<String, String> params,
                         Model model){
 
-
+        System.out.println(params.toString());
+        
+        List<BookView> list = new ArrayList<>();
         // select box로 제목, 저자, ISBN13으로 검색하도록 한다.
         // 이때, 해당 카테고리는 queryType으로 받고, 검색어는 query로 받는다.
 
@@ -41,29 +46,35 @@ public class BookController {
 
         // 사이즈 및 요청 페이지 -> 추후 처리
 
-        List<BookView> list = new ArrayList<>();
-
         int count = 0;
-        // if(categoryId!=null){
-        //     list = service.getList(page, categoryId);
-        //     count = service.getCount(categoryId);
+        if(!params.containsKey("page")){
+            int page = 1;
+            params.put("page", Integer.toString(page));
+        }
+        // if(categoryId!=null && query!=null){
+        //     list = service.getList(page, query, categoryId);
+        //     count = service.getCount(query, categoryId);
         // }
         // else if(query!=null){
-        //     list = service.getList(page, query);
-        //     count = service.getCount(query);
+        //     list = service.getList(page, query, null);
+        //     count = service.getCount(query, null);
+        // }
+        // else if(categoryId!=null){
+        //     list = service.getList(page, null, categoryId);
+        //     count = service.getCount(null, categoryId);
         // }
         // else{
             
-        //     list = service.getList(page);
-        //     count = service.getCount();
+        //     list = service.getList(page, null, null);
+        //     count = service.getCount(null, null);
         // }
-        list = service.getList();
-        // System.out.println("BookView = "+list.toString());
-
+        list = service.getListByParams(params);
+        count = service.getCountByParams(params);
 
         List<Category> categoryList = categoryService.getList();
         model.addAttribute("category", categoryList);
         model.addAttribute("list", list);
+        model.addAttribute("count", count!=0? count:1);
 
         return "admin/book/list";
     }

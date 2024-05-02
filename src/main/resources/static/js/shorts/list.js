@@ -1,4 +1,6 @@
 
+
+
 //로그인 체크 쿠키 확인 함수
   function getJSessionID() {
     var cookies = document.cookie.split(';');
@@ -11,7 +13,45 @@
     return null;
   }
 
+// <댓글, 좋아요 클릭 시 로그인 안내 모달  창 함수 >
+function loginModal(){
 
+  const openButton = document.getElementById('modal-btn');
+  const closeButton = document.getElementById('login-close-btn');
+  const modal = document.getElementById('login-modal');
+  const modalBackdrop = document.getElementById('login-modal-backdrop');
+
+  modal.classList.remove('d:none');
+  modalBackdrop.classList.remove('d:none');
+  modal.classList.add('modal-fade-in');
+
+  closeButton.addEventListener('click', function () {
+    modal.classList.replace('modal-fade-in', 'modal-fade-out');
+
+    setTimeout(() => {
+      modal.classList.add('d:none');
+      modalBackdrop.classList.add('d:none');
+      modal.classList.remove('modal-fade-out');
+    }, 130);
+  });
+
+
+}
+
+window.addEventListener("load",function (e){
+
+  const writeBtn = document.querySelector(".write-btn");
+
+  writeBtn.addEventListener("click",(e)=>{
+    if(getJSessionID() ==null){
+      loginModal();
+      e.preventDefault();
+    }
+
+
+  })
+
+})
 
 
 // <댓글 창 textarea 자동으로 글 늘어나게 하기
@@ -26,7 +66,8 @@ window.addEventListener("load",function (e){
     let regBtn = target.nextElementSibling;
     console.log(regBtn);
     if (getJSessionID() !=1) {
-      alert('로그인을 먼저하세요 ')
+      // alert('로그인을 먼저하세요 ')
+      loginModal();
       regBtn.disabled  =true;
 
     }
@@ -96,7 +137,7 @@ window.addEventListener("load", function (e) {
         // 좋아요 취소 후 , 아이콘과 색상 변경
         e.target.classList.remove("icon-color:main-5", "icon:heart_fill");
         e.target.classList.add("icon:heart")
-        e.target.classList.remove("likeBtn-transition");
+        e.target.classList.remove("like");
 
         // 좋아요 취소 후, 해당 쇼츠의 좋아요 갯수 리로드 후  삽입
         let count = getLikeCount(shortsId);
@@ -113,22 +154,15 @@ window.addEventListener("load", function (e) {
         // 좋아요 후, 아이콴과 색상 변경
         e.target.classList.add("icon-color:main-5", "icon:heart_fill");
         e.target.classList.remove("icon:heart")
-
-        //좋아요 에니메이션  커지는 효과  추가
-        e.target.classList.add("likeBtn-transition");
-
-        // 커지고 나서 좀 있다, 줄어들게 하기 위해서
-        setTimeout(function (){
-          e.target.classList.remove("likeBtn-transition");
-
-        },200)
+        e.target.classList.add("like");
 
         //  좋아요 후 해당 쇼츠의 좋아요 갯수 리로드 후 삽입
         let count = getLikeCount(shortsId);
         shortsNumber.textContent = await count;
       }
     } catch (error) {
-      alert("로그인을 해주세요 !")
+      // alert("로그인을 해주세요 !")
+      loginModal();
       console.error("fetch 호출 중 에러 발생:", error);
     }
 
@@ -284,7 +318,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
       let userId = data.userId;
 
       commentList.forEach((cmt) => {
-        let formattedDate = moment(cmt.regDate).format('YY-MM-DD HH:mm');
+        // let formattedDate = moment(cmt.regDate).format('YY-MM-DD HH:mm');
 
         commentCount++; //댓글 갯수 카운트
         // icon icon-size:2 icon-color:accent-2 icon:trash
@@ -332,7 +366,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
                       divHTML+=`
                     </div>
                     <div class=" mt:3 comment-content-color  pl:2 fs:2">${cmt.content}</div>
-                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${formattedDate}</div>
+                    <div class="ml:auto fs:1 color:base-3 mb:2 d:flex jc:end">${cmt.regDate}</div>
                   </div>
                   `;
 

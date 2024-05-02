@@ -1,11 +1,13 @@
 package kr.withbooks.web.service;
 
-import kr.withbooks.web.entity.DebateComment;
-import kr.withbooks.web.repository.DebateCommentRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import kr.withbooks.web.entity.DebateComment;
+import kr.withbooks.web.entity.DebateCommentView;
+import kr.withbooks.web.repository.DebateCommentRepository;
 
 @Service
 public class DebateCommentServiceImp implements DebateCommentService {
@@ -26,9 +28,9 @@ public class DebateCommentServiceImp implements DebateCommentService {
     }
 
     @Override
-    public List<DebateComment> getAllById(Long boardId) {
-        List<DebateComment> commentList = debateCommentRepository.findAllById(boardId);
-        return commentList;
+    public List<DebateCommentView> getListById(Long boardId) {
+        List<DebateCommentView> list = debateCommentRepository.findAllById(boardId);
+        return list;
     }
 
     @Override

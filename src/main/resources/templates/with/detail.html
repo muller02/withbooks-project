@@ -240,7 +240,7 @@
         </div>
 
         <div>
-            <h1 class="fs:5 fw:3 mb:3 " th:text="${b.title}">오늘 작가님 오셨습니다.</h1>
+            <h1 class="fs:5 fw:3 mb:3 " ><a th:href="@{/with/freeboard/detail(boardId=${b.id})}">[[${b.title}]]</a></h1>
             <p class="mb:2" th:text="${b.content}">what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like what i like
                 what i like what i like what i like what i like what i likewhat i like what i like what ilike what i like what i like
                 what i like what i like what i like what i like what i likewhat i like what i like what ilike what i like what i like</p>
@@ -253,9 +253,11 @@
 
 
         <div class="mt:2 d:flex ai:center">
-            <span class="deco icon:thumbs_up mr:3 my:auto pt:1" th:text="${b.likeCnt}">12</span>
-            <span class="deco icon:chat my:auto" th:text="${b.commentCnt}">12</span>
+            <span class="deco d:inline-block border py:1 px:3 border-radius:7 	 icon:thumbs_up mr:3" th:text="${b.likeCnt}">12</span>
+            <span class="deco  d:inline-block  py:1 px:3 border-radius:7 border icon:chat" th:text="${b.commentCnt}">12</span>
         </div>
+
+
 
     </section>
 
