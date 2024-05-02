@@ -153,8 +153,14 @@ window.addEventListener("load", (e)=>{
             }
             innerHtml += `
         </ul>
+     
     </section>
+         <a
+          href="/shorts/reg"
+          class="icon icon:plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:7 icon-size:5 border-radius:full h:1 w:1 zi:5"
+        ></a>
 </div>
+ 
 `;
 
             contentDiv.insertAdjacentHTML("afterbegin", innerHtml);
