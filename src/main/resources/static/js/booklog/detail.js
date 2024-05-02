@@ -18,22 +18,73 @@ window.addEventListener("load", function () {
     }
 
     // 메뉴 버튼 =========================================================
-    const bookInfoMenuSection = bookInfo.querySelector("#dropdown-menu");
-    const bookInfoMenuBtn = bookInfo.querySelector("button");
-    const bookinfoMenuUl = bookInfo.querySelector("ul");
-    const bookInfoMenuLi = bookinfoMenuUl.querySelector("li");
+    // const bookInfoMenuSection = bookInfo.querySelector("#dropdown-menu");
+    // const bookInfoMenuBtn = bookInfo.querySelector("button");
+    // const bookinfoMenuUl = bookInfo.querySelector("ul");
+    // const bookInfoMenuLi = bookinfoMenuUl.querySelector("li");
 
-    bookInfoMenuBtn.addEventListener("click", function () {
-        bookinfoMenuUl.classList.toggle("active");
-    });
+    // bookInfoMenuBtn.addEventListener("click", function () {
+    //     bookinfoMenuUl.classList.toggle("active");
+    // });
 
-    bookInfoMenuLi.onclick = function(e){
-        e.preventDefault();
-        let deleteYes = confirm("북로그를 삭제하시겠습니다 ?");
-        if(deleteYes){
-            document.deletebooklog.submit();
-        }
-    }
+    // // 북로그에 대한 메뉴 삭제 버튼 클릭시
+    // bookInfoMenuLi.onclick = function () {
+    //     let result = confirm("북로그를 삭제하시겠습니까?");
+
+    //     // 컨펌창에서 확인 클릭시 삭제됨
+    //     if (result) {
+    //         alert("북로그가 삭제됐습니다.");
+    //         // deletebooklog : form tag name attribute
+    //         document.deletebooklog.submit();
+    //     }
+    // };
+
+    // const logInfo = logList.querySelectorAll(".log-info");
+    // const logMenuBtn = logInfo.querySelector("button");
+    // const logMenuUl = logInfo.querySelector("ul");
+    // const logDelete = logInfo.querySelector(".log-delete");
+    // const logEdit = logInfo.querySelector(".log-edit");
+
+    // logMenuBtn.addEventListener("click",function(e){
+    //     // logMenuUl.classList.toggle("active");
+    //     console.log(e.target.aTag);
+    // })
+
+    // logDelete.onclick = function(){
+
+    //     let result = confirm("해당 로그를 삭제하시겠습니까?");
+
+    //     if(result){
+    //         alert("로그가 삭제됐습니다.")
+    //         document.deletelog.submit();
+    //     }
+    // }
+    // const logBtn = document.querySelectorAll("button");
+    // for (const btn of logBtn) {
+    //     btn.addEventListener("click", (e) => {
+    //         const logsMenuSection = e.target.closest(".logs-menu");
+    //         const logInfoMenuSection = e.target.closest(".log-info-menu");
+
+    //         if (logsMenuSection) {
+    //             console.log("로그 메뉴 지역입니다.");
+    //             const logBtn = logsMenuSection.querySelector("button");
+    //             const logUl = logsMenuSection.querySelector("ul");
+
+    //             console.log(logBtn);
+    //             logBtn.onclick = function () {
+    //                 console.log("왜 바로 안나옴?")
+    //                 logUl.classList.toggle("active");
+    //             };
+
+    //             return;
+    //         }
+
+    //         if (logInfoMenuSection) {
+    //             console.log("북로그 정보 메뉴 지역입니다.");
+    //         }
+    //     });
+    // }
+
     // ===================================================================
 
     // PUBLIC 버튼 클릭시 값과 텍스트 바꾸기
@@ -75,13 +126,14 @@ window.addEventListener("load", function () {
 
         // 일
         let date = today.getDate();
+        //해당 일이 한자리면 앞에 '0' 붙이기
         if (date.toString.length == 1) date = "0" + date;
 
         // 로그 작성창 만들기
         let sectionHTML = ` 
                         <div id="new-log" class="new-log bd-top pt:3">
                             <div class="d:flex mb:4 pos:relative">
-                                <div class="booklog-date fl-grow:1 fw:3">${year}.${month}.${date}</div>
+                                <div class="booklog-date fl-grow:1 fw:3">${year}-${month}-${date}</div>
                                 <div class="reg-cancel n-btn bg-color:base-2 mr:1"><span>취소</span></div>
                                 <button class="reg-btn n-btn bg-color:main-1 color:main-3 top:0 right:0" type="submit">등록</button>
                             </div>
@@ -197,7 +249,7 @@ window.addEventListener("load", function () {
             addLogCancel();
         };
 
-        // 등록 전 유효성 검사
+        // TODO 등록 전 유효성 검사
         logContentSection.onchange = function (e) {
             console.log("changing");
         };
@@ -205,7 +257,6 @@ window.addEventListener("load", function () {
         //등록 버튼 클릭시 비동기처리
         submitBtn.onclick = async function (e) {
             e.preventDefault();
-            console.log("등록합니다.");
 
             let content = logTextarea.value.replace(/\n/g, "<br/>");
             let file = inputImg.files[0];
@@ -218,7 +269,7 @@ window.addEventListener("load", function () {
             let reponse = await fetch("/api/booklog/reg", {
                 method: "POST",
                 headers: {
-                    "ContentType": "multipart/form-data",
+                    ContentType: "multipart/form-data",
                 },
                 body: formData,
             });
@@ -238,21 +289,24 @@ window.addEventListener("load", function () {
                         `;
                 }
 
+                // 날짜 포맷
+                // timestamp 표시부터 자르기 위해 T의 인덱스를 찾는다.
+                const subIdx = result.regDate.search("T");
+                const regDate = result.regDate.substring(0, subIdx);
+
                 let sectionHTML = ` 
                     <div class="bd-top py:3">
-                        <div class="d:flex mb:4 pos:relative">
-                            <div class="d:none logs-id">${result.id}</div>
-                            <div class="fl-grow:1 fw:3" >${result.regDate}</div>
-                            <div class="n-dropdown position:absolute right:1">
-                                <button class="cursor:pointer rg-comment-hover dropdown-btn">
-                                    <span class="icon icon:dots_three_outline_vertical_fill icon-size:2">메뉴버튼</span>
-                                </button>
-                                <ul class="n-dropdown-list right:0">
-                                    <li class="n-dropdown-item">
-                                        <button>
-                                            <span class="deco icon:trash deco-color:accent-2 color:accent-2"> 삭제하기 </span>
-                                        </button>
-                                    </li>
+                        <div class="log-info d:flex mb:4 pos:relative">
+                            <form action="deletelog" name="deletelog" method="post">
+                                <input class="d:none" name="booklog-id" value="${result.booklogId}" />
+                                <input type="hidden" name="logs-id" value="${result.id}" />
+                            </form>
+                            <div class="fl-grow:1 fw:3" >${regDate}</div>
+                            <div id="dropdown-menu" class="logs-menu n-dropdown position:absolute right:1">
+                                <button type="button" class="cursor:pointer menu-hover"><span class="icon icon:dots_three_outline_vertical_fill icon-size:2">버튼</span></button>
+                                <ul class="dropdown-transformx">
+                                    <li class="log-delete n-dropdown-item d:flex p:1"><span class="icon icon:trash mr:2">아이콘</span>삭제</li>
+                                    <li class="log-edit n-dropdown-item d:flex p:1"><span class="icon icon:pencil_simple mr:2">아이콘</span>수정하기</li>
                                 </ul>
                             </div>
                         </div>
@@ -269,3 +323,57 @@ window.addEventListener("load", function () {
         };
     });
 });
+
+window.addEventListener(
+    "click",
+    function (e) {
+        const logInfoMenuSection = e.target.closest(".log-info-menu");
+        const logsMenuSection = e.target.closest(".logs-menu");
+
+        if (logInfoMenuSection) {
+            e.stopPropagation();
+            const btn = logInfoMenuSection.querySelector("button");
+            const ul = logInfoMenuSection.querySelector("ul");
+            const li = ul.querySelector(".booklog-delete");
+
+            btn.onclick = function (e) {
+                ul.classList.toggle("active");
+            };
+
+            li.onclick = function () {
+                let result = confirm("북로그 삭제하시겠습니까?");
+
+                if (result) {
+                    alert("북로그가 삭제됐습니다");
+                    document.deletebooklog.submit();
+                }
+            };
+        }
+
+        if (logsMenuSection) {
+            const form = logsMenuSection.closest(".log-info").querySelector("form");
+            const btn = logsMenuSection.querySelector("button");
+            const ul = logsMenuSection.querySelector("ul");
+            const logDelete = ul.querySelector(".log-delete");
+            const logEdit = ul.querySelector(".log-edit");
+
+            btn.onclick = function () {
+                ul.classList.toggle("active");
+            };
+
+            logDelete.onclick = function () {
+                let result = confirm("로그 삭제하시겠습니까?");
+
+                if (result) {
+                    alert("삭제됐습니다.");
+                    form.submit();
+                }
+            };
+
+            logEdit.onclick = function () {
+                console.log("로그를 수정합니다.");
+            };
+        }
+    },
+    false
+);

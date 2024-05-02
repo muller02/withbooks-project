@@ -18,6 +18,8 @@ import kr.withbooks.web.entity.Booklog;
 import kr.withbooks.web.entity.BooklogLogs;
 import kr.withbooks.web.entity.BooklogView;
 import kr.withbooks.web.service.BooklogService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 // 북로그 리스트
 @Controller
@@ -135,6 +137,18 @@ public class BooklogController {
         service.delete(id);
         return "redirect:list";
     }
+
+    @PostMapping("deletelog")
+    public String deletelog(
+        @RequestParam(name = "logs-id") Long id,
+        @RequestParam(name = "booklog-id") Long booklogId
+    ) {
+       
+        service.deleteLog(id);
+
+        return "redirect:detail?id="+booklogId;
+    }
+    
 
     @PostMapping("deleteAllByIds")
     public String deleteAllByIds( 
