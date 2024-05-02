@@ -19,22 +19,22 @@ public class BookController {
     @Autowired
     private BookService service;
 
-    @GetMapping("list")
-    public List<BookView> list(
-                                @RequestParam(name = "q", required = false) String query
-                                ,@RequestParam(name = "c", required = false) Long categoryId
-                                ,@RequestParam(name = "s", required = false) Long size
-                                ,@RequestParam(name = "p", required = false) Long page
-                                ) {
+    // @GetMapping("list")
+    // public List<BookView> list(
+    //                             @RequestParam(name = "q", required = false) String query
+    //                             ,@RequestParam(name = "c", required = false) Long categoryId
+    //                             ,@RequestParam(name = "s", required = false) Long size
+    //                             ,@RequestParam(name = "p", required = false) Long page
+    //                             ) {
 
-        // 카테고리 선택하지 않고 책 검색 시 0으로 보내는 값을 null로 처리
-       if(categoryId == 0)
-           categoryId=null;
+    //     // 카테고리 선택하지 않고 책 검색 시 0으로 보내는 값을 null로 처리
+    //    if(categoryId == 0)
+    //        categoryId=null;
 
-        List<BookView> list = service.getList(query, categoryId);
-        System.out.println("list : " + list);
+    //     List<BookView> list = service.getList(query, categoryId);
+    //     System.out.println("list : " + list);
 
-        return list;
+    //     return list;
 
-    }
+    // }
 }

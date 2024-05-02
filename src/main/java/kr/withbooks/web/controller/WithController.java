@@ -1,10 +1,12 @@
 package kr.withbooks.web.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
 import kr.withbooks.web.repository.DebateRoomViewRepository;
 import kr.withbooks.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -137,6 +139,7 @@ public class WithController {
           @RequestParam(name = "with-img-file", required = false) MultipartFile withImgFile,
           @RequestParam(name = "sido") String sido,
           @RequestParam(name = "sigungu") String sigungu,
+          @AuthenticationPrincipal CustomUserDetails userDetails,
           HttpServletRequest request
   ) throws IOException {
 
@@ -169,6 +172,7 @@ public class WithController {
       withImgFile.transferTo(filePath);
     }
 
+    Long userId = userDetails.getId();
     with.setWithRegId(1L); // 위드 등록 사용자 id 임시 1L
 
     with.setImg(withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
