@@ -19,7 +19,13 @@
 </head>
 <body>
     <main layout:fragment="main">
-        <section class="d:flex fl-dir:column p:2" th:each="b : ${list}">
+        <section class="d:flex mt:3">
+            <h1 class="d:none">정렬방식</h1>
+            <div><a class="fs:2" href="" th:href="@{/freeboard/list(wid=${param.wid},s=0)}">최신순</a></div>
+            <div class="mx:2">|</div>
+            <div><a class="fs:2" href="" th:href="@{/freeboard/list(wid=${param.wid},s=1)}">인기순</a></div>
+        </section>
+        <section class="d:flex fl-dir:column bd-bottom mt:6" th:each="b : ${list}">
             <h1 class="d:none">게시글</h1>
             <span class="pos:relative">
                 <section class="d:flex ai:center">
@@ -53,7 +59,11 @@
                     <div class="fs:2 color:base-6 deco icon:thumbs_up icon-color:base-5 deco-mr:1" th:text="${b.likeCnt}">13</div>
                     <div class="fs:2 color:base-6 deco icon:chat_circle icon-color:base-5 ml:3 deco-mr:1" th:text="${b.commentCnt}">13</div>
                 </section>
+
             </span>
+        </section>
+        <section>
+            <h1>페이저</h1>
         </section>
     </main>
 </body>
