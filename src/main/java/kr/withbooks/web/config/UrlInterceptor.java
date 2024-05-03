@@ -17,11 +17,15 @@ public class UrlInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
         if (modelAndView != null) {
-            String requestURI = request.getRequestURI();
+            String uri = request.getRequestURI();
+            String requestURI = uri.split("/")[1]; // 첫 번째 경로 요소만 추출
 
             System.out.println("토마토 = " + requestURI);
-            modelAndView.addObject("requestURI", requestURI);
+
+            modelAndView.addObject("requestURI", "/" + requestURI); // 앞에 슬래시 추가하여 URI 형식 유지
+
         }
     }
 
