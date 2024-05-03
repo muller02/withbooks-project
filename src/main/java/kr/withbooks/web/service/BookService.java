@@ -9,7 +9,7 @@ import kr.withbooks.web.entity.BookView;
 public interface BookService {
     List<BookView> getList();
     
-    List<BookView> getList(String query, Long categoryId);
+    // List<BookView> getList(String query, Long categoryId);
 
     BookView getView(Long id);
 
@@ -20,6 +20,10 @@ public interface BookService {
     List<BookView> getListByParams(Map<String, String> params);
 
     int getCountByParams(Map<String, String> params);
+
+    List<BookView> getListByParams(int size, int page, String query, Long categoryId);
+
+    int getCountByParams(int size, Integer page, String query, Long categoryId);
 
 
     

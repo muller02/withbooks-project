@@ -1,5 +1,6 @@
 package kr.withbooks.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +28,41 @@ public class BookController {
     private CategoryService categoryService;
 
     @GetMapping("list")
-    public String list(Model model) {
-        List<BookView> list = service.getList();
-        List<Category> cateList = categoryService.getList();
+    public String list(
+                        @RequestParam(name = "q", required = false) String query
+                        ,@RequestParam(name = "c", required = false) Long categoryId
+                        // ,@RequestParam(name = "s", required = false) Long size
+                        ,@RequestParam(name = "p", required = false, defaultValue = "1") Integer page
+                        ,Model model
+                        ) {
 
-        model.addAttribute("list", list);
+        // 카테고리 선택하지 않고 책 검색 시 0으로 보내는 값을 null로 처리
+        categoryId = categoryId == null || categoryId == 0 ? null : categoryId;
+        // 책 기본 출력 사이즈는 12
+        int size = 12;
+
+        List<BookView> list = new ArrayList<>();
+        
+        // 카테고리 선택상자에 출력
+        List<Category> cateList = categoryService.getList();
         model.addAttribute("category", cateList);
-        // System.out.println(list);
+
+        // 검색한 책의 개수
+        int count = service.getCountByParams(size, page, query, categoryId);
+        
+        // count가 0이라면 list를 검색할 필요가 없음
+        if(count != 0)
+            list = service.getListByParams(size, page, query, categoryId);
+        else
+        // count가 0으로 가게되면 html에서 페이징 출력에 버그가 생김
+        // 1, 0 페이징이 출력되는 오류로 count = 1 설정
+            count = 1;
+
+        model.addAttribute("count", count);
+        model.addAttribute("list", list);
+
         return "/book/list";
+
     }
 
     @GetMapping("detail")
