@@ -7,7 +7,7 @@
 	<select id="findAll" resultType="BookmarkView">
 		SELECT 
 		*
-		FROM bookmark_view
+		FROM bookmark_view where userId = #{userId}
 		<!-- <where>
 			<if test="p != null">
 				title like '%${query}%'

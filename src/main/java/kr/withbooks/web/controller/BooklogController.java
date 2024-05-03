@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +33,11 @@ public class BooklogController {
 
     // 북로그 리스트
     @GetMapping("list")
-    public String list(Model model){
+    public String list(Model model,
+                       @AuthenticationPrincipal CustomUserDetails userDetails){
 
         //[ ]  제거 예정
-        Long id = 4L;
+        Long id = userDetails.getId();
         
         List<BooklogView> list = service.getList(id);
 
@@ -73,11 +76,13 @@ public class BooklogController {
         @RequestParam(name = "booklog-id", required = false) Long bookLogId,
         @RequestParam(name = "public-yn", required = false, defaultValue = "0") Integer publicChecked,
         Booklog booklog, BooklogLogs logs,
-        HttpServletRequest request) throws IOException {
+        HttpServletRequest request,
+        @AuthenticationPrincipal CustomUserDetails userDetails) throws IOException {
+        Long userid = userDetails.getId();
 
             // =============== 먼저 북로그를 저장한다 ========================================================================
             booklog = Booklog.builder()
-                                    .userId(4L)
+                                    .userId(userid)
                                     .bookId(bookId)
                                     .publicYn(publicChecked)
                                     .build();
@@ -153,9 +158,10 @@ public class BooklogController {
     @PostMapping("deleteAllByIds")
     public String deleteAllByIds( 
                             @RequestParam(name="ids", required= true) List<Integer> ids
+                            ,@AuthenticationPrincipal CustomUserDetails userDetails
                             ){
         
-       Long userId = 4L;
+       Long userId = userDetails.getId();
         if(ids!=null && ids.size() > 0)
             service.deleteAllByIds(ids);
 

@@ -149,7 +149,7 @@ window.addEventListener("load", function(){
     // ======================================================================================================
     // 추가 버튼
     let count =0;
-    let maxCount = 2;
+    let maxCount = 1;
     const addBtn = document.querySelector('.add-btn')
 
 

@@ -31,7 +31,7 @@
       <section class="pb:4 pt:4 pl:4 pr:4">
         <h1 class="d:none">위드 토론 등록 페이지</h1>
 
-        <form action="" class="" method="post">
+        <form action="/with/debate/reg" class="" method="post">
           <div class="d:flex jc:end">
             <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
               등록
@@ -115,6 +115,7 @@
               ></textarea>
             </div>
           </section>
+          <input type="hidden" name="wid"  th:value="${param.wid}">
           <section
             class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
           >

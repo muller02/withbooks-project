@@ -81,7 +81,7 @@ public class DebateController {
 
 
 
-        return "redirect:/with/debate/list";
+        return "redirect:/with/detail?id="+withId;
     }
     @GetMapping("/reg")
     public String regForm() {
