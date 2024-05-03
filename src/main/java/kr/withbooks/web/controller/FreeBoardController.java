@@ -29,6 +29,7 @@ public class FreeBoardController {
         List<FreeBoardView> list = service.getListByWithId(withId);
         model.addAttribute("list", list);
 
+        
 
         return  "/freeboard/list";
     }
