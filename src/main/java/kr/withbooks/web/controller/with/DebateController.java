@@ -33,18 +33,21 @@ public class DebateController {
     @Autowired
     private DebateTopicService debateTopicService;
 
-
-
-
     @GetMapping("/list")
     public String list(Model model) {
 
         List<DebateRoomView> list  = service.getListById(1L);
 
+        log.info("list : {}", list);
+
         model.addAttribute("list", list);
-        System.out.println("list: " + list);
 
         return "with/debate/list";
+    }
+
+    @GetMapping("/reg")
+    public String regForm() {
+        return "with/debate/reg";
     }
 
     @PostMapping("/reg")
@@ -53,14 +56,13 @@ public class DebateController {
                        @RequestParam Integer deadline,
                        @RequestParam String notice,
                        @RequestParam(name = "wid" ) Long withId,
-                       @RequestParam(name = "topic" ,required = false) String[] topic){
+                       @RequestParam(name = "topic", required = false) String[] topic){
 
         // DateTimeFormatter를 사용하여 문자열을 LocalDateTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime parsedDatereserve = LocalDateTime.parse(reserveDate + " 00:00:00", formatter);
 
-
-
+        log.info("withId : {}", withId);
 
         With with = withService.get(withId);
 
@@ -70,25 +72,19 @@ public class DebateController {
         Long debateRoomId =  service.add(debateRoom);
         log.info("debateRoomId : {}", debateRoom);
 
-
         List<String> topicContentList = Arrays.asList(topic);
 
-        for(int i =0 ; i< topicContentList.size(); i++) {
-            DebateTopic debateTopic = DebateTopic.builder().roomId(debateRoomId).content(topicContentList.get(i)).build();
-            debateTopicService.add(debateTopic);
+//        for(int i =0 ; i< topicContentList.size(); i++) {
+//            DebateTopic debateTopic = DebateTopic.builder().roomId(debateRoomId).content(topicContentList.get(i)).build();
+//            debateTopicService.add(debateTopic);
+//        }
 
+        for (String topicContent : topicContentList) {
+            DebateTopic debateTopic = DebateTopic.builder().roomId(debateRoomId).content(topicContent).build();
+            debateTopicService.add(debateTopic);
         }
 
-
-
-        return "redirect:/with/detail?id="+withId;
+        return "redirect:/with/detail?id=" + withId;
     }
-    @GetMapping("/reg")
-    public String regForm() {
 
-
-        return "with/debate/reg";
-
-
-    }
 }
