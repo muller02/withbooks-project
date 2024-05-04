@@ -1,5 +1,7 @@
 package kr.withbooks.web.config;
 
+import jakarta.servlet.http.HttpSessionListener;
+import org.apache.catalina.SessionListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,6 +51,7 @@ public class SecurityConfig {
                   .addLogoutHandler(new CustomLogoutHandler())
                   .invalidateHttpSession(true) // 로그아웃 후 세션 초기화 설정
                   .deleteCookies("JSESSIONID") // 로그아웃 후 쿠기 삭제 설정
+                  .deleteCookies("lck");
           ;
 
 //
@@ -63,4 +66,6 @@ public class SecurityConfig {
     public LogoutHandler logoutSuccessHandler() {
         return new CustomLogoutHandler(); // 로그아웃 핸들러 등록
     }
+
+
 }
