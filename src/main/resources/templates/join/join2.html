@@ -82,10 +82,10 @@
                                 th:field="*{email}"
                                 th:errorclass="field-error"
                         />
+                        <div class="field-error" th:errors="*{email}">
+                            이메일 오류
+                        </div>
                     </label>
-                    <div class="field-error" th:errors="*{email}">
-                        이메일 오류
-                    </div>
                     <button  class="n-btn  bg-color:main-3 ml:5">중복확인</button>
                 </div>
             </section>
