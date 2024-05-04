@@ -22,32 +22,40 @@
             --width-1: 10px;
             --height-1: 10px;
         }
-        .selected{
+        .selected-img-pager{
             background-color: var(--color-main-5);
             border-color: var(--color-main-5) !important;
             transition: background-color 400ms, border-color 400ms;
+        }
+        .selected-sort{
+            --color-base-3: var(--color-base-9);
+        }
+        .cur-page{
+            background-color: var(--color-main-5);
+            color: var(--color-base-1) !important;
+            border-width: 0 !important;
         }
     </style>
     
 </head>
 <body>
     <main layout:fragment="main">
-        <section class="d:flex mt:3">
+        <section id="sort" class="d:flex mt:3">
             <h1 class="d:none">정렬방식</h1>
-            <div><a class="fs:2" href="" th:href="@{/freeboard/list(wid=${param.wid},s=0)}">최신순</a></div>
-            <div class="mx:2">|</div>
-            <div><a class="fs:2" href="" th:href="@{/freeboard/list(wid=${param.wid},s=1)}">인기순</a></div>
+            <div><a class="latest fs:2 color:base-3" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=latest)}">최신순</a></div>
+            <div class="mx:2 fs:2 color:base-9">|</div>
+            <div><a class="popular fs:2 color:base-3" th:classappend="${{param.s}}=='popular' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=popular)}">인기순</a></div>
         </section>
         
         <span class="board-list">
-            <section class="d:flex fl-dir:column bd-bottom mt:6 pb:3" th:each="b : ${list}">
+            <section class="d:flex fl-dir:column mt:4 bd-bottom pb:3" th:each="b : ${list}">
                 <h1 class="d:none">게시글</h1>
                 <span class="pos:relative">
                     <section class="d:flex ai:center">
                         <h1 class="d:none">사용자 정보</h1>
-                        <div><img class="profile-img h:1 w:1" src="" alt=""></div>
+                        <div><img class="profile-img h:1 w:1" src="" th:src="${b.userImg}" alt=""></div>
                         <span class="ml:2">
-                            <div class="fs:2" th:text="${b.userId}">뉴렉이</div>
+                            <div class="fs:2" th:text="${b.nickname}">뉴렉이</div>
                             <div class="fs:1 color:base-5" th:text="${b.regDate}">10분전</div>
                         </span>
                     </section>
@@ -61,6 +69,7 @@
                     <span th:if="!${#arrays.isEmpty(b.imgs)}">
                         <section class="bd bd-radius:6 bd-color:base-3 mt:3 d:flex fl-dir:column jc:center ai:center pos:relative">
                             <h1 class="d:none">이미지</h1>
+
                             <div class="pt:3 w:4 of:hidden">
                                 <span class="img-box d:flex" data-cur-x="0" data-cur-img="1" th:data-last-img="${#arrays.length(b.imgs)}">
                                     <div th:each="img : ${b.imgs}">
@@ -68,10 +77,12 @@
                                     </div>
                                 </span>
                             </div>
+
                             <ul class="img-pager py:2 w:2 d:flex jc:center">
-                                <li class="w:1 h:1 bd bd-radius:8 mx:auto selected"></li>
+                                <li class="w:1 h:1 bd bd-radius:8 mx:auto selected-img-pager"></li>
                                 <li class="w:1 h:1 bd bd-radius:8 mx:auto" th:each="tmp, status : ${b.imgs}" th:unless="${status.index==0}"></li>
                             </ul>
+
                             <div class="w:6 d:flex jc:space-between pos:absolute top:2">
                                 <div><button class="img-l-btn icon icon:caret_left_bold cursor:pointer d:none">이전</button></div>
                                 <div><button class="img-r-btn icon icon:caret_right_bold cursor:pointer">다음</button></div>
@@ -89,8 +100,31 @@
             </section>
         </span>
 
-        <section>
-            <h1>페이저</h1>
+        <section class="mt:5 d:flex jc:center" 
+            th:with="
+                tmpa = (${count}-1) / 10,
+                lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
+                tmp = (${{param.p}}-1) / 5,
+                startnum = ${T(java.lang.Math).floor(tmp)} * 5 + 1
+            "
+        >
+            <h1 class="d:none">페이저</h1>
+            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} le 1">
+                <li th:unless="${startnum} eq 1" >
+                    <a class="icon icon:caret_left" href="">이전</a>
+                </li>
+
+                <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
+                    <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
+                        th:href="@{./list(wid=${param.wid},p=${n},s=${param.s})}" 
+                        th:text="${n}"
+                        th:classappend="${{param.p}} == ${n} ? 'cur-page'"
+                    >1</a>
+                </li>
+                <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
+                    <a class="icon icon:caret_right" href="">다음</a>
+                </li>
+            </ul>
         </section>
     </main>
 </body>

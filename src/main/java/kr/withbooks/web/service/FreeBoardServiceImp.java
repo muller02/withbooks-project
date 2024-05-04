@@ -23,10 +23,16 @@ public class FreeBoardServiceImp implements  FreeBoardService{
     // }
 
     @Override
-    public List<FreeBoardView> getListByWithId(Long withId) {
-        List<FreeBoardView> list = repository.findAllByWithId(withId);
-        // list에 imgs 채워넣기
+    public List<FreeBoardView> getList(Long withId, int page, String sort) {
+        int limit = 10;
+        int offset = (page - 1) * limit;
+        List<FreeBoardView> list = repository.findAll(withId, page, sort, limit, offset);
 
         return list;
+    }
+
+    @Override
+    public int getCount(Long withId) {
+        return repository.count(withId);
     }
 }

@@ -8,6 +8,8 @@ public interface FreeBoardService {
 
     // List<FreeBoardView> getViewById(Long withId);
 
-    List<FreeBoardView> getListByWithId(Long withId);
+    List<FreeBoardView> getList(Long withId, int page, String sort);
+
+    int getCount(Long withId);
 
 }

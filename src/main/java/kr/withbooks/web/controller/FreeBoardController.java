@@ -23,13 +23,16 @@ public class FreeBoardController {
 
     @GetMapping("/list")
     public  String list(
-        @RequestParam(name="wid") Long withId
+          @RequestParam(name="wid") Long withId
+        , @RequestParam(name="p") int page
+        , @RequestParam(name="s") String sort
         , Model model){
 
-        List<FreeBoardView> list = service.getListByWithId(withId);
+        List<FreeBoardView> list = service.getList(withId, page, sort);
+        int count = service.getCount(withId);
+       
         model.addAttribute("list", list);
-
-        
+        model.addAttribute("count", count);
 
         return  "/freeboard/list";
     }

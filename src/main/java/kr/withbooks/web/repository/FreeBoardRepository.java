@@ -13,7 +13,9 @@ public interface FreeBoardRepository {
 
     // List<FreeBoard> findAll();
 
-    List<FreeBoardView> findAllByWithId(Long withId);
+    List<FreeBoardView> findAll(Long withId, int page, String sort, int limit, int offset);
+
+    int count(Long withId);
 
 
 

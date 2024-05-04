@@ -20,24 +20,38 @@
 		<collection property="imgs" column="id" ofType="String" select="selectFreeAttachmentForFreeBoardView"/>
 	</resultMap>
 
-	
 
-	<select id="selectFreeAttachmentForFreeBoardView" resultType="String">
-		SELECT img FROM free_attachment WHERE board_id = #{id}
-	</select>
-
+		<select id="selectFreeAttachmentForFreeBoardView" resultType="String">
+			SELECT img FROM free_attachment WHERE board_id = #{id}
+		</select>
 
 	
-	<select id="findAllByWithId" resultMap="FreeBoardViewResult" >
+	<select id="findAll" resultMap="FreeBoardViewResult" >
 		select 
 			* 
 		from 
 			free_board_view
 		where 
 			with_id = #{withId}
-
+		<choose>
+			<when test="sort == 'latest'">
+				order by reg_date desc
+			</when>
+			<when test="sort == 'popular'">
+				order by like_cnt desc
+			</when>
+		</choose>
+		limit #{limit} offset #{offset}
 	</select>
 
+
+	<select id="count" resultType="int">
+		select 
+			count(id) 
+		from 
+			free_board_view
+		where with_id = #{withId}
+	</select>
 
 
 </mapper>
