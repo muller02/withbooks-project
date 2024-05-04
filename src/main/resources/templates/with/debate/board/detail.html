@@ -50,7 +50,7 @@
                     <div class="card-note-media">
                         <section class="d:flex fl-dir:column jc:center ai:center mt:8 mb:2">
                             <h1 class="d:none">토론카드 이미지</h1>
-                            <div class="d:flex jc:center">
+                            <div class="d:flex jc:center" th:if="${imgList}">
                                 <img
                                         th:each="i : ${imgList}"
                                         class="w:7 h:7"

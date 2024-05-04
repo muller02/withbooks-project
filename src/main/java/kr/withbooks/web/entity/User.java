@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class User {
+
     private Long id;
     private String intro;
     private String email;
@@ -25,7 +26,4 @@ public class User {
     private String role;
     private String img;
 
- 
-
-    
 }

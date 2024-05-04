@@ -111,7 +111,7 @@ window.addEventListener("load", function (e) {
 
 
     // Api 요청 url
-    const url = `http://localhost:8080/api/shorts-like?si=`;
+    const url = `/api/shorts-like?si=`;
 
     try {
       const response = await fetch(url + shortsId, {
@@ -170,7 +170,7 @@ window.addEventListener("load", function (e) {
     // 좋아요 리로드 함수
     async function getLikeCount(shortsId) {
       let count;
-      let url = `http://localhost:8080/api/shorts-like/count?si=${shortsId}`
+      let url = `/api/shorts-like/count?si=${shortsId}`
       let resoponse = fetch(url);
 
       count = (await resoponse).text();
@@ -310,7 +310,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
 
   let commentCount = 0;
 
-  fetch(`http://localhost:8080/api/comments/list?shorts_id=${shortsId}`)
+  fetch(`/api/comments/list?shorts_id=${shortsId}`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -401,7 +401,7 @@ window.addEventListener("load",function (e){
     let commentId = target.dataset.commentid
 
     //api delete 요청
-    let url  =`http://localhost:8080/api/comments?cmtId=${commentId}`;
+    let url  =`/api/comments?cmtId=${commentId}`;
 
     fetch(url,{method:"DELETE"}).then(response=>{
       if (!response.ok) {
