@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
 public class FreeBoardView {
 
@@ -21,9 +21,9 @@ public class FreeBoardView {
     private String title;
     private String content;
     private LocalDateTime regDate;
-    private String userImg;
     private int blindYn;
     private String nickname;
+    private String userImg;
     private int likeCnt;
     private int commentCnt;
     

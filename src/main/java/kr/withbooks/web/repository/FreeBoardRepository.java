@@ -11,12 +11,10 @@ import java.util.List;
 @Mapper
 public interface FreeBoardRepository {
 
-    // List<FreeBoard> findAll();
-
     List<FreeBoardView> findAll(Long withId, int page, String sort, int limit, int offset);
 
     int count(Long withId);
 
-
+    FreeBoard findById(Long freeBoardId);
 
 }

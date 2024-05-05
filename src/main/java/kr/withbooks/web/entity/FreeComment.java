@@ -1,27 +1,22 @@
 package kr.withbooks.web.entity;
 
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FreeBoard {
+public class FreeComment {
 
     private Long id;
-    private Long withId;
+    private Long boardId;
     private Long userId;
-    private String title;
     private String content;
     private LocalDateTime regDate;
-    private int blindYn;
-
-
-
+    
 }

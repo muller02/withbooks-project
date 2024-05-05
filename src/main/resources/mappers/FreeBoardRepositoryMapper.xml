@@ -53,5 +53,13 @@
 		where with_id = #{withId}
 	</select>
 
+	<select id="findById" resultType="FreeBoard">
+		select 
+			* 
+		from 
+			free_board
+		where id = #{freeBoardId}
+	</select>
+
 
 </mapper>
