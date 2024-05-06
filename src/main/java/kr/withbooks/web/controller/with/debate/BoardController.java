@@ -155,4 +155,14 @@ public class BoardController {
         return "redirect:/with/debate/board/list?rid=" + roomId;
 
     }
+
+    @GetMapping("/edit")
+    public String edit(@RequestParam("id") Long id, Model model) {
+        DebateBoard debateBoard = debateBoardService.getById(id);
+        List<DebateTopic> topicList = debateTopicService.getList(debateBoard.getRoomId());
+
+        model.addAttribute("board", debateBoard);
+        model.addAttribute("topicList", topicList);
+        return "with/debate/board/edit";
+    }
 }

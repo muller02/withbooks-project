@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="d:flex   ai:center">
                                         <span class="icon icon:calendar_blank icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 " th:text="${b.regDate}">2024.02.20.18:25</span>
+                                        <span class="fs:1 color:base-5 ml:1 " th:text="${#temporals.format(b.regDate, 'yyyy.MM.dd HH:mm')}">2024.02.20.18:25</span>
                                     </div>
                                     <div class="d:flex   ai:center">
                                         <span class="icon icon:chat_circle_text icon-size:2"></span>

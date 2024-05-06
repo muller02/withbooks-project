@@ -9,10 +9,12 @@
   SELECT
     *
   FROM debate_board_view
-  where room_id = #{roomId}
+  WHERE room_id = #{roomId}
+  and blind_yn = 0
   <if test="topicId != null">
     and topic_id = #{topicId}
   </if>
+  ORDER BY reg_date desc
 </select>
 
 <!--<select id="findById" resultType="DebateBoardView">-->
