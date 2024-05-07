@@ -72,6 +72,31 @@
       margin-top: 5px; /* 위쪽 여백 */
       margin-left: 5px; /* 왼쪽 여백 */
     }
+
+    .area1,
+    .area2 {
+      text-align: center;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-y: scroll; /* 세로 스크롤 사용 */
+    }
+
+    .area1,
+    .area2::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .area1,
+    .area2::-webkit-scrollbar-thumb {
+      background: rgba(153, 153, 153); /* 스크롤바 색상 color-base-5*/
+      border-radius: 12px; /* 스크롤바 둥근 테두리 */
+    }
+
+    .area1,
+    .area2::-webkit-scrollbar-track {
+      background: rgba(246, 246, 247, 0.1); /*스크롤바 뒷 배경 색상*/
+    }
+
   </style>
   <script src="/js/with/reg.js"></script>
 </head>
@@ -166,11 +191,11 @@
             중복확인
           </button>
         </div>
-        <div class="duplicate-true color:accent-1 d:none">
+        <div class="duplicate-true d:none color:accent-1 mt:3 ml:2">
           사용중인 위드명입니다. 다른 위드명을 입력해 주세요.
         </div>
 
-        <div class="duplicate-false color:main-5 d:none">
+        <div class="duplicate-false d:none color:main-5 mt:3 ml:2">
           좋은 위드명이네요 !
         </div>
       </section>
@@ -196,7 +221,7 @@
             </label>
           </li>
         </ul>
-        <div class="d:none category-alert color:accent-1">
+        <div class="category-alert d:none color:accent-1 mt:3 ml:2">
           카테고리는 최대 3개 까지만 가능합니다
         </div>
       </section>
@@ -216,7 +241,7 @@
                     type="number"
             />
             <span> 회</span>
-            <div class="interval-alert color:accent-1 d:none">
+            <div class="interval-alert d:none color:accent-1 mt:3 ml:2">
               최대 50회 까지 입력 가능합니다.
             </div>
           </div>
@@ -236,7 +261,7 @@
                     type="number"
             />
             <span> 명</span>
-            <div class="personnel-alert color:accent-1 d:none">
+            <div class="personnel-alert d:none color:accent-1 mt:3 ml:2">
               최대 100명 까지 입력 가능합니다.
             </div>
           </div>
@@ -254,7 +279,7 @@
                   class="area1 n-select mr:3"
                   id="area1"
                   name="sido"
-                  onChange="cate1Change(this.value, area2)"
+                  onChange="area1Change(this.value, area2)"
                   required
           >
             <option>시/도</option>

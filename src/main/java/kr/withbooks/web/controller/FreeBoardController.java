@@ -94,6 +94,8 @@ public class FreeBoardController {
     }
 
 
+
+    // 이거 FreeCommentController가 해야하는지 FreeBoardController가 해야하는지 잘 모르겠다.
     @PostMapping("/detail")
     public String detail(
           @RequestParam(name="fid") Long freeBoardId
@@ -111,6 +113,14 @@ public class FreeBoardController {
         // return "redirect: /freeboard/detail" + freeBoardId; 을 하면 뒤에 이상한 url이 더 붙는다.
         // 지금 방법도 마찬가지로 뒤에 이상한 url이 더 붙는다.
       return "redirect:" + referer;
+    }
+
+
+
+    @GetMapping("/reg")
+    public String regForm(){
+
+      return "/freeboard/reg";
     }
 
 }
