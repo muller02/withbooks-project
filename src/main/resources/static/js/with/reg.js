@@ -824,7 +824,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // 유효성 검사 통과 시 폼 제출
       // withReg.submit();
       withForm.submit();
-
     }
   }
 
@@ -849,17 +848,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// 대면 클릭시 모임장소 섹션 나옴
-// window.addEventListener("load", function () {
-//   const faceYnDiv = document.querySelector(".face-yn");
-//   const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
-//
-//   const location = document.querySelector(".location");
-//
-//   // 대면
-//   faceYnDiv.onclick = async (e) => {
-//     e.preventDefault();
-//
-//     let face;
-//   };
-// });
+/* 대면 클릭시 모임장소 섹션 나옴 */
+window.addEventListener("DOMContentLoaded", function () {
+  // 대면/비대면 라디오 버튼 요소 가져오기
+  const faceYnRadios = document.querySelectorAll(".face-yn");
+  const locationSection = document.querySelector(".location");
+  locationSection.style.display = "none";
+
+  // 각 라디오 버튼에 이벤트 리스너 추가
+  faceYnRadios.forEach((radio) => {
+    radio.addEventListener("click", function (e) {
+      // 선택된 라디오 버튼의 값 확인
+      const selectedValue = radio.value;
+
+      // location 섹션의 표시 여부 결정
+      if (selectedValue === "1") {
+        // 대면 선택 시
+        locationSection.style.display = "block";
+      } else {
+        // 비대면 선택 시
+        locationSection.style.display = "none";
+      }
+    });
+  });
+});
