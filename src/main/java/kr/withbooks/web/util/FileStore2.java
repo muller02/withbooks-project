@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class FileStore {
+public class FileStore2 {
 
     public List<DebateAttachment> storeFiles(List<MultipartFile> multipartFiles, HttpServletRequest request) throws IOException {
         List<DebateAttachment> storeFileResult = new ArrayList<>();

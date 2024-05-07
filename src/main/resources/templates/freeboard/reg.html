@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main layout:fragment="main">
+        <section>
+            <h1 class="d:none">글 유형 선택</h1>
+            <div>
+                <label class="d:flex jc:center ai:center w:2 h:1 bg-color:main-2 bd-radius:4">
+                    공지사항  
+                    <input class="d:none" type="checkbox" name="public">
+                </label>
+            </div>
+        </section>
+        <section>
+            <h1 class="d:none">입력부</h1>
+            <form>
+                <section>
+                    <h1 class="d:none">제목 입력부</h1>
+                    <div>
+                        <label class="d:none">제목</label>
+                        <input type="text" placeholder="제목">
+                    </div>
+                </section>
+                <section>
+                    <h1 class="d:none">사진 입력부</h1>
+                    <div>
+                        <label for="">
+                            이미지 선택
+                            <input type="file" multiple>
+                        </label>
+                        <div><img src="" alt="이미지1"></div>
+                        <div><img src="" alt="이미지2"></div>
+                    </div>
+                </section>
+                <section>
+                    <h1 class="d:none">본문 입력부</h1>
+                    <textarea class="bd" name="content"></textarea>
+                </section>
+                <div><button>등록</button></div>
+            </form>
+        </section>
+
+    </main>
+</body>
+</html>
