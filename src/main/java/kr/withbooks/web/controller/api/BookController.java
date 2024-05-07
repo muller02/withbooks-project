@@ -37,4 +37,12 @@ public class BookController {
          return list;
 
      }
+
+     @GetMapping("detail")
+     public BookView detail(Long id){
+
+        System.out.println("id = "+id);
+        BookView book = service.getView(id);
+        return book;
+     }
 }

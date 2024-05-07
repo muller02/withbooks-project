@@ -52,6 +52,8 @@ window.addEventListener("load",function(){
     if(!categoryParam)
         return;
 
+    if(categoryParam)
+
     // 카테고리 값 설정
     categoryValue = categoryParam;
 
