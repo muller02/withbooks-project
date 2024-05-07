@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 public class BoardForm {
 
-    private Long id;
     private Long topicId;
     private String title;
     private String content;

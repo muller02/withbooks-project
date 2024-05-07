@@ -16,6 +16,7 @@ public class BookmarkView {
 
     private long id;
     private long bookId;
+    private long userId;
     private String title; 
     private String author; 
     private String cover;

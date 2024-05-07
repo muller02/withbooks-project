@@ -8,7 +8,7 @@ import kr.withbooks.web.entity.BookmarkView;
 
 @Mapper
 public interface BookmarkRepository {
-    List<BookmarkView> findAll(Integer p);
+    List<BookmarkView> findAll(Integer p, Long userId);
 
     void deleteAllByIds(List<Integer> ids, Long userId);
 

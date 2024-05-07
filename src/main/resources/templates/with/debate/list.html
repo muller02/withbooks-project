@@ -96,7 +96,7 @@
                         요한하리
                       </div>
                       <div class="ml:2">
-                        [<span th:text="${n.boardCnt}">5</span>]
+                        [<span th:text="${n.boardCnt} == null ? 0 : ${n.boardCnt}" >5</span>]
                       </div>
                     </span>
                   </div>

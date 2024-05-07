@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.withbooks.web.entity.FreeBoard;
 import kr.withbooks.web.entity.FreeBoardView;
 import kr.withbooks.web.repository.FreeBoardRepository;
 
@@ -13,20 +14,24 @@ public class FreeBoardServiceImp implements  FreeBoardService{
 
     @Autowired
     private FreeBoardRepository repository;
-
-    // @Override
-    // public List<FreeBoardView> getViewById(Long withId) {
-
-    //     List<FreeBoardView> list = freeBoardViewRepository.findById(withId);
-
-    //     return  list;
-    // }
+    
 
     @Override
-    public List<FreeBoardView> getListByWithId(Long withId) {
-        List<FreeBoardView> list = repository.findAllByWithId(withId);
-        // list에 imgs 채워넣기
+    public List<FreeBoardView> getList(Long withId, int page, String sort) {
+        int limit = 10;
+        int offset = (page - 1) * limit;
+        List<FreeBoardView> list = repository.findAll(withId, page, sort, limit, offset);
 
         return list;
+    }
+
+    @Override
+    public int getCount(Long withId) {
+        return repository.count(withId);
+    }
+
+    @Override
+    public FreeBoard getById(Long freeBoardId) {
+        return repository.findById(freeBoardId);
     }
 }

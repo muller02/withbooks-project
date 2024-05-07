@@ -15,8 +15,8 @@ public class BookmarkServiceImp implements BookmarkService {
     private BookmarkRepository repository;
 
     @Override
-    public List<BookmarkView> getList(Integer p) {
-        return repository.findAll(p);
+    public List<BookmarkView> getList(Integer p,Long userId) {
+        return repository.findAll(p,userId);
     }
 
     @Override

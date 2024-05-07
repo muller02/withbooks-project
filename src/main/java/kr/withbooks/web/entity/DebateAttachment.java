@@ -14,5 +14,5 @@ public class DebateAttachment {
     private Long id;
     private Long boardId;
     private String originalImg;
-    private String saveImg;
+    private String saveImg; // webapp/image/debate/board 에 저장한 파일명
 }

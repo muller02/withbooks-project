@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,9 +69,10 @@ public class BookController {
 
     @GetMapping("detail")
     public String detail(Model model
-                        , @RequestParam(name="id") Long bookId) {
+                        , @RequestParam(name="id") Long bookId
+                        , @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        Long userId = 1L;
+        Long userId = userDetails.getId();
 
         // getView 쓰지 않고 getMapById를 쓰는 이유
         // -> 책 정보와 더불어 회원의 id로 해당 책을 북마크 했는지 여부가 함께 출력되어야 함

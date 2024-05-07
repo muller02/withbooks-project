@@ -25,6 +25,13 @@ public class BookServiceImp implements BookService {
         return viewRepository.findAll(null, null);
     }
 
+    @Override
+    public List<BookView> getList(String query, Long categoryId) {
+
+
+        return    viewRepository.findAll(query,categoryId);
+    }
+
 
     //=====================================================================
     // book/list

@@ -31,7 +31,8 @@
       <section class="pb:4 pt:4 pl:4 pr:4">
         <h1 class="d:none">위드 토론 등록 페이지</h1>
 
-        <form action="" class="" method="post">
+        <form action="/with/debate/reg" class="" method="post">
+          <input type="hidden" name="wid"  th:value="${param.wid}">
           <div class="d:flex jc:end">
             <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
               등록
@@ -80,16 +81,12 @@
 
 
             <label>
-
               <div class="d:flex ai:center">
                 <span class="mr:5">    예약일:</span>
                 <input id="reserve-date" name="reserveDate"  class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center"  type="date">
-
-
               </div>
             </label>
             <label>
-
               <div class="d:flex ai:center d:none  deadline-box " >
                 <span class="mr:5">     토론기한:</span>
                 <input id="deadline" value="1" class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center" min="1" max="5" name="deadline"  type="number">
@@ -99,10 +96,10 @@
                 </div>
               </div>
             </label>
+
           </section>
-          <section
-            class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow"
-          >
+
+          <section class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow">
             <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">공지사항</h1>
             <div class="mt:4">
               <textarea
@@ -115,6 +112,7 @@
               ></textarea>
             </div>
           </section>
+
           <section
             class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
           >
