@@ -10,29 +10,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
+    <script src="/js/admin/book/detail.js" defer></script>
+    <style>
+        .n-form>div:not(:first-child) {
+            margin-top: 0
+        }
+    </style>
 </head>
 <body>
-    <main layout:fragment="main" class="n-panel n-main-panel">
+    <main layout:fragment="main" class="n-panel n-main-panel flex-direction:column">
 
         <!-- api 검색부 -->
-        <section id="search-section" class="mt:4">
+        <section id="search-section" class="mt:4 w:100p">
             <h1 class="d:none">검색</h1>
                 <div class="n-container px:4 lg:px:10">
                     <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
-                        <select name="query-type">
-                            <option value="all" selected>전체</option>
-                            <option value="author">저자</option>
-                            <option value="title">제목</option>
-                            <option value="isbn13">ISBN13</option>
+                        <select name="sort">
+                            <option value="1">책리스트</option>
+                            <option value="2">검색어</option>
+                            <option value="3">ISBN 검색</option>
                         </select>
-                        <input
-                        type="text"
-                        class="query n-textbox n-textbox-type:outline n-textbox-status:focus"
-                        placeholder="Outline Focus"
-                        />
+                        <div class="search-input-div d:flex flex-direction:row w:100p">
+                            <select name="QueryType" >
+                                <option value="Bestseller">베스트셀러</option>
+                                <option value="ItemNewAll">신간</option>
+                                <option value="ItemNewSpecial">특별 신간</option>
+                            </select>
+                        </div>
                         <button type="submit" class="n-btn n-btn-type:filled">검색</button>
                     </div>
                 </div>
+            </section>
+
+            <div class="d:flex justify-content:space-between mt:4 px:10">
+                <div class="d:flex ai:center">검색 결과 : <span th:text="${count}"></span> 건</div>
+                <button class="n-btn">선택 반영</button>
+            </div>
+    
+    
+            <section class="n-container p:4 lg:px:10">
+                <h1 class="d:none">Main</h1>
+                <section id="book-list" class="book-list">
+                    <h1 class="d:none">책 리스트</h1>
+    
+                    <section class="d:flex align-items:center pb:4 pt:4 bd-bottom bg-color:main-1 pr:2">
+                        <h1 class="d:none">헤더</h1>
+                        <div class="w:1p text-align:center pl:5">
+                            <label>
+                                <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
+                            </label>
+                        </div>
+                        <div class="w:1p text-align:center">ID</div>
+                        <div class="w:2p text-align:center">카테고리</div>
+                        <div class="w:5p text-align:center">제목</div>
+                        <div class="w:2p text-align:center">저자</div>
+                        <div class="w:2p text-align:center">ISBN13</div>
+                        <div class="w:1p text-align:center">기존여부</div>
+                    </section>
+    
+                    <section>
+                        <h1 class="d:none">본문</h1>
+    
+                        <section class="book-row d:flex jc:space-between align-items:center py:2 bd-top bd-right bd-left bd-color:main-3 pos:relative csr:pointer">
+                            <h1 class="d:none">요약</h1>
+                            <div class="w:1p text-align:center pl:5">
+                                <label>
+                                    <input type="checkbox" name="select-all" class="n-toggle n-toggle-type:check-box n-toggle-size:1">
+                                </label>
+                            </div>
+                            <div class="w:1p text-align:center ln-clamp:1"></div>
+                            <div class="w:2p text-align:center ln-clamp:1"></div>
+                            <div class="w:5p text-align:center ln-clamp:1"></div>
+                            <div class="w:2p text-align:center ln-clamp:1"></div>
+                            <div class="w:2p text-align:center ln-clamp:1"></div>
+                            <div class="w:1p text-align:center ln-clamp:1"></div>
+                            <div class="toggle-btn-area w:9p ml:10 h:10p pos:absolute bg-color:transparent text-indent:-1 of:hidden"></div>
+                        </section>
+    
+    
+                        <!-- 디테일 출력할 부분 -->
+                        <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle"
+                        >
+                        </section>
+    
+                    </section>
+                </section>
+                
             </section>
 
     </main>
