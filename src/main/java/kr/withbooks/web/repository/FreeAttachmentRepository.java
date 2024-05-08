@@ -10,5 +10,7 @@ import kr.withbooks.web.entity.FreeAttachment;
 public interface FreeAttachmentRepository {
 
     List<FreeAttachment> findAll(Long freeBoardId);
+
+    int save(Long boardId, String savedPath);
     
 }

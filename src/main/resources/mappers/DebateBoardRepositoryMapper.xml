@@ -40,5 +40,22 @@
         where id = #{id}
     </select>
 
+    <!-- 게시글 수정 -->
+    <update id="update" parameterType="DebateBoard">
+        UPDATE debate_board
+        SET
+        title = #{title}
+        , content = #{content}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        UPDATE debate_board
+        SET
+        blind_yn = 1
+        WHERE
+        id = #{id}
+    </delete>
 </mapper>
 

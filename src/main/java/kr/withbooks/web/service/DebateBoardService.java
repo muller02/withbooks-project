@@ -12,4 +12,6 @@ public interface DebateBoardService {
     DebateBoard getById(Long id);
 
     Long save(DebateBoard debateBoard);
+
+    void edit(Long id, DebateBoard updateBoard);
 }

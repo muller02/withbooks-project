@@ -17,4 +17,6 @@ public interface FreeBoardRepository {
 
     FreeBoard findById(Long freeBoardId);
 
+    int save(FreeBoard freeBoard);
+
 }

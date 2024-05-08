@@ -11,4 +11,6 @@ public interface DebateBoardRepository {
     void save(DebateBoard debateBoard);
 
     DebateBoard findById(Long id);
+
+    void update(DebateBoard debateBoard);
 }

@@ -8,6 +8,11 @@
     if(_img != null)    
         imgWidth = _img.width;
 
+    // 이미지가 한 장만 있는 경우 이전/다음 화살표 시각적 표시
+    let lastImgCnt = parseInt(document.querySelector(".img-box").dataset.lastImg);
+    if(lastImgCnt == 1)
+        document.querySelector(".img-r-btn").classList.add("d:none");
+
     board.onclick = (e)=>{
         
         // 이전 버튼을 눌렀을 때 
@@ -74,6 +79,7 @@
             }            
         }
     }
+    
 }
 
 

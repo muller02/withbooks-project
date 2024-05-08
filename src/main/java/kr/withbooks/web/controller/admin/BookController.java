@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.Category;
+import kr.withbooks.web.service.AladdinAPIService;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.CategoryService;
 
@@ -25,6 +25,8 @@ public class BookController {
     private BookService service;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private AladdinAPIService apiService;
 
     @GetMapping("list")
     public String list( 
@@ -78,25 +80,38 @@ public class BookController {
         return "admin/book/list";
     }
 
-    @GetMapping("detail")
-    public String detail(@RequestParam("id")Long id
-                        ,Model model){
-        Book book = service.getView(id);
-        model.addAttribute("book", book);
-        return "admin/book/detail";
-    }
-
     @GetMapping("reg")
     public String reg(){
-
         return "admin/book/reg";
     }
 
-    @PostMapping("reg")
-    public String save(Book book){
 
-        System.out.println("Book = "+book.toString());
-        return "redirect:admin/book/list";
+    // =====================================================================
+    // Aladdin API
+    /*
+    sort 1 = QueryType
+    sort 2 = Query, QueryType
+    sort 3 = ItemId, ItemIdType
+    */
+
+    @GetMapping("aladdinList")
+    public String aladdinList(
+                           @RequestParam(name = "sort", required = true) Integer sort
+                           ,@RequestParam(name = "qt", required = false) String queryType
+                           ,@RequestParam(name = "q", required = false) String query
+                           ,@RequestParam(name = "i", required = false) String itemId
+                           ,@RequestParam(name = "p", required = false) Integer page
+                            ,Model model    ) {
+
+        List<Book> list = new ArrayList<>();
+        Map<String, Object> resultMap = apiService.getList(list, sort, queryType, query, itemId, page);
+
+        System.out.println(resultMap.toString());
+        model.addAttribute("totalResults", resultMap.get("totalResults"));
+        model.addAttribute("list", resultMap.get("list"));
+
+        return "admin/book/reg";
+
     }
 
 

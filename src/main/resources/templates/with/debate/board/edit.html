@@ -79,17 +79,18 @@
     <main class=" p:2">
         <section class="">
             <h1 class="d:none">토론 카드 내용 입력</h1>
-            <form th:object="${board}" class="form-group h:auto" action="reg" method="post" enctype="multipart/form-data">
+            <form th:object="${board}" class="form-group h:auto" action="edit" method="post" enctype="multipart/form-data">
                 <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3">
-                    <h1 class="deco icon:sun bd-bottom w:10p h:1 pl:2">토론주제 등록</h1>
+                    <h1 class="deco icon:sun bd-bottom w:10p h:1 pl:2">토론주제</h1>
                     <div class="d:flex jc:center mt:2">
-                        <div class="n-select">
-                            <select name="topicId">
-                              <option value=" ">토론주제</option>
-                              <option th:each="val : ${topicList}"
-                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>
-                            </select>
-                        </div>
+                        <div class="w:10p n-textbox color:base-3" th:text="${debateTopic.content}">토론주제</div>
+<!--                        <div class="n-select">-->
+<!--                            <select name="topicId">-->
+<!--                              <option value=" ">토론주제</option>-->
+<!--                              <option th:each="val : ${topicList}"-->
+<!--                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
                     </div>
                 </section>
 

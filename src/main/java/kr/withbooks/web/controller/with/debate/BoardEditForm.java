@@ -10,9 +10,9 @@ import java.util.List;
 public class BoardEditForm {
 
     private Long id;
-    private Long topicId;
+    //private Long topicId;
     private String title;
     private String content;
     private List<MultipartFile> files = new ArrayList<>();
-
+    private List<Long> deleteFilesId = new ArrayList<>();
 }
