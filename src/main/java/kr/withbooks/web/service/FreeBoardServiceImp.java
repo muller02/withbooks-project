@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.withbooks.web.entity.FreeBoard;
 import kr.withbooks.web.entity.FreeBoardView;
@@ -33,5 +34,10 @@ public class FreeBoardServiceImp implements  FreeBoardService{
     @Override
     public FreeBoard getById(Long freeBoardId) {
         return repository.findById(freeBoardId);
+    }
+
+    @Override
+    public void reg(FreeBoard freeBoard, MultipartFile[] imgs) {
+        // DB에 freeboard 저장
     }
 }
