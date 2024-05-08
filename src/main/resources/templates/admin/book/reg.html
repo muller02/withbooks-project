@@ -15,6 +15,12 @@
         .n-form>div:not(:first-child) {
             margin-top: 0
         }
+
+        .n-toggle {
+
+        /* toggle-type:check */
+        --toggle-check-border-color: var(--color-main-2);
+        }
     </style>
 </head>
 <body>
@@ -43,7 +49,7 @@
             </section>
 
             <div class="d:flex justify-content:space-between mt:4 px:10">
-                <div class="d:flex ai:center">검색 결과 : <span th:text="${count}"></span> 건</div>
+                <div class="d:flex ai:center">검색 결과 : <span th:text="${totalResults}"></span> 건</div>
                 <button class="n-btn">선택 반영</button>
             </div>
     
@@ -58,44 +64,118 @@
                         <div class="w:1p text-align:center pl:5">
                             <label>
                                 <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
+                                전체선택
                             </label>
                         </div>
-                        <div class="w:1p text-align:center">ID</div>
-                        <div class="w:2p text-align:center">카테고리</div>
+                        <!-- <div class="w:2p text-align:center">카테고리</div>
                         <div class="w:5p text-align:center">제목</div>
                         <div class="w:2p text-align:center">저자</div>
                         <div class="w:2p text-align:center">ISBN13</div>
-                        <div class="w:1p text-align:center">기존여부</div>
+                        <div class="w:1p text-align:center">기존여부</div> -->
                     </section>
     
-                    <section>
+                    <section th:each="book : ${list}">
                         <h1 class="d:none">본문</h1>
-    
-                        <section class="book-row d:flex jc:space-between align-items:center py:2 bd-top bd-right bd-left bd-color:main-3 pos:relative csr:pointer">
-                            <h1 class="d:none">요약</h1>
-                            <div class="w:1p text-align:center pl:5">
-                                <label>
-                                    <input type="checkbox" name="select-all" class="n-toggle n-toggle-type:check-box n-toggle-size:1">
-                                </label>
-                            </div>
-                            <div class="w:1p text-align:center ln-clamp:1"></div>
-                            <div class="w:2p text-align:center ln-clamp:1"></div>
-                            <div class="w:5p text-align:center ln-clamp:1"></div>
-                            <div class="w:2p text-align:center ln-clamp:1"></div>
-                            <div class="w:2p text-align:center ln-clamp:1"></div>
-                            <div class="w:1p text-align:center ln-clamp:1"></div>
-                            <div class="toggle-btn-area w:9p ml:10 h:10p pos:absolute bg-color:transparent text-indent:-1 of:hidden"></div>
-                        </section>
-    
-    
-                        <!-- 디테일 출력할 부분 -->
                         <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle"
                         >
+                        <div class="w:1 text-align:center">
+                            <label>
+                                <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
+                            </label>
+                        </div>
+                        <div class="d:flex pos:relative w:100p">
+                            <h1 class="d:none">디테일</h1>
+                              <div class="d:flex fl-dir:column">
+                                  <div class="">
+                                      <img class="w:3 h:5 bd-radius:2" th:src="${book.cover}">
+                                  </div>
+                              </div>
+                        
+                              <span class="ml:6 w:10p">
+                                  <span class="d:flex">
+                                      <div>
+                                          <div><b>ID</b> : <span th:text="${book.id}"></span></div>
+                                      </div>
+                        
+                                      <div class="ml:auto">
+                                          <div><b>카테고리</b> : <span th:text="${book.categoryName}"></span></div>
+                                      </div>
+                        
+                                      <div class="ml:auto">
+                                          <div><b>제목</b> : <span th:text="${book.title}"></span></div>
+                                      </div>
+                        
+                                      <div class="ml:auto">
+                                          <div><b>저자</b> : <span th:text="${book.author}"></span></div>
+                                      </div>
+                                  </span>
+                        
+                                  <span class="d:flex mt:3">
+                                      <div><b>ISBN13</b> : <span th:text="${book.isbn13}"></span></div>
+                                      <div class="ml:auto"><b>출판일</b> : <span th:text="${book.pubDate}"></span></div>
+                                      <div class="ml:auto"><b>출판사</b> : <span th:text="${book.publisher}"></span></div>
+                                  </span>
+                                  
+                                  <div class="d:flex mt:3 ai:center">
+                                      <label class="w:1"><b>가격</b></label>
+                                      <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.price}"></input>
+                                  </div>
+                        
+                                  <div class="d:flex mt:3">
+                                      <label class="w:1"><b>설명</b></label>
+                                      <textarea class="bd bd-radius:2 w:10p pl:3 py:1" th:utext="${book.description}"></textarea>
+                                  </div>
+                        
+                                  <div class="d:flex mt:3">
+                                      <label class="w:2"><b>구매링크</b></label>
+                                      <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.purchaseLink}"></input>
+                                      
+                                      <div class="d:flex jc:center ai:center"><a th:href="${book.purchaseLink}" class="icon icon:share_fat ml:2">링크</a></div>
+                                  </div>
+                              </span>
+                          </div>
                         </section>
     
                     </section>
                 </section>
                 
+            </section>
+
+
+            <section class="mb:5 mt:3">
+                <h1 class="d:none">페이저</h1>
+                <ul class="n-pager" style="display: flex; justify-content: center;"
+    
+                    th:with="page=${param.p} eq null ? 1 : ${{param.p}}
+                            ,temp=(${page}-1)/5
+                            ,startnum=${T(java.lang.Math).floor(temp)} * 5 + 1
+                            ,temp1 = ${count/6}
+                            ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                            ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
+                            ">
+                    <li>
+                        <span th:if="${page} lt 6">이전</span>
+                        <a href="list?page=5"
+                        th:if="${page} ge 6">이전</a>
+                    </li>
+    
+                    <li
+                        th:each="n : ${#numbers.sequence(startnum, endnum)}"
+                        th:class="${{param.p}} == ${n} ? 'active'">
+                        <span th:if="${n} eq ${{param.p}}" th:text="${n}">1</span>
+                        <a
+                            th:if="${n} ne ${{param.p}}"
+                            href="list?p=1"
+                            th:href="@{./list(page=${n})}"
+                            th:text="${n}">1</a>
+                    </li>
+                    <li>
+                        <span th:if="${startnum+4} gt ${lastnum}">다음</span>
+                        <a href="list?page=6" 
+                        th:href="@{./list(page=${startnum}+5)}"
+                        th:if="${startnum+4} lt ${lastnum}">다음</a >
+                    </li>
+                </ul>
             </section>
 
     </main>
