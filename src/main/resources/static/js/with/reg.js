@@ -44,17 +44,17 @@ window.addEventListener("load", function () {
   let checkName;
 
   // 중복확인버튼 클릭했는지 여부
-  let duplicateBtnValid;
+  let duplicateBtnValid = false;
 
   // 위드 정원 유효성 검사
-  let personnelValid;
+  let personnelValid = false;
 
   // 토론주기 유효성 검사
   const intervalInput = withReg.querySelector("input[name='interval']");
 
   const personnelInput = withReg.querySelector("input[name='personnel']"); // 위드 정원
 
-  let intervalValid;
+  let intervalValid = false;
 
   const form = document.querySelector("form");
   const submitBtn = document.getElementById("btn");
@@ -137,8 +137,13 @@ window.addEventListener("load", function () {
 
     /* 위드명 입력창에 입력이 되면, 유효성 검사 관련 알림 모두 숨김 */
     withNameInput.addEventListener("input", function (e) {
-      duplicateTrue.classList.add("d:none");
-      duplicateFalse.classList.add("d:none");
+      // 위드명의 길이가 최소 글자 수(두 글자) 미만인 경우
+      if (withNameInput.value.length < 2) {
+        lengthAlert.classList.remove("d:none");
+      } else {
+        lengthAlert.classList.add("d:none");
+        duplicateFalse.classList.remove("d:none");
+      }
     });
 
     /* 위드 소개 textarea 자동 늘어지게 하는 이벤트 */

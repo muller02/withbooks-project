@@ -11,12 +11,54 @@ window.addEventListener("load", function (e) {
   const querySearch = document.querySelector(".query-search");
   const queryBtn = document.querySelector(".query-btn");
 
-  console.log(faceYnRadio[0]);
-
   let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
   let faceYn;
   let query;
 
+  const writeBtn = document.querySelector(".write-btn");
+
+  /* 로그인 정보 쿠키 확인 */
+  function getJSessionID() {
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith("lck=")) {
+        return cookie.split("=")[1];
+      }
+    }
+    return null;
+  }
+
+  /* 로그인 안내 모달 창 */
+  function loginModal() {
+    const openButton = document.getElementById("modal-btn");
+    const closeButton = document.getElementById("login-close-btn");
+    const modal = document.getElementById("login-modal");
+    const modalBackdrop = document.getElementById("login-modal-backdrop");
+
+    modal.classList.remove("d:none");
+    modalBackdrop.classList.remove("d:none");
+    modal.classList.add("modal-fade-in");
+
+    closeButton.addEventListener("click", function () {
+      modal.classList.replace("modal-fade-in", "modal-fade-out");
+
+      setTimeout(() => {
+        modal.classList.add("d:none");
+        modalBackdrop.classList.add("d:none");
+        modal.classList.remove("modal-fade-out");
+      }, 130);
+    });
+  }
+
+  writeBtn.addEventListener("click", (e) => {
+    if (getJSessionID() == null) {
+      loginModal();
+      e.preventDefault();
+    }
+  });
+
+  /* 대면비대면 선택에 따른 정렬 */
   faceYnDiv.onclick = async function (e) {
     if (e.target.nodeName !== "INPUT") return;
     faceYn = e.target.value;

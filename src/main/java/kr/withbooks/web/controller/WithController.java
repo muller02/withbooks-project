@@ -51,12 +51,17 @@ public class WithController {
   public String list(Model model,
                      @RequestParam(name = "c", required = false) Long[] categoryIds,
                      @RequestParam(name = "q", required = false) String query,
-                     @RequestParam(name = "f", required = false) Long faceYn) {
+                     @RequestParam(name = "f", required = false) Long faceYn,
+                     @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+    Long userId = userDetails != null ? userDetails.getId() : null;
+
+    System.out.println("userId = " + userId);
+
 
     //카테고리 모델 얻기
     List<Category> categoryList = categoryService.getList();
     model.addAttribute("categoryList", categoryList);
-
 
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
     List<WithView> list = service.getList(categoryIds, query, faceYn);
@@ -73,7 +78,7 @@ public class WithController {
     // 뷰에 데이터 전달
     model.addAttribute("list", list);
 
-    return "/with/list";
+    return "with/list";
   }
 
   @GetMapping("detail")
@@ -85,7 +90,6 @@ public class WithController {
     Long withCapId = with.getWithRegId();
 
     String nickname = userService.getNickNameById(withCapId);
-
 
     //withId에 해당하는 위드 카테고리 리스트를 얻기
     List<String> withCategoryNames = withCategoryService.getListByWithId(withId);
@@ -105,8 +109,6 @@ public class WithController {
 
     model.addAttribute("nickname", nickname);
 
-    System.out.println("토마토  = " + nickname);
-
     model.addAttribute("withMemberList", withMemberList);
     // model.addAttribute("freeBoardList", freeBoardList);
     model.addAttribute("debateRoomList", debateRoomList);
@@ -115,7 +117,7 @@ public class WithController {
     model.addAttribute("withMemberCnt", withMemberCnt);
 
 
-    return "/with/detail";
+    return "with/detail";
   }
 
 
@@ -131,7 +133,7 @@ public class WithController {
     String nickname = userService.getNickNameById(userDetails.getId());
     model.addAttribute("nickname", nickname);
 
-    return "/with/reg";
+    return "with/reg";
 
   }
 
@@ -153,12 +155,9 @@ public class WithController {
     String location = sido + " " + sigungu;
     with.setLocation(location);
 
-    //With 테이블 등록
-
     //위드 이미지파일 이름
     //파일이 없을 때, 기본 이미지 적용
     String withImgName = "default.png";
-
 
     //파일이 있을 떄, 파일을 로컬에 저장
     if (!withImgFile.isEmpty()) {
@@ -187,7 +186,6 @@ public class WithController {
 
 
     //WithCategory 테이블 등록
-
     Long withId = with.getId();   // 위에서  등록한 with ID 반환받기
 
     //withcategoryId 배열을 List<Long> 형태로 변환
