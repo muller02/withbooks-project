@@ -10,5 +10,10 @@ public interface DebateAttachmentRepository {
 
     void save(List<DebateAttachment> debateAttachments);
 
-    List<DebateAttachment> findAllById(Long boardId);
+    List<DebateAttachment> findAllByBoardId(Long boardId);
+
+    List<DebateAttachment> findAllByIds(List<Long> ids);
+
+    void deleteAllByIds(List<Long> ids);
+
 }

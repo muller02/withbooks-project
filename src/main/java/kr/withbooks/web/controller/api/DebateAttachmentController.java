@@ -19,7 +19,7 @@ public class DebateAttachmentController {
 
     @GetMapping("/files/{boardId}")
     public List<DebateAttachment> files(@PathVariable("boardId") Long boardId) {
-        List<DebateAttachment> attachmentFiles = debateAttachmentService.getListById(boardId);
+        List<DebateAttachment> attachmentFiles = debateAttachmentService.getAllFileByBoardId(boardId);
         return attachmentFiles;
     }
 }

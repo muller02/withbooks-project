@@ -28,13 +28,47 @@
         </foreach>
     </insert>
 
-    <select id="findAllById" parameterType="DebateAttachment">
-        select
+    <select id="findAllByBoardId" parameterType="Long">
+        SELECT
            *
-        from debate_attachment
-        where board_id = #{boardId}
+        FROM debate_attachment
+        WHERE board_id = #{boardId}
     </select>
 
+    <!-- 파일 리스트 조회 -->
+    <select id="findAllByIds" parameterType="list" resultType="DebateAttachment">
+        SELECT
+            *
+        FROM
+        debate_attachment
+        WHERE
+        id IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY
+        id
+    </select>
+
+    <!-- 파일 삭제 -->
+    <delete id="deleteAllByIds" parameterType="list">
+        DELETE FROM
+        debate_attachment
+        WHERE
+        id IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+
+<!--    <delete id="deleteByBoardId" parameterType="Long">-->
+<!--        DELETE-->
+<!--        FROM debate_attachment-->
+<!--        WHERE-->
+<!--        board_id = #{boardId}-->
+<!--    </delete>-->
 
 </mapper>
 

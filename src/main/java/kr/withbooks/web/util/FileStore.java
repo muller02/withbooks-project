@@ -3,6 +3,7 @@ package kr.withbooks.web.util;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.entity.DebateAttachment;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -11,9 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * storeFileName = saveImg
+ */
 @Component
 public class FileStore {
 
+    // 파일을 disk 에 저장
     public List<DebateAttachment> storeFiles(List<MultipartFile> multipartFiles, HttpServletRequest request) throws IOException {
         List<DebateAttachment> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
@@ -50,12 +55,32 @@ public class FileStore {
 
     }
 
-    // storeFileName = saveImg
-    public String getUploadFilePath(String storeFileName, HttpServletRequest request) {
+    // disk 에 저장된 파일 삭제
+    public void deleteFile(List<DebateAttachment> debateAttachment, HttpServletRequest request) {
+        if (CollectionUtils.isEmpty(debateAttachment)) {
+            return;
+        }
+
+        for (DebateAttachment attachment : debateAttachment) {
+            deleteFile(attachment.getSaveImg(), request);
+        }
+    }
+
+    private void deleteFile(String storeFileName, HttpServletRequest request) {
+        String uploadFilePath = getUploadFilePath(storeFileName, request);
+        File file = new File(uploadFilePath);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    private String getUploadFilePath(String storeFileName, HttpServletRequest request) {
+        // storeFileName = saveImg
         String path = "/image/debate/board";
         String realPath = request.getServletContext().getRealPath(path);
         return realPath + File.separator + storeFileName;
     }
+
 
     private String createStoreFileName(String originalFilename) {
         String ext = extractExt(originalFilename);
