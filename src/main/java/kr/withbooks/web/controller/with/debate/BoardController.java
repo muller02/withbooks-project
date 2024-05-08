@@ -100,7 +100,7 @@ public class BoardController {
         DebateTopic findTopic = debateTopicService.getById(topicId);
         log.info("findTopic = {}", findTopic);
 
-        List<DebateAttachment> imgList = debateAttachmentService.getListById(id);
+        List<DebateAttachment> imgList = debateAttachmentService.getAllFileByBoardId(id);
         log.info("imgList = {}", imgList);
 
         model.addAttribute("board", findBoard);
@@ -159,10 +159,43 @@ public class BoardController {
     @GetMapping("/edit")
     public String edit(@RequestParam("id") Long id, Model model) {
         DebateBoard debateBoard = debateBoardService.getById(id);
-        List<DebateTopic> topicList = debateTopicService.getList(debateBoard.getRoomId());
+        DebateTopic debateTopic = debateTopicService.getById(debateBoard.getTopicId());
 
         model.addAttribute("board", debateBoard);
-        model.addAttribute("topicList", topicList);
+        model.addAttribute("debateTopic", debateTopic);
         return "with/debate/board/edit";
     }
+
+    @PostMapping("/edit")
+    public String edit(
+            @RequestParam("id") Long id,
+            @ModelAttribute BoardEditForm boardEditForm,
+            HttpServletRequest request) throws IOException {
+
+        // 1. 게시글 정보 수정
+        DebateBoard updateBoard = new DebateBoard();
+        updateBoard.setTitle(boardEditForm.getTitle());
+        updateBoard.setContent(boardEditForm.getContent());
+
+        debateBoardService.edit(id, updateBoard);
+
+        // 2. 파일 업로드 (to disk)
+        log.info("files : {}", boardEditForm.getFiles());
+        List<DebateAttachment> debateAttachments = fileStore.storeFiles(boardEditForm.getFiles(), request);
+
+        // 3. 파일 정보 저장 (to database)
+        debateAttachmentService.add(id, debateAttachments);
+
+        // 4. 삭제할 파일 정보 조회 (from database)
+        List<DebateAttachment> deleteFiles = debateAttachmentService.getAllFileByIds(boardEditForm.getDeleteFilesId());
+
+        // 5. 파일 삭제 (from disk)
+        fileStore.deleteFile(deleteFiles, request);
+
+        // 6. 파일 삭제 (from database)
+        debateAttachmentService.deleteAllFileByIds(boardEditForm.getDeleteFilesId());
+
+        return "redirect:/with/debate/board/detail?id=" + id;
+    }
+
 }

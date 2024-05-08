@@ -41,5 +41,13 @@ public class DebateBoardServiceImp implements DebateBoardService {
         return debateBoard.getId();
     }
 
+    @Override
+    public void edit(Long id, DebateBoard updateBoard) {
+        DebateBoard findBoard = debateBoardRepository.findById(id);
+        findBoard.setTitle(updateBoard.getTitle());
+        findBoard.setContent(updateBoard.getContent());
+        debateBoardRepository.update(findBoard);
+    }
+
 
 }
