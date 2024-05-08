@@ -60,7 +60,7 @@ window.addEventListener("load", function (e) {
       i.checked = false;
     }
     faceYnRadio[0].checked = true;
-    // 위드 리스트를 받아옴o
+    // 위드 리스트를 받아옴
     let list = await response.json();
     updateHTML(list);
   };
@@ -68,7 +68,7 @@ window.addEventListener("load", function (e) {
   // 체크박스 클릭시 그에 해당하는 value를 가지고온다 e.target을 통해
   // 가지고 온 value값을 배열에 담아준다 .
   // locahostL8080/ ? c=2&c=3&c=4
-  //문자열 결합
+  // 문자열 결합
 
   // querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
   async function handleQuery() {
@@ -154,14 +154,12 @@ function getByParams(categoryIdArr, query, faceYn) {
     faceYn &&
     faceYn !== ""
   ) {
-    console.log(232323);
     url = `/api/with?f=${faceYn}&c=${categoryIds}`;
   } else if (query && query !== "") {
     url = `/api/with?q=${query}`;
   } else if (categoryIdArr && categoryIdArr.length !== 0) {
     url = `/api/with?c=${categoryIds}`;
   } else if (faceYn && faceYn !== "") {
-    console.log("여기왔어요2");
     url = `/api/with?f=${faceYn}`;
   } else {
     url = `/api/with`;
