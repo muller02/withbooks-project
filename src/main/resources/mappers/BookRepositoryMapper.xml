@@ -9,19 +9,14 @@
 			*
 		FROM book
 		<where>
-			<if test="query != null">
-				title like '%${query}%'
+			<if test="query != null and query != '' ">
+				and title like '%${query}%'
 			</if>
-		</where>
-				<!-- <where>
 			<if test="categoryId != null">
-				category_id = #{categoryId}
-			</if>
-			<if test="query != null">
-				and kor_name like '%${query}%'
+				and category_id = ${categoryId}
 			</if>
 		</where>
-		limit #{offset}, #{size} -->
+		<!-- limit #{offset}, #{size} -->
 	</select>
 	
 	<select id="findById" resultType="Book" parameterType="Long" >
@@ -59,19 +54,137 @@
 		group by b.id
 	</select>
 
-	<!-- <select id="count" resultType="int">
-		SELECT 
-		count(id)
-		FROM menu
+	<!-- <select id="findCountByParams" resultType="int">
+		select 
+			count(id) count
+		from
+			book
 		<where>
-			<if test="categoryId != null">
-				category_id = #{categoryId} 
+			<if test="params.query != null and params.queryType != null">
+				${params.queryType} like '%${params.query}%'
 			</if>
-			<if test="query != null">
-				and kor_name like '%${query}%'
+			<if test="params.categoryId != null">
+				and category_id = #{params.categoryId}
 			</if>
 		</where>
 	</select> -->
+
+
+<!-- book/list -->
+	<select id="findByParams" resultType="Book">
+	select 
+			*
+		from
+			(
+				select 
+					b.id,
+					b.title,
+					b.purchase_link,
+					b.author,
+					b.pub_date,
+					b.description,
+					b.isbn13,
+					b.price,
+					b.cover,
+					b.public_yn,
+					b.category_id,
+					b.reg_date,
+					b.publisher,
+					c.name categoryName
+				from
+					book b left join book_category c on b.category_id = c.id
+			<where>
+					b.public_yn=1
+				<if test="categoryId != null">
+					and b.category_id = #{categoryId}
+				</if>
+				<if test="query != null">
+					and (b.title like '%${query}%' or b.author like '%${query}%')
+				</if>
+			</where>
+				order by 
+					b.id desc
+			) v
+		LIMIT #{offset}, #{size}
+	</select>
+
+	<select id="findCntByParams" resultType="int">
+		select 
+			count(id) count
+		from
+			book
+		<where>
+				public_yn=1
+			<if test="categoryId != null">
+				and category_id = #{categoryId}
+			</if>
+			<if test="query != null and query != '' ">
+				and (title like '%${query}%' or author like '%${query}%')
+			</if>
+		</where>
+	</select>
+<!-- ================================================================= -->
+
+
+<!-- admin/book/list -->
+	<select id="findAllByParams" resultType="Book">
+		select 
+			*
+		from
+			(
+				select 
+					b.id,
+					b.category_id,
+					b.title,
+					b.author,
+					b.pub_date,
+					b.publisher,
+					b.isbn13,
+					b.description,
+					b.purchase_link,
+					b.price,
+					b.cover,
+					b.public_yn,
+					b.reg_date,
+					c.name categoryName,
+					count(bs.id) best_count
+				from
+					book b left join book_category c on b.category_id = c.id 
+					left join bestseller bs on b.id = bs.book_id
+				group by 
+					b.id
+				order by 
+					b.id desc
+			) v
+		<where>
+			<if test="params.query != null and params.queryType != null">
+				${params.queryType} like '%${params.query}%'
+			</if>
+			<if test="params.categoryId != null">
+				and category_id = #{params.categoryId}
+			</if>
+		</where>
+		order by
+			id desc
+		LIMIT #{offset}, #{size}
+
+	</select>
+
+	<select id="findCountByParams" resultType="int">
+		select 
+			count(id) count
+		from
+			book
+		<where>
+			<if test="params.query != null and params.queryType != null">
+				${params.queryType} like '%${params.query}%'
+			</if>
+			<if test="params.categoryId != null">
+				and category_id = #{params.categoryId}
+			</if>
+		</where>
+	</select>
+<!-- ================================================================= -->
 
 
 </mapper>

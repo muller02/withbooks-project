@@ -167,7 +167,7 @@ public class BookshortsController {
         List<BookshortsAttachment> shortsAttachments = shortsAttachmentService.getListById(shortsId);
         log.info("shortsAttachments = {}", shortsAttachments);
 
-        Book book = bookService.get(bookId);
+        Book book = bookService.getById(bookId);
         log.info("book = {}", book);
         // model : view로 전달 하는 저장, 
         // 조합하기 - view는 결합이다. 어쩔수 없이 view를 사용한다.

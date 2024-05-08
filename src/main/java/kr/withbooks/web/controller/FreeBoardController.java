@@ -1,6 +1,8 @@
 package kr.withbooks.web.controller;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.FreeAttachment;
 import kr.withbooks.web.entity.FreeBoard;
@@ -118,9 +122,72 @@ public class FreeBoardController {
 
 
     @GetMapping("/reg")
-    public String regForm(){
+    public String regForm(
+        @RequestParam(name="wid") Long withId
+      , Model model
+    ){
+
+      model.addAttribute("withId", withId);
 
       return "/freeboard/reg";
+    }
+
+
+    @PostMapping("/reg")
+    public String reg(
+        String notice
+      , String title
+      , String content
+      , MultipartFile[] imgs
+      , HttpServletRequest request
+      , @RequestParam(name="with-id") Long withId
+      , @AuthenticationPrincipal CustomUserDetails userDetails
+    ){
+
+      // 이미지가 왔다면
+      // 이미지 파일을 서버에 저장
+      if(!imgs[0].isEmpty())
+      {
+        // 서버에 이미지를 저장할 경로를 구하기
+        String realPath = request
+                            .getServletContext()
+                            .getRealPath("/image/free-board");
+  
+        File dir = new File(realPath);
+        if(!dir.exists())
+            dir.mkdirs();
+
+
+        // 서버에 이미지를 저장
+        for(MultipartFile img : imgs){
+          String pathToSave = realPath + File.separator + img.getOriginalFilename();
+          File imgFile = new File(pathToSave);
+    
+          try {
+            img.transferTo(imgFile);
+          } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+
+
+      // // 게시글을 DB에 저장
+      {
+        FreeBoard freeBoard = FreeBoard
+                              .builder()
+                              .withId(withId)
+                              .userId(userDetails.getId())
+                              .title(title)
+                              .content(content)
+                              .noticeYn(notice!=null ? 1 : 0)
+                              .build();
+
+        service.reg(freeBoard, imgs);
+      }
+
+
+      return "redirect: /freeboard/list";
     }
 
 }
