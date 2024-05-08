@@ -146,8 +146,9 @@ public class FreeBoardController {
 
       // 이미지가 왔다면
       // 이미지 파일을 서버에 저장
-      if(imgs != null)
+      if(!imgs[0].isEmpty())
       {
+        // 서버에 이미지를 저장할 경로를 구하기
         String realPath = request
                             .getServletContext()
                             .getRealPath("/image/free-board");
@@ -156,6 +157,8 @@ public class FreeBoardController {
         if(!dir.exists())
             dir.mkdirs();
 
+
+        // 서버에 이미지를 저장
         for(MultipartFile img : imgs){
           String pathToSave = realPath + File.separator + img.getOriginalFilename();
           File imgFile = new File(pathToSave);
@@ -166,11 +169,10 @@ public class FreeBoardController {
             e.printStackTrace();
           }
         }
-  
       }
 
 
-      // 게시글을 DB에 저장
+      // // 게시글을 DB에 저장
       {
         FreeBoard freeBoard = FreeBoard
                               .builder()
@@ -178,13 +180,14 @@ public class FreeBoardController {
                               .userId(userDetails.getId())
                               .title(title)
                               .content(content)
+                              .noticeYn(notice!=null ? 1 : 0)
                               .build();
 
         service.reg(freeBoard, imgs);
       }
 
 
-      return "/freeboard/reg";
+      return "redirect: /freeboard/list";
     }
 
 }

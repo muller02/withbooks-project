@@ -77,10 +77,10 @@
                     <section class="mt:3 d:flex fl-dir:column jc:center ai:center pos:relative">
                         <h1 class="d:none">이미지</h1>
 
-                        <div class="mt:3 w:5 bd bd-radius:6 bd-color:base-3 of:hidden">
+                        <div class="mt:3 w:5 bd bd-radius:6 bd-color:base-3 --of:hidden">
                             <span class="img-box d:flex" data-cur-x="0" data-cur-img="1" th:data-last-img="${#arrays.length(imgs)}">
                                 <div th:each="img : ${imgs}">
-                                    <img class="h:5" src="/image/my/profile.png" alt="게시글 이미지" --th:src="${img.img}">
+                                    <img class="h:5 bg-size:contain" src="/image/my/profile.png" alt="게시글 이미지" th:src="${img.img}">
                                 </div>
                             </span>
                         </div>

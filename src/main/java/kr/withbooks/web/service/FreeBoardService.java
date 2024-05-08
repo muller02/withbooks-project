@@ -17,5 +17,5 @@ public interface FreeBoardService {
 
     FreeBoard getById(Long freeBoardId);
 
-    void reg(FreeBoard freeBoard, MultipartFile[] imgs);
+    int reg(FreeBoard freeBoard, MultipartFile[] imgs);
 }
