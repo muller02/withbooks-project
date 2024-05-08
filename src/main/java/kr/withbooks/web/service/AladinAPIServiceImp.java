@@ -9,24 +9,30 @@ import org.springframework.stereotype.Service;
 
 import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.Category;
-import kr.withbooks.web.repository.AladdinAPIRepository;
+import kr.withbooks.web.repository.AladinAPIRepository;
+import kr.withbooks.web.util.AladinJsonParser;
 
 @Service
-public class AladdinAPIServiceImp implements AladdinAPIService {
+public class AladinAPIServiceImp implements AladinAPIService {
     
     @Autowired
     private CategoryService categoryService;
 
     @Autowired
-    private AladdinAPIRepository repository;
+    private AladinAPIRepository repository;
+
+    @Autowired
+    private AladinJsonParser jsonparser;
 
     @Override
-    public Map<String, Object> getList(List<Book> list, Integer sort, String queryType, String query, String itemId, Integer page) {
+    public Integer getList(List<Book> list, Integer sort, String queryType, String query, String itemId, Integer page) {
         // TODO Auto-generated method stub
         String apiUrl = repository.urlMaker(sort, queryType, query,itemId,page);
-        // List<Category> cList = categoryService.getList(); 
-        // return repository.list(apiUrl, cList);
-        return null;
+        System.out.println("apiUrl = "+apiUrl);
+        String jsonResponse = repository.jsonResponse(apiUrl);
+        Integer totalResults = jsonparser.parser(list, jsonResponse);
+
+        return totalResults;
     }
     @Override
     public Book getByISBN13(String isbn13) {

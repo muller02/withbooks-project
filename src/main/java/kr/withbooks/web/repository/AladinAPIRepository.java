@@ -6,21 +6,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.Category;
-import kr.withbooks.web.util.JsonParser;
-
 @Component
-public class AladdinAPIRepository {
+public class AladinAPIRepository {
     // field
     private static String apiUrl;
 
@@ -41,6 +32,7 @@ public class AladdinAPIRepository {
 		StringBuilder builder = new StringBuilder();
 		boolean isList = true;
 
+		// 한글깨짐 -> encode 필요
 		String encodedQuery = "";
 		if(query != null)
 			try {
@@ -50,7 +42,7 @@ public class AladdinAPIRepository {
 			}
 		
 		// 주소 앞단 만들어주기
-		// http://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=##&
+		// http://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=##
 		/*  
 			sort 1 = ItemList
 			sort 2 = ItemSearch
@@ -94,6 +86,7 @@ public class AladdinAPIRepository {
 			}
 		}
 
+		// List를 찾는 경우 SearchTarget 필요, 1건 검색인 경우 필요없음
 		if(isList)
 			builder.append("&SearchTarget=Book");
 		builder.append("&MaxResults=100&output=js&Version=20131101");
@@ -105,63 +98,57 @@ public class AladdinAPIRepository {
 		return apiUrl;
 	}
 
-    
-	// public static void main(String[] args) throws Exception {
+		// Aladdin API 통신 함수
         public String jsonResponse(String apiUrl){
-//		String url = GetUrl();
-		// int categoryId = 517;
-		String jsonResponse="";
-		 try {
-			 // URL 객체 생성
-	            URL url = new URL(apiUrl);
 
-	            // HttpURLConnection 객체 생성
-	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			String jsonResponse="";
 
-	            // 요청 메서드 설정
-	            connection.setRequestMethod("GET");
+			try {
+				// URL 객체 생성
+					URL url = new URL(apiUrl);
 
-	            // 응답 코드 확인
-	            int responseCode = connection.getResponseCode();
-	            if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적으로 응답을 받은 경우
-	                // 응답 데이터를 읽어오기 위한 BufferedReader 생성
-	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
-	                StringBuilder response = new StringBuilder();
-	                String line;
+					// HttpURLConnection 객체 생성
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-	                // 한 줄씩 읽어서 StringBuilder에 추가
-	                while ((line = reader.readLine()) != null) {
-	                    response.append(line);
-	                }
+					// 요청 메서드 설정
+					connection.setRequestMethod("GET");
 
-	                // BufferedReader 닫기
-	                reader.close();
+					// 응답 코드 확인
+					int responseCode = connection.getResponseCode();
+					if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적으로 응답을 받은 경우
+						// 응답 데이터를 읽어오기 위한 BufferedReader 생성
+						// UTF-8 설정하지 않는 경우 한글 깨짐
+						BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+						StringBuilder builder = new StringBuilder();
+						String line;
 
-	                // 응답 데이터 출력
-	                jsonResponse = response.toString();
-	                // System.out.println("JSON Response:\n" + jsonResponse);
+						// 한 줄씩 읽어서 StringBuilder에 추가
+						while ((line = reader.readLine()) != null) {
+							builder.append(line);
+						}
 
-	            } else {
-	                System.out.println("HTTP request failed with response code: " + responseCode);
-	            }
+						// BufferedReader 닫기
+						reader.close();
 
-	            // HttpURLConnection 닫기
-	            connection.disconnect();
+						// 응답 데이터 출력
+						jsonResponse = builder.toString();
+						// System.out.println("JSON Response:\n" + jsonResponse);
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+					} else {
+						System.out.println("HTTP request failed with response code: " + responseCode);
+					}
+					// HttpURLConnection 닫기
+					connection.disconnect();
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			// JsonParser jp = new JsonParser();
+			// return jp.parser(jsonResponse, cList);
+			return jsonResponse;
 			
-		// JsonParser jp = new JsonParser();
-		// return jp.parser(jsonResponse, cList);
-		return jsonResponse;
-		
-		
-//		
-//		for(Item item : api.Items){
-//			System.out.println("제목 : "+item.Title + " / 작가 :  " + item.Author +" / 아이디 :  " + item.itemId + " / 작품 설명 : "+ item.Description);
-//		}
-	}
+		}
     
 
 }

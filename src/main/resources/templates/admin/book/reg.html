@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
-    <script src="/js/admin/book/detail.js" defer></script>
+    <script src="/js/admin/book/reg.js" defer></script>
     <style>
         .n-form>div:not(:first-child) {
             margin-top: 0
@@ -32,16 +32,51 @@
                 <div class="n-container px:4 lg:px:10">
                     <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
                         <select name="sort">
-                            <option value="1">책리스트</option>
-                            <option value="2">검색어</option>
-                            <option value="3">ISBN 검색</option>
+                            <option value="1" th:selected="${sort}=='1'">책리스트</option>
+                            <option value="2" th:selected="${sort}=='2'">검색어</option>
+                            <option value="3" th:selected="${sort}=='3'">ISBN 검색</option>
                         </select>
-                        <div class="search-input-div d:flex flex-direction:row w:100p">
-                            <select name="QueryType" >
-                                <option value="Bestseller">베스트셀러</option>
-                                <option value="ItemNewAll">신간</option>
-                                <option value="ItemNewSpecial">특별 신간</option>
+                        <div class="search-input-div d:flex flex-direction:row w:100p"
+                        th:with="s = ${sort} ? ${sort} : '1'
+                        "
+                        >
+                        <div th:text="${temp}"></div>
+                        <div th:text="${lastnum}"></div>
+                            <!-- sort = 1 -->
+                            <select name="qt" class="sort-1"
+                            th:classappend="${s} != '1' ? 'd:none'"
+                            >
+                                <option value="Bestseller" th:selected="${qt}=='Bestseller'">베스트셀러</option>
+                                <option value="ItemNewAll" th:selected="${qt}=='ItemNewAll'">신간</option>
+                                <option value="ItemNewSpecial" th:selected="${qt}=='ItemNewSpecial'">특별 신간</option>
                             </select>
+                            
+                            <!-- sort = 2 -->
+                            <select name="qt" class="sort-2"
+                            th:classappend="${s} != '2' ? 'd:none'"
+                            >
+                                <option value="Title" th:selected="${qt}=='Title'">제목</option>
+                                <option value="Author" th:selected="${qt}=='Author'">저자</option>
+                                <option value="Publisher" th:selected="${qt}=='Publisher'">출판사</option>
+                            </select>
+                            <input
+                                type="text"
+                                name="q"
+                                class="sort-2 n-textbox n-textbox-type:outline n-textbox-status:focus"
+                                placeholder="입력해주세요"
+                                th:value="${q}"
+                                th:classappend="${s} != '2' ? 'd:none'"
+                            />
+
+                            <!-- sort = 3 -->
+                            <input
+                                type="text"
+                                name="i"
+                                class="sort-3 n-textbox n-textbox-type:outline n-textbox-status:focus"
+                                placeholder="입력해주세요"
+                                th:value="${i}"
+                                th:classappend="${s} != '3' ? 'd:none'"
+                            />
                         </div>
                         <button type="submit" class="n-btn n-btn-type:filled">검색</button>
                     </div>
@@ -50,6 +85,40 @@
 
             <div class="d:flex justify-content:space-between mt:4 px:10">
                 <div class="d:flex ai:center">검색 결과 : <span th:text="${totalResults}"></span> 건</div>
+                <div class="d:flex jc:space-between ai:center w:3p">
+                    <div class="w:1 d:flex jc:space-around">
+                        <a href="" 
+                        th:if="${sort} == '1' and (${p}-1) > 0"
+                        th:href="@{|aladinList?sort=1&qt=${qt}&p=${p-1}|}"
+                        class="icon icon:caret_left_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '2' and (${p}-1) > 0"
+                        th:href="@{|aladinList?sort=2&q=${q}&qt=${qt}&p=${p-1}|}"
+                        class="icon icon:caret_left_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '3' and (${p}-1) > 0"
+                        th:href="@{|aladinList?sort=3&i=${i}&p=${p-1}|}"
+                        class="icon icon:caret_left_bold icon-size:5 csr:pointer"></a>
+                    </div>
+                    <div>
+                        <span class="fs:5"><b th:text="${p}">1</b></span>
+                    </div>
+                    <div class="w:1 d:flex jc:space-around">
+                        <a href="" 
+                        th:if="${sort} == '1' and ${lastNum > p}"
+                        th:href="@{|aladinList?sort=1&qt=${qt}&p=${p+1}|}"
+                        class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '2' and ${lastNum > p}"
+                        th:href="@{|aladinList?sort=2&q=${q}&qt=${qt}&p=${p+1}|}"
+                        class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '3' and ${lastNum > p}"
+                        th:href="@{|aladinList?sort=3&i=${i}&p=${p+1}|}"
+                        class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
+                        
+                    </div>
+                </div>
                 <button class="n-btn">선택 반영</button>
             </div>
     
@@ -80,7 +149,17 @@
                         >
                         <div class="w:1 text-align:center">
                             <label>
-                                <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
+                                <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="book-checkbox"
+                                    th:data-categoryName="${book.categoryName}"
+                                    th:data-title="${book.title}"
+                                    th:data-author="${book.author}"
+                                    th:data-isbn13="${book.isbn13}"
+                                    th:data-pubDate="${book.pubDate}"
+                                    th:data-publisher="${book.publisher}"
+                                    th:data-price="${book.price}"
+                                    th:data-description="${book.description}"
+                                    th:data-purchaseLink="${book.purchaseLink}"
+                                >
                             </label>
                         </div>
                         <div class="d:flex pos:relative w:100p">
@@ -139,43 +218,6 @@
                     </section>
                 </section>
                 
-            </section>
-
-
-            <section class="mb:5 mt:3">
-                <h1 class="d:none">페이저</h1>
-                <ul class="n-pager" style="display: flex; justify-content: center;"
-    
-                    th:with="page=${param.p} eq null ? 1 : ${{param.p}}
-                            ,temp=(${page}-1)/5
-                            ,startnum=${T(java.lang.Math).floor(temp)} * 5 + 1
-                            ,temp1 = ${count/6}
-                            ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
-                            ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
-                            ">
-                    <li>
-                        <span th:if="${page} lt 6">이전</span>
-                        <a href="list?page=5"
-                        th:if="${page} ge 6">이전</a>
-                    </li>
-    
-                    <li
-                        th:each="n : ${#numbers.sequence(startnum, endnum)}"
-                        th:class="${{param.p}} == ${n} ? 'active'">
-                        <span th:if="${n} eq ${{param.p}}" th:text="${n}">1</span>
-                        <a
-                            th:if="${n} ne ${{param.p}}"
-                            href="list?p=1"
-                            th:href="@{./list(page=${n})}"
-                            th:text="${n}">1</a>
-                    </li>
-                    <li>
-                        <span th:if="${startnum+4} gt ${lastnum}">다음</span>
-                        <a href="list?page=6" 
-                        th:href="@{./list(page=${startnum}+5)}"
-                        th:if="${startnum+4} lt ${lastnum}">다음</a >
-                    </li>
-                </ul>
             </section>
 
     </main>
