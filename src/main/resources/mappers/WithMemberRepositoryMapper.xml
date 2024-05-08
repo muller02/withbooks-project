@@ -8,6 +8,28 @@
 		select *  from with_member where with_id =#{withId}
 	</select>
 
+	<insert id="add" parameterType="WithMember">
+		insert into 
+			with_member 
+			(
+				with_id
+			   ,member_id
+			) 
+		values
+			(
+				#{withId}
+			   ,#{userId}
+			)
+	</insert>
 
+	<select id="findJoinYn" resultType="Integer" parameterType="WithMember">
+		select 
+			*
+		from
+			with_member
+		where
+			with_id = ${withId} 
+		and member_id = ${userId}
+	</select>
 
 </mapper>
