@@ -24,6 +24,5 @@ public class WithView {
   private String sido; // 모임장소-시도
   private String sigungu; // 모임장소-시군구
 
-
   private List<String> categoryNames;
 }

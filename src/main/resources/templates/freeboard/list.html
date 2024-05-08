@@ -73,7 +73,7 @@
                                 <div class="pt:3 w:4 of:hidden">
                                     <span class="img-box d:flex" data-cur-x="0" data-cur-img="1" th:data-last-img="${#arrays.length(b.imgs)}">
                                         <div th:each="img : ${b.imgs}">
-                                            <img class="h:4" src="/image/my/profile.png" alt="게시글 이미지" --th:src="${img}">
+                                            <img class="h:4" src="/image/my/profile.png" alt="게시글 이미지" th:src="${b.imgs[0]}">
                                         </div>
                                     </span>
                                 </div>
@@ -126,6 +126,11 @@
                     <a class="icon icon:caret_right" href="">다음</a>
                 </li>
             </ul>
+        </section>
+
+        <section>
+            <h1 class="d:none">플로팅 버튼</h1>
+            <div><a class="icon icon:plus icon-color:sub-1 icon-size:4 bg-color:main-5 border-radius:12 zi:3 p:6 pos:fixed right:1 bottom:1" href="" th:href="@{reg(wid=${param.wid})}">asdf</a></div>
         </section>
     </main>
 </body>

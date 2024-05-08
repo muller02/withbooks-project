@@ -16,10 +16,25 @@ public class WithMemberServiceImp implements WithMemberService{
     @Autowired
     private WithMemberViewRepository withMemberViewrepository;
 
+    @Autowired
+    private WithMemberRepository withMemberRepository;
+
 
     @Override
     public List<WithMemberView> getViewById(Long withId) {
 
         return withMemberViewrepository.findByWithId(withId);
+    }
+
+
+
+    @Override
+    public int join(Long userId, Long withId) {
+        return withMemberRepository.add(userId, withId);
+    }
+
+    @Override
+    public Integer getJoinYn(Long withId, Long userId) {
+        return withMemberRepository.findJoinYn(withId, userId);
     }
 }

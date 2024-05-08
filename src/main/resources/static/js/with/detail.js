@@ -1,12 +1,15 @@
 window.addEventListener("load", (e)=>{
     let contentDiv = document.querySelector("#content");
     let menuTap = document.querySelector(".menu-tap");
+    let withInfoSection = document.querySelector("#with-info");
+    let withJoinDiv = withInfoSection.querySelector(".with-join-btn");
+    let withJoinBtn = withJoinDiv.querySelector("button");
 
     let lis = menuTap.querySelectorAll("li");
 
     let tmpContetnDiv =contentDiv.innerHTML;
 
-    console.log(tmpContetnDiv);
+    // console.log(tmpContetnDiv);
 
     menuTap.addEventListener("click",async function (e) {
         e.preventDefault();
@@ -218,7 +221,28 @@ window.addEventListener("load", (e)=>{
         }
     }
 
+    // 가입신청 버튼 클릭시
+    withJoinBtn.addEventListener("click", async()=>{
 
+        // 이미 가입된 상태일 땐 이벤트 끝내기
+        if(withJoinBtn.classList.contains("bg-color:base-2")){
+          return;
+        } 
+
+        // 위드 아이디
+        let withId = withJoinDiv.querySelector("input").value;
+        // 위드가입 api
+        let reponse = await fetch(`/api/with/join?withId=${withId}&userId=${4}`);
+
+        // 가입된 상태를 식별하기 위한 스타일 변경
+        reponse.json().then(()=>{
+            withJoinBtn.textContent = "가입 되었습니다!";
+            withJoinBtn.classList.add("bg-color:base-2");
+            withJoinBtn.classList.add("color:base-4");
+        });
+
+        // TODO 가입 됐을 때 바뀔 액션 적용 필요!
+    });
 
 
 })

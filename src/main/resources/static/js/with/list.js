@@ -11,12 +11,54 @@ window.addEventListener("load", function (e) {
   const querySearch = document.querySelector(".query-search");
   const queryBtn = document.querySelector(".query-btn");
 
-  console.log(faceYnRadio[0]);
-
   let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
   let faceYn;
   let query;
 
+  const writeBtn = document.querySelector(".write-btn");
+
+  /* 로그인 정보 쿠키 확인 */
+  function getJSessionID() {
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith("lck=")) {
+        return cookie.split("=")[1];
+      }
+    }
+    return null;
+  }
+
+  /* 로그인 안내 모달 창 */
+  function loginModal() {
+    const openButton = document.getElementById("modal-btn");
+    const closeButton = document.getElementById("login-close-btn");
+    const modal = document.getElementById("login-modal");
+    const modalBackdrop = document.getElementById("login-modal-backdrop");
+
+    modal.classList.remove("d:none");
+    modalBackdrop.classList.remove("d:none");
+    modal.classList.add("modal-fade-in");
+
+    closeButton.addEventListener("click", function () {
+      modal.classList.replace("modal-fade-in", "modal-fade-out");
+
+      setTimeout(() => {
+        modal.classList.add("d:none");
+        modalBackdrop.classList.add("d:none");
+        modal.classList.remove("modal-fade-out");
+      }, 130);
+    });
+  }
+
+  writeBtn.addEventListener("click", (e) => {
+    if (getJSessionID() == null) {
+      loginModal();
+      e.preventDefault();
+    }
+  });
+
+  /* 대면비대면 선택에 따른 정렬 */
   faceYnDiv.onclick = async function (e) {
     if (e.target.nodeName !== "INPUT") return;
     faceYn = e.target.value;
@@ -60,7 +102,7 @@ window.addEventListener("load", function (e) {
       i.checked = false;
     }
     faceYnRadio[0].checked = true;
-    // 위드 리스트를 받아옴o
+    // 위드 리스트를 받아옴
     let list = await response.json();
     updateHTML(list);
   };
@@ -68,7 +110,7 @@ window.addEventListener("load", function (e) {
   // 체크박스 클릭시 그에 해당하는 value를 가지고온다 e.target을 통해
   // 가지고 온 value값을 배열에 담아준다 .
   // locahostL8080/ ? c=2&c=3&c=4
-  //문자열 결합
+  // 문자열 결합
 
   // querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
   async function handleQuery() {
@@ -154,14 +196,12 @@ function getByParams(categoryIdArr, query, faceYn) {
     faceYn &&
     faceYn !== ""
   ) {
-    console.log(232323);
     url = `/api/with?f=${faceYn}&c=${categoryIds}`;
   } else if (query && query !== "") {
     url = `/api/with?q=${query}`;
   } else if (categoryIdArr && categoryIdArr.length !== 0) {
     url = `/api/with?c=${categoryIds}`;
   } else if (faceYn && faceYn !== "") {
-    console.log("여기왔어요2");
     url = `/api/with?f=${faceYn}`;
   } else {
     url = `/api/with`;

@@ -46,7 +46,7 @@
 
     </div>
 
-    <div class="md:flex-grow:1 md:px:3 lg:px:0">
+    <div id="with-info" class="md:flex-grow:1 md:px:3 lg:px:0">
         <ul class="d:flex gap:1 flex-wrap:wrap  mx:3 my:4 ">
             <li class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"> <span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span></li>
             <li class="bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 mr:1 pb:1 background-color:main-6" th:each=" n : ${withCategoryNames}"> <span
@@ -71,9 +71,10 @@
                 <div class="mb:2 md:mr:6 md:w:4"><span class="color:base-6 fw:3 mr:3">정원</span><span th:text="${withMemberCnt + ' / ' + with.personnel +'명'} ">7 / 12</span></div>
             </div>
         </div>
-        <div class="with-join-btn-m  my:4 ">
-            <button type="button" class="n-btn n-btn-type:filled w:100p mx:atuo  ">가입 신청하기 <span
-                    class=" ml:2 icon 	icon icon:caret_right icon-color:sub-1"></span></button>
+        <div class="with-join-btn my:4">
+            <input type="hidden" name="with-id" th:value="${with.id}">
+            <button type="button" class="n-btn n-btn-type:filled w:100p mx:atuo" th:text="${{joinYn}} == 1 ? '현재 활동 중인 위드' : '가입 신청하기'" th:classappend="${{joinYn}} == 1 ? 'bg-color:base-2 color:base-4'">가입 신청하기 <span
+                    class="ml:2 icon icon icon:caret_right icon-color:sub-1"></span></button>
 
         </div>
     </div>
@@ -212,7 +213,7 @@
 
     <!-- 여기 inline flex 추가  -->
     <div class="d:inline-flex 	mx:2 ai:center mr:4  " th:each=" wm : ${withMemberList}">
-        <img class="mr:5 d:inline-block" src="/ppang.png"></img>
+        <img class="mr:5 d:inline-block" src="/ppang.png"/>
         <div class="d:flex ai:center flex-direction:column ">
             <div class="mr:auto fs:3" th:text="${wm.nickName}" th:classappend="${wm.masterYn} ?'deco  deco-pos:right  icon-color:main-3 icon:star_fill' :''" >뉴렉이</div>
             <div th:text="${wm.joinDate}" class="color:base-3 fs:2">2023.02.23</div>
