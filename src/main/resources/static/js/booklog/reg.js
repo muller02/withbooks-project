@@ -185,7 +185,7 @@ window.addEventListener("load", function () {
                                                 <div class="preview-panel"></div>
                                             </div>
                                         </section>
-                                        <textarea class="booklog-content n-textbox" type="text" name="text-area" placeholder="새로운 북로그를 작성해주세요 :)"></textarea>
+                                        <textarea class="booklog-content n-textbox fs:3" type="text" name="text-area" placeholder="새로운 북로그를 작성해주세요 :)"></textarea>
                                     </div>
                                 </section>
                             </form>
