@@ -27,7 +27,7 @@ public class JoinController {
     public String joinForm(Model model){
         User user = new User();
         model.addAttribute("user", user);
-        return "join/join2";
+        return "join/join";
     }
 
     @PostMapping("/join")
@@ -38,7 +38,7 @@ public class JoinController {
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
-            return "join/join2";
+            return "join/join";
         }
 
         //성공 로직

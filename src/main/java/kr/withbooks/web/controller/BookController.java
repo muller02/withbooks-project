@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.withbooks.web.entity.BookView;
+import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.CategoryService;
@@ -43,7 +43,7 @@ public class BookController {
         // 책 기본 출력 사이즈는 12
         int size = 12;
 
-        List<BookView> list = new ArrayList<>();
+        List<Book> list = new ArrayList<>();
         
         // 카테고리 선택상자에 출력
         List<Category> cateList = categoryService.getList();
@@ -72,7 +72,8 @@ public class BookController {
                         , @RequestParam(name="id") Long bookId
                         , @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        Long userId = userDetails.getId();
+        Long userId =1L;
+        // Long userId = userDetails.getId();
 
         // getView 쓰지 않고 getMapById를 쓰는 이유
         // -> 책 정보와 더불어 회원의 id로 해당 책을 북마크 했는지 여부가 함께 출력되어야 함

@@ -18,7 +18,8 @@ public class CustomAuthenticationSuccessHandler  implements AuthenticationSucces
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         int sessionMaxInactiveInterval = request.getSession().getMaxInactiveInterval();
 
-        System.out.println("토마토= "  +  sessionMaxInactiveInterval);
+
+
         Cookie cookie = new Cookie("lck","1" +
                 "");
         cookie.setMaxAge(sessionMaxInactiveInterval);

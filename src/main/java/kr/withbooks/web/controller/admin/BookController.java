@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.BookView;
 import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.CategoryService;
@@ -38,7 +37,7 @@ public class BookController {
 
         System.out.println(params.toString());
         
-        List<BookView> list = new ArrayList<>();
+        List<Book> list = new ArrayList<>();
         // select box로 제목, 저자, ISBN13으로 검색하도록 한다.
         // 이때, 해당 카테고리는 queryType으로 받고, 검색어는 query로 받는다.
 
@@ -82,7 +81,7 @@ public class BookController {
     @GetMapping("detail")
     public String detail(@RequestParam("id")Long id
                         ,Model model){
-        BookView book = service.getView(id);
+        Book book = service.getView(id);
         model.addAttribute("book", book);
         return "admin/book/detail";
     }

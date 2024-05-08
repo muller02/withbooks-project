@@ -16,6 +16,8 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
+
+        System.out.println("로그인실패  ");
         String errorMessage = "아이디 또는 비밀번호가 일치하지 않습니다.";
 
         request.getSession().setAttribute("errorMessage", errorMessage);

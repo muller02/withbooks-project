@@ -176,7 +176,7 @@ window.addEventListener("load", function (e) {
 });
 
 // 위드 모임장소 select box
-let cate1Num = [
+let area1Num = [
   "서울",
   "부산",
   "대구",
@@ -194,7 +194,7 @@ let cate1Num = [
   "충남",
   "충북",
 ];
-let cate1Name = [
+let area1Name = [
   "서울",
   "부산",
   "대구",
@@ -213,11 +213,11 @@ let cate1Name = [
   "충북",
 ];
 
-// cate2는 시군구
-let cate2Num = [];
-let cate2Name = [];
+// area2는 시군구
+let area2Num = [];
+let area2Name = [];
 
-cate2Num["강원"] = [
+area2Num["강원"] = [
   "강릉시",
   "동해시",
   "삼척시",
@@ -237,7 +237,7 @@ cate2Num["강원"] = [
   "화천군",
   "횡성군",
 ];
-cate2Name["강원"] = [
+area2Name["강원"] = [
   "강릉시",
   "동해시",
   "삼척시",
@@ -258,7 +258,7 @@ cate2Name["강원"] = [
   "횡성군",
 ];
 
-cate2Num["경기"] = [
+area2Num["경기"] = [
   "고양시 덕양구",
   "고양시 일산구",
   "과천시",
@@ -300,7 +300,7 @@ cate2Num["경기"] = [
   "연천군",
   "포천군",
 ];
-cate2Name["경기"] = [
+area2Name["경기"] = [
   "고양시 덕양구",
   "고양시 일산구",
   "과천시",
@@ -343,7 +343,7 @@ cate2Name["경기"] = [
   "포천군",
 ];
 
-cate2Num["경남"] = [
+area2Num["경남"] = [
   "거제시",
   "김해시",
   "마산시",
@@ -365,7 +365,7 @@ cate2Num["경남"] = [
   "함양군",
   "합천군",
 ];
-cate2Name["경남"] = [
+area2Name["경남"] = [
   "거제시",
   "김해시",
   "마산시",
@@ -388,7 +388,7 @@ cate2Name["경남"] = [
   "합천군",
 ];
 
-cate2Num["경북"] = [
+area2Num["경북"] = [
   "경산시",
   "경주시",
   "구미시",
@@ -414,7 +414,7 @@ cate2Num["경북"] = [
   "청송군",
   "칠곡군",
 ];
-cate2Name["경북"] = [
+area2Name["경북"] = [
   "경산시",
   "경주시",
   "구미시",
@@ -441,10 +441,10 @@ cate2Name["경북"] = [
   "칠곡군",
 ];
 
-cate2Num["광주"] = ["광산구", "남구", "동구", "북구", "서구"];
-cate2Name["광주"] = ["광산구", "남구", "동구", "북구", "서구"];
+area2Num["광주"] = ["광산구", "남구", "동구", "북구", "서구"];
+area2Name["광주"] = ["광산구", "남구", "동구", "북구", "서구"];
 
-cate2Num["대구"] = [
+area2Num["대구"] = [
   "남구",
   "달서구",
   "동구",
@@ -454,7 +454,7 @@ cate2Num["대구"] = [
   "중구",
   "달성군",
 ];
-cate2Name["대구"] = [
+area2Name["대구"] = [
   "남구",
   "달서구",
   "동구",
@@ -465,10 +465,10 @@ cate2Name["대구"] = [
   "달성군",
 ];
 
-cate2Num["대전"] = ["대덕구", "동구", "서구", "유성구", "중구"];
-cate2Name["대전"] = ["대덕구", "동구", "서구", "유성구", "중구"];
+area2Num["대전"] = ["대덕구", "동구", "서구", "유성구", "중구"];
+area2Name["대전"] = ["대덕구", "동구", "서구", "유성구", "중구"];
 
-cate2Num["부산"] = [
+area2Num["부산"] = [
   "강서구",
   "금정구",
   "남구",
@@ -486,7 +486,7 @@ cate2Num["부산"] = [
   "해운대구",
   "기장군",
 ];
-cate2Name["부산"] = [
+area2Name["부산"] = [
   "강서구",
   "금정구",
   "남구",
@@ -505,7 +505,7 @@ cate2Name["부산"] = [
   "기장군",
 ];
 
-cate2Num["서울"] = [
+area2Num["서울"] = [
   "강남구",
   "강동구",
   "강북구",
@@ -532,7 +532,7 @@ cate2Num["서울"] = [
   "중구",
   "중랑구",
 ];
-cate2Name["서울"] = [
+area2Name["서울"] = [
   "강남구",
   "강동구",
   "강북구",
@@ -560,13 +560,13 @@ cate2Name["서울"] = [
   "중랑구",
 ];
 
-cate2Num["세종"] = new Array("세종특별자치시");
-cate2Name["세종"] = new Array("세종특별자치시");
+area2Num["세종"] = new Array("세종특별자치시");
+area2Name["세종"] = new Array("세종특별자치시");
 
-cate2Num["울산"] = ["남구", "동구", "북구", "중구", "울주군"];
-cate2Name["울산"] = ["남구", "동구", "북구", "중구", "울주군"];
+area2Num["울산"] = ["남구", "동구", "북구", "중구", "울주군"];
+area2Name["울산"] = ["남구", "동구", "북구", "중구", "울주군"];
 
-cate2Num["인천"] = [
+area2Num["인천"] = [
   "계양구",
   "남구",
   "남동구",
@@ -578,7 +578,7 @@ cate2Num["인천"] = [
   "강화군",
   "옹진군",
 ];
-cate2Name["인천"] = [
+area2Name["인천"] = [
   "계양구",
   "남구",
   "남동구",
@@ -591,7 +591,7 @@ cate2Name["인천"] = [
   "옹진군",
 ];
 
-cate2Num["전남"] = [
+area2Num["전남"] = [
   "광양시",
   "나주시",
   "목포시",
@@ -615,7 +615,7 @@ cate2Num["전남"] = [
   "해남군",
   "화순군",
 ];
-cate2Name["전남"] = [
+area2Name["전남"] = [
   "광양시",
   "나주시",
   "목포시",
@@ -640,7 +640,7 @@ cate2Name["전남"] = [
   "화순군",
 ];
 
-cate2Num["전북"] = [
+area2Num["전북"] = [
   "군산시",
   "김제시",
   "남원시",
@@ -657,7 +657,7 @@ cate2Num["전북"] = [
   "장수군",
   "진안군",
 ];
-cate2Name["전북"] = [
+area2Name["전북"] = [
   "군산시",
   "김제시",
   "남원시",
@@ -675,10 +675,10 @@ cate2Name["전북"] = [
   "진안군",
 ];
 
-cate2Num["제주"] = ["서귀포시", "제주시", "남제주군", "북제주군"];
-cate2Name["제주"] = ["서귀포시", "제주시", "남제주군", "북제주군"];
+area2Num["제주"] = ["서귀포시", "제주시", "남제주군", "북제주군"];
+area2Name["제주"] = ["서귀포시", "제주시", "남제주군", "북제주군"];
 
-cate2Num["충남"] = [
+area2Num["충남"] = [
   "공주시",
   "논산시",
   "보령시",
@@ -695,7 +695,7 @@ cate2Num["충남"] = [
   "태안군",
   "홍성군",
 ];
-cate2Name["충남"] = [
+area2Name["충남"] = [
   "공주시",
   "논산시",
   "보령시",
@@ -713,7 +713,7 @@ cate2Name["충남"] = [
   "홍성군",
 ];
 
-cate2Num["충북"] = [
+area2Num["충북"] = [
   "제천시",
   "청주시 상당구",
   "청주시 흥덕구",
@@ -727,7 +727,7 @@ cate2Num["충북"] = [
   "진천군",
   "청원군",
 ];
-cate2Name["충북"] = [
+area2Name["충북"] = [
   "제천시",
   "청주시 상당구",
   "청주시 흥덕구",
@@ -742,10 +742,10 @@ cate2Name["충북"] = [
   "청원군",
 ];
 
-function cate1Change(key, sel) {
+function area1Change(key, sel) {
   if (key == "") return;
-  let name = cate2Name[key];
-  let val = cate2Num[key];
+  let name = area2Name[key];
+  let val = area2Num[key];
 
   // key가 빈 값인지 확인, 비어있다면 아무 작업 없이 종료
   for (i = sel.length - 1; i >= 0; i--) sel.options[i] = null;
@@ -753,7 +753,7 @@ function cate1Change(key, sel) {
   // key가 있다면, 선택목록(sel) 초기화하고 시군구 추가
   sel.options[0] = new Option("-선택-", "", "", "true");
 
-  // cate2Name 객체에서 가져와 옵션 생성, 추가
+  // area2Name 객체에서 가져와 옵션 생성, 추가
   for (i = 0; i < name.length; i++) {
     sel.options[i + 1] = new Option(name[i], val[i]);
   }
@@ -824,7 +824,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // 유효성 검사 통과 시 폼 제출
       // withReg.submit();
       withForm.submit();
-
     }
   }
 
@@ -849,17 +848,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// 대면 클릭시 모임장소 섹션 나옴
-// window.addEventListener("load", function () {
-//   const faceYnDiv = document.querySelector(".face-yn");
-//   const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
-//
-//   const location = document.querySelector(".location");
-//
-//   // 대면
-//   faceYnDiv.onclick = async (e) => {
-//     e.preventDefault();
-//
-//     let face;
-//   };
-// });
+/* 대면 클릭시 모임장소 섹션 나옴 */
+window.addEventListener("DOMContentLoaded", function () {
+  // 대면/비대면 라디오 버튼 요소 가져오기
+  const faceYnRadios = document.querySelectorAll(".face-yn");
+  const locationSection = document.querySelector(".location");
+  locationSection.style.display = "none";
+
+  // 각 라디오 버튼에 이벤트 리스너 추가
+  faceYnRadios.forEach((radio) => {
+    radio.addEventListener("click", function (e) {
+      // 선택된 라디오 버튼의 값 확인
+      const selectedValue = radio.value;
+
+      // location 섹션의 표시 여부 결정
+      if (selectedValue === "1") {
+        // 대면 선택 시
+        locationSection.style.display = "block";
+      } else {
+        // 비대면 선택 시
+        locationSection.style.display = "none";
+      }
+    });
+  });
+});

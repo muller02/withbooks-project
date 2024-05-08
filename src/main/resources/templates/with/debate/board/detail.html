@@ -122,6 +122,13 @@
                         </section>
                     </div>
                 </section>
+
+                <div class="pos:fixed right:2 bottom:9 zi:5">
+                    <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
+                    <div class="bg-color:main-5 border-radius:full p:3">
+                        <a href="reg" th:href="@{/with/debate/board/edit(id=${param.id})}" th:title="${'토론카드 수정하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
+                    </div>
+                </div>
             </div>
 
             <div class="card-note-comment mt:2">
