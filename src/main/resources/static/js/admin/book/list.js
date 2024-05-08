@@ -63,12 +63,6 @@ function makeTemplate(book){
           <div class="">
               <img class="w:3 h:5 bd-radius:2" src="${book.cover}">
           </div>
-          <div>
-              <label class="d:flex jc:center color:main-6 cursor:pointer">
-                  이미지 변경
-                  <input class="d:none bd w:3" type="file">
-              </label>
-          </div>
       </div>
 
       <span class="ml:6 w:10p">
