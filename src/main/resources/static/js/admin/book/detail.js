@@ -2,6 +2,7 @@ const searchSection = document.querySelector("#search-section");
 const selectSort = searchSection.querySelector("select[name='sort']");
 const searchInputDiv = searchSection.querySelector(".search-input-div");
 
+// 책리스트/검색어/ISBN13 검색 선택 시 나타나는 input 변화
 selectSort.onchange = function(e){
     let sortValue = Number(e.target.value);
     let template = "";
