@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
+        <script src="/js/admin/book/aladin-list.js" defer></script>
         <script src="/js/admin/book/reg.js" defer></script>
         <style>
             .n-form>div:not(:first-child) {
@@ -76,7 +77,8 @@
                                 type="text"
                                 name="i"
                                 class="sort-3 n-textbox n-textbox-type:outline n-textbox-status:focus"
-                                placeholder="입력해주세요"
+                                placeholder="숫자 13자 입력"
+                                maxlength="13"
                                 th:value="${i}"
                                 th:classappend="${s} != '3' ? 'd:none'"
                             />
@@ -86,9 +88,11 @@
                 </div>
             </section>
 
-            <div class="d:flex justify-content:space-between mt:4 px:10 max-width:10">
-                <div class="d:flex ai:center">검색 결과 : <span th:text="${totalResults}"></span> 건</div>
-                <div class="d:flex jc:space-between ai:center w:3p">
+            <div class="d:flex justify-content:space-between mt:4 px:10 max-width:10"
+            th:if="${sort}"
+            >
+                <div class="d:flex ai:center">검색 결과 : <span th:text="${totalResults}? ${totalResults}:'0'"></span> 건</div>
+                <div class="d:flex jc:space-between ai:center w:3p" th:if="${totalResults > 0}">
                     <div class="w:1 d:flex jc:space-around">
                         <a href="" 
                         th:if="${sort} == '1' and (${p}-1) > 0"
@@ -119,22 +123,23 @@
                         th:if="${sort} == '3' and ${lastNum > p}"
                         th:href="@{|aladinList?sort=3&i=${i}&p=${p+1}|}"
                         class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
-                        
                     </div>
                 </div>
-                <button class="n-btn">선택 반영</button>
+                <button class="n-btn" th:if="${totalResults > 0}">선택 반영</button>
             </div>
         
         
             <section class="n-container p:4 lg:px:10">
                 <h1 class="d:none">Main</h1>
-                <section id="book-list" class="book-list">
+                <section id="list-container">
                     <h1 class="d:none">책 리스트</h1>
 
-                    <section class="d:flex align-items:center pb:4 pt:4 bd-bottom bg-color:main-1 pr:2">
+                    <section class="d:flex align-items:center pb:4 pt:4 bd-bottom bg-color:main-1 pr:2"
+                        th:if="${totalResults}"
+                    >
                         <h1 class="d:none">헤더</h1>
                         <div class="w:1p text-align:center pl:5">
-                            <label>
+                            <label class="w:5">
                                 <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
                                 전체선택
                             </label>
@@ -146,9 +151,10 @@
                         <div class="w:1p text-align:center">기존여부</div> -->
                     </section>
 
-                    <section th:each="book : ${list}">
+                    <section id="book-list" th:each="book : ${list}">
                         <h1 class="d:none">본문</h1>
                         <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle"
+                        th:classappend="${book.publicYn == 1}? 'bg-color:base-2'"
                         >
                         <div class="w:1 text-align:center">
                             <label>
@@ -162,6 +168,7 @@
                                     th:data-price="${book.price}"
                                     th:data-description="${book.description}"
                                     th:data-purchaseLink="${book.purchaseLink}"
+                                    th:disabled="${book.publicYn == 1}"
                                 >
                             </label>
                         </div>
@@ -174,36 +181,32 @@
                                 </div>
                         
                                 <span class="ml:6 w:10p">
-                                    <span class="d:flex">
+                                    <div class="d:flex jc:space-between">
                                         <div>
-                                            <div><b>ID</b> : <span th:text="${book.id}"></span></div>
+                                            <div><b>제목</b></div>
+                                            <div class="px:2" th:text="${book.title}"></div>
                                         </div>
                         
-                                        <div class="ml:auto d:flex">
-                                            <div><b>카테고리</b> : </div>
-                                            <div th:text="${book.categoryName}"></div>
+                                        <div class="w:5">
+                                            <div><b>저자</b></div>
+                                            <div class="px:2" th:text="${book.author}"></div>
                                         </div>
-                        
-                                        <div class="ml:auto">
-                                            <div><b>제목</b> : <span th:text="${book.title}"></span></div>
-                                        </div>
-                        
-                                        <div class="ml:auto">
-                                            <div><b>저자</b> : <span th:text="${book.author}"></span></div>
-                                        </div>
-                                    </span>
-                        
-                                    <span class="d:flex mt:3">
-                                        <div><b>ISBN13</b> : <span th:text="${book.isbn13}"></span></div>
-                                        <div class="ml:auto"><b>출판일</b> : <span th:text="${book.pubDate}"></span></div>
-                                        <div class="ml:auto"><b>출판사</b> : <span th:text="${book.publisher}"></span></div>
-                                    </span>
-                                    
-                                    <div class="d:flex mt:3 ai:center">
-                                        <label class="w:1"><b>가격</b></label>
-                                        <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.price}"></input>
                                     </div>
                         
+                                    <span class="d:flex mt:3">
+                                        <div><b>ISBN13</b><div class="px:2" th:text="${book.isbn13}"></div></div>
+                                        <div class="ml:auto"><b>가격</b><div class="px:2" th:text="${book.price}"></div></div>
+                                        <div class="ml:auto"><b>출판일</b> : <div class="px:2" 
+                                            th:text="${#dates.format(book.pubDate, 'yyyy년 MM월 dd일')}"
+                                            ></div></div>
+                                        <div class="ml:auto"><b>출판사</b> : <div class="px:2" th:text="${book.publisher}"></div></div>
+                                    </span>
+
+                                    <div class=" mt:3">
+                                        <div><b>카테고리</b></div>
+                                        <div class="px:2" th:text="${book.categoryName}"></div>
+                                    </div>
+
                                     <div class="d:flex mt:3">
                                         <label class="w:1"><b>설명</b></label>
                                         <textarea class="bd bd-radius:2 w:10p pl:3 py:1" th:utext="${book.description}"></textarea>
