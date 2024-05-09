@@ -58,6 +58,14 @@ public class FreeBoardController {
 
         List<FreeBoardView> list = service.getList(withId, page, sort);
         int count = service.getCount(withId);
+
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(FreeBoardView f : list){
+          String replacedStr = f.getContent().replace("\r\n", "<br>");
+          f.setContent(replacedStr);
+        }
+
        
         model.addAttribute("list", list);
         model.addAttribute("count", count);
@@ -84,6 +92,22 @@ public class FreeBoardController {
 
         if(userDetails != null)
           isLiked = freeLikeService.isLiked(freeBoardId, userDetails.getId());  
+
+
+
+        // 댓글의 \r\n 을 <br> 태그로 치환
+        for(FreeCommentView f : commentList){
+          String replacedStr = f.getContent().replace("\r\n", "<br>");
+          f.setContent(replacedStr);
+        }
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        {
+          String replacedStr = board.getContent().replace("\r\n", "<br>");
+          board.setContent(replacedStr);
+        }
+
+
         
         
         model.addAttribute("board", board);

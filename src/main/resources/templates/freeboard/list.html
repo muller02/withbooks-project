@@ -38,7 +38,7 @@
     
 </head>
 <body>
-    <main class="px:3 pb:3" layout:fragment="main">
+    <main class="px:3 pb:3 flex-grow:1" layout:fragment="main">
         <section id="sort" class="d:flex mt:3">
             <h1 class="d:none">정렬방식</h1>
             <div><a class="latest fs:2 color:base-3" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=latest)}">최신순</a></div>
@@ -64,29 +64,16 @@
                     <a href="" th:href="@{./detail(fid=${b.id})}">
                         <div class="fs:4 fw:3 mt:4" th:text="${b.title}">푸바오 신간 샀어요 !!</div>
         
-                        <p class="fs:3 mt:3" th:text="${b.content}">오늘 교보문고 가니까 입구에 딱!!! 있더라구요!!! 어어쩌고 저쩌고 ㄴ으미능마니읜읨나음니ㅏ으미나으미느아미느이ㅏㅓㅎ호ㅓ로로ㅓ허ㅏㅗㅗㅓ</p>
+                        <p class="ln-clamp:3 fs:3 mt:3" th:utext="${b.content}">오늘 교보문고 가니까 입구에 딱!!! 있더라구요!!! 어어쩌고 저쩌고 ㄴ으미능마니읜읨나음니ㅏ으미나으미느아미느이ㅏㅓㅎ호ㅓ로로ㅓ허ㅏㅗㅗㅓ</p>
         
                         <span th:if="!${#arrays.isEmpty(b.imgs)}">
-                            <section class="bd bd-radius:6 bd-color:base-3 mt:3 d:flex fl-dir:column jc:center ai:center pos:relative">
+                            <section class="bd bd-radius:6 bd-color:base-3 mt:3 h:6 d:flex fl-dir:column jc:center ai:center pos:relative">
                                 <h1 class="d:none">이미지</h1>
     
-                                <div class="pt:3 w:4 of:hidden">
-                                    <span class="img-box d:flex" data-cur-x="0" data-cur-img="1" th:data-last-img="${#arrays.length(b.imgs)}">
-                                        <div th:each="img : ${b.imgs}">
-                                            <img class="h:4" src="/image/my/profile.png" alt="게시글 이미지" th:src="${b.imgs[0]}">
-                                        </div>
-                                    </span>
+                                <div class="w:10 h:10p py:4">
+                                    <img class="w:10p h:10p object-fit:cover" src="/image/my/profile.png" alt="게시글 이미지" th:src="${b.imgs[0]}">
                                 </div>
-    
-                                <!-- <ul class="img-pager py:2 w:2 d:flex jc:center">
-                                    <li class="w:1 h:1 bd bd-radius:8 mx:auto selected-img-pager"></li>
-                                    <li class="w:1 h:1 bd bd-radius:8 mx:auto" th:each="tmp, status : ${b.imgs}" th:unless="${status.index==0}"></li>
-                                </ul> -->
-    
-                                <!-- <div class="w:6 d:flex jc:space-between pos:absolute top:2">
-                                    <div><button class="img-l-btn icon icon:caret_left_bold cursor:pointer d:none">이전</button></div>
-                                    <div><button class="img-r-btn icon icon:caret_right_bold cursor:pointer">다음</button></div>
-                                </div> -->
+
                             </section>
                         </span>
                     </a>
@@ -128,9 +115,9 @@
             </ul>
         </section>
 
-        <section>
+        <section class=" pos:fixed right:2 md:right:3 lg:right:3 bottom:9 md:bottom:4 lg:bottom:4">
             <h1 class="d:none">플로팅 버튼</h1>
-            <div><a class="icon icon:plus icon-color:sub-1 icon-size:4 bg-color:main-5 border-radius:12 zi:3 p:6 pos:fixed right:1 bottom:1" href="" th:href="@{reg(wid=${param.wid})}">asdf</a></div>
+            <div><a class="icon icon:plus icon-color:sub-1 icon-size:4 bg-color:main-5 border-radius:12 zi:3 p:6" href="" th:href="@{reg(wid=${param.wid})}">asdf</a></div>
         </section>
     </main>
 </body>
