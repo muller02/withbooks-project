@@ -60,6 +60,7 @@ public class BoardController {
     @GetMapping("/list")
     public String list(
             @RequestParam(name = "rid") Long roomId,
+            @RequestParam(name = "wid") Long withId,
             @RequestParam(name = "tid", required = false) Long topicId,
             Model model) {
 

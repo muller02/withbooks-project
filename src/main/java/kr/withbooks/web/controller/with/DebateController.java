@@ -1,11 +1,13 @@
 package kr.withbooks.web.controller.with;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
 import kr.withbooks.web.service.DebateRoomService;
 import kr.withbooks.web.service.DebateTopicService;
 import kr.withbooks.web.service.WithService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,9 +36,12 @@ public class DebateController {
     private DebateTopicService debateTopicService;
 
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(
+            @RequestParam(name = "wid") Long withId,
+            Model model,
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        List<DebateRoomView> list  = service.getListById(1L);
+        List<DebateRoomView> list  = service.getListById(withId);
 
         log.info("list : {}", list);
 

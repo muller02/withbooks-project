@@ -1,14 +1,12 @@
 window.addEventListener("load", function () {
-
     const fileInput = document.getElementById("file-input");
 
     console.log(fileInput);
 
-
     let selectedFiles = [];
+    let dataTransfer = new DataTransfer();
 
     fileInput.addEventListener("change", function (e) {
-
         const fileList = document.getElementById("file-list");
         console.log(fileList);
 
@@ -21,32 +19,26 @@ window.addEventListener("load", function () {
             const fileName = document.createTextNode(files[i].name);
             const deleteButton = document.createElement("button");
             deleteButton.addEventListener("click", function (e) {
-                item.remove();
-                e.preventDefault();
-                deleteFile(files[i]);
+                const index = selectedFiles.indexOf(files[i]);
+                selectedFiles.splice(index, 1);
+                fileList.removeChild(item);
+                updateFileInput();
             })
-            deleteButton.innerText="X";
+            deleteButton.innerText = "X";
             item.appendChild(fileName);
             item.appendChild(deleteButton);
             fileList.appendChild(item);
         }
 
+        updateFileInput();
     })
 
-    function deleteFile(deleteFile) {
-        const inputFile = document.querySelector('input[name="files"]');
-        const dataTransfer = new DataTransfer();
-
-        // 삭제할 파일을 필터링하여 해당 파일을 제외
-        selectedFiles = selectedFiles.filter(file => file!==deleteFile);
-
-        // 필터링된 파일 목록
+    function updateFileInput() {
+        dataTransfer.items.clear();
         selectedFiles.forEach(file => {
-            // 필터링된 파일을 DataTransfer 객체의 items 에 추가
             dataTransfer.items.add(file);
-        })
-
-        // 파일 입력 요소의 파일 목록을 업데이트
-        inputFile.files = dataTransfer.files;
+        });
+        fileInput.files = dataTransfer.files;
     }
+
 })

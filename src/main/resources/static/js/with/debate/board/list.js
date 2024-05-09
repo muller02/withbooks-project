@@ -15,11 +15,12 @@ window.addEventListener('load', function (){
 
         // URLSearchParams 객체를 사용하여 roomId와 topicId를 가져옴
         const roomId = params.get('rid');
+        const withId = params.get('wid');
         const topicId = e.target.value;
 
-        // roomId와 topicId가 모두 유효한 경우에만 컨트롤러를 호출
-        if (roomId && topicId) {
-            const url = `/with/debate/board/list?rid=${roomId}&tid=${topicId}`
+        // roomId와 withId, topicId가 모두 유효한 경우에만 컨트롤러를 호출
+        if (roomId && topicId && withId) {
+            const url = `/with/debate/board/list?wid=${withId}&rid=${roomId}&tid=${topicId}`
             window.location.href = url;
         }
     }

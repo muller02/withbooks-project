@@ -52,18 +52,19 @@
                     </div>
                     <div class="d:flex">
                         <!-- 취소 버튼 빈색, 삭제버튼 빨간색 -->
-                        <button class="n-btn mr:2 cancel-btn d:none bg-color:base-2"><span class="color:base-1"></span>취소</span></button>
-                        <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">전체 삭제</button>
+                        <button class="n-btn mr:2 cancel-btn d:none bg-color:base-2"><span class="color:base-1">취소</span></button>
+                        <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">선택 삭제</button>
                         <button class="n-btn mr:2 delete-btn">삭제</button>
                     </div>
                 </div>
-    
+
                 <section class="book-list my:4" id="booklog-section">
                     <h1 class="d:none">북 리스트</h1>
                     <form action="/booklog/deleteAllByIds" method="post" id="idsForm">
                         <div class="booklog-list d:flex flex-wrap:wrap justify-content:flex-start">
                             <section class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
                                 <div>
+                                    <input type="hidden" th:value="${l.bookId}" class="book-id" />
                                     <a th:href="@{./detail(id=${l.id})} ">
                                         <input type="checkbox" name="ids" th:value="${l.id}" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1" />
                                         <div class="book-info gap:4 d:flex fl-dir:column">
@@ -81,8 +82,6 @@
                                                 <span class="fs:2 fw:3" th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</span>
                                                 <span class="fs:1 fw:1 mt:1" th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</span>
                                             </div>
-
-
                                         </div>
                                     </a>
                                 </div>

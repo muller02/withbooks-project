@@ -10,6 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/with/debate/board/list.js" defer></script>
     <title>list</title>
+
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -36,8 +40,6 @@
             <section class="px:3 mt:9">
                 <h1 class="d:none">토론방 목록</h1>
                 <ul class="d:flex flex-direction:column mx:7 ">
-
-
                     <li th:each="b : ${list}">
                         <h1 class="d:none">토론방</h1>
                         <div class="d:flex fl-direction:row-reverse h:3 gap:3 border-bottom border-color:base-3 py:4  ">
@@ -75,19 +77,18 @@
                             </div>
                         </div>
                     </li>
-
-
-
                 </ul>
             </section>
-        </div>
 
-        <div class="pos:fixed right:2 bottom:9 zi:5">
-            <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
-            <div class="bg-color:main-5 border-radius:full p:3">
-                <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
+            <div class="reg-btn pos:fixed right:4 bottom:9 zi:5">
+                <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
+                <div class="bg-color:main-5 border-radius:full p:3">
+                    <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+                </div>
             </div>
         </div>
+
+
 
     </main>
 
