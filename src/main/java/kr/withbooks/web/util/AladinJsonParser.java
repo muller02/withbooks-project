@@ -21,8 +21,8 @@ public class AladinJsonParser {
 
         // 에러코드가 뜬 경우
         if(jsonObject.has("errorCode")){
-            System.out.println(jsonObject.getInt("errorCode"));
-            System.out.println(jsonObject.getString("errorMessage"));
+            System.out.println("에러코드 >>"+jsonObject.getInt("errorCode"));
+            System.out.println("에러메세지 >>"+jsonObject.getString("errorMessage"));
             return null;
         }
 
