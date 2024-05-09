@@ -224,24 +224,43 @@ window.addEventListener("load", (e)=>{
     // 가입신청 버튼 클릭시
     withJoinBtn.addEventListener("click", async()=>{
 
-        // 이미 가입된 상태일 땐 이벤트 끝내기
-        if(withJoinBtn.classList.contains("bg-color:base-2")){
-          return;
-        } 
-
         // 위드 아이디
         let withId = withJoinDiv.querySelector("input").value;
+                
+        // 탈퇴 버튼 클릭시
+        if(withJoinBtn.classList.contains("joined")){
+            let result = confirm("탈퇴 하시겠습니까?");
+            if(result){
+                document.deleteMember.submit();
+                alert("탈퇴되었습니다.");
+             }
+            return;
+        }
         // 위드가입 api
-        let reponse = await fetch(`/api/with/join?withId=${withId}&userId=${4}`);
+        let reponse = await fetch(`/api/with/join?withId=${withId}&userId=`);
 
         // 가입된 상태를 식별하기 위한 스타일 변경
         reponse.json().then(()=>{
             withJoinBtn.textContent = "가입 되었습니다!";
-            withJoinBtn.classList.add("bg-color:base-2");
-            withJoinBtn.classList.add("color:base-4");
-        });
+            withJoinBtn.classList.add("joined");
+            withJoinBtn.classList.add("bg-color:main-1");
+            withJoinBtn.classList.add("color:main-5");
+            // 버튼이 바뀌는 동안 이벤트 발생 막기 위해 disabled 처리
+            withJoinBtn.setAttribute("disabled","");
 
-        // TODO 가입 됐을 때 바뀔 액션 적용 필요!
+            // 0.8초 뒤에 탈퇴하기 버튼으로 바뀜
+            setTimeout(function(){
+                withJoinBtn.classList.remove("bg-color:main-1");
+                withJoinBtn.classList.remove("color:main-5");
+
+                withJoinBtn.classList.replace("n-btn-type:filled","n-btn-type:outline");
+                withJoinBtn.classList.add("border-color:base-2");
+                withJoinBtn.classList.add("color:base-4");
+                withJoinBtn.textContent = "탈퇴하기";
+                // disabled 지움
+                withJoinBtn.removeAttribute("disabled");
+        },800)
+        });
     });
 
 
