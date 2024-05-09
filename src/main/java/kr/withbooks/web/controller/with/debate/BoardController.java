@@ -95,7 +95,7 @@ public class BoardController {
 
         DebateRoom findRoom = debateRoomService.getById(roomId);
         Long bookId = findRoom.getBookId();
-        Book book = bookService.get(bookId);
+        Book book = bookService.getById(bookId);
         System.out.println("진입  토마토 ");
 
         DebateTopic findTopic = debateTopicService.getById(topicId);

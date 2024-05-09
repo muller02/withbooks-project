@@ -12,7 +12,7 @@
   <style>
     * {
       font-family: 'Noto Sans KR', sans-serif;
-      font-size: 15px;
+      font-size: 16px;
 
       color: var(--color-base-9);
     }
@@ -60,13 +60,13 @@
     }
 
     .required-field {
-      /* border: 1px solid var(--color-accent-1);  */
+      border: 1px solid var(--color-accent-1);
       /* 빨간색 테두리 */
-      background-color: rgba(252, 74, 74, 0.2) !important;
+      background-color: rgba(252, 74, 74, 0.1) !important;
       /* --color-accent-1에 투명도 조절 */
     }
 
-    .alert-msg {
+    .required-msg {
       color: var(--color-accent-1); /* 빨간색 텍스트 */
       font-size: 14px; /* 폰트 크기 */
       margin-top: 5px; /* 위쪽 여백 */
@@ -88,13 +88,13 @@
 
     .area1,
     .area2::-webkit-scrollbar-thumb {
-      background: rgba(153, 153, 153); /* 스크롤바 색상 color-base-5*/
+      background: rgba(153, 153, 153); /* 스크롤바 색상 color-base-5 */
       border-radius: 12px; /* 스크롤바 둥근 테두리 */
     }
 
     .area1,
     .area2::-webkit-scrollbar-track {
-      background: rgba(246, 246, 247, 0.1); /*스크롤바 뒷 배경 색상*/
+      background: rgba(246, 246, 247, 0.1); /* 스크롤바 뒷 배경 색상 */
     }
 
   </style>
@@ -112,12 +112,13 @@
             method="post"
     >
       <div class="d:flex jc:end">
-        <button class="n-btn mt:3 bg-color:main-5" id="btn" type="submit">
+        <button class="submit-btn n-btn mt:3 bg-color:main-5" id="btn" type="submit">
           등록
         </button>
       </div>
       <p class="fw:3 fs:5 mr:3 ml:3 mb:8">
-        <span class="font-size:7"> 북버그(유저명) 님,</span><br/>
+        <span class="font-size:7" th:text="${nickname} + ' 님,'"> 북버그(유저명) 님,</span>
+        <br/>
         위드를 만들어볼까요?
       </p>
 
@@ -191,20 +192,25 @@
             중복확인
           </button>
         </div>
-        <div class="duplicate-true d:none color:accent-1 mt:3 ml:2">
+
+        <!-- 유효성 검증 안내문구 -->
+        <div class="duplicate-true d:none color:accent-1 mt:3 ml:2 fs:2">
           사용중인 위드명입니다. 다른 위드명을 입력해 주세요.
         </div>
-
-        <div class="duplicate-false d:none color:main-5 mt:3 ml:2">
-          좋은 위드명이네요 !
+        <div class="duplicate-false d:none color:main-5 mt:3 ml:2 fs:2">
+          좋은 위드명이네요!
+        </div>
+        <div class="length-alert d:none color:accent-1 mt:3 ml:2 fs:2">
+          위드명은 최소 두 글자 이상이어야 합니다.
         </div>
       </section>
 
       <section class="n-item n-item:shadow mb:4 p:4 category-section">
         <div class="mb:2 fs:3 fw:3">
-          주요 카테고리<span class="color:base-5 fs:2 fw:1">
+          주요 카테고리
+          <span class="color:base-5 fs:2 fw:1">
                 (최대 3개)</span
-        >
+          >
         </div>
         <ul class="w:full d:flex jc:start gap:2 fl-wrap:wrap">
           <li th:each=" c : ${categories}">
@@ -221,7 +227,7 @@
             </label>
           </li>
         </ul>
-        <div class="category-alert d:none color:accent-1 mt:3 ml:2">
+        <div class="category-limit d:none color:accent-1 mt:3 ml:2 fs:2">
           카테고리는 최대 3개 까지만 가능합니다
         </div>
       </section>
@@ -241,11 +247,11 @@
                     type="number"
             />
             <span> 회</span>
-            <div class="interval-alert d:none color:accent-1 mt:3 ml:2">
-              최대 50회 까지 입력 가능합니다.
-            </div>
           </div>
         </label>
+        <div class="interval-alert d:none color:accent-1 mt:3 ml:2 fs:2">
+          최대 50회 까지 입력 가능합니다.
+        </div>
       </section>
 
       <section class="n-item n-item:shadow mb:4 p:4">
@@ -254,6 +260,7 @@
           <div>
             <input
                     class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center"
+                    max="100"
                     min="1"
                     name="personnel"
                     placeholder="정원"
@@ -261,11 +268,11 @@
                     type="number"
             />
             <span> 명</span>
-            <div class="personnel-alert d:none color:accent-1 mt:3 ml:2">
-              최대 100명 까지 입력 가능합니다.
-            </div>
           </div>
         </label>
+        <div class="personnel-alert d:none color:accent-1 mt:3 ml:2 fs:2">
+          최대 100명 까지 입력 가능합니다.
+        </div>
       </section>
 
       <section class="location n-item n-item:shadow mb:4 p:4">

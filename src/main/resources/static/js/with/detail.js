@@ -1,12 +1,15 @@
 window.addEventListener("load", (e)=>{
     let contentDiv = document.querySelector("#content");
     let menuTap = document.querySelector(".menu-tap");
+    let withInfoSection = document.querySelector("#with-info");
+    let withJoinDiv = withInfoSection.querySelector(".with-join-btn");
+    let withJoinBtn = withJoinDiv.querySelector("button");
 
     let lis = menuTap.querySelectorAll("li");
 
     let tmpContetnDiv =contentDiv.innerHTML;
 
-    console.log(tmpContetnDiv);
+    // console.log(tmpContetnDiv);
 
     menuTap.addEventListener("click",async function (e) {
         e.preventDefault();
@@ -218,7 +221,47 @@ window.addEventListener("load", (e)=>{
         }
     }
 
+    // 가입신청 버튼 클릭시
+    withJoinBtn.addEventListener("click", async()=>{
 
+        // 위드 아이디
+        let withId = withJoinDiv.querySelector("input").value;
+                
+        // 탈퇴 버튼 클릭시
+        if(withJoinBtn.classList.contains("joined")){
+            let result = confirm("탈퇴 하시겠습니까?");
+            if(result){
+                document.deleteMember.submit();
+                alert("탈퇴되었습니다.");
+             }
+            return;
+        }
+        // 위드가입 api
+        let reponse = await fetch(`/api/with/join?withId=${withId}&userId=`);
+
+        // 가입된 상태를 식별하기 위한 스타일 변경
+        reponse.json().then(()=>{
+            withJoinBtn.textContent = "가입 되었습니다!";
+            withJoinBtn.classList.add("joined");
+            withJoinBtn.classList.add("bg-color:main-1");
+            withJoinBtn.classList.add("color:main-5");
+            // 버튼이 바뀌는 동안 이벤트 발생 막기 위해 disabled 처리
+            withJoinBtn.setAttribute("disabled","");
+
+            // 0.8초 뒤에 탈퇴하기 버튼으로 바뀜
+            setTimeout(function(){
+                withJoinBtn.classList.remove("bg-color:main-1");
+                withJoinBtn.classList.remove("color:main-5");
+
+                withJoinBtn.classList.replace("n-btn-type:filled","n-btn-type:outline");
+                withJoinBtn.classList.add("border-color:base-2");
+                withJoinBtn.classList.add("color:base-4");
+                withJoinBtn.textContent = "탈퇴하기";
+                // disabled 지움
+                withJoinBtn.removeAttribute("disabled");
+        },800)
+        });
+    });
 
 
 })

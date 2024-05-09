@@ -21,6 +21,7 @@ public class FreeBoard {
     private String content;
     private LocalDateTime regDate;
     private int blindYn;
+    private int noticeYn;
 
 
 

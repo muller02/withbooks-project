@@ -8,11 +8,9 @@ import kr.withbooks.web.entity.Book;
 public interface BookService {
     List<Book> getList();
     
-     List<Book> getList(String query, Long categoryId);
+    List<Book> getList(String query, Long categoryId);
 
-    Book getView(Long id);
-
-    Book get(Long bookId);
+    Book getById(Long bookId);
 
     Map<String, Object> getMapById(Long bookId, Long userId);
 

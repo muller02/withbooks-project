@@ -61,5 +61,24 @@
 		where id = #{freeBoardId}
 	</select>
 
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		insert into free_board
+			(
+				with_id,
+				user_id,
+				title,
+				content,
+				notice_yn
+			)
+		values
+			(
+				#{withId},
+				#{userId},
+				#{title},
+				#{content},
+				#{noticeYn}
+			)
+	</insert>
+
 
 </mapper>

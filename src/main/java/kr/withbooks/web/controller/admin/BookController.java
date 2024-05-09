@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.Category;
+import kr.withbooks.web.service.AladinAPIService;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.CategoryService;
 
@@ -25,6 +25,8 @@ public class BookController {
     private BookService service;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private AladinAPIService apiService;
 
     @GetMapping("list")
     public String list( 
@@ -78,25 +80,68 @@ public class BookController {
         return "admin/book/list";
     }
 
-    @GetMapping("detail")
-    public String detail(@RequestParam("id")Long id
-                        ,Model model){
-        Book book = service.getView(id);
-        model.addAttribute("book", book);
-        return "admin/book/detail";
-    }
+    // @GetMapping("reg")
+    // public String reg(){
+    //     return "admin/book/reg";
+    // }
 
-    @GetMapping("reg")
-    public String reg(){
 
-        return "admin/book/reg";
-    }
+    // =====================================================================
+    // Aladdin API
+    /*
+        sort 1 = QueryType
+        sort 2 = Query, QueryType
+        sort 3 = ItemId, ItemIdType
+    */
 
-    @PostMapping("reg")
-    public String save(Book book){
+    @GetMapping("aladinList")
+    public String aladinList(
+                           @RequestParam(name = "sort", required = false) Integer sort
+                           ,@RequestParam(name = "qt", required = false) String queryType
+                           ,@RequestParam(name = "q", required = false) String query
+                           ,@RequestParam(name = "i", required = false) String itemId
+                           ,@RequestParam(name = "p", required = false, defaultValue = "1") Integer page
+                            ,Model model) {
 
-        System.out.println("Book = "+book.toString());
-        return "redirect:admin/book/list";
+        System.out.println("sort = "+sort);
+        System.out.println("qt = "+queryType);
+        System.out.println("q = "+query);
+        System.out.println("i = "+itemId);
+        System.out.println("p = "+page);
+        
+        if(sort == null)
+            return "admin/book/aladin-list";
+
+        List<Book> list = new ArrayList<>();
+        Integer totalResults = apiService.getList(list, sort, queryType, query, itemId, page);
+        
+        System.out.println("======================================");
+        // System.out.println(list);
+        System.out.println(totalResults);
+        double lastNum = 0;
+
+        if(totalResults!=null){
+
+            if(totalResults%50 > 0)
+                lastNum = Math.floor(totalResults/50) + 1;
+            else
+                lastNum = totalResults/50;
+            
+        }
+        System.out.println(lastNum);
+        System.out.println("======================================");
+
+        model.addAttribute("list", list);
+        model.addAttribute("totalResults", totalResults);
+        model.addAttribute("sort", sort);
+        model.addAttribute("qt", queryType);
+        model.addAttribute("q", query);
+        model.addAttribute("i", itemId);
+        model.addAttribute("p", page);
+        model.addAttribute("lastNum", lastNum);
+
+        return "admin/book/aladin-list";
+
     }
 
 

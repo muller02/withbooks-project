@@ -121,7 +121,7 @@ function makeTemplate(book){
       
       <span class="btn-box d:flex pos:absolute bottom:1 right:1 mb:3 mr:3">
           <div>
-              <button class="n-btn n-btn-type:outline">찾아와줘😀</button>
+              <button class="n-btn n-btn-type:outline" onclick='getByISBN13(${book.isbn13})'>찾아와줘😀</button>
           </div>
           <div class="ml:6">
               <button class="n-btn">수정내용 저장</button>
@@ -130,6 +130,16 @@ function makeTemplate(book){
   </div>
     `;
     return template;
+}
+// ================================================================================
+
+// ================================================================================
+// ISBN13으로 책 한권 알라딘에서 찾아오기
+async function getByISBN13(isbn13){
+    let response = await fetch("/api/book/getByISBN13?isbn13="+isbn13);
+    let book = await response.json();
+
+    console.log(book);
 }
 // ================================================================================
 

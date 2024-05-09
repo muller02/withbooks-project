@@ -14,5 +14,19 @@
 		where board_id = #{freeBoardId}
 	</select>
 
+	<insert id="save">
+		insert into 
+			free_attachment
+			(
+				board_id,
+				img
+			)
+		values
+			(
+				#{boardId},
+				#{savedPath}
+			)
+	</insert>
+
 
 </mapper>

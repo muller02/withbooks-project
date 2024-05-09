@@ -25,14 +25,18 @@
 	<update id="update">
 		update user 
 
-		set 
+		<set>
 			nickname = #{nickname},
 			intro = #{intro},
 			birth_date = #{birthDate, jdbcType=DATE},
 			gender = #{gender},
-			email = #{email}
-
-		where id = #{id}
+			email = #{email},
+			<if test="img != null">
+				img = #{img},
+			</if>
+		</set>
+		where 
+			id = #{id}
 	</update>
 
 </mapper>
