@@ -48,7 +48,7 @@ public class WithController {
 
     // 위드 가입 신청하기
     @GetMapping("join")
-    public int join(
+    public Integer join(
         // @AuthenticationPrincipal CustomUserDetails userDetails,
         Long withId,
         Long userId
@@ -56,10 +56,11 @@ public class WithController {
 
         // Long userId = userDetails.getId();
         userId = 4L;
-        System.out.println("withId: "+withId);
-        int result = memberService.join(userId, withId);
+
+        Integer result = memberService.join(userId, withId);
 
         return result;
     }
+    
     
 }

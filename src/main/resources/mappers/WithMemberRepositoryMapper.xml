@@ -32,4 +32,10 @@
 		and member_id = ${userId}
 	</select>
 
+	<delete id="delete" parameterType="Long">
+		delete from with_member 
+		where
+			with_id = #{withId} and member_id = #{userId}
+	</delete>
+
 </mapper>

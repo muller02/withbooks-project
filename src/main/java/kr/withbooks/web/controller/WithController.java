@@ -41,7 +41,6 @@ public class WithController {
   @Autowired
   private UserService userService;
 
-
   // 서비스 필요할 것 같습니다.
   @Autowired
   private DebateRoomViewRepository debateRoomViewRepository;
@@ -220,4 +219,16 @@ public class WithController {
 
   }
   
+
+  @PostMapping("withdraw")
+  public String withdraw(
+      @RequestParam(name = "with-id", required = true)Long withId,
+      Long memberId
+  ) {
+
+      memberId = 4L;
+      withMemberService.withdraw(withId, memberId);
+
+      return "redirect:/with/detail?id="+withId;
+  }
 }
