@@ -15,20 +15,38 @@ public class DebateBoardServiceImp implements DebateBoardService {
     @Autowired
     private DebateBoardViewRepository debateBoardViewRepository;
 
-    @Override
-    public List<DebateBoardView> getList(Long roomId) {
+    @Autowired
+    private DebateBoardRepository debateBoardRepository;
 
-        List<DebateBoardView> list = debateBoardViewRepository.findAllById(roomId);
+    @Override
+    public List<DebateBoardView> getList(Long roomId, Long topicId) {
+
+        List<DebateBoardView> list = debateBoardViewRepository.findAllById(roomId, topicId);
 
         return list;
     }
 
     @Override
-    public DebateBoardView getById(Long id) {
+    public DebateBoard getById(Long id) {
 
-        DebateBoardView DebateBoardView = debateBoardViewRepository.findById(id);
+        DebateBoard debateBoard = debateBoardRepository.findById(id);
 
-        return DebateBoardView;
+        return debateBoard;
+    }
+
+    @Override
+    public Long save(DebateBoard debateBoard) {
+
+        debateBoardRepository.save(debateBoard);
+        return debateBoard.getId();
+    }
+
+    @Override
+    public void edit(Long id, DebateBoard updateBoard) {
+        DebateBoard findBoard = debateBoardRepository.findById(id);
+        findBoard.setTitle(updateBoard.getTitle());
+        findBoard.setContent(updateBoard.getContent());
+        debateBoardRepository.update(findBoard);
     }
 
 

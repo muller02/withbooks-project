@@ -2,7 +2,9 @@ package kr.withbooks.web.controller;
 
 import java.util.List;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,12 @@ public class BookmarkController {
     @GetMapping("list")
     public String list(
                         @RequestParam(name="p", required= false) Integer p 
-                        ,Model model
+                        ,Model model,
+                        @AuthenticationPrincipal CustomUserDetails userDetails
                         ){
-        List<BookmarkView> list = service.getList(p);
+
+        Long userId= userDetails.getId();
+        List<BookmarkView> list = service.getList(p,userId);
         System.out.println(list);
         model.addAttribute("list", list);
         
@@ -34,10 +39,11 @@ public class BookmarkController {
 
     @PostMapping("delete")
     public String delete(
-                        @RequestParam(name="ids", required= true) List<Integer> ids 
-                        ){
+            @RequestParam(name="ids", required= true) List<Integer> ids
+                        , @AuthenticationPrincipal CustomUserDetails userDetails
+            ){
 
-        Long userId = 1L;
+        Long userId = userDetails.getId();
 
         System.out.println(ids);
 

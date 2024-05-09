@@ -5,10 +5,38 @@
 <mapper namespace="kr.withbooks.web.repository.UserRepository">
 	
 	
-<select id="findByEmail" resultType="User">
+	<select id="findByEmail" resultType="User">
 	
-	select * from user where email = #{email}
+		select * from user where email = #{email}
 
 	</select>
+
+  	<select id="findById" resultType="User">
+	
+	  	select * from user where id = #{id}
+
+	</select>
+	<select id="findByNickName">
+
+		select nickname from user where id = #{id}
+
+	</select>
+
+	<update id="update">
+		update user 
+
+		<set>
+			nickname = #{nickname},
+			intro = #{intro},
+			birth_date = #{birthDate, jdbcType=DATE},
+			gender = #{gender},
+			email = #{email},
+			<if test="img != null">
+				img = #{img},
+			</if>
+		</set>
+		where 
+			id = #{id}
+	</update>
 
 </mapper>

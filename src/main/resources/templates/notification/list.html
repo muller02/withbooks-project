@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            --gap-9:100px;
+        }
+        img{
+            --width-2:62px;
+            --height-2:62px;
+        }
+        .icon\:dots_three_outline_vertical_fill{
+            --top-1:6px;
+        }
+        .bg-color\:base-2{
+            --color-base-2:#e4e7ea7f;
+        }
+    </style>
+</head>
+<body>
+    <main layout:fragment="main" class="h:100vh pb:9">
+        <section class="d:none w:10p h:10p d:flex jc:center ai:center">
+            <h1 class="d:none">알림없음창</h1>
+            <div class="d:flex fl-dir:column jc:center ai:center">
+                <div class="icon icon:bell icon-color:base-3"></div>
+                <div class="mt:4 color:base-3">알림메세지가 없습니다.</div>
+            </div>
+        </section>
+        
+        <section>
+            <h1 class="d:none">알림 목록</h1>
+            <section>
+                <h1 class="d:none">알림</h1>
+                <div class="d:flex ai:center pl:3 pr:4 py:3 bd-bottom pos:relative">
+                    <span class="flex-grow:1">
+                        <p class="fs:3 color:base-8">‘뉴렉독서모임’ 위드에 가입되었습니다! 지금 바로 참여해보세요!</p>
+                        <span class="d:flex mt:2">
+                            <div class="fs:2 fw:3 color:base-8">위드</div>
+                            <div class="px:1">ㅣ</div>
+                            <div class="fs:2 fw:3 color:base-8">어제</div>
+                        </span>
+                    </span>
+                    <div><img class="w:2 h:2" src="/image/my/profile.png" alt=""></div>
+                    <div class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1">점점점</div>
+                </div>
+            </section>
+            <!-- <section>
+                <h1 class="d:none">알림</h1>
+                <div class="d:flex ai:center pl:3 pr:4 py:3 bd-bottom pos:relative">
+                    <span class="flex-grow:1">
+                        <p class="fs:3 color:base-8">‘뉴렉독서모임’ 위드에 가입되었습니다! 지금 바로 참여해보세요!</p>
+                        <span class="d:flex mt:2">
+                            <div class="fs:2 fw:3 color:base-8">위드</div>
+                            <div class="px:1">ㅣ</div>
+                            <div class="fs:2 fw:3 color:base-8">어제</div>
+                        </span>
+                    </span>
+                    <div><img class="w:2 h:2" src="/image/my/profile.png" alt=""></div>
+                    <div class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1">점점점</div>
+                    <div class="w:10p h:10p bg-color:base-2 pos:absolute top:0 left:0 zi:1"></div>
+                </div>
+            </section>
+            <section>
+                <h1 class="d:none">알림</h1>
+                <div class="d:flex ai:center pl:3 pr:4 py:3 bd-bottom pos:relative">
+                    <span class="flex-grow:1">
+                        <p class="fs:3 color:base-8">‘뉴렉독서모임’ 위드에 가입되었습니다! 지금 바로 참여해보세요!</p>
+                        <span class="d:flex mt:2">
+                            <div class="fs:2 fw:3 color:base-8">위드</div>
+                            <div class="px:1">ㅣ</div>
+                            <div class="fs:2 fw:3 color:base-8">어제</div>
+                        </span>
+                    </span>
+                    <div><img class="w:2 h:2" src="/image/my/profile.png" alt=""></div>
+                    <div class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1">점점점</div>
+                </div>
+            </section> -->
+        </section>
+    </main>
+</body>
+</html>

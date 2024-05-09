@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.FreeLikeRepository">
+
+	
+	<select id="count" resultType="int">
+		select 
+			count(distinct board_id, user_id) 
+		from 
+			free_like
+		where board_id = #{freeBoardId}
+	</select>
+
+	<insert id="insert">
+		insert into 
+			free_like
+		values 
+		(
+			#{freeBoardId},
+			#{userId}
+		)
+	</insert>
+
+	<select id="isLiked" resultType="boolean">
+		select exists
+		(
+			select 
+				1
+			from 
+				free_like
+			where 
+				user_id = #{id} AND 
+				board_id = #{freeBoardId}
+		)
+	</select>
+
+	<delete id="delete">
+		delete
+		from 
+			free_like
+		where 
+			user_id = #{userId} and
+			board_id = #{freeBoardId}
+	</delete>
+
+</mapper>

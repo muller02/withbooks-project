@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html
-    lang="en"
+    lang="ko"
     xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{inc/layout.html}"
 >
     <head>
         <meta charset="UTF-8" />
-        <title>Title</title>
-        <script src="/js/book/list.js"></script>
+        <title>책검색</title>
+        <script src="/js/book/list.js" defer></script>
         <style>
             .search {
                 --right-1: 6px;
@@ -48,15 +48,16 @@
                     <h1 class="d:none">책 검색 폼</h1>
                     <div class="d:flex">
                         <div class="flex-grow:1 margin-right:1">
-                            <form class="pos:relative book-search">
+                            <form action="list" method="get" class="pos:relative book-search">
                                 <input
                                     class="search-query-input n-textbox n-textbox:outline txt-al:center bd-radius:4 input"
                                     type="text"
+                                    name="q"
                                     placeholder="책 검색"
+                                    th:value="${param.q}"
                                 />
                                 <button
                                     class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass"
-                                    type="submit"
                                 >
                                     검색
                                 </button>
@@ -72,14 +73,16 @@
                     </div>
                     <div class="n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
                         <div class="n-expander-title">
-                            <input type="checkbox" class="n-expander-trigger" />
+                            <input type="checkbox" class="n-expander-trigger" checked/>
                             상세검색
                         </div>
                         <div class="n-expander-content d:flex jc:space-between">
                             <ul class="d:flex fl-wrap:wrap search-category">
-                                <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer	"  th:each="c : ${category}">
+                                <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer"  
+                                th:each="c : ${category}">
                                     <a href="#" class="click-none" role="button">
-                                        <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
+                                        <span class="category-value click-none" th:text="${c.name}" th:data-id="${c.id}"
+                                        >카테고리</span>
                                     </a>
                                 </li>
                             </ul>
@@ -133,7 +136,7 @@
                                             <div th:text="${n.publisher}">
                                                 열린마음
                                             </div>
-                                            <div th:text="${#temporals.format(n.pubDate,'yyyy-MM-dd HH:mm:ss')}">
+                                            <div th:text="${#dates.format(n.pubDate,'yyyy.MM.dd')}">
                                                 2022.01.01
                                             </div>
                                         </div>
@@ -148,6 +151,43 @@
                         </li>
                     </ul>
                 </section>
+
+                <section class="mb:5 mt:3">
+                    <h1 class="d:none">페이저</h1>
+                    <ul class="n-pager" style="display: flex; justify-content: center;"
+        
+                        th:with="p=${param.p} eq null ? 1 : ${{param.p}}
+                                ,temp=(${p}-1)/5
+                                ,startnum=${T(java.lang.Math).floor(temp)} * 5 + 1
+                                ,temp1 = ${count/6}
+                                ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                                ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
+                                ">
+                        <li>
+                            <span th:if="${p} lt 6">이전</span>
+                            <a href="list?p=5"
+                            th:if="${p} ge 6">이전</a>
+                        </li>
+        
+                        <li
+                            th:each="n : ${#numbers.sequence(startnum, endnum)}"
+                            th:class="${{param.p}} == ${n} ? 'active'">
+                            <span th:if="${n} eq ${{param.p}}" th:text="${n}">1</span>
+                            <a
+                                th:if="${n} ne ${{param.p}}"
+                                href="list?p=1"
+                                th:href="@{./list(p=${n})}"
+                                th:text="${n}">1</a>
+                        </li>
+                        <li>
+                            <span th:if="${startnum+4} gt ${lastnum}">다음</span>
+                            <a href="list?page=6" 
+                            th:href="@{./list(p=${startnum}+5)}"
+                            th:if="${startnum+4} lt ${lastnum}">다음</a >
+                        </li>
+                    </ul>
+                </section>
+        
             </div>
         </main>
     </body>

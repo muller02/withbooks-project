@@ -3,7 +3,9 @@ package kr.withbooks.web.controller.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +22,13 @@ public class BookmarkController {
 
     @GetMapping("add")
     public int add(
-                    @RequestParam(name="bookId", required = true) Long bookId
-                    ){
-        
-        Long userId = 1L;
+            @RequestParam(name="bookId", required = true) Long bookId,
+            @AuthenticationPrincipal CustomUserDetails userDetails
+            ){
+
+        Long userId = userDetails.getId();
+
+
         int result = 0;
 
         if(userId == null || bookId == null)
@@ -38,9 +43,10 @@ public class BookmarkController {
 
     @GetMapping("delete")
     public int delete(
-                @RequestParam(name="bookId", required = true) Long bookId
+                @RequestParam(name="bookId", required = true) Long bookId,
+                @AuthenticationPrincipal CustomUserDetails userDetails
                 ){
-        Long userId = 1L;
+        Long userId = userDetails.getId();
         int result = 0;
 
         if(userId == null || bookId == null)

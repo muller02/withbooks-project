@@ -9,6 +9,24 @@
         where id = #{id}
     </select>
 
+    <select id="findAll">
+        select * from debate_topic
+        where room_id = #{roomId}
+    </select>
+
+    <insert id="save">
+
+        insert into debate_topic(room_id, content) values
+
+            (
+            #{roomId},
+            #{content}
+
+            )
+
+    </insert>
+
+
 
 
 

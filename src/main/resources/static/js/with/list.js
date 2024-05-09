@@ -1,163 +1,307 @@
-window.addEventListener("load", function () {
-  searchDiv = document.querySelector("#search-detail");
-  searchBtn = document.querySelector("#search-btn");
-  withlist = document.querySelector("#with-list");
-  refreshBtn = document.querySelector("#refresh");
+// 카테고리 검색  클릭 시 모달창 표시
+window.addEventListener("load", function (e) {
+  const searchBtn = document.querySelector("#search-btn");
+  const searchBox = document.querySelector(".search-box");
+  const resetIcon = document.querySelector(".reset-icon");
+  const categorySection = document.querySelector("#category");
+  const categoryList = categorySection.querySelector(".category-list");
+  const inputCheckBox = categoryList.querySelectorAll("input[type='checkbox']");
+  const faceYnDiv = searchBox.querySelector(".face-yn");
+  const faceYnRadio = faceYnDiv.querySelectorAll("input[type='radio']");
+  const querySearch = document.querySelector(".query-search");
+  const queryBtn = document.querySelector(".query-btn");
 
-  // 상세검색 클릭 시
-  searchBtn.onclick = function (e) {
-    e.preventDefault();
+  let categoryIdArr = []; // categoryId를 누적으로 저장하는 배열
+  let faceYn;
+  let query;
 
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
+  const writeBtn = document.querySelector(".write-btn");
 
-    //비동기 처리
-    xhr.onload = function () {
-      //콜백 함수
-
-      var list = JSON.parse(this.responseText);
-
-      searchDiv.innerHTML = " ";
-
-      var inHTML1 = `<section class="category d:flex fl-dir:column w:7 pl:3">
-      <div class="d:flex ai:center">
-        <div class="margin-right:8">카테고리</div>
-        <div class="icon icon:arrows_clockwise_fill icon-size:2"></div>
-      </div>
-      <div class="mt:3">
-        <div class="d:flex fl-wrap:wrap">
-          <h1 class="d:none">카테고리 필터</h1>
-        `;
-      searchDiv.insertAdjacentHTML("afterbegin", inHTML1);
-
-      for (item of list) {
-        var inHTML2 = `
-          <label class="n-toggle n-toggle-type:outline-box m:1" >
-        ${item.name}
-            <input type="checkbox" class="d:none p" name="c"  value="${item.cid}" />
-          </label>
-          `;
-        searchDiv.insertAdjacentHTML("beforeend", inHTML2);
+  /* 로그인 정보 쿠키 확인 */
+  function getJSessionID() {
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith("lck=")) {
+        return cookie.split("=")[1];
       }
-      var inHTML3 = `
-        </div>
-      </div>
-    </section>
-            `;
-
-      searchDiv.insertAdjacentHTML("beforeend", inHTML3);
-    };
-
-    xhr.open("GET", `http://localhost:8080/api/category/list`);
-    xhr.send();
-  };
-
-  var arr = [];
-  var tmp2;
-
-  searchDiv.addEventListener("change", function (e) {
-    // checkbox = document.getElementsByClassName("p")[0];
-
-    if (e.target.tagName != "INPUT") return;
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    var c = e.target.value;
-    xhr.onload = function () {
-      //콜백 함수
-
-      var list3 = JSON.parse(this.responseText);
-
-      //현재 클릭한 checkbox가 true 일 경우만 insertHtml을 실행한다
-
-      console.log(arr);
-
-      withlist.innerHTML = ``;
-
-      for (i of list3) {
-        var innerHtml = ` <li class="d:flex h:4 gap:3 n-item:shadow ">
-
-                <h1 class="d:none">위드 리스트</h1>
-
-
-                <img data-v-01ad9008="" src="/image/with/puppy2.png"
-                     class="obj-fit:cover   w:2 margin-top:10  margin-bottom:auto    border-radius:8 va:middle max-width:100p max-height:100p">
-
-                <!-- 젤 큰박스에 사이즈 주기 -->
-
-                <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2 ">
-                    <ul class="d:flex gap:1 flex-wrap:wrap  ">
-                        <li class="border bd-color:base-3 border-radius:11 fs:1  pl:3 pr:3 pt:1 pb:1"><span class="">대면</span>
-                        </li>
-                        <li class="border bd-color:base-3 border-radius:11 fs:1  pl:3 pr:3 pt:1 pb:1 background-color:main-6 ">
-                            <span class="\tcolor:base-1">소설</span></li>
-                        <li class="border bd-color:base-3 border-radius:11 fs:1  pl:3 pr:3 pt:1 pb:1 background-color:main-6">
-                            <span class=" color:base-1">인문</span>
-                        </li>
-                    </ul>
-                    <div class="fs:5 fw:3">${i.name}</div>
-                    <div class="d:flex ai:center gap:1 flex-wrap:wrap">
-                        <!-- 텍스트 중앙정렬 line-height로 주기  -->
-                        <div class="d:flex ">
-                            <span class="icon icon:chat_circle  icon-size:2"></span>
-                            <span class="fs:1 color:base-5 ml:1  ">5명/12명</span>
-                        </div>
-                        <span>·</span>
-                        <div class="d:flex">
-                            <span class="icon icon:chat_circle  icon-size:2"></span>
-                            <span class="fs:1 color:base-5 ml:1">월 1회</span>
-                        </div>
-                        <span>·</span>
-                        <div class="d:flex">
-                            <span class="icon icon:chat_circle  icon-size:2"></span>
-                            <span class="fs:1 color:base-5 ml:1">노고산동</span>
-                        </div>
-                    </div>
-                    <div class=" ln-clamp:3">
-                    <span class=" ">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus, 
-                        dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur 
-                        amet! Ex, sunt eius.
-                    </span>
-
-                    </div>
-                    <!-- <div class="text-align:right"><a href="" class="color:base-4 fs:1">더보기></a></div> -->
-
-                </div>
-
-
-            </li>`;
-
-        withlist.insertAdjacentHTML("beforeend", innerHtml);
-      }
-    };
-
-    var c = e.target.value; //체크 박스의 카테고리 id를 저장
-
-    if (e.target.checked == true) {
-      //체크박스가 클릭되면 arr에 id 저장
-      arr.push(c);
-    } else {
-      // 클릭이 false면 배열에서 요소 제거
-      arr = arr.filter(function (item) {
-        return item !== c;
-      });
     }
+    return null;
+  }
 
-    var tmp = "";
-    for (k of arr) {
-      //list를 얻기위해 문자열 결합
-      tmp += k + "&c=";
-    }
-    console.log("tmp = " + tmp);
+  /* 로그인 안내 모달 창 */
+  function loginModal() {
+    const openButton = document.getElementById("modal-btn");
+    const closeButton = document.getElementById("login-close-btn");
+    const modal = document.getElementById("login-modal");
+    const modalBackdrop = document.getElementById("login-modal-backdrop");
 
-    if (arr.length == 0) {
-      xhr.open("GET", `http://localhost:8080/api/with/list`);
-      xhr.send();
-    } else {
-      xhr.open("GET", `http://localhost:8080/api/with/list?c=${tmp}`);
-      xhr.send();
+    modal.classList.remove("d:none");
+    modalBackdrop.classList.remove("d:none");
+    modal.classList.add("modal-fade-in");
+
+    closeButton.addEventListener("click", function () {
+      modal.classList.replace("modal-fade-in", "modal-fade-out");
+
+      setTimeout(() => {
+        modal.classList.add("d:none");
+        modalBackdrop.classList.add("d:none");
+        modal.classList.remove("modal-fade-out");
+      }, 130);
+    });
+  }
+
+  writeBtn.addEventListener("click", (e) => {
+    if (getJSessionID() == null) {
+      loginModal();
+      e.preventDefault();
     }
   });
+
+  /* 대면비대면 선택에 따른 정렬 */
+  faceYnDiv.onclick = async function (e) {
+    if (e.target.nodeName !== "INPUT") return;
+    faceYn = e.target.value;
+
+    //비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, query, faceYn);
+
+    // 위드 리스트를 받아옴
+    let list = await response.json();
+
+    updateHTML(list);
+    console.log(faceYn);
+  };
+
+  searchBtn.onclick = function (e) {
+    searchBox.classList.toggle("d:none");
+
+    if (searchBtn.classList.toggle("icon:plus")) {
+      searchBtn.classList.remove("icon:minus");
+      searchBtn.classList.add("icon:plus");
+      searchBtn.classList.add(".ani2");
+    } else {
+      searchBtn.classList.remove("icon:plus");
+      searchBtn.classList.add("icon:minus");
+      searchBtn.classList.add(".ani2");
+    }
+  };
+
+  // reset 아이콘 클릭시 모든 checkbox false 상태로 변환
+  resetIcon.onclick = async function (e) {
+    querySearch.value = null;
+
+    for (let i of inputCheckBox) {
+      i.checked = false;
+    }
+    categoryIdArr.length = 0;
+
+    //비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, null, null);
+    for (let i of faceYnRadio) {
+      i.checked = false;
+    }
+    faceYnRadio[0].checked = true;
+    // 위드 리스트를 받아옴
+    let list = await response.json();
+    updateHTML(list);
+  };
+
+  // 체크박스 클릭시 그에 해당하는 value를 가지고온다 e.target을 통해
+  // 가지고 온 value값을 배열에 담아준다 .
+  // locahostL8080/ ? c=2&c=3&c=4
+  // 문자열 결합
+
+  // querySearch 엘리먼트에서 keypress 이벤트와 queryBtn 클릭 이벤트에 대한 핸들러 함수입니다.
+  async function handleQuery() {
+    query = querySearch.value;
+    // 비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, query, faceYn);
+    // 위드 리스트를 받아옴
+    let list = await response.json();
+    updateHTML(list);
+  }
+
+  // querySearch 엘리먼트에서 keypress 이벤트를 감지하여 엔터 키를 눌렀을 때 handleQuery 함수를 호출합니다.
+  querySearch.addEventListener("keypress", async function (event) {
+    // event.key가 "Enter"일 때만 동작하도록 합니다.
+    if (event.key === "Enter") {
+      await handleQuery();
+    }
+  });
+
+  // queryBtn 클릭 시 handleQuery 함수를 호출합니다.
+  queryBtn.onclick = handleQuery;
+
+  // 카테고리 검색
+  categoryList.addEventListener("click", async (e) => {
+    if (e.target.nodeName !== "INPUT" && e.target.type !== "checkbox") return;
+
+    // 이거는 체크 박스 클릭하면 넣고 아니면 뺴기
+    let categoryId;
+    if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
+      categoryId = e.target.value;
+    }
+
+    if (e.target.checked) {
+      categoryIdArr.push(e.target.value);
+    } else {
+      categoryIdArr = categoryIdArr.filter((item) => item !== categoryId);
+    }
+
+    console.log(categoryIdArr);
+
+    //비동기 fetch 메소드 호출 및 GET 통신
+    let response = await getByParams(categoryIdArr, query, faceYn);
+
+    // 위드 리스트를 받아옴
+    let list = await response.json();
+
+    updateHTML(list);
+  });
 });
+
+//
+function getByParams(categoryIdArr, query, faceYn) {
+  let categoryIds = "";
+
+  if (categoryIdArr !== null) {
+    for (let i = 0; i < categoryIdArr.length; i++) {
+      categoryIds += categoryIdArr[i];
+      // c?=2 &c=
+      if (i < categoryIdArr.length - 1) {
+        categoryIds += "&c=";
+      }
+    }
+  }
+
+  let url;
+
+  console.log("f=", faceYn);
+  console.log("q=", query);
+  console.log("c=", categoryIds);
+
+  if (
+    query &&
+    query !== "" &&
+    categoryIdArr &&
+    categoryIdArr.length !== 0 &&
+    faceYn &&
+    faceYn !== ""
+  ) {
+    url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
+  } else if (
+    categoryIdArr &&
+    categoryIdArr.length !== 0 &&
+    faceYn &&
+    faceYn !== ""
+  ) {
+    url = `/api/with?f=${faceYn}&c=${categoryIds}`;
+  } else if (query && query !== "") {
+    url = `/api/with?q=${query}`;
+  } else if (categoryIdArr && categoryIdArr.length !== 0) {
+    url = `/api/with?c=${categoryIds}`;
+  } else if (faceYn && faceYn !== "") {
+    url = `/api/with?f=${faceYn}`;
+  } else {
+    url = `/api/with`;
+  }
+
+  // const method = "GET";
+  return fetch(url);
+}
+
+function updateHTML(list) {
+  const withListUl = document.querySelector(".with-list-ul");
+
+  withListUl.innerHTML = ``;
+
+  for (let item of list) {
+    let categoryHtml = "";
+
+    for (let category of item.categoryNames) {
+      categoryHtml += `<li class=" bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0">
+                        <span class="color:base-1">${category}</span>
+                          </li>`;
+    }
+
+    let innerHtml = `
+       
+             <li
+            class="d:flex with-ul gap:2 flex-direction:column n-item:shadow"
+   
+          >
+            <ul class="d:flex gap:1 flex-wrap:wrap">
+              <li
+                class="border bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
+              >
+                <span class="" 
+                  >${item.faceYn == 1 ? "대면" : "비대면"}</span
+                >
+              </li>
+              ${categoryHtml}
+            </ul>
+            <div class="d:flex pt:1 gap:5">
+              <!--            th:with img-->
+              <div
+                class="w:2 h:2 box-shadow border-color:base-2 border-radius:3 my:auto flex-shrink:0"
+              >
+                <img
+                  src="/image/with/${item.img}"
+     
+                  class="w:100p h:100p border-radius:3"
+                />
+              </div>
+
+              <div class="d:flex gap:1 flex-direction:column flex-grow:1">
+                <div class="fs:6 fw:3 mb:2">
+                  <a
+                        href="/with/detail?id=${item.id}"
+        
+                  >
+                   ${item.name}</a
+                  >
+                </div>
+                <div class="d:flex ai:center gap:1 ai:center">
+                  <div class="d:flex ai:center">
+                    <span class="icon icon:chat_circle icon-size:2"></span>
+                    <span
+                      class="fs:2 color:base-5 ml:1"
+       
+                      >${item.memberCnt}명/${item.personnel}명</span
+                    >
+                  </div>
+                  <!--            <span>·</span>-->
+                  <div class="d:flex ai:center">
+                    <span class="icon icon:chat_circle icon-size:2"></span>
+                    <span
+                      class="fs:2 color:base-5 ml:1"
+     
+                      >월 ${item.interval} 회</span
+                      
+                    >
+                  </div>
+                  <!--            <span>·</span>-->
+                </div>
+
+                <div class="d:flex ai:center">
+                  <span class="icon icon:chat_circle icon-size:2"></span>
+                  <span
+                    class="fs:2 color:base-5 ml:1"
+        
+                    >${item.location}</span
+                  >
+                </div>
+                <div class="ln-clamp:3">
+                  <span class=" " >
+                        ${item.intro}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+       `;
+
+    withListUl.insertAdjacentHTML("beforeend", innerHtml);
+  }
+}

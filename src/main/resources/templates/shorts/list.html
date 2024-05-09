@@ -1,19 +1,22 @@
-<!doctype html>
 <html
-  lang="en"
+  lang="ko"
   xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{inc/layout.html}"
 >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css"
-    />
+    <title>북쇼츠</title>
+    <link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/newtil-css@0.1.49/dist/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+
+
+    <script src="https://fastly.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!--    자바스크립트 날짜 형식 바꿔주는 라이브러리 -->
+
     <link rel="stylesheet" type="text/css" href="/css/var.css" />
     <link rel="stylesheet" type="text/css" href="/css/withtil.css" />
     <link rel="stylesheet" type="text/css" href="/css/util/border-radius.css" />
@@ -27,13 +30,13 @@
         --width-1: 32px;
       }
 
+      /*좋아요 댓글 이모티콘 크기 */
+      .cmt-like-section > * {
+        --icon-size-5: 28px;
+
+      }
       .pager {
         --height-1: 4px;
-      }
-
-      /*모달창 위치 옮기기 */
-      .transform-x {
-        transform: translateX(-122px);
       }
 
       /* 이미지 슬라이드 효과*/
@@ -53,7 +56,7 @@
       }
       .translate-x-18px {
         @media (min-width: 1200px) {
-          transform: translateX(-18px);
+          transform: translateX(330px);
         }
       }
 
@@ -141,19 +144,70 @@
       }
       /*  모달창*/
 
+    *{
+      font-family: "Noto Sans KR", sans-serif;
+    }
+
+    .comment-user-img{
+      width: 28px;
+      height: 28px;
+    }
+
+    /*.likeBtn{*/
+    /*  transition: transform 0.3s ease;*/
+
+    /*}*/
+    /*.likeBtn-transition{*/
+    /*  transform: scale(1.8);*/
+
+    /*}*/
+
+
+      @keyframes scaleAnimation {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.8);
+        }
+
+        100%{
+          transform: scale(1);
+
+        }
+      }
+
+      .like {
+        animation: scaleAnimation 0.6s ease; /* 1초 동안 애니메이션을 적용하고, 입출력 속도는 ease-in-out */
+      }
 
     </style>
-
     <script src="/js/shorts/list.js"></script>
   </head>
 
   <body>
     <!--gap 오버라이딩 필요 스마트폰 pb 있고, 테블릿 pc 업게 하기 -->
+
+<!--    dsff-->
+    <!--    dsff-->
+    <!--    dsff-->
     <main
       layout:fragment="main"
       class="min-w:7 px:3 pb:10 md:pb:0 lg:pb:0"
       id="main"
     >
+
+      <section id="login-modal" class="n-modal d:none  modal-transform-xy" tabindex="-1">
+        <h1 class="n-font:subtitle text-align:center fs:5 fw:2 mt:3 mb:4">로그인을 하시겠습니까?</h1>
+        <p class="fs:2">로그인을하시면 조금 더 많은 서비스를 이용 할 수 있습니다. </p>
+        <div class="mt:4 d:flex gap:4 jc:center">
+          <button id="login-close-btn" type="button" class="n-btn w:2 p:2 bg-color:main-2">닫기</button>
+          <a href="/login"  id="login-open-btn" type="button" class="n-btn w:3 flex-grow:1">로그인</a>
+
+        </div>
+      </section>
+      <div id="login-modal-backdrop" class="backdrop d:none"></div>
+
       <section
         class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative"
       >
@@ -284,7 +338,7 @@
             <div class="fs:2 fw:3">132</div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="icon icon:heart"></div>
+            <div class="icon icon:heart "></div>
             <div class="fs:2 fw:3">50.2M</div>
           </div>
         </section>
@@ -303,7 +357,7 @@
             <img
               class="obj-fit:contain h:10p w:10p"
               src="/image/shorts/profile.png"
-              th:src="@{|/image/shorts/${s.userImg}|}"
+              th:src="@{|/image/user/${s.userImg}|}"
               alt="프로필사진"
             />
           </div>
@@ -319,7 +373,7 @@
             </div>
             <div
               class="as:end font-size:1 color:base-4 ml:1"
-              th:text="${#temporals.format(s.regDate,'yyyy-MM-dd HH:mm:ss')}"
+              th:text="${#temporals.format(s.regDate,'yy-MM-dd HH:mm')}"
             >
               10분 전
             </div>
@@ -346,35 +400,54 @@
             <ul class="dropdown-list">
               <li>
                 <button>
-                  <span class="va:middle deco deco-size:2 icon:share_fat">
+                  <span class="va:middle deco deco-size:2 icon:share_fat w:100p">
                     공유하기
                   </span>
                 </button>
               </li>
-              <li>
+
+
+              <li th:if="${#authentication.principal ne 'anonymousUser'}">
                 <button>
-                  <span class="va:middle deco deco-size:2 icon:share_fat">
+                  <span class="va:middle deco deco-size:2 icon:share_fat w:100p">
                     신고하기
                   </span>
                 </button>
               </li>
-              <li>
+
+
+<!--              <span th:text=""></span>-->
+<!--                <p th:text="${#authentication.principal.username}"></p>-->
+
+<!--              <span th:text="${s.userId}"></span>-->
+<!--              <div th:if="sec:authentication=principal.id>-->
+<!--              <div th:text="${#authentication.principal != null}"></div>-->
+
+
+
+<!--              <div th:if="${#authentication.principal == null}">-->
+
+<!--                <div th:if="${#authentication.principal.id eq s.userId}">-->
+
+
+
+              <li th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq s.userId}">
                 <button>
                   <a
                     href=""
                     th:href="@{edit(sid=${s.id},bid=${s.bookId})}"
-                    class="va:middle deco deco-size:2 icon:pencil_simple"
+                    class="va:middle deco deco-size:2 icon:pencil_simple w:100p"
                   >
                     수정하기
                   </a>
                 </button>
               </li>
 
-              <li>
+              <li th:if="${#authentication.principal != 'anonymousUser' and #authentication.principal.id eq s.userId}">
                 <form id="form-name" class="px:2 py:1">
                   <button
                     id="modal-btn"
-                    class="delete-btn va:middle deco deco-size:2 deco-color:accent-2 icon:trash color:accent-2"
+                    class="delete-btn w:100p va:middle deco deco-size:2 ai:center deco-color:accent-2 icon:trash color:accent-2 fs:2 fw:2"
                   >
                     삭제하기
                   </button>
@@ -383,28 +456,32 @@
                   <!--             모달창 -->
                 </form>
               </li>
+
+<!--              </div>-->
+
+
             </ul>
           </div>
           <section
-            id="modal"
-            class="n-modal d:none modal-transform-xy"
-            tabindex="-1"
-          >
-            <h1 class="n-font:subtitle text-align:center">
-              게시글을 정말 삭제 하시겠습니까 ?
-            </h1>
-            <div class="mt:4 d:flex">
-              <button id="ok-btn" type="button" class="n-btn w:2 mr:4">
-                확인
-              </button>
-              <button
-                id="close-btn"
-                type="button"
-                class="n-btn w:2 bg-color:main-2"
-              >
-                닫기
-              </button>
-            </div>
+              id="modal"
+              class="n-modal d:none modal-transform-xy"
+              tabindex="-1"
+            >
+              <h1 class="n-font:subtitle text-align:center">
+                게시글을 정말 삭제 하시겠습니까 ?
+              </h1>
+              <div class="mt:4 d:flex">
+                <button id="ok-btn" type="button" class="n-btn w:2 mr:4">
+                  확인
+                </button>
+                <button
+                  id="close-btn"
+                  type="button"
+                  class="n-btn w:2 bg-color:main-2"
+                >
+                  닫기
+                </button>
+              </div>
           </section>
         </section>
 
@@ -562,24 +639,47 @@
           <h1 class="d:none">댓글/좋아요 버튼</h1>
           <div class="d:flex fl-dir:column ai:center">
             <div
-              class="icon icon:chats comment-btn cursor:pointer color-icon"
+              class="icon icon:chats  icon-size:5 comment-btn cursor:pointer color-icon"
               th:data-shorts-id="${s.id}"
             ></div>
             <div
-              class="fs:2 fw:3 count-comment color-text"
+              class="fs:3 fw:3 count-comment  color-text"
               th:text="${s.commentCnt}"
             >
               132
             </div>
           </div>
           <div class="d:flex fl-dir:column ai:center ml:5">
-            <div class="icon icon:heart cursor:pointer color-icon"></div>
-            <div class="fs:2 fw:3 color-text" th:text="${s.likeCnt}">50.2M</div>
+            <div class="likeBtn icon  icon-size:5  cursor:pointer "   th:data-shorts-id="${s.id}"  th:classappend="${s.liked}==1  ? 'icon:heart_fill icon-color:main-5' : 'icon:heart'"></div>
+
+            <div class="fs:3 fw:3 color-text" th:text="${s.likeCnt}" >50.2M</div>
+            <section
+                    id="modal-like"
+                    class="n-modal d:none modal-transform-xy"
+                    tabindex="-1"
+            >
+              <h1 class="n-font:subtitle text-align:center">
+                로그인을 해주세요
+              </h1>
+              <div class="mt:4 d:flex">
+                <button id="ok-btn-like" type="button" class="n-btn w:2 mr:4">
+                  로그인 하러 가기
+                </button>
+                <button
+                        id="close-btn-like"
+                        type="button"
+                        class="n-btn w:2 bg-color:main-2"
+                >
+                  닫기
+                </button>
+              </div>
+            </section>
+
           </div>
         </section>
 
         <section
-          class="comment-group box-shadow-custom bg-color:sub-1 translate-x-18px mt:2 d:none h:auto d:flex fl-dir:column bd-radius:6 p:3 lg:pos:absolute lg:bottom:0 lg:right:-5 lg:border lg:w:7 zi:4"
+          class="comment-group box-shadow-custom bg-color:sub-1 translate-x-18px mt:2 d:none h:auto d:flex fl-dir:column bd-radius:6 p:3 lg:pos:absolute lg:bottom:0 lg:right:-7 lg:border lg:w:7 zi:4"
         >
           <h1 class="d:none">북쇼츠 댓글</h1>
           <div
@@ -587,20 +687,21 @@
           ></div>
           <div class="comments color-base-9"></div>
 
-          <section class="d:flex jc:center mt:4">
-            <h1 class="d:none">댓글 페이저1</h1>
-            <ul class="n-pager">
-              <li class="active"><a>1</a></li>
-              <li><a>2</a></li>
-              <li><a>3</a></li>
-            </ul>
-          </section>
+<!--          댓글 페이징 일단 제외 -->
+<!--          <section class="d:flex jc:center mt:4">-->
+<!--            <h1 class="d:none">댓글 페이저1</h1>-->
+<!--            <ul class="n-pager">-->
+<!--              <li class="active"><a>1</a></li>-->
+<!--              <li><a>2</a></li>-->
+<!--              <li><a>3</a></li>-->
+<!--            </ul>-->
+<!--          </section>-->
           <div>
             <form class="d:flex mt:2 ai:center" method="post">
               <textarea
                 type="text"
                 required
-                class="comment-content px:1 py:1 n-textbox mr:2"
+                class="comment-content px:1 py:1 n-textbox mr:2 of:hidden "
                 name="comment-content"
                 placeholder="댓글을 입력하세요 ! "
               ></textarea>
@@ -615,15 +716,22 @@
       </section>
       <section>
         <h1 class="d:none">플로팅버튼</h1>
+
+
+        <div class="floting-btn">
         <a
           href="/shorts/reg"
-          class="icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:7 icon-size:5 border-radius:full h:1 w:1 zi:5"
+          style="transform: translate(-60px , 10px)"
+          class="icon icon:plus plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"
         ></a>
         <a
           href="#main"
-          class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
+          style="transform: translate(-36px, 9px)"
+          class="icon icon:arrow_up arrow icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
         ></a>
+        </div>
       </section>
     </main>
   </body>
 </html>
+

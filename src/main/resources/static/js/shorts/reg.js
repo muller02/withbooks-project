@@ -74,7 +74,7 @@ window.addEventListener("load", function () {
     // false 를 붙이면 동기
     var q = queryInput.value;
 
-    xhr.open("GET", `http://localhost:8080/api/book/list?q=${q}&c=0`);
+    xhr.open("GET", `/api/book/list?q=${q}&c=0`);
     xhr.send();
   };
 });

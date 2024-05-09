@@ -9,6 +9,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://fastly.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
     <style>
       .search {
         --right-1: 6px;
@@ -16,6 +18,10 @@
       }
       .click-none {
         pointer-events: none;
+      }
+
+      .debate-reg-transform{
+          transform:     translate(-2px, 14px)
       }
     </style>
     <script src="/js/with/debate/reg.js"></script>
@@ -25,7 +31,8 @@
       <section class="pb:4 pt:4 pl:4 pr:4">
         <h1 class="d:none">위드 토론 등록 페이지</h1>
 
-        <form action="" class="">
+        <form action="/with/debate/reg" class="" method="post">
+          <input type="hidden" name="wid"  th:value="${param.wid}">
           <div class="d:flex jc:end">
             <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
               등록
@@ -47,19 +54,19 @@
               <div
                 class="flex-grow:1 margin-right:1 al-self:stretch pos:relative"
               >
-                <form class="book-search">
+
                   <input
                     class="search-query-input n-textbox n-textbox:outline txt-al:center bd-radius:4 input mt:4"
                     type="text"
                     placeholder="책 검색"
                   />
                   <button
-                    class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass"
+                    class="query-input-btn search pos:absolute right:1 top:1 icon icon:magnifying_glass debate-reg-transform"
                     type="submit"
                   >
                     검색
                   </button>
-                </form>
+
               </div>
               <section class="my:4 book-list w:100p">
                 <h1 class="d:none">검색된 책 리스트</h1>
@@ -67,13 +74,32 @@
               </section>
             </div>
           </section>
-          <section class="bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
-            <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">토론일</h1>
-            <div class="mt:4"><input type="date" name="" id="" /></div>
+          <section class="bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow ai:center">
+            <h1 class="deco icon:calendar_blank bd-bottom w:100p h:1 fw:3">토론일
+            <span class="ml:4 fs:2 fw:2 color:main-5" id="debate-period"></span>
+            </h1>
+
+
+            <label>
+              <div class="d:flex ai:center">
+                <span class="mr:5">    예약일:</span>
+                <input id="reserve-date" name="reserveDate"  class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center"  type="date">
+              </div>
+            </label>
+            <label>
+              <div class="d:flex ai:center d:none  deadline-box " >
+                <span class="mr:5">     토론기한:</span>
+                <input id="deadline" value="1" class="n-textbox n-textbox-type:underline n-textbox-label:top w:2 placeholder-center text-align:center" min="1" max="5" name="deadline"  type="number">
+                <span> 일</span>
+                <div class="personnel-alert color:accent-1 d:none">
+                  최대 5일 까지 입력 가능합니다.
+                </div>
+              </div>
+            </label>
+
           </section>
-          <section
-            class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow"
-          >
+
+          <section class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow">
             <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">공지사항</h1>
             <div class="mt:4">
               <textarea
@@ -86,23 +112,25 @@
               ></textarea>
             </div>
           </section>
+
           <section
             class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
           >
-            <h1 class="deco icon:sun bd-bottom w:100p h:1 fw:3">토론주제</h1>
-            <span class="d:flex fl-dir:column ai:center">
-              <span class="d:flex ai:center topic-list al-self:stretch">
-                <div class="mt:4 flex-grow:1">
+            <h1 class="deco icon:tmp bd-bottom w:100p h:1 fw:3">토론주제
+            <span class="ml:4 fs:2 fw:1 color:accent-1 topic-list-alert d:none">토론주제는 최대 3개 까지만 가능합니다.</span></h1>
+            <span class="topic-list d:flex fl-dir:column ai:center">
+              <span class="topic-input d:flex ai:center al-self:stretch">
+                <div class="d:flex mt:4 flex-grow:1">
                   <input
                     type="text"
                     name="topic"
-                    class="n-textbox w:100p"
+                    class="n-textbox w:100p mr:3 pl:2"
                     placeholder="토론 주제를 입력하세요."
                   />
+<!--                  <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>-->
+                  <button type="button" class=""><span class="add-btn icon icon:plus">추가</span></button>
                 </div>
-                <div class="icon icon:trash">삭제</div>
               </span>
-              <div><a class="icon icon:tmp">추가</a></div>
             </span>
           </section>
         </form>

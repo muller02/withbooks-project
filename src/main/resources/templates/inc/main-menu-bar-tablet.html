@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <style>
         .main-menu-bar-tablet {
@@ -13,6 +16,7 @@
         ul li {
             position: relative;
         }
+
         .arrow_box {
 
             display: none;
@@ -32,6 +36,12 @@
             z-index: 3;
             display: block;
         }
+
+        .check-style{
+            padding: 12px;
+            border-radius: 20px;
+            background-color: var(--color-main-2);
+        }
     </style>
 </head>
 <body>
@@ -39,18 +49,41 @@
     <h1 class="d:none">메인메뉴바</h1>
     <ul class="d:flex fl-dir:column ai:center pt:5">
         <li><a class="" href=""><img src="/icon/home.svg" class="w:1" alt="홈"></a></li>
-        <li class="mt:6"><a href=""><img src="/icon/user.svg" alt="마이"></a></li>
+        <li class="mt:6"><a href="/my/index" th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/login' "><img src="/icon/user.svg" alt="마이"></a></li>
         <span class="mt:6 h:1 w:100p bg-color:base-3"></span>
-        <li class="mt:6"><a class="icon icon:book-searchd icon-color:base-9 " href="/book/list">북검색</a>
+        <li class="mt:6"
+            th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'check-style' : ''"
+        ><a class="icon icon:book-searchd icon-color:base-9 " href="/book/list"
+            th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'color:main-5 icon-color:main-5' : ''"
+
+        >북검색</a>
             <p class="arrow_box">책검색</p>
         </li>
-        <li class="mt:6"><a class="icon icon:withd icon-color:base-9" href="/with/list">위드</a>
+        <li class="mt:6 "
+            th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'check-style' : ''"
+
+        ><a class="icon icon:withd icon-color:base-9" href="/with/list"
+            th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'color:main-5 icon-color:main-5' : ''"
+
+        >위드</a>
             <p class="arrow_box">위드</p>
         </li>
-        <li class="mt:6"><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list">북쇼츠</a>
+        <li class="mt:6 "
+            th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'check-style' : ''"
+
+        ><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list"
+            th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'color:main-5 icon-color:main-5' : ''"
+
+        >북쇼츠</a>
             <p class="arrow_box">북쇼츠</p>
         </li>
-        <li class="mt:6"><a class="icon icon:book-logd icon-color:base-9" href="/booklog/list">북로그</a>
+        <li class="mt:6"
+            th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'check-style' : ''"
+
+        ><a class="icon icon:book-logd icon-color:base-9" href="/booklog/list"
+            th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'color:main-5 icon-color:main-5' : ''"
+
+        >북로그</a>
             <p class="arrow_box">북로그</p>
         </li>
         <span class="mt:6 h:1 w:100p bg-color:base-3"></span>
@@ -63,3 +96,4 @@
 </body>
 
 </html>
+

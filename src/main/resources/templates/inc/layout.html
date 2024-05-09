@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
 
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.49/dist/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/newtil-css@0.1.49/dist/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/var.css" />
         <link rel="stylesheet" type="text/css" href="/icon/icon.css" />
         <link
@@ -49,17 +49,22 @@
             href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap"
             rel="stylesheet"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/css/components/comment/comment.css" type="text/css">
+        <link rel="stylesheet" href="/icon/icon.css" type="text/css">
+        <script type="module" src="/js/theme.js"></script>
+        <script type="module" src="/js/font.js"></script>
+
         <style>
-            * {
-                font-family: "Noto Sans KR", sans-serif;
+            body {
+                font-family: var(--selected-font);
                 font-size: 15px;
 
                 color: var(--color-base-9);
             }
         </style>
     </head>
-    <body>
+    <body class="bg-color:base-1">
         <div class="md:d:flex lg:d:flex min-height:100vh">
             <!-- header부분 -->
             <div th:replace="~{inc/header}"></div>

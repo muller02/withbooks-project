@@ -9,83 +9,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/js/admin/book/list.js" defer></script>
+    <style>
+        .core div{
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .toggle{
+            padding: 0 !important;
+            height: 0;
+            overflow: hidden;
+        }
+        .max-width\:10{
+            --width-10: 1440px;
+        }
+    </style>
 </head>
 <body>
+    
 
-    <main layout:fragment="main" class="n-panel n-main-panel">
-        <div class="n-container px:4 lg:px:10">
-            <h1 class="d:none">Main</h1>
-
-            <section class="mt:4">
-                <h1 class="d:none">검색</h1>
-                <form class="n-form n-field-textbox:underline d:flex justify-content:space-around">
-                    <label>검색
-                        <input
-                        type="text"
-                        class="n-textbox n-textbox-type:outline n-textbox-status:focus"
-                        placeholder="Outline Focus" />
-                    </label>
-                    <button type="button" class="n-btn n-btn-type:filled">검색</button>
-                  </form>
-            </section>
-
-            <div class="d:flex justify-content:space-between mt:4">
-                <div>검색 결과 : 1032 건</div>
-                <div>
-                    <button type="button" class="n-btn n-btn-type:filled">
-                        <a href="reg">
-                            책 등록
-                        </a>
-                    </button>
-                    <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button>
+    <main layout:fragment="main" class="n-panel flex-direction:column n-main-panel">
+        <div class="">책 검색</div>
+        <section id="search-section" class="mt:4 px:10 max-width:10">
+            <h1 class="d:none">검색</h1>
+            
+            <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
+                <select name="query-type">
+                    <option value="title" selected>제목</option>
+                    <option value="author">저자</option>
+                    <option value="isbn13">ISBN13</option>
+                </select>
+                <input
+                type="text"
+                class="query n-textbox n-textbox-type:outline n-textbox-status:focus"
+                placeholder="Outline Focus"
+                />
+                <button type="submit" class="n-btn n-btn-type:filled">검색</button>
+            </div>
+            <div class="search-category-div n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2 max-width:10">
+                <div class="n-expander-title">
+                    <input type="checkbox" class="n-expander-trigger" />
+                    카테고리 검색
+                </div>
+                <div class="n-expander-content d:flex jc:space-between">
+                    <ul class="d:flex fl-wrap:wrap search-category">
+                        <li class="bg-color:main-1 py:1 px:4 mr:1 mb:2 border-radius:full cursor:pointer" th:each="c : ${category}">
+                            <span class="category-value" th:text="${c.name}" th:data-id="${c.id}">카테고리</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </section>
 
-            <!--  n-bbs-table n-column-width:3 -->
-            <table class="n-row-height:2 n-table-border n-table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col" class="width:1">
-                            <label>
-                                <input type="checkbox" class="n-toggle n-toggle-type:check-box n-toggle-size:1" />
-                            </label>
-                        </th>
-                        <th scope="col" class="width:1">ID</th>
-                        <th scope="col" class="width:3">카테고리</th>
-                        <th scope="col" class="width:1">공개 여부</th>
-                        <th scope="col">사진</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작가</th>
-                        <th scope="col">등록일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="book : ${list}">
-                        <th scope="col">
-                            <label>
-                                <input type="checkbox" class="n-toggle n-toggle-type:check-box  n-toggle-size:1" />
-                            </label>
-                        </th>
-                        <th scope="row" th:text="${book.id}">1</th>
-                        <th scope="row" th:text="${book.categoryName}">소설/시/희곡</th>
-                        <td><span class="icon icon:eye" th:text="${book.publicYn}"></span></td>
-                        <td><img src="/img/bookshorts/detail/도둑맞은집중력.PNG" th:src="${book.cover}" class="h:1 w:1" alt=""></td>
-                        <td><a href="detail" th:href="@{/admin/book/detail(id=${book.id})}" th:text="${book.title}" th:title="${book.title}">도둑 맞은 집중력</a></td>
-                        <td th:text="${book.author}"  th:title="${book.author}">홍길동</td>
-                        <td th:text="${book.regDate}">2020-11-01</td>
-                    </tr>
-                </tbody>
-            </table>
-            <section class="mt:4">
-                <h1 class="d:none">페이저</h1>
-                <ul class="n-pager justify-content:center">
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                </ul>
-            </section>
-
+        <div class="d:flex justify-content:space-between mt:4 px:10 max-width:10">
+            <div>검색 결과 : <span th:text="${count}"></span> 건</div>
+            <div>
+                <button type="button" class="n-btn n-btn-type:filled">
+                    <a href="aladinList">
+                        API 검색 / 등록
+                    </a>
+                </button>
+                <!-- <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button> -->
+            </div>
         </div>
+
+
+        <section class="n-container p:4 lg:px:10">
+            <h1 class="d:none">Main</h1>
+            <section id="book-list" class="book-list">
+                <h1 class="d:none">책 리스트</h1>
+
+                <section class="d:flex align-items:center pb:4 pt:4 bd-bottom bg-color:main-1">
+                    <h1 class="d:none">헤더</h1>
+                    <div class="w:1p text-align:center">ID</div>
+                    <div class="w:2p text-align:center">카테고리</div>
+                    <div class="w:5p text-align:center">제목</div>
+                    <div class="w:2p text-align:center">저자</div>
+                    <div class="w:2p text-align:center">ISBN13</div>
+                    <div class="w:1p text-align:center">공개여부</div>
+                </section>
+
+                <section th:each="book : ${list}">
+                    <h1 class="d:none">본문</h1>
+
+                    <section class="book-row d:flex jc:space-between align-items:center py:2 bd-top bd-right bd-left bd-color:main-3 pos:relative csr:pointer">
+                        <h1 class="d:none">요약</h1>
+                        <div class="w:1p text-align:center ln-clamp:1" th:text="${book.id}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.categoryName}"></div>
+                        <div class="w:5p text-align:center ln-clamp:1" th:text="${book.title}" th:title="${book.title}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.author}" th:title="${book.author}"></div>
+                        <div class="w:2p text-align:center ln-clamp:1" th:text="${book.isbn13}"></div>
+                        <div class="w:1p text-align:center ln-clamp:1" th:text="${book.publicYn}"></div>
+                        <div class="toggle-btn-area w:10p h:10p pos:absolute bg-color:transparent text-indent:-1 of:hidden"></div>
+                    </section>
+
+
+                    <!-- 디테일 출력할 부분 -->
+                    <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle"
+                    th:data-id="${book.id}"
+                    >
+                    </section>
+
+                </section>
+            </section>
+            
+        </section>
+
+        <section class="mb:5 mt:3">
+            <h1 class="d:none">페이저</h1>
+            <ul class="n-pager" style="display: flex; justify-content: center;"
+
+                th:with="page=${param.p} eq null ? 1 : ${{param.p}}
+                        ,temp=(${page}-1)/5
+                        ,startnum=${T(java.lang.Math).floor(temp)} * 5 + 1
+                        ,temp1 = ${count/6}
+                        ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                        ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
+                        ">
+                <li>
+                    <span th:if="${page} lt 6">이전</span>
+                    <a href="list?page=5"
+                    th:if="${page} ge 6">이전</a>
+                </li>
+
+                <li
+                    th:each="n : ${#numbers.sequence(startnum, endnum)}"
+                    th:class="${{param.p}} == ${n} ? 'active'">
+                    <span th:if="${n} eq ${{param.p}}" th:text="${n}">1</span>
+                    <a
+                        th:if="${n} ne ${{param.p}}"
+                        href="list?p=1"
+                        th:href="@{./list(page=${n})}"
+                        th:text="${n}">1</a>
+                </li>
+                <li>
+                    <span th:if="${startnum+4} gt ${lastnum}">다음</span>
+                    <a href="list?page=6" 
+                    th:href="@{./list(page=${startnum}+5)}"
+                    th:if="${startnum+4} lt ${lastnum}">다음</a >
+                </li>
+            </ul>
+        </section>
+
+
+
+
     </main>
 </body>
 </html>

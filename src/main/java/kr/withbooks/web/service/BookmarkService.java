@@ -6,7 +6,7 @@ import kr.withbooks.web.entity.BookmarkView;
 
 public interface BookmarkService {
 
-    List<BookmarkView> getList(Integer p);
+    List<BookmarkView> getList(Integer p, Long userId);
 
     void deleteAllByIds(List<Integer> ids, Long userId);
 

@@ -9,15 +9,17 @@
   SELECT
     *
   FROM debate_room_view
+  ORDER BY reg_date desc
 </select>
-  <select id="findAllById" resultType="DebateRoomView">
 
-    select
-    *
-    from debate_room_view
-    where with_id = #{withId}
+<select id="findAllById" resultType="DebateRoomView">
 
-  </select>
+  select
+  *
+  from debate_room_view
+  where with_id = #{withId} and blind_yn = 0
+
+</select>
 
 
 

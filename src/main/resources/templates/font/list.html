@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+    <script type="module" src="/js/font/list.js"></script>
+    <style>
+        .Noto-Sans-KR-box{
+            font-family: "Noto Sans KR", sans-serif;
+            font-size: 15px;
+
+            color: var(--color-base-9);
+        }
+        .Hi-Melody-box{
+            font-family: "Hi Melody", sans-serif; 
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+    </style>
+</head>
+<body>
+    <main layout:fragment="main" class="d:flex flex-direction:column px:3 py:4 w:10p">
+        <span class="font-list">
+            <div class="Noto-Sans-KR-box w:10p">
+                <label class="fs:4 deco icon:moon deco-mr:5 w:10p" data-font="Noto Sans KR">
+                    Noto Sans KR
+                    <input class="Noto-Sans-KR ml:auto" type="radio" name="theme" data-font="Noto Sans KR"/>
+                </label>
+            </div>
+            <div class="Hi-Melody-box w:10p mt:5">
+                <label class="fs:4 deco icon:moon deco-mr:5 w:10p" data-font="Hi Melody">
+                    Hi Melody
+                    <input class="Hi-Melody ml:auto" type="radio" name="theme" data-font="Hi Melody"/>
+                </label>
+            </div>
+        </span>
+    </main>
+</body>
+</html>

@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{inc/layout.html}">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-
+        <title>북로그</title>
+        <script src="/js/booklog/list.js"></script>
         <style>
-            .book-list div {
+            .wrapping {
+                position: relative;
+                opacity: 1;
+                z-index: -1;
+            }
+            .book-list .book-info {
                 width: 130px;
-
-                a {
+                span {
                     display: block;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+            }
+            .box-shadow-custom {
+                box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
             }
         </style>
     </head>
@@ -36,34 +43,62 @@
                     </ul>
                 </section>
 
-                <section class="book-list my:4">
+                <div class="book-check-all d:flex mx:3 justify-content:space-between margin:2">
+                    <div>
+                        <label>
+                            <input type="checkbox" class="d:none n-toggle n-toggle-type:check-box n-toggle-size:1" />
+                            <span class="d:none">전체 선택</span>
+                        </label>
+                    </div>
+                    <div class="d:flex">
+                        <!-- 취소 버튼 빈색, 삭제버튼 빨간색 -->
+                        <button class="n-btn mr:2 cancel-btn d:none bg-color:base-2"><span class="color:base-1"></span>취소</span></button>
+                        <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">전체 삭제</button>
+                        <button class="n-btn mr:2 delete-btn">삭제</button>
+                    </div>
+                </div>
+    
+                <section class="book-list my:4" id="booklog-section">
                     <h1 class="d:none">북 리스트</h1>
-                    <ul class="d:flex flex-wrap:wrap justify-content:flex-start">
-                        <li class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
-                            <div class="gap:4 d:flex fl-dir:column lg:ai:center">
-                                <div class="h:4 d:flex jc:center ">
-                                    <a class="text-align:center h:100p" href="detail" th:href="@{./detail(id=${l.id})} ">
-                                        <img src="/image/shorts/detail/도둑맞은집중력.PNG" th:src="${l.bookCover}" class="h:100p w:100p obj-fit:contain margin-right:auto" alt="도둑맞은 집중력.img" />
+                    <form action="/booklog/deleteAllByIds" method="post" id="idsForm">
+                        <div class="booklog-list d:flex flex-wrap:wrap justify-content:flex-start">
+                            <section class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
+                                <div>
+                                    <a th:href="@{./detail(id=${l.id})} ">
+                                        <input type="checkbox" name="ids" th:value="${l.id}" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1" />
+                                        <div class="book-info gap:4 d:flex fl-dir:column">
+                                            <div class="h:4 w:100p box-shadow-custom">
+                                                <span class="h:100p">
+                                                    <img
+                                                        src="/image/shorts/detail/도둑맞은집중력.PNG"
+                                                        th:src="${l.bookCover}"
+                                                        class="h:100p w:100p obj-fit:contain margin-right:auto"
+                                                        alt="도둑맞은 집중력.img"
+                                                    />
+                                                </span>
+                                            </div>
+                                            <div class="w:100p">
+                                                <span class="fs:2 fw:3" th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</span>
+                                                <span class="fs:1 fw:1 mt:1" th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</span>
+                                            </div>
+
+
+                                        </div>
                                     </a>
                                 </div>
-
-                                <div class="w:100p fl-dir:column ai:center">
-                                    <h1 class="fs:3 fw:3">
-                                        <a th:href="@{./detail(id=${l.id})} " th:text="${l.bookTitle}" th:title="${l.bookTitle}">도둑맞은 집중력</a>
-                                    </h1>
-                                    <div class="fs:2 fw:1 mt:1">
-                                        <a th:href="@{./detail(id=${l.id})} " th:text="${l.bookAuthor}" th:title="${l.bookAuthor}">요한하리</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </section>
+                        </div>
+                    </form>
                 </section>
 
-                <section class="pos:absolute b">
+                <div id="new-log-reg" class="pos:fixed right:2 bottom:9 zi:5">
                     <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
-                    <div>버튼</div>
-                </section>
+                    <div class="bg-color:main-5 border-radius:full p:3">
+                        <a href="/booklog/reg" th:title="${'새 북로그 작성하기'}">
+                            <span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </main>
     </body>

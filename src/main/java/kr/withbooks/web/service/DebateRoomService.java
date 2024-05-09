@@ -10,4 +10,9 @@ public interface DebateRoomService {
     List<DebateRoomView> getList();
 
     DebateRoom getById(Long id);
+
+    List<DebateRoomView> getListById(Long withId);
+
+
+    Long add(DebateRoom debateRoom);
 }

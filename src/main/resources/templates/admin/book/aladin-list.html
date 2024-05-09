@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.44/dist/style.css" />
+        <script src="/js/admin/book/aladin-list.js" defer></script>
+        <script src="/js/admin/book/reg.js" defer></script>
+        <style>
+            .n-form>div:not(:first-child) {
+                margin-top: 0
+            }
+
+            .n-toggle {
+
+            /* toggle-type:check */
+            --toggle-check-border-color: var(--color-main-2);
+            }
+            .max-width\:10{
+                --width-10: 1440px;
+            }
+        </style>
+    </head>
+    <body>
+        <main layout:fragment="main" class="n-panel n-main-panel flex-direction:column">
+
+            <!-- api 검색부 -->
+            <section id="search-section" class="mt:4 w:100p">
+                <h1 class="d:none">검색</h1>
+                <div class="n-container px:4 lg:px:10">
+                    <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
+                        <select name="sort">
+                            <option value="1" th:selected="${sort}=='1'">책리스트</option>
+                            <option value="2" th:selected="${sort}=='2'">검색어</option>
+                            <option value="3" th:selected="${sort}=='3'">ISBN 검색</option>
+                        </select>
+                        <div class="search-input-div d:flex flex-direction:row w:100p"
+                        th:with="s = ${sort} ? ${sort} : '1'
+                        "
+                        >
+                        <div th:text="${temp}"></div>
+                        <div th:text="${lastnum}"></div>
+                            <!-- sort = 1 -->
+                            <select name="qt" class="sort-1"
+                            th:classappend="${s} != '1' ? 'd:none'"
+                            >
+                                <option value="Bestseller" th:selected="${qt}=='Bestseller'">베스트셀러</option>
+                                <option value="ItemNewAll" th:selected="${qt}=='ItemNewAll'">신간</option>
+                                <option value="ItemNewSpecial" th:selected="${qt}=='ItemNewSpecial'">특별 신간</option>
+                            </select>
+                            
+                            <!-- sort = 2 -->
+                            <select name="qt" class="sort-2"
+                            th:classappend="${s} != '2' ? 'd:none'"
+                            >
+                                <option value="Title" th:selected="${qt}=='Title'">제목</option>
+                                <option value="Author" th:selected="${qt}=='Author'">저자</option>
+                                <option value="Publisher" th:selected="${qt}=='Publisher'">출판사</option>
+                            </select>
+                            <input
+                                type="text"
+                                name="q"
+                                class="sort-2 n-textbox n-textbox-type:outline n-textbox-status:focus"
+                                placeholder="입력해주세요"
+                                th:value="${q}"
+                                th:classappend="${s} != '2' ? 'd:none'"
+                            />
+
+                            <!-- sort = 3 -->
+                            <input
+                                type="text"
+                                name="i"
+                                class="sort-3 n-textbox n-textbox-type:outline n-textbox-status:focus"
+                                placeholder="숫자 13자 입력"
+                                maxlength="13"
+                                th:value="${i}"
+                                th:classappend="${s} != '3' ? 'd:none'"
+                            />
+                        </div>
+                        <button type="submit" class="n-btn n-btn-type:filled">검색</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="d:flex justify-content:space-between mt:4 px:10 max-width:10"
+            th:if="${sort}"
+            >
+                <div class="d:flex ai:center">검색 결과 : <span th:text="${totalResults}? ${totalResults}:'0'"></span> 건</div>
+                <div class="d:flex jc:space-between ai:center w:3p" th:if="${totalResults > 0}">
+                    <div class="w:1 d:flex jc:space-around">
+                        <a href="" 
+                        th:if="${sort} == '1' and (${p}-1) > 0"
+                        th:href="@{|aladinList?sort=1&qt=${qt}&p=${p-1}|}"
+                        class="icon icon:caret_left_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '2' and (${p}-1) > 0"
+                        th:href="@{|aladinList?sort=2&q=${q}&qt=${qt}&p=${p-1}|}"
+                        class="icon icon:caret_left_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '3' and (${p}-1) > 0"
+                        th:href="@{|aladinList?sort=3&i=${i}&p=${p-1}|}"
+                        class="icon icon:caret_left_bold icon-size:5 csr:pointer"></a>
+                    </div>
+                    <div>
+                        <span class="fs:5"><b th:text="${p}">1</b></span>
+                    </div>
+                    <div class="w:1 d:flex jc:space-around">
+                        <a href="" 
+                        th:if="${sort} == '1' and ${lastNum > p}"
+                        th:href="@{|aladinList?sort=1&qt=${qt}&p=${p+1}|}"
+                        class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '2' and ${lastNum > p}"
+                        th:href="@{|aladinList?sort=2&q=${q}&qt=${qt}&p=${p+1}|}"
+                        class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
+                        <a href="" 
+                        th:if="${sort} == '3' and ${lastNum > p}"
+                        th:href="@{|aladinList?sort=3&i=${i}&p=${p+1}|}"
+                        class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
+                    </div>
+                </div>
+                <button class="n-btn" th:if="${totalResults > 0}">선택 반영</button>
+            </div>
+        
+        
+            <section class="n-container p:4 lg:px:10">
+                <h1 class="d:none">Main</h1>
+                <section id="list-container">
+                    <h1 class="d:none">책 리스트</h1>
+
+                    <section class="d:flex align-items:center pb:4 pt:4 bd-bottom bg-color:main-1 pr:2"
+                        th:if="${totalResults}"
+                    >
+                        <h1 class="d:none">헤더</h1>
+                        <div class="w:1p text-align:center pl:5">
+                            <label class="w:5">
+                                <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
+                                전체선택
+                            </label>
+                        </div>
+                        <!-- <div class="w:2p text-align:center">카테고리</div>
+                        <div class="w:5p text-align:center">제목</div>
+                        <div class="w:2p text-align:center">저자</div>
+                        <div class="w:2p text-align:center">ISBN13</div>
+                        <div class="w:1p text-align:center">기존여부</div> -->
+                    </section>
+
+                    <section id="book-list" th:each="book : ${list}">
+                        <h1 class="d:none">본문</h1>
+                        <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle"
+                        th:classappend="${book.publicYn == 1}? 'bg-color:base-2'"
+                        >
+                        <div class="w:1 text-align:center">
+                            <label>
+                                <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="book-checkbox"
+                                    th:data-categoryName="${book.categoryName}"
+                                    th:data-title="${book.title}"
+                                    th:data-author="${book.author}"
+                                    th:data-isbn13="${book.isbn13}"
+                                    th:data-pubDate="${book.pubDate}"
+                                    th:data-publisher="${book.publisher}"
+                                    th:data-price="${book.price}"
+                                    th:data-description="${book.description}"
+                                    th:data-purchaseLink="${book.purchaseLink}"
+                                    th:disabled="${book.publicYn == 1}"
+                                >
+                            </label>
+                        </div>
+                        <div class="d:flex pos:relative w:100p">
+                            <h1 class="d:none">디테일</h1>
+                                <div class="d:flex fl-dir:column">
+                                    <div class="">
+                                        <img class="w:3 h:5 bd-radius:2" th:src="${book.cover}">
+                                    </div>
+                                </div>
+                        
+                                <span class="ml:6 w:10p">
+                                    <div class="d:flex jc:space-between">
+                                        <div>
+                                            <div><b>제목</b></div>
+                                            <div class="px:2" th:text="${book.title}"></div>
+                                        </div>
+                        
+                                        <div class="w:5">
+                                            <div><b>저자</b></div>
+                                            <div class="px:2" th:text="${book.author}"></div>
+                                        </div>
+                                    </div>
+                        
+                                    <span class="d:flex mt:3">
+                                        <div><b>ISBN13</b><div class="px:2" th:text="${book.isbn13}"></div></div>
+                                        <div class="ml:auto"><b>가격</b><div class="px:2" th:text="${book.price}"></div></div>
+                                        <div class="ml:auto"><b>출판일</b> : <div class="px:2" 
+                                            th:text="${#dates.format(book.pubDate, 'yyyy년 MM월 dd일')}"
+                                            ></div></div>
+                                        <div class="ml:auto"><b>출판사</b> : <div class="px:2" th:text="${book.publisher}"></div></div>
+                                    </span>
+
+                                    <div class=" mt:3">
+                                        <div><b>카테고리</b></div>
+                                        <div class="px:2" th:text="${book.categoryName}"></div>
+                                    </div>
+
+                                    <div class="d:flex mt:3">
+                                        <label class="w:1"><b>설명</b></label>
+                                        <textarea class="bd bd-radius:2 w:10p pl:3 py:1" th:utext="${book.description}"></textarea>
+                                    </div>
+                        
+                                    <div class="d:flex mt:3">
+                                        <label class="w:2"><b>구매링크</b></label>
+                                        <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.purchaseLink}"></input>
+                                        
+                                        <div class="d:flex jc:center ai:center"><a th:href="${book.purchaseLink}" class="icon icon:share_fat ml:2">링크</a></div>
+                                    </div>
+                                </span>
+                            </div>
+                        </section>
+
+                    </section>
+                </section>
+                
+            </section>
+        </main>
+    </body>
+</html>

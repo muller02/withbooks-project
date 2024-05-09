@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/with/debate/board/list.js" defer></script>
     <title>list</title>
 </head>
 
@@ -15,17 +16,19 @@
 
     <main layout:fragment="main">
 
-        <div class="d:flex fl-dir:column gap:10 mt:8">
+        <div class="d:flex fl-dir:column gap:8 mt:10">
 
-            <section class="d:none">
+            <section>
                 <h1 class="d:none">토론주제 목록</h1>
                 <div class="d:flex jc:center">
                     <label class="d:none" for="lang">토론주제</label>
-                    <select class="bd w:6" name="languages" id="lang">
-                        <option class="" value="">토론주제</option>
-                        <option value="">재홍이는 바지인가</option>
-                        <option value="">경인이는 나카무라인가 무라카미인가</option>
-                        <option value="">다진쓰는 진짜 깡패인가</option>
+                    <select class="bd bd-radius:3 w:5 p:1" name="languages" id="lang"> <!--onchange="redirectToController(this.value)">-->
+                        <option class="" value=" ">토론주제</option>
+                        <option th:each="val : ${topicList}"
+                                th:value="${val.id}" th:text="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>
+                        <!--<option value="">경인이는 나카무라인가 무라카미인가</option>
+                        <option value="">다진쓰는 진짜 깡패인가</option>-->
+<!--                        <span th:text="${val.content}"></span>-->
                     </select>
                 </div>
             </section>
@@ -37,13 +40,16 @@
 
                     <li th:each="b : ${list}">
                         <h1 class="d:none">토론방</h1>
-                        <div class="d:flex fl-direction:row-reverse h:3 border-bottom border-color:base-3 py:4  ">
-                            <div>
-                                <img src="/image/with/debate/cat.png" alt="이미지" class="obj-fit:fill max-height:100p border-radius:3">
+                        <div class="d:flex fl-direction:row-reverse h:3 gap:3 border-bottom border-color:base-3 py:4  ">
+                            <div th:if="${b.saveImg}">
+                                <img src="/image/with/debate/cat.png" th:src="@{|/image/debate/board/${b.saveImg}|}" alt="이미지" class="obj-fit:fill max-height:100p border-radius:3">
                             </div>
                             <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
                                 <div>
-                                    <h1 class="fs:5 fw:3"><a href="" th:href="@{|/with/debate/board/detail?id=${b.id}|}" th:text="${b.topic}">"재홍이는 바지인가"</a></h1>
+                                    <div class="fs:2 fw:1"><a href="" th:href="@{|/with/debate/board/detail?id=${b.id}|}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
+                                </div>
+                                <div>
+                                    <hi class="fs:5 fw:2"><a href="" th:href="@{|/with/debate/board/detail?id=${b.id}|}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
                                 </div>
                                 <div class="d:flex ai:center gap:1">
                                     <div class="d:flex   ai:center">
@@ -52,7 +58,7 @@
                                     </div>
                                     <div class="d:flex   ai:center">
                                         <span class="icon icon:calendar_blank icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 " th:text="${b.regDate}">2024.02.20.18:25</span>
+                                        <span class="fs:1 color:base-5 ml:1 " th:text="${#temporals.format(b.regDate, 'yyyy.MM.dd HH:mm')}">2024.02.20.18:25</span>
                                     </div>
                                     <div class="d:flex   ai:center">
                                         <span class="icon icon:chat_circle_text icon-size:2"></span>
@@ -74,6 +80,13 @@
 
                 </ul>
             </section>
+        </div>
+
+        <div class="pos:fixed right:2 bottom:9 zi:5">
+            <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
+            <div class="bg-color:main-5 border-radius:full p:3">
+                <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
+            </div>
         </div>
 
     </main>

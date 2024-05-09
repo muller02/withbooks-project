@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.NotificationRepository">
+	
+	<select id="countById" resultType="int">
+		select count(id) 
+		from notification 
+		where 	user_id=#{userId} 
+					and 
+				checked_yn=0;
+	</select>
+
+	<select id="findAllById" resultType="Notification">
+		SELECT * FROM notification 
+		where 
+			user_id = #{userId};
+	</select>
+
+</mapper>

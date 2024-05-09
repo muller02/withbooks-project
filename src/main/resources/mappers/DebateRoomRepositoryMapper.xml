@@ -4,6 +4,34 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.withbooks.web.repository.DebateRoomRepository">
 
+    <!-- 테이블 전체 컬럼 -->
+    <sql id="debateRoom">
+
+         reg_id
+        , with_id
+        , book_id
+        , notice
+        , deadline
+        , reserve_date
+    </sql>
+
+
+    <!-- 게시글 저장 -->
+    <insert id="save" parameterType="debateRoom" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO debate_room (
+        <include refid="debateRoom" />
+        ) VALUES (
+
+        #{regId}
+        , #{withId}
+        , #{bookId}
+        , #{notice}
+        , #{deadline}
+        , #{reserveDate}
+
+        )
+    </insert>
+
     <select id="findById" resultType="DebateRoom">
       SELECT
       *

@@ -3,8 +3,8 @@ package kr.withbooks.web.entity;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import groovy.transform.builder.Builder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,10 +20,11 @@ public class DebateBoardView {
     private String title;
     private String content;
     private LocalDateTime regDate;
-    private Integer blindYn;
+    private int blindYn;
     private Long topicId;
     private String topic;
-    private String img;
+    private String originalImg;
+    private String saveImg;
     private String nickname;
     private Long cmtCnt;
 }
