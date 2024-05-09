@@ -105,12 +105,11 @@
 <main class="n-container mx:auto" layout:fragment="main">
   <section class="with-reg-page p:4" id="with-reg">
     <h1 class="d:none">위드 등록 페이지</h1>
-    <form action="/with/reg" class="n-form2 with-form"
-          const const
-          enctype="multipart/form-data"
-          form=document.querySelector("form");
-          method="post"
-          submitBtn=document.getElementById("btn");
+    <form
+            action="/with/reg"
+            class="n-form2 with-form"
+            enctype="multipart/form-data"
+            method="post"
     >
       <div class="d:flex jc:end">
         <button class="submit-btn n-btn mt:3 bg-color:main-5" id="btn" type="submit">
