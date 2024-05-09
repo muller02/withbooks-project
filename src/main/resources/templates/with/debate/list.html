@@ -76,7 +76,7 @@
           <ul class="n-list n-card-list content-ul">
             <li class="jc:center ai:center p:5" th:each="n: ${list}">
               <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
-              <a href="#" th:href="@{|./board/list?rid=${n.id}|} " class="">
+              <a href="#" th:href="@{/with/debate/board/list(wid=${param.wid},rid=${n.id})} " class="">
                 <div class="gap:4 d:flex fl-dir:column lg:ai:center ai:center">
                   <div class="w:100p lg:w:3 d:flex jc:center mb:2">
                     <img

@@ -13,6 +13,5 @@ public interface DebateRoomService {
 
     List<DebateRoomView> getListById(Long withId);
 
-
     Long add(DebateRoom debateRoom);
 }
