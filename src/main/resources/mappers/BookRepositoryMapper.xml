@@ -195,5 +195,42 @@
 	</select>
 <!-- ================================================================= -->
 
+<!-- admin/book/aladinList -->
+<insert id="save">
+	insert into
+		book(
+			category_id,
+			category_name,
+			cid,
+			title,
+			author,
+			pub_date,
+			publisher,
+			isbn13,
+			description,
+			purchase_link,
+			price,
+			cover,
+			reg_date
+		)
+	values
+		<foreach collection="list" item="book" separator=",">
+				(
+					#{book.categoryId},
+					#{book.categoryName},
+					#{book.cid},
+					#{book.title},
+					#{book.author},
+					#{book.pubDate},
+					#{book.publisher},
+					#{book.isbn13},
+					#{book.description},
+					#{book.purchaseLink},
+					#{book.price},
+					#{book.cover},
+					#{book.regDate}
+				)
+		</foreach>
+</insert>
 
 </mapper>

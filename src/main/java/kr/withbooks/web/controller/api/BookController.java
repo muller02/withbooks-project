@@ -5,13 +5,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.service.AladinAPIService;
 import kr.withbooks.web.service.BookService;
+import kr.withbooks.web.service.CategoryService;
 
 @RestController("apiBookController")
 @RequestMapping("api/book")
@@ -19,6 +23,9 @@ public class BookController {
 
     @Autowired
     private BookService service;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private AladinAPIService apiService;
@@ -56,6 +63,22 @@ public class BookController {
 
     // =====================================================================
     // aladdin API
+    // admin/book/alaldinList -> reg
+    @PostMapping("reg")
+    public Integer reg(@RequestBody List<Book> list){
+        
+        if(list == null)
+            return null;
+
+        List<Category> categoryList = categoryService.getList();
+
+        Integer insertedCount = service.reg(list, categoryList);
+        System.out.println("인서트개수 = "+insertedCount);
+
+        return insertedCount;
+    }
+
+
     @GetMapping("getByISBN13")
     public Book getByISBN13(String isbn13){
 

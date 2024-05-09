@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.Category;
 
 public interface BookService {
     List<Book> getList();
@@ -21,6 +22,8 @@ public interface BookService {
     List<Book> getListByParams(int size, int page, String query, Long categoryId);
 
     int getCountByParams(int size, Integer page, String query, Long categoryId);
+
+    Integer reg(List<Book> list, List<Category> categoryList);
 
 
     

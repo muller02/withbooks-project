@@ -57,6 +57,7 @@ public class AladinJsonParser {
             try {
                 book = Book.builder()
                             .categoryName(categoryName)
+                            .cid(item.getLong("categoryId"))
                             .title(item.getString("title"))
                             .purchaseLink(item.getString("link"))
                             .author(item.getString("author"))

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.repository.BookRepository;
 
 @Service
@@ -81,4 +82,28 @@ public class BookServiceImp implements BookService {
         return repository.findCountByParams(params, size, offset);
     }
      //=====================================================================
+
+     //admin/book/aladinList
+     @Override
+     public Integer reg(List<Book> list, List<Category> categoryList) {
+
+        for (Book book : list) {
+            String categoryName = book.getCategoryName();
+            String[] categoryNameArr = categoryName.split(">");
+            String categoryNameToId = categoryNameArr[1];
+            long categoryId = 0;
+            for (Category c : categoryList) {
+                String cidName = c.getName();
+                long id = c.getId();
+                if(cidName.equals(categoryNameToId)){
+                    categoryId = id;
+                    break;
+                }
+            }
+            categoryId = categoryId==0 ? 20 : categoryId;
+            book.setCategoryId(categoryId);
+        }
+
+         return repository.save(list);
+     }
 }

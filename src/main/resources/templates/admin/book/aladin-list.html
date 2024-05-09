@@ -125,7 +125,7 @@
                         class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
                     </div>
                 </div>
-                <button class="n-btn" th:if="${totalResults > 0}">선택 반영</button>
+                <button class="n-btn reg-btn" th:if="${totalResults > 0}">선택 반영</button>
             </div>
         
         
@@ -159,15 +159,13 @@
                         <div class="w:1 text-align:center">
                             <label>
                                 <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="book-checkbox"
-                                    th:data-categoryName="${book.categoryName}"
                                     th:data-title="${book.title}"
+                                    th:data-cid="${book.cid}"
                                     th:data-author="${book.author}"
                                     th:data-isbn13="${book.isbn13}"
-                                    th:data-pubDate="${book.pubDate}"
                                     th:data-publisher="${book.publisher}"
                                     th:data-price="${book.price}"
                                     th:data-description="${book.description}"
-                                    th:data-purchaseLink="${book.purchaseLink}"
                                     th:disabled="${book.publicYn == 1}"
                                 >
                             </label>
@@ -194,29 +192,35 @@
                                     </div>
                         
                                     <span class="d:flex mt:3">
-                                        <div><b>ISBN13</b><div class="px:2" th:text="${book.isbn13}"></div></div>
+                                        <div>
+                                            <div><b>ISBN13</b></div>
+                                            <div class="d:flex csr:pointer" th:onclick="copyISBN13([[${book.isbn13}]])" title="클립보드 저장">
+                                                <div class="px:2" th:text="${book.isbn13}"></div>
+                                                <div class="icon icon:copy_simple icon-color:accent-1"></div>
+                                            </div>
+                                        </div>
                                         <div class="ml:auto"><b>가격</b><div class="px:2" th:text="${book.price}"></div></div>
-                                        <div class="ml:auto"><b>출판일</b> : <div class="px:2" 
-                                            th:text="${#dates.format(book.pubDate, 'yyyy년 MM월 dd일')}"
+                                        <div class="ml:auto"><b>출판일</b> : <div class="px:2 pub-date" 
+                                            th:text="${#dates.format(book.pubDate, 'yyyy-MM-dd')}"
                                             ></div></div>
                                         <div class="ml:auto"><b>출판사</b> : <div class="px:2" th:text="${book.publisher}"></div></div>
                                     </span>
 
                                     <div class=" mt:3">
                                         <div><b>카테고리</b></div>
-                                        <div class="px:2" th:text="${book.categoryName}"></div>
+                                        <div class="px:2 category-name" th:text="${book.categoryName}"></div>
                                     </div>
 
                                     <div class="d:flex mt:3">
                                         <label class="w:1"><b>설명</b></label>
-                                        <textarea class="bd bd-radius:2 w:10p pl:3 py:1" th:utext="${book.description}"></textarea>
+                                        <textarea class="bd bd-radius:2 w:10p pl:3 py:1 description" th:utext="${book.description}"></textarea>
                                     </div>
                         
                                     <div class="d:flex mt:3">
                                         <label class="w:2"><b>구매링크</b></label>
-                                        <input class="bd bd-radius:2 w:10p pl:3 py:1" th:value="${book.purchaseLink}"></input>
+                                        <div class="purchase-link" th:text="${book.purchaseLink}"></div>
                                         
-                                        <div class="d:flex jc:center ai:center"><a th:href="${book.purchaseLink}" class="icon icon:share_fat ml:2">링크</a></div>
+                                        <div class="d:flex jc:center ai:center"><a th:href="${book.purchaseLink}" class="icon icon:share_fat ml:2" target='_blank'>링크</a></div>
                                     </div>
                                 </span>
                             </div>

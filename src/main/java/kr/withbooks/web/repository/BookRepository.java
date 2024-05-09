@@ -26,5 +26,8 @@ public interface BookRepository {
     List<Book> findByParams(int offset, int size, String query, Long categoryId);
     int findCntByParams(int offset, int size, String query, Long categoryId);
 
+    //admin/book/aladinList
+    Integer save(List<Book> list);
+
 
 } 
