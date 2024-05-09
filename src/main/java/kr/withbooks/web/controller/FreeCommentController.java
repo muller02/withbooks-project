@@ -34,6 +34,6 @@ public class FreeCommentController {
         freeCommentService.reg(freeBoardId, userDetails.getId(), comment);
 
         
-      return "redirect:free-board/detail?fid=" + freeBoardId;
+      return "redirect:/free-board/detail?fid=" + freeBoardId;
     }
 }

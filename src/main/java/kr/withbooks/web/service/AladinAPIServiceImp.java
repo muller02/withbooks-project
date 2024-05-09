@@ -34,13 +34,13 @@ public class AladinAPIServiceImp implements AladinAPIService {
         Integer totalResults = jsonparser.parser(list, jsonResponse);
 
         // Test
+        // 알라딘에서 검색해온 책들을 기존 DB와 비교하여 없는 책인 경우 0, 있는 책인 경우 1 세팅
         if(list.size() > 0)
             for (Book book : list) {
                 String isbn13 = book.getIsbn13();
                 int bool = bookRepository.findBoolByISBN13(isbn13);
-                
+                book.setPublicYn(bool);
             }
-            
 
         return totalResults;
     }

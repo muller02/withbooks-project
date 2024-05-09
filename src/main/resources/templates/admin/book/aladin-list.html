@@ -131,7 +131,7 @@
         
             <section class="n-container p:4 lg:px:10">
                 <h1 class="d:none">Main</h1>
-                <section id="book-list" class="book-list">
+                <section id="list-container">
                     <h1 class="d:none">책 리스트</h1>
 
                     <section class="d:flex align-items:center pb:4 pt:4 bd-bottom bg-color:main-1 pr:2"
@@ -139,7 +139,7 @@
                     >
                         <h1 class="d:none">헤더</h1>
                         <div class="w:1p text-align:center pl:5">
-                            <label>
+                            <label class="w:5">
                                 <input class="n-toggle n-toggle-type:check-box n-toggle-size:1" type="checkbox" name="select-all">
                                 전체선택
                             </label>
@@ -151,9 +151,10 @@
                         <div class="w:1p text-align:center">기존여부</div> -->
                     </section>
 
-                    <section th:each="book : ${list}">
+                    <section id="book-list" th:each="book : ${list}">
                         <h1 class="d:none">본문</h1>
                         <section class="book-detail d:flex pos:relative bd-left bd-right bd-bottom bd-color:main-3 of:hidden p:5 toggle"
+                        th:classappend="${book.publicYn == 1}? 'bg-color:base-2'"
                         >
                         <div class="w:1 text-align:center">
                             <label>
@@ -167,6 +168,7 @@
                                     th:data-price="${book.price}"
                                     th:data-description="${book.description}"
                                     th:data-purchaseLink="${book.purchaseLink}"
+                                    th:disabled="${book.publicYn == 1}"
                                 >
                             </label>
                         </div>

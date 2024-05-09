@@ -1,3 +1,20 @@
+////////////////// 프로필이미지 선택 시 썸네일 변경 ////////////////////
+{
+    let profileImg = document.querySelector(".profile-img");
+    let profileImgInput = document.querySelector(".profile-img-input");
+    
+    profileImgInput.oninput = (e)=>{
+        let file = e.target.files[0];
+        let fileReader = new FileReader();
+
+        fileReader.onload = (e)=>{
+            profileImg.src = e.target.result;
+        };
+
+        fileReader.readAsDataURL(file);
+    }
+}
+
 
 ////////////////// 회원탈퇴 모달창 이벤트 ////////////////////
 {
