@@ -80,23 +80,23 @@ public class BookController {
         return "admin/book/list";
     }
 
-    @GetMapping("reg")
-    public String reg(){
-        return "admin/book/reg";
-    }
+    // @GetMapping("reg")
+    // public String reg(){
+    //     return "admin/book/reg";
+    // }
 
 
     // =====================================================================
     // Aladdin API
     /*
-    sort 1 = QueryType
-    sort 2 = Query, QueryType
-    sort 3 = ItemId, ItemIdType
+        sort 1 = QueryType
+        sort 2 = Query, QueryType
+        sort 3 = ItemId, ItemIdType
     */
 
     @GetMapping("aladinList")
     public String aladinList(
-                           @RequestParam(name = "sort", required = true) Integer sort
+                           @RequestParam(name = "sort", required = false) Integer sort
                            ,@RequestParam(name = "qt", required = false) String queryType
                            ,@RequestParam(name = "q", required = false) String query
                            ,@RequestParam(name = "i", required = false) String itemId
@@ -108,6 +108,9 @@ public class BookController {
         System.out.println("q = "+query);
         System.out.println("i = "+itemId);
         System.out.println("p = "+page);
+        
+        if(sort == null)
+            return "admin/book/aladin-list";
 
         List<Book> list = new ArrayList<>();
         Integer totalResults = apiService.getList(list, sort, queryType, query, itemId, page);
@@ -116,12 +119,16 @@ public class BookController {
         // System.out.println(list);
         System.out.println(totalResults);
         double lastNum = 0;
-        if(totalResults%50 > 0)
-            lastNum = Math.floor(totalResults/50) + 1;
-        else
-            lastNum = totalResults/50;
 
-            System.out.println(lastNum);
+        if(totalResults!=null){
+
+            if(totalResults%50 > 0)
+                lastNum = Math.floor(totalResults/50) + 1;
+            else
+                lastNum = totalResults/50;
+            
+        }
+        System.out.println(lastNum);
         System.out.println("======================================");
 
         model.addAttribute("list", list);
@@ -133,7 +140,7 @@ public class BookController {
         model.addAttribute("p", page);
         model.addAttribute("lastNum", lastNum);
 
-        return "admin/book/reg";
+        return "admin/book/aladin-list";
 
     }
 

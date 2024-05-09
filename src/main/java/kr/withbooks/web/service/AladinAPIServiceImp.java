@@ -10,16 +10,17 @@ import org.springframework.stereotype.Service;
 import kr.withbooks.web.entity.Book;
 import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.repository.AladinAPIRepository;
+import kr.withbooks.web.repository.BookRepository;
 import kr.withbooks.web.util.AladinJsonParser;
 
 @Service
 public class AladinAPIServiceImp implements AladinAPIService {
     
     @Autowired
-    private CategoryService categoryService;
+    private AladinAPIRepository repository;
 
     @Autowired
-    private AladinAPIRepository repository;
+    private BookRepository bookRepository;
 
     @Autowired
     private AladinJsonParser jsonparser;
@@ -32,6 +33,15 @@ public class AladinAPIServiceImp implements AladinAPIService {
         String jsonResponse = repository.jsonResponse(apiUrl);
         Integer totalResults = jsonparser.parser(list, jsonResponse);
 
+        // Test
+        if(list.size() > 0)
+            for (Book book : list) {
+                String isbn13 = book.getIsbn13();
+                int bool = bookRepository.findBoolByISBN13(isbn13);
+                
+            }
+            
+
         return totalResults;
     }
     @Override
@@ -41,7 +51,7 @@ public class AladinAPIServiceImp implements AladinAPIService {
         map.put("ItemId", isbn13);
         map.put("ItemIdType", "ISBN13");
 
-        List<Category> cList = categoryService.getList(); 
+        // List<Category> cList = categoryService.getList(); 
         // String apiUrl = repository.urlMaker(map);
         // Map<String, Object> resultMap = repository.list(apiUrl, cList);
 

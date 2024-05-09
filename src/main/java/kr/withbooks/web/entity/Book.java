@@ -20,9 +20,9 @@ public class Book {
     private Date pubDate;
     private String description;
     private String isbn13;
-    private int price;
+    private Integer price;
     private String cover;
-    private String publicYn;
+    private Integer publicYn;
     private long categoryId;
     private LocalDateTime regDate;
     private String publisher;

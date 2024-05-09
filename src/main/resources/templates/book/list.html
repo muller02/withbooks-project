@@ -136,7 +136,7 @@
                                             <div th:text="${n.publisher}">
                                                 열린마음
                                             </div>
-                                            <div th:text="${#temporals.format(n.pubDate,'yyyy-MM-dd HH:mm:ss')}">
+                                            <div th:text="${#dates.format(n.pubDate,'yyyy.MM.dd')}">
                                                 2022.01.01
                                             </div>
                                         </div>
