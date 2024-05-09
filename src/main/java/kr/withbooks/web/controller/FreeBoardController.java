@@ -193,7 +193,7 @@ public class FreeBoardController {
       }
 
 
-      return "redirect: /freeboard/list";
+      return "redirect:/free-board/list?p=1&wid="+withId+"&s=latest";
     }
 
 }

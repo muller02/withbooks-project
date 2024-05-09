@@ -15,7 +15,8 @@
             --color-base-3:var(--color-base-2);
             --gap-9:100px;
         }
-        img{
+        img,
+        .profile-input-label{
             --width-1:36px;
             --height-1:36px;
 
@@ -26,7 +27,9 @@
             --top-1: -52px;
         }
         .save-button{
-            --top-1: -222px;
+            --top-1: -56px;
+            --top-2: -4px;
+            --top-3: -36px;
         }
         .withdrawal-modal{
             --color-main-3:#1a1a1a9b;
@@ -41,17 +44,24 @@
                 <div class="back-icon-content-box h:1 pos:absolute top:1"><a class="icon icon:caret_left icon-size:5 " href="/my/index">뒤로가기</a></div>
             </section>
         </header>
-        <section class="d:flex jc:center pb:10">
-            <h1 class="d:none">프로필 이미지</h1>
-            <span class="pos:relative">
-                <a href="">
-                    <div><img class="h:2 w:2" src="/image/my/profile.png" alt=""></div>
-                    <div class="pos:absolute bottom:1 right:1"><img class="h1: w:1" src="/icon/pencil.svg" alt="연필아이콘"></div>
-
-                </a>
-            </span>
-        </section>
-        <form class="pos:relative" action="" method="post">
+        <form class="pos:relative" action="" method="post" enctype="multipart/form-data">
+            <section class="d:flex jc:center pb:10">
+                <h1 class="d:none">프로필 이미지</h1>
+                <span class="pos:relative">
+                    <div>
+                        <img class="profile-img h:2 w:2 bd-radius:12" src="/image/my/profile.png" th:src="${user.img}" alt="">
+                    </div>
+                    <div class="pos:absolute bottom:1 right:1">
+                        <img class="h1: w:1" src="/icon/pencil.svg" alt="연필아이콘">
+                    </div>
+                    <div class="pos:absolute top:1 ">
+                        <label class="profile-input-label d:inline-block h:2 w:2 cursor:pointer">
+                            <input class="profile-img-input d:none" type="file" name="profile-img">
+                        </label>
+                    </div>
+                </span>
+            </section>
+        
             <section id="profile-manage">
                 <h1 class="fs:7 fw:3 color:base-8 pb:6">프로필 관리</h1>
                 <div>
@@ -83,8 +93,11 @@
                     <div class="mt:7"><a class="fs:4 fw:3 color:base-8 deco icon:key deco-mr:5" href="">비밀번호 변경하기</a></div>
                 </div>
             </section>
-            <div class="save-button pos:absolute top:1 right:1"><button class="px:4 py:2 bg-color:main-5 color:base-1 border-radius:2 cursor:pointer">저장</button></div>
+            <div class="save-button pos:absolute top:1 md:top:2 lg:top:2 right:1 lg:right:0">
+                <button class="px:4 py:2 bg-color:main-5 color:base-1 border-radius:2 cursor:pointer">저장</button>
+            </div>
         </form>
+
         <div class="h:1 mt:9">
             <a class="withdrawal-link fs:4 color:base-1 bg-color:accent-1 d:flex jc:center ai:center w:10p h:10p bd-radius:4" href="">회원 탈퇴</a>
         </div>
