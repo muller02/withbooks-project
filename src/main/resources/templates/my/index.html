@@ -34,7 +34,7 @@
             
             <div>
                 <span class="d:flex ai:center">
-                    <div><img class="w:2 h:2" src="/image/my/profile.png" alt="프로필 사진"></div>
+                    <div><img class="w:2 h:2 bd-radius:12" src="/image/my/profile.png" th:src="${user.img}" alt="프로필 사진"></div>
                     <div class="fs:6 fw:3 ml:3" th:text="${user.nickname}">뉴렉이</div>
                     <div class="ml:auto as:start"><a class="fs:2 color:base-7" href="/profile/edit">프로필 관리</a></div>
                 </span>

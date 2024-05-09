@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("with")
@@ -38,7 +40,6 @@ public class WithController {
 
   @Autowired
   private UserService userService;
-
 
   // 서비스 필요할 것 같습니다.
   @Autowired
@@ -82,7 +83,11 @@ public class WithController {
   }
 
   @GetMapping("detail")
-  public String detail(Model model, @RequestParam(name = "id", required = false) Long withId) {
+  public String detail(
+      Model model
+    , @RequestParam(name = "id", required = false) Long withId
+    // , @AuthenticationPrincipal CustomUserDetails userDetails
+  ) {
 
     //withId에 해당하는 위드 얻기
     With with = service.get(withId);
@@ -91,11 +96,20 @@ public class WithController {
 
     String nickname = userService.getNickNameById(withCapId);
 
+    // Long userId = userDetails.getId();
+    // [ ] 제거 예정
+    Long userId = 4L;
+
     //withId에 해당하는 위드 카테고리 리스트를 얻기
     List<String> withCategoryNames = withCategoryService.getListByWithId(withId);
 
     //withMember 테이블에서 withId에 해당하는 맴버들을 얻기
     List<WithMemberView> withMemberList = withMemberService.getViewById(withId);
+    // 위드 가입 여부 알아오기
+    Integer withJoinYn = withMemberService.getJoinYn(withId,userId);
+    // 미가입 상태일 경우 0 보내기, 반대의 경우 1 보냄
+    if(withJoinYn == null) withJoinYn = 0;
+    else withJoinYn = 1;
 
     //WithViewService 를 통해 with Id에 해당하는 view 리스트를 얻고 사이즈를 얻기
     int withMemberCnt = withMemberList.size();
@@ -115,6 +129,7 @@ public class WithController {
     model.addAttribute("with", with);
     model.addAttribute("withCategoryNames", withCategoryNames);
     model.addAttribute("withMemberCnt", withMemberCnt);
+    model.addAttribute("joinYn", withJoinYn);
 
 
     return "with/detail";
@@ -202,5 +217,18 @@ public class WithController {
     return "redirect:/with/list";
 
 
+  }
+  
+
+  @PostMapping("withdraw")
+  public String withdraw(
+      @RequestParam(name = "with-id", required = true)Long withId,
+      Long memberId
+  ) {
+
+      memberId = 4L;
+      withMemberService.withdraw(withId, memberId);
+
+      return "redirect:/with/detail?id="+withId;
   }
 }

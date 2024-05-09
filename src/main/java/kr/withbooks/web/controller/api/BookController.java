@@ -2,7 +2,6 @@ package kr.withbooks.web.controller.api;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.service.AladdinAPIService;
+import kr.withbooks.web.service.AladinAPIService;
 import kr.withbooks.web.service.BookService;
 
 @RestController("apiBookController")
@@ -22,7 +21,7 @@ public class BookController {
     private BookService service;
 
     @Autowired
-    private AladdinAPIService apiService;
+    private AladinAPIService apiService;
 
     // ======================================================================
     // mariaDB

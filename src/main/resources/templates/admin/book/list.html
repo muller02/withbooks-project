@@ -22,14 +22,17 @@
             height: 0;
             overflow: hidden;
         }
+        .max-width\:10{
+            --width-10: 1440px;
+        }
     </style>
 </head>
 <body>
     
 
     <main layout:fragment="main" class="n-panel flex-direction:column n-main-panel">
-
-        <section id="search-section" class="mt:4 px:10">
+        <div class="">책 검색</div>
+        <section id="search-section" class="mt:4 px:10 max-width:10">
             <h1 class="d:none">검색</h1>
             
             <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
@@ -45,7 +48,7 @@
                 />
                 <button type="submit" class="n-btn n-btn-type:filled">검색</button>
             </div>
-            <div class="search-category-div n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2">
+            <div class="search-category-div n-expander bd bd-color:base-5 bd-radius:4 p:2 my:2 max-width:10">
                 <div class="n-expander-title">
                     <input type="checkbox" class="n-expander-trigger" />
                     카테고리 검색
@@ -60,12 +63,12 @@
             </div>
         </section>
 
-        <div class="d:flex justify-content:space-between mt:4 px:10">
+        <div class="d:flex justify-content:space-between mt:4 px:10 max-width:10">
             <div>검색 결과 : <span th:text="${count}"></span> 건</div>
             <div>
                 <button type="button" class="n-btn n-btn-type:filled">
-                    <a href="reg">
-                        책 등록
+                    <a href="aladinList">
+                        API 검색 / 등록
                     </a>
                 </button>
                 <!-- <button type="button" class="n-btn n-btn-type:filled n-btn-color:accent">일괄 공개</button> -->

@@ -1,13 +1,18 @@
 package kr.withbooks.web.controller.api;
 
 
-import kr.withbooks.web.entity.WithView;
-import kr.withbooks.web.service.WithCategoryService;
-import kr.withbooks.web.service.WithService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import kr.withbooks.web.entity.WithView;
+import kr.withbooks.web.service.WithMemberService;
+import kr.withbooks.web.service.WithService;
+
 
 @RestController("apiWithController")
 @RequestMapping("api/with")
@@ -15,6 +20,10 @@ public class WithController {
 
     @Autowired
     private WithService service;
+
+    @Autowired
+    private WithMemberService memberService;
+
     @GetMapping
     List<WithView> list(@RequestParam(name = "c", required = false) Long[] categoryIds,
                         @RequestParam(name = "q" ,required = false) String query,
@@ -36,4 +45,22 @@ public class WithController {
 
         return checkName;
     }
+
+    // 위드 가입 신청하기
+    @GetMapping("join")
+    public Integer join(
+        // @AuthenticationPrincipal CustomUserDetails userDetails,
+        Long withId,
+        Long userId
+        ) {
+
+        // Long userId = userDetails.getId();
+        userId = 4L;
+
+        Integer result = memberService.join(userId, withId);
+
+        return result;
+    }
+    
+    
 }

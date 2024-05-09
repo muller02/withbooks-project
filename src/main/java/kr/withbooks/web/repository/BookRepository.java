@@ -19,6 +19,9 @@ public interface BookRepository {
     List<Book> findAllByParams(Map<String, String> params, int size, int offset);
     int findCountByParams(Map<String, String> params, int size, int offset);
 
+    // admin/book/aladinList
+    int findBoolByISBN13(String isbn13);
+
     // book/list
     List<Book> findByParams(int offset, int size, String query, Long categoryId);
     int findCntByParams(int offset, int size, String query, Long categoryId);
