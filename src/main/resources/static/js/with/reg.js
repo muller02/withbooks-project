@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
   const submitBtn = form.querySelector(".submit-btn");
 
+  /* 중복 등록된 이벤트 리스너 제거 */
+  submitBtn.removeEventListener("click", validateForm);
+
   /* submitBtn 클릭 시 유효성 검사 */
   submitBtn.addEventListener("click", function (e) {
     e.preventDefault(); // 기본 동작인 폼 제출을 막음
@@ -230,19 +233,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* 토론주기 유효성 검사 */
   intervalInput.oninput = function () {
-    if (parseInt(intervalInput.value) > 50) {
-      intervalAlert.classList.remove("d:none");
+    const inputValue = parseInt(intervalInput.value);
+
+    if (inputValue > 50) {
+      // 토론주기 값이 50을 초과한 경우
+      intervalInput.value = 50; // 값을 50으로 설정
+      intervalAlert.classList.remove("d:none"); // 알림 표시
     } else {
-      intervalAlert.classList.add("d:none");
+      intervalAlert.classList.add("d:none"); // 알림 숨김
     }
   };
 
   /* 위드 정원 유효성 검사 */
   personnelInput.oninput = function () {
-    if (parseInt(personnelInput.value) > 100) {
-      personnelAlert.classList.remove("d:none");
+    const inputValue = parseInt(personnelInput.value);
+
+    if (inputValue > 100) {
+      // 위드 정원 값이 100을 초과한 경우
+      personnelInput.value = 100; // 값을 100으로 설정
+      personnelAlert.classList.remove("d:none"); // 알림 표시
     } else {
-      personnelAlert.classList.add("d:none");
+      personnelAlert.classList.add("d:none"); // 알림 숨김
     }
   };
 
