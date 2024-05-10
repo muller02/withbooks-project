@@ -82,11 +82,11 @@
             <div class="with-tap-component">
                 <ul class="n-tabbar justify-content:space-between menu-tap">
                     <li class="active"><button class="fw:3" id="home2">홈</button></li>
-                    <li><button th:data-with-id="${with.id}" id="debate">토론서재</button></li>
-                    <li><button>모임일정</button></li>
-                    <li><button th:data-with-id="${with.id}" id="board">자유게시판</button></li>
-                    <li><button>북추천</button></li>
-                    <li><button>위드맴버</button></li>
+                    <li><a th:data-with-id="${with.id}" id="debate" th:href="@{/with/debate/list(wid=${with.id})}">토론서재</a></li>
+                    <li><a>모임일정</a></li>
+                    <li><a th:data-with-id="${with.id}" id="board" th:href="@{/free-board/list(wid=${with.id},p=1,s='latest')}">자유게시판</a></li>
+                    <li><a>북추천</a></li>
+                    <li><a>위드맴버</a></li>
                 </ul>
             </div>
 
