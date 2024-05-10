@@ -140,11 +140,11 @@
                             <h1 class="d:none">타인 댓글</h1>
                             <div class="d:flex fl-dir:column py:2">
                                 <a class="d:flex ai:center" href="">
-                                    <div class="d:flex ai:center"><img class="profile-image w:1 h:1" th:src="@{|/image/user/${cmt.userImg}|}" alt="프로필사진"></div>
+                                    <div class="d:flex ai:center"><img class="profile-image w:1 h:1" th:src="@{|${cmt.userImg}|}" alt="프로필사진"></div>
                                     <div class="writer fs:2 fw:3 h:10p ml:1" th:text="${cmt.userNickname}">뉴렉이</div>
                                 </a>
                                 <div class="comment-area mt:2 ml:1 mr:10">
-                                    <div class="fs:2 bg-color:base-2 bd-radius:4 bd-tl-radius:0 px:3 pt:2 pb:3 w:max-content	" th:text="${cmt.content}">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </div>
+                                    <div class="fs:2 bg-color:base-2 bd-radius:4 bd-tl-radius:0 px:3 pt:2 pb:3 w:max-content" th:text="${cmt.content}">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </div>
                                     <div class="d:none"><button>삭제</button></div>
                                     <div class="fs:1 color:base-6 ml:1 mt:1" th:text="${#temporals.format(cmt.regDate,'yyyy-MM-dd HH:mm')}">오후 10:46</div>
                                 </div>
@@ -156,7 +156,7 @@
                             <h1 class="d:none">내 댓글</h1>
                             <div class="d:flex fl-dir:column py:2">
                                 <a class="d:none" href="">
-                                    <div><img class="profile-image w:1 h:1" src="/image/shorts/profile.png" th:src="@{|/image/user/${cmt.userImg}|}" alt="프로필사진"></div>
+                                    <div><img class="profile-image w:1 h:1" th:src="@{|/image/user/${cmt.userImg}|}" alt="프로필사진"></div>
                                     <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
                                 </a>
                                 <div class="comment-area ml:6 mt:2 mr:1 pos:relative d:flex fl-dir:column ai:end">
