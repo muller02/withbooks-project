@@ -20,5 +20,15 @@
     -webkit-mask-image: url("/icon/palette.svg");
     mask-image: url("/icon/palette.svg");
 }
+.icon\:visibility_off::before,
+.icon\:visibility_off::after{
+    -webkit-mask-image: url("/icon/visibility_off_20dp_FILL0_wght400_GRAD0_opsz20.svg");
+    mask-image: url("/icon/visibility_off_20dp_FILL0_wght400_GRAD0_opsz20.svg");
+}
+.icon\:visibility::before,
+.icon\:visibility::after{
+    -webkit-mask-image: url("/icon/visibility_24dp_FILL0_wght400_GRAD0_opsz24.svg");
+    mask-image: url("/icon/visibility_24dp_FILL0_wght400_GRAD0_opsz24.svg");
+}
 
 /* 아이콘 오버라이딩 시 , before after 둘 다 해야함 */
