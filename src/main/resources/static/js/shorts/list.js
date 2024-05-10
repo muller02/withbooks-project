@@ -326,7 +326,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
                     <div class="border-bottom  pt:3  pl:2 ">
                     <div class="d:flex ai:center " >
                     <div class="border-radius:full of:hidden mr:1  comment-user-img mr:2 "> 
-                        <img src="/image/user/${cmt.img}" class="obj-fit:contain  w:100p h:100p">
+                        <img src="${cmt.img}" class="obj-fit:contain  w:100p h:100p">
                      </div>
                      <span></span>
                       <div class=" mr:auto  fw:2 ">${cmt.nickname}</div>

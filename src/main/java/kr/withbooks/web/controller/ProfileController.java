@@ -77,6 +77,8 @@ public class ProfileController {
 
             // user에 경로 저장
             userBuilder.img("/image/user/" + profileImg.getOriginalFilename());
+
+
         }
 
 
@@ -95,6 +97,7 @@ public class ProfileController {
                         .build();
 
         userService.modify(user);
+        userDetails.setImg(user.getImg());
 
         return "redirect:/profile/edit";
     }

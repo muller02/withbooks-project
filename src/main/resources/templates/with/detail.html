@@ -31,6 +31,11 @@
 
     <body>
         <main layout:fragment="main" class="flex-grow:1">
+          <a class="m:2" href="list">
+                        <span class="n-btn n-btn:void mt:3 pl:2" style="color: var(--color-base-5);">
+                            <span class="	icon icon:caret_left icon-size:3 mx:1">아이콘</span>
+                            전체 목록 보기
+                        </span>
             <section class="md:d:flex lg:d:block md:px:2 lg:px:0">
                 <h1 class="d:none">위드 정보</h1>
                 <div class="md:d:flex md:ai:center lg:d:block md:w:3 lg:h:4 lg:w:100p md:h:3 md:my:auto">
@@ -82,11 +87,11 @@
             <div class="with-tap-component">
                 <ul class="n-tabbar justify-content:space-between menu-tap">
                     <li class="active"><button class="fw:3" id="home2">홈</button></li>
-                    <li><button th:data-with-id="${with.id}" id="debate">토론서재</button></li>
-                    <li><button>모임일정</button></li>
-                    <li><button th:data-with-id="${with.id}" id="board">자유게시판</button></li>
-                    <li><button>북추천</button></li>
-                    <li><button>위드맴버</button></li>
+                    <li><a th:data-with-id="${with.id}" id="debate" th:href="@{/with/debate/list(wid=${with.id})}">토론서재</a></li>
+                    <li><a>모임일정</a></li>
+                    <li><a th:data-with-id="${with.id}" id="board" th:href="@{/free-board/list(wid=${with.id},p=1,s='latest')}">자유게시판</a></li>
+                    <li><a>북추천</a></li>
+                    <li><a>위드맴버</a></li>
                 </ul>
             </div>
 
