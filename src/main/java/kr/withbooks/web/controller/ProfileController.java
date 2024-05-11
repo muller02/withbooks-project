@@ -97,7 +97,9 @@ public class ProfileController {
                         .build();
 
         userService.modify(user);
+        userDetails.setNickName(user.getNickname());
         userDetails.setImg(user.getImg());
+
 
         return "redirect:/profile/edit";
     }

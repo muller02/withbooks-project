@@ -49,20 +49,21 @@
     <h1 class="d:none">메인메뉴바</h1>
     <ul class="d:flex fl-dir:column ai:center pt:5">
         <li><a class="" href=""><img src="/icon/home.svg" class="w:1" alt="홈"></a></li>
-        <li class="mt:6"><a href="/my/index" th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/login' ">
-            <img th:if="${#authorization.expression('isAuthenticated()')}"
-                                                                                                                                  th:src="${#authentication.principal.img}"
-                                                                                                                                  class="h:1 w:1 border-radius:full"
-                                                                                                                                  alt="마이" />
+        <li class="mt:6">
 
-            <img th:unless="${#authorization.expression('isAuthenticated()')}"
-                 th:src="@{/icon/user.svg}"
-                 class="h:1 w:1 border-radius:full"
-                 alt="마이" /></a></li>
+            <a th:href="${#authentication.principal ne 'anonymousUser'} ? '/my/index' : '/login' ">
+
+                <img th:src="${#authentication.principal ne 'anonymousUser' ? #authentication.principal.img : '/icon/user.svg'}"
+                     class="h:1 w:1 border-radius:full"
+                     alt="마이" />
+
+            </a>
+        </li>
         <span class="mt:6 h:1 w:100p bg-color:base-3"></span>
         <li class="mt:6"
             th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'check-style' : ''"
-        ><a class="icon icon:book-searchd icon-color:base-9 " href="/book/list"
+        >
+            <a class="icon icon:book-searchd icon-color:base-9 " href="/book/list"
             th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'color:main-5 icon-color:main-5' : ''"
 
         >북검색</a>
