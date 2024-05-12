@@ -12,7 +12,27 @@
     <title>list</title>
 
     <style>
+        #notice-box {
+            position: fixed;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            background-color: rgba(0,0,0,0.1);
+            z-index: 5;
+            display : flex;
+            justify-content: center;
+            align-items: center;
 
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.8s;
+        }
+
+        #notice-box.active {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -21,7 +41,6 @@
     <main layout:fragment="main">
 
         <div class="d:flex fl-dir:column gap:8 mt:10">
-
             <section>
                 <h1 class="d:none">토론주제 목록</h1>
                 <div class="d:flex jc:center">
@@ -34,6 +53,26 @@
                         <option value="">다진쓰는 진짜 깡패인가</option>-->
 <!--                        <span th:text="${val.content}"></span>-->
                     </select>
+                </div>
+            </section>
+
+            <section id="notice-box">
+                <h1 class="d:none">토론방 공지사항</h1>
+                <div id="notice-contents" class="d:flex w:9 bg-color:base-2 p:4 bd border-radius:3">
+                    <div class="d:flex h:6">
+                        <span class="icon icon:megaphone icon-size:3 icon-color:accent-2">알림아이콘</span>
+                        <div class="w:7 mx:2">
+                            <p class="fs:3" th:utext="${debateRoom.notice}">공지사항 컨텐츠</p>
+                        </div>
+                    </div>
+                    <div><span id="close-notice" class="icon icon:x icon-size:3">닫기</span></div>
+                </div>
+            </section>
+
+            <section class="pos:fixed right:4 lg:right:1/4 top:2p md:top:2 lg:top:2 zi:5 " >
+                <h1 class="d:none">공지사항 버튼</h1>
+                <div class="bg-rgb:base-9 bd border-radius:full p:3">
+                    <span id="open-notice" class="icon icon:megaphone icon-size:4 icon-color:base-4">알림</span>
                 </div>
             </section>
 
@@ -80,8 +119,8 @@
                 </ul>
             </section>
 
-            <div class="reg-btn pos:fixed right:4 bottom:9 zi:5">
-                <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
+            <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
+                <h1 class="d:none">토론카드 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
                     <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
                 </div>

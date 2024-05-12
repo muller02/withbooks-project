@@ -26,4 +26,23 @@ window.addEventListener('load', function (){
     }
 
     //==================================================================================
+
+    //============================== NOTICE  ===========================================
+
+    const noticeBox = document.querySelector('#notice-box');
+    const openNotice = document.querySelector('#open-notice');
+    const closeNotice = document.querySelector('#close-notice');
+
+    openNotice.addEventListener("click", function(e){
+        noticeBox.classList.add("active");
+    })
+
+    closeNotice.addEventListener("click", function(e){
+        console.log(e.target)
+        noticeBox.classList.remove("active");
+    })
+
+
+
+    //==================================================================================
 })

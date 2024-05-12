@@ -152,33 +152,28 @@ window.addEventListener("load", function(){
     let maxCount = 1;
     const addBtn = document.querySelector('.add-btn')
 
+    addBtn.addEventListener("click", function(){
 
-       addBtn.addEventListener("click", function(){
+       console.log(count)
+       if(count > maxCount){
 
+           topicListAlert.classList.remove("d:none");
+           return;
+       }
+       count++;
 
-
-           console.log(count)
-           if(count > maxCount){
-
-               topicListAlert.classList.remove("d:none");
-               return;
-           }
-           count++;
-
-        let spanHTML = `
-                <span class="topic-input d:flex ai:center al-self:stretch">
-                  <div class="d:flex mt:4 flex-grow:1">
-                    <input type="text" name="topic" class="n-textbox w:100p mr:3" placeholder="토론 주제를 입력하세요." />
-                    <button type="button" class=""><span class="del-btn icon icon:minus">삭제</span></button>
-                  </div>
-                </span> `
-        document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
+    let spanHTML = `
+            <span class="topic-input d:flex ai:center al-self:stretch">
+              <div class="d:flex mt:4 flex-grow:1">
+                <input type="text" name="topic" class="n-textbox w:100p mr:3" placeholder="토론 주제를 입력하세요." />
+                <button type="button" class=""><span class="del-btn icon icon:minus">삭제</span></button>
+              </div>
+            </span> `
+    document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
     });
 
     // 삭제 버튼
     document.querySelector('.topic-list').addEventListener('click', function(e){
-;
-
 
         if(e.target.classList.contains('add-btn'))
             return
