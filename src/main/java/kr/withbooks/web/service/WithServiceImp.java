@@ -42,6 +42,24 @@ public class WithServiceImp implements WithService {
         return list;
     }
 
+    @Override
+    public List<WithView> getListByWithIds(List<Long> withIds) {
+
+        List<WithView> list = viewRepository.findAllByWithIds(withIds);
+
+
+
+        for (WithView withView : list) {
+            Long withId = withView.getId();
+            List<String> categoryNames = withCategoryRepository.findById(withId);
+            withView.setCategoryNames(categoryNames);
+        }
+
+
+        return list;
+
+    }
+
 
     @Override
     public void add(With with) {

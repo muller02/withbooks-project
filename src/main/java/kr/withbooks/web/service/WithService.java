@@ -10,6 +10,9 @@ public interface WithService {
 
   List<WithView> getList(Long[] categoryId, String query, Long faceYn);
 
+  List<WithView> getListByWithIds(List<Long> withIds);
+
+
   void add(With with);
 
   With get(Long withId);

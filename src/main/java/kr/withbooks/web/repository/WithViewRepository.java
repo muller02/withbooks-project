@@ -13,5 +13,7 @@ public interface WithViewRepository {
 
   WithView findById(Long id);
 
-    List<String> findAllByWithId(Long withId);
+    List<WithView> findAllByWithIds(List<Long> withIds);
+
+    List<WithView> findByUserId(Long userId);
 }

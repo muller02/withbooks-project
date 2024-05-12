@@ -67,14 +67,6 @@ public class WithController {
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
     List<WithView> list = service.getList(categoryIds, query, faceYn);
 
-    //service 로 이동 시킴 why ? Api에서도 사용해야 하므로
-    // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을
-    // 가지고 와서, withView categoryNames에 담기.
-//        for (WithView withView : list) {
-//            Long withId = withView.getId();
-//            List<String> categoryNames = service.getWithCategoryNames(withId);
-//            withView.setCategoryNames(categoryNames);
-//        }
 
     // 뷰에 데이터 전달
     model.addAttribute("list", list);
@@ -86,7 +78,7 @@ public class WithController {
   public String detail(
       Model model
     , @RequestParam(name = "id", required = false) Long withId
-    // , @AuthenticationPrincipal CustomUserDetails userDetails
+     , @AuthenticationPrincipal CustomUserDetails userDetails
   ) {
 
     //withId에 해당하는 위드 얻기
@@ -98,7 +90,7 @@ public class WithController {
 
     // Long userId = userDetails.getId();
     // [ ] 제거 예정
-    Long userId = 4L;
+    Long userId =userDetails.getId();
 
     //withId에 해당하는 위드 카테고리 리스트를 얻기
     List<String> withCategoryNames = withCategoryService.getListByWithId(withId);

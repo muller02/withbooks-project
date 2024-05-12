@@ -82,8 +82,9 @@ public class BookController {
     @GetMapping("getByISBN13")
     public Book getByISBN13(String isbn13){
 
-        Book book = apiService.getByISBN13(isbn13);
+        Book book = new Book();
+        Integer result = apiService.getByISBN13(book,isbn13);
 
-        return null;
+        return book;
     }
 }
