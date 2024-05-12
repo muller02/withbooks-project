@@ -7,6 +7,6 @@ import kr.withbooks.web.entity.Book;
 public interface AladinAPIService {
 
     public Integer getList(List<Book> list, Integer sort, String queryType, String query, String itemId, Integer page);
-    public Integer getByISBN13(Book book, String isbn13);
+    public Integer getByISBN13(List<Book> list, String isbn13);
     
 }

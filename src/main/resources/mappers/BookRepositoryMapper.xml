@@ -193,6 +193,48 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="findBestseller" resultType="Integer">
+		select
+			count(*) count
+		from
+			bestseller
+		where
+			book_id = #{bookId}
+	</select>
+	
+	<insert id="saveBestseller">
+		insert into
+			bestseller
+				(
+					book_id
+				)
+			values
+			<foreach collection="ids" item="bookId">
+				(
+					${bookId}
+				)
+		</foreach>
+	</insert>
+
+	<delete id="deleteBestseller">
+		delete 
+		from	
+			bestseller
+		where
+		<foreach collection="ids" item="bookId">
+				book_id = ${bookId}
+		</foreach>
+	</delete>
+	
+	<update id="updateBookPublicYn">
+		update 
+			book
+		set
+			public_yn = #{yn}
+		where
+			id = #{bookId}
+	</update>
 <!-- ================================================================= -->
 
 <!-- admin/book/aladinList -->

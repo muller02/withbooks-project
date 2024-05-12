@@ -1,15 +1,11 @@
 package kr.withbooks.web.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.repository.AladinAPIRepository;
 import kr.withbooks.web.repository.BookRepository;
 import kr.withbooks.web.util.AladinJsonParser;
@@ -46,11 +42,10 @@ public class AladinAPIServiceImp implements AladinAPIService {
         return totalResults;
     }
     @Override
-    public Integer getByISBN13(Book book, String isbn13) {
+    public Integer getByISBN13(List<Book> list, String isbn13) {
 
         String apiUrl = repository.urlMaker(3, null, null,isbn13, 1);
         String jsonResponse = repository.jsonResponse(apiUrl);
-        List<Book> list = new ArrayList<>();
         Integer result = jsonparser.parser(list, jsonResponse);
         
         return result;

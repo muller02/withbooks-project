@@ -31,11 +31,10 @@
     
 
     <main layout:fragment="main" class="n-panel flex-direction:column n-main-panel">
-        <div class="">책 검색</div>
         <section id="search-section" class="mt:4 px:10 max-width:10">
             <h1 class="d:none">검색</h1>
             
-            <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around">
+            <div class="search-div n-form n-field-textbox:underline d:flex justify-content:space-around mt:2">
                 <select name="query-type">
                     <option value="title" selected>제목</option>
                     <option value="author">저자</option>
@@ -94,7 +93,7 @@
                         <div class="w:2p text-align:center ln-clamp:1" th:text="${book.author}" th:title="${book.author}"></div>
                         <div class="w:2p text-align:center ln-clamp:1" th:text="${book.isbn13}"></div>
                         <div class="w:1p text-align:center ln-clamp:1">
-                            <span class="icon" th:classappend="${book.publicYn} == '1' ? 'icon:visibility icon-color:main-5' : 'icon:visibility_off icon-color:accent-1'"></span>
+                            <span class="public-yn icon" th:data-id="${book.id}" th:classappend="${book.publicYn} == '1' ? 'icon:visibility icon-color:main-5' : 'icon:visibility_off icon-color:accent-1'"></span>
                         </div>
                         <div class="toggle-btn-area w:10p h:10p pos:absolute bg-color:transparent text-indent:-1 of:hidden"></div>
                     </section>
