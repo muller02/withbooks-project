@@ -3,6 +3,7 @@ package kr.withbooks.web.controller.with.debate;
 import java.io.IOException;
 import java.util.List;
 
+import kr.withbooks.web.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,13 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.DebateAttachment;
-import kr.withbooks.web.entity.DebateBoard;
-import kr.withbooks.web.entity.DebateBoardView;
-import kr.withbooks.web.entity.DebateCommentView;
-import kr.withbooks.web.entity.DebateRoom;
-import kr.withbooks.web.entity.DebateTopic;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.DebateAttachmentService;
 import kr.withbooks.web.service.DebateBoardService;
@@ -65,6 +59,13 @@ public class BoardController {
             Model model) {
 
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateBoardView b : list){
+            String replacedStr = b.getContent().replace("\r\n", "<br>");
+            b.setContent(replacedStr);
+        }
+
         model.addAttribute("list", list);
 
         log.info("list = {}", list);
@@ -92,11 +93,22 @@ public class BoardController {
         Long topicId = findBoard.getTopicId();
         List<DebateCommentView> debateCommentList = debateCommentService.getListById(id);
 
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        {
+            String replacedStr = findBoard.getContent().replace("\r\n", "<br>");
+            findBoard.setContent(replacedStr);
+        }
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateCommentView c : debateCommentList){
+            String replacedStr = c.getContent().replace("\r\n", "<br>");
+            c.setContent(replacedStr);
+        }
+
 
         DebateRoom findRoom = debateRoomService.getById(roomId);
         Long bookId = findRoom.getBookId();
         Book book = bookService.getById(bookId);
-        System.out.println("진입  토마토 ");
 
         DebateTopic findTopic = debateTopicService.getById(topicId);
         log.info("findTopic = {}", findTopic);
@@ -111,8 +123,8 @@ public class BoardController {
         model.addAttribute("debateCommentList", debateCommentList);
         // model.addAttribute("userId", userDetails.getId());
 
-        System.out.println("debateCommentList : " + debateCommentList);
-        
+        log.info("board = {}", findBoard);
+        log.info("debateCommentList ={} ", debateCommentList);
 
         return "with/debate/board/detail";
     }
