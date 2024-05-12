@@ -70,6 +70,17 @@ public class BoardController {
 
         log.info("list = {}", list);
 
+        DebateRoom findRoom = debateRoomService.getById(roomId, withId);
+
+        {
+            String replacedStr = findRoom.getNotice().replace("\r\n", "<br>");
+            findRoom.setNotice(replacedStr);
+        }
+
+        model.addAttribute("debateRoom", findRoom);
+
+        log.info("debateRoom = {}", findRoom);
+
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
         model.addAttribute("topicList", topicList);
 
