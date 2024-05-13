@@ -37,7 +37,7 @@ public class BookController {
                         @RequestParam Map<String, String> params,
                         Model model){
 
-        System.out.println(params.toString());
+        System.out.println("=============================파람스 : "+params.toString());
         
         List<Book> list = new ArrayList<>();
         // select box로 제목, 저자, ISBN13으로 검색하도록 한다.

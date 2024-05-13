@@ -15,6 +15,7 @@ const submitBtn = searchSection.querySelector("button[type='submit']")
 selectSort.onchange = function(e){
     let sortValue = Number(e.target.value);
     
+    // 단순 toggle 처리할 수 없으므로 case에 따른 classList 추가/삭제
     switch(sortValue){
         case 1 :
                 selectQt1.classList.remove("d:none");
@@ -41,8 +42,8 @@ selectSort.onchange = function(e){
 submitBtn.onclick = (e)=>{
 
         // selected된 sort에 따른 url 변경
-        sortValue = Number(selectSort.value);
-        urlParams = "";
+        let sortValue = Number(selectSort.value);
+        let urlParams = "";
 
         switch(sortValue){
                 case 1 :
