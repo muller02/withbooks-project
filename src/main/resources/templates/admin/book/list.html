@@ -119,33 +119,39 @@
                 <h1 class="d:none">페이저</h1>
                 <ul class="n-pager" style="display: flex; justify-content: center;"
 
-                    th:with="page=${param.p} eq null ? 1 : ${{param.p}}
+                    th:with="page=${{param.page}} eq null ? 1 : ${{param.page}}
                             ,temp=(${page}-1)/5
                             ,startnum=${T(java.lang.Math).floor(temp)} * 5 + 1
-                            ,temp1 = ${count/6}
-                            ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                            ,temp1 = ${count/20}
+                            ,lastnum=${count} mod 20 > 0 ? ${temp1} + 1 : ${temp1}
                             ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
                             ">
                     <li>
-                        <span th:if="${page} lt 6">이전</span>
+                        <!-- <span th:if="${page} lt 6">이전</span> -->
                         <a href="list?page=5"
+                        th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${startnum}-1)}"
                         th:if="${page} ge 6">이전</a>
                     </li>
 
                     <li
                         th:each="n : ${#numbers.sequence(startnum, endnum)}"
-                        th:class="${{param.p}} == ${n} ? 'active'">
-                        <span th:if="${n} eq ${{param.p}}" th:text="${n}">1</span>
+                        th:class="${{param.page}} == ${n} ? 'active'">
+                        <span th:if="${n} eq ${{param.page}}" th:text="${n}">1</span>
                         <a
-                            th:if="${n} ne ${{param.p}}"
+                            th:if="${n} ne ${{param.page}}"
+                            href="list?p=1"
+                            th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${n})}"
+                            th:text="${n}">1</a>
+                        <!-- <a
+                            th:if="${n} ne ${{param.page}}"
                             href="list?p=1"
                             th:href="@{./list(page=${n})}"
-                            th:text="${n}">1</a>
+                            th:text="${n}">1</a> -->
                     </li>
                     <li>
-                        <span th:if="${startnum+4} gt ${lastnum}">다음</span>
+                        <!-- <span th:if="${startnum+4} gt ${lastnum}">다음</span> -->
                         <a href="list?page=6" 
-                        th:href="@{./list(page=${startnum}+5)}"
+                        th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${startnum}+5)}"
                         th:if="${startnum+4} lt ${lastnum}">다음</a >
                     </li>
                 </ul>
