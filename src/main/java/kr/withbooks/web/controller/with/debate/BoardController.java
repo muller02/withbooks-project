@@ -155,9 +155,12 @@ public class BoardController {
     public String reg(
             @ModelAttribute BoardForm boardForm,
             @RequestParam("rid") Long roomId,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestParam(name = "wid") Long withId,
             HttpServletRequest request) throws IOException {
 
-        Long userId = 4L;
+        System.out.println("wid = " + withId);
+        Long userId = userDetails.getId();
 
         // board
         DebateBoard board = DebateBoard.builder()
@@ -176,7 +179,7 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/with/debate/board/list?rid=" + roomId;
+        return "redirect:/with/debate/board/list?wid="+withId+"&rid=" + roomId;
 
     }
 
@@ -194,6 +197,7 @@ public class BoardController {
     public String edit(
             @RequestParam("id") Long id,
             @ModelAttribute BoardEditForm boardEditForm,
+
             HttpServletRequest request) throws IOException {
 
         // 1. 게시글 정보 수정
