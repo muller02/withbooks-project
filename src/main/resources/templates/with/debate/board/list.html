@@ -46,9 +46,9 @@
                 <div class="d:flex jc:center">
                     <label class="d:none" for="lang">토론주제</label>
                     <select class="bd bd-radius:3 w:5 p:1" name="languages" id="lang"> <!--onchange="redirectToController(this.value)">-->
-                        <option class="" value=" ">토론주제</option>
+                        <option class="" value=" ">💡 토론주제</option>
                         <option th:each="val : ${topicList}"
-                                th:value="${val.id}" th:text="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>
+                                th:value="${val.id}" th:selected="${selectedOption == val.id}">[[${val.content}]]</option>
                         <!--<option value="">경인이는 나카무라인가 무라카미인가</option>
                         <option value="">다진쓰는 진짜 깡패인가</option>-->
 <!--                        <span th:text="${val.content}"></span>-->
@@ -122,7 +122,7 @@
             <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
                 <h1 class="d:none">토론카드 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
-                    <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+                    <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid},wid=${param.wid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
                 </div>
             </div>
         </div>
