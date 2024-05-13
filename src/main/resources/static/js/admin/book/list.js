@@ -147,19 +147,16 @@ function makeTemplate(book, bestsellerYn){
 
           
           <div class="d:flex mt:3">
-              <label class="none-active">베스트셀러(Y/N)
-              <input class="ml:3" type="checkbox" onchange="bestsellerToggle(event, ${book.id})" ${bestChecked}>
-              </label>
-          </div>
-
-          <div class="d:flex mt:3">
-              <label class="none-active">공개
-              <input class="ml:3" onchange="publicYnToggle(event, ${book.id})" type="checkbox" ${pubChecked}>
-              </label>
+            <label class="none-active"><b>베스트셀러(Y/N)</b>
+            <input class="ml:3 n-toggle" type="checkbox" onchange="bestsellerToggle(event, ${book.id})" ${bestChecked}>
+            </label>
+            <label class="none-active ml:5"><b>공개</b>
+            <input class="ml:3 n-toggle" onchange="publicYnToggle(event, ${book.id})" type="checkbox" ${pubChecked}>
+            </label>
           </div>
       </span>
       
-      <span class="btn-box d:flex pos:absolute bottom:1 right:1 mb:3 mr:3">
+      <span class="btn-box d:flex pos:absolute bottom:1 right:1 mt:3 mr:3">
           <div>
               <button class="n-btn n-btn-type:outline" onclick='getByISBN13(${book.isbn13})'>찾아와줘😀</button>
           </div>
