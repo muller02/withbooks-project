@@ -101,12 +101,16 @@ public class BoardController {
     @GetMapping("/detail")
     public String detail(
             @RequestParam Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
+
+
         System.out.println("진입  토마토 ");
         DebateBoard findBoard = debateBoardService.getById(id);
-        Long roomId = findBoard.getRoomId();
+//        Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
         List<DebateCommentView> debateCommentList = debateCommentService.getListById(id);
 
@@ -138,7 +142,9 @@ public class BoardController {
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
         model.addAttribute("debateCommentList", debateCommentList);
-        // model.addAttribute("userId", userDetails.getId());
+        model.addAttribute("nickname", userDetails.getNickName());
+        model.addAttribute("userImg", userDetails.getImg());
+
 
         log.info("board = {}", findBoard);
         log.info("debateCommentList ={} ", debateCommentList);
@@ -161,8 +167,8 @@ public class BoardController {
     public String reg(
             @ModelAttribute BoardForm boardForm,
             @RequestParam("rid") Long roomId,
-            @AuthenticationPrincipal CustomUserDetails userDetails,
             @RequestParam(name = "wid") Long withId,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
             HttpServletRequest request) throws IOException {
 
         System.out.println("wid = " + withId);
@@ -185,12 +191,16 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/with/debate/board/list?wid="+withId+"&rid=" + roomId;
+        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
 
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam("id") Long id, Model model) {
+    public String edit(
+            @RequestParam("id") Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
+            Model model) {
         DebateBoard debateBoard = debateBoardService.getById(id);
         DebateTopic debateTopic = debateTopicService.getById(debateBoard.getTopicId());
 
@@ -202,6 +212,8 @@ public class BoardController {
     @PostMapping("/edit")
     public String edit(
             @RequestParam("id") Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
             @ModelAttribute BoardEditForm boardEditForm,
 
             HttpServletRequest request) throws IOException {
@@ -229,7 +241,7 @@ public class BoardController {
         // 6. 파일 삭제 (from database)
         debateAttachmentService.deleteAllFileByIds(boardEditForm.getDeleteFilesId());
 
-        return "redirect:/with/debate/board/detail?id=" + id;
+        return "redirect:/with/debate/board/detail?wid=" + withId + "&rid=" + roomId + "&id=" + id;
     }
 
 }
