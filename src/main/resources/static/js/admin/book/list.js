@@ -18,6 +18,7 @@ window.addEventListener("load", function(){
     const query = queryInput.value;
     const queryType = queryTypeInput.value;
 
+    // 해당 페이지로 이동
     window.location = 
         `list?queryType=${queryType}&query=${query}&page=1`;
   }
@@ -28,20 +29,31 @@ window.addEventListener("load", function(){
 
   // 카테고리 선택 시
   searchCategoryDiv.onclick = function(e){
-
+    e.stopPropagation();
     const categorySpan = e.target;
     // 카테고리 span만 진행
     if(categorySpan.tagName != "SPAN")
       return;
-    // console.log(e.target);
+   
+    //이미 선택된 카테고리인지 체크
+    let isSelected =  e.target.parentNode.classList.contains("bg-color:main-4");
     
     //categoryId 추출
     const categoryId = categorySpan.dataset.id;
+    if(categoryId===undefined)
+        return;
     const queryType =queryTypeInput.value;
     const query = queryInput.value;
 
-    window.location = 
-        `list?categoryId=${categoryId}&queryType=${queryType}&query=${query}&page=1`;
+    let locationUrl = ""; 
+
+    //새 카테고리인지,현재 선택된 카테고리인지에 따라 url 변경
+    if(isSelected)
+      locationUrl = `list?queryType=${queryType}&query=${query}&page=1`;
+    else
+      locationUrl = `list?categoryId=${categoryId}&queryType=${queryType}&query=${query}&page=1`;
+
+      window.location = locationUrl;
   }
 
 });
@@ -75,6 +87,12 @@ function makeTemplate(book, bestsellerYn){
 
   if(Number(book.publicYn) > 0)
     pubChecked = "checked";
+
+  console.log(book.pubDate);
+  console.log(typeof book.pubDate);
+
+  let temp = book.pubDate;
+  book.pubDate = temp.substr(0, 10);
 
     let template = `
     <div class="d:flex pos:relative w:100p">
@@ -146,7 +164,7 @@ function makeTemplate(book, bestsellerYn){
               <button class="n-btn n-btn-type:outline" onclick='getByISBN13(${book.isbn13})'>찾아와줘😀</button>
           </div>
           <div class="ml:6">
-              <button class="n-btn">수정내용 저장</button>
+              <button class="n-btn" onclick="editClickHandler(event, ${book.id})">수정내용 저장</button>
           </div>
       </span>
   </div>
@@ -225,6 +243,10 @@ async function publicYnToggle(e, bookId){
       publicYnSpan.classList.toggle("icon:visibility_off");
       publicYnSpan.classList.toggle("icon-color:accent-1");
   }
+}
+
+async function editClickHandler(e, bookId){
+
 }
 
 

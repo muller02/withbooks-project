@@ -42,6 +42,35 @@ window.addEventListener("load", function(){
     });
 
 
+    // ================================= Enter 키 누를시 책 검색   =======================================
+
+    searchQueryInput.addEventListener("keypress",async function (e) {
+        e.preventDefault();
+
+        if (e.key === "Enter") {
+            console.log("sadfsaff")
+            console.log("sadfsaff")
+            // 사용자가 검색을 눌렀을때 검색어
+            let queryValue = searchQueryInput.value;
+
+
+            // fetch 통신 후 response 받는 절
+            let response = await getByParams(queryValue);
+
+            // 서버에서 문제가 생긴 경우 return
+            if (response.status != 200) {
+                contentUl.innerHTML = '';
+                contentUl.innerHTML = `검색 결과가 없습니다 ...  유감.`;
+                return;
+            }
+
+            let list = await response.json();
+            printBookList(list);
+
+        }
+    })
+
+
     
     
     // ================================= 파라미터 추가하여 서버와 통신  =======================================
