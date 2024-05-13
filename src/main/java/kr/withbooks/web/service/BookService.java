@@ -33,6 +33,8 @@ public interface BookService {
 
     Integer editBookPublicYn(Long bookId, Integer yn);
 
+    Integer editBook(Long bookId, Integer price, String description, String purchaseLink);
+
 
     
 

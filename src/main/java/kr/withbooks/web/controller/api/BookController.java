@@ -103,6 +103,25 @@ public class BookController {
         return result;
     }
 
+    @PostMapping("editBook")
+    public Integer editBook(
+                            // @RequestBody String jsonString
+                            @RequestParam(name="bookId") Long bookId,
+                            @RequestParam(name="price") Integer price,
+                            @RequestParam(name="description") String description,
+                            @RequestParam(name="purchaseLink") String purchaseLink
+                            ){
+        Integer result = 0;
+        // System.out.println(jsonString);
+        System.out.println(bookId);
+        System.out.println(price);
+        System.out.println(description);
+        System.out.println(purchaseLink);
+        result = service.editBook(bookId, price, description, purchaseLink);
+        
+        return result;
+    }
+
 
     // =====================================================================
 
