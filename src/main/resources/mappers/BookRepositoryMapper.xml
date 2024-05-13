@@ -235,6 +235,17 @@
 		where
 			id = #{bookId}
 	</update>
+
+	<update id="updateBook">
+		update
+			book
+		set
+			price = #{price},
+			description = #{description},
+			purchase_link = #{purchaseLink}
+		where
+			id = #{bookId}
+	</update>
 <!-- ================================================================= -->
 
 <!-- admin/book/aladinList -->

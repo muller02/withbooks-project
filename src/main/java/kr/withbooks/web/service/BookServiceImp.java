@@ -100,6 +100,11 @@ public class BookServiceImp implements BookService {
     public Integer editBookPublicYn(Long bookId, Integer yn) {
         return repository.updateBookPublicYn(bookId, yn);
     }
+    @Override
+    public Integer editBook(Long bookId, Integer price, String description, String purchaseLink){
+        return repository.updateBook(bookId, price, description, purchaseLink);
+    }
+
 
      //=====================================================================
 

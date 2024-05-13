@@ -22,6 +22,7 @@ public interface BookRepository {
     Integer saveBestseller(List<Long> ids);
     Integer deleteBestseller(List<Long> ids);
     Integer updateBookPublicYn(Long bookId, Integer yn);
+    Integer updateBook(Long bookId, Integer price, String description, String purchaseLink);
 
     
     // book/list
