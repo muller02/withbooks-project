@@ -107,6 +107,7 @@
                 placeholder="공지사항을 작성 하세요."
                 name="notice"
                 id=""
+                th:maxlength="300"
                 cols="30"
                 rows="10"
               ></textarea>
@@ -124,8 +125,9 @@
                   <input
                     type="text"
                     name="topic"
+                    th:maxlength="30"
                     class="n-textbox w:100p mr:3 pl:2"
-                    placeholder="토론 주제를 입력하세요."
+                    placeholder="최대 30자까지 토론 주제를 입력하세요."
                   />
 <!--                  <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>-->
                   <button type="button" class=""><span class="add-btn icon icon:plus">추가</span></button>

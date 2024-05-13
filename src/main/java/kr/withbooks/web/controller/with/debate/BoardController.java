@@ -84,6 +84,12 @@ public class BoardController {
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
         model.addAttribute("topicList", topicList);
 
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateTopic t : topicList){
+            String replacedStr = t.getContent().replace("\r\n", "<br>");
+            t.setContent(replacedStr);
+        }
+
         if (topicId != null) {
             DebateTopic findTopic = debateTopicService.getById(topicId);
             model.addAttribute("selectedOption", findTopic.getId());

@@ -114,7 +114,7 @@ function makeTemplate(book, bestsellerYn){
               </div>
 
               <div class="ml:auto">
-                  <div><b>제목</b> : <span>"${book.title}</span></div>
+                  <div><b>제목</b> : <span>${book.title}</span></div>
               </div>
 
               <div class="ml:auto">
@@ -130,41 +130,38 @@ function makeTemplate(book, bestsellerYn){
           
           <div class="d:flex mt:3 ai:center">
               <label class="w:1"><b>가격</b></label>
-              <input class="bd bd-radius:2 w:10p pl:3 py:1" value="${book.price}"></input>
+              <input class="price bd bd-radius:2 w:10p pl:3 py:1" value="${book.price}"></input>
           </div>
 
           <div class="d:flex mt:3">
               <label class="w:1"><b>설명</b></label>
-              <textarea class="bd bd-radius:2 w:10p pl:3 py:1">${book.description}</textarea>
+              <textarea class="description bd bd-radius:2 w:10p pl:3 py:1">${book.description}</textarea>
           </div>
 
           <div class="d:flex mt:3">
               <label class="w:2"><b>구매링크</b></label>
-              <input class="bd bd-radius:2 w:10p pl:3 py:1" value="${book.purchaseLink}"></input>
+              <input class="purchase-link bd bd-radius:2 w:10p pl:3 py:1" value="${book.purchaseLink}"></input>
               
               <div class="d:flex jc:center ai:center"><a href="${book.purchaseLink}" class="icon icon:share_fat ml:2">링크</a></div>
           </div>
 
           
           <div class="d:flex mt:3">
-              <label class="none-active">베스트셀러(Y/N)
-              <input class="ml:3" type="checkbox" onchange="bestsellerToggle(event, ${book.id})" ${bestChecked}>
-              </label>
-          </div>
-
-          <div class="d:flex mt:3">
-              <label class="none-active">공개
-              <input class="ml:3" onchange="publicYnToggle(event, ${book.id})" type="checkbox" ${pubChecked}>
-              </label>
+            <label class="none-active"><b>베스트셀러(Y/N)</b>
+            <input class="ml:3 n-toggle" type="checkbox" onchange="bestsellerToggle(event, ${book.id})" ${bestChecked}>
+            </label>
+            <label class="none-active ml:5"><b>공개</b>
+            <input class="ml:3 n-toggle" onchange="publicYnToggle(event, ${book.id})" type="checkbox" ${pubChecked}>
+            </label>
           </div>
       </span>
       
-      <span class="btn-box d:flex pos:absolute bottom:1 right:1 mb:3 mr:3">
+      <span class="btn-box d:flex pos:absolute bottom:1 right:1 mt:3 mr:3">
           <div>
               <button class="n-btn n-btn-type:outline" onclick='getByISBN13(${book.isbn13})'>찾아와줘😀</button>
           </div>
           <div class="ml:6">
-              <button class="n-btn" onclick="editClickHandler(event, ${book.id})">수정내용 저장</button>
+              <button class="n-btn" onclick="editClickHandler(${book.id})">수정내용 저장</button>
           </div>
       </span>
   </div>
@@ -245,8 +242,45 @@ async function publicYnToggle(e, bookId){
   }
 }
 
-async function editClickHandler(e, bookId){
+async function editClickHandler(bookId){
+  let bookDetail = document.querySelector(`section.book-detail[data-id="${bookId}"]`);
+  let price = bookDetail.querySelector(".price");
+  let description = bookDetail.querySelector(".description");
+  let purchaseLink = bookDetail.querySelector(".purchase-link");
+  // let data = {
+  //   "bookId" : bookId,
+  //   "price" : price.value,
+  //   "description" : description.value,
+  //   "purchaseLink": purchaseLink.value
+  // };
+  // let jsonString = JSON.stringify(data);
 
+  const formData = new FormData();
+  formData.append("bookId", bookId);
+  formData.append("price", price.value);
+  formData.append("description", description.value);
+  formData.append("purchaseLink", purchaseLink.value);
+
+  if(confirm("수정하시겠습니까?"))
+    await fetch("/api/book/editBook", {
+        method: "POST",
+        headers: {
+            ContentType: "multipart/form-data",
+        },
+        body: formData,
+    })
+    .then((response)=>response.json())
+    .then(data => {
+            console.log('서버 응답:', data);
+            alert("수정완료");
+            let changedInput = bookDetail.querySelectorAll("bd-color:accent-3");
+            console.log(changedInput);
+    })
+    .catch(error => {
+            console.error('에러:', error);
+            alert("error!");
+    });
+    
 }
 
 

@@ -33,6 +33,11 @@
             visibility: visible;
             opacity: 1;
         }
+
+        /* 선택 옵션의 스타일을 조정 */
+        .multiline-option {
+            white-space: pre-wrap; /* 줄 바꿈 유지 */
+        }
     </style>
 </head>
 
@@ -45,10 +50,10 @@
                 <h1 class="d:none">토론주제 목록</h1>
                 <div class="d:flex jc:center">
                     <label class="d:none" for="lang">토론주제</label>
-                    <select class="bd bd-radius:3 w:5 p:1" name="languages" id="lang"> <!--onchange="redirectToController(this.value)">-->
+                    <select class="bd bd-radius:3 w:5 md:w:7 lg:w:8 p:1" name="languages" id="lang"> <!--onchange="redirectToController(this.value)">-->
                         <option class="" value=" ">💡 토론주제</option>
-                        <option th:each="val : ${topicList}"
-                                th:value="${val.id}" th:selected="${selectedOption == val.id}">[[${val.content}]]</option>
+                        <option class="multiline-option" th:each="val : ${topicList}"
+                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">컨텐츠</option>
                         <!--<option value="">경인이는 나카무라인가 무라카미인가</option>
                         <option value="">다진쓰는 진짜 깡패인가</option>-->
 <!--                        <span th:text="${val.content}"></span>-->
@@ -87,10 +92,10 @@
                             </div>
                             <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
                                 <div>
-                                    <div class="fs:2 fw:1"><a href="" th:href="@{|/with/debate/board/detail?id=${b.id}|}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
+                                    <div class="fs:2 fw:1"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
                                 </div>
                                 <div>
-                                    <hi class="fs:5 fw:2"><a href="" th:href="@{|/with/debate/board/detail?id=${b.id}|}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
+                                    <hi class="fs:5 fw:2"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
                                 </div>
                                 <div class="d:flex ai:center gap:1">
                                     <div class="d:flex   ai:center">
@@ -107,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="ln-clamp:3">
-                                    <span th:text="${b.content}">
+                                    <span th:utext="${b.content}">
                                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus,
                                         dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur
                                         amet! Ex, sunt eius.
@@ -122,7 +127,7 @@
             <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
                 <h1 class="d:none">토론카드 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
-                    <a href="reg" th:href="@{/with/debate/board/reg(rid=${param.rid},wid=${param.wid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+                    <a href="reg" th:href="@{/with/debate/board/reg(wid=${param.wid},rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
                 </div>
             </div>
         </div>
