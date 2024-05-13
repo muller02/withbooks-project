@@ -55,7 +55,27 @@ async function getDetail(id){
   return book;
 }
 
-function makeTemplate(book){
+async function getBestseller(bookId){
+  let url = "/api/book/bestseller?bookId="+bookId;
+  let response = await fetch(url);
+  let result = await response.json();
+  console.log("여부 = ",result);
+  return result;
+}
+
+
+function makeTemplate(book, bestsellerYn){
+
+  let bestChecked = "";
+  let pubChecked = "";
+
+  // 출력 시 베스트셀러/공개유무 checked 를 위한 boolean 처리
+  if(Number(bestsellerYn) > 0)
+    bestChecked = "checked";
+
+  if(Number(book.publicYn) > 0)
+    pubChecked = "checked";
+
     let template = `
     <div class="d:flex pos:relative w:100p">
     <h1 class="d:none">디테일</h1>
@@ -109,13 +129,15 @@ function makeTemplate(book){
 
           
           <div class="d:flex mt:3">
-              <label class="none-active">베스트셀러(Y/N) </label>
-              <input class="ml:3" type="checkbox" checked="${book.publicYn} == 1">
+              <label class="none-active">베스트셀러(Y/N)
+              <input class="ml:3" type="checkbox" onchange="bestsellerToggle(event, ${book.id})" ${bestChecked}>
+              </label>
           </div>
 
           <div class="d:flex mt:3">
-              <label class="none-active">공개 </label>
-              <input class="ml:3" type="checkbox" checked="${book.publicYn} == 1">
+              <label class="none-active">공개
+              <input class="ml:3" onchange="publicYnToggle(event, ${book.id})" type="checkbox" ${pubChecked}>
+              </label>
           </div>
       </span>
       
@@ -133,13 +155,104 @@ function makeTemplate(book){
 }
 // ================================================================================
 
+// API를 통한 베스트셀러 설정
+async function bestsellerToggle(e, bookId){
+  
+  // bookList.onchange를 꺼주기 위한 전파방지
+  e.stopPropagation();
+
+  let url = "/api/book/";
+  let ischecked = e.target.checked;
+  let string = "";
+
+  //저장 or 삭제
+  if(ischecked){
+    url += "addBestseller";
+    string = "베스트셀러로 저장하시겠습니까?";
+  }
+  else{
+    url += "deleteBestseller"
+    string = "베스트셀러에서 삭제하시겠습니까?";
+  }
+    
+  url += "?bookId="+bookId;
+
+  // 통신 및 결과 회신
+  if(confirm(string))
+      await fetch(url)
+      .then((response)=>response.json())
+      .then((result)=>{
+        if(result > 0){
+          alert("처리완료!");
+        }
+        else{
+          alert("실패!");
+        }
+      })
+  else
+  // 아니오 선택 시 checked를 원래대로
+    e.target.checked =! ischecked;
+}
+
+// API를 통한 공개유무 설정
+async function publicYnToggle(e, bookId){
+  
+  // bookList.onchange를 꺼주기 위한 전파방지
+  e.stopPropagation();
+
+  let checked = e.target.checked;
+  let yn = 0;
+
+  // 0 = 숨김, 1 = 공개
+  if(checked)
+    yn = 1;
+  else
+    yn = 0;
+
+  url = "/api/book/editPublic?bookId="+bookId+"&yn="+yn;
+  // 통신 및 결과 회신
+  await fetch(url)
+        .then((response)=>response.json())
+        .then((result)=>{
+          console.log(result);
+        })
+
+  // 공개여부에 따라 아이콘 toggle
+  {
+      let publicYnSpan = document.querySelector(`span[data-id="${bookId}"]`);
+      publicYnSpan.classList.toggle("icon:visibility");
+      publicYnSpan.classList.toggle("icon-color:main-5");
+      publicYnSpan.classList.toggle("icon:visibility_off");
+      publicYnSpan.classList.toggle("icon-color:accent-1");
+  }
+}
+
+
+
 // ================================================================================
 // ISBN13으로 책 한권 알라딘에서 찾아오기
 async function getByISBN13(isbn13){
-    let response = await fetch("/api/book/getByISBN13?isbn13="+isbn13);
-    let book = await response.json();
+  
+  var url = "/api/book/getByISBN13?isbn13="+isbn13; // 팝업 창에 표시될 페이지의 URL
+  var popupWidth = 800; // 팝업 창의 너비
+  var popupHeight = 300; // 팝업 창의 높이
+  var left = (window.innerWidth - popupWidth) / 2;
+  var top = (window.innerHeight - popupHeight) / 2;
+  var popupOptions = "width=" + popupWidth + ",height=" + popupHeight + ",top=" + top + ",left=" + left;
+  
+  // 팝업 창 오픈
+  var popup = window.open(url, "_blank", popupOptions);
+  
+  // 팝업 차단을 우회하기 위한 예외 처리
+  // if (popup == null || typeof(popup) === "undefined") {
+  //   alert("팝업 허용 후 다시 시도해주세요.");
+  //   return;
+  // }
 
-    console.log(book);
+  let response = await fetch(url);
+  let book = await response.json();
+
+    // return book;
 }
 // ================================================================================
 
@@ -160,7 +273,8 @@ async function getByISBN13(isbn13){
       // 토글 상태에 따라서 detail을 검색해 가져오거나, 내용을 삭제
       if(!bookDetail.classList.contains("toggle")){
         let book = await getDetail(bookId);
-        let template = makeTemplate(book);
+        let bestsellerYn = await getBestseller(bookId);
+        let template = makeTemplate(book, bestsellerYn);
         // console.log(template);
         bookDetail.insertAdjacentHTML("beforeend", template);
       }else{

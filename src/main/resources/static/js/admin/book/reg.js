@@ -5,6 +5,9 @@ const regBtn = document.querySelector(".reg-btn");
 // disabled를 제외한 모든 체크박스
 const checkboxes = listContainer
                 .querySelectorAll("input[type='checkbox']:not(:disabled):not([name='select-all'])");
+// 베스트셀러 저장을 위한 url 추출
+const urlParams = new URLSearchParams(window.location.search);
+let sort = Number(urlParams.get("sort"));
 
 // 전체선택
 selectAll.onchange = function(){
@@ -24,6 +27,7 @@ selectAll.onchange = function(){
 // ===================================================================
 // DB에 반영
 regBtn.onclick = function(){
+        let isBestseller = false;
         
         // 유효성 체크
         {
@@ -36,6 +40,15 @@ regBtn.onclick = function(){
                 if(count == 0){
                         alert("등록할 책을 하나 이상 선택해주세요.");
                         return;
+                }
+        }
+
+        // DB에 저장 후 bestseller에 추가할지 묻기 위한 isBestseller
+        {
+                if(sort == 1){
+                        let qt = urlParams.get("qt");
+                        isBestseller = qt == "Bestseller" ? true : false;
+                        console.log(isBestseller);
                 }
         }
 
@@ -75,6 +88,7 @@ regBtn.onclick = function(){
                 console.log(bookArr.length);
 
                 let jsonString = JSON.stringify(bookArr);
+                
 
                 if(confirm(`총 ${bookArr.length}개 등록하시겠습니까?`))
                         fetch('/api/book/reg', {
@@ -94,7 +108,6 @@ regBtn.onclick = function(){
                                 console.error('에러:', error);
                                 alert("error!");
                         });
-
         }
 
 }

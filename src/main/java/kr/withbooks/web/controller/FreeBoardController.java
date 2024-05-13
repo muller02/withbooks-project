@@ -96,7 +96,7 @@ public class FreeBoardController {
 
 
         // 댓글의 \r\n 을 <br> 태그로 치환
-        for(FreeCommentView f : commentList){
+        for(FreeCommentView f : commentList) {
           String replacedStr = f.getContent().replace("\r\n", "<br>");
           f.setContent(replacedStr);
         }

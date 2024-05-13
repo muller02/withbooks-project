@@ -31,7 +31,7 @@
         <div class="card-content mx:5 pt:5">
             <div class="card-note-container  bd-bottom pb:5">
                 <div class="pos:fixed right:2 bottom:9 zi:5">
-                    <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
+                    <h1 class="d:none">수정버튼</h1>
                     <div class="bg-color:main-5 border-radius:full p:3">
                         <a href="reg" th:href="@{/with/debate/board/edit(id=${param.id})}" th:title="${'토론카드 수정하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="card-note-body  px:6 mt:5">
                         <section class="h:100p ln-h:1.5 px:4 py:3 txt-al:left of-y:auto pb:5">
                             <h1 class="d:none">토론카드 코멘트</h1>
-                            <div th:text="${board.content}">
+                            <div th:utext="${board.content}">
                                 <p>
                                     우리는 집중하지 못하고 산만해지는 것이 흔히 스마트폰과 같은 디지털 기기에 대해 자제력을 발휘하지 못하는 개인의 실패라고 생각한다. 그러나 그렇지 않다. 저자는 현재 우리가 겪고 있는 집중력 문제가 현대 사회의 비만율의 증가와 유사하다고 설명한다.
                                     정크푸드를 중심으로 한 식품 공급 체계와 생활 방식의 변화가 비만율 증가를 만든 것처럼, 집중력 위기의 광범위한 증가도 현대 사회 시스템이 만들어낸 유행병과 같다는 것이다.
@@ -144,7 +144,7 @@
                                     <div class="writer fs:2 fw:3 h:10p ml:1" th:text="${cmt.userNickname}">뉴렉이</div>
                                 </a>
                                 <div class="comment-area mt:2 ml:1 mr:10">
-                                    <div class="fs:2 bg-color:base-2 bd-radius:4 bd-tl-radius:0 px:3 pt:2 pb:3 w:max-content" th:text="${cmt.content}">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </div>
+                                    <div class="fs:2 bg-color:base-2 bd-radius:4 bd-tl-radius:0 px:3 pt:2 pb:3 w:max-content" th:utext="${cmt.content}">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </div>
                                     <div class="d:none"><button>삭제</button></div>
                                     <div class="fs:1 color:base-6 ml:1 mt:1" th:text="${#temporals.format(cmt.regDate,'yyyy-MM-dd HH:mm')}">오후 10:46</div>
                                 </div>
@@ -160,7 +160,7 @@
                                     <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
                                 </a>
                                 <div class="comment-area ml:6 mt:2 mr:1 pos:relative d:flex fl-dir:column ai:end">
-                                    <div class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:3 pt:2 pb:2 mb:1" th:text="${cmt.content}">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </div>
+                                    <div class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:3 pt:2 pb:2 mb:1" th:utext="${cmt.content}">세상은 이미 끔찍하고 지독하지만 앞으로는 더욱 악화될 것이다. 기적적인 해법을 무작정 기다릴 것이 아니라 이제 각자가 자신 자신을 책임져야 할 때다. </div>
                                     <div class="delete-button pos:absolute right:1 bottom:1">
                                     </div>
                                     <div class="d:flex ai:center">
@@ -172,19 +172,20 @@
                         </section>
                     </div>
                 </section>
-                <section class="pt:3 mx:2  d:inline-block w:9p">
+                <section class="pt:3 mx:2  d:inline-block w:10p">
                     <h1 class="d:none">댓글 입력란</h1>
-                    <form class="d:flex flex-grow:1">
-              
-                        <label class="d:none">댓글</label>
-                        <textarea id="new-comment" class="of:hidden bd-radius:4 comment-content bg-color:base-2 fl-grow:1 px:4 py:2 resize:none" rows="1"></textarea>
+                    <form class="d:flex ">
+                        <div class="flex-grow:1">
+                            <label>
+                                <textarea id="new-comment" class="w:10p bd-radius:4 comment-content bg-color:base-2 fl-grow:1 px:4 py:2 resize:none" rows="1"></textarea>
+                            </label>
+                        </div>
 
-                        <input type="hidden" id="new-comment-board-id" th:value="${board.id}">
-
+                        <div><input type="hidden" id="new-comment-board-id" th:value="${board.id}"></div>
+                        <div><button type="button" id="comment-create-btn" class="cursor:pointer d:inline-block py:2 ml:3 bg-color:main-5 bd-radius:4 px:3 color:base-1">등록</button></div>
                     </form>
-
                 </section>
-                <button type="button" id="comment-create-btn" class="cursor:pointer  d:inline-block ml:3 bg-color:main-5 bd-radius:4 px:3 color:base-1">등록</button>
+
 
             </div>
         </div>

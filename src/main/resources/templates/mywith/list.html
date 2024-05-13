@@ -60,13 +60,13 @@
       <button class="query-btn icon  translate-x  icon:magnifying_glass pos:absolute right:1 mr:2"></button>
     </div>
     <!-- 상세 검색 -->
-    <div class="d:flex ai:center">
-      <button class="n-btn n-btn-type:outline h:100p deco-pos:right border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3"
-              id="search-btn"
-              type="button">
-        <span class="mr:auto ml:1">상세검색</span>
-      </button>
-    </div>
+<!--    <div class="d:flex ai:center">-->
+<!--      <button class="n-btn n-btn-type:outline h:100p deco-pos:right border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3"-->
+<!--              id="search-btn"-->
+<!--              type="button">-->
+<!--        <span class="mr:auto ml:1">상세검색</span>-->
+<!--      </button>-->
+<!--    </div>-->
 
     <!--    <select name="space" id="pet-select" class="h:100p text-align:center">-->
     <!--      <option value="m1">최신순</option>-->
@@ -74,72 +74,72 @@
     <!--    </select>-->
   </section>
 
-  <section
-          class="search-box lg:pos:absolute top:2 mx:3 right:1 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">
+<!--  <section-->
+<!--          class="search-box lg:pos:absolute top:2 mx:3 right:1 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">-->
 
-    <!-- 상세 검색 창 -->
-    <div class=" w:full d:flex jc:start  p:3 flex-direction:column gap:3">
-      <!-- 정렬 방법 -->
+<!--    &lt;!&ndash; 상세 검색 창 &ndash;&gt;-->
+<!--    <div class=" w:full d:flex jc:start  p:3 flex-direction:column gap:3">-->
+<!--      &lt;!&ndash; 정렬 방법 &ndash;&gt;-->
 
-      <div class="ml:auto d:flex ai:center">
-        <span class="fs:3 fw:3 color:main-5">초기화</span>
-        <span class="reset-icon icon csr:pointer	  icon:arrows_clockwise_fill icon-size:2 ml:auto"></span>
+<!--      <div class="ml:auto d:flex ai:center">-->
+<!--        <span class="fs:3 fw:3 color:main-5">초기화</span>-->
+<!--        <span class="reset-icon icon csr:pointer	  icon:arrows_clockwise_fill icon-size:2 ml:auto"></span>-->
 
-      </div>
-      <div class="face-yn mb:3 ">
-        <div class="margin-right:8 ml:2 mb:2 fw:3 ">📢 대면 / 비대면</div>
-        <!-- 대면 여부 -->
+<!--      </div>-->
+<!--      <div class="face-yn mb:3 ">-->
+<!--        <div class="margin-right:8 ml:2 mb:2 fw:3 ">📢 대면 / 비대면</div>-->
+<!--        &lt;!&ndash; 대면 여부 &ndash;&gt;-->
 
-        <ul class="d:flex   ">
-          <li class="d:flex ai:center m:1">
-            <label class="n-toggle n-toggle-type:outline-box">
-              전체
-              <input checked class="d:none" name="f" type="radio" value="2"/>
-            </label>
-          </li>
-          <li class="d:flex ai:center m:1">
-            <label class="n-toggle n-toggle-type:outline-box">
-              대면
-              <input class="d:none" name="f" type="radio" value="1"/>
-            </label>
-          </li>
-          <li class="d:flex ai:center m:1">
-            <label class="n-toggle n-toggle-type:outline-box">
-              비대면
-              <input class="d:none" name="f" type="radio" value="0"/>
-            </label>
-          </li>
+<!--        <ul class="d:flex   ">-->
+<!--          <li class="d:flex ai:center m:1">-->
+<!--            <label class="n-toggle n-toggle-type:outline-box">-->
+<!--              전체-->
+<!--              <input checked class="d:none" name="f" type="radio" value="2"/>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="d:flex ai:center m:1">-->
+<!--            <label class="n-toggle n-toggle-type:outline-box">-->
+<!--              대면-->
+<!--              <input class="d:none" name="f" type="radio" value="1"/>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="d:flex ai:center m:1">-->
+<!--            <label class="n-toggle n-toggle-type:outline-box">-->
+<!--              비대면-->
+<!--              <input class="d:none" name="f" type="radio" value="0"/>-->
+<!--            </label>-->
+<!--          </li>-->
 
-        </ul>
-      </div>
-      <!-- 카테고리 검색 -->
-      <div class=" d:flex fl-dir:column lg:w:7     " id="category">
-        <div class="d:flex ai:center mb:1">
-          <div class="margin-right:8 ml:2 fw:3 mb:2 ">📢 카테고리</div>
+<!--        </ul>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; 카테고리 검색 &ndash;&gt;-->
+<!--      <div class=" d:flex fl-dir:column lg:w:7     " id="category">-->
+<!--        <div class="d:flex ai:center mb:1">-->
+<!--          <div class="margin-right:8 ml:2 fw:3 mb:2 ">📢 카테고리</div>-->
 
-        </div>
-        <div class="rg:mt:3">
-          <div class="category-list d:flex fl-wrap:wrap">
-            <h1 class="d:none">카테고리 필터</h1>
-            <label class="n-toggle n-toggle-type:outline-box m:1"
-                   th:classappend="${iterStat.last} ? '' : 'lg:flex-grow:1'"
-                   th:each="c, iterStat : ${categoryList}">
-              <input class="d:none" th:text="${c.name}" th:value="${c.id}" type="checkbox"/>
-            </label>
-          </div>
+<!--        </div>-->
+<!--        <div class="rg:mt:3">-->
+<!--          <div class="category-list d:flex fl-wrap:wrap">-->
+<!--            <h1 class="d:none">카테고리 필터</h1>-->
+<!--            <label class="n-toggle n-toggle-type:outline-box m:1"-->
+<!--                   th:classappend="${iterStat.last} ? '' : 'lg:flex-grow:1'"-->
+<!--                   th:each="c, iterStat : ${categoryList}">-->
+<!--              <input class="d:none" th:text="${c.name}" th:value="${c.id}" type="checkbox"/>-->
+<!--            </label>-->
+<!--          </div>-->
 
-          <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">
-            <button class="n-btn n-btn-type:outline flex-grow:1" type="button">
-              취소
-            </button>
-            <button class="n-btn n-btn-type:filled flex-grow:1" type="button">
-              완료
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!--          <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">-->
+<!--            <button class="n-btn n-btn-type:outline flex-grow:1" type="button">-->
+<!--              취소-->
+<!--            </button>-->
+<!--            <button class="n-btn n-btn-type:filled flex-grow:1" type="button">-->
+<!--              완료-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
 
   <!-- 카테고리 상세: 정렬 후 코드 -->
   <div class="pl:3 fade d:none" id="search-detail">
@@ -161,11 +161,11 @@
     <h1 class="d:none n-tab-grow">전체위드 / 나의위드</h1>
 
     <ul class="n-tabbar">
-      <li class="active w:5p">
-        <button class="w:100p font-weight:3">전체 위드</button>
+      <li class=" w:5p">
+        <a class="w:100p color:base-3 " href="/with/list">전체 위드</a>
       </li>
-      <li class="w:5p">
-        <a class="w:100p color:base-3 font-weight:3" href="/mywith/list" id="container1">나의 위드</a>
+      <li class="w:5p active">
+        <a class="w:100p  font-weight:3 " href="/mywith/list">나의 위드</a>
       </li>
     </ul>
   </section>
@@ -174,7 +174,7 @@
   <section class="with-list">
     <h1 class="d:none">위드 리스트</h1>
     <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list-ul">
-      <li class="d:flex with-ul gap:2 flex-direction:column n-item:shadow" th:each="with: ${list}">
+      <li class="d:flex with-ul gap:2 flex-direction:column n-item:shadow" th:each="with: ${withList}">
         <ul class="d:flex gap:1 flex-wrap:wrap">
           <li
                   class=" bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"

@@ -25,6 +25,14 @@ public interface BookService {
 
     Integer reg(List<Book> list, List<Category> categoryList);
 
+    Integer getBestseller(Long bookId);
+
+    Integer addBestseller(List<Long> ids);
+
+    Integer deleteBestseller(List<Long> ids);
+
+    Integer editBookPublicYn(Long bookId, Integer yn);
+
 
     
 

@@ -52,23 +52,6 @@ public class BookController {
             int page = 1;
             params.put("page", Integer.toString(page));
         }
-        // if(categoryId!=null && query!=null){
-        //     list = service.getList(page, query, categoryId);
-        //     count = service.getCount(query, categoryId);
-        // }
-        // else if(query!=null){
-        //     list = service.getList(page, query, null);
-        //     count = service.getCount(query, null);
-        // }
-        // else if(categoryId!=null){
-        //     list = service.getList(page, null, categoryId);
-        //     count = service.getCount(null, categoryId);
-        // }
-        // else{
-            
-        //     list = service.getList(page, null, null);
-        //     count = service.getCount(null, null);
-        // }
         list = service.getListByParams(params);
         count = service.getCountByParams(params);
 
