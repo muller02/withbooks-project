@@ -11,6 +11,7 @@ window.addEventListener("load", function(){
   // submit 버튼
   const submitBtn = searchDiv.querySelector("button");
 
+  // =================================================
   //쿼리 입력 후 submit 버튼 눌렀을때
   submitBtn.onclick = function(e){
     e.preventDefault();
@@ -24,6 +25,7 @@ window.addEventListener("load", function(){
   }
 
 
+  // =================================================
   // ================ 카테고리 검색 ===================
   const searchCategoryDiv = searchSection.querySelector(".search-category-div");
 
@@ -67,6 +69,7 @@ async function getDetail(id){
   return book;
 }
 
+// bestseller유무를 가져오는 function
 async function getBestseller(bookId){
   let url = "/api/book/bestseller?bookId="+bookId;
   let response = await fetch(url);
@@ -74,7 +77,6 @@ async function getBestseller(bookId){
   console.log("여부 = ",result);
   return result;
 }
-
 
 function makeTemplate(book, bestsellerYn){
 
@@ -170,6 +172,7 @@ function makeTemplate(book, bestsellerYn){
 }
 // ================================================================================
 
+// ================================================================================
 // API를 통한 베스트셀러 설정
 async function bestsellerToggle(e, bookId){
   
@@ -232,7 +235,7 @@ async function publicYnToggle(e, bookId){
           console.log(result);
         })
 
-  // 공개여부에 따라 아이콘 toggle
+  // 공개여부에 따라 행 아이콘 toggle
   {
       let publicYnSpan = document.querySelector(`span[data-id="${bookId}"]`);
       publicYnSpan.classList.toggle("icon:visibility");
@@ -242,11 +245,17 @@ async function publicYnToggle(e, bookId){
   }
 }
 
+// ==============================================================================
+// api를 통한 수정사항 저장
 async function editClickHandler(bookId){
+
+  // 필요한 수정값 추출
   let bookDetail = document.querySelector(`section.book-detail[data-id="${bookId}"]`);
   let price = bookDetail.querySelector(".price");
   let description = bookDetail.querySelector(".description");
   let purchaseLink = bookDetail.querySelector(".purchase-link");
+
+  // json으로 보낼 경우 서버에서 String으로 받아야하므로 제외
   // let data = {
   //   "bookId" : bookId,
   //   "price" : price.value,
@@ -255,6 +264,7 @@ async function editClickHandler(bookId){
   // };
   // let jsonString = JSON.stringify(data);
 
+  // formdata를 통해 서버에서 RequestParam으로 받도록 함
   const formData = new FormData();
   formData.append("bookId", bookId);
   formData.append("price", price.value);
@@ -273,14 +283,21 @@ async function editClickHandler(bookId){
     .then(data => {
             console.log('서버 응답:', data);
             alert("수정완료");
-            let changedInput = bookDetail.querySelectorAll("bd-color:accent-3");
-            console.log(changedInput);
+    })
+    .then(()=>{
+      // onchange로 인해 bd-color 변경된 input 원래대로 돌리긴ㄴ
+      let tagsAll = bookDetail.querySelectorAll("*");
+      tagsAll.forEach((tag)=>{
+        if(tag.classList.contains("bd-color:accent-3"))
+          tag.classList.remove("bd-color:accent-3");
+      })
+      
     })
     .catch(error => {
             console.error('에러:', error);
             alert("error!");
     });
-    
+
 }
 
 
