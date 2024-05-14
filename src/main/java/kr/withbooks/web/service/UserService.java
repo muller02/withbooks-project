@@ -10,6 +10,11 @@ public interface UserService {
 
     String getNickNameById(Long userId);
 
+    void join(User user);
+
+
+    
+
     Integer emailCheck(String email);
     
     // User get(Long id, );
