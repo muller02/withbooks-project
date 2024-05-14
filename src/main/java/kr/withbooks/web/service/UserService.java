@@ -10,4 +10,5 @@ public interface UserService {
 
     String getNickNameById(Long userId);
     
+    // User get(Long id, );
 }
