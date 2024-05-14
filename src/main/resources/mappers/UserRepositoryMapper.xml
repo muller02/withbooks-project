@@ -48,4 +48,13 @@
 		)
 	</insert>
 
+	<select id="countByEmail">
+		select
+			count(*) count
+		from 
+			user
+		where
+			email = #{email}
+	</select>
+
 </mapper>

@@ -14,5 +14,8 @@ public interface UserService {
 
 
     
+
+    Integer emailCheck(String email);
+    
     // User get(Long id, );
 }

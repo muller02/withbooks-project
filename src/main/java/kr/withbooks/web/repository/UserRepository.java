@@ -17,4 +17,7 @@ public interface UserRepository {
 
     void save(User user);
 
+    // /user/join 이메일 중복 체크
+    Integer countByEmail(String email);
+
 }
