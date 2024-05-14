@@ -51,7 +51,7 @@
         <li><a class="" href=""><img src="/icon/home.svg" class="w:1" alt="홈"></a></li>
         <li class="mt:6">
 
-            <a th:href="${#authentication.principal ne 'anonymousUser'} ? '/my/index' : '/login' ">
+            <a th:href="${#authentication.principal ne 'anonymousUser'} ? '/my/index' : '/user/login' ">
 
                 <img th:src="${#authentication.principal ne 'anonymousUser' ? #authentication.principal.img : '/icon/user.svg'}"
                      class="h:1 w:1 border-radius:full"

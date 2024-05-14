@@ -37,7 +37,7 @@ public class SecurityConfig {
              // admin 페이지 이동 시로그인 페이지로 이동하는 설정
 
           http
-                 .formLogin((auth) -> auth.loginPage("/login") //사용자 정의 로그인 ㅔ이지를 설정
+                 .formLogin((auth) -> auth.loginPage("/user/login") //사용자 정의 로그인 ㅔ이지를 설정
                          .loginProcessingUrl("/loginProc") // 로그인 폼의 제출 url을 설정, 이 url을 통해 제출된 사용자 인증 정보를 처리\
                          .usernameParameter("email")
                          .defaultSuccessUrl("/shorts/list",true) //로그인 성공시 이동, 900 erorr 방지
@@ -47,7 +47,7 @@ public class SecurityConfig {
                  );
 
           http.logout()
-                          .logoutUrl("/logout")
+                          .logoutUrl("/user/logout")
                   .addLogoutHandler(new CustomLogoutHandler())
                   .invalidateHttpSession(true) // 로그아웃 후 세션 초기화 설정
                   .deleteCookies("JSESSIONID") // 로그아웃 후 쿠기 삭제 설정
