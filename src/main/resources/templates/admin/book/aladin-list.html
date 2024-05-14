@@ -112,15 +112,15 @@
                     <div class="w:1 d:flex jc:space-around">
                         <a href="" 
                         th:if="${sort} == '1' and ${lastNum > p}"
-                        th:href="@{|aladinList?sort=1&qt=${qt}&p=${p+1}|}"
+                        th:href="@{|aladinList?sort=1&qt=${qt}&p=${p+1}&m=2&sm=2|}"
                         class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
                         <a href="" 
                         th:if="${sort} == '2' and ${lastNum > p}"
-                        th:href="@{|aladinList?sort=2&q=${q}&qt=${qt}&p=${p+1}|}"
+                        th:href="@{|aladinList?sort=2&q=${q}&qt=${qt}&p=${p+1}&m=2&sm=2|}"
                         class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
                         <a href="" 
                         th:if="${sort} == '3' and ${lastNum > p}"
-                        th:href="@{|aladinList?sort=3&i=${i}&p=${p+1}|}"
+                        th:href="@{|aladinList?sort=3&i=${i}&p=${p+1}&m=2&sm=2|}"
                         class="icon icon:caret_right_bold icon-size:5 csr:pointer"></a>
                     </div>
                 </div>

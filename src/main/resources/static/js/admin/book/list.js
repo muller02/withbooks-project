@@ -51,9 +51,9 @@ window.addEventListener("load", function(){
 
     //새 카테고리인지,현재 선택된 카테고리인지에 따라 url 변경
     if(isSelected)
-      locationUrl = `list?queryType=${queryType}&query=${query}&page=1`;
+      locationUrl = `list?queryType=${queryType}&query=${query}&page=1&m=2&sm=1`;
     else
-      locationUrl = `list?categoryId=${categoryId}&queryType=${queryType}&query=${query}&page=1`;
+      locationUrl = `list?categoryId=${categoryId}&queryType=${queryType}&query=${query}&page=1&m=2&sm=1`;
 
       window.location = locationUrl;
   }
