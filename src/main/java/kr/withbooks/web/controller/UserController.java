@@ -5,9 +5,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.controller.form.UserJoinForm;
 import kr.withbooks.web.entity.User;
-import kr.withbooks.web.service.JoinService;
+import kr.withbooks.web.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class UserController {
 
-    private final JoinService service;
+    @Autowired
+    private final UserService service;
 
     @GetMapping("/join")
     public String joinForm(Model model){
