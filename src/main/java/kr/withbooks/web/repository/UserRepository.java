@@ -15,4 +15,6 @@ public interface UserRepository {
     void update(User user);
     String findByNickName(Long userId);
 
+    void save(User user);
+
 }

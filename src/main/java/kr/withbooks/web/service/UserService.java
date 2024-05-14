@@ -9,6 +9,10 @@ public interface UserService {
     void modify(User user);
 
     String getNickNameById(Long userId);
+
+    void join(User user);
+
+
     
     // User get(Long id, );
 }
