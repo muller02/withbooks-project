@@ -33,10 +33,13 @@
     </insert>
 
     <select id="findById" resultType="DebateRoom">
-      SELECT
-      *
-      FROM debate_room
-      where id = #{id}
+        SELECT
+        *
+        FROM debate_room
+        where id = #{id}
+        <if test="withId != null">
+            and with_id = #{withId}
+        </if>
     </select>
 
 

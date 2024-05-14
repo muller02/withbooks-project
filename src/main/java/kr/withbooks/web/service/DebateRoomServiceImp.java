@@ -29,9 +29,13 @@ public class DebateRoomServiceImp implements DebateRoomService {
     @Override
     public DebateRoom getById(Long id) {
 
-        DebateRoom findRoom = debateRoomRepository.findById(id);
+        return debateRoomRepository.findById(id, null);
+    }
 
-        return findRoom;
+    @Override
+    public DebateRoom getById(Long id, Long withId) {
+
+        return debateRoomRepository.findById(id, withId);
     }
 
     @Override

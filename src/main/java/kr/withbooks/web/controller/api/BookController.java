@@ -1,6 +1,7 @@
 package kr.withbooks.web.controller.api;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,14 @@ public class BookController {
         return book;
     }
 
+    @GetMapping("bestseller")
+    public Integer bestseller(Long bookId){
+        System.out.println("bookId = "+bookId);
+        Integer result  = service.getBestseller(bookId);
+        return result;
+    }
+
+
     // 북쇼츠, 북로그 등 책검색
     @GetMapping("list")
     public List<Book> list(
@@ -59,6 +68,61 @@ public class BookController {
         return list;
 
     }
+    
+    @GetMapping("addBestseller")
+    public Integer addBestseller(@RequestParam(required = false) Long bookId
+                                ,@RequestParam(required = false) List<Long> ids
+                                ){
+
+        if(ids == null){
+            ids = new ArrayList<>();
+            ids.add(bookId);
+        }
+        
+        Integer result = service.addBestseller(ids);
+        return result;
+    }
+
+    @GetMapping("deleteBestseller")
+    public Integer deleteBestseller(@RequestParam(required = false) Long bookId
+                                ,@RequestParam(required = false) List<Long> ids
+                                ){
+
+        if(ids == null){
+            ids = new ArrayList<>();
+            ids.add(bookId);
+        }
+        
+        Integer result = service.deleteBestseller(ids);
+        return result;
+    }
+
+    @GetMapping("editPublic")
+    public Integer editPublic(Long bookId, Integer yn){
+        Integer result = service.editBookPublicYn(bookId, yn);
+        return result;
+    }
+
+    @PostMapping("editBook")
+    public Integer editBook(
+                            // @RequestBody String jsonString
+                            @RequestParam(name="bookId") Long bookId,
+                            @RequestParam(name="price") Integer price,
+                            @RequestParam(name="description") String description,
+                            @RequestParam(name="purchaseLink") String purchaseLink
+                            ){
+        Integer result = 0;
+        // System.out.println(jsonString);
+        System.out.println(bookId);
+        System.out.println(price);
+        System.out.println(description);
+        System.out.println(purchaseLink);
+        result = service.editBook(bookId, price, description, purchaseLink);
+        
+        return result;
+    }
+
+
     // =====================================================================
 
     // =====================================================================
@@ -82,8 +146,9 @@ public class BookController {
     @GetMapping("getByISBN13")
     public Book getByISBN13(String isbn13){
 
-        Book book = apiService.getByISBN13(isbn13);
-
-        return null;
+        List<Book> list = new ArrayList<>();
+        Integer result = apiService.getByISBN13(list,isbn13);
+        System.err.println("요상타 = "+list.get(0));
+        return list.get(0);
     }
 }

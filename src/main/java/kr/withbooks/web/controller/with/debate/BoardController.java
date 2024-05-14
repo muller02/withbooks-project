@@ -3,6 +3,7 @@ package kr.withbooks.web.controller.with.debate;
 import java.io.IOException;
 import java.util.List;
 
+import kr.withbooks.web.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,13 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.DebateAttachment;
-import kr.withbooks.web.entity.DebateBoard;
-import kr.withbooks.web.entity.DebateBoardView;
-import kr.withbooks.web.entity.DebateCommentView;
-import kr.withbooks.web.entity.DebateRoom;
-import kr.withbooks.web.entity.DebateTopic;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.DebateAttachmentService;
 import kr.withbooks.web.service.DebateBoardService;
@@ -65,12 +59,36 @@ public class BoardController {
             Model model) {
 
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateBoardView b : list){
+            String replacedStr = b.getContent().replace("\r\n", "<br>");
+            b.setContent(replacedStr);
+        }
+
         model.addAttribute("list", list);
 
         log.info("list = {}", list);
 
+        DebateRoom findRoom = debateRoomService.getById(roomId, withId);
+
+        {
+            String replacedStr = findRoom.getNotice().replace("\r\n", "<br>");
+            findRoom.setNotice(replacedStr);
+        }
+
+        model.addAttribute("debateRoom", findRoom);
+
+        log.info("debateRoom = {}", findRoom);
+
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
         model.addAttribute("topicList", topicList);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateTopic t : topicList){
+            String replacedStr = t.getContent().replace("\r\n", "<br>");
+            t.setContent(replacedStr);
+        }
 
         if (topicId != null) {
             DebateTopic findTopic = debateTopicService.getById(topicId);
@@ -83,20 +101,35 @@ public class BoardController {
     @GetMapping("/detail")
     public String detail(
             @RequestParam Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
+
+
         System.out.println("진입  토마토 ");
         DebateBoard findBoard = debateBoardService.getById(id);
-        Long roomId = findBoard.getRoomId();
+//        Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
         List<DebateCommentView> debateCommentList = debateCommentService.getListById(id);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        {
+            String replacedStr = findBoard.getContent().replace("\r\n", "<br>");
+            findBoard.setContent(replacedStr);
+        }
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateCommentView c : debateCommentList){
+            String replacedStr = c.getContent().replace("\r\n", "<br>");
+            c.setContent(replacedStr);
+        }
 
 
         DebateRoom findRoom = debateRoomService.getById(roomId);
         Long bookId = findRoom.getBookId();
         Book book = bookService.getById(bookId);
-        System.out.println("진입  토마토 ");
 
         DebateTopic findTopic = debateTopicService.getById(topicId);
         log.info("findTopic = {}", findTopic);
@@ -109,10 +142,12 @@ public class BoardController {
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
         model.addAttribute("debateCommentList", debateCommentList);
-        // model.addAttribute("userId", userDetails.getId());
+        model.addAttribute("nickname", userDetails.getNickName());
+        model.addAttribute("userImg", userDetails.getImg());
 
-        System.out.println("debateCommentList : " + debateCommentList);
-        
+
+        log.info("board = {}", findBoard);
+        log.info("debateCommentList ={} ", debateCommentList);
 
         return "with/debate/board/detail";
     }
@@ -132,9 +167,12 @@ public class BoardController {
     public String reg(
             @ModelAttribute BoardForm boardForm,
             @RequestParam("rid") Long roomId,
+            @RequestParam(name = "wid") Long withId,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
             HttpServletRequest request) throws IOException {
 
-        Long userId = 4L;
+        System.out.println("wid = " + withId);
+        Long userId = userDetails.getId();
 
         // board
         DebateBoard board = DebateBoard.builder()
@@ -153,12 +191,16 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/with/debate/board/list?rid=" + roomId;
+        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
 
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam("id") Long id, Model model) {
+    public String edit(
+            @RequestParam("id") Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
+            Model model) {
         DebateBoard debateBoard = debateBoardService.getById(id);
         DebateTopic debateTopic = debateTopicService.getById(debateBoard.getTopicId());
 
@@ -170,7 +212,10 @@ public class BoardController {
     @PostMapping("/edit")
     public String edit(
             @RequestParam("id") Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
             @ModelAttribute BoardEditForm boardEditForm,
+
             HttpServletRequest request) throws IOException {
 
         // 1. 게시글 정보 수정
@@ -196,7 +241,7 @@ public class BoardController {
         // 6. 파일 삭제 (from database)
         debateAttachmentService.deleteAllFileByIds(boardEditForm.getDeleteFilesId());
 
-        return "redirect:/with/debate/board/detail?id=" + id;
+        return "redirect:/with/debate/board/detail?wid=" + withId + "&rid=" + roomId + "&id=" + id;
     }
 
 }

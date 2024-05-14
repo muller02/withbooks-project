@@ -12,7 +12,7 @@
 			<if test="query != null and query != '' ">
 				and title like '%${query}%'
 			</if>
-			<if test="categoryId != null">
+			<if test="categoryId != null and categoryId != '' ">
 				and category_id = ${categoryId}
 			</if>
 		</where>
@@ -166,10 +166,10 @@
 					b.id desc
 			) v
 		<where>
-			<if test="params.query != null and params.queryType != null">
+			<if test="params.query != null and params.query != '' and params.queryType != null and params.queryType != ''">
 				${params.queryType} like '%${params.query}%'
 			</if>
-			<if test="params.categoryId != null">
+			<if test="params.categoryId != null and params.categoryId != ''">
 				and category_id = #{params.categoryId}
 			</if>
 		</where>
@@ -185,14 +185,67 @@
 		from
 			book
 		<where>
-			<if test="params.query != null and params.queryType != null">
+			<if test="params.query != null and params.query != '' and params.queryType != null and params.queryType != ''">
 				${params.queryType} like '%${params.query}%'
 			</if>
-			<if test="params.categoryId != null">
+			<if test="params.categoryId != null and params.categoryId != ''">
 				and category_id = #{params.categoryId}
 			</if>
 		</where>
 	</select>
+
+	<select id="findBestseller" resultType="Integer">
+		select
+			count(*) count
+		from
+			bestseller
+		where
+			book_id = #{bookId}
+	</select>
+	
+	<insert id="saveBestseller">
+		insert into
+			bestseller
+				(
+					book_id
+				)
+			values
+			<foreach collection="ids" item="bookId">
+				(
+					${bookId}
+				)
+		</foreach>
+	</insert>
+
+	<delete id="deleteBestseller">
+		delete 
+		from	
+			bestseller
+		where
+		<foreach collection="ids" item="bookId">
+				book_id = ${bookId}
+		</foreach>
+	</delete>
+	
+	<update id="updateBookPublicYn">
+		update 
+			book
+		set
+			public_yn = #{yn}
+		where
+			id = #{bookId}
+	</update>
+
+	<update id="updateBook">
+		update
+			book
+		set
+			price = #{price},
+			description = #{description},
+			purchase_link = #{purchaseLink}
+		where
+			id = #{bookId}
+	</update>
 <!-- ================================================================= -->
 
 <!-- admin/book/aladinList -->

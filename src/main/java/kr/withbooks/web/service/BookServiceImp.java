@@ -81,6 +81,31 @@ public class BookServiceImp implements BookService {
         int offset = (page-1)*size;
         return repository.findCountByParams(params, size, offset);
     }
+    @Override
+    public Integer getBestseller(Long bookId) {
+        return repository.findBestseller(bookId);
+    }
+
+    @Override
+    public Integer addBestseller(List<Long> ids) {
+        return repository.saveBestseller(ids);
+    }
+
+    @Override
+    public Integer deleteBestseller(List<Long> ids) {
+        return repository.deleteBestseller(ids);
+    }
+
+    @Override
+    public Integer editBookPublicYn(Long bookId, Integer yn) {
+        return repository.updateBookPublicYn(bookId, yn);
+    }
+    @Override
+    public Integer editBook(Long bookId, Integer price, String description, String purchaseLink){
+        return repository.updateBook(bookId, price, description, purchaseLink);
+    }
+
+
      //=====================================================================
 
      //admin/book/aladinList

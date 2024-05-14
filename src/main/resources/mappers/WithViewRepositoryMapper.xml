@@ -40,6 +40,7 @@
 
 
 
+
 <!--  카테고리 아이디 where 필요-->
 </select>
 
@@ -55,6 +56,18 @@
   </select>
 
 
+    <select id="findAllByWithIds" resultType="WithView">
+
+
+        select * from with_view
+        <where>
+            id in
+            <foreach collection="withIds" item="arr" open="(" close=")" separator=",">
+                #{arr}
+            </foreach>
+
+        </where>
+    </select>
 
 
 </mapper>
