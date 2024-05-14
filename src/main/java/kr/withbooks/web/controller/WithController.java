@@ -65,7 +65,7 @@ public class WithController {
     model.addAttribute("categoryList", categoryList);
 
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
-    List<WithView> list = service.getList(categoryIds, query, faceYn);
+    List<WithView> list = service.getList(categoryIds, query, faceYn, null, null, null, null, null);
 
 
     // 뷰에 데이터 전달

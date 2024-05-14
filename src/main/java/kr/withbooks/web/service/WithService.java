@@ -8,7 +8,7 @@ import java.util.List;
 public interface WithService {
   // 전체 목록 조회
 
-  List<WithView> getList(Long[] categoryId, String query, Long faceYn);
+  List<WithView> getList(Long[] categoryId, String query, Long faceYn, Long id, String name, String withTop, String sort, Long page);
 
   List<WithView> getListByWithIds(List<Long> withIds);
 
