@@ -43,12 +43,12 @@
             and with_top like '%${withTop}%'
         </if>
 
-        group by
-            b.id
-        order by
-            b.reg_date desc
     </where>
 
+    group by
+    b.id
+    order by
+    b.reg_date desc
 
 
 
