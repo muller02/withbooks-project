@@ -26,11 +26,11 @@ public class WithServiceImp implements WithService {
 
 
     @Override
-    public List<WithView> getList(Long[] categoryIds,String query,Long faceYn) {
+    public List<WithView> getList(Long[] categoryIds,String query,Long faceYn, Long id, String name, String withTop, String sort, Long page) {
         // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을
         // 가지고 와서, withView categoryNames에 담기.
 
-        List<WithView> list = viewRepository.findAll(categoryIds,query,faceYn);
+        List<WithView> list = viewRepository.findAll(categoryIds, query, faceYn, id, name, withTop, sort, page);
 
 
         for (WithView withView : list) {
@@ -82,5 +82,6 @@ public class WithServiceImp implements WithService {
 
         return with != null;
     }
+
 
 }

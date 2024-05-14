@@ -14,6 +14,13 @@
         .query-input{
             --height-1: 40px;
         }
+        .latest,
+        .oldest{
+            color: var(--color-base-3)
+        }
+        .selected-sort{
+            color: var(--color-main-5);
+        }
     </style>
 </head>
 <body>
@@ -24,18 +31,20 @@
             <form class="d:flex ai:center bd-color:base-2 p:2">
                 <div>
                     <label class="d:none">검색옵션</label>
-                    <select class="category-select bd bd-radius:4 w:4 h:1 fw:3 pl:1" name="category">
-                        <option class="fw:3 pl:1" value="ID">ID</option>
-                        <option class="fw:3 pl:1" value="with-name">위드명</option>
-                        <option class="fw:3 pl:1" value="with-top">위드장</option>
+                    <select class="category-select bd bd-radius:4 w:4 h:1 fw:3 pl:1" name="c">
+                        <option class="fw:3 pl:1" value="id" th:selected="${{param.c}} == 'id'">ID</option>
+                        <option class="fw:3 pl:1" value="with-name" th:selected="${{param.c}} == 'with-name'">위드명</option>
+                        <option class="fw:3 pl:1" value="with-top" th:selected="${{param.c}} == 'with-top'">위드장</option>
                         <!-- <option value="카테고리">카테고리</option> -->
                         <!-- <option value="개설일">개설일</option> -->
                     </select>
                 </div>
                 <div class="flex-grow:1 mx:6">
                     <label class="d:none">검색어</label>
-                    <input class="query-input bd bd-radius:4 w:10p h:1" type="text" name="query">
+                    <input class="query-input bd bd-radius:4 w:10p h:1" type="text" name="q" th:value="${param.q}">
                 </div>
+                <div><input type="hidden" name="s" th:value="${param.s}"></div>
+                <div><input type="hidden" name="p" value="1"></div>
                 <div><button class="bg-color:main-5 color:base-1 fs:3 px:6 py:2 bd-radius:10 cursor:pointer">검색</button></div>
             </form>
         </section>
@@ -45,61 +54,61 @@
             <span class="d:flex ai:center">
                 <div class="fs:3 fw:3">검색결과 : 1032 건</div>
                 <div class="ml:auto mr:6">
-                    <select class="text-align:center px:2 py:1 bd bd-radius:4" onchange="window.location.href=this.value">
-                        <option value="latest"><a href="">최신순</a></option>
-                        <option value="oldest"><a href="">오래된순</a></option>
-                    </select>
+                    <ul class="d:flex">
+                        <li><a class="latest" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=latest,p=1)}">최신순</a></li>
+                        <li class="ml:3"><a class="oldest" th:classappend="${{param.s}}=='oldest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=oldest,p=1)}">오래된순</a></li>
+                    </ul>
                 </div>
             </span>
         </section>
         
         <section class="px:6 mt:4">
             <h1 class="d:none">위드 목록</h1>
-            <section class="fs:2">
+            <section class="fs:2 mt:2" th:each="w : ${list}">
                 <h1 class="d:none">퐁당퐁당</h1>
-                <span class="bd bd-radius:4 d:flex p:4">
-                    <div>
-                        <img class="h:2" src="/image/with/a1.png" alt="">
-                    </div>
-                    <span class="d:flex fl-dir:column jc:center ml:3 w:10p">
-                        <span class="d:flex bd-bottom bd-color:base-2">
-                            <span class="d:flex">
-                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">ID</div>
-                                <div class="py:1 px:2 w:2">2</div>
-                            </span>
-                            <span class="d:flex">
-                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">위드명</div>
-                                <div class="py:1 px:2 w:4">퐁당퐁당</div>
-                            </span>
-                            <span class="d:flex">
-                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">위드장</div>
-                                <div class="py:1 px:2 w:4">뉴렉이</div>
-                            </span>
-                        </span>
-                        <span class="d:flex mt:2 bd-bottom bd-color:base-2">
-                            <span class="d:flex">
-                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">개설일</div>
-                                <div class="py:1 px:2 w:2">22.11.11</div>
-                            </span>
-                            <span class="d:flex">
-                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">카테고리</div>
-                                <span class="py:1 px:2 d:flex w:6">
-                                    <div class="w:2 text-align:center">소설/시/희곡</div>
-                                    <div class="w:2 text-align:center">역사</div>
-                                    <div class="w:2 text-align:center">자기계발</div>
+                <a href="">
+                    <span class="bd bd-radius:4 d:flex p:4">
+                        <div>
+                            <img class="h:2 w:2" src="/image/with/a1.png" th:src="@{|/image/with/${w.img}|}" alt="">
+                        </div>
+                        <span class="d:flex fl-dir:column jc:center ml:3 w:10p">
+                            <span class="d:flex bd-bottom bd-color:base-2">
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">ID</div>
+                                    <div class="py:1 px:2 w:2" th:text="${w.id}">2</div>
+                                </span>
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">위드명</div>
+                                    <div class="py:1 px:2 w:4" th:text="${w.name}">퐁당퐁당</div>
+                                </span>
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">위드장</div>
+                                    <div class="py:1 px:2 w:4" th:text="${w.withTop}">뉴렉이</div>
                                 </span>
                             </span>
+                            <span class="d:flex mt:2 bd-bottom bd-color:base-2">
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">개설일</div>
+                                    <div class="py:1 px:2 w:3" th:text="${w.regDate}">22.11.11</div>
+                                </span>
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">카테고리</div>
+                                    <span class="py:1 px:2 d:flex w:10p">
+                                        <div class="w:3 text-align:left" th:each="c : ${w.categoryNames}" th:text="${c}">소설/시/희곡</div>
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="d:flex mt:2 bd-bottom bd-color:base-2">
+                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">소개</div>
+                                <p class="py:1 px:2 ln-clamp:1" th:text="${w.intro}">
+                                    좋은 분들이 모여서 이야기하다 보면 공감대가 생기고 친밀감이 쌓여서 좋은 독자들로
+                                    이어나갔으면 좋겠다는 생각에 만들게 되었습니다.
+                                </p>
+                            </span>
+    
                         </span>
-                        <span class="d:flex mt:2 bd-bottom bd-color:base-2">
-                            <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">소개</div>
-                            <p class="py:1 px:2 ln-clamp:1">
-                                좋은 분들이 모여서 이야기하다 보면 공감대가 생기고 친밀감이 쌓여서 좋은 독자들로
-                                이어나갔으면 좋겠다는 생각에 만들게 되었습니다.
-                            </p>
-                        </span>
-
                     </span>
-                </span>
+                </a>
             </section>
         </section>
     </main>
