@@ -135,7 +135,7 @@
                     <li>
                         <!-- <span th:if="${page} lt 6">이전</span> -->
                         <a href="list?page=5"
-                        th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${startnum}-1)}"
+                        th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${startnum}-1,m=2,sm=1)}"
                         th:if="${page} ge 6">이전</a>
                     </li>
 
@@ -146,7 +146,7 @@
                         <a
                             th:if="${n} ne ${{param.page}}"
                             href="list?p=1"
-                            th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${n})}"
+                            th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${n},m=2,sm=1)}"
                             th:text="${n}">1</a>
                         <!-- <a
                             th:if="${n} ne ${{param.page}}"
@@ -157,7 +157,7 @@
                     <li>
                         <!-- <span th:if="${startnum+4} gt ${lastnum}">다음</span> -->
                         <a href="list?page=6" 
-                        th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${startnum}+5)}"
+                        th:href="@{./list(categoryId=${param.categoryId},queryType=${param.queryType},query=${param.query},page=${startnum}+5,m=2,sm=1)}"
                         th:if="${startnum+4} lt ${lastnum}">다음</a >
                     </li>
                 </ul>
