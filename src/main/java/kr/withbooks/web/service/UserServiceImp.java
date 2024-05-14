@@ -30,5 +30,11 @@ public class UserServiceImp implements UserService{
         return repository.findByNickName(userId);
     }
 
+    // /user/join 이메일 중복 체크
+    @Override
+    public Integer emailCheck(String email){
+        return repository.countByEmail(email);
+    }
+
 
 }

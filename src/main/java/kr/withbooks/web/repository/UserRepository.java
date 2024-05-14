@@ -15,4 +15,7 @@ public interface UserRepository {
     void update(User user);
     String findByNickName(Long userId);
 
+    // /user/join 이메일 중복 체크
+    Integer countByEmail(String email);
+
 }

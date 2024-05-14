@@ -9,6 +9,8 @@ public interface UserService {
     void modify(User user);
 
     String getNickNameById(Long userId);
+
+    Integer emailCheck(String email);
     
     // User get(Long id, );
 }

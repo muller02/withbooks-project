@@ -19,7 +19,7 @@
 
         /* 깃 테스트 용!!! */
         input[type="text"]:invalid {
-            border-color: var(--color-main-5);
+            border-color: var(--color-accent-1);
         }
 
         .with-name label::after {
@@ -30,10 +30,10 @@
             height: 20px;
         }
 
-        /* .with-name label:has(input:invalid)::after {
-            content: "두 글자 이상 입력 필수입니다.";
+        .with-name label:has(input:invalid)::after {
+            /* content: "두 글자 이상 입력 필수입니다."; */
             color: var(--color-main-5);
-        } */
+        }
 
 
         .nick-name label::after {
@@ -44,10 +44,10 @@
             height: 20px;
         }
 
-        /* .nick-name label:has(input:invalid)::after {
-            content: "한글, 영문,숫자 가능 (20자내로 작성해주세요)";
+        .nick-name label:has(input:invalid)::after {
+            /* content: "한글, 영문,숫자 가능 (20자내로 작성해주세요)"; */
             color: var(--color-main-5);
-        } */
+        }
 
     </style>
 </head>
