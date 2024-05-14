@@ -51,7 +51,7 @@
         <li><a class="" href=""><img src="/icon/home.svg" class="w:1" alt="홈"></a></li>
         <li class="mt:6">
 
-            <a th:href="${#authentication.principal ne 'anonymousUser'} ? '/my/index' : '/login' ">
+            <a th:href="${#authentication.principal ne 'anonymousUser'} ? '/my/index' : '/user/login' ">
 
                 <img th:src="${#authentication.principal ne 'anonymousUser' ? #authentication.principal.img : '/icon/user.svg'}"
                      class="h:1 w:1 border-radius:full"
@@ -60,38 +60,37 @@
             </a>
         </li>
         <span class="mt:6 h:1 w:100p bg-color:base-3"></span>
-        <li class="mt:6"
-            th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'check-style' : ''"
+        <li class="mt:6 book-search"
+
         >
-            <a class="icon icon:book-searchd icon-color:base-9 " href="/book/list"
-            th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'color:main-5 icon-color:main-5' : ''"
+            <a class="icon icon:book-searchd icon-color:base-9 " href="/book/list?m=1"
+
 
         >북검색</a>
             <p class="arrow_box">책검색</p>
         </li>
-        <li class="mt:6 "
-            th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'check-style' : ''"
+        <li class="mt:6 with "
 
-        ><a class="icon icon:withd icon-color:base-9" href="/with/list"
-            th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'color:main-5 icon-color:main-5' : ''"
+
+        ><a class="icon icon:withd icon-color:base-9" href="/with/list?m=2"
+
 
         >위드</a>
             <p class="arrow_box">위드</p>
         </li>
-        <li class="mt:6 "
-            th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'check-style' : ''"
+        <li class="mt:6 book-shorts "
 
-        ><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list"
-            th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'color:main-5 icon-color:main-5' : ''"
+        ><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list?m=3"
+
 
         >북쇼츠</a>
             <p class="arrow_box">북쇼츠</p>
         </li>
-        <li class="mt:6"
-            th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'check-style' : ''"
+        <li class="mt:6 booklog"
 
-        ><a class="icon icon:book-logd icon-color:base-9" href="/booklog/list"
-            th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'color:main-5 icon-color:main-5' : ''"
+
+        ><a class="icon icon:book-logd icon-color:base-9" href="/booklog/list?m=4"
+
 
         >북로그</a>
             <p class="arrow_box">북로그</p>

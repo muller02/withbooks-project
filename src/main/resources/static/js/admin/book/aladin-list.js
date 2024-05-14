@@ -47,13 +47,13 @@ submitBtn.onclick = (e)=>{
 
         switch(sortValue){
                 case 1 :
-                        urlParams = `sort=1&qt=${selectQt1.value}&p=1`; 
+                        urlParams = `sort=1&qt=${selectQt1.value}&p=1&m=2&sm=2`; 
                         break;
                 case 2 : 
-                        urlParams = `sort=2&qt=${selectQt2.value}&q=${inputQ2.value}&p=1`; 
+                        urlParams = `sort=2&qt=${selectQt2.value}&q=${inputQ2.value}&p=1&m=2&sm=2`; 
                         break;
                 case 3 : 
-                        urlParams = `sort=3&i=${inputI3.value}&p=1`; 
+                        urlParams = `sort=3&i=${inputI3.value}&p=1&m=2&sm=2`; 
                         break;
         }
         console.log(urlParams);
