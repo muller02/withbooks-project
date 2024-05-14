@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/calendar")
 public class CalendarController {
 
-  @GetMapping("/list")
+  @GetMapping("/index")
   public String list() {
-    
-    return "/calendar/list";
+
+    return "/calendar/index";
   }
 }
