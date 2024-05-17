@@ -26,12 +26,15 @@ public class UserController {
         ,@RequestParam(name = "nickname", required = false) String nickname
         ,@RequestParam(name = "email", required = false) String email
         ,@RequestParam(name = "gender", required = false) Integer gender
-        ,@RequestParam(name = "status", required = false) String status
+        ,@RequestParam(name = "status", required = false) Integer status
         ,@RequestParam(name = "birthyear", required = false) String birthyear
+        ,@RequestParam(name = "start-date", required = false) String startDate
+        ,@RequestParam(name = "end-date", required = false) String endDate
         ,Model model
     ) {
 
-        System.out.println("birthyear : "+birthyear);
+        System.out.println("startDate : "+startDate);
+        System.out.println("endDate : "+endDate);
 
         model.addAttribute("id", id);
         model.addAttribute("nickname", nickname);
@@ -39,11 +42,19 @@ public class UserController {
         model.addAttribute("gender", gender);
         model.addAttribute("status", status);
         model.addAttribute("birthyear", birthyear);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
 
-        // List<User> list = service.get();  
+        // List<User> list = service.get(id, nickname, email, birthyear, gender, startDate, endDate, status);  
 
         return "admin/user/list";
     }
+
+    @GetMapping("detail")
+    public String detail() {
+        return "admin/user/detail";
+    }
+    
     
     
 }

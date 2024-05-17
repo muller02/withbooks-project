@@ -47,7 +47,7 @@
 /* 기본: main-6 base-3   */
 .n-btn {
     --btn-filled-background-color-default: var(--color-main-5);
-    --btn-filled-background-color-hover: var(--color-main-5);
+    --btn-filled-background-color-hover: var(--color-main-3);
     --btn-filled-background-color-active: var(--color-main-6);
     --btn-filled-border: 1px solid transparent;
     --btn-filled-color: var(--color-base-1);
@@ -251,7 +251,9 @@
     grid-row-start: 2; /** expander-content를 두번째 행으로 지정 */
     min-height: 0;
 
-    transition: visibility 0.1s, padding 0.2s;
+    transition:
+        visibility 0.1s,
+        padding 0.2s;
 }
 
 /* 북로그 */
@@ -333,9 +335,6 @@
     box-shadow: 0px 1px 1.5px 0px rgba(0, 0, 0, 0.05);
 }
 
-
-
-
 .bookmark .n-tabbar .n-tab.active,
 .bookmark .n-tabbar-type\:underline > li.active > a,
 .bookmark .n-tabbar-type\:underline > li.active > button,
@@ -359,4 +358,12 @@
 .bookmark .n-tabbar\:underline > li.active > button {
     border-color: var(--color-main-5);
     color: var(--color-main-5);
+}
+
+.admin-user .n-toggle-type\:outline,
+.admin-user .n-toggle-type\:outline-box,
+.admin-user .n-toggle\:outline,
+.admin-user .n-toggle\:outline-box {
+    --toggle-outline-color-checked: var(--color-main-5);
+    --toggle-outline-background-color-checked: var(--color-main-1);
 }
