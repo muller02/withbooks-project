@@ -34,6 +34,12 @@
       transform: translateX(-10px);
     }
 
+    .cur-page{
+        background-color: var(--color-main-5);
+        color: var(--color-base-1) !important;
+        border-width: 0 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -239,7 +245,7 @@
 
             <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
                 <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
-                    th:href="@{./list(wid=${param.wid},p=${n},s=${param.s})}" 
+                    th:href="@{./list(p=${n})}" 
                     th:text="${n}"
                     th:classappend="${{param.p}} == ${n} ? 'cur-page'"
                 >1</a>
