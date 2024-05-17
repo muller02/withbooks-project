@@ -39,4 +39,19 @@
 			id = #{id}
 	</update>
 
+	<select id="findByAll" resultType="User">
+	select 
+		*
+	from
+		user
+	where
+		    id = #{id} 
+		and email like '%${email}%'
+		and nickname like '%${nickname}%'
+		and gender = ${gender}
+		and birth_date like '${birthyear}%'
+		and (join_date gt ${startDate}) between (join_date lt ${endDate}) 
+		and withdraw_status = ${status}	
+	</select>
+
 </mapper>

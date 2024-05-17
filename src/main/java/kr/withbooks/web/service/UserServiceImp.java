@@ -1,5 +1,7 @@
 package kr.withbooks.web.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,13 @@ public class UserServiceImp implements UserService{
 
 
         return repository.findByNickName(userId);
+    }
+
+    @Override
+    public List<User> get(Long id, String nickname, String email, String birthyear, Integer gender, String startDate,
+            String endDate, Integer status) {
+        
+        return repository.findByAll(id, nickname, email, birthyear, gender, startDate, endDate, status);
     }
 
 
