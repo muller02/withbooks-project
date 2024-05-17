@@ -1,6 +1,8 @@
 package kr.withbooks.web.controller;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
@@ -28,14 +30,15 @@ public class UserController {
     @Autowired
     private final UserService service;
 
-    @GetMapping("/join")
+    @GetMapping("join")
     public String joinForm(){
         // User user = new User();
         // model.addAttribute("user", user);
         return "user/join";
     }
 
-    @PostMapping("/join")
+    // 회원가입 POST요청
+    @PostMapping("join")
     public String joinUser(
             // @Validated
             // @ModelAttribute(name = "user") UserJoinForm form,
@@ -49,26 +52,35 @@ public class UserController {
             RedirectAttributes redirect
             ) {
 
-          if(intro == null || intro == "")
-                intro = "안녕하세요 :)";
 
         // if (bindingResult.hasErrors()) {
         //     log.info("errors={}", bindingResult);
         //     return "user/join";
         // }
-
-        //성공 로직
-        // User user = new User();
-        // user.setEmail(form.getEmail());
-        // user.setPassword(form.getPassword());
-        // user.setNickname(form.getNickname());
-        // user.setGender(form.getGender());
-        // user.setIntro(form.getIntro());
-
         // log.info("user={}", user);
 
         // service.join(user);
-        redirect.addFlashAttribute("message", "가입성공~");
+
+
+        // String -> LocalDateTime
+        DateTimeFormatter format = DateTimeFormatter.ISO_LOCAL_DATE;
+        LocalDate date = LocalDate.parse(birthDate, format);
+        LocalDateTime birth = date.atStartOfDay();
+
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setNickname(nickname);
+        user.setGender(gender);
+        user.setBirthDate(birth);
+        user.setIntro(intro);
+        System.err.println(user.getBirthDate());
+        int result = service.join(user);
+
+        if(result > 0)
+            redirect.addFlashAttribute("message", "회원가입이 성공적으로 완료되었습니다.");
+        else
+            redirect.addFlashAttribute("message", "회원가입에 실패했습니다. 다시 시도해주세요!");
 
         return "redirect:/user/login";
     }
