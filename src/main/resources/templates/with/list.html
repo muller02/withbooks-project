@@ -34,6 +34,12 @@
       transform: translateX(-10px);
     }
 
+    .cur-page{
+        background-color: var(--color-main-5);
+        color: var(--color-base-1) !important;
+        border-width: 0 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -223,6 +229,32 @@
         </div>
       </li>
     </ul>
+    <section class="mt:5 d:flex jc:center" 
+            th:with="
+                tmpa = (${count}-1) / 10,
+                lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
+                tmp = (${{param.p}}-1) / 5,
+                startnum = ${T(java.lang.Math).floor(tmp)} * 5 + 1
+            "
+        >
+        <h1 class="d:none">페이저</h1>
+        <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
+            <li th:unless="${startnum} eq 1" >
+                <a class="icon icon:caret_left" href="">이전</a>
+            </li>
+
+            <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
+                <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
+                    th:href="@{./list(p=${n})}" 
+                    th:text="${n}"
+                    th:classappend="${{param.p}} == ${n} ? 'cur-page'"
+                >1</a>
+            </li>
+            <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
+                <a class="icon icon:caret_right" href="">다음</a>
+            </li>
+        </ul>
+    </section>
   </section>
 
   <section>

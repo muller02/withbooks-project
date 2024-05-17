@@ -12,7 +12,7 @@ public interface UserService {
 
     String getNickNameById(Long userId);
 
-    void join(User user);
+    int join(User user);
 
 
     

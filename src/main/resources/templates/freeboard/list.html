@@ -107,7 +107,7 @@
             "
         >
             <h1 class="d:none">페이저</h1>
-            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} le 1">
+            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
                 <li th:unless="${startnum} eq 1" >
                     <a class="icon icon:caret_left" href="">이전</a>
                 </li>

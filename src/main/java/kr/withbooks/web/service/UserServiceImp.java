@@ -41,16 +41,14 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void join(User user) {
+    public int join(User user) {
 
         User encodeUser = user;
         String encodedPassword  = bCryptPasswordEncoder.encode(user.getPassword());
         encodeUser.setPassword(encodedPassword);
         encodeUser.setRole("ROLE_USER");
 
-
-
-        repository.save(encodeUser);
+        return repository.save(encodeUser);
     }
 
     // /user/join 이메일 중복 체크

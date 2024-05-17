@@ -540,6 +540,11 @@ window.addEventListener("load", function (e) {
 
     // input에 내용이 있어야 버튼 활성화 가능 함수
     function  updateButtonState(){
+      if(getJSessionID() ==null){
+        commentReg.disabled =true;
+      return
+      }
+
       if(commentContent.value.trim() === "" || commentContent.value.trim() ===null){
         commentReg.disabled = true;
       }else{
@@ -552,6 +557,8 @@ window.addEventListener("load", function (e) {
     //댓글 input창에 입력될 때 마다 함수 호출
     commentContent.addEventListener("input",updateButtonState);
 
+    if(getJSessionID() ==null)
+      commentReg.disabled =true;
 
     commentReg.onclick = function (e) {
       let content = commentContent.value;
