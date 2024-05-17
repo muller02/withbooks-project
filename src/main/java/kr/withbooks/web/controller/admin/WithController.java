@@ -25,15 +25,19 @@ public class WithController {
         @RequestParam(name = "c") String category,
         @RequestParam(name = "q") String query,
         @RequestParam(name = "s") String sort,
-        @RequestParam(name = "p") Long page,
+        @RequestParam(name = "p") Integer page,
         Model model) {
+
+
+        page = 1;
 
         List<WithView> list = null;
         int count = 0;
 
         switch (category) {
             case "id":
-                list = service.getList(null, null, null, Long.parseLong(query), null, null, sort, page);
+                if(!"".equals(query))
+                    list = service.getList(null, null, null, Long.parseLong(query), null, null, sort, page);
                 break;
             case "with-name":
                 list = service.getList(null, null, null, null, query, null, sort, page);
@@ -42,6 +46,9 @@ public class WithController {
                 list = service.getList(null, null, null, null, null, query, sort, page);
                 break;
         }
+
+        if("".equals(query))
+            list = service.getList(null, null, null, null, null, null, sort, page);
 
         
         model.addAttribute("list", list);

@@ -1,10 +1,10 @@
 package kr.withbooks.web.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.entity.*;
-import kr.withbooks.web.repository.DebateRoomViewRepository;
-import kr.withbooks.web.service.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,11 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.entity.Category;
+import kr.withbooks.web.entity.DebateRoomView;
+import kr.withbooks.web.entity.With;
+import kr.withbooks.web.entity.WithCategory;
+import kr.withbooks.web.entity.WithMemberView;
+import kr.withbooks.web.entity.WithView;
+import kr.withbooks.web.repository.DebateRoomViewRepository;
+import kr.withbooks.web.service.CategoryService;
+import kr.withbooks.web.service.FreeBoardService;
+import kr.withbooks.web.service.UserService;
+import kr.withbooks.web.service.WithCategoryService;
+import kr.withbooks.web.service.WithMemberService;
+import kr.withbooks.web.service.WithService;
 
 
 @Controller
@@ -53,9 +63,13 @@ public class WithController {
                      @RequestParam(name = "c", required = false) Long[] categoryIds,
                      @RequestParam(name = "q", required = false) String query,
                      @RequestParam(name = "f", required = false) Long faceYn,
+                     @RequestParam(name = "p", required = false) Integer page,
                      @AuthenticationPrincipal CustomUserDetails userDetails) {
 
     Long userId = userDetails != null ? userDetails.getId() : null;
+
+    if(page == null)
+      page = 1;
 
     System.out.println("userId = " + userId);
 
@@ -65,11 +79,13 @@ public class WithController {
     model.addAttribute("categoryList", categoryList);
 
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
-    List<WithView> list = service.getList(categoryIds, query, faceYn, null, null, null, null, null);
+    List<WithView> list = service.getList(categoryIds, query, faceYn, null, null, null, null, page);
 
+    int count = service.getCount();
 
     // 뷰에 데이터 전달
     model.addAttribute("list", list);
+    model.addAttribute("count", count);
 
     return "with/list";
   }

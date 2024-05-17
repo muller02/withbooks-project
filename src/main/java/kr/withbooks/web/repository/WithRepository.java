@@ -15,4 +15,6 @@ public interface WithRepository {
     With findById(Long wihtId);
 
     With findByName(String withName);
+
+    int count();
 }

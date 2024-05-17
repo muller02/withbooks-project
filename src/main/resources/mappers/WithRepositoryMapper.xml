@@ -20,6 +20,12 @@
 
 		</where>
 	</select>
+
+	<select id="count" resultType="int" >
+		select count(id) from `with`
+	</select>
+
+
 	<select id="findById" resultType="With">
 
 		select * from `with` where id = #{withId}

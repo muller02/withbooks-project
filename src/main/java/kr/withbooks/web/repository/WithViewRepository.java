@@ -11,7 +11,7 @@ public interface WithViewRepository {
 
   // List<WithView> findAll(Long[] categoryIds , String query, Long faceYn);
 
-  List<WithView> findAll(Long[] categoryIds , String query, Long faceYn, Long id, String name, String withTop, String sort, Long page);
+  List<WithView> findAll(Long[] categoryIds , String query, Long faceYn, Long id, String name, String withTop, String sort, Integer limit, Integer offset);
 
   WithView findById(Long id);
 
