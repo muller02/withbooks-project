@@ -75,14 +75,12 @@
         @media (min-width: 768px) {
         width: 1200px !important;
     }
-
-
 }
 
-    .gradation{
-        background: linear-gradient(to top, rgba(251, 198, 232, 0.44), #D3D2FB , #C4E2FA);
 
-    }
+        .border-color{
+            border: 1px solid var(--color-main-1)
+        }
 
         .clamp {
             -webkit-line-clamp: 6;
@@ -130,18 +128,18 @@
 
 
             <article class= "d:flex flex-direction:column md:d:flex  md:flex-direction:row lg:d:flex  lg:flex-direction:row gap:4 jc:center mt:auto ">
-                <div class="border-radius:5   p:5 shorts-shadow     ">
-                    <div class="fw:3"> 북쇼츠</div>
+                <div class="border-radius:5   p:5 shorts-shadow  md:w:3p lg:w:3p border-color  ">
+                    <div class="fw:3"> ❗북쇼츠</div>
+                    <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ? <br>  짧은 글로
+                        책 선택 시간을 줄일수 있습니다.</div>
+                </div>
+                <div class="border-radius:5  p:5  shorts-shadow md:w:3p border-color  lg:w:3p">
+                    <div class="fw:3"> ❗위드</div>
                     <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ?  북쇼츠의 짧은 글로
                         책 선택 시간을 줄일수 있습니다.</div>
                 </div>
-                <div class="border-radius:5  p:5  shorts-shadow">
-                    <div class="fw:3"> 위드</div>
-                    <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ?  북쇼츠의 짧은 글로
-                        책 선택 시간을 줄일수 있습니다.</div>
-                </div>
-                <div class="border-radius:5   p:5  shorts-shadow">
-                    <div class="fw:3"> 북로그</div>
+                <div class="border-radius:5   p:5  shorts-shadow md:w:3p border-color lg:w:3p">
+                    <div class="fw:3"> ❗북로그</div>
                     <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ?  북쇼츠의 짧은 글로
                         책 선택 시간을 줄일수 있습니다.</div>
                 </div>
@@ -241,14 +239,14 @@
 
 <div class="n-item bd:none	 box-shadow:5">
     <ul class=" d:flex   overflow-y-scroll	    scrl-none scroll-box	 ">
-            <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0 text-align:center px:4 mr:1 mb:2 border-radius:2 cursor:pointer  " >
+            <li class="bg-color:main-5 color:base-1 py:1  h:auto min-width:2  flex-shrink:0 text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
                       베스트 셀러
             </li>
-            <li class="bg-color:main-1 py:1  flex-shrink:0 h:auto min-width:2 w:auto text-align:center px:4 mr:1 mb:2 border-radius:2 cursor:pointer  " >
+            <li class="bg-color:main-1 py:1  flex-shrink:0 h:auto min-width:2 w:auto text-align:center px:4 mr:4  mb:2 border-radius:5 cursor:pointer  " >
                 신간
             </li>
 
-            <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0  text-align:center px:4 mr:1 mb:2 border-radius:2 cursor:pointer  " >
+            <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0  text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
                 특별신간
             </li>
 
