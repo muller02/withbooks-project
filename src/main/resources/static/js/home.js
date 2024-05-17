@@ -14,9 +14,12 @@ window.addEventListener("load", function(e) {
             setTimeout(() => {
                 bookIntroDiv.classList.remove("effect");
                 bookIntroDiv.style.transform = `translateX(0px)`;
-            }, 0);
+                // 효과를 다시 추가
+                setTimeout(() => {
+                    bookIntroDiv.classList.add("effect");
+                }, 20);
+            }, 300); // 애니메이션 완료 후 효과 제거
         }
-        bookIntroDiv.classList.add("effect");
     }
 
     function startSlide() {
@@ -32,27 +35,34 @@ window.addEventListener("load", function(e) {
 
     // 슬라이드 조건 확인
     function checkSlideCondition() {
-        if (window.innerWidth <768) {
+        stopSlide(); // 슬라이드를 멈추고 조건을 확인
+
+        if (window.innerWidth < 768) {
             moveLen = -460; // 기본 이동 거리
-            startSlide();
-        } else if (window.innerWidth >= 768) {
-        
-            moveLen = -1200; // 1200px 이상일 때 이동 거리
-            startSlide();
         } else {
-            moveLen = -460; // 기본 이동 거리
-            startSlide();
+            moveLen = -1200; // 768px 이상일 때 이동 거리
         }
+
+        // 슬라이드 위치 초기화
+        bookIntroDiv.classList.remove("effect");
+        bookIntroDiv.style.transform = `translateX(${moveLen * currentIndex}px)`;
+        setTimeout(() => {
+            bookIntroDiv.classList.add("effect");
+        }, 20);
+
+        startSlide(); // 슬라이드를 다시 시작
     }
 
     // 초기화할 때 슬라이드 조건 확인
     checkSlideCondition();
 
     // 윈도우 크기 변경 감지하여 슬라이드 조건 확인
+    let resizeTimeout;
     window.addEventListener("resize", function() {
-        stopSlide()
-
-        checkSlideCondition(); // 조건 재확인
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            checkSlideCondition(); // 조건 재확인
+        }, 100);
     });
 });
 
