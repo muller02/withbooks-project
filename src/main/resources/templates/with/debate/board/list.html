@@ -52,6 +52,7 @@
 
     <main layout:fragment="main">
 
+        <div class="d:flex ai:center">
         <a class="m:2" href="" th:href="@{/with/debate/list(wid=${param.wid})}">
                         <span class="n-btn n-btn:void mt:3 pl:2 fs:1" style="color: var(--color-base-5);">
                             <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
@@ -59,12 +60,20 @@
                         </span>
         </a>
 
-        <div class="d:flex fl-dir:column gap:8 mt:4">
+
+        <section class="w:1 h:1 d:inline-block ml:auto mt:3 mr:2 " >
+            <h1 class="d:none">공지사항 버튼</h1>
+            <div class="bd border-color:main-5 border-radius:full p:3">
+                <span id="open-notice" class="icon icon:megaphone icon-size:4 icon-color:main-5">알림</span>
+            </div>
+        </section>
+        </div>
+        <div class="d:flex fl-dir:column gap:8 mt:6">
             <section>
                 <h1 class="d:none">토론주제 목록</h1>
                 <div class="d:flex jc:center">
                     <label class="d:none" for="selectBox">토론주제</label>
-                    <select class="bd bd-radius:3 lg:w:8 p:1" name="languages" id="selectBox"> <!--onchange="redirectToController(this.value)">-->
+                    <select class="bd bd-radius:3 w:8p p:1" name="languages" id="selectBox"> <!--onchange="redirectToController(this.value)">-->
                         <option class="" value=" ">💡 토론주제</option>
                         <option class="" th:each="val : ${topicList}"
                                 th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">컨텐츠</option>
@@ -75,25 +84,23 @@
                 </div>
             </section>
 
+
             <section id="notice-box">
                 <h1 class="d:none">토론방 공지사항</h1>
                 <div id="notice-contents" class="d:flex w:8 bg-color:base-2 p:4 bd border-radius:3">
-                    <div class="d:flex h:6">
-                        <span class="icon icon:megaphone icon-size:3 icon-color:accent-2">알림아이콘</span>
+                    <div class=" h:6 mr:auto">
+                        <div class="deco icon:megaphone icon-size:5 icon-color:accent-2 mt">공지사항</div>
+
                         <div class="w:6 mx:2">
                             <p class="fs:3" th:utext="${debateRoom.notice}">공지사항 컨텐츠</p>
                         </div>
                     </div>
                     <div><span id="close-notice" class="icon icon:x icon-size:3">닫기</span></div>
+
                 </div>
             </section>
 
-            <section class="pos:fixed right:4 lg:right:1/4 top:1/5 md:top:2 lg:top:2 zi:5 " >
-                <h1 class="d:none">공지사항 버튼</h1>
-                <div class="bg-rgb:base-9 bd border-radius:full p:3">
-                    <span id="open-notice" class="icon icon:megaphone icon-size:4 icon-color:base-4">알림</span>
-                </div>
-            </section>
+
 
             <section class="px:3 mt:9">
                 <h1 class="d:none">토론방 목록</h1>
