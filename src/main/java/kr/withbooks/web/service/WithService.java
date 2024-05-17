@@ -20,5 +20,4 @@ public interface WithService {
 
   boolean getName(String withName);
 
-  int getCount();
 }

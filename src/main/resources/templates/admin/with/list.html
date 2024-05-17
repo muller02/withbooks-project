@@ -14,12 +14,20 @@
         .query-input{
             --height-1: 40px;
         }
+
         .latest,
         .oldest{
             color: var(--color-base-3)
         }
+
         .selected-sort{
             color: var(--color-main-5);
+        }
+
+        .cur-page{
+            background-color: var(--color-main-5);
+            color: var(--color-base-1) !important;
+            border-width: 0 !important;
         }
     </style>
 </head>
@@ -52,7 +60,7 @@
         <section class="mt:3 ml:3">
             <h1 class="d:none">검색결과 상단</h1>
             <span class="d:flex ai:center">
-                <div class="fs:3 fw:3">검색결과 : 1032 건</div>
+                <div class="fs:3 fw:3">검색결과 : <span th:text="${count}">1032</span>건</div>
                 <div class="ml:auto mr:6">
                     <ul class="d:flex">
                         <li><a class="latest" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=latest,p=1)}">최신순</a></li>
@@ -110,6 +118,33 @@
                     </span>
                 </a>
             </section>
+
+            <section class="mt:5 d:flex jc:center" 
+            th:with="
+                tmpa = (${count}-1) / 10,
+                lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
+                tmp = (${{param.p}}-1) / 5,
+                startnum = ${T(java.lang.Math).floor(tmp)} * 5 + 1
+            "
+        >
+        <h1 class="d:none">페이저</h1>
+        <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
+            <li th:unless="${startnum} eq 1" >
+                <a class="icon icon:caret_left" href="">이전</a>
+            </li>
+
+            <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
+                <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
+                    th:href="@{./list(c=${param.c},q=${param.q},s=${param.s},p=${n})}" 
+                    th:text="${n}"
+                    th:classappend="${{param.p}} == ${n} ? 'cur-page'"
+                >1</a>
+            </li>
+            <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
+                <a class="icon icon:caret_right" href="">다음</a>
+            </li>
+        </ul>
+    </section>
         </section>
     </main>
 </body>

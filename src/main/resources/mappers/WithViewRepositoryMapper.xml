@@ -59,14 +59,12 @@
 
     limit #{limit} offset #{offset}
     
-        
-        
-
-
-
-
 <!--  카테고리 아이디 where 필요-->
 </select>
+
+
+
+
 
   <select id="findAllByWithId" resultType="java.lang.String">
     select

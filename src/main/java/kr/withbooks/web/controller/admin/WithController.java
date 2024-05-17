@@ -29,10 +29,8 @@ public class WithController {
         Model model) {
 
 
-        page = 1;
 
         List<WithView> list = null;
-        int count = 0;
 
         switch (category) {
             case "id":
@@ -51,6 +49,7 @@ public class WithController {
             list = service.getList(null, null, null, null, null, null, sort, page);
 
         
+        model.addAttribute("count", 1000);
         model.addAttribute("list", list);
 
         return "/admin/with/list";

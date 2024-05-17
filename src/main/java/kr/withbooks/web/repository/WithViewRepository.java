@@ -18,4 +18,6 @@ public interface WithViewRepository {
     List<WithView> findAllByWithIds(List<Long> withIds);
 
     List<WithView> findByUserId(Long userId);
+
+    int count(Long id, String name, String withTop);
 }
