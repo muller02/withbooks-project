@@ -9,6 +9,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="/js/user/join.js" defer></script>
     <style>
         * {
             font-family: "Noto Sans KR", sans-serif;
@@ -18,7 +19,7 @@
 
         /* 깃 테스트 용!!! */
         input[type="text"]:invalid {
-            border-color: var(--color-main-5);
+            border-color: var(--color-accent-1);
         }
 
         .with-name label::after {
@@ -30,7 +31,7 @@
         }
 
         .with-name label:has(input:invalid)::after {
-            content: "두 글자 이상 입력 필수입니다.";
+            /* content: "두 글자 이상 입력 필수입니다."; */
             color: var(--color-main-5);
         }
 
@@ -44,7 +45,7 @@
         }
 
         .nick-name label:has(input:invalid)::after {
-            content: "한글, 영문,숫자 가능 (20자내로 작성해주세요)";
+            /* content: "한글, 영문,숫자 가능 (20자내로 작성해주세요)"; */
             color: var(--color-main-5);
         }
 
@@ -56,28 +57,38 @@
 
     <section class="pb:4 pt:4 pl:4 pr:4 with-reg-page ">
         <h1 class="d:none">회원가입</h1>
-        <form class="n-form2" action="/user/join" method="post">
+        <form id="form" class="n-form" action="/join" method="post">
             <div class="d:flex jc:end">
-                <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">가입</button>
+                <button type="submit" id="btn" class="n-btn w:5 mt:3 bg-color:main-5">가입</button>
             </div>
             <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8">
                 <span class="font-size:7"> 환영합니다!,</span><br />
                 이메일로 회원가입 해주세요.
             </p>
 
-            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7 ">
+            <section class="change-section n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7 ">
                 <div class="with-name d:flex">
-                    <label>
+                    <label class="w:6">
+                        <input type="hidden" name="email-id">
                         <input
-                                type="email"
-                                class="n-textbox n-textbox-type:underline n-textbox-label:top  "
+                                type="text"
+                                class="n-textbox n-textbox-type:underline n-textbox-label:top"
                                 placeholder="이메일"
                                 name="email"
                                 required minlength="2"
                         />
-
                     </label>
-                    <button  class="n-btn  bg-color:main-3 ml:5">중복확인</button>
+                    <span>@</span>
+                    <input class="inputEmail pl:4 n-textbox n-textbox-type:underline" type="text" name="email">
+                    <select class="w:3" name="address">
+                        <option selected disabled hidden>이메일 선택</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="yahoo.com">yahoo.com</option>
+                        <option class="inputSelected" value="">직접 입력 </option>
+                    </select>
+                    <button class="check-email n-btn bg-color:main-3 ml:5">중복확인</button>
                 </div>
             </section>
 

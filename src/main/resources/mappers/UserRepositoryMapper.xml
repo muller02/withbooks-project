@@ -39,6 +39,24 @@
 			id = #{id}
 	</update>
 
+	<insert id="save" parameterType="User">
+		INSERT INTO user (
+		intro, nickname, email, password, gender, role
+		)
+		VALUES (
+		#{intro}, #{nickname}, #{email}, #{password}, #{gender}, #{role}
+		)
+	</insert>
+
+	<select id="countByEmail">
+		select
+			count(*) count
+		from 
+			user
+		where
+			email = #{email}
+	</select>
+
 	<select id="findByAll" resultType="User">
 	select 
 		*

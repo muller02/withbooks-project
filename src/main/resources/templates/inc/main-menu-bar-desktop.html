@@ -3,17 +3,22 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
    >
-    <!-- <head>
-        <style>
-            .withbooks-img {
-                --width-2: 36px;
-                --height-2: 36px;
-            }
-        </style>
-    </head> -->
+<head>
+
+    <style>
+        .main-menu-bar-desktop {
+            --width-2: 80px
+        }
+
+        .main-menu-bar-desktop span {
+            --height-1: 1px;
+        }
+    </style>
+</head>
+
     <body>
         <section
-            class="lg:d:block mr:2 d:none main-menu-bar-tablet w:5 bg-color:base-1 px:6 flex-shrink:0"
+            class="lg:d:block mr:2 d:none  main-menu-bar-desktop w:5 bg-color:base-1 px:6 flex-shrink:0"
         >
             <h1 class="d:none">메인메뉴바</h1>
             <ul class="d:flex fl-dir:column ai:center">
@@ -107,50 +112,50 @@
               
                 <span class="d:flex fl-dir:column w:100p">
                     <span class="mt:2 h:1 w:100p bg-color:base-3"></span>
-                    <li class="mt:5 px:2 py:1"
-                        th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    <li class="mt:5 px:2 py:1 book-search"
+
                     >
                         <a
-                            class="deco icon:book-searchd fs:3 fw:3 color:base-8 deco-mr:3"
-                            href="/book/list"
-                            th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'color:main-5 icon-color:main-5' : ''"
+                            class="deco icon:book-searchd fs:3 fw:3  deco-mr:3"
+                            href="/book/list?m=1"
+
 
                         >책검색</a
                         >
                     </li>
-                    <li class="mt:5 px:2 py:1"
-                        th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    <li class="mt:5 px:2 py:1 with"
+
                     >
                         <a
-                            class="deco icon:withd fs:3 fw:3 color:base-8 deco-mr:3"
-                            href="/with/list"
-                            th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'color:main-5 icon-color:main-5' : ''"
+                            class="deco icon:withd fs:3 fw:3 deco-mr:3"
+                            href="/with/list?m=2"
+
 
                         >위드</a
                         >
                     </li>
                     <li
-                        class="mt:5 px:2 py:1 w:100p "
-                        th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'border-radius:6 bg-color:main-2' : ''"
+                        class="mt:5 px:2 py:1 w:100p book-shorts "
+
 
                     >
 
                         <a
                             class="deco icon:book-shortd deco-mr:3 fs:3 fw:3 "
-                            href="/shorts/list"
-                            th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'color:main-5 icon-color:main-5' : ''"
+                            href="/shorts/list?m=3"
+
 
                         >북쇼츠</a
                         >
                     </li>
 
-                    <li class="mt:5 px:2 py:1"
-                        th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    <li class="mt:5 px:2 py:1 booklog"
+
                     >
                         <a
-                            class="deco icon:book-logd fs:3 fw:3 color:base-8 deco-mr:3"
-                            href="/booklog/list"
-                            th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'color:main-5 icon-color:main-5' : ''"
+                            class="deco icon:book-logd fs:3 fw:3  deco-mr:3"
+                            href="/booklog/list?m=4"
+
 
                             >북로그</a
                         >
@@ -160,7 +165,7 @@
                     ></span>
                     <li class="mt:5 px:2 py:1">
                         <a
-                            class="deco icon:gear_six fs:3 fw:3 color:base-8 deco-mr:3"
+                            class="deco icon:gear_six fs:3 fw:3 deco-mr:3"
                             href=""
                             >설정</a
                         >

@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/calendar")
-public class CalendarController {
+@RequestMapping("/withmember")
+public class WithMemberController {
 
-  @GetMapping("/index")
-  public String list() {
+    @GetMapping("/list")
+    public  String list(){
 
-    return "/calendar/index";
-  }
+
+        return "";
+
+    }
 }
