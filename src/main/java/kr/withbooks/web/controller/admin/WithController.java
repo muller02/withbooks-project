@@ -27,7 +27,7 @@ public class WithController {
         @RequestParam(name = "s") String sort,
         @RequestParam(name = "p") Integer page,
         Model model) {
-
+ 
 
 
         List<WithView> list = null;
@@ -51,6 +51,8 @@ public class WithController {
         
         model.addAttribute("count", 1000);
         model.addAttribute("list", list);
+
+        System.out.println("list " + list);
 
         return "/admin/with/list";
     }

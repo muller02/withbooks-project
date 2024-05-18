@@ -19,4 +19,6 @@ public interface FreeBoardRepository {
 
     int save(FreeBoard freeBoard);
 
+    Long remove(Long id);
+
 }

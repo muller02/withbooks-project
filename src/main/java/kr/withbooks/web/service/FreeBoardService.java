@@ -18,4 +18,6 @@ public interface FreeBoardService {
     FreeBoard getById(Long freeBoardId);
 
     int reg(FreeBoard freeBoard, MultipartFile[] imgs);
+
+    Long delete(Long id);
 }

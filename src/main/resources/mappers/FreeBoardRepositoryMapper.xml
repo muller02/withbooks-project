@@ -86,5 +86,15 @@
 			)
 	</insert>
 
+	<update id="remove">
+		update 
+			free_board
+
+		set 
+			blind_yn = 1
+
+		where 
+			id = #{id}
+	</update>
 
 </mapper>

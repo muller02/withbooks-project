@@ -60,4 +60,9 @@ public class FreeBoardServiceImp implements  FreeBoardService{
 
         return count;
     }
+
+    @Override
+    public Long delete(Long id) {
+        return repository.remove(id);
+    }
 }
