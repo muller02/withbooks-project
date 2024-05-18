@@ -28,5 +28,10 @@ public class FreeCommentServiceImp implements FreeCommentService{
     public int reg(Long freeBoardId, Long userId, String comment) {
         return repository.insert(freeBoardId, userId, comment);
     }
+
+    @Override
+    public int delete(Long id) {
+        return repository.remove(id);
+    }
     
 }

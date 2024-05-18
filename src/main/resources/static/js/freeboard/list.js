@@ -7,17 +7,32 @@
         
         // 점점점 버튼 누를 때 수정/삭제 팝업 토글
         if(e.target.classList.contains("icon:dots_three_outline_vertical_fill")){
-            if(onPopUpBox != null)
-                onPopUpBox.classList.add("d:none");
+
             
-            onPopUpBox = e.target.parentNode.querySelector("ul");
-            onPopUpBox.classList.toggle("d:none");
+            if(onPopUpBox == null){     // 활성화된 팝업창이 없을 때
+                onPopUpBox = e.target.parentNode.querySelector("ul");
+                onPopUpBox.classList.remove("d:none");
+            }
+            else{       // 활성화된 팝업창이 있을 때
+                if(e.target.parentNode.querySelector("ul") === onPopUpBox){ // 클릭한 점점점이 활성화된 팝업창의 점점점일 때
+                    onPopUpBox.classList.add("d:none");
+                    onPopUpBox = null;
+                }
+                else{   // 클릭한 점점점이 활성화된 팝업창의 점점점이 아닐 때
+                    onPopUpBox.classList.add("d:none");
+                    onPopUpBox = e.target.parentNode.querySelector("ul");
+                    onPopUpBox.classList.remove("d:none");
+                }
+            }
+            
         }
 
-        // 팝업창이 아닌 곳을 클릭했을 때 팝업창 d:none
+        // 팝업창이 아닌 곳을 클릭했을 때 활성화된 팝업창 d:none
         if(!e.target.classList.contains("pop-up-box") && !e.target.classList.contains("icon:dots_three_outline_vertical_fill")){
-            if(onPopUpBox != null)
+            if(onPopUpBox != null){
                 onPopUpBox.classList.add("d:none");
+                onPopUpBox = null;
+            }
         }
 
     });
