@@ -23,6 +23,12 @@
             --height-4: 208px;
         }
 
+        .book-name-font-size{
+            font-size: 30px;
+        }
+        .font-color-ac{
+            color: #767676;
+        }
 
         .background-color-none{
             background-color:transparent;
@@ -33,29 +39,29 @@
 <body>
 
 <main class="min-width:8 p:3" layout:fragment="main">
-    <section class="pos:relative py:3 d:flex flex-direction:column md:flex-direction:row lg:flex-direction:column jc:center ai:center w:100p border-radius:10 bg-color:main-1 fl-wrap:wrap">
-        <h1 class="d:none" th:text="${book['title']}">도둑 맞은 집중력</h1>
+    <section class="p:7 pos:relative  d:flex flex-direction:column md:flex-direction:row lg:flex-direction:column jc:center ai:center w:100p border-radius:10 bg-color:main-1 fl-wrap:wrap">
+        <h1 class="d:none " th:text="${book['title']}">도둑 맞은 집중력</h1>
 
         <div class="pos:relative">
             <!-- TODO 회원인지 아닌지 체크해서 회원 아닌 경우 -> 북마크 라벨을 d:none 처리. -->
             <!-- List<entity>가 아닌 Map<String, Object>로 받음 -->
             <label id="book-mark" class="bookmark-icon icon cursor:pointer icon:bookmark_simple_fill icon-color:main-1 icon-size:5 position:absolute top:1 left:1"
-                th:classappend="${{book['marked']}} > 0 ? 'icon-color:main-5'" >
+                th:classappend="${{book['marked']}} > 0 ? 'icon-color:main-5':''" >
                  <input type="checkbox" class="d:none"/>
             </label>
-                <img class="book-img h:4 w:3" src="/img/bookshorts/detail/도둑맞은집중력.png" th:src="${book['cover']}" alt="책이미지">
+                <img class="book-img h:4 w:3 " src="/img/bookshorts/detail/도둑맞은집중력.png" th:src="${book['cover']}" alt="책이미지">
         </div>
         <span class="md:ml:8 lg:ml:0">
             <div class="d:flex flex-direction:column">
-                <div class="mt:5s:6 fw:3 al-self:center" th:text="${book['title']}">도둑 맞은 집중력 돌아와!!!!!!!자지마!!!!</div>
+                <div class="mt:6  fw:3 al-self:center book-name-font-size mt:2" th:text="${book['title']}">도둑 맞은 집중력 돌아와!!!!!!!자지마!!!!</div>
                 <span class="d:flex al-self:center">
                     <span class="d:flex">
-                        <div class="fs:1 color:base-4 " th:text="${book['author']}">마틴 푸크너</div>
-                        <div class="fs:1 color:base-4 ">(지은이),</div>
+                        <div class="fs:2 font-color-ac " th:text="${book['author']}">마틴 푸크너</div>
+                        <div class="fs:2 font-color-ac ">(지은이),</div>
                     </span>
                     <span class="d:flex ml:1">
-                        <div class="fs:1 color:base-4 ">허진</div>
-                        <div class="fs:1 color:base-4 ">(옮긴이)</div>
+                        <div class="fs:2 font-color-ac ">허진</div>
+                        <div class="fs:2 font-color-ac ">(옮긴이)</div>
                     </span>
                 </span>
             </div>
