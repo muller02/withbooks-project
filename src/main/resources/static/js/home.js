@@ -8,18 +8,16 @@ window.addEventListener("load", function(e) {
 
     function slideNextImage() {
         currentIndex = (currentIndex + 1) % countImg.length; // currentIndex를 다음 이미지로 갱신
+        if (currentIndex === 0) {
+
+            bookIntroDiv.classList.remove("effect");
+            bookIntroDiv.style.transform = `translateX(0px)`;
+            bookIntroDiv.classList.add("effect");
+
+        }
         bookIntroDiv.style.transform = `translateX(${moveLen * currentIndex}px)`;
 
-        if (currentIndex === 0) {
-            setTimeout(() => {
-                bookIntroDiv.classList.remove("effect");
-                bookIntroDiv.style.transform = `translateX(0px)`;
-                // 효과를 다시 추가
-                setTimeout(() => {
-                    bookIntroDiv.classList.add("effect");
-                }, 20);
-            }, 300); // 애니메이션 완료 후 효과 제거
-        }
+
     }
 
     function startSlide() {
