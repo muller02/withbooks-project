@@ -39,6 +39,16 @@
 </head>
 <body>
     <main class="px:3 pb:3 flex-grow:1" layout:fragment="main">
+        <div class="with-tap-component">
+            <ul class="n-tabbar justify-content:space-between menu-tap">
+                <li ><a class="fw:3" id="home2" th:href="@{/with/detail(id=${param.wid})}">홈</a></li>
+                <li ><a id="debate" th:href="@{/with/debate/list(wid=${param.wid})}" >토론서재</a></li>
+                <li><a>모임일정</a></li>
+                <li class="active" ><a id="board" th:href="@{/free-board/list(wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
+                <li><a>북추천</a></li>
+                <li><a>위드맴버</a></li>
+            </ul>
+        </div>
         <section id="sort" class="d:flex mt:3">
             <h1 class="d:none">정렬방식</h1>
             <div><a class="latest fs:2 color:base-3" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=latest)}">최신순</a></div>
@@ -97,7 +107,7 @@
             "
         >
             <h1 class="d:none">페이저</h1>
-            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} le 1">
+            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
                 <li th:unless="${startnum} eq 1" >
                     <a class="icon icon:caret_left" href="">이전</a>
                 </li>

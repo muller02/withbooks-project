@@ -21,11 +21,22 @@
             font-family: "Noto Sans KR", sans-serif;
         }
     </style>
+
+    <script>
+        window.addEventListener('load', function(){
+            let message = document.querySelector(".message").dataset.message;
+            console.log(message);
+            if(message)
+                alert(message);
+        })
+    </script>
 </head>
 <body>
 <main layout:fragment="main" class="d:flex w:100p">
 
-    <div class=" bg-color:main-3 lg:w:9 lg:mr:4 lg:d:inline-block d:none  "></div>
+    <div class="message bg-color:main-3 lg:w:9 lg:mr:4 lg:d:inline-block d:none"
+    th:data-message="${message}"
+    ></div>
 
 
     <div class="flex-grow:1 lg:d:flex lg:jc:center lg:fl-dir:column	">
