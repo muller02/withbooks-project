@@ -6,31 +6,35 @@
     let boardDelBtn = board.querySelector(".board-del-btn");
     let boardDelModalBox = board.querySelector("#board-del-modal-box");
     let delBtn = boardDelModalBox.querySelector(".del-btn");
-    let boardId = boardDot.dataset.id;
     
 
-    // 게시글의 점점점을 누르면 팝업창이 토글
-    boardDot.addEventListener("click", (e)=>{
-        boardPopup.classList.toggle("d:none");
-    });
+    if(boardDot != null){
+        // 게시글의 점점점을 누르면 팝업창이 토글
+        boardDot.addEventListener("click", (e)=>{
+            boardPopup.classList.toggle("d:none");
+        });
+    
+    
+        // 삭제하기 버튼을 눌렀을 시 모달창 활성화
+        boardDelBtn.onclick = (e) =>{
+            boardDelModalBox.classList.remove("d:none");
+        }
+    
+        // 모달창의 바깥쪽 또는 취소버튼을 눌렀을 때 모달창 비활성화
+        boardDelModalBox.onclick = (e)=>{
+            if(e.target == boardDelModalBox || e.target.classList.contains("cancel-btn"))
+                boardDelModalBox.classList.add("d:none");
+        }
+    
+        // 모달창의 삭제버튼을 눌렀을 때 게시글 삭제
+        delBtn.onclick = (e) => {
+            let boardId = boardDot.dataset.id;
+            fetch(`/api/free-boards/${boardId}`, {method: "DELETE"});
+            history.back();
+        }
 
-
-    // 삭제하기 버튼을 눌렀을 시 모달창 활성화
-    boardDelBtn.onclick = (e) =>{
-        boardDelModalBox.classList.remove("d:none");
     }
 
-    // 모달창의 바깥쪽 또는 취소버튼을 눌렀을 때 모달창 비활성화
-    boardDelModalBox.onclick = (e)=>{
-        if(e.target == boardDelModalBox || e.target.classList.contains("cancel-btn"))
-            boardDelModalBox.classList.add("d:none");
-    }
-
-    // 모달창의 삭제버튼을 눌렀을 때 게시글 삭제
-    delBtn.onclick = (e) => {
-        fetch(`/api/free-boards/${boardId}`, {method: "DELETE"});
-        history.back();
-    }
 }
 
 

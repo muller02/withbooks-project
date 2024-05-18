@@ -89,7 +89,7 @@
                     </span>
                 </section>
 
-                <section class="pos:relative">
+                <section class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId}" >
                     <h1 class="d:none">수정/삭제 버튼</h1>
                     <button class="board-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer" th:attr="data-id=${board.id}">점점점</button>
                     
@@ -137,7 +137,7 @@
                         </div>
                         
 
-                        <section id="edit-del-btn-section" class="pos:relative">
+                        <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId}">
                             <h1 class="d:none">수정/삭제 버튼</h1>
                             <button class="comment-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer">점점점</button>
                             
