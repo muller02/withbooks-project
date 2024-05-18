@@ -47,7 +47,6 @@ public class FreeBoardServiceImp implements  FreeBoardService{
         // DB에 freeboard 저장
         repository.save(freeBoard);
         Long boardId = freeBoard.getId();
-        System.out.println("보드아이디 : " + boardId);
 
         // 이미지가 왔다면
         // DB에 이미지 저장
@@ -63,5 +62,29 @@ public class FreeBoardServiceImp implements  FreeBoardService{
     @Override
     public Long delete(Long id) {
         return repository.remove(id);
+    }
+
+    @Override
+    public int edit(FreeBoard freeBoard, MultipartFile[] imgs) {
+        int count = 0;
+
+        // DB에 freeboard 저장
+        repository.update(freeBoard);
+        Long boardId = freeBoard.getId();
+        System.out.println("보드아이디 : " + boardId);
+
+
+        
+        
+
+        // 이미지가 왔다면
+        // DB에 이미지 저장
+        if(!imgs[0].isEmpty())
+        for(MultipartFile img : imgs){
+            String savedPath = "/image/free-board/" + img.getOriginalFilename();
+            count += freeAttachmentRepository.save(boardId, savedPath);
+        }
+
+        return count;
     }
 }

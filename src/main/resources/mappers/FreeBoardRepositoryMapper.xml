@@ -97,4 +97,17 @@
 			id = #{id}
 	</update>
 
+
+	<update id="update">
+		update 
+			free_board
+
+		set 
+			id = #{id},
+
+
+		where 
+			id = #{id}
+	</update>
+
 </mapper>

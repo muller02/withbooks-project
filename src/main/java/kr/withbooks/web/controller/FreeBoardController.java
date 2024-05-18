@@ -124,6 +124,36 @@ public class FreeBoardController {
 
 
    
+    @GetMapping("/edit")
+    public String editForm(
+        @RequestParam(name="fid") Long freeBoardId,
+        @RequestParam(name="wid") Long withId, 
+        Model model
+    ){
+
+      model.addAttribute("freeBoardId", freeBoardId);
+      model.addAttribute("withId", withId);
+
+      return "/freeboard/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(
+        String notice
+      , String title
+      , String content
+      , MultipartFile[] imgs
+      , HttpServletRequest request
+      , @RequestParam(name="with-id") Long withId
+      , @RequestParam(name="free-board_id") Long freeBoardId
+      , @AuthenticationPrincipal CustomUserDetails userDetails
+    ){
+
+      // 여기 해야함 
+      // freeboard/list와 detail에서 수정하기 눌렀을 때 구현필요(th:href에 링크 써 주고 postmapping 구현)
+      // freeboard/detail의 코멘트 수정하기 구현해야함.
+      return "a";
+    }
 
 
 

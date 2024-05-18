@@ -92,7 +92,7 @@
                         
                         <ul class="pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none">
                             <li>
-                                <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" href="">수정하기</a>
+                                <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" th:href="@{edit(wid=${param.wid},fid=${b.id})}">수정하기</a>
                             </li>
                             <li class="mt:2">
                                 <button class="del-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:trash icon-color:accent-1 color:accent-1 cursor:pointer" href="" th:attr="data-id=${b.id}">삭제하기</button>

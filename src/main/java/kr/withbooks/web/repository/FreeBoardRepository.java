@@ -5,6 +5,7 @@ import kr.withbooks.web.entity.FreeBoard;
 import kr.withbooks.web.entity.FreeBoardView;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface FreeBoardRepository {
     int save(FreeBoard freeBoard);
 
     Long remove(Long id);
+
+    int update(FreeBoard freeBoard);
 
 }
