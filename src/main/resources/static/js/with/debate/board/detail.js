@@ -10,14 +10,27 @@ window.addEventListener('load', function(e) {
     console.log(textarea)
 
 
-textarea.oninput = function (e) {
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
+    textarea.oninput = function (e) {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + 'px'; //스크롤의 높이 만큼 textArea의 높이도 같이 늘어 남
 
-}
+    }
 
 })
-   
+
+
+// 수정 삭제 드랍다운
+window.addEventListener("load", function () {
+    const dropdownButton = document.getElementById("dropdown-btn");
+    const dropdownList = document.getElementById("dropdown-list");
+
+    console.log(dropdownButton);
+    console.log(dropdownList);
+
+    dropdownButton.addEventListener("click", function () {
+        dropdownList.classList.toggle("active");
+    });
+});
 
 
 window.addEventListener('load', function(e) {

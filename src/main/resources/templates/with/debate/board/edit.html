@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +24,7 @@
             width: 80px;
             height: 80px;
         }
-
-
-
+        
         .item:hover{
             background-color: #8BA3F8 !important;
 
@@ -76,7 +79,7 @@
         <div class="mr:auto"><a class="icon icon:x icon-size:5" href="">나가기</a></div>
 
     </header>
-    <main class=" p:2">
+    <main layout:fragment="main" class="flex-grow:1">
         <section class="">
             <h1 class="d:none">토론 카드 내용 입력</h1>
             <form th:object="${board}" class="form-group h:auto" action="edit" method="post" enctype="multipart/form-data">

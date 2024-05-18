@@ -9,41 +9,88 @@
     <script src="/js/with/debate/board/detail.js" defer></script>
     <title>Document</title>
     <style>
-         .profile-image,
+        .profile-image,
         .writer{
-            --width-1: 16px;
-            --height-1: 16px;
+        --width-1: 16px;
+        --height-1: 16px;
         }
         .comment-area{
-            --gap-10:80px;
+        --gap-10:80px;
         }
         .delete-button{
-            --right-1:10px;
-            --bottom-1:26px;
+        --right-1:10px;
+        --bottom-1:26px;
         }
         main{
-            --gap-10:80px;
+        --gap-10:80px;
+        }
+        .n-dropdown {
+         --dropdown-min-width: 110px;
+         --dropdown-padding: 4px;
+         --dropdown-border-radius: 8px;
+         --dropdown-border: 1px solid var(--color-base-3);
+         --dropdown-z-index: 900;
+
+         --dropdown-offset: 2px; /* 드롭다운과 드롭다운 버튼(트리거)의 떨어진 정도 */
+
+         --dropdown-item-padding: 4px 6px;
+         --dropdown-item-border-radius: 4px;
+        }
+
+        .rg-comment-hover:hover {
+            background-color: var(--color-base-2);
+
+            border-radius: 100px;
         }
     </style>
 </head>
 <body>
     <main class="min-width:8 pb:10 px:3 flex-grow:1" layout:fragment="main">
 
-        <a class="m:2" href="" th:href="@{/with/debate/board/list(wid=${param.wid}, rid=${param.rid})}">
-                        <span class="n-btn n-btn:void mt:3 pl:2 fs:1" style="color: var(--color-base-5);">
-                            <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
-                            토론 카드
-                        </span>
-        </a>
+        <div class="d:flex mt:3 mr:1">
+            <a class="m:1" href="" th:href="@{/with/debate/board/list(wid=${param.wid}, rid=${param.rid})}">
+                <span class="n-btn n-btn:void pl:2 fs:1" style="color: var(--color-base-5);">
+                    <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
+                    토론 카드
+                </span>
+            </a>
+
+            <section class="d:flex ml:auto">
+                <h1 class="d:none">북쇼츠 팝업버튼</h1>
+                <div class="n-dropdown">
+                    <button id="dropdown-btn" class="rg-comment-hover icon icon:dots_three_outline_vertical_fill icon-color:base-5 icon-size:2 my:3">
+                        점점점
+                    </button>
+
+                    <ul id="dropdown-list" class="w:1" style="transform: translateX(-100px)">
+                        <li>
+                            <button type="button" th:onclick="|location.href='@{/with/debate/board/edit(wid=${param.wid}, rid=${param.rid}, id=${param.id})}'|">
+                                <span class="va:middle deco icon:pencil_simple deco:size:1 deco-mr:1 icon-color:base-6 fs:1">
+                                    수정하기
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <span class="va:middle deco icon:trash deco-size:3 deco-mr:1 icon-color:base-6 fs:1">
+                                    삭제하기
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
 
         <div class="card-content mx:5 pt:1">
             <div class="card-note-container bd-bottom pb:5">
-                <div class="pos:fixed right:2 bottom:9 zi:5">
-                    <h1 class="d:none">수정버튼</h1>
-                    <div class="bg-color:main-5 border-radius:full p:3">
-                        <a href="reg" th:href="@{/with/debate/board/edit(wid=${param.wid}, rid=${param.rid}, id=${param.id})}" th:title="${'토론카드 수정하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>
-                    </div>
-                </div>
+<!--                <div class="pos:fixed right:2 bottom:9 zi:5">-->
+<!--                    <h1 class="d:none">수정버튼</h1>-->
+<!--                    <div class="bg-color:main-5 border-radius:full p:3">-->
+<!--                        <a href="reg" th:href="@{/with/debate/board/edit(wid=${param.wid}, rid=${param.rid}, id=${param.id})}" th:title="${'토론카드 수정하기'}"><span class="icon icon:pencil_simple icon-size:5 icon-color:base-1">버튼</span></a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <section class="card-note ">
                     <h1 class="d:none">토론카드 컨텐츠</h1>
