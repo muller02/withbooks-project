@@ -35,9 +35,6 @@
         #comment-list{
             --font-size-1: 10px;
         }
-        .dotdotdot{
-            --top-1: 8px;
-        }
         .img-nx-pr-btn{
             --top-2: 128px;
         }
@@ -51,6 +48,24 @@
         }
         textarea{
             resize: none;
+        }
+        .dotdotdot{
+            --top-1: -30px;
+        }
+        .icon\:dots_three_outline_vertical_fill:hover{
+            background-color: var(--color-base-3);
+            border-radius: 20px;
+        }
+        .pop-up-box{
+            --top-1: -30px;
+        }
+        .icon\:file:hover,
+        .icon\:trash:hover{
+            background-color:var(--color-base-2); 
+        }
+        #board-del-modal-box,
+        #comment-del-modal-box{
+            --color-base-3: rgba(30, 6, 6, 0.1);
         }
     </style>
 </head>
@@ -74,7 +89,19 @@
                     </span>
                 </section>
 
-                <div class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1">점점점</div>
+                <section class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId}" >
+                    <h1 class="d:none">수정/삭제 버튼</h1>
+                    <button class="board-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer" th:attr="data-id=${board.id}">점점점</button>
+                    
+                    <ul class="board-popup pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none">
+                        <li>
+                            <a class="board-edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5"  th:href="@{edit(wid=${board.withId},fid=${board.id})}">수정하기</a>
+                        </li>
+                        <li class="mt:2">
+                            <button class="board-del-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:trash icon-color:accent-1 color:accent-1" href="">삭제하기</button>
+                        </li>
+                    </ul>
+                </section>
 
                 <div class="fs:4 fw:3 mt:4 ml:2" th:text="${board.title}">푸바오 신간 샀어요 !!</div>
 
@@ -108,8 +135,24 @@
                                 <div class="fs:1 color:base-5" th:text="${c.regDate}">10분전</div>
                             </div>
                         </div>
+                        
+
+                        <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId}">
+                            <h1 class="d:none">수정/삭제 버튼</h1>
+                            <button class="comment-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer">점점점</button>
+                            
+                            <ul class="cmt-popup pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none zi:3" th:attr="data-cmt-id=${c.id}">
+                                <li>
+                                    <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" href="">수정하기</a>
+                                </li>
+                                <li class="mt:2">
+                                    <button class="del-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:trash icon-color:accent-1 color:accent-1" href="">삭제하기</button>
+                                </li>
+                            </ul>
+                        </section>
+
                         <p class="fs:2 mt:4 ml:4" th:utext="${c.content}">좋아요 굿!!</p>
-                        <div class="dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1">점점점</div>
+
                     </section>
 
                     <section>
@@ -124,6 +167,28 @@
                             <div><button class="icon icon:check_bold pos:absolute icon-size:5 icon-color:main-5 right:1 top:1 cursor:pointer pl:2 box-sizing:content-box bd-left">제출</button></div>
                         </form>
                     </section>
+                </section>
+
+                <section id="board-del-modal-box" class="pos:fixed top:1 bottom:1 left:1 right:1 zi:4 d:flex ai:center jc:center bg-color:base-3 d:none">
+                    <h1 class="d:none">게시글 삭제 모달 창</h1>
+                    <span class="modal-center-box bd bd-radius:4 bg-color:base-1 w:5 h:3 d:flex fl-dir:column ai:center jc:center">
+                        <div class="fs:4">정말로 삭제하시겠습니까?</div>
+                        <div class="del-modal-div mt:5 d:flex">
+                            <button class="del-btn bd bd-radius:4 bd-color:transparent bg-color:accent-1 px:4 py:2 color:base-1 cursor:pointer">삭제</button>
+                            <button class="cancel-btn bd bd-radius:4 px:4 py:2 ml:4 cursor:pointer">취소</button>
+                        </div>
+                    </span>
+                </section>
+
+                <section id="comment-del-modal-box" class="pos:fixed top:1 bottom:1 left:1 right:1 zi:4 d:flex ai:center jc:center bg-color:base-3 d:none">
+                    <h1 class="d:none">댓글 삭제 모달 창</h1>
+                    <span class="modal-center-box bd bd-radius:4 bg-color:base-1 w:5 h:3 d:flex fl-dir:column ai:center jc:center">
+                        <div class="fs:4">정말로 삭제하시겠습니까?</div>
+                        <div class="del-modal-div mt:5 d:flex">
+                            <button class="del-btn bd bd-radius:4 bd-color:transparent bg-color:accent-1 px:4 py:2 color:base-1 cursor:pointer">삭제</button>
+                            <button class="cancel-btn bd bd-radius:4 px:4 py:2 ml:4 cursor:pointer">취소</button>
+                        </div>
+                    </span>
                 </section>
 
             </div>

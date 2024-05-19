@@ -11,4 +11,7 @@ public interface DebateRoomViewRepository {
     List<DebateRoomView> findAll();
 
     List<DebateRoomView> findAllById(Long withId);
+
+    DebateRoomView findByWithId(Long withId);
+
 }

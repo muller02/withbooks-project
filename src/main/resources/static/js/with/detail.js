@@ -51,7 +51,7 @@ window.addEventListener("load", (e) => {
             return;
         }
         // 위드가입 api
-        let reponse = await fetch(`/api/with/join?withId=${withId}&userId=`);
+        let reponse = await fetch(`/api/withs/join?withId=${withId}&userId=`);
 
         // 가입된 상태를 식별하기 위한 스타일 변경
         reponse.json().then(() => {

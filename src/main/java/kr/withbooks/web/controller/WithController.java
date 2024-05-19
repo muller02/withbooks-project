@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import kr.withbooks.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,6 @@ import kr.withbooks.web.entity.WithCategory;
 import kr.withbooks.web.entity.WithMemberView;
 import kr.withbooks.web.entity.WithView;
 import kr.withbooks.web.repository.DebateRoomViewRepository;
-import kr.withbooks.web.service.CategoryService;
-import kr.withbooks.web.service.FreeBoardService;
-import kr.withbooks.web.service.UserService;
-import kr.withbooks.web.service.WithCategoryService;
-import kr.withbooks.web.service.WithMemberService;
-import kr.withbooks.web.service.WithService;
 
 
 @Controller
@@ -54,6 +49,10 @@ public class WithController {
   // 서비스 필요할 것 같습니다.
   @Autowired
   private DebateRoomViewRepository debateRoomViewRepository;
+
+
+  @Autowired
+  private DebateRoomService debateRoomService;
 
   @Autowired
   private FreeBoardService freeBoardService;
@@ -81,11 +80,12 @@ public class WithController {
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
     List<WithView> list = service.getList(categoryIds, query, faceYn, null, null, null, null, page);
 
-//    int count = service.getCount();
+    int count = 1000;
+    // count = service.getCount();
 
     // 뷰에 데이터 전달
     model.addAttribute("list", list);
-//    model.addAttribute("count", count);
+    model.addAttribute("count", count);
 
     return "with/list";
   }
@@ -126,9 +126,13 @@ public class WithController {
     List<DebateRoomView> debateRoomList = debateRoomViewRepository.findAllById(withId);
 
 
+    // 토론 요약 best 책
+   DebateRoomView debateTopRoom = debateRoomService.getTopBoardCntbyId(withId);
+
     // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
     // List<FreeBoardView> freeBoardList = freeBoardService.getViewById(withId);
 
+    System.out.println("하하 = " + debateTopRoom);
     model.addAttribute("nickname", nickname);
 
     model.addAttribute("withMemberList", withMemberList);
@@ -138,6 +142,7 @@ public class WithController {
     model.addAttribute("withCategoryNames", withCategoryNames);
     model.addAttribute("withMemberCnt", withMemberCnt);
     model.addAttribute("joinYn", withJoinYn);
+    model.addAttribute("debateTopRoom",debateTopRoom);
 
 
     return "with/detail";

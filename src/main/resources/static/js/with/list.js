@@ -189,22 +189,22 @@ function getByParams(categoryIdArr, query, faceYn) {
     faceYn &&
     faceYn !== ""
   ) {
-    url = `/api/with?c=${categoryIds}&q=${query}&f=${faceYn}`;
+    url = `/?c=${categoryIds}&q=${query}&f=${faceYn}`;
   } else if (
     categoryIdArr &&
     categoryIdArr.length !== 0 &&
     faceYn &&
     faceYn !== ""
   ) {
-    url = `/api/with?f=${faceYn}&c=${categoryIds}`;
+    url = `/api/withs?f=${faceYn}&c=${categoryIds}`;
   } else if (query && query !== "") {
-    url = `/api/with?q=${query}`;
+    url = `/api/withs?q=${query}`;
   } else if (categoryIdArr && categoryIdArr.length !== 0) {
-    url = `/api/with?c=${categoryIds}`;
+    url = `/api/withs?c=${categoryIds}`;
   } else if (faceYn && faceYn !== "") {
-    url = `/api/with?f=${faceYn}`;
+    url = `/api/withs?f=${faceYn}`;
   } else {
-    url = `/api/with`;
+    url = `/api/withs`;
   }
 
   // const method = "GET";

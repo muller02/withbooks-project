@@ -50,4 +50,10 @@ public class DebateRoomServiceImp implements DebateRoomService {
 
         return debateRoom.getId();
     }
+
+    @Override
+    public DebateRoomView getTopBoardCntbyId(Long withId) {
+
+        return debateRoomViewRepository.findByWithId(withId);
+    }
 }

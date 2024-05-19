@@ -74,7 +74,6 @@ public class UserController {
         user.setGender(gender);
         user.setBirthDate(birth);
         user.setIntro(intro);
-        System.err.println(user.getBirthDate());
         int result = service.join(user);
 
         if(result > 0)

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.entity.FreeBoard;
 import kr.withbooks.web.entity.FreeBoardView;
 
@@ -18,4 +19,8 @@ public interface FreeBoardService {
     FreeBoard getById(Long freeBoardId);
 
     int reg(FreeBoard freeBoard, MultipartFile[] imgs);
+
+    Long delete(Long id);
+
+    int edit(FreeBoard freeBoard, MultipartFile[] imgs, HttpServletRequest request);
 }
