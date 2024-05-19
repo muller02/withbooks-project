@@ -20,4 +20,6 @@ public interface WithService {
 
   boolean getName(String withName);
 
+  List<WithView> getListByBookId(Long bookId);
+
 }

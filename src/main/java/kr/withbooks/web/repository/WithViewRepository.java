@@ -20,4 +20,7 @@ public interface WithViewRepository {
     List<WithView> findByUserId(Long userId);
 
     int count(Long id, String name, String withTop);
+
+    List<WithView> findByBookId(Long bookId);
+
 }

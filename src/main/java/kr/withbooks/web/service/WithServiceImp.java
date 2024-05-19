@@ -84,5 +84,10 @@ public class WithServiceImp implements WithService {
         return with != null;
     }
 
+    @Override
+    public List<WithView> getListByBookId(Long bookId) {
+        return viewRepository.findByBookId(bookId);
+    }
+
 
 }
