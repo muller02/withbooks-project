@@ -46,12 +46,17 @@
                 width: 60%; /* 화면이 커지면 너비를 50%로 조절 */
             }
         }
+
+        .profile-img{
+            --height-1: 18px;
+            --width-1: 18px;
+        }
     </style>
 </head>
 
 <body>
 
-    <main class="min-width:8 pb:11 px:3" layout:fragment="main">
+    <main class="pb:11 px:3 flex-grow:1" layout:fragment="main">
 
         <div class="d:flex mt:3 mr:1">
             <a class="m:1" href="" th:href="@{/with/debate/list(wid=${param.wid})}">
@@ -98,7 +103,7 @@
                 </div>
             </section>
 
-            <section class="px:3 mt:9">
+            <section class="px:1 mt:9">
                 <h1 class="d:none">토론방 목록</h1>
                 <ul class="d:flex flex-direction:column mx:7 ">
                     <li th:each="b : ${list}">
@@ -116,7 +121,7 @@
                                 </div>
                                 <div class="d:flex ai:center gap:1">
                                     <div class="d:flex ai:center">
-                                        <span class="icon icon:user icon-size:2"></span>
+                                        <img class="profile-img h:1 w:1 bd-radius:12" th:src="${b.userImg}"/>
                                         <span class="fs:1 color:base-5 ml:1 " th:text="${b.nickname}">뉴렉이</span>
                                     </div>
                                     <div class="d:flex   ai:center">

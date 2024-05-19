@@ -28,6 +28,7 @@ public class BoardController {
     private final DebateAttachmentService debateAttachmentService;
     private final DebateCommentService debateCommentService;
     private final FileStore fileStore;
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(
@@ -37,6 +38,9 @@ public class BoardController {
             Model model) {
 
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
+
+
+
 
         // 게시글의 \r\n 을 <br> 태그로 치환
         for(DebateBoardView b : list){
@@ -61,7 +65,6 @@ public class BoardController {
 
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
 
-
         // 게시글의 \r\n 을 <br> 태그로 치환
         for(DebateTopic t : topicList){
             String replacedStr = t.getContent().replace("\r\n", "<br>");
@@ -85,10 +88,10 @@ public class BoardController {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
-
-
-        System.out.println("진입  토마토 ");
         DebateBoard findBoard = debateBoardService.getById(id);
+        Long userId = findBoard.getUserId();
+        User findUser = userService.getById(userId);
+
 //        Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
         List<DebateCommentView> debateCommentList = debateCommentService.getListById(id);
@@ -121,8 +124,9 @@ public class BoardController {
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
         model.addAttribute("debateCommentList", debateCommentList);
-        model.addAttribute("nickname", userDetails.getNickName());
-        model.addAttribute("userImg", userDetails.getImg());
+        model.addAttribute("user", findUser);
+//        model.addAttribute("nickname", userDetails.getNickName());
+//        model.addAttribute("userImg", userDetails.getImg());
 
 
         log.info("board = {}", findBoard);
