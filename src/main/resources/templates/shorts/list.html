@@ -96,6 +96,9 @@
           opacity 0.13s;
       }
 
+      .comment-modal-transform{
+        transform: translateX(-130px);
+      }
 
       @keyframes modal-fade-in {
         from {
@@ -332,6 +335,7 @@
       <section
         class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:4 py:4 mt:6 short-section lg:pos:relative"
         th:each="s : ${list}"
+        th:id="${s.id}"
       >
         <h1 class="d:none">북쇼츠</h1>
         <div class="d:none shorts" th:text="${s.id}">id</div>
@@ -382,7 +386,7 @@
                 class="icon icon:dots_three_outline_vertical_fill color-icon rg-comment-hover shorts-content-dots"
               ></span>
             </button>
-            <ul class="dropdown-list">
+            <ul class="dropdown-list ">
               <li>
                 <button>
                   <span class="va:middle deco deco-size:2 icon:share_fat w:100p">

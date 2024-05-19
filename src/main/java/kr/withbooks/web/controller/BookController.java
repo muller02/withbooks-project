@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import kr.withbooks.web.entity.WithView;
+import kr.withbooks.web.service.WithService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,11 @@ public class BookController {
 
     @Autowired
     private CategoryService categoryService;
+    
+    
+    @Autowired
+    private WithService withService;
+    
 
     @GetMapping("list")
     public String list(
@@ -74,12 +81,17 @@ public class BookController {
 
         Long userId =1L;
         // Long userId = userDetails.getId();
+        
+        //해당 책으로 토론한 위드 리스트
+        List<WithView> withList = withService.getListByBookId(bookId);
 
         // getView 쓰지 않고 getMapById를 쓰는 이유
         // -> 책 정보와 더불어 회원의 id로 해당 책을 북마크 했는지 여부가 함께 출력되어야 함
         Map<String, Object> bookMap = service.getMapById(bookId, userId);
         System.out.println(bookMap);
         model.addAttribute("book", bookMap);
+        System.out.println("토마토 = " + withList);
+        model.addAttribute("withList",withList);
         return "book/detail";
     }
 

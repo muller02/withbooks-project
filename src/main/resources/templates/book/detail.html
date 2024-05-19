@@ -72,11 +72,11 @@
                 </div>
                 <div class="d:flex jc:center mt:6">
                     <div class="deco deco-size:4 deco-mr:0 mr:2 icon:stack fs:3">인문/사회학</div>
-                    <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:shopping_cart_simple  fs:3" th:text="${book['price']}">18,800원</div>
+                    <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:shopping_cart_simple  fs:3" >[[${book['price']}]]원</div>
                 </div>
                 <div class="d:flex jc:center mt:6">
                     <div class="deco deco-size:4 mr:2 deco-mr:0 icon:text_align_left fs:3" th:text="${book['isbn13']}">9791167740984</div>
-                    <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:text_t fs:3">464</div>
+                    <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:text_t fs:3">464p</div><span></span>
                 </div>
             </div>
         </span>
@@ -101,21 +101,24 @@
         <h1 class="fs:4 fw:3 mb:3 deco icon:user">이 책으로 토론한 위드</h1>
         <div class="deco-size:3 deco-pos:right color:main-6 fs:1 fw:1 deco icon:arrow_right"><a class="fs:1 color:main-6 " href="">더보기</a></div>
         </div>
-        <section class="mt:3 d:flex">
-            <h1 class="d:none">책에 퐁당</h1>
-            <div><img class="h:2 w:2 bd-radius:6" src="/img/bookshorts/detail/뚱랑이.png" alt="위드이미지"></div>
+        <section class="mt:3 d:flex" th:each="with : ${withList}">
+            <h1 class="d:none" th:text="${with.name}">책에 퐁당</h1>
+            <div><img class="h:2 w:2 bd-radius:6" src="/img/bookshorts/detail/뚱랑이.png" th:src="${with.img}" alt="위드이미지"></div>
             <div class="ml:3 d:flex flex-direction:column w:100p">
-                <div class="fs:5 fw:3">책에 퐁당</div>
+                <a th:href="@{/with/detail(id=${with.id})}">
+                <div class="fs:5 fw:3 " th:text="${with.name}">책에 퐁당</div>
+                </a>
+
                 <div class="d:flex mt:2">
                     <span class="deco icon:user deco-size:4 mr:2 deco-mr:0 d:flex">
-                        <div class="fs:1 color:base-5">5명</div>
-                        <div class="fs:1 color:base-5">/12명</div>
+                        <div class="fs:1 color:base-5" >[[${with.memberCnt}]]명</div>
+                        <div class="fs:1 color:base-5">/[[${with.personnel}]]명</div>
                     </span>
-                    <div class="deco icon:calendar_check deco-size:4 mr:2 deco-ml:2 deco-mr:0 fs:1 color:base-5">월 1회</div>
-                    <div class="deco icon:map_pin deco-size:4 mr:2 deco-ml:2 deco-mr:0 fs:1 color:base-5">노고산동</div>
+                    <div class="deco icon:calendar_check deco-size:4 mr:2 deco-ml:2 deco-mr:0 fs:1 color:base-5">월 [[${with.interval}]]회</div>
+                    <div class="deco icon:map_pin deco-size:4 mr:2 deco-ml:2 deco-mr:0 fs:1 color:base-5">[[${with.location}]]</div>
                 </div>
                 <p class="fs:3  mt:2 of:l
-                hidden"><span class="ln-clamp:2">월 1회 책을 읽고 생각을 나누는 어쩌구 저쩌구 어쩌구 저쩌구</span></p>
+                hidden"><span class="ln-clamp:2" th:text="${with.intro}">월 1회 책을 읽고 생각을 나누는 어쩌구 저쩌구 어쩌구 저쩌구</span></p>
             </div>
         </section>
     </section>

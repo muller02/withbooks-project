@@ -92,5 +92,10 @@
     </select>
 
 
-</mapper>
+    <select id="findByBookId" resultType="WithView">
 
+        select * from with_view where id in(SELECT with_id FROM debate_room_view where book_id=#{bookId});
+
+    </select>
+
+</mapper>

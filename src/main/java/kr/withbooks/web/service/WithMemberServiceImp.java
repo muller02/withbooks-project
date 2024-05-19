@@ -1,7 +1,6 @@
 package kr.withbooks.web.service;
 
 
-import kr.withbooks.web.entity.WithMember;
 import kr.withbooks.web.entity.WithMemberView;
 import kr.withbooks.web.repository.WithMemberRepository;
 import kr.withbooks.web.repository.WithMemberViewRepository;
@@ -29,8 +28,8 @@ public class WithMemberServiceImp implements WithMemberService{
 
 
     @Override
-    public Integer join(Long userId, Long withId) {
-        return withMemberRepository.add(userId, withId);
+    public Integer join(Long userId, Long withId, Long masterYn) {
+        return withMemberRepository.add(userId, withId,masterYn);
     }
 
     @Override

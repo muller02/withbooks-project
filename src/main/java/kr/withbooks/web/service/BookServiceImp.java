@@ -131,4 +131,20 @@ public class BookServiceImp implements BookService {
 
          return repository.save(list);
      }
+     // ===================================================================
+
+     // ===================================================================
+     // home
+
+     @Override
+     public List<Book> getBestsellerList() {
+         return repository.findAllBestseller();
+     }
+
+     @Override
+     public List<Book> getNewList() {
+         return repository.findAllNew();
+     }
+
+
 }

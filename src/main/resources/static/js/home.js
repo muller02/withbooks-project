@@ -87,3 +87,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// =========================================================================
+// bestseller, new section
+const bookSection = document.querySelector("#book-section");
+const bestseller = bookSection.querySelector(".bestseller");
+const newBook = bookSection.querySelector(".new-book");
+
+// bestseller 비동기 데이터 통신
+bestseller.onclick = function(e){
+    if(bestseller.classList.contains("book-on"))
+        return;
+    else{
+        bestseller.classList.toggle("book-on");
+        newBook.classList.toggle("book-on");
+    }
+        
+    fetch("/api/home/bestseller")
+    .then((response)=>response.json())
+    .then((data)=>{
+        console.log(data);
+    })
+
+}
+
+// new 비동기 데이터 통신
+newBook.onclick = function(e){
+    if(newBook.classList.contains("book-on"))
+        return;
+    else{
+        newBook.classList.toggle("book-on");
+        bestseller.classList.toggle("book-on");
+    }
+
+    fetch("/api/home/new")
+    .then((response)=>response.json())
+    .then((data)=>{
+        console.log(data);
+    })
+
+}
+
