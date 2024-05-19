@@ -44,7 +44,7 @@
 		intro, nickname, email, password, birth_date, gender, role
 		)
 		VALUES (
-		#{intro}, #{nickname}, #{email}, #{birthDate, jdbcType=DATE}, #{password}, #{gender}, #{role}
+		#{intro}, #{nickname}, #{email},  #{password}, #{birthDate}, #{gender}, #{role}
 		)
 	</insert>
 
