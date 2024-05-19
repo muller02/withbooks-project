@@ -155,71 +155,76 @@
         <div class="m:2 fw:3 fs:5 color:main-5">🔥 실시간 인기 북쇼츠</div>
         <div class="  p:3 " >
             <div class=" d:flex   overflow-y-scroll	     scrl-none scroll-box	 ">
-                    
-                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >
+
+                <div th:each="shorts, iterStat : ${bookshortsList}"
+                     class="h:4 box-shadow-custom min-width:6 p:3 border-radius:4 m:3 box-sizing:border-box"
+                     th:classappend="${iterStat.index % 2 == 0} ? 'shorts-item-background-color' : ''">
+                    <a th:href="@{|/shorts/list#${shorts.id}|}">
+                    <!-- 여기서 shorts의 index가 짝수면 shorts-item-background-color를 추가하고, 홀수면 추가하지 않습니다. -->
                         <div class="d:flex  justify-content:end mb:4">
-                            <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
+                            <div class="fs:2 color:main-6" th:text="${shorts.bookTitle}">    도둑 맞은 집중력</div>
                         </div>
                         <div class="clamp">
-                            <span>
+                            <span th:utext="${shorts.content}">
 
 
                             Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
                         </span>
                         </div>
+                    </a>
                 </div>
 
 
-                <div class="h:4 box-shadow-custom  min-width:6 p:3    border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
+<!--                <div class="h:4 box-shadow-custom  min-width:6 p:3    border-radius:4 m:3 box-sizing:border-box 	  " >-->
+<!--                    <div class="d:flex  justify-content:end mb:4">-->
+<!--                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>-->
+<!--                    </div>-->
+<!--                    <div class="clamp">-->
+<!--                            <span>-->
 
 
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
-                </div>
-                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
+<!--                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >-->
+<!--                    <div class="d:flex  justify-content:end mb:4">-->
+<!--                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>-->
+<!--                    </div>-->
+<!--                    <div class="clamp">-->
+<!--                            <span>-->
 
 
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
-                </div>
+<!--                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
-                <div class="h:4 box-shadow-custom  min-width:6 p:3    border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
+<!--                <div class="h:4 box-shadow-custom  min-width:6 p:3    border-radius:4 m:3 box-sizing:border-box 	  " >-->
+<!--                    <div class="d:flex  justify-content:end mb:4">-->
+<!--                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>-->
+<!--                    </div>-->
+<!--                    <div class="clamp">-->
+<!--                            <span>-->
 
 
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
-                </div>
+<!--                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
+<!--                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >-->
+<!--                    <div class="d:flex  justify-content:end mb:4">-->
+<!--                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>-->
+<!--                    </div>-->
+<!--                    <div class="clamp">-->
+<!--                            <span>-->
 
 
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
+<!--                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?-->
+<!--                        </span>-->
+<!--                    </div>-->
 
             </div>
         </div>

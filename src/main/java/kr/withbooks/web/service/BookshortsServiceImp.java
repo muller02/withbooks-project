@@ -61,6 +61,10 @@ public class BookshortsServiceImp  implements  BookshrotsService{
 
     }
 
-    
+    @Override
+    public List<BookshortsView> getRandView() {
+        return shortsViewRepository.findRand10();
+    }
+
 
 }

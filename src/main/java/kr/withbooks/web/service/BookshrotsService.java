@@ -13,7 +13,11 @@ public interface BookshrotsService {
     List<BookshortsView> getView();
     List<BookshortsAttachment> getAttach();
     Bookshorts get(Long shortsId);
-    void delete(Long shortsId); 
+    void delete(Long shortsId);
+
+    List<BookshortsView> getRandView();
+
+
 
     
 }
