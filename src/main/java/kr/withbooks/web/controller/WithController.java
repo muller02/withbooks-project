@@ -185,7 +185,7 @@ public class WithController {
 
     //위드 이미지파일 이름
     //파일이 없을 때, 기본 이미지 적용
-    String withImgName = "default.png";
+    String withImgName = "/image/with/default.png";
 
     //파일이 있을 떄, 파일을 로컬에 저장
     if (!withImgFile.isEmpty()) {
@@ -208,7 +208,7 @@ public class WithController {
     with.setWithRegId(userId); // 위드 등록 사용자의 ID 설정
 //    with.setWithRegId(1L); // 위드 등록 사용자 id 임시 1L
 
-    with.setImg(withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
+    with.setImg("/image/with/"+withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
 
     service.add(with);  // with 저장
 
@@ -227,7 +227,7 @@ public class WithController {
 
     withCategoryService.add(withCategory.getWithID(), withCategory.getCategoryId());
 
-    return "redirect:/with/list";
+    return "redirect:/with/list?p=1";
 
 
   }

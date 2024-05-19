@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
     validateForm();
   });
 
+  const withForm = document.querySelector(".with-form");
+
   /* 필수 입력 항목 하이라이팅 & 스크롤 */
   function validateForm() {
-    const withForm = document.querySelector(".with-form");
 
     let isValid = true;
     let firstInvalidField = null; // 첫 번째 유효하지 않은 필드를 저장할 변수
@@ -263,9 +264,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const isFormValid = checkFormValidity();
     if (isFormValid) {
-      withReg.action = "/with/reg";
-      withReg.method = "post";
-      withReg.submit();
+      withForm.action = "/with/reg";
+      withForm.method = "post";
+      withForm.submit();
+
     } else {
       // 폼이 유효하지 않은 경우 서버로 데이터 전송하지 않음
       console.log("폼이 유효하지 않습니다.");
@@ -282,10 +284,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function checkFormValidity() {
     let isFormValid = true;
 
-    // 중복검사 유효성 검사
-    if (!duplicateBtnValid || checkName !== "true") {
-      isFormValid = false;
-    }
+    // // 중복검사 유효성 검사
+    // if (!duplicateBtnValid || checkName !== "true") {
+    //   isFormValid = false;
+    // }
 
     // 위드명 길이 유효성 검사
     if (withNameInput.value.length < 2) {

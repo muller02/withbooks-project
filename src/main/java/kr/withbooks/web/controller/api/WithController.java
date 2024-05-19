@@ -33,7 +33,7 @@ public class WithController {
 
 
 
-        return service.getList(categoryIds, query, faceYn, null, null, null, null, null);
+        return service.getList(categoryIds, query, faceYn, null, null, null, null, 1);
     }
 
 
