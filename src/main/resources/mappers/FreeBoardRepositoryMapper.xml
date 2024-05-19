@@ -103,8 +103,9 @@
 			free_board
 
 		set 
-			id = #{id},
-
+			title = #{title},
+			content = #{content},
+			notice_yn = #{noticeYn}
 
 		where 
 			id = #{id}

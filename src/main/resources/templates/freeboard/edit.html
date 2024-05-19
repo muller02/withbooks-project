@@ -40,7 +40,7 @@
                 <div class="pt:5">
                     <label class="color:base-4 px:2 py:1 bd bd-radius:4 cursor:pointer --checked">
                         공지사항  
-                        <input --class="d:none" type="checkbox" name="notice">
+                        <input --class="d:none" type="checkbox" name="notice" th:checked="${freeBoard.noticeYn == 1}">
                     </label>
                 </div>
             </section>
@@ -51,7 +51,7 @@
                         <h1 class="d:none">제목 입력부</h1>
                         <div>
                             <label class="d:none">제목</label>
-                            <input class="w:10p py:2 bd bd-radius:4 d:flex text-align:center" type="text" name="title" placeholder="제목">
+                            <input class="w:10p py:2 bd bd-radius:4 d:flex text-align:center" type="text" name="title" placeholder="제목" th:value="${freeBoard.title}">
                         </div>
                     </section>
                     <section class="mt:4">
@@ -67,13 +67,13 @@
                     </section>
                     <section class="mt:4">
                         <h1 class="d:none">본문 입력부</h1>
-                        <textarea class="bd-top w:10p h:10p pt:2 px:3" placeholder="내용을 입력하세요" name="content" rows="23"></textarea>
+                        <textarea class="bd-top w:10p h:10p pt:2 px:3" placeholder="내용을 입력하세요" name="content" rows="23" th:utext="${freeBoard.content}"></textarea>
                     </section>
                     <div><button class="submit-button px:3 py:2 bg-color:main-5 color:base-1 bd-radius:4 pos:absolute right:1 top:1 cursor:pointer">등록</button></div>
                 </div>
             </section>
             <div>
-                <input type="hidden" name="with-id" th:value="${withId}">
+                <input type="hidden" name="with-id" th:value="${freeBoard.withId}">
                 <input type="hidden" name="free-board_id" th:value="${freeBoardId}">
             </div>
         </form>

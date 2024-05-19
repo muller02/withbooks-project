@@ -127,12 +127,13 @@ public class FreeBoardController {
     @GetMapping("/edit")
     public String editForm(
         @RequestParam(name="fid") Long freeBoardId,
-        @RequestParam(name="wid") Long withId, 
         Model model
     ){
+      FreeBoard freeBoard = service.getById(freeBoardId);
+      System.out.println("보드 " + freeBoard);
 
+      model.addAttribute("freeBoard", freeBoard);
       model.addAttribute("freeBoardId", freeBoardId);
-      model.addAttribute("withId", withId);
 
       return "/freeboard/edit";
     }
@@ -149,10 +150,21 @@ public class FreeBoardController {
       , @AuthenticationPrincipal CustomUserDetails userDetails
     ){
 
-      // 여기 해야함 
-      // freeboard/list와 detail에서 수정하기 눌렀을 때 구현필요(th:href에 링크 써 주고 postmapping 구현)
-      // freeboard/detail의 코멘트 수정하기 구현해야함.
-      return "a";
+      // // 게시글을 DB에 저장
+      {
+        FreeBoard freeBoard = FreeBoard
+                              .builder()
+                              .id(freeBoardId)
+                              .title(title)
+                              .content(content)
+                              .noticeYn(notice!=null ? 1 : 0)
+                              .build();
+
+        service.edit(freeBoard, imgs, request);
+      }
+
+
+      return "redirect:/free-board/list?p=1&wid="+withId+"&s=latest";
     }
 
 
@@ -162,7 +174,7 @@ public class FreeBoardController {
         @RequestParam(name="wid") Long withId
       , Model model
     ){
-
+      
       model.addAttribute("withId", withId);
 
       return "/freeboard/reg";

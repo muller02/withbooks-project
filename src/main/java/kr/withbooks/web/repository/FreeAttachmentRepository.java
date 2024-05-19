@@ -12,5 +12,7 @@ public interface FreeAttachmentRepository {
     List<FreeAttachment> findAll(Long freeBoardId);
 
     int save(Long boardId, String savedPath);
+
+    int remove(Long boardId);
     
 }
