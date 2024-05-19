@@ -1,30 +1,19 @@
 package kr.withbooks.web.controller.with.debate;
 
-import java.io.IOException;
-import java.util.List;
-
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
+import kr.withbooks.web.service.*;
+import kr.withbooks.web.util.FileStore;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.service.BookService;
-import kr.withbooks.web.service.DebateAttachmentService;
-import kr.withbooks.web.service.DebateBoardService;
-import kr.withbooks.web.service.DebateCommentService;
-import kr.withbooks.web.service.DebateRoomService;
-import kr.withbooks.web.service.DebateTopicService;
-import kr.withbooks.web.util.FileStore;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Controller
