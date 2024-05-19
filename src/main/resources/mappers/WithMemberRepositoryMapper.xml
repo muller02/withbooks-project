@@ -14,11 +14,13 @@
 			(
 				with_id
 			   ,member_id
+				,master_yn
 			) 
 		values
 			(
 				#{withId}
 			   ,#{userId}
+				,#{masterYn}
 			)
 	</insert>
 

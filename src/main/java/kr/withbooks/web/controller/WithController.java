@@ -57,6 +57,10 @@ public class WithController {
   @Autowired
   private FreeBoardService freeBoardService;
 
+
+  @Autowired
+  private WithMemberService memberService;
+
   @GetMapping("list")
   public String list(Model model,
                      @RequestParam(name = "c", required = false) Long[] categoryIds,
@@ -224,6 +228,11 @@ public class WithController {
     WithCategory withCategory = new WithCategory();
     withCategory.setWithID(withId);
     withCategory.setCategoryId(withCategoryIdList);
+
+
+    Long masterYn = 1L;
+
+    memberService.join(userId, withId,   masterYn);
 
     withCategoryService.add(withCategory.getWithID(), withCategory.getCategoryId());
 
