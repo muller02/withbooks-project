@@ -326,7 +326,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
                     <div class="border-bottom  pt:3  pl:2 ">
                     <div class="d:flex ai:center " >
                     <div class="border-radius:full of:hidden mr:1  comment-user-img mr:2 "> 
-                        <img src="${cmt.img}" class="obj-fit:contain  w:100p h:100p">
+                        <img src="${cmt.img}" class="  w:100p h:100p">
                      </div>
                      <span></span>
                       <div class=" mr:auto  fw:2 ">${cmt.nickname}</div>
@@ -340,7 +340,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
                         <button class="cursor:pointer dropdown-btn">
                           <span class="comment-dots-icon icon icon:dots_three_outline_vertical_fill icon-size:3 color-icon rg-comment-hover"></span>
                         </button>
-                        <ul class="dropdown-list w:2 dropdown-transformx comment-dropdown-list ">
+                        <ul class="dropdown-list w:2 comment-modal-transform comment-dropdown-list ">
                         
                           <li>
                
