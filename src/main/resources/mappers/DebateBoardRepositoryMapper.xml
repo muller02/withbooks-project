@@ -16,7 +16,6 @@
         , topic_id
     </sql>
 
-
     <!-- 게시글 저장 -->
     <insert id="save" parameterType="DebateBoard" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO debate_board (
@@ -33,6 +32,7 @@
         )
     </insert>
 
+    <!-- 게시글 찾기 -->
     <select id="findById" resultType="DebateBoard">
         SELECT
         *
@@ -50,7 +50,8 @@
         id = #{id}
     </update>
 
-    <delete id="deleteById" parameterType="Long">
+    <!-- 게시글 삭제 -->
+    <delete id="delete" parameterType="Long">
         UPDATE debate_board
         SET
         blind_yn = 1

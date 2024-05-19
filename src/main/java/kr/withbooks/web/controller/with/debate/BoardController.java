@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import kr.withbooks.web.entity.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -27,29 +28,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/with/debate/board")
 public class BoardController {
 
-    @Autowired
-    private DebateBoardService debateBoardService;
-
-    @Autowired
-    private DebateRoomService debateRoomService;
-
-    @Autowired
-    private BookService bookService;
-
-    @Autowired
-    private DebateTopicService debateTopicService;
-
-    @Autowired
-    private DebateAttachmentService debateAttachmentService;
-
-    @Autowired
-    private DebateCommentService debateCommentService;
-
-    @Autowired
-    private FileStore fileStore;
+    private final DebateBoardService debateBoardService;
+    private final DebateRoomService debateRoomService;
+    private final BookService bookService;
+    private final DebateTopicService debateTopicService;
+    private final DebateAttachmentService debateAttachmentService;
+    private final DebateCommentService debateCommentService;
+    private final FileStore fileStore;
 
     @GetMapping("/list")
     public String list(
@@ -82,13 +71,14 @@ public class BoardController {
         log.info("debateRoom = {}", findRoom);
 
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
-        model.addAttribute("topicList", topicList);
+
 
         // 게시글의 \r\n 을 <br> 태그로 치환
         for(DebateTopic t : topicList){
             String replacedStr = t.getContent().replace("\r\n", "<br>");
             t.setContent(replacedStr);
         }
+        model.addAttribute("topicList", topicList);
 
         if (topicId != null) {
             DebateTopic findTopic = debateTopicService.getById(topicId);
@@ -244,4 +234,19 @@ public class BoardController {
         return "redirect:/with/debate/board/detail?wid=" + withId + "&rid=" + roomId + "&id=" + id;
     }
 
+    @PostMapping("/delete")
+    public String delete(
+            @RequestParam Long id,
+            @RequestParam(name = "wid") Long withId,
+            @RequestParam(name = "rid") Long roomId
+    ) {
+
+        log.info("delete debate board with id {}", id);
+        log.info("delete debate with id {}", withId);
+        log.info("delete debate room with id {}", roomId);
+
+        debateBoardService.deleteById(id);
+
+        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
+    }
 }

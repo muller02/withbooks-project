@@ -4,19 +4,19 @@ import kr.withbooks.web.entity.DebateBoard;
 import kr.withbooks.web.entity.DebateBoardView;
 import kr.withbooks.web.repository.DebateBoardRepository;
 import kr.withbooks.web.repository.DebateBoardViewRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DebateBoardServiceImp implements DebateBoardService {
 
-    @Autowired
-    private DebateBoardViewRepository debateBoardViewRepository;
+    private final DebateBoardViewRepository debateBoardViewRepository;
 
-    @Autowired
-    private DebateBoardRepository debateBoardRepository;
+    private final DebateBoardRepository debateBoardRepository;
 
     @Override
     public List<DebateBoardView> getList(Long roomId, Long topicId) {
@@ -47,6 +47,11 @@ public class DebateBoardServiceImp implements DebateBoardService {
         findBoard.setTitle(updateBoard.getTitle());
         findBoard.setContent(updateBoard.getContent());
         debateBoardRepository.update(findBoard);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        debateBoardRepository.delete(id);
     }
 
 
