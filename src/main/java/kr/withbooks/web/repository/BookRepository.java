@@ -33,6 +33,10 @@ public interface BookRepository {
     Integer save(List<Book> list);
     int findBoolByISBN13(String isbn13);
 
+    // main
+    List<Book> findAllBestseller();
+    List<Book> findAllNew();
+
 
 
 

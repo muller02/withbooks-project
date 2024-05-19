@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/newtil-css@0.1.49/dist/style.css" />
-    <script src="/js/home.js"></script>
+    <script src="/js/home.js" defer></script>
 
 
     <link rel="stylesheet" type="text/css" href="/css/var.css" />
@@ -89,6 +89,11 @@
             overflow: hidden;
             text-overflow: ellipsis
         }
+
+        .book-on{
+            background-color:var(--color-main-5) !important;
+            color:var(--color-base-1);
+        }
     </style>
 </head>
 <body>
@@ -154,186 +159,131 @@
         <h1 class="d:none">서비스 소개 </h1>
         <div class="m:2 fw:3 fs:5 color:main-5">🔥 실시간 인기 북쇼츠</div>
         <div class="  p:3 " >
-            <div class=" d:flex   overflow-y-scroll	     scrl-none scroll-box	 ">
-                    
-                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >
+            <div class=" d:flex overflow-y-scroll scrl-none scroll-box">
+                <div th:each="shorts, stat : ${shortsList}">
+                    <div class="h:4 box-shadow-custom  min-width:6 p:3   " 
+                    th:classappend="${stat.index % 2 == 0} ? 'shorts-item-background-color border-radius:4 m:3 box-sizing:border-box' : 'border-radius:4 m:3 box-sizing:border-box'">
                         <div class="d:flex  justify-content:end mb:4">
-                            <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
+                            <div class="fs:2 color:main-6" th:text="${shorts.bookTitle}">    도둑 맞은 집중력</div>
                         </div>
                         <div class="clamp">
-                            <span>
-
-
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
+                            <span th:utext="${shorts.content}">
+                                Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
+                            </span>
                         </div>
-                </div>
-
-
-                <div class="h:4 box-shadow-custom  min-width:6 p:3    border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
-
-
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
                     </div>
                 </div>
-                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
-
-
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
-                </div>
-
-
-                <div class="h:4 box-shadow-custom  min-width:6 p:3    border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
-
-
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
-                </div>
-
-                <div class="h:4 box-shadow-custom  min-width:6 p:3   shorts-item-background-color border-radius:4 m:3 box-sizing:border-box 	  " >
-                    <div class="d:flex  justify-content:end mb:4">
-                        <div class="fs:2 color:main-6">    도둑 맞은 집중력</div>
-                    </div>
-                    <div class="clamp">
-                            <span>
-
-
-                            Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
-                        </span>
-                    </div>
-
             </div>
         </div>
-
     </section>
 
 
 
 
-    <section class="my:8  pt:2 ">
+    <section class="my:8  pt:2" id="book-section">
         <h1 class="d:none">베스트셀러</h1>
         <div class="d:flex ai:center m:2   ">
             <div class=" color:main-5 mr:3 fw:3 fs:5"> 🔥 베스트 셀러 , 신간 </div>
             <div class="mt:1 fs:2 color:base-5">2024.02</div>
         </div>
 
+        <div class="n-item bd:none	 box-shadow:5">
+            <ul class=" d:flex   overflow-y-scroll	    scrl-none scroll-box	 ">
+                    <li class=" bestseller book-on bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0 text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
+                            베스트 셀러
+                    </li>
+                    <li class="new-book bg-color:main-1 py:1  flex-shrink:0 h:auto min-width:2 w:auto text-align:center px:4 mr:4  mb:2 border-radius:5 cursor:pointer  " >
+                        신간
+                    </li>
+        <!-- 
+                    <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0  text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
+                        특별신간
+                    </li> -->
 
-<div class="n-item bd:none	 box-shadow:5">
-    <ul class=" d:flex   overflow-y-scroll	    scrl-none scroll-box	 ">
-            <li class="bg-color:main-5 color:base-1 py:1  h:auto min-width:2  flex-shrink:0 text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
-                      베스트 셀러
-            </li>
-            <li class="bg-color:main-1 py:1  flex-shrink:0 h:auto min-width:2 w:auto text-align:center px:4 mr:4  mb:2 border-radius:5 cursor:pointer  " >
-                신간
-            </li>
 
-            <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0  text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
-                특별신간
-            </li>
+                </ul>
 
-
-         </ul>
-
-         
-        <section class="d:flex overflow-y-scroll  scroll-box  scrl-none ">
-            <h2 class="d:none  ">베스트셀러</h2>
-        <ul class=" d:flex  flex-direction:column   scroll-box	md:w:5p lg:w:5p ">
-            <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
-                    <div class="fw:3 fs:3">1. </div>
-                    <div class="book-img-wh">
-                        <img src="/image/with/trend.png" class="w:100p h:100p">
-                    </div>
-                    <div>
-                        <div class="fs:3 fw:3">도둑 맞은 집중력</div>
-                        <div>홍길동 저</div>
-                        <div>유노북스</div>
-                        <div>2023.01.02</div>
-                    </div>
-            </li>
-            <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
-                <div class="fw:3 fs:3">2. </div>
-                <div class="book-img-wh">
-                    <img src="/image/home/책소개.jpg" class="w:100p h:100p">
-                </div>
-                <div>
-                    <div class="fs:3 fw:3">도둑 맞은 집중력</div>
-                    <div>홍길동 저</div>
-                    <div>유노북스</div>
-                    <div>2023.01.02</div>
-                </div>
-            </li>
-            <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
-                <div class="fw:3 fs:3">3. </div>
-                <div class="book-img-wh">
-                    <img src="/image/home/책소개.jpg" class="w:100p h:100p">
-                </div>
-                <div>
-                    <div class="fs:3 fw:3">도둑 맞은 집중력</div>
-                    <div>홍길동 저</div>
-                    <div>유노북스</div>
-                    <div>2023.01.02</div>
-                </div>
-            </li>
-        </ul>
-        <ul class=" d:flex  	flex-direction:column   	md:w:5p lg:w:5p ">
-            <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
-                    <div class="fw:3 fs:3">4. </div>
-                    <div class="book-img-wh">
-                        <img src="/image/home/책소개.jpg" class="w:100p h:100p">
-                    </div>
-                    <div>
-                        <div class="fs:3 fw:3">도둑 맞은 집중력</div>
-                        <div>홍길동 저</div>
-                        <div>유노북스</div>
-                        <div>2023.01.02</div>
-                    </div>
-            </li>
-            <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
-                <div class="fw:3 fs:3">5. </div>
-                <div class="book-img-wh">
-                    <img src="/image/home/책소개.jpg" class="w:100p h:100p">
-                </div>
-                <div>
-                    <div class="fs:3 fw:3">도둑 맞은 집중력</div>
-                    <div>홍길동 저</div>
-                    <div>유노북스</div>
-                    <div>2023.01.02</div>
-                </div>
-            </li>
-            <li class="shorts-shadow min-width:6 p:3     gap:4  m:2 box-sizing:border-box d:flex	  " >
-                <div class="fw:3 fs:3">6. </div>
-                <div class="book-img-wh">
-                    <img src="/image/home/책소개.jpg" class="w:100p h:100p">
-                </div>
-                <div>
-                    <div class="fs:3 fw:3">도둑 맞은 집중력</div>
-                    <div>홍길동 저</div>
-                    <div>유노북스</div>
-                    <div>2023.01.02</div>
-                </div>
-            </li>
-        </ul>
-        </section>
-</div>
+                
+                <section class="d:flex overflow-y-scroll  scroll-box  scrl-none ">
+                    <h2 class="d:none  ">베스트셀러</h2>
+                <ul class=" d:flex  flex-direction:column   scroll-box	md:w:5p lg:w:5p ">
+                    <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  "  th:each="book, stat : ${bookList}">
+                            <div class="fw:3 fs:3" th:text="${stat.index + 1}">1. </div>
+                            <div class="book-img-wh">
+                                <img src="/image/with/trend.png" th:src="${book.cover}" class="w:100p h:100p">
+                            </div>
+                            <div>
+                                <div class="fs:3 fw:3" th:text="${book.title}">도둑 맞은 집중력</div>
+                                <div th:text="${book.author}">홍길동 저</div>
+                                <div th:text="${book.publisher}">유노북스</div>
+                                <div th:text="${book.pubDate}">2023.01.02</div>
+                            </div>
+                    </li>
+                    <!-- <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
+                        <div class="fw:3 fs:3">2. </div>
+                        <div class="book-img-wh">
+                            <img src="/image/home/책소개.jpg" class="w:100p h:100p">
+                        </div>
+                        <div>
+                            <div class="fs:3 fw:3">도둑 맞은 집중력</div>
+                            <div>홍길동 저</div>
+                            <div>유노북스</div>
+                            <div>2023.01.02</div>
+                        </div>
+                    </li>
+                    <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
+                        <div class="fw:3 fs:3">3. </div>
+                        <div class="book-img-wh">
+                            <img src="/image/home/책소개.jpg" class="w:100p h:100p">
+                        </div>
+                        <div>
+                            <div class="fs:3 fw:3">도둑 맞은 집중력</div>
+                            <div>홍길동 저</div>
+                            <div>유노북스</div>
+                            <div>2023.01.02</div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class=" d:flex  	flex-direction:column   	md:w:5p lg:w:5p ">
+                    <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
+                            <div class="fw:3 fs:3">4. </div>
+                            <div class="book-img-wh">
+                                <img src="/image/home/책소개.jpg" class="w:100p h:100p">
+                            </div>
+                            <div>
+                                <div class="fs:3 fw:3">도둑 맞은 집중력</div>
+                                <div>홍길동 저</div>
+                                <div>유노북스</div>
+                                <div>2023.01.02</div>
+                            </div>
+                    </li>
+                    <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
+                        <div class="fw:3 fs:3">5. </div>
+                        <div class="book-img-wh">
+                            <img src="/image/home/책소개.jpg" class="w:100p h:100p">
+                        </div>
+                        <div>
+                            <div class="fs:3 fw:3">도둑 맞은 집중력</div>
+                            <div>홍길동 저</div>
+                            <div>유노북스</div>
+                            <div>2023.01.02</div>
+                        </div>
+                    </li>
+                    <li class="shorts-shadow min-width:6 p:3     gap:4  m:2 box-sizing:border-box d:flex	  " >
+                        <div class="fw:3 fs:3">6. </div>
+                        <div class="book-img-wh">
+                            <img src="/image/home/책소개.jpg" class="w:100p h:100p">
+                        </div>
+                        <div>
+                            <div class="fs:3 fw:3">도둑 맞은 집중력</div>
+                            <div>홍길동 저</div>
+                            <div>유노북스</div>
+                            <div>2023.01.02</div>
+                        </div>
+                    </li> -->
+                </ul>
+                </section>
+        </div>
     </section>
 
 </main>

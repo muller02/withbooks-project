@@ -35,6 +35,10 @@ public interface BookService {
 
     Integer editBook(Long bookId, Integer price, String description, String purchaseLink);
 
+    List<Book> getBestsellerList();
+
+    List<Book> getNewList();
+
 
     
 

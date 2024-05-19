@@ -61,6 +61,12 @@ public class BookshortsServiceImp  implements  BookshrotsService{
 
     }
 
+    // main
+    @Override
+    public List<BookshortsView> getBestList() {
+        return shortsViewRepository.findAllBestShorts();
+    }
+
     
 
 }
