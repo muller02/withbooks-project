@@ -10,4 +10,6 @@ import kr.withbooks.web.entity.BookshortsView;
 public interface BookshortsViewRepository {
     
     List<BookshortsView> findAll(Long bookId, Long userId);
+    
+    List<BookshortsView> findAllBestShorts();
 }
