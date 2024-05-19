@@ -164,10 +164,10 @@
                     <div class="h:4 box-shadow-custom  min-width:6 p:3   " 
                     th:classappend="${stat.index % 2 == 0} ? 'shorts-item-background-color border-radius:4 m:3 box-sizing:border-box' : 'border-radius:4 m:3 box-sizing:border-box'">
                         <div class="d:flex  justify-content:end mb:4">
-                            <div class="fs:2 color:main-6" th:text="${shorts.bookTitle}">    도둑 맞은 집중력</div>
+                            <div class="fs:2 color:main-6" th:text="${shorts.bookTitle}" th:text="${shorts.bookTitle}">    도둑 맞은 집중력</div>
                         </div>
                         <div class="clamp">
-                            <span th:utext="${shorts.content}">
+                            <span th:utext="${shorts.content}" th:utext="${shorts.content}">
                                 Lorem ipsum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipum dolor sit, amet consectetur adipisicing elit. Aut, eius excepturi sit aliquam non omnis libero odio temporibus! Numquam fugit quibusdam laborum modi ab accusamus at asperiores quam cumque! Dolore?
                             </span>
                         </div>

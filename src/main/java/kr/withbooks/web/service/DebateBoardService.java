@@ -14,4 +14,6 @@ public interface DebateBoardService {
     Long save(DebateBoard debateBoard);
 
     void edit(Long id, DebateBoard updateBoard);
+
+    void deleteById(Long id);
 }

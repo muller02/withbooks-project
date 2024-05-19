@@ -46,3 +46,14 @@ window.addEventListener('load', function (){
 
     //==================================================================================
 })
+
+window.addEventListener('resize', function() {
+    const select = document.querySelector('select');
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 1200) {
+        select.style.width = '60%';
+    } else {
+        select.style.width = '40%';
+    }
+});

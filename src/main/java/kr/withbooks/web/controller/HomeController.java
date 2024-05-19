@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.Bookshorts;
 import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.service.BookService;
 import kr.withbooks.web.service.BookshrotsService;

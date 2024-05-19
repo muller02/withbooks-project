@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface WithMemberRepository {
 
     // 위드 가입
-    Integer add(Long userId, Long withId);
+    Integer add(Long userId, Long withId,Long masterYn);
 
     // 위드 가입 여부
     Integer findJoinYn(Long withId, Long userId);

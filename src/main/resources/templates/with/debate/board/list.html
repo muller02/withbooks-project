@@ -34,15 +34,16 @@
             opacity: 1;
         }
 
-        /* 선택 옵션의 스타일을 조정 */
-        .multiline-option {
-            white-space: pre-wrap; /* 줄 바꿈 유지 */
+        /* 기본 스타일 */
+        select {
+            width: 40%; /* 처음에는 너비를 100%로 설정 */
+            box-sizing: border-box; /* padding과 border를 너비에 포함 */
         }
 
-        /* 예시: 화면 폭이 작을 때 셀렉트 박스 크기 조절 */
-        @media only screen and (max-width: 100px) {
-            #selectBox {
-                width: 100%;
+        /* 미디어 쿼리 - 화면 크기가 768px 이상일 때 */
+        @media (min-width: 1200px) {
+            select {
+                width: 60%; /* 화면이 커지면 너비를 50%로 조절 */
             }
         }
     </style>
@@ -50,14 +51,16 @@
 
 <body>
 
-    <main layout:fragment="main">
+    <main class="min-width:8 pb:11 px:3" layout:fragment="main">
 
-        <a class="m:2" href="" th:href="@{/with/debate/list(wid=${param.wid})}">
-                        <span class="n-btn n-btn:void mt:3 pl:2 fs:1" style="color: var(--color-base-5);">
-                            <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
-                            토론 서재
-                        </span>
-        </a>
+        <div class="d:flex mt:3 mr:1">
+            <a class="m:1" href="" th:href="@{/with/debate/list(wid=${param.wid})}">
+                <span class="n-btn n-btn:void pl:2 fs:1" style="color: var(--color-base-5);">
+                    <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
+                    토론 서재
+                </span>
+            </a>
+        </div>
 
         <div class="d:flex fl-dir:column gap:8 mt:4">
             <section>
@@ -88,7 +91,7 @@
                 </div>
             </section>
 
-            <section class="pos:fixed right:4 lg:right:1/4 top:1/5 md:top:2 lg:top:2 zi:5 " >
+            <section class="pos:fixed right:4 lg:right:1/4 top:1/4 md:top:2 lg:top:2 zi:5 " >
                 <h1 class="d:none">공지사항 버튼</h1>
                 <div class="bg-rgb:base-9 bd border-radius:full p:3">
                     <span id="open-notice" class="icon icon:megaphone icon-size:4 icon-color:base-4">알림</span>
@@ -100,9 +103,9 @@
                 <ul class="d:flex flex-direction:column mx:7 ">
                     <li th:each="b : ${list}">
                         <h1 class="d:none">토론방</h1>
-                        <div class="d:flex fl-direction:row-reverse h:3 gap:3 border-bottom border-color:base-3 py:4  ">
-                            <div th:if="${b.saveImg}">
-                                <img src="/image/with/debate/cat.png" th:src="@{|/image/debate/board/${b.saveImg}|}" alt="이미지" class="obj-fit:fill max-height:100p border-radius:3">
+                        <div class="d:flex fl-direction:row-reverse h:3 gap:2 border-bottom border-color:base-3 py:4 ">
+                            <div th:if="${b.saveImg}" class="w:2 md:w:3 lg:w:4">
+                                <img src="/image/with/debate/cat.png" th:src="@{|/image/debate/board/${b.saveImg}|}" alt="이미지" class="obj-fit:cover w:2 md:w:3 lg:w:4 h:10p border-radius:3">
                             </div>
                             <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
                                 <div>
@@ -112,7 +115,7 @@
                                     <hi class="fs:5 fw:2"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
                                 </div>
                                 <div class="d:flex ai:center gap:1">
-                                    <div class="d:flex   ai:center">
+                                    <div class="d:flex ai:center">
                                         <span class="icon icon:user icon-size:2"></span>
                                         <span class="fs:1 color:base-5 ml:1 " th:text="${b.nickname}">뉴렉이</span>
                                     </div>
@@ -138,15 +141,13 @@
                 </ul>
             </section>
 
-            <div class="reg-btn pos:fixed  bottom:9 right:8 zi:5">
+            <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
                 <h1 class="d:none">토론카드 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
                     <a href="reg" th:href="@{/with/debate/board/reg(wid=${param.wid},rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
                 </div>
             </div>
         </div>
-
-
 
     </main>
 

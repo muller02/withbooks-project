@@ -46,4 +46,10 @@
 
 	</select>
 
+	<select id="findRand10" resultType="BookshortsView"
+	>
+		SELECT * FROM shorts_view where like_cnt >0 and blind_yn=0 ORDER BY RAND() LIMIT 10
+
+	</select>
+
 </mapper>

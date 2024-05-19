@@ -33,7 +33,7 @@ public class WithController {
 
 
 
-        return service.getList(categoryIds, query, faceYn, null, null, null, null, null);
+        return service.getList(categoryIds, query, faceYn, null, null, null, null, 1);
     }
 
 
@@ -58,8 +58,9 @@ public class WithController {
 
         // Long userId = userDetails.getId();
         userId = 4L;
+        Long masterYn =0L;
 
-        Integer result = memberService.join(userId, withId);
+        Integer result = memberService.join(userId, withId, masterYn);
 
         return result;
     }

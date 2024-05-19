@@ -1,5 +1,5 @@
 
-// <댓글 창 textarea 자동으로 글 늘어나게 하기
+// 댓글 창 textarea 자동으로 글 늘어나게 하기
 window.addEventListener('load', function(e) {
 
 
@@ -32,7 +32,46 @@ window.addEventListener("load", function () {
     });
 });
 
+// 삭제 모달 창
+window.addEventListener('load', function () {
+    const openButton = document.getElementById('modal-btn');
+    const closeButton = document.getElementById('close-btn');
+    const modal = document.getElementById('modal');
+    const modalBackdrop = document.getElementById('modal-backdrop');
 
+    openButton.addEventListener('click', function () {
+        modal.classList.remove('d:none');
+        modalBackdrop.classList.remove('d:none');
+        modal.classList.add('modal-fade-in');
+    });
+
+    closeButton.addEventListener('click', function () {
+        modal.classList.replace('modal-fade-in', 'modal-fade-out');
+
+        setTimeout(() => {
+            modal.classList.add('d:none');
+            modalBackdrop.classList.add('d:none');
+            modal.classList.remove('modal-fade-out');
+        }, 130);
+    });
+});
+
+// 게시글 삭제
+window.addEventListener('load', function () {
+    const deleteBtn = document.querySelector("#delete-btn");
+    const deleteForm = document.querySelector("#delete-form");
+
+    deleteBtn.addEventListener("click", function (e) {
+        console.log(e.target)
+        deleteForm.action = '/with/debate/board/delete';
+        deleteForm.method = 'post';
+        deleteForm.submit();
+    })
+})
+
+
+
+// 댓글 등록 삭제
 window.addEventListener('load', function(e) {
 
     //============================== 등록 ====================================
