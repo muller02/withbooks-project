@@ -22,6 +22,15 @@
 </select>
 
 
+  <select id="findByWithId" resultType="DebateRoomView">
+
+    SELECT *
+    FROM debate_room_view
+    WHERE with_id = #{withId}
+    ORDER BY board_cnt DESC
+    LIMIT 1
+
+  </select>
 
 
 

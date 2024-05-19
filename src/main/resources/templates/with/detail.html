@@ -156,35 +156,24 @@
 <div class="pos:absolute left:3"><img src="/trend.png" ></div>
 <div class="pos:absolute left:4"><img src="/trend.png" ></div>
 </div> -->
-      <div class="mb:2">
-        <div class="border d:inline-block d:flex flex-direction:column border-radius:8">
-          <div class="text-align:center fw:3">토론 Best</div>
-          <div class="d:flex h:2 pl:2 pr:2 pt:2 pb:2">
-            <div><img class="h:100p" src="/trend.png"/></div>
+      <div class="mb:2 mt:6">
+        <div class="border d:inline-block d:flex flex-direction:column border-radius:8 p:4">
+          <div class="text-align:center fw:3 fs:4">토론 Best</div>
+          <div class="d:flex  pl:2 pr:2 pt:2 pb:2">
+            <a th:href="@{/book/detail(id=${debateTopRoom.bookId})}">
+              <img class=" w:3 h:3" th:src="${debateTopRoom.cover}"/></a>
             <div class="flex-grow:1 text-align:center align-self:center pr:2 pl:2">
-              <div>“뉴렉” 위드는 “THE ONE THING” 책으로 총 “100” 건의 토론을 나누었어요!</div>
+              <div><span class="color:main-5 fs:3 fw:3">“[[${with.name}]]”</span> 위드는 <span class="color:main-5 fs:3 fw:3">“[[${debateTopRoom.title}]]”</span> 책으로 총 <span class="color:main-5 fs:3 fw:3">“[[${debateTopRoom.boardCnt}]]”</span> 건의 토론을 나누었어요!</div>
               <div>글이 많이 올라왔다는건, 그만큼 논쟁거리가 다분하다는 방증!</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="border d:inline-block d:flex flex-direction:column border-radius:8">
-          <div class="text-align:center fw:3">토론 Best</div>
-          <div class="d:flex h:2 pl:2 pr:2 pt:2 pb:2">
-            <div><img class="h:100p" src="/trend.png"/></div>
-            <div class="flex-grow:1 text-align:center align-self:center pr:2 pl:2">
-              <div>“뉴렉” 위드는 “THE ONE THING” 책으로 총 “100” 건의 토론을 나누었어요!</div>
-              <div>글이 많이 올라왔다는건, 그만큼 논쟁거리가 다분하다는 방증!</div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </section>
 
-    <div class="w:100p border-bottom border-width:3 border-color:main-2"><span class="d:none">선</span></div>
-    <section class="px:3 my:5">
+    <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>    <section class="px:3 my:5">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">모임일정</h1>
 
       <div class="border w:fit-content d:flex jc:center ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3">
@@ -228,8 +217,7 @@
       </div>
     </section>
 
-    <div class="w:100p border-bottom border-width:3 border-color:main-2"><span class="d:none">선</span></div>
-
+    <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
     <section class="my:5 px:3">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">
         위드맴버
@@ -238,7 +226,9 @@
 
       <!-- 여기 inline flex 추가  -->
       <div class="d:inline-flex mx:2 ai:center mr:4" th:each=" wm : ${withMemberList}">
-        <img class="mr:5 d:inline-block" src="/ppang.png"/>
+       <div class="w:1 h:1 mr:3">
+        <img class="mr:5 d:inline-block h:100p w:100p border-radius:full" th:src="${wm.img}"/>
+       </div>
         <div class="d:flex ai:center flex-direction:column">
           <div class="mr:auto fs:3"
                th:classappend="${wm.masterYn} ?'deco  deco-pos:right  icon-color:main-3 icon:star_fill' :''"
@@ -249,8 +239,7 @@
       </div>
     </section>
 
-    <div class="w:100p border-bottom border-width:3 border-color:main-2"><span class="d:none">선</span></div>
-
+    <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
     <section class="my:5 board-list">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">자유게시판</h1>
 

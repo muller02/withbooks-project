@@ -17,4 +17,7 @@ public interface DebateRoomService {
 
     Long add(DebateRoom debateRoom);
 
+
+    DebateRoomView getTopBoardCntbyId(Long withId);
+
 }
