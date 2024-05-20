@@ -22,6 +22,7 @@ public class FreeBoardView {
     private String content;
     private LocalDateTime regDate;
     private int blindYn;
+    private int noticeYn;
     private String nickname;
     private String userImg;
     private int likeCnt;
