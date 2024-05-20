@@ -213,7 +213,6 @@ window.addEventListener("load", function () {
             };
 
             // 로그 작성 폼
-            let form = searchBox.querySelector("form");
             let booklogRegForm = searchBox.querySelector("#booklog-reg-form");
             // 이미지 선택하는 label 세션부분
             let inputImg = booklogRegForm.querySelector(".booklog-img");
@@ -230,6 +229,7 @@ window.addEventListener("load", function () {
             // 등록 버튼
             let regBtn = booklogRegForm.querySelector(".reg-btn");
 
+            // 등록 시 내용 없으면 리턴. 내용 있으면 등록 처리
             regBtn.onclick = function (e) {
                 e.preventDefault();
                 let file = inputImg.files["0"];
@@ -243,7 +243,7 @@ window.addEventListener("load", function () {
                     return;
                 }
 
-                document.form.submit();
+                document.regform.submit();
             };
 
             // 이미지 선택하기
