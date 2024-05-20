@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.withbooks.web.entity.Bookshorts;
+import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
 import kr.withbooks.web.service.UserService;
 
@@ -33,9 +35,8 @@ public class UserController {
         ,Model model
     ) {
 
-        System.out.println("startDate : "+startDate);
-        System.out.println("endDate : "+endDate);
-
+        List<User> list = service.get(id, nickname, email, birthyear, gender, startDate, endDate, status); 
+        
         model.addAttribute("id", id);
         model.addAttribute("nickname", nickname);
         model.addAttribute("email", email);
@@ -44,14 +45,25 @@ public class UserController {
         model.addAttribute("birthyear", birthyear);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
+        model.addAttribute("list", list);
 
-        // List<User> list = service.get(id, nickname, email, birthyear, gender, startDate, endDate, status);  
+        System.out.println(list.get(0));
 
         return "admin/user/list";
     }
 
     @GetMapping("detail")
-    public String detail() {
+    public String detail(
+        @RequestParam(name = "id", required = true) Long id
+        , Model model
+    ) {
+
+        User user = service.getById(id);
+        List<BookshortsView> list = service.getByIdShorts(id);   
+             
+        model.addAttribute("user", user);
+        model.addAttribute("list", list);
+
         return "admin/user/detail";
     }
     

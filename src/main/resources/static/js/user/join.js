@@ -184,21 +184,21 @@ checkEmailBtn.onclick = function(e){
     
     let emailId = emailName+"@"+email;
 
-    // fetch("/api/user/emailCheck?email="+emailId)
-    // .then((response)=>response.json())
-    // .then((data)=>{
-    //     if(data == 0){
-    //         alert("사용 가능한 이메일입니다.")
-    //         emailNameInput.classList.add("bd-color:main-5")
+    fetch("/api/user/emailCheck?email="+emailId)
+    .then((response)=>response.json())
+    .then((data)=>{
+        if(data == 0){
+            alert("사용 가능한 이메일입니다.")
+            emailNameInput.classList.add("bd-color:main-5")
             emailVaildSpan.classList.remove("d:none");
             emailCheckedSpan.classList.add("d:none");
             isEmailValid = true;
-    //     }
-    //     else{
-    //         alert("중복된 이메일입니다.")
-    //         isEmailValid = false;
-    //     }
-    // })
+        }
+        else{
+            alert("중복된 이메일입니다.")
+            isEmailValid = false;
+        }
+    })
 }
 
 // =======================================================================
@@ -259,30 +259,45 @@ passwordSection.addEventListener('keyup', function(e){
 
 // =======================================================================
 // nickname check
+
+let timeout;
 nicknameInput.oninput = function(){
+    console.log("우엥엥");
     
     // 한글 숫자 영문대소문자 2 이상 10 이하
     const nicknameRegex = /^[a-zA-Z0-9가-힣]{2,9}$/;
     
     // 입력 중에는 빨간색 색상 표시
     nicknameInput.classList.add("bd-color:accent-1");
+    const nickname = nicknameInput.value;
     
     // 유효성 체크
-    if(!nicknameRegex.test(nicknameInput.value)){
+    if(!nicknameRegex.test(nickname)){
         return;
     }
     
+    clearTimeout(timeout);
     // DB 체크
-    // fetch();
-    
-    // 유효한 경우에 메시지 출력 삭제
-    nicknameValidSpan.classList.add("d:none");
-    isCheckedNickname = true;
-    // 유효하지 않은 경우 메시지 출력
-    // nicknameValidSpan.classList.remove("d:none");
-    // isCheckedNickname = false;
-
-
+    timeout = setTimeout(()=>{
+        fetch("/api/user/nicknameCheck?nickname="+nickname)
+        .then((response)=>response.json())
+        .then((data)=>{
+            console.log(data);
+            if(Number(data) == 0){
+                // 유효한 경우에 메시지 출력 삭제
+                nicknameValidSpan.classList.add("d:none");
+                nicknameInput.classList.add("bd-color:main-5");
+                nicknameInput.classList.remove("bd-color:accent-1");
+                isCheckedNickname = true;
+            }else{
+                // 유효하지 않은 경우 메시지 출력
+                nicknameValidSpan.classList.remove("d:none");
+                nicknameInput.classList.add("bd-color:accent-1");
+                nicknameInput.classList.remove("bd-color:main-5");
+                isCheckedNickname = false;
+            }
+        })
+    }, 500);
 }
 // ================================================================
 

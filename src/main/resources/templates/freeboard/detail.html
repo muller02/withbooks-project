@@ -126,7 +126,7 @@
                 <section id="comment-list" class="d:flex fl-dir:column mt:4 pb:3">
                     <h1 class="d:none">댓글 목록</h1>
 
-                    <section class="d:flex fl-dir:column pos:relative bd-top pt:2 pb:9" th:each="c : ${commentList}">
+                    <section class="comment d:flex fl-dir:column pos:relative bd-top pt:2 pb:9" th:each="c : ${commentList}">
                         <h1 class="d:none">댓글</h1>
                         <div class="d:flex ai:center">
                             <div><img class="profile-img h:1 w:1" src="" th:src="${c.img}" alt=""></div>
@@ -138,12 +138,12 @@
                         
 
                         <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId}">
-                            <h1 class="d:none">수정/삭제 버튼</h1>
+                            <h1 class="d:none">댓글 수정/삭제 버튼</h1>
                             <button class="comment-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer">점점점</button>
                             
                             <ul class="cmt-popup pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none zi:3" th:attr="data-cmt-id=${c.id}">
                                 <li>
-                                    <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" href="">수정하기</a>
+                                    <a class="comment-edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5 cursor:pointer">수정하기</a>
                                 </li>
                                 <li class="mt:2">
                                     <button class="del-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:trash icon-color:accent-1 color:accent-1" href="">삭제하기</button>
@@ -151,7 +151,7 @@
                             </ul>
                         </section>
 
-                        <p class="fs:2 mt:4 ml:4" th:utext="${c.content}">좋아요 굿!!</p>
+                        <p class="fs:2 mt:4 ml:4" th:utext="${c.content}" th:attr="data-cmt-id=${c.id}">좋아요 굿!!</p>
 
                     </section>
 
