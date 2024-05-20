@@ -73,7 +73,6 @@ public class BookshortsController {
             }
         }
 
-        System.out.println("복숭아 = "  + list);
         model.addAttribute("list", list);
 
         return "shorts/list";

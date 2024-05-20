@@ -7,8 +7,8 @@ import kr.withbooks.web.entity.WithMemberView;
 public interface WithMemberService {
 
     List<WithMemberView> getViewById(Long withId);
-    
-    Integer join(Long userId, Long withId);
+
+    Integer join(Long userId, Long withId, Long masterYn);
 
     Integer getJoinYn(Long withId, Long userId);
 

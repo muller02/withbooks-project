@@ -21,5 +21,12 @@ public class UserController {
         Integer result = service.emailCheck(email);
         return result;
     }
+
+    @GetMapping("nicknameCheck")
+    public Integer duplicateCheckName(@RequestParam String nickname){
+        System.out.println("????");
+        Integer result = service.nicknameCheck(nickname);
+        return result;
+    }
     
 }

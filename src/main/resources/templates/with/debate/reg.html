@@ -12,6 +12,14 @@
     <script src="https://fastly.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
     <style>
+
+      * {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 16px;
+
+        color: var(--color-base-9);
+      }
+
       .search {
         --right-1: 6px;
         --top-1: 6px;
@@ -27,7 +35,7 @@
     <script src="/js/with/debate/reg.js"></script>
   </head>
   <body>
-    <main layout:fragment="main" class="flex-grow:1">
+    <main layout:fragment="main">
       <section class="pb:4 pt:4 pl:4 pr:4">
         <h1 class="d:none">위드 토론 등록 페이지</h1>
 
@@ -49,7 +57,7 @@
             id="search-book-form"
             class="bd-radius:9 n-item n-item:shadow px:5 py:3 m:3"
           >
-            <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">책 등록</h1>
+            <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">📘 책 등록</h1>
             <div class="d:flex fl-dir:column ai:center">
               <div
                 class="flex-grow:1 margin-right:1 al-self:stretch pos:relative"
@@ -75,7 +83,7 @@
             </div>
           </section>
           <section class="bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow ai:center">
-            <h1 class="deco icon:calendar_blank bd-bottom w:100p h:1 fw:3">토론일
+            <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">📅 토론일
             <span class="ml:4 fs:2 fw:2 color:main-5" id="debate-period"></span>
             </h1>
 
@@ -100,7 +108,7 @@
           </section>
 
           <section class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow">
-            <h1 class="deco icon:info bd-bottom w:100p h:1 fw:3">공지사항</h1>
+            <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">🗒️ 공지사항</h1>
             <div class="mt:4">
               <textarea
                 class="w:100p"
@@ -117,7 +125,7 @@
           <section
             class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
           >
-            <h1 class=" bd-bottom w:100p h:1 fw:3"> 💡 토론주제
+            <h1 class="pt:3 bd-bottom w:100p h:1 fw:3"> 💡 토론주제
             <span class="ml:4 fs:2 fw:1 color:accent-1 topic-list-alert d:none">토론주제는 최대 3개 까지만 가능합니다.</span></h1>
             <span class="topic-list d:flex fl-dir:column ai:center">
               <span class="topic-input d:flex ai:center al-self:stretch">

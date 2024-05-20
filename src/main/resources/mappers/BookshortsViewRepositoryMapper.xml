@@ -20,12 +20,36 @@
 
 		order by id desc
 		
+	</select>
 
+	<!-- main -->
+	<select id="findAllBestShorts">
+		select 
+			st.id, 
+			st.user_id, 
+			us.nickname, 
+			b.id bookId, 
+			b.title bookTitle, 
+			st.content, 
+			count(st.id) likeCnt 
+		from 
+			shorts st join `user` us on st.user_id = us.id 
+				join book b on st.book_id=b.id 
+				join shorts_like sl on st.id = sl.shorts_id 
+		where 
+			st.blind_yn = 0 
+		group by 
+			st.id 
+		order by 
+			likeCnt desc 
+		limit 10
 
-	
-				
+	</select>
 
-		
+	<select id="findRand10" resultType="BookshortsView"
+	>
+		SELECT * FROM shorts_view where like_cnt >0 and blind_yn=0 ORDER BY RAND() LIMIT 10
+
 	</select>
 
 </mapper>

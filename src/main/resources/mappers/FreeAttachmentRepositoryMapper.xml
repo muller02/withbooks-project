@@ -28,5 +28,12 @@
 			)
 	</insert>
 
+	<delete id="remove">
+		delete from 
+			free_attachment
+		where 
+			board_id = #{boardId}
+	</delete>
+
 
 </mapper>

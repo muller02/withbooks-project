@@ -48,7 +48,7 @@
 <section class="lg:d:none d:none md:d:block main-menu-bar-tablet w:2 bg-color:base-1 flex-shrink:0">
     <h1 class="d:none">메인메뉴바</h1>
     <ul class="d:flex fl-dir:column ai:center pt:5">
-        <li><a class="" href=""><img src="/icon/home.svg" class="w:1" alt="홈"></a></li>
+        <li><a class="" href="/"><img src="/icon/home.svg" class="w:1" alt="홈"></a></li>
         <li class="mt:6">
 
             <a th:href="${#authentication.principal ne 'anonymousUser'} ? '/my/index' : '/user/login' ">
@@ -69,15 +69,6 @@
         >북검색</a>
             <p class="arrow_box">책검색</p>
         </li>
-        <li class="mt:6 with "
-
-
-        ><a class="icon icon:withd icon-color:base-9" href="/with/list?m=2"
-
-
-        >위드</a>
-            <p class="arrow_box">위드</p>
-        </li>
         <li class="mt:6 book-shorts "
 
         ><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list?m=3"
@@ -86,6 +77,16 @@
         >북쇼츠</a>
             <p class="arrow_box">북쇼츠</p>
         </li>
+        <li class="mt:6 with "
+
+
+        ><a class="icon icon:withd icon-color:base-9" href="/with/list?m=2&p=1"
+
+
+        >위드</a>
+            <p class="arrow_box">위드</p>
+        </li>
+
         <li class="mt:6 booklog"
 
 

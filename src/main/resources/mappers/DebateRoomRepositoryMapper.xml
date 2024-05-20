@@ -15,7 +15,6 @@
         , reserve_date
     </sql>
 
-
     <!-- 게시글 저장 -->
     <insert id="save" parameterType="debateRoom" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO debate_room (
@@ -36,9 +35,9 @@
         SELECT
         *
         FROM debate_room
-        where id = #{id}
+        WHERE id = #{id}
         <if test="withId != null">
-            and with_id = #{withId}
+            AND with_id = #{withId}
         </if>
     </select>
 

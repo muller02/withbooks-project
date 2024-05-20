@@ -13,4 +13,6 @@ public interface DebateBoardRepository {
     DebateBoard findById(Long id);
 
     void update(DebateBoard debateBoard);
+
+    void delete(Long id);
 }

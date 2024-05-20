@@ -41,8 +41,8 @@
     <!-- <header class="h:1 d:flex jc:center ai:center">
             <h1 class="fs:3 fw:3"><a href="">위드북스</a></h1>
         </header> -->
-    <main layout:fragment="main" class="flex-grow:1">
-      <div class="with-tap-component">
+    <main layout:fragment="main">
+      <div class="with-tap-component pt:3 px:2">
         <ul class="n-tabbar justify-content:space-between menu-tap">
           <li ><a class="fw:3" id="home2" th:href="@{/with/detail(id=${param.wid})}">홈</a></li>
           <li class="active"><a id="debate" >토론서재</a></li>
@@ -55,13 +55,6 @@
 
       <div class="p:3">
         <h1 class="d:none">북리스트</h1>
-
-
-
-
-
-
-
         <!--            <section class="my:4 d:grid gap:8 grid-templ-col:2 md:grid-templ-col:3 lg:grid-templ-col:1 ji:center">-->
         <section class="my:4 book-list">
           <h1 class="d:none">북 리스트</h1>
@@ -79,18 +72,18 @@
                     />
                   </div>
 
-                  <div class="w:100p d: fl-dir:column ai:center px:2">
-                    <h1 class="fs:4 fw:3">
+                  <div class="w:100p d:fl-dir:column ai:center px:2">
+                    <h1 class="fs:3 fw:3">
                       <div th:text="${n.title}">도둑맞은 집중력</div>
                     </h1>
-                    <span class="d:flex">
-                      <div class="fs:2 fw:1 mt:1" th:text="${n.author}">
+                    <div class="d:flex ai:center gap:1 mt:1">
+                      <span class="fs:2 fw:2 pt:1 lg:fs:1 color:base-5" th:text="${n.author}">
                         요한하리
+                      </span>
+                      <div class="pt:1 fs:2 lg:fs:1">
+                        [<span th:text="${n.boardCnt} == null ? 0 : ${n.boardCnt}">5</span>]
                       </div>
-                      <div class="ml:2">
-                        [<span th:text="${n.boardCnt} == null ? 0 : ${n.boardCnt}" >5</span>]
-                      </div>
-                    </span>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -98,11 +91,19 @@
           </ul>
         </section>
       </div>
-      <a
-              th:href="@{/with/debate/reg(wid=${param.wid})}"
-              style="transform: translate(-60px , 10px)"
-              class="icon icon:plus plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"
-      ></a>
+<!--      <a-->
+<!--              th:href="@{/with/debate/reg(wid=${param.wid})}"-->
+<!--              style="transform: translate(-60px , 10px)"-->
+<!--              class="icon icon:plus plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"-->
+<!--      ></a>-->
+
+      <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
+        <h1 class="d:none">토론카드 작성하기 버튼</h1>
+        <div class="bg-color:main-5 border-radius:full p:3">
+          <a href="reg" th:href="@{/with/debate/reg(wid=${param.wid})}" th:title="${'토론방 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+
+        </div>
+      </div>
     </main>
   </body>
 </html>

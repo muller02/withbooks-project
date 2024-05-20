@@ -11,5 +11,7 @@ public interface FreeCommentService {
     List<FreeCommentView> getList(Long freeBoardId);
 
     int reg(Long freeBoardId, Long userId, String comment);
+
+    int delete(Long id);
     
 }

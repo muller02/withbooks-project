@@ -42,19 +42,29 @@
         <if test="withTop != null and withTop != ''">
             and with_top like '%${withTop}%'
         </if>
-
     </where>
+    
+        group by
+            b.id
 
-    group by
-    b.id
-    order by
-    b.reg_date desc
+    <choose>
+        <when test="sort == 'latest'"> 
+            order by b.reg_date desc
+        </when>
 
+        <when test="sort == 'oldest'">
+            order by b.reg_date asc
+        </when>
+    </choose>
 
-
-
+    limit #{limit} offset #{offset}
+    
 <!--  카테고리 아이디 where 필요-->
 </select>
+
+
+
+
 
   <select id="findAllByWithId" resultType="java.lang.String">
     select
@@ -82,5 +92,10 @@
     </select>
 
 
-</mapper>
+    <select id="findByBookId" resultType="WithView">
 
+        select * from with_view where id in(SELECT with_id FROM debate_room_view where book_id=#{bookId});
+
+    </select>
+
+</mapper>

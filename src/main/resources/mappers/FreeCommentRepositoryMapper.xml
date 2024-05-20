@@ -38,4 +38,11 @@
 		)
 	</insert>
 
+	<delete id="remove">
+		delete from 
+			free_comment
+		where 
+			id = #{id}
+	</delete>
+
 </mapper>

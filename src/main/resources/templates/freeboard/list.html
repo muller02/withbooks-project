@@ -34,8 +34,25 @@
             color: var(--color-base-1) !important;
             border-width: 0 !important;
         }
+        .icon\:dots_three_outline_vertical_fill{
+            --top-1: -30px;
+        }
+        .icon\:dots_three_outline_vertical_fill:hover{
+            background-color: var(--color-base-3);
+            border-radius: 20px;
+        }
+        .pop-up-box{
+            --top-1: -30px;
+        }
+        .icon\:file:hover,
+        .icon\:trash:hover{
+            background-color:var(--color-base-2); 
+        }
+        #del-modal-box{
+            --color-base-3: rgba(30, 6, 6, 0.1);
+        }
     </style>
-    
+    <script src="/js/freeboard/list.js" defer></script>
 </head>
 <body>
     <main class="px:3 pb:3 flex-grow:1" layout:fragment="main">
@@ -56,7 +73,7 @@
             <div><a class="popular fs:2 color:base-3" th:classappend="${{param.s}}=='popular' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=popular)}">인기순</a></div>
         </section>
         
-        <span class="board-list">
+        <span id="board-list" class="board-list">
             <section class="d:flex fl-dir:column mt:6 bd-bottom pb:3" th:each="b : ${list}">
                 <h1 class="d:none">게시글</h1>
                 <span class="pos:relative">
@@ -68,8 +85,20 @@
                             <div class="fs:1 color:base-5" th:text="${b.regDate}">10분전</div>
                         </span>
                     </section>
-    
-                    <div class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1">점점점</div>
+                    
+                    <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq b.userId}">
+                        <h1 class="d:none">수정/삭제 버튼</h1>
+                        <button class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer">점점점</button>
+                        
+                        <ul class="pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none">
+                            <li>
+                                <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" th:href="@{edit(wid=${param.wid},fid=${b.id})}">수정하기</a>
+                            </li>
+                            <li class="mt:2">
+                                <button class="del-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:trash icon-color:accent-1 color:accent-1 cursor:pointer" href="" th:attr="data-id=${b.id}">삭제하기</button>
+                            </li>
+                        </ul>
+                    </section>
                     
                     <a href="" th:href="@{./detail(fid=${b.id})}">
                         <div class="fs:4 fw:3 mt:4" th:text="${b.title}">푸바오 신간 샀어요 !!</div>
@@ -83,7 +112,7 @@
                                 <div class="w:10 h:10p py:4">
                                     <img class="w:10p h:10p object-fit:contain" src="/image/my/profile.png" alt="게시글 이미지" th:src="${b.imgs[0]}">
                                 </div>
-
+                                <div class="img-cnt bg-color:base-6 color:base-1 px:2 pos:absolute right:1 bottom:1" th:text="${b.imgs.size()}">123</div>
                             </section>
                         </span>
                     </a>
@@ -94,6 +123,17 @@
                         <div class="fs:2 color:base-6 deco icon:chat_circle icon-color:base-5 ml:3 deco-mr:1" th:text="${b.commentCnt}">13</div>
                     </section>
     
+                </span>
+            </section>
+
+            <section id="del-modal-box" class="pos:fixed top:1 bottom:1 left:1 right:1 zi:4 d:flex ai:center jc:center bg-color:base-3 d:none">
+                <h1 class="d:none">삭제 모달 창</h1>
+                <span class="modal-center-box bd bd-radius:4 bg-color:base-1 w:5 h:3 d:flex fl-dir:column ai:center jc:center">
+                    <div class="fs:4">정말로 삭제하시겠습니까?</div>
+                    <div class="del-modal-div mt:5 d:flex">
+                        <button class="del-btn bd bd-radius:4 bd-color:transparent bg-color:accent-1 px:4 py:2 color:base-1 cursor:pointer">삭제</button>
+                        <button class="cancel-btn bd bd-radius:4 px:4 py:2 ml:4 cursor:pointer">취소</button>
+                    </div>
                 </span>
             </section>
         </span>
@@ -107,7 +147,7 @@
             "
         >
             <h1 class="d:none">페이저</h1>
-            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} le 1">
+            <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
                 <li th:unless="${startnum} eq 1" >
                     <a class="icon icon:caret_left" href="">이전</a>
                 </li>

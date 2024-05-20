@@ -194,8 +194,8 @@ window.addEventListener("load", function(){
     let spanHTML = `
             <span class="topic-input d:flex ai:center al-self:stretch">
               <div class="d:flex mt:4 flex-grow:1">
-                <input type="text" name="topic" class="n-textbox w:100p mr:3" placeholder="토론 주제를 입력하세요." />
-                <button type="button" class=""><span class="del-btn icon icon:minus">삭제</span></button>
+                <input type="text" name="topic" class="n-textbox w:100p mr:3 pl:2" placeholder="토론 주제를 입력하세요." />
+                <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>
               </div>
             </span> `
     document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
@@ -224,7 +224,7 @@ window.addEventListener("DOMContentLoaded", function() {
     let reserveDate = document.getElementById("reserve-date");
     let debatePeriod = document.getElementById("debate-period");
     let deadline = document.getElementById("deadline");
-    let  deadlineBox = document.querySelector(".deadline-box");
+    let deadlineBox = document.querySelector(".deadline-box");
     let deadlineValue;
     let statDateValue;
     let debateEndDate
@@ -259,7 +259,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
         deadlineValue = deadline.value;
         console.log(deadlineValue)
-       debateEndDate  = moment(reserveDate.value).add(deadlineValue, 'days').format('YYYY-MM-DD');
+        debateEndDate  = moment(reserveDate.value).add(deadlineValue, 'days').format('YYYY-MM-DD');
 
         debatePeriod.innerHTML=` (${statDateValue} ~ ${debateEndDate})`
 

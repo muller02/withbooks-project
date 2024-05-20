@@ -63,22 +63,6 @@
 			isbn13 = #{isbn13}
 	</select>
 
-	<!-- <select id="findCountByParams" resultType="int">
-		select 
-			count(id) count
-		from
-			book
-		<where>
-			<if test="params.query != null and params.queryType != null">
-				${params.queryType} like '%${params.query}%'
-			</if>
-			<if test="params.categoryId != null">
-				and category_id = #{params.categoryId}
-			</if>
-		</where>
-	</select> -->
-
-
 <!-- book/list -->
 	<select id="findByParams" resultType="Book">
 	select 
@@ -285,5 +269,38 @@
 				)
 		</foreach>
 </insert>
+<!-- ============================================================================= -->
+
+<!-- main -->
+<select id="findAllBestseller">
+	select 
+		b.id, 
+		b.category_id, 
+		b.title, 
+		b.author, 
+		b.publisher, 
+		b.pub_date, 
+		b.cover,
+		bs.reg_date 
+	from 
+		bestseller bs join book b on bs.book_id = b.id
+	where 
+		b.public_yn = 1
+	limit 9
+</select>
+
+<select id="findAllNew">
+<![CDATA[
+	select 
+		* 
+	from 
+		book 
+	where public_yn = 1
+		and  pub_date <= curdate()
+	order by 
+		pub_date desc
+	limit 9
+]]>
+</select>
 
 </mapper>

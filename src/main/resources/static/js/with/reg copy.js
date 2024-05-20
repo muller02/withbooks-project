@@ -108,7 +108,7 @@ window.addEventListener("load", function () {
         e.preventDefault();
 
         let withName = withNameInput.value;
-        let url = "/api/with/check-name?n=" + withName;
+        let url = "/api/withs/check-name?n=" + withName;
 
         await fetch(url)
             .then((response) => {
@@ -354,7 +354,7 @@ window.addEventListener("load", function () {
 //         e.preventDefault();
 //
 //         let withName = withNameInput.value;
-//         let url = "/api/with/check-name?n=" + withName;
+//         let url = "/api/withs/check-name?n=" + withName;
 //
 //         await fetch(url)
 //             .then((response) => {

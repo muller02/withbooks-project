@@ -13,15 +13,25 @@
 </select>
 
 <select id="findAllById" resultType="DebateRoomView">
-
-  select
-  *
-  from debate_room_view
-  where with_id = #{withId} and blind_yn = 0
-
+  SELECT
+    *
+  FROM debate_room_view
+  WHERE
+    with_id = #{withId}
+    AND blind_yn = 0
+  ORDER BY reg_date desc
 </select>
 
 
+  <select id="findByWithId" resultType="DebateRoomView">
+
+    SELECT *
+    FROM debate_room_view
+    WHERE with_id = #{withId}
+    ORDER BY board_cnt DESC
+    LIMIT 1
+
+  </select>
 
 
 

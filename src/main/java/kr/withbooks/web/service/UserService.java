@@ -13,12 +13,10 @@ public interface UserService {
 
     String getNickNameById(Long userId);
 
-    void join(User user);
-
-
-    
+    int join(User user);
 
     Integer emailCheck(String email);
+    Integer nicknameCheck(String nickname);
     
     List<User> get(Long id,String nickname,String email,String birthyear,Integer gender,String startDate,String endDate,Integer status);
     List<BookshortsView> getByIdShorts(Long id);

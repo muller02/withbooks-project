@@ -4,6 +4,7 @@ import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.DebateComment;
 import kr.withbooks.web.entity.DebateCommentView;
 import kr.withbooks.web.service.DebateCommentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/with/debate/board")
 public class DebateBoardCommentController {
 
-    @Autowired
-    private DebateCommentService debateCommentService;
+    private final DebateCommentService debateCommentService;
 
 //    @ResponseStatus(HttpStatus.OK)
 //    @GetMapping("/{boardId}/comments")
