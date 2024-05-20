@@ -13,5 +13,7 @@ public interface FreeCommentService {
     int reg(Long freeBoardId, Long userId, String comment);
 
     int delete(Long id);
+
+    void edit(Long id, String content);
     
 }
