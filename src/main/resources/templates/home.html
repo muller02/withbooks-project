@@ -51,6 +51,8 @@
 
         .shorts-shadow{
             box-shadow: 2px 4px 12px rgba(157, 157, 157, 0.08);
+            flex: 0 0 33.33%;
+            max-height: 115px;
         }
 
         .overflow-y-scroll {
@@ -206,18 +208,20 @@
                 
                 <section class="d:flex overflow-y-scroll  scroll-box  scrl-none ">
                     <h2 class="d:none  ">베스트셀러</h2>
-                <ul class=" d:flex  flex-direction:column   scroll-box	md:w:5p lg:w:5p ">
-                    <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  "  th:each="book, stat : ${bookList}">
+                <ul class=" d:flex  flex-direction:column scroll-box md:w:5p lg:w:5p fl-wrap:wrap max-height:7">
+                    <li class="shorts-shadow min-width:6 box-sizing:border-box"  th:each="book, stat : ${bookList}">
+                        <a class="d:flex  p:3 gap:4 m:2 " href="" th:href="@{./book/detail(id=${book.id},m=1)}">
                             <div class="fw:3 fs:3" th:text="${stat.index + 1}">1. </div>
                             <div class="book-img-wh">
-                                <img src="/image/with/trend.png" th:src="${book.cover}" class="w:100p h:100p">
+                                <img src="/image/with/trend.png" th:src="${book.cover}" class="book-img-wh">
                             </div>
                             <div>
-                                <div class="fs:3 fw:3" th:text="${book.title}">도둑 맞은 집중력</div>
-                                <div th:text="${book.author}">홍길동 저</div>
-                                <div th:text="${book.publisher}">유노북스</div>
-                                <div th:text="${book.pubDate}">2023.01.02</div>
+                                <div class="fs:3 fw:3 ln-clamp:1" th:text="${book.title}">도둑 맞은 집중력</div>
+                                <div class="ln-clamp:1" th:text="${book.author}">홍길동 저</div>
+                                <div class="ln-clamp:1" th:text="${book.publisher}">유노북스</div>
+                                <div  th:text="${#dates.format(book.pubDate, 'yyyy.MM.dd')}">2023.01.02</div>
                             </div>
+                        </a>
                     </li>
                     <!-- <li class="shorts-shadow min-width:6 p:3    gap:4  m:2 box-sizing:border-box d:flex	  " >
                         <div class="fw:3 fs:3">2. </div>
