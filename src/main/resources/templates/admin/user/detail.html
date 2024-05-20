@@ -8,30 +8,39 @@
     </head>
     <body>
         <main layout:fragment="main" class="n-panel flex-direction:column n-main-panel">
+            <!-- <div class="text-align:end m:2">
+                <a class="bg-color:main-2 color:main-4 px:4 py:2 bd-radius:5 fs:1" href="list">회원 목록으로</a>
+            </div> -->
             <section class="m:2">
                 <h1 class="fw:3 fs:4 mb:2">회원정보</h1>
                 <div class="bd-top bd-bottom bd-w:2">
                     <div class="d:flex ai:center bd-bottom">
                         <div class="w:2 py:2 fs:1 text-align:center bg-color:base-2">회원정보</div>
-                        <div class="px:2 fs:1">123</div>
+                        <div class="px:2 fs:1" th:text="${user.id}">123</div>
                     </div>
                     <div class="d:flex ai:center bd-bottom">
                         <div class="w:2 py:2 fs:1 text-align:center bg-color:base-2">아이디</div>
-                        <div class="px:2 fs:1">withbooks@naver.com</div>
+                        <div class="px:2 fs:1" th:text="${user.email}">withbooks@naver.com</div>
                     </div>
                     <div class="d:flex ai:center bd-bottom">
                         <div class="w:2 py:2 fs:1 text-align:center bg-color:base-2">닉네임</div>
-                        <div class="px:2 fs:1">뉴렉이</div>
+                        <div class="px:2 fs:1" th:text="${user.nickname}">뉴렉이</div>
                     </div>
                     <div class="d:flex ai:center bd-bottom">
                         <div class="w:2 py:2 fs:1 text-align:center bg-color:base-2">등록일</div>
-                        <div class="px:2 fs:1">2023-01-01</div>
+                        <div class="px:2 fs:1" th:text="${#temporals.format(user.joinDate, 'yyyy-MM-dd')}">2023-01-01</div>
                     </div>
                     <div class="d:flex">
                         <div class="w:2 py:2 fs:1 text-align:center bg-color:base-2">상태</div>
                         <div class="d:flex ai:center px:2">
-                            <div class="fs:1 mr:3">정상</div>
-                            <div class="bg-color:main-2 color:main-5 px:3 py:1 fs:1 bd-radius:6 cursor:pointer"><span>관리</span></div>
+                            <div
+                                class="fs:1 mr:3"
+                                th:text="${user.withdrawStatus == 0 ? '정상' : user.withdrawStatus == 1 ? '탈퇴' : '정지' }"
+                                th:classappend="${user.withdrawStatus == 1 ? 'color:base-4' : user.withdrawStatus == 2 ? 'color:accent-1' : '' }"
+                            >
+                                정상
+                            </div>
+                            <div class="bg-color:main-2 color:main-5 px:3 py:1 fs:1 bd-radius:6 cursor:pointer"><span>변경</span></div>
                         </div>
                     </div>
                 </div>
@@ -94,25 +103,14 @@
                             <div class="fw:3 fs:2 w:1p text-align:center fs:2">댓글수</div>
                         </div>
                         <div>
-                            <div class="bd-top">
+                            <div class="bd-top" th:each="l,i : ${list}">
                                 <div class="d:flex ai:center py:2">
-                                    <div class="fs:2 w:1p text-align:center">1</div>
-                                    <div class="fs:2 w:2p text-align:center">1335</div>
+                                    <div class="fs:2 w:1p text-align:center" th:text="${i.count}">1</div>
+                                    <div class="fs:2 w:2p text-align:center" th:text="${l.id}">1335</div>
                                     <!-- th:title -->
-                                    <div class="fs:2 w:5p text-align:center ln-clamp:1">이 북로그는 어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고</div>
-                                    <div class="fs:2 w:2p text-align:center">2024-01-01</div>
-                                    <div class="fs:2 w:1p text-align:center">134</div>
-                                    <div class="fs:2 w:1p text-align:center">30</div>
-                                </div>
-                            </div>
-                            <div class="bd-top">
-                                <div class="d:flex ai:center py:2">
-                                    <div class="fs:2 w:1p text-align:center">1</div>
-                                    <div class="fs:2 w:2p text-align:center">1335</div>
-                                    <!-- th:title -->
-                                    <div class="fs:2 w:5p text-align:center ln-clamp:1">이 북로그는 어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고</div>
-                                    <div class="fs:2 w:2p text-align:center">2024-01-01</div>
-                                    <div class="fs:2 w:1p text-align:center">134</div>
+                                    <div class="fs:2 w:5p text-align:center ln-clamp:1" th:utext="${l.content}">이 북로그는 어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고</div>
+                                    <div class="fs:2 w:2p text-align:center" th:text="${#temporals.format(l.regDate, 'yyyy-MM-dd')}">2024-01-01</div>
+                                    <div class="fs:2 w:1p text-align:center" th:text="${l.liked}">134</div>
                                     <div class="fs:2 w:1p text-align:center">30</div>
                                 </div>
                             </div>
@@ -120,6 +118,29 @@
                     </div>
                 </div>
             </section>
+            <!-- <section class="n-modal" tabindex="-1">
+                <h1 class="n-font:h3 font-weight:3">상태 변경</h1>
+                <form>
+                    <div class="my:5">
+                        <label class="mr:3">
+                            <input type="radio" name="status" class="" />
+                            정상
+                        </label>
+                        <label class="mr:3">
+                            <input type="radio" name="status" class="" />
+                            정지
+                        </label>
+                        <label class="mr:3">
+                            <input type="radio" name="status" class="" />
+                            탈퇴
+                        </label>
+                    </div>
+                    <div class="d:flex jc:flex-end gap:2 mt:8">
+                        <button type="button" class="n-btn n-btn:outline">취소</button>
+                        <button type="submit" class="n-btn">저장</button>
+                    </div>
+                </form>
+            </section> -->
         </main>
     </body>
 </html>

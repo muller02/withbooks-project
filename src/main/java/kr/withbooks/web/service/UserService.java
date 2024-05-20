@@ -2,6 +2,7 @@ package kr.withbooks.web.service;
 
 import java.util.List;
 
+import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
 
 public interface UserService {
@@ -18,5 +19,5 @@ public interface UserService {
     Integer nicknameCheck(String nickname);
     
     List<User> get(Long id,String nickname,String email,String birthyear,Integer gender,String startDate,String endDate,Integer status);
-
+    List<BookshortsView> getByIdShorts(Long id);
 }

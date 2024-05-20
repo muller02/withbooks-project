@@ -2,12 +2,11 @@ package kr.withbooks.web.service;
 
 import java.util.List;
 
-import com.fasterxml.jackson.core.Base64Variant;
-import kr.withbooks.web.repository.JoinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
 import kr.withbooks.web.repository.UserRepository;
 
@@ -67,6 +66,11 @@ public class UserServiceImp implements UserService{
             String endDate, Integer status) {
         
         return repository.findByAll(id, nickname, email, birthyear, gender, startDate, endDate, status);
+    }
+
+    @Override
+    public List<BookshortsView> getByIdShorts(Long id) {
+        return repository.findByIdShorts(id);
     }
 
 
