@@ -171,11 +171,11 @@
                             <h1 class="fs:6" th:text="${board.title}">일뽕재홍</h1>
                             <div class="d:flex gap:1 jc:center ai:center">
                                 <span class="d:flex jc:center">
-                                    <img class="profile-image w:1 h:1" src="/image/shorts/profile.png" --th:src="${userImg}" alt="이치고경인">
+                                    <img class="profile-image w:1 h:1" src="/image/shorts/profile.png" th:src="${user.img}" alt="이치고경인">
                                 </span>
                                 <span class="gap:1" >
                                     <i class="fs:1">by</i>
-                                    <span class="fs=1" --th:text="${nickname}">이치고경인</span>
+                                    <span class="fs=1" th:text="${user.nickname}">이치고경인</span>
                                 </span>
                             </div>
                             <span class="fs:1" th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm:ss')}">2024-03-27 23:03:26</span>
@@ -232,7 +232,7 @@
             </div>
 
             <div class="card-note-comment mt:2">
-                <section class="comment-list py:2 px:3 bd-bottom"  th:with="valid = ${#authentication.principal ne 'anonymousUser' ? #authentication.principal.id : -1}">
+                <section class="comment-list py:2 px:4 bd-bottom"  th:with="valid = ${#authentication.principal ne 'anonymousUser' ? #authentication.principal.id : -1}">
                     <h1 class="d:none">댓글목록</h1>
                     
                     <div th:each="cmt : ${debateCommentList}"> 
