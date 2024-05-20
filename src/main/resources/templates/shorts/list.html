@@ -171,6 +171,7 @@
 
     </style>
     <script src="/js/shorts/list.js" defer></script>
+    <script src="/js/shorts/list-scroll.js" defer></script>
   </head>
 
   <body>
@@ -196,7 +197,7 @@
       </section>
       <div id="login-modal-backdrop" class="backdrop d:none"></div>
 
-      <section
+      <!-- <section
         class="bd bd-color:base-3 bd-radius:8 px:3 py:4 mt:6 lg:pos:relative"
       >
         <h1 class="d:none">북쇼츠</h1>
@@ -330,17 +331,19 @@
             <div class="fs:2 fw:3">50.2M</div>
           </div>
         </section>
-      </section>
+      </section> -->
 
       <section
         class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:4 py:4 mt:6 short-section lg:pos:relative"
-        th:each="s : ${list}"
+        th:each="s, stat : ${list}"
         th:id="${s.id}"
       >
         <h1 class="d:none">북쇼츠</h1>
         <div class="d:none shorts" th:text="${s.id}">id</div>
 
-        <section class="shorts d:flex jc:center ai:center px:1">
+        <section class="shorts d:flex jc:center ai:center px:1"
+        th:classappend="${stat.last} ? 'observe-target' : ''"
+        >
           <h1 class="d:none">북쇼츠 작성관련 정보</h1>
           <div class="h:1 w:1 border-radius:full of:hidden">
             <img
