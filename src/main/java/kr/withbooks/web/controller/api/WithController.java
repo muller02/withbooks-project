@@ -3,7 +3,9 @@ package kr.withbooks.web.controller.api;
 
 import java.util.List;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,16 +50,21 @@ public class WithController {
         return checkName;
     }
 
+//    @GetMapping("check-member")
+//    boolean checkWithMember( // @AuthenticationPrincipal CustomUserDetails userDetails,
+//                             Long withId,
+//                             Long userId)
+
     // 위드 가입 신청하기
     @GetMapping("join")
     public Integer join(
-        // @AuthenticationPrincipal CustomUserDetails userDetails,
-        Long withId,
-        Long userId
+         @AuthenticationPrincipal CustomUserDetails userDetails,
+        Long withId
+//        Long userId
         ) {
 
-        // Long userId = userDetails.getId();
-        userId = 4L;
+         Long userId = userDetails.getId();
+//        userId = 4L;
         Long masterYn =0L;
 
         Integer result = memberService.join(userId, withId, masterYn);

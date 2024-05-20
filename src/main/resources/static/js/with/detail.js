@@ -14,8 +14,6 @@ window.addEventListener("load", (e) => {
 
 
 
-
-
             //===================== 해당 텝의 스크립트 추가 ============================//
 
     async function getAnyList(withId, reqUrl) {

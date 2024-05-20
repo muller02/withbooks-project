@@ -244,12 +244,18 @@ public class WithController {
 
   @PostMapping("withdraw")
   public String withdraw(
-      @RequestParam(name = "with-id", required = true)Long withId,
-      Long memberId
+      @RequestParam(name = "with-id", required = true)Long withId
+      ,@AuthenticationPrincipal  CustomUserDetails userDetails
   ) {
 
-      memberId = 4L;
-      withMemberService.withdraw(withId, memberId);
+
+      Long userId = null;
+
+      if(userDetails!=null)
+        userId =  userDetails.getId();
+
+
+      withMemberService.withdraw(withId,userId );
 
       return "redirect:/with/detail?id="+withId;
   }
