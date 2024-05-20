@@ -79,12 +79,12 @@ window.addEventListener("load", function () {
         // 월
         let month = today.getMonth() + 1;
         //해당 월이 한자리면 앞에 '0' 붙이기
-        if (month.toString.length == 1) month = "0" + month;
+        if (month < 10) month = "0" + month;
 
         // 일
         let date = today.getDate();
         //해당 일이 한자리면 앞에 '0' 붙이기
-        if (date.toString.length == 1) date = "0" + date;
+        if (date < 10) date = "0" + date;
 
         // 로그 작성창 만들기
         let sectionHTML = ` 
@@ -215,17 +215,18 @@ window.addEventListener("load", function () {
             addLogCancel();
         };
 
-        // TODO 등록 전 유효성 검사
-        logContentSection.onchange = function (e) {
-            console.log("changing");
-        };
-
         //등록 버튼 클릭시 비동기처리
         submitBtn.onclick = async function (e) {
             e.preventDefault();
 
             let content = logTextarea.value.replace(/\n/g, "<br/>");
             let file = inputImg.files[0];
+
+            // 등록 전에 내용 없을 시 리턴
+            if (content == "" && file == undefined) {
+                alert("사진 또는 글을 입력해주세요!");
+                return;
+            }
 
             const formData = new FormData();
             formData.append("content", content);

@@ -63,6 +63,8 @@ window.addEventListener("load", function () {
             if(section.tagName != 'SECTION')
                 return;
 
+            if (section.tagName != "SECTION") return;
+
             // 찾은 section의 checkbox 찾기
             let checkbox = section.querySelector("input[type='checkbox']");
 
