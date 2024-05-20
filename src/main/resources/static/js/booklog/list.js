@@ -60,9 +60,13 @@ window.addEventListener("load", function () {
         // XXX 리팩토링 필요
         bookMarkList.onclick = function (e) {
             let section = e.target;
+            if(section.tagName != 'SECTION')
+                return;
+
+            if (section.tagName != "SECTION") return;
 
             // 찾은 section의 checkbox 찾기
-            let checkbox = section.querySelector("input");
+            let checkbox = section.querySelector("input[type='checkbox']");
 
             // checkbox의 boolean을 찾아 반대로 대입해주기
             let tmp = checkbox.checked;

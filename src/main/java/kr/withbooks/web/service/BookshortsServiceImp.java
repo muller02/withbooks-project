@@ -34,13 +34,21 @@ public class BookshortsServiceImp  implements  BookshrotsService{
     // shortsview 가져오기
     @Override
     public List<BookshortsView> getView() {
-        return  getView(null,null);
+        return  getView(null,null, 1);
     }
 
-
     @Override
-    public List<BookshortsView> getView(Long bookId,Long userId) {
-        return shortsViewRepository.findAll(bookId,userId);
+    public List<BookshortsView> getView(Long bookId,Long userId, int page) {
+        int size = 20;
+        int offset = (page-1)*size;
+        return shortsViewRepository.findAll(bookId,userId, size, offset);
+    }
+
+    // /api/bookShorts/list
+    // 무한스크롤
+    @Override
+    public List<BookshortsView> getView(Long bookId, Long userId, Long lastShortsId) {
+        return shortsViewRepository.findAllViews(bookId, userId, lastShortsId);
     }
 
     @Override
