@@ -14,10 +14,9 @@ public interface UserService {
 
     int join(User user);
 
-
-    
-
     Integer emailCheck(String email);
+    Integer nicknameCheck(String nickname);
     
     List<User> get(Long id,String nickname,String email,String birthyear,Integer gender,String startDate,String endDate,Integer status);
+
 }

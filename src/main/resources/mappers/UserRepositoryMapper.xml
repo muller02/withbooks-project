@@ -48,6 +48,8 @@
 		)
 	</insert>
 
+<!-- ================================================================== -->
+<!-- /user/join -->
 	<select id="countByEmail">
 		select
 			count(*) count
@@ -56,6 +58,17 @@
 		where
 			email = #{email}
 	</select>
+
+	<select id="countByNickname">
+		select
+			count(*) count
+		from
+			user
+		where
+			nickname = #{nickname}
+	</select>
+
+<!-- ================================================================= -->
 
 	<select id="findByAll" resultType="User">
 	select 

@@ -58,6 +58,11 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
+    public Integer nicknameCheck(String nickname) {
+        return repository.countByNickname(nickname);
+    }
+
+    @Override
     public List<User> get(Long id, String nickname, String email, String birthyear, Integer gender, String startDate,
             String endDate, Integer status) {
         
