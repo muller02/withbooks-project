@@ -58,18 +58,50 @@
 	</select>
 
 	<select id="findByAll" resultType="User">
-	select 
-		*
-	from
-		user
-	where
-		    id = #{id} 
-		and email like '%${email}%'
-		and nickname like '%${nickname}%'
-		and gender = ${gender}
-		and birth_date like '${birthyear}%'
-		and (join_date gt ${startDate}) between (join_date lt ${endDate}) 
-		and withdraw_status = ${status}	
+		select 
+			*
+		from
+			user
+		<where>
+			<if test="id != null and id != '' ">
+				id = #{id} 
+			</if>
+			<if test="email != null and email != '' ">
+				and email like '%#{email}%'
+			</if>
+			<if test="nickname != null and nickname != '' ">
+				and nickname like '%#{nickname}%'
+			</if>
+			<if test="gender != null and gender != '' ">
+				and gender = #{gender}
+			</if>
+			<if test="birthyear != null and birthyear != '' ">
+				and birth_date like '#{birthyear}%'
+			</if>
+			<if test="startDate != null and startDate != '' ">
+				and join_date gt #{startDate}
+			</if>
+			<if test="endDate != null and endDate != '' ">
+				and join_date lt #{endDate}
+			</if>
+			<if test="status != null and status != '' ">
+				and withdraw_status = #{status}	
+			</if>
+		</where>	
+		order by join_date desc
+	</select>
+
+	<select id="findByIdShorts" resultType="BookshortsView">
+		select 
+			s.*, count(s.id) liked
+		from
+			shorts s
+				left join
+			shorts_like l ON s.id = l.shorts_id
+		where
+			s.user_id = #{id}
+		group by s.id
+		order by reg_date desc
 	</select>
 
 </mapper>

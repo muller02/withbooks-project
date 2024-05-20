@@ -104,29 +104,29 @@
                             </div>
                         </div>
                         <div class="text-align:end mt:2 mr:2">
-                            <input type="reset" value="초기화" class="n-btn bg-color:base-2 color:base-5" />
-                            <button class="search-btn n-btn">검색</button>
+                            <input type="reset" value="초기화" class="n-btn bg-color:base-2 color:base-5 fs:1" />
+                            <button class="search-btn n-btn fs:1">검색</button>
                         </div>
                     </form>
                 </div>
             </section>
-            <section class="admin-user mx:2 mt:10">
+            <section id="result-section" class="admin-user mx:2 mt:10">
                 <h1 class="d:none">검색 결과 리스트</h1>
                 <div>
                     <div class="d:flex mb:1 ai:center mb:2">
-                        <div class="fw:3 fs:4 mr:3">회원 목록</div>
+                        <div class="fw:3 fs:4 mr:2">회원 목록</div>
                         <div class="fl-grow:1 d:flex">
-                            <div class="color:base-4">검색 결과:&nbsp;</div>
-                            <div class="color:base-4">30<span class="color:base-4">건</span></div>
+                            <div class="color:base-4 fs:1">검색 결과:&nbsp;</div>
+                            <div class="color:base-4 fs:1">30<span class="color:base-4 fs:1">건</span></div>
                         </div>
                         <!-- <label class="n-toggle n-toggle-type:outline-box">
                             20개씩
                             <input type="checkbox" class="d:none" />
                         </label> -->
                     </div>
-                    <div class="d:flex ai:center">
+                    <div class="d:flex ai:center bg-color:base-2 px:2 py:2">
                         <label>
-                            <input type="checkbox" />
+                            <input type="checkbox" name="all" />
                         </label>
                         <div class="fw:3 w:1p text-align:center fs:1">번호</div>
                         <div class="fw:3 w:1p text-align:center fs:1">회원번호</div>
@@ -137,38 +137,35 @@
                         <div class="fw:3 w:1p text-align:center fs:1 fl-shrink:0">등록일</div>
                         <div class="fw:3 w:1p text-align:center fs:1">상태</div>
                     </div>
-                    <div>
-                        <div>
-                            <a href="detail" class="d:flex ai:center">
+                    <div class="result-list">
+                        <div class="result bd-bottom px:2 py:2" th:each="u,i : ${list}">
+                            <a th:href="@{|detail?id=${u.id}}" class="d:flex ai:center">
                                 <label>
                                     <input type="checkbox" />
                                 </label>
-                                <div class="w:1p text-align:center fs:1">1</div>
-                                <div class="w:1p text-align:center fs:1">123</div>
-                                <div class="w:4p text-align:center fs:1">admin@withbooks.kr</div>
-                                <div class="w:2p text-align:center fs:1">위북이</div>
-                                <div class="w:1p text-align:center fs:1">1999</div>
-                                <div class="w:1p text-align:center fs:1">여성</div>
-                                <div class="w:1p text-align:center fs:1 fl-shrink:0">2024-01-01</div>
-                                <div class="w:1p text-align:center fs:1">정상</div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="detail" class="d:flex ai:center">
-                                <label>
-                                    <input type="checkbox" />
-                                </label>
-                                <div class="w:1p text-align:center fs:1">2</div>
-                                <div class="w:1p text-align:center fs:1">123</div>
-                                <div class="w:4p text-align:center fs:1">admin@withbooks.kr</div>
-                                <div class="w:2p text-align:center fs:1">위북이</div>
-                                <div class="w:1p text-align:center fs:1">1999</div>
-                                <div class="w:1p text-align:center fs:1">여성</div>
-                                <div class="w:1p text-align:center fs:1 fl-shrink:0">2024-01-01</div>
-                                <div class="w:1p text-align:center fs:1">정상</div>
+                                <div class="w:1p text-align:center fs:1" th:text="${i.count}">1</div>
+                                <div class="w:1p text-align:center fs:1" th:text="${u.id}">123</div>
+                                <div class="w:4p text-align:center fs:1" th:text="${u.email}">admin@withbooks.kr</div>
+                                <div class="w:2p text-align:center fs:1" th:text="${u.nickname}">위북이</div>
+                                <div class="w:1p text-align:center fs:1" th:text="${#temporals.format(u.birthDate, 'yyyy')}">1999</div>
+                                <div class="w:1p text-align:center fs:1" th:text="${u.gender == 0 ? '남성' : '여성'}">여성</div>
+                                <div class="w:1p text-align:center fs:1 fl-shrink:0" th:text="${#temporals.format(u.joinDate, 'yyyy-MM-dd')}">2024-01-01</div>
+                                <div
+                                    class="w:1p text-align:center fs:1"
+                                    th:classappend="${u.withdrawStatus == 1 ? 'color:base-4' : u.withdrawStatus == 2 ? 'color:accent-1' : '' }"
+                                    th:text="${u.withdrawStatus == 0 ? '정상' : u.withdrawStatus == 1 ? '탈퇴' : '정지' }"
+                                >
+                                    정상
+                                </div>
                             </a>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section>
+                <h1>일괄 처리 메뉴</h1>
+                <div>
+                    
                 </div>
             </section>
         </main>
