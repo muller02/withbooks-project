@@ -128,16 +128,16 @@ window.addEventListener("load", function () {
             // 월
             let month = today.getMonth() + 1;
             //해당 월이 한자리면 앞에 '0' 붙이기
-            if (month.length == 1) month = "0" + month;
+            if (month < 10) month = "0" + month;
 
             // 일
             let date = today.getDate();
-            console.log(date.length);
-            if (date.length == 1) date = "0" + date;
+            // 해당 일이 한자리면 앞에 '0' 붙이기
+            if (date < 10) date = "0" + date;
 
             // 북로그 작성창 ( 책정보 + 이미지/글 작성란 )
             let sectionHTML = ` 
-                            <form action="reg" method="post" enctype="multipart/form-data" novalidate>
+                            <form name="regform" action="reg" method="post" enctype="multipart/form-data" novalidate>
                                 <section id="book-info" class="booklog-style">
                                     <h1 class="d:none">책 정보</h1>
                                     <div class="d:flex px:2 pos:relative">
@@ -213,6 +213,7 @@ window.addEventListener("load", function () {
             };
 
             // 로그 작성 폼
+            let form = searchBox.querySelector("form");
             let booklogRegForm = searchBox.querySelector("#booklog-reg-form");
             // 이미지 선택하는 label 세션부분
             let inputImg = booklogRegForm.querySelector(".booklog-img");
@@ -226,6 +227,24 @@ window.addEventListener("load", function () {
             let logContentImg = logContentSection.querySelector("section");
             // 로그 작성 취소
             let regCantleBtn = booklogRegForm.querySelector(".reg-cantle");
+            // 등록 버튼
+            let regBtn = booklogRegForm.querySelector(".reg-btn");
+
+            regBtn.onclick = function (e) {
+                e.preventDefault();
+                let file = inputImg.files["0"];
+                let textarea = logContentSection.querySelector("textarea").value;
+
+                console.log(file);
+                console.log(textarea);
+
+                if (file == undefined && textarea == "") {
+                    alert("사진 또는 글을 입력해주세요!");
+                    return;
+                }
+
+                document.form.submit();
+            };
 
             // 이미지 선택하기
             inputImg.oninput = function () {
