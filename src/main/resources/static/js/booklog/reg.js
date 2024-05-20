@@ -128,11 +128,12 @@ window.addEventListener("load", function () {
             // 월
             let month = today.getMonth() + 1;
             //해당 월이 한자리면 앞에 '0' 붙이기
-            if (month.toString.length == 1) month = "0" + month;
+            if (month.length == 1) month = "0" + month;
 
             // 일
             let date = today.getDate();
-            if (date.toString.length == 1) date = "0" + date;
+            console.log(date.length);
+            if (date.length == 1) date = "0" + date;
 
             // 북로그 작성창 ( 책정보 + 이미지/글 작성란 )
             let sectionHTML = ` 
