@@ -154,14 +154,7 @@
         if(!likeBtn.classList.contains("liked"))
         {
             async function like(freeBoardId) {
-                const response = await fetch("/api/free-board/free-like" ,
-                {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'text/plain'
-                    },
-                    body: freeBoardId
-                });
+                const response = await fetch(`/api/free-boards/${freeBoardId}/free-likes`, {method: 'POST'});
                 const jsonData = await response.json();
                 
 
@@ -183,14 +176,7 @@
         else
         {
             async function cancelLike(freeBoardId) {
-                const response = await fetch("/api/free-board/free-like" ,
-                {
-                    method: 'DELETE',
-                    headers: {
-                      'Content-Type': 'text/plain'
-                    },
-                    body: freeBoardId
-                });
+                const response = await fetch(`/api/free-boards/${freeBoardId}/free-likes`, {method: 'DELETE'});
                 const jsonData = await response.json();
                 
                 
