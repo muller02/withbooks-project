@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // =========================================================================
 // bestseller, new section
 const bookSection = document.querySelector("#book-section");
+const ul = bookSection.querySelector(".book-content>ul");
 const bestseller = bookSection.querySelector(".bestseller");
 const newBook = bookSection.querySelector(".new-book");
 
@@ -105,7 +106,7 @@ bestseller.onclick = function(e){
     fetch("/api/home/bestseller")
     .then((response)=>response.json())
     .then((data)=>{
-        console.log(data);
+        makeTemplate(data);
     })
 
 }
@@ -122,8 +123,34 @@ newBook.onclick = function(e){
     fetch("/api/home/new")
     .then((response)=>response.json())
     .then((data)=>{
-        console.log(data);
+        makeTemplate(data);
     })
 
+}
+
+function makeTemplate(list){
+    ul.innerHTML = "";
+    let index = 1;
+    let template = "";
+    for(book of list){
+        let pubDate = book.pubDate.substr(0, 10);
+        template +=  `
+        <li class="shorts-shadow min-width:6 box-sizing:border-box">
+            <a class="d:flex  p:3 gap:4 m:2 " href="/book/detail?id=${book.id},m=1">
+                <div class="fw:3 fs:3">${index++}</div>
+                <div class="book-img-wh">
+                    <img src="${book.cover}" class="book-img-wh">
+                </div>
+                <div>
+                    <div class="fs:3 fw:3 ln-clamp:1">${book.title}</div>
+                    <div class="ln-clamp:1">${book.author}</div>
+                    <div class="ln-clamp:1">${book.publisher}</div>
+                    <div>${pubDate}</div>
+                </div>
+            </a>
+            </li>
+        `;
+    }
+    ul.insertAdjacentHTML("beforeend", template);
 }
 

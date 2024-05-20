@@ -191,22 +191,20 @@
 
         <div class="n-item bd:none	 box-shadow:5">
             <ul class=" d:flex   overflow-y-scroll	    scrl-none scroll-box	 ">
-                    <li class=" bestseller book-on bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0 text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
-                            베스트 셀러
-                    </li>
-                    <li class="new-book bg-color:main-1 py:1  flex-shrink:0 h:auto min-width:2 w:auto text-align:center px:4 mr:4  mb:2 border-radius:5 cursor:pointer  " >
-                        신간
-                    </li>
-        <!-- 
-                    <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0  text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
-                        특별신간
-                    </li> -->
-
-
-                </ul>
+                <li class=" bestseller book-on bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0 text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
+                        베스트 셀러
+                </li>
+                <li class="new-book bg-color:main-1 py:1  flex-shrink:0 h:auto min-width:2 w:auto text-align:center px:4 mr:4  mb:2 border-radius:5 cursor:pointer  " >
+                    신간
+                </li>
+    <!-- 
+                <li class="bg-color:main-1 py:1  h:auto min-width:2  flex-shrink:0  text-align:center px:4 mr:4 mb:2 border-radius:5 cursor:pointer  " >
+                    특별신간
+                </li> -->
+            </ul>
 
                 
-                <section class="d:flex overflow-y-scroll  scroll-box  scrl-none ">
+                <section class="book-content d:flex overflow-y-scroll  scroll-box  scrl-none ">
                     <h2 class="d:none  ">베스트셀러</h2>
                 <ul class=" d:flex  flex-direction:column scroll-box md:w:5p lg:w:5p fl-wrap:wrap max-height:7">
                     <li class="shorts-shadow min-width:6 box-sizing:border-box"  th:each="book, stat : ${bookList}">
@@ -219,7 +217,7 @@
                                 <div class="fs:3 fw:3 ln-clamp:1" th:text="${book.title}">도둑 맞은 집중력</div>
                                 <div class="ln-clamp:1" th:text="${book.author}">홍길동 저</div>
                                 <div class="ln-clamp:1" th:text="${book.publisher}">유노북스</div>
-                                <div  th:text="${#dates.format(book.pubDate, 'yyyy.MM.dd')}">2023.01.02</div>
+                                <div  th:text="${#dates.format(book.pubDate, 'yyyy-MM-dd')}">2023.01.02</div>
                             </div>
                         </a>
                     </li>
