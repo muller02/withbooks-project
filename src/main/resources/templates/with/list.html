@@ -171,7 +171,7 @@
         <button class="w:100p font-weight:3">전체 위드</button>
       </li>
       <li class="w:5p">
-        <a class="w:100p color:base-3 font-weight:3" href="/mywith/list" id="container1">나의 위드</a>
+        <a class="w:100p color:base-3 font-weight:3" href="/mywith/list?m=3" id="container1">나의 위드</a>
       </li>
     </ul>
   </section>
@@ -200,7 +200,7 @@
 
           <div class="d:flex gap:1 flex-direction:column flex-grow:1">
             <div class="fs:6 fw:3 mb:2">
-              <a th:href="@{/with/detail(id=${with.id})}" th:text="${with.name}">책에퐁당</a>
+              <a th:href="@{/with/detail(m=3,id=${with.id})}" th:text="${with.name}">책에퐁당</a>
             </div>
             <div class="d:flex ai:center gap:1 ai:center">
               <div class="d:flex ai:center">

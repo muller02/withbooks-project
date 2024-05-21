@@ -101,9 +101,9 @@
   <div class="with-tap-component">
     <ul class="n-tabbar justify-content:space-between menu-tap">
       <li class="active"><a>홈</a></li>
-      <li><a id="debate" th:href="@{/with/debate/list(wid=${with.id})}">토론서재</a></li>
-      <li><a id="calendar" th:href="@{/calendar/index(wid=${with.id})}">모임일정</a></li>
-      <li><a id="board" th:href="@{/free-board/list(wid=${with.id},p=1,s='latest')}">자유게시판</a></li>
+      <li><a id="debate" th:href="@{/with/debate/list(m=3,wid=${with.id})}">토론서재</a></li>
+      <li><a id="calendar" th:href="@{/calendar/index(m=3,wid=${with.id})}">모임일정</a></li>
+      <li><a id="board" th:href="@{/free-board/list(m=3,wid=${with.id},p=1,s='latest')}">자유게시판</a></li>
       <li><a>북추천</a></li>
       <li><a>위드맴버</a></li>
     </ul>
@@ -244,6 +244,7 @@
     </section>
 
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
+
     <section class="my:5 board-list">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">자유게시판</h1>
 
@@ -251,18 +252,20 @@
         <h1 class="d:none">게시글</h1>
         <div class="d:flex ai:center mb:3">
           <div class="w:1 h:1 mr:2">
-            <img class="w:100p h:100p border-radius:5" src="/image/shorts/uie.jpg"/>
+            <img class="w:100p h:100p border-radius:5" src="/image/shorts/uie.jpg"
+            th:src="${b.userImg}"
+            />
           </div>
           <div>
             <div th:text="${b.nickname}">뉴렉이</div>
             <div class="fs:2 color:base-3" th:text="${b.regDate}">10분전</div>
           </div>
 
-          <div class="ml:auto icon icon:dots_three_outline_vertical_fill"></div>
+          <!-- <div class="ml:auto icon icon:dots_three_outline_vertical_fill"></div> -->
         </div>
 
         <div>
-          <h1 class="fs:5 fw:3 mb:3"><a th:href="@{/with/freeboard/detail(boardId=${b.id})}">[[${b.title}]]</a></h1>
+          <h1 class="fs:5 fw:3 mb:3"><a th:href="@{/free-board/detail(m=3,loc=0,fid=${b.id})}">[[${b.title}]]</a></h1>
           <p class="mb:2" th:text="${b.content}">
             what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like
             what i like what i like what i like what i like what i like
@@ -271,8 +274,14 @@
             i like what i like
           </p>
 
-          <div class="border border-color:base-3 w:100p h:4 border-radius:5">
-            <img src="/image/shorts/"/>
+          <div class="border border-color:base-3 w:100p h:4 border-radius:5"
+          th:if="${b.imgs.size()>0}"
+          >
+            <img src="/image/shorts/"
+            th:if="${b.imgs.size()>0}"
+            th:src="${b.imgs[0]}"
+            class="w:100p h:4"
+            />
           </div>
         </div>
 
@@ -283,72 +292,7 @@
         </div>
       </section>
 
-      <!--  사진 있을 떄 없을 떄, 구분해서 section이 달라짐 -->
-      <section class="border-bottom pb:2 mb:2">
-        <h1 class="d:none">게시글</h1>
-        <div class="d:flex ai:center mb:3">
-          <div class="w:1 h:1">
-            <img class="w:100p h:100p border-radius:5" src="/image/shorts/uie.jpg"/>
-          </div>
-          <div>
-            <div>뉴렉이</div>
-            <div>10분전</div>
-          </div>
 
-          <div class="ml:auto icon icon:dots_three_outline_vertical_fill"></div>
-        </div>
-
-        <div>
-          <h1 class="fs:3 fw:3 mb:3">오늘 작가님 오셨습니다.</h1>
-          <p class="mb:2">
-            what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like
-            what i like what i like what i like what ilike what i like what
-            i likewhat i like what i like what ilike what i like what i like what i like what i like what ilike what i
-            like what i likewhat i like what i like what ilike what i
-            like what i like
-          </p>
-        </div>
-
-        <div class="mt:2">
-          <span class="deco icon:chat mr:3">12</span>
-          <span class="deco icon:chat">12</span>
-        </div>
-      </section>
-      <section class="border-bottom pb:2">
-        <h1 class="d:none">게시글</h1>
-        <div class="d:flex ai:center mb:3">
-          <div class="w:1 h:1">
-            <img class="w:100p h:100p border-radius:5" src="/image/shorts/uie.jpg"/>
-          </div>
-          <div>
-            <div>뉴렉이</div>
-            <div>10분전</div>
-          </div>
-
-          <div class="ml:auto icon icon:dots_three_outline_vertical_fill"></div>
-        </div>
-
-        <div>
-          <h1 class="fs:3 fw:3 mb:3">오늘 작가님 오셨습니다.</h1>
-          <div class="d:flex gap:1">
-            <p class="mb:2">
-              what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like
-              what i like what i like what i like what ilike what i like
-              what i likewhat i like what i like what ilike what i like what i like what i like what i like what ilike
-              what i like what i likewhat i like what i like what ilike
-              what i like what i like
-            </p>
-            <div>
-              <img class="border w:2 h:2" src=""/>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt:2">
-          <span class="deco icon:thumbs_up mr:3">12</span>
-          <span class="deco icon:chat">12</span>
-        </div>
-      </section>
     </section>
   </div>
 </main>

@@ -58,19 +58,19 @@
     <main class="px:3 pb:3 flex-grow:1" layout:fragment="main">
         <div class="with-tap-component">
             <ul class="n-tabbar justify-content:space-between menu-tap">
-                <li ><a class="fw:3" id="home2" th:href="@{/with/detail(id=${param.wid})}">홈</a></li>
-                <li ><a id="debate" th:href="@{/with/debate/list(wid=${param.wid})}" >토론서재</a></li>
+                <li ><a class="fw:3" id="home2" th:href="@{/with/detail(m=3,id=${param.wid})}">홈</a></li>
+                <li ><a id="debate" th:href="@{/with/debate/list(m=3,wid=${param.wid})}" >토론서재</a></li>
                 <li><a>모임일정</a></li>
-                <li class="active" ><a id="board" th:href="@{/free-board/list(wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
+                <li class="active" ><a id="board" th:href="@{/free-board/list(m=3,wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
                 <li><a>북추천</a></li>
                 <li><a>위드맴버</a></li>
             </ul>
         </div>
         <section id="sort" class="d:flex mt:3">
             <h1 class="d:none">정렬방식</h1>
-            <div><a class="latest fs:2 color:base-3" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=latest)}">최신순</a></div>
+            <div><a class="latest fs:2 color:base-3" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{./list(m=3,wid=${param.wid},p=1,s=latest)}">최신순</a></div>
             <div class="mx:2 fs:2 color:base-9">|</div>
-            <div><a class="popular fs:2 color:base-3" th:classappend="${{param.s}}=='popular' ? 'selected-sort'" href="" th:href="@{./list(wid=${param.wid},p=1,s=popular)}">인기순</a></div>
+            <div><a class="popular fs:2 color:base-3" th:classappend="${{param.s}}=='popular' ? 'selected-sort'" href="" th:href="@{./list(m=3,wid=${param.wid},p=1,s=popular)}">인기순</a></div>
         </section>
         
         <span id="board-list" class="board-list">
@@ -92,7 +92,7 @@
                         
                         <ul class="pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none">
                             <li>
-                                <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" th:href="@{edit(wid=${param.wid},fid=${b.id})}">수정하기</a>
+                                <a class="edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5" th:href="@{edit(m=3,wid=${param.wid},fid=${b.id})}">수정하기</a>
                             </li>
                             <li class="mt:2">
                                 <button class="del-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:trash icon-color:accent-1 color:accent-1 cursor:pointer" href="" th:attr="data-id=${b.id}">삭제하기</button>
@@ -100,7 +100,7 @@
                         </ul>
                     </section>
                     
-                    <a href="" th:href="@{./detail(fid=${b.id})}">
+                    <a href="" th:href="@{./detail(m=3,fid=${b.id})}">
                         <div class="fs:4 fw:3 mt:4" th:text="${b.title}">푸바오 신간 샀어요 !!</div>
         
                         <p class="ln-clamp:3 fs:3 mt:3" th:utext="${b.content}">오늘 교보문고 가니까 입구에 딱!!! 있더라구요!!! 어어쩌고 저쩌고 ㄴ으미능마니읜읨나음니ㅏ으미나으미느아미느이ㅏㅓㅎ호ㅓ로로ㅓ허ㅏㅗㅗㅓ</p>
@@ -154,7 +154,7 @@
 
                 <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
                     <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
-                        th:href="@{./list(wid=${param.wid},p=${n},s=${param.s})}" 
+                        th:href="@{./list(m=3,wid=${param.wid},p=${n},s=${param.s})}"
                         th:text="${n}"
                         th:classappend="${{param.p}} == ${n} ? 'cur-page'"
                     >1</a>

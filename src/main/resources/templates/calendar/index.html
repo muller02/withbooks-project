@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="en"
-      layout:decorate="~{inc/layout.html}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<!doctype html>
+<html lang="en" layout:decorate="~{inc/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset='utf-8'/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -18,10 +16,21 @@
 </head>
 <body>
 <main class="flex-grow:1" layout:fragment="main">
+  <!-- 위드 탭 -->
+  <div class="with-tap-component">
+    <ul class="n-tabbar justify-content:space-between menu-tap">
+      <li><a class="fw:3" id="home2" th:href="@{/with/detail(id=${param.wid})}">홈</a></li>
+      <li><a id="debate" th:href="@{/with/debate/list(wid=${param.wid})}">토론서재</a></li>
+      <li class="active"><a id="calendar" th:href="@{/calendar/index(wid=${param.wid})}">모임일정</a></li>
+      <li><a id="board" th:href="@{/free-board/list(wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
+      <li><a>북추천</a></li>
+      <li><a>위드맴버</a></li>
+    </ul>
+  </div>
   <!-- calendar -->
   <section>
     <h1 class="d:none">캘린더</h1>
-    <div id='calendar'></div>
+    <div id='calendar-container'></div>
   </section>
 
   <!-- modal -->
@@ -87,7 +96,6 @@
         <button class="n-btn n-btn:outline" id="cancel-btn" type="button">취소</button>
         <button class="n-btn" type="submit">등록</button>
       </div>
-
     </form>
   </section>
 </main>
