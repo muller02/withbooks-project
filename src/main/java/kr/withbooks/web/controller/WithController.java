@@ -116,20 +116,11 @@ public class WithController {
 
     String nickname = userService.getNickNameById(withCapId);
 
-    // Long userId = userDetails.getId();
-    // [ ] 제거 예정
-    Long userId =userDetails.getId();
-
     //withId에 해당하는 위드 카테고리 리스트를 얻기
     List<String> withCategoryNames = withCategoryService.getListByWithId(withId);
 
     //withMember 테이블에서 withId에 해당하는 맴버들을 얻기
     List<WithMemberView> withMemberList = withMemberService.getViewById(withId);
-    // 위드 가입 여부 알아오기
-    Integer withJoinYn = withMemberService.getJoinYn(withId,userId);
-    // 미가입 상태일 경우 0 보내기, 반대의 경우 1 보냄
-    if(withJoinYn == null) withJoinYn = 0;
-    else withJoinYn = 1;
 
     //WithViewService 를 통해 with Id에 해당하는 view 리스트를 얻고 사이즈를 얻기
     int withMemberCnt = withMemberList.size();
@@ -139,7 +130,7 @@ public class WithController {
 
 
     // 토론 요약 best 책
-   DebateRoomView debateTopRoom = debateRoomService.getTopBoardCntbyId(withId);
+    DebateRoomView debateTopRoom = debateRoomService.getTopBoardCntbyId(withId);
 
     // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
     List<FreeBoardView> freeBoardList = freeBoardService.getList(withId, 1, "latest");
@@ -157,6 +148,19 @@ public class WithController {
       model.addAttribute("freeBoardList", subList);
     }
 
+    // Long userId = userDetails.getId();
+    if(userDetails!=null){
+      // [ ] 제거 예정
+      Long userId =userDetails.getId();
+      // 위드 가입 여부 알아오기
+      Integer withJoinYn = withMemberService.getJoinYn(withId,userId);
+      // 미가입 상태일 경우 0 보내기, 반대의 경우 1 보냄
+      if(withJoinYn == null) withJoinYn = 0;
+      else withJoinYn = 1;
+      model.addAttribute("joinYn", withJoinYn);
+    }
+
+
     model.addAttribute("nickname", nickname);
 
     model.addAttribute("withMemberList", withMemberList);
@@ -165,7 +169,7 @@ public class WithController {
     model.addAttribute("with", with);
     model.addAttribute("withCategoryNames", withCategoryNames);
     model.addAttribute("withMemberCnt", withMemberCnt);
-    model.addAttribute("joinYn", withJoinYn);
+   
     model.addAttribute("debateTopRoom",debateTopRoom);
 
 
@@ -185,7 +189,7 @@ public class WithController {
     String nickname = userService.getNickNameById(userDetails.getId());
     model.addAttribute("nickname", nickname);
 
-    return "with/reg";
+    return "with/reg?m=3";
 
   }
 
@@ -256,7 +260,7 @@ public class WithController {
 
     withCategoryService.add(withCategory.getWithID(), withCategory.getCategoryId());
 
-    return "redirect:/with/list?p=1";
+    return "redirect:/with/list?m=3&p=1";
 
 
   }
@@ -277,7 +281,7 @@ public class WithController {
 
       withMemberService.withdraw(withId,userId );
 
-      return "redirect:/with/detail?id="+withId;
+      return "redirect:/with/detail?m=3&id="+withId;
   }
 
 
