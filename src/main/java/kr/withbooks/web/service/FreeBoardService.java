@@ -23,4 +23,5 @@ public interface FreeBoardService {
     Long delete(Long id);
 
     int edit(FreeBoard freeBoard, MultipartFile[] imgs, HttpServletRequest request);
+
 }
