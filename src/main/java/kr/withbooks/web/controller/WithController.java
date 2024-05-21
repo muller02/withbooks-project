@@ -2,10 +2,10 @@ package kr.withbooks.web.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import kr.withbooks.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.entity.DebateRoomView;
+import kr.withbooks.web.entity.FreeBoardView;
 import kr.withbooks.web.entity.With;
 import kr.withbooks.web.entity.WithCategory;
 import kr.withbooks.web.entity.WithMemberView;
 import kr.withbooks.web.entity.WithView;
 import kr.withbooks.web.repository.DebateRoomViewRepository;
+import kr.withbooks.web.service.CategoryService;
+import kr.withbooks.web.service.DebateRoomService;
+import kr.withbooks.web.service.FreeBoardService;
+import kr.withbooks.web.service.UserService;
+import kr.withbooks.web.service.WithCategoryService;
+import kr.withbooks.web.service.WithMemberService;
+import kr.withbooks.web.service.WithService;
 
 
 @Controller
@@ -134,9 +142,21 @@ public class WithController {
    DebateRoomView debateTopRoom = debateRoomService.getTopBoardCntbyId(withId);
 
     // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
-    // List<FreeBoardView> freeBoardList = freeBoardService.getViewById(withId);
+    List<FreeBoardView> freeBoardList = freeBoardService.getList(withId, 1, "latest");
 
-    System.out.println("하하 = " + debateTopRoom);
+    
+    // freeBoardList null 체크 및 2개만 출력
+    if(freeBoardList!=null){
+      
+      List<FreeBoardView> subList = new ArrayList<>();
+      if(freeBoardList.size() >= 2)
+        subList = freeBoardList.subList(0, 2);
+      else
+        subList = freeBoardList;
+      
+      model.addAttribute("freeBoardList", subList);
+    }
+
     model.addAttribute("nickname", nickname);
 
     model.addAttribute("withMemberList", withMemberList);
