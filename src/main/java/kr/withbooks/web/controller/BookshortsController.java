@@ -46,18 +46,17 @@ public class BookshortsController {
 
 
     @GetMapping("list")
-    public String list(Model model, @RequestParam(name = "id", required = false) Long bookId,
-                       @AuthenticationPrincipal CustomUserDetails userDetails) {
-
+    public String list(Model model, 
+                        @RequestParam(name = "id", required = false) Long bookId,
+                        @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         Long userId = null;
         if(userDetails != null)
             userId = userDetails.getId();
 
-        System.out.println("딸기 = " + userId);
-        List<BookshortsView> list = service.getView(bookId,userId);
-        // System.out.println(list);
+        int page = 1;
 
+        List<BookshortsView> list = service.getView(bookId,userId, page);
 
         for (BookshortsView view : list) {
             Long id = view.getId();
@@ -73,7 +72,6 @@ public class BookshortsController {
             }
         }
 
-        System.out.println("복숭아 = "  + list);
         model.addAttribute("list", list);
 
         return "shorts/list";

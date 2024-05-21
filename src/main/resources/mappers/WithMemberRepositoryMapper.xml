@@ -14,11 +14,13 @@
 			(
 				with_id
 			   ,member_id
+				,master_yn
 			) 
 		values
 			(
 				#{withId}
 			   ,#{userId}
+				,#{masterYn}
 			)
 	</insert>
 
@@ -30,6 +32,14 @@
 		where
 			with_id = ${withId} 
 		and member_id = ${userId}
+	</select>
+
+	<select id="findAll" resultType="WithMember">
+		SELECT
+			*
+		FROM with_member
+		WHERE
+			with_id = #{withId}
 	</select>
 
 	<delete id="delete" parameterType="Long">

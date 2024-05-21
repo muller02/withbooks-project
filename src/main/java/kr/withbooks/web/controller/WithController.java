@@ -1,9 +1,10 @@
 package kr.withbooks.web.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.entity.*;
-import kr.withbooks.web.repository.DebateRoomViewRepository;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import kr.withbooks.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.entity.Category;
+import kr.withbooks.web.entity.DebateRoomView;
+import kr.withbooks.web.entity.With;
+import kr.withbooks.web.entity.WithCategory;
+import kr.withbooks.web.entity.WithMemberView;
+import kr.withbooks.web.entity.WithView;
+import kr.withbooks.web.repository.DebateRoomViewRepository;
 
 
 @Controller
@@ -45,17 +50,29 @@ public class WithController {
   @Autowired
   private DebateRoomViewRepository debateRoomViewRepository;
 
+
+  @Autowired
+  private DebateRoomService debateRoomService;
+
   @Autowired
   private FreeBoardService freeBoardService;
+
+
+  @Autowired
+  private WithMemberService memberService;
 
   @GetMapping("list")
   public String list(Model model,
                      @RequestParam(name = "c", required = false) Long[] categoryIds,
                      @RequestParam(name = "q", required = false) String query,
                      @RequestParam(name = "f", required = false) Long faceYn,
+                     @RequestParam(name = "p", required = false) Integer page,
                      @AuthenticationPrincipal CustomUserDetails userDetails) {
 
     Long userId = userDetails != null ? userDetails.getId() : null;
+
+    if(page == null)
+      page = 1;
 
     System.out.println("userId = " + userId);
 
@@ -65,19 +82,14 @@ public class WithController {
     model.addAttribute("categoryList", categoryList);
 
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
-    List<WithView> list = service.getList(categoryIds, query, faceYn);
+    List<WithView> list = service.getList(categoryIds, query, faceYn, null, null, null, null, page);
 
-    //service 로 이동 시킴 why ? Api에서도 사용해야 하므로
-    // List에 담긴 WithView 를 하나 씩 꺼내고, 해당 WithView의 id를 통해 , 해당 위드에 등록 된 카테고리 이름을
-    // 가지고 와서, withView categoryNames에 담기.
-//        for (WithView withView : list) {
-//            Long withId = withView.getId();
-//            List<String> categoryNames = service.getWithCategoryNames(withId);
-//            withView.setCategoryNames(categoryNames);
-//        }
+    int count = 1000;
+    // count = service.getCount();
 
     // 뷰에 데이터 전달
     model.addAttribute("list", list);
+    model.addAttribute("count", count);
 
     return "with/list";
   }
@@ -86,7 +98,7 @@ public class WithController {
   public String detail(
       Model model
     , @RequestParam(name = "id", required = false) Long withId
-    // , @AuthenticationPrincipal CustomUserDetails userDetails
+     , @AuthenticationPrincipal CustomUserDetails userDetails
   ) {
 
     //withId에 해당하는 위드 얻기
@@ -98,7 +110,7 @@ public class WithController {
 
     // Long userId = userDetails.getId();
     // [ ] 제거 예정
-    Long userId = 4L;
+    Long userId =userDetails.getId();
 
     //withId에 해당하는 위드 카테고리 리스트를 얻기
     List<String> withCategoryNames = withCategoryService.getListByWithId(withId);
@@ -118,9 +130,13 @@ public class WithController {
     List<DebateRoomView> debateRoomList = debateRoomViewRepository.findAllById(withId);
 
 
+    // 토론 요약 best 책
+   DebateRoomView debateTopRoom = debateRoomService.getTopBoardCntbyId(withId);
+
     // 해당 위드의 자유 게시판 리스트를 출력하기위한 view Service 호출
     // List<FreeBoardView> freeBoardList = freeBoardService.getViewById(withId);
 
+    System.out.println("하하 = " + debateTopRoom);
     model.addAttribute("nickname", nickname);
 
     model.addAttribute("withMemberList", withMemberList);
@@ -130,6 +146,7 @@ public class WithController {
     model.addAttribute("withCategoryNames", withCategoryNames);
     model.addAttribute("withMemberCnt", withMemberCnt);
     model.addAttribute("joinYn", withJoinYn);
+    model.addAttribute("debateTopRoom",debateTopRoom);
 
 
     return "with/detail";
@@ -172,7 +189,7 @@ public class WithController {
 
     //위드 이미지파일 이름
     //파일이 없을 때, 기본 이미지 적용
-    String withImgName = "default.png";
+    String withImgName = "/image/with/default.png";
 
     //파일이 있을 떄, 파일을 로컬에 저장
     if (!withImgFile.isEmpty()) {
@@ -195,7 +212,7 @@ public class WithController {
     with.setWithRegId(userId); // 위드 등록 사용자의 ID 설정
 //    with.setWithRegId(1L); // 위드 등록 사용자 id 임시 1L
 
-    with.setImg(withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
+    with.setImg("/image/with/"+withImgName);  //입력 받거나 , 받지 못 했을떄 이미지 이름 지정
 
     service.add(with);  // with 저장
 
@@ -212,9 +229,14 @@ public class WithController {
     withCategory.setWithID(withId);
     withCategory.setCategoryId(withCategoryIdList);
 
+
+    Long masterYn = 1L;
+
+    memberService.join(userId, withId,   masterYn);
+
     withCategoryService.add(withCategory.getWithID(), withCategory.getCategoryId());
 
-    return "redirect:/with/list";
+    return "redirect:/with/list?p=1";
 
 
   }
@@ -222,13 +244,21 @@ public class WithController {
 
   @PostMapping("withdraw")
   public String withdraw(
-      @RequestParam(name = "with-id", required = true)Long withId,
-      Long memberId
+      @RequestParam(name = "with-id", required = true)Long withId
+      ,@AuthenticationPrincipal  CustomUserDetails userDetails
   ) {
 
-      memberId = 4L;
-      withMemberService.withdraw(withId, memberId);
+
+      Long userId = null;
+
+      if(userDetails!=null)
+        userId =  userDetails.getId();
+
+
+      withMemberService.withdraw(withId,userId );
 
       return "redirect:/with/detail?id="+withId;
   }
+
+
 }

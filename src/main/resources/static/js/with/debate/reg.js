@@ -42,6 +42,35 @@ window.addEventListener("load", function(){
     });
 
 
+    // ================================= Enter 키 누를시 책 검색   =======================================
+
+    searchQueryInput.addEventListener("keypress",async function (e) {
+        e.preventDefault();
+
+        if (e.key === "Enter") {
+            console.log("sadfsaff")
+            console.log("sadfsaff")
+            // 사용자가 검색을 눌렀을때 검색어
+            let queryValue = searchQueryInput.value;
+
+
+            // fetch 통신 후 response 받는 절
+            let response = await getByParams(queryValue);
+
+            // 서버에서 문제가 생긴 경우 return
+            if (response.status != 200) {
+                contentUl.innerHTML = '';
+                contentUl.innerHTML = `검색 결과가 없습니다 ...  유감.`;
+                return;
+            }
+
+            let list = await response.json();
+            printBookList(list);
+
+        }
+    })
+
+
     
     
     // ================================= 파라미터 추가하여 서버와 통신  =======================================
@@ -152,33 +181,28 @@ window.addEventListener("load", function(){
     let maxCount = 1;
     const addBtn = document.querySelector('.add-btn')
 
+    addBtn.addEventListener("click", function(){
 
-       addBtn.addEventListener("click", function(){
+       console.log(count)
+       if(count > maxCount){
 
+           topicListAlert.classList.remove("d:none");
+           return;
+       }
+       count++;
 
-
-           console.log(count)
-           if(count > maxCount){
-
-               topicListAlert.classList.remove("d:none");
-               return;
-           }
-           count++;
-
-        let spanHTML = `
-                <span class="topic-input d:flex ai:center al-self:stretch">
-                  <div class="d:flex mt:4 flex-grow:1">
-                    <input type="text" name="topic" class="n-textbox w:100p mr:3" placeholder="토론 주제를 입력하세요." />
-                    <button type="button" class=""><span class="del-btn icon icon:minus">삭제</span></button>
-                  </div>
-                </span> `
-        document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
+    let spanHTML = `
+            <span class="topic-input d:flex ai:center al-self:stretch">
+              <div class="d:flex mt:4 flex-grow:1">
+                <input type="text" name="topic" class="n-textbox w:100p mr:3 pl:2" placeholder="토론 주제를 입력하세요." />
+                <button type="button" class=""><span class="del-btn icon icon:trash">삭제</span></button>
+              </div>
+            </span> `
+    document.querySelector('.topic-list').insertAdjacentHTML("beforeend", spanHTML)
     });
 
     // 삭제 버튼
     document.querySelector('.topic-list').addEventListener('click', function(e){
-;
-
 
         if(e.target.classList.contains('add-btn'))
             return
@@ -200,7 +224,7 @@ window.addEventListener("DOMContentLoaded", function() {
     let reserveDate = document.getElementById("reserve-date");
     let debatePeriod = document.getElementById("debate-period");
     let deadline = document.getElementById("deadline");
-    let  deadlineBox = document.querySelector(".deadline-box");
+    let deadlineBox = document.querySelector(".deadline-box");
     let deadlineValue;
     let statDateValue;
     let debateEndDate
@@ -235,7 +259,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
         deadlineValue = deadline.value;
         console.log(deadlineValue)
-       debateEndDate  = moment(reserveDate.value).add(deadlineValue, 'days').format('YYYY-MM-DD');
+        debateEndDate  = moment(reserveDate.value).add(deadlineValue, 'days').format('YYYY-MM-DD');
 
         debatePeriod.innerHTML=` (${statDateValue} ~ ${debateEndDate})`
 

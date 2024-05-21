@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.withbooks.web.entity.Book;
+import kr.withbooks.web.entity.Category;
 import kr.withbooks.web.repository.BookRepository;
 
 @Service
@@ -80,5 +81,70 @@ public class BookServiceImp implements BookService {
         int offset = (page-1)*size;
         return repository.findCountByParams(params, size, offset);
     }
+    @Override
+    public Integer getBestseller(Long bookId) {
+        return repository.findBestseller(bookId);
+    }
+
+    @Override
+    public Integer addBestseller(List<Long> ids) {
+        return repository.saveBestseller(ids);
+    }
+
+    @Override
+    public Integer deleteBestseller(List<Long> ids) {
+        return repository.deleteBestseller(ids);
+    }
+
+    @Override
+    public Integer editBookPublicYn(Long bookId, Integer yn) {
+        return repository.updateBookPublicYn(bookId, yn);
+    }
+    @Override
+    public Integer editBook(Long bookId, Integer price, String description, String purchaseLink){
+        return repository.updateBook(bookId, price, description, purchaseLink);
+    }
+
+
      //=====================================================================
+
+     //admin/book/aladinList
+     @Override
+     public Integer reg(List<Book> list, List<Category> categoryList) {
+
+        for (Book book : list) {
+            String categoryName = book.getCategoryName();
+            String[] categoryNameArr = categoryName.split(">");
+            String categoryNameToId = categoryNameArr[1];
+            long categoryId = 0;
+            for (Category c : categoryList) {
+                String cidName = c.getName();
+                long id = c.getId();
+                if(cidName.equals(categoryNameToId)){
+                    categoryId = id;
+                    break;
+                }
+            }
+            categoryId = categoryId==0 ? 20 : categoryId;
+            book.setCategoryId(categoryId);
+        }
+
+         return repository.save(list);
+     }
+     // ===================================================================
+
+     // ===================================================================
+     // home
+
+     @Override
+     public List<Book> getBestsellerList() {
+         return repository.findAllBestseller();
+     }
+
+     @Override
+     public List<Book> getNewList() {
+         return repository.findAllNew();
+     }
+
+
 }

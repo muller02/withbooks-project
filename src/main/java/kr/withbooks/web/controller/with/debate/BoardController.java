@@ -1,74 +1,72 @@
 package kr.withbooks.web.controller.with.debate;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletRequest;
+import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.entity.*;
+import kr.withbooks.web.service.*;
+import kr.withbooks.web.util.FileStore;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.entity.Book;
-import kr.withbooks.web.entity.DebateAttachment;
-import kr.withbooks.web.entity.DebateBoard;
-import kr.withbooks.web.entity.DebateBoardView;
-import kr.withbooks.web.entity.DebateCommentView;
-import kr.withbooks.web.entity.DebateRoom;
-import kr.withbooks.web.entity.DebateTopic;
-import kr.withbooks.web.service.BookService;
-import kr.withbooks.web.service.DebateAttachmentService;
-import kr.withbooks.web.service.DebateBoardService;
-import kr.withbooks.web.service.DebateCommentService;
-import kr.withbooks.web.service.DebateRoomService;
-import kr.withbooks.web.service.DebateTopicService;
-import kr.withbooks.web.util.FileStore;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/with/debate/board")
 public class BoardController {
 
-    @Autowired
-    private DebateBoardService debateBoardService;
-
-    @Autowired
-    private DebateRoomService debateRoomService;
-
-    @Autowired
-    private BookService bookService;
-
-    @Autowired
-    private DebateTopicService debateTopicService;
-
-    @Autowired
-    private DebateAttachmentService debateAttachmentService;
-
-    @Autowired
-    private DebateCommentService debateCommentService;
-
-    @Autowired
-    private FileStore fileStore;
+    private final DebateBoardService debateBoardService;
+    private final DebateRoomService debateRoomService;
+    private final BookService bookService;
+    private final DebateTopicService debateTopicService;
+    private final DebateAttachmentService debateAttachmentService;
+    private final DebateCommentService debateCommentService;
+    private final FileStore fileStore;
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(
             @RequestParam(name = "rid") Long roomId,
+            @RequestParam(name = "wid") Long withId,
             @RequestParam(name = "tid", required = false) Long topicId,
             Model model) {
 
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateBoardView b : list){
+            String replacedStr = b.getContent().replace("\r\n", "<br>");
+            b.setContent(replacedStr);
+        }
+
         model.addAttribute("list", list);
 
         log.info("list = {}", list);
 
+        DebateRoom findRoom = debateRoomService.getById(roomId, withId);
+
+        {
+            String replacedStr = findRoom.getNotice().replace("\r\n", "<br>");
+            findRoom.setNotice(replacedStr);
+        }
+
+        model.addAttribute("debateRoom", findRoom);
+
+        log.info("debateRoom = {}", findRoom);
+
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateTopic t : topicList){
+            String replacedStr = t.getContent().replace("\r\n", "<br>");
+            t.setContent(replacedStr);
+        }
         model.addAttribute("topicList", topicList);
 
         if (topicId != null) {
@@ -82,20 +80,35 @@ public class BoardController {
     @GetMapping("/detail")
     public String detail(
             @RequestParam Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
-        System.out.println("진입  토마토 ");
         DebateBoard findBoard = debateBoardService.getById(id);
-        Long roomId = findBoard.getRoomId();
+        Long userId = findBoard.getUserId();
+        User findUser = userService.getById(userId);
+
+//        Long roomId = findBoard.getRoomId();
         Long topicId = findBoard.getTopicId();
         List<DebateCommentView> debateCommentList = debateCommentService.getListById(id);
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        {
+            String replacedStr = findBoard.getContent().replace("\r\n", "<br>");
+            findBoard.setContent(replacedStr);
+        }
+
+        // 게시글의 \r\n 을 <br> 태그로 치환
+        for(DebateCommentView c : debateCommentList){
+            String replacedStr = c.getContent().replace("\r\n", "<br>");
+            c.setContent(replacedStr);
+        }
 
 
         DebateRoom findRoom = debateRoomService.getById(roomId);
         Long bookId = findRoom.getBookId();
         Book book = bookService.getById(bookId);
-        System.out.println("진입  토마토 ");
 
         DebateTopic findTopic = debateTopicService.getById(topicId);
         log.info("findTopic = {}", findTopic);
@@ -108,10 +121,13 @@ public class BoardController {
         model.addAttribute("topic", findTopic);
         model.addAttribute("imgList", imgList);
         model.addAttribute("debateCommentList", debateCommentList);
-        // model.addAttribute("userId", userDetails.getId());
+        model.addAttribute("user", findUser);
+//        model.addAttribute("nickname", userDetails.getNickName());
+//        model.addAttribute("userImg", userDetails.getImg());
 
-        System.out.println("debateCommentList : " + debateCommentList);
-        
+
+        log.info("board = {}", findBoard);
+        log.info("debateCommentList ={} ", debateCommentList);
 
         return "with/debate/board/detail";
     }
@@ -131,9 +147,13 @@ public class BoardController {
     public String reg(
             @ModelAttribute BoardForm boardForm,
             @RequestParam("rid") Long roomId,
+            @RequestParam(name = "wid") Long withId,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
             HttpServletRequest request) throws IOException {
 
-        Long userId = 4L;
+        Long userId = userDetails.getId();
+        log.info("userId = {}", userId);
+        log.info("withId = {}", withId);
 
         // board
         DebateBoard board = DebateBoard.builder()
@@ -152,12 +172,16 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/with/debate/board/list?rid=" + roomId;
+        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
 
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam("id") Long id, Model model) {
+    public String edit(
+            @RequestParam("id") Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
+            Model model) {
         DebateBoard debateBoard = debateBoardService.getById(id);
         DebateTopic debateTopic = debateTopicService.getById(debateBoard.getTopicId());
 
@@ -169,6 +193,8 @@ public class BoardController {
     @PostMapping("/edit")
     public String edit(
             @RequestParam("id") Long id,
+            @RequestParam("wid") Long withId,
+            @RequestParam("rid") Long roomId,
             @ModelAttribute BoardEditForm boardEditForm,
             HttpServletRequest request) throws IOException {
 
@@ -195,7 +221,22 @@ public class BoardController {
         // 6. 파일 삭제 (from database)
         debateAttachmentService.deleteAllFileByIds(boardEditForm.getDeleteFilesId());
 
-        return "redirect:/with/debate/board/detail?id=" + id;
+        return "redirect:/with/debate/board/detail?wid=" + withId + "&rid=" + roomId + "&id=" + id;
     }
 
+    @PostMapping("/delete")
+    public String delete(
+            @RequestParam Long id,
+            @RequestParam(name = "wid") Long withId,
+            @RequestParam(name = "rid") Long roomId
+    ) {
+
+        log.info("delete debate board with id {}", id);
+        log.info("delete debate with id {}", withId);
+        log.info("delete debate room with id {}", roomId);
+
+        debateBoardService.deleteById(id);
+
+        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
+    }
 }

@@ -14,18 +14,15 @@ import java.util.List;
 @RequestMapping("/api/with/debate")
 public class DebateController {
 
-
     @Autowired
     private DebateRoomService debateRoomService;
-
 
     @GetMapping
     public List<DebateRoomView> list(@RequestParam(name = "id") Long withId) {
 
         List<DebateRoomView> list  = debateRoomService.getListById(withId);
-
-
         return  list;
+
     }
 
 }

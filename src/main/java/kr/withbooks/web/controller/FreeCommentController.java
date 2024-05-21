@@ -27,11 +27,11 @@ public class FreeCommentController {
         , @RequestHeader("Referer") String referer
         , @AuthenticationPrincipal CustomUserDetails userDetails
     ){
-        
-        if(userDetails == null)
-          return "로그인을 해 주세요";
 
-        freeCommentService.reg(freeBoardId, userDetails.getId(), comment);
+      if(userDetails == null)
+        return "로그인을 해 주세요";
+
+      freeCommentService.reg(freeBoardId, userDetails.getId(), comment);
 
         
       return "redirect:/free-board/detail?fid=" + freeBoardId;

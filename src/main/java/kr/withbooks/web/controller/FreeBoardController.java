@@ -94,12 +94,14 @@ public class FreeBoardController {
           isLiked = freeLikeService.isLiked(freeBoardId, userDetails.getId());  
 
 
-
         // 댓글의 \r\n 을 <br> 태그로 치환
-        for(FreeCommentView f : commentList){
+        for(FreeCommentView f : commentList) {
           String replacedStr = f.getContent().replace("\r\n", "<br>");
           f.setContent(replacedStr);
         }
+
+        
+        
 
         // 게시글의 \r\n 을 <br> 태그로 치환
         {
@@ -124,6 +126,48 @@ public class FreeBoardController {
 
 
    
+    @GetMapping("/edit")
+    public String editForm(
+        @RequestParam(name="fid") Long freeBoardId,
+        Model model
+    ){
+      FreeBoard freeBoard = service.getById(freeBoardId);
+      System.out.println("보드 " + freeBoard);
+
+      model.addAttribute("freeBoard", freeBoard);
+      model.addAttribute("freeBoardId", freeBoardId);
+
+      return "/freeboard/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(
+        String notice
+      , String title
+      , String content
+      , MultipartFile[] imgs
+      , HttpServletRequest request
+      , @RequestParam(name="with-id") Long withId
+      , @RequestParam(name="free-board_id") Long freeBoardId
+      , @AuthenticationPrincipal CustomUserDetails userDetails
+    ){
+
+      // // 게시글을 DB에 저장
+      {
+        FreeBoard freeBoard = FreeBoard
+                              .builder()
+                              .id(freeBoardId)
+                              .title(title)
+                              .content(content)
+                              .noticeYn(notice!=null ? 1 : 0)
+                              .build();
+
+        service.edit(freeBoard, imgs, request);
+      }
+
+
+      return "redirect:/free-board/list?p=1&wid="+withId+"&s=latest";
+    }
 
 
 
@@ -132,7 +176,7 @@ public class FreeBoardController {
         @RequestParam(name="wid") Long withId
       , Model model
     ){
-
+      
       model.addAttribute("withId", withId);
 
       return "/freeboard/reg";

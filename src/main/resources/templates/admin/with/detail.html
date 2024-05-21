@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/admin/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main layout:fragment="main" class="n-panel flex-direction:column n-main-panel">
+        
+
+        
+        <section class="px:6 mt:4">
+            <h1 class="d:none">위드</h1>
+            <section class="fs:2 mt:2" th:each="w : ${list}">
+                <h1 class="d:none">퐁당퐁당</h1>
+                <a href="">
+                    <span class="bd bd-radius:4 d:flex p:4">
+                        <div>
+                            <img class="h:2 w:2" src="/image/with/a1.png" th:src="@{|/image/with/${w.img}|}" alt="">
+                        </div>
+                        <span class="d:flex fl-dir:column jc:center ml:3 w:10p">
+                            <span class="d:flex bd-bottom bd-color:base-2">
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">ID</div>
+                                    <div class="py:1 px:2 w:2" th:text="${w.id}">2</div>
+                                </span>
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">위드명</div>
+                                    <div class="py:1 px:2 w:4" th:text="${w.name}">퐁당퐁당</div>
+                                </span>
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">위드장</div>
+                                    <div class="py:1 px:2 w:4" th:text="${w.withTop}">뉴렉이</div>
+                                </span>
+                            </span>
+                            <span class="d:flex mt:2 bd-bottom bd-color:base-2">
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">개설일</div>
+                                    <div class="py:1 px:2 w:3" th:text="${w.regDate}">22.11.11</div>
+                                </span>
+                                <span class="d:flex">
+                                    <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">카테고리</div>
+                                    <span class="py:1 px:2 d:flex w:10p">
+                                        <div class="w:3 text-align:left" th:each="c : ${w.categoryNames}" th:text="${c}">소설/시/희곡</div>
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="d:flex mt:2 bd-bottom bd-color:base-2">
+                                <div class="fw:3 w:2 bg-color:base-2 py:1 px:4 text-align:center">소개</div>
+                                <p class="py:1 px:2 ln-clamp:1" th:text="${w.intro}">
+                                    좋은 분들이 모여서 이야기하다 보면 공감대가 생기고 친밀감이 쌓여서 좋은 독자들로
+                                    이어나갔으면 좋겠다는 생각에 만들게 되었습니다.
+                                </p>
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </section>
+        </section>
+
+        <span class="d:flex ">
+            <section class="bd bd-radius:4 p:4 fs:2 flex-grow:1 h:6">
+                <h1 class="bd-bottom pb:2">위드 멤버</h1>
+                <div class="d:flex fl-dir:column h:9p">
+                    <div class="d:flex ai:center">
+                        <div class="d:flex fl-dir:column ai:center jc:center">
+                            <div>
+                                <img class="h:1 w:1" src="" alt="프로필 이미지">
+                            </div>
+                            <div class="deco icon:graduation_cap deco-pos:right icon-color:main-5">뉴렉이</div>
+                        </div>
+                        <div class="d:flex fl-dir:column ai:center jc:center ml:8">
+                            <div>
+                                <img class="h:1 w:1" src="" alt="프로필 이미지">
+                            </div>
+                            <div>명길</div>
+                        </div>
+        
+                        <div class="d:flex fl-dir:column ai:center jc:center ml:8">
+                            <div>
+                                <img class="h:1 w:1" src="" alt="프로필 이미지">
+                            </div>
+                            <div>명길</div>
+                        </div>
+                    </div>
+                    <nav class="mt:auto align-self:center">
+                        <h1 class="d:none">페이저</h1>
+                        <ul class="d:flex">
+                            <li><a href=""><</a></li>
+                            <li class="ml:2"><a href="">2</a></li>
+                            <li class="ml:2"><a href="">3</a></li>
+                            <li class="ml:2"><a class="fw:3" href="">4</a></li>
+                            <li class="ml:2"><a href="">5</a></li>
+                            <li class="ml:2"><a href="">6</a></li>
+                            <li class="ml:2"><a href="">></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+    
+    
+            <section class="bd bd-radius:4 p:4 fs:2 flex-grow:1 d:flex fl-dir:column h:6">
+                <h1 class="bd-bottom pb:2">토론서재 등록 책 (20)</h1>
+                <span class="d:flex">
+                    <div>
+                        <div class="d:flex>
+                            <img class="w:1 h:1" src="" alt="책 이미지">
+                        </div>
+                        <div>도둑맞은 집중력</div>
+                    </div>
+                    <div class="ml:10 d:flex">
+                        <div>
+                            <img class="w:1 h:1" src="" alt="책 이미지">
+                        </div>
+                        <div class="ml:2">도둑맞은 집중력</div>
+                    </div>
+                </span>
+                <span class="d:flex mt:2">
+                    <div>
+                        <div class="d:flex>
+                            <img class="w:1 h:1" src="" alt="책 이미지">
+                        </div>
+                        <div>도둑맞은 집중력</div>
+                    </div>
+                    <div class="ml:10 d:flex">
+                        <div>
+                            <img class="w:1 h:1" src="" alt="책 이미지">
+                        </div>
+                        <div class="ml:2">도둑맞은 집중력</div>
+                    </div>
+                </span>
+
+                <nav class="align-self:center mt:auto">
+                    <h1 class="d:none">페이저</h1>
+                    <ul class="d:flex">
+                        <li><a href=""><</a></li>
+                        <li class="ml:2"><a href="">2</a></li>
+                        <li class="ml:2"><a href="">3</a></li>
+                        <li class="ml:2"><a class="fw:3" href="">4</a></li>
+                        <li class="ml:2"><a href="">5</a></li>
+                        <li class="ml:2"><a href="">6</a></li>
+                        <li class="ml:2"><a href="">></a></li>
+                    </ul>
+                </nav>
+            </section>
+        </span>
+
+        <section class="bd bd-radius:4 p:4 fs:2 d:flex fl-dir:column">
+            <h1 class="d:none">자유게시판 리스트</h1>
+            <section class="d:flex jc:space-between ai:center p:3 bg-color:main-3 fw:3">
+                <h1 class="d:none">헤더</h1>
+                <div><input type="checkbox"></div>
+                <div class="bd bd-color:accent-1 flex-grow:1 ml:6 w:1 text-align:center">번호</div>
+                <div class="bd bd-color:accent-1 flex-grow:1 ml:6 w:10 text-align:center">제목</div>
+                <div class="bd bd-color:accent-1 flex-grow:1 ml:6 w:1 text-align:center">아이디</div>
+                <div class="bd bd-color:accent-1 flex-grow:1 ml:6 w:1 text-align:center">등록일</div>
+            </section>
+            <section class="d:flex jc:space-between ai:center p:3 bd-bottom">
+                <h1 class="d:none">글</h1>
+                <div><input type="checkbox" name="checked"></div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">1</div>
+                <div class="flex-grow:1 ml:6 w:10 text-align:center">오늘날씨 정말 좋네요 하하하하하하하하하하핳하ㅏㅎ</div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">withboooks@naver.com</div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">2023.01.23</div>
+            </section>
+            <section class="d:flex jc:space-between ai:center p:3 bd-bottom">
+                <h1 class="d:none">글</h1>
+                <div><input type="checkbox" name="checked"></div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">1</div>
+                <div class="flex-grow:1 ml:6 w:10 text-align:center">오늘날씨 정말 좋네요 하하하하하하하하하하핳하ㅏㅎ</div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">withboooks@naver.com</div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">2023.01.23</div>
+            </section>
+            <section class="d:flex jc:space-between ai:center p:3 bd-bottom">
+                <h1 class="d:none">글</h1>
+                <div><input type="checkbox" name="checked"></div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">1</div>
+                <div class="flex-grow:1 ml:6 w:10 text-align:center">오늘날씨 정말 좋네요 하하하하하하하하하하핳하ㅏㅎ</div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">withboooks@naver.com</div>
+                <div class="flex-grow:1 ml:6 w:1 text-align:center">2023.01.23</div>
+            </section>
+
+            <nav class="mt:4 align-self:center">
+                <h1 class="d:none">페이저</h1>
+                <ul class="d:flex">
+                    <li><a href=""><</a></li>
+                    <li class="ml:2"><a href="">2</a></li>
+                    <li class="ml:2"><a href="">3</a></li>
+                    <li class="ml:2"><a class="fw:3" href="">4</a></li>
+                    <li class="ml:2"><a href="">5</a></li>
+                    <li class="ml:2"><a href="">6</a></li>
+                    <li class="ml:2"><a href="">></a></li>
+                </ul>
+            </nav>
+        </section>
+    </main>
+</body>
+</html>

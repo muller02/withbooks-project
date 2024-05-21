@@ -38,4 +38,20 @@
 		)
 	</insert>
 
+	<delete id="remove">
+		delete from 
+			free_comment
+		where 
+			id = #{id}
+	</delete>
+
+	<update id="update">
+		update 
+			free_comment
+		set
+			content = ${content}
+		where
+			id = #{id}
+	</update>
+
 </mapper>

@@ -1,11 +1,14 @@
 package kr.withbooks.web.controller.with;
 
+import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
 import kr.withbooks.web.service.DebateRoomService;
 import kr.withbooks.web.service.DebateTopicService;
+import kr.withbooks.web.service.WithMemberService;
 import kr.withbooks.web.service.WithService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -21,24 +23,26 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/with/debate")
 public class DebateController {
 
-    @Autowired
-    private DebateRoomService service;
-
-    @Autowired
-    private WithService withService;
-
-    @Autowired
-    private DebateTopicService debateTopicService;
+    private final DebateRoomService debateRoomService;
+    private final DebateTopicService debateTopicService;
+    private final WithService withService;
+    private final WithMemberService withMemberService;
 
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(
+            @RequestParam(name = "wid") Long withId,
+            Model model,
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        List<DebateRoomView> list  = service.getListById(1L);
+        List<DebateRoomView> list  = debateRoomService.getListById(withId);
+        List<WithMember> withMembers = withMemberService.getWithMembers(withId);
 
         log.info("list : {}", list);
+        log.info("withMembers : {}", withMembers);
 
         model.addAttribute("list", list);
 
@@ -69,15 +73,10 @@ public class DebateController {
         Long withRegId = with.getWithRegId();
         DebateRoom debateRoom =  DebateRoom.builder().regId(withRegId).bookId(bookId).reserveDate(parsedDatereserve).deadline(deadline).notice(notice).withId(withId).build();
 
-        Long debateRoomId =  service.add(debateRoom);
-        log.info("debateRoomId : {}", debateRoom);
+        Long debateRoomId =  debateRoomService.add(debateRoom);
+        log.info("debateRoomId : {}", debateRoomId);
 
         List<String> topicContentList = Arrays.asList(topic);
-
-//        for(int i =0 ; i< topicContentList.size(); i++) {
-//            DebateTopic debateTopic = DebateTopic.builder().roomId(debateRoomId).content(topicContentList.get(i)).build();
-//            debateTopicService.add(debateTopic);
-//        }
 
         for (String topicContent : topicContentList) {
             DebateTopic debateTopic = DebateTopic.builder().roomId(debateRoomId).content(topicContent).build();

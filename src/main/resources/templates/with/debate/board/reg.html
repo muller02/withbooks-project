@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/layout.html}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,15 +18,28 @@
     <link rel="stylesheet" type="text/css" href="/css/util/color.css" />
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-    <script src="/js/with/debate/board/reg.js" defer></script>
+    <script src="/js/with/debate/board/reg2.js" defer></script>
     <style>
+
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+
+            color: var(--color-base-9);
+        }
+
         .w\:74 {
             width: 80px;
             height: 80px;
         }
 
 
+        body {
+            font-family: var(--selected-font);
+            font-size: 15px;
 
+            color: var(--color-base-9);
+        }
         .item:hover{
             background-color: #8BA3F8 !important;
 
@@ -69,19 +87,36 @@
     </style>
 </head>
 <body>
-    <header class="d:flex jc:start ai:center h:1 px:2 pt:2">
+<!--    <header class="d:flex jc:start ai:center h:1 px:2 pt:2">-->
 
-        <h1 class="d:none">상단바</h1>
+<!--        <h1 class="d:none">상단바</h1>-->
 
-        <div class="mr:auto"><a class="icon icon:x icon-size:5" href="">나가기</a></div>
+<!--        <div class="mr:auto"><a class="icon icon:x icon-size:5" href="">나가기</a></div>-->
 
-    </header>
-    <main class=" p:2">
-        <section class="">
-            <h1 class="d:none">토론 카드 내용 입력</h1>
+<!--    </header>-->
+    <main layout:fragment="main">
+        <section class="pb:4 pt:4 pl:4 pr:4">
+            <h1 class="d:none">토론 카드 작성</h1>
+
             <form class="form-group h:auto" action="reg" method="post" enctype="multipart/form-data">
-                <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3">
-                    <h1 class="deco icon:sun bd-bottom w:10p h:1 pl:2">토론주제 등록</h1>
+
+                <div><input type="hidden" name="rid" th:value="${param.rid}"></div>
+                <div><input type="hidden" name="wid" th:value="${param.wid}"></div>
+
+                <div class="d:flex jc:end">
+                    <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
+                        등록
+                    </button>
+                </div>
+
+                <h1 class="d:none">토론카드 등록 페이지</h1>
+                <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8 px:2">
+                    <span class="font-size:7"> 뉴렉위드,</span><br />
+                    토론 카드를 개설 해보세요 !
+                </p>
+
+                <section class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
+                    <h1 class="pt:3 bd-bottom w:10p h:1 fw:3">💡 토론주제</h1>
                     <div class="d:flex jc:center mt:2">
                         <div class="n-select">
                             <select name="topicId">
@@ -93,26 +128,31 @@
                     </div>
                 </section>
 
-                <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3 mt:6">
-                    <h1 class="deco icon:pencil_simple bd-bottom w:10p h:1 pl:2 ">제목</h1>
+                <section class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
+                    <h1 class="pt:3 bd-bottom w:10p h:1 fw:3 ">✏️ 제목</h1>
                     <div class="d:flex jc:center mt:2">
                         <input class="w:10p n-textbox" type="text" name="title">
                     </div>
                 </section>
 
-                <section class="bd px:5 pb:2 bd-radius:9 bd-color:base-3 h:5 mt:6">
-
-                    <h1 class="deco icon:pencil_simple bd-bottom w:10p h:1 pl:2 ">의견</h1>
-
-                    <textarea class="text-area w:100p h:2 mt:5" name="content" ></textarea>
-<!--                    <div class="d:flex jc:center mt:2">-->
-<!--                       -->
-<!--                    </div>-->
+                <section class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow">
+                    <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">🗒️ 의견</h1>
+                    <div class="mt:4">
+                      <textarea
+                              class="w:100p"
+                              placeholder="의견을 작성 하세요."
+                              name="content"
+                              id=""
+                              th:maxlength="1500"
+                              cols="30"
+                              rows="10"
+                      ></textarea>
+                    </div>
                 </section>
 
-                <section class="form-group mt:3 ">
-                    <h1 class="d:none">이미지 입력</h1>
-                    <div>
+                <section class="form-group bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow ">
+                    <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">📷 이미지 등록</h1>
+                    <div class="mt:4">
                         <input id="file-input" type="file" multiple="multiple" name="files" >
                         <div id="file-list">
                         </div>
@@ -128,8 +168,8 @@
                     <!--                    </div>-->
                 </section>
 
-                <div><input type="hidden" name="rid" th:value="${param.rid}"></div>
-                <button class="reg-btn n-btn bg-color:main-4  pos:absolute top:0 right:0 " type="submit">등록</button>
+
+<!--                <button class="reg-btn n-btn bg-color:main-4  pos:absolute top:1 right:1 " type="submit">등록</button>-->
             </form>
         </section>
     </main>

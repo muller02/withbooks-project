@@ -6,26 +6,114 @@
 
 	<select id="findAll" resultType="BookshortsView" >
 
-		select sv.*,
-		IF(sl.user_id IS NULL, 0, 1) AS liked
-		from shorts_view sv left join shorts_like sl
-		on sv.id =sl.shorts_id and sl.user_id = #{userId}
-		 <where>
-        <if test="bookId != null">
-            book_id = ${bookId}
-        </if>
-			 and
-			 blind_yn = 0
-    </where>
+		select 
+			sv.*,
+			IF(sl.user_id IS NULL, 0, 1) AS liked
+		from 
+			shorts_view sv left join shorts_like sl
+			on sv.id =sl.shorts_id and sl.user_id = #{userId}
+		<where>
+			<if test="bookId != null">
+				book_id = ${bookId}
+			</if>
+				and
+				blind_yn = 0
+		</where>
 
-		order by id desc
+		order by reg_date desc
+
+		limit #{offset}, #{size}
 		
+	</select>
 
+	<!-- main -->
+	<select id="findAllBestShorts">
+		select 
+			st.id, 
+			st.user_id, 
+			us.nickname, 
+			b.id bookId, 
+			b.title bookTitle, 
+			st.content, 
+			count(st.id) likeCnt 
+		from 
+			shorts st join `user` us on st.user_id = us.id 
+				join book b on st.book_id=b.id 
+				join shorts_like sl on st.id = sl.shorts_id 
+		where 
+			st.blind_yn = 0 
+		group by 
+			st.id 
+		order by 
+			likeCnt desc 
+		limit 10
 
-	
-				
+	</select>
 
-		
+	<select id="findRand10" resultType="BookshortsView"
+	>
+		SELECT * FROM shorts_view where like_cnt >0 and blind_yn=0 ORDER BY RAND() LIMIT 10
+
+	</select>
+	<!-- ================================================================================== -->
+	<!-- /api/bookShorts/list -->
+
+	<resultMap id="ShortsViewMap" type="BookshortsView">	
+		<id property="id" column="id" />
+		<result property="bookId" column="book_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="content" column="content"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="blindYn" column="blind_yn"/>
+		<result property="likeCnt" column="likeCnt"/>
+		<result property="commentCnt" column="commentCnt"/>
+		<result property="userNickname" column="userNickname"/>
+		<result property="userImg" column="userImg"/>
+		<result property="bookTitle" column="bookTitle"/>
+		<result property="liked" column="liked"/>
+
+		<collection property="img" column="id" ofType="String" select="selectViewImgs"/>
+	</resultMap>
+
+	<!-- List<String> img -->
+	<select id="selectViewImgs" resultType="String">
+		select 
+			img
+		from
+			shorts_attachment
+		where
+			shorts_id = #{id}
+	</select>
+
+	<!-- 무한스크롤 -->
+	<select id="findAllViews" resultMap="ShortsViewMap">
+		<![CDATA[
+			select
+					*
+				from
+					(select 
+						st.*,
+						us.nickname,
+						us.img,
+						ifnull(sc.count, 0) commentCnt,
+						ifnull(sl.count, 0) likeCnt,
+						if(stl.user_id is null, 0, 1) liked
+					from 
+						shorts st left join `user` us on st.user_id = us.id
+						left join (select shorts_id, count(*) count from shorts_comment group by shorts_id) sc on st.id = sc.shorts_id
+						left join (select shorts_id, count(*) count from shorts_like group by shorts_id) sl on st.id = sl.shorts_id
+						left join shorts_like stl on st.id = stl.shorts_id and stl.user_id = #{userId}
+					where
+						st.blind_yn = 0
+					group by
+						st.id
+					order by
+						st.reg_date desc
+					) st_view
+				where
+					st_view.id < ${lastShortsId}
+				limit 20
+		]]>
 	</select>
 
 </mapper>

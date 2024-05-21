@@ -2,10 +2,8 @@ window.addEventListener("load", function () {
     let newLogBtn = this.document.querySelector("#new-log-reg");
     let newLogBtnATag = newLogBtn.querySelector("a");
     let bookList = this.document.querySelector(".book-list");
-    let bookIdList = bookList.querySelectorAll("input");
+    let bookIdList = bookList.querySelectorAll(".book-id");
 
-
-    
     // 체크박스 및 삭제모드 버튼 변수
     const bookCheckAll = this.document.querySelector(".book-check-all");
     const checkAllBox = bookCheckAll.querySelector("input");
@@ -25,9 +23,9 @@ window.addEventListener("load", function () {
     // 래핑 div들 -> 삭제모드 시 a링크를 가로막는 역할
     const wrappingDivs = bookMarkList.querySelectorAll("section>div");
 
-
     newLogBtnATag.onclick = function () {
         // 책 아이디 로컬스토리지에 담기
+        localStorage.clear();
         let list = {};
         let cnt = 0;
 
@@ -36,13 +34,10 @@ window.addEventListener("load", function () {
         }
 
         localStorage.setItem("bookids", JSON.stringify(list));
-
     };
 
-        
     // 삭제버튼 눌렀을 때
-    deleteBtn.onclick = function(){
-
+    deleteBtn.onclick = function () {
         // 취소, 전체 삭제 버튼 노출 및 삭제 버튼 숨김
         cancelBtn.classList.toggle("d:none");
         deleteAllBtn.classList.toggle("d:none");
@@ -51,75 +46,76 @@ window.addEventListener("load", function () {
 
         // 전체 선택 시 체크박스 뜨게 하기
         let checkboxes = document.querySelectorAll("input");
-        checkboxes.forEach((checkbox)=>{checkbox.classList.remove("d:none")});
+        checkboxes.forEach((checkbox) => {
+            checkbox.classList.remove("d:none");
+        });
 
         // div가 북마크를 감싸서 a링크 비활성화 시키기
         console.log(wrappingDivs);
-        wrappingDivs.forEach((div)=>{
+        wrappingDivs.forEach((div) => {
             div.classList.add("wrapping");
         });
 
         // book-section을 눌렀을때 해당 책의 체크박스가 눌러지도록 조치
         // XXX 리팩토링 필요
-        bookMarkList.onclick = function(e){
-            
+        bookMarkList.onclick = function (e) {
             let section = e.target;
+            if(section.tagName != 'SECTION')
+                return;
+
+            if (section.tagName != "SECTION") return;
 
             // 찾은 section의 checkbox 찾기
-            let checkbox = section.querySelector("input");
-        
+            let checkbox = section.querySelector("input[type='checkbox']");
+
             // checkbox의 boolean을 찾아 반대로 대입해주기
             let tmp = checkbox.checked;
-            checkbox.checked =! tmp;
-
+            checkbox.checked = !tmp;
         };
     };
 
-
     // 전체 선택 클릭 시 작동
-    checkAllBox.onchange = function(e){
+    checkAllBox.onchange = function (e) {
         // 모든 체크박스 찾기
-        const checkboxes 
-        = document.querySelectorAll('input[type="checkbox"]');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
         // 전체 선택 체크박스 checked 변경
         let checked = checkAllBox.checked;
         checked = e.target.checked;
 
         // 모든 체크박스들 checked 변경
-        checkboxes.forEach((checkbox)=>{checkbox.checked = checked});
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = checked;
+        });
     };
 
-
     // 취소 버튼 클릭 시 작동
-    cancelBtn.onclick = function(){
-        
+    cancelBtn.onclick = function () {
         // 모든 체크박스 체크해제 후 숨김
         let checkboxes = document.querySelectorAll("input");
-        checkboxes.forEach((checkbox)=>{
-                        checkbox.classList.add("d:none");
-                        checkbox.checked=false;});
-        
+        checkboxes.forEach((checkbox) => {
+            checkbox.classList.add("d:none");
+            checkbox.checked = false;
+        });
+
         // 취소 버튼 숨김
         cancelBtn.classList.toggle("d:none");
         deleteAllBtn.classList.toggle("d:none");
         deleteBtn.classList.toggle("d:none");
         checkBoxLabel.classList.toggle("d:none");
-        
-        wrappingDivs.forEach((div)=>{
+
+        wrappingDivs.forEach((div) => {
             div.classList.remove("wrapping");
         });
-            
-
     };
 
-    deleteAllBtn.onclick = function(){
+    deleteAllBtn.onclick = function () {
         const checkedboxes = document.querySelectorAll("input:checked");
-        if(checkedboxes.length == 0){
+        if (checkedboxes.length == 0) {
             alert("삭제할 책을 선택해주세요 ! ");
             return;
         }
-        
+
         // const ids = new Array();
         // checkedboxes.forEach((checkbox)=>{
         //     ids.push(checkbox.value);
@@ -128,13 +124,7 @@ window.addEventListener("load", function () {
         // const formData = new FormData();
         // formData.append("ids", ids);
 
-        let deleteYes = confirm("북로그를 삭제하시겠습니다 ?");
-        if(deleteYes)
-            document.querySelector("#idsForm").submit();
-    
-    }
-
-
-
-
+        let deleteYes = confirm("북로그를 삭제하시겠습니까 ?");
+        if (deleteYes) document.querySelector("#idsForm").submit();
+    };
 });

@@ -18,13 +18,28 @@ public interface BookRepository {
     // admin/book/list
     List<Book> findAllByParams(Map<String, String> params, int size, int offset);
     int findCountByParams(Map<String, String> params, int size, int offset);
+    Integer findBestseller(Long bookId);
+    Integer saveBestseller(List<Long> ids);
+    Integer deleteBestseller(List<Long> ids);
+    Integer updateBookPublicYn(Long bookId, Integer yn);
+    Integer updateBook(Long bookId, Integer price, String description, String purchaseLink);
 
-    // admin/book/aladinList
-    int findBoolByISBN13(String isbn13);
-
+    
     // book/list
     List<Book> findByParams(int offset, int size, String query, Long categoryId);
     int findCntByParams(int offset, int size, String query, Long categoryId);
+    
+    //admin/book/aladinList
+    Integer save(List<Book> list);
+    int findBoolByISBN13(String isbn13);
+
+    // main
+    List<Book> findAllBestseller();
+    List<Book> findAllNew();
+
+
+
+
 
 
 } 

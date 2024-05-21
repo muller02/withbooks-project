@@ -26,5 +26,6 @@ public class DebateBoardView {
     private String originalImg;
     private String saveImg;
     private String nickname;
+    private String userImg;
     private Long cmtCnt;
 }

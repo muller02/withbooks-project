@@ -14,5 +14,9 @@ public interface FreeCommentRepository {
     List<FreeCommentView> findAll(Long freeBoardId);
 
     int insert(Long freeBoardId, Long userId, String comment);
+
+    int remove(Long id);
+
+    void update(Long id, String content);
     
 }

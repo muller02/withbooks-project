@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{inc/layout.html}"
+>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/js/user/join.js" defer></script>
+    <style>
+        * {
+            font-family: "Noto Sans KR", sans-serif;
+            font-size: 15px;
+            color: var(--color-base-9);
+        }
+
+        /* 깃 테스트 용!!! */
+    /*    input[type="text"]:invalid {
+            border-color: var(--color-accent-1);
+        }
+
+        .with-name label::after {
+            margin-top: 6px;
+            color: var(--color-accent-1);
+            display: block;
+            width: 100%;
+            height: 20px;
+        }
+
+        .with-name label:has(input:invalid)::after {
+            /* content: "두 글자 이상 입력 필수입니다.";
+            color: var(--color-main-5);
+        }
+
+
+        .nick-name label::after {
+            margin-top: 6px;
+            color: var(--color-accent-1);
+            display: block;
+            width: 100%;
+            height: 20px;
+        }
+
+        .nick-name label:has(input:invalid)::after {
+            /* content: "한글, 영문,숫자 가능 (20자내로 작성해주세요)";
+            color: var(--color-main-5);
+        }*/
+
+    </style>
+</head>
+
+<body>
+<main layout:fragment="main" class="n-container mx:auto">
+
+    <section class="pb:4 pt:4 pl:4 pr:4 with-reg-page w:100p">
+        <h1 class="d:none">회원가입</h1>
+        <form id="form" class="n-form" method="post">
+            <div class="d:flex fl-dir:row jc:flex-end">
+                <button id="submit-btn" class="n-btn w:5 mt:3 bg-color:main-5">가입하기</button>
+            </div>
+            <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8">
+                <span class="font-size:7"> 환영합니다!,</span><br />
+                이메일로 회원가입 해주세요.
+            </p>
+
+            <section id="change-section" class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7">
+                <h1 class="d:none">이메일 섹션</h1>
+                <div class="d:flex">
+                    <div class="mb:2 fw:3 fl-grow:1">이메일
+                        <span class="color:accent-1">*</span>
+                    </div>
+                    <div>
+                        <button class="check-email n-btn n-btn-size:1 bg-color:main-5 fs:1">중복확인</button>
+                    </div>
+                </div>
+                <div class="d:flex">
+                    <div class="d:flex fl-grow:1 w:100p">
+                        <div class="fl-grow:1 ">
+                            <label>
+                                <input
+                                type="text"
+                                class="n-textbox n-textbox-type:underline n-textbox-label:top"
+                                placeholder="이메일"
+                                name="email"
+                                required minlength="2"
+                                />
+                            </label>
+                        </div>
+                        <div><span>@</span></div>
+                        <div class="d:flex fl-grow:1">
+                            <input class="inputEmail pl:4 n-textbox n-textbox-type:underline" type="text">
+                            <select name="address">
+                                <option selected disabled hidden>이메일 선택</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="naver.com">naver.com</option>
+                                <option value="yahoo.com">yahoo.com</option>
+                                <option class="inputSelected" value="">직접 입력 </option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div>
+                    <span class="email-checked d:none color:accent-1 fs:2">중복확인 해주세요.</span>
+                    <span class="email-valid d:none color:main-5 fs:2">사용가능한 이메일입니다.</span>
+                </div>
+            </section>
+
+            <section class="password-section n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7">
+                <h1 class="d:none">비밀번호 섹션</h1>
+                <div>
+                    <div class="with-name">
+                        <div class="mb:2 fw:3">비밀번호
+                            <span class="color:accent-1 ml:1">*</span>
+                            <span class="color:main-5 ml:3 fs:1">( 영문과 숫자 포함 8자 이상 작성 )</span>
+                        </div>
+                        <label>
+                            <input
+                                    type="password"
+                                    class="pass n-textbox n-textbox-type:underline n-textbox-label:top "
+                                    name="password"
+                                    placeholder="비밀번호"
+                                    required minlength="2"
+                            />
+
+                        </label>
+                    </div>
+                    <div class="with-name mt:3">
+                        <label>
+                            <input
+                                    type="password"
+                                    class="pass-check n-textbox n-textbox-type:underline n-textbox-label:top "
+                                    placeholder="비밀번호 확인*"
+                                    required minlength="2"
+                            />
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <span class="password-invaild d:none color:accent-1 fs:2">비밀번호가 일치하지 않습니다.</span>
+                    <span class="password-regex d:none color:accent-1 fs:2">조건에 맞는 비밀번호를 작성해주세요.</span>
+                </div>
+            </section>
+
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7">
+                <h1 class="d:none">닉네임 섹션</h1>
+                <div class="nick-name">
+                    <div class="mb:2 fw:3">닉네임
+                        <span class="color:accent-1 ml:1">*</span>
+                    </div>
+                    <label>
+                        <input
+                                type="text"
+                                class="n-textbox n-textbox-type:underline n-textbox-label:top "
+                                name="nickname"
+                                placeholder="닉네임"
+                                required minlength="2"
+                        />
+                    </label>
+                </div>
+                <div>
+                    <span class="nickname-vaild d:none color:accent-1 fs:2">사용할 수 없는 닉네임입니다.</span>
+                </div>
+            </section>
+
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:4 pl:5 pr:5 mb:7">
+                <h1 class="d:none">생년월일 섹션</h1>
+                <div class="mb:2 fw:3">생년월일<span class="color:accent-1 ml:1">*</span></div>
+                <label>
+                    <input
+                        type="date"
+                        class="n-textbox n-textbox-type:underline n-textbox-label:top "
+                        name="birth-date"
+                    />
+                </label>
+            </section>
+
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:5 pl:5 pr:5 mb:7">
+                <h1 class="d:none">성별 섹션</h1>
+                <div class="mb:2 fw:3">성별
+                    <span class="color:accent-1 ml:1">*</span>
+                </div>
+                <ul class="w:full d:flex jc:start gap:2">
+                    <li>
+                        <label class="n-toggle n-toggle-type:outline-box">
+                            여성
+                            <input type="radio" class="d:none" name="gender"  value="0" checked />
+                        </label>
+                    </li>
+                    <li>
+                        <label class="n-toggle n-toggle-type:outline-box">
+                            남성
+                            <input type="radio" class="d:none" name="gender"  value="1" />
+                        </label>
+                    </li>
+                </ul>
+
+            </section>
+            
+
+            <section class="n-item n-item:shadow mb:4 pt:4 pb:5 pl:5 pr:5 mb:7">
+              <h1 class="d:none">소개</h1>
+               <div class="mb:2 fw:3">소개</div>
+               <div class="d:flex ai:center">
+                   <textarea
+                            type="text"
+                            class="n-textbox"
+                            placeholder="자신을 소개 해보세요 !"
+                            name="intro"
+                    ></textarea>
+               </div>
+           </section>
+        </form>
+    </section>
+
+</main>
+</body>
+</html>
+

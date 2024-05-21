@@ -1,14 +1,16 @@
 window.addEventListener("load", function () {
 
-    const fileInput = document.querySelector("#file-input");
-    const fileList = document.querySelector("#file-list");
+    const fileInput = document.getElementById("file-input");
 
     console.log(fileInput);
-    console.log(fileList);
+
 
     let selectedFiles = [];
 
     fileInput.addEventListener("change", function (e) {
+
+        const fileList = document.getElementById("file-list");
+        console.log(fileList);
 
         let files = e.target.files;
         console.log(files);

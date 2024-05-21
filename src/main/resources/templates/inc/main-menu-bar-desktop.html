@@ -3,23 +3,28 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
    >
-    <!-- <head>
-        <style>
-            .withbooks-img {
-                --width-2: 36px;
-                --height-2: 36px;
-            }
-        </style>
-    </head> -->
+<head>
+
+    <style>
+        .main-menu-bar-desktop {
+            --width-2: 80px
+        }
+
+        .main-menu-bar-desktop span {
+            --height-1: 1px;
+        }
+    </style>
+</head>
+
     <body>
         <section
-            class="lg:d:block mr:2 d:none main-menu-bar-tablet w:5 bg-color:base-1 px:6 flex-shrink:0"
+            class="lg:d:block mr:2 d:none  main-menu-bar-desktop w:5 bg-color:base-1 px:6 flex-shrink:0"
         >
             <h1 class="d:none">메인메뉴바</h1>
             <ul class="d:flex fl-dir:column ai:center">
                 <div class="d:flex w:100p jc:center ai:center mt:4 ml:5">
                     <div>
-                        <a class="" href=""
+                        <a class="" href="/"
                             ><img
                                 class="withbooks-img mt:1 w:1"
                                 src="/icon/home.svg"
@@ -27,12 +32,12 @@
                         /></a>
                     </div>
                     <div class="m:4">
-                        <a class="fs:8 fw:3 d:block" href="">위드북스</a>
+                        <a class="fs:8 fw:3 d:block" href="/">위드북스</a>
                     </div>
                 </div>
 
                     <!--여기 일단 로그인 버튼 피룡  -->
-                    <a class="  mt:6 mb:3	w:100p" href="/login" sec:authorize="isAnonymous()">
+                    <a class="  mt:6 mb:3	w:100p" href="/user/login" sec:authorize="isAnonymous()">
                     <div >
                         <button type="button" class="n-btn bg-color:main-6 d:flex  flex-direction:column w:100p h:100p px:4 py:3">
                            <span class=" mb:1 color:sub-1 fw:3 fs:4"> 위드북스 시작하기 </span>
@@ -44,14 +49,22 @@
                     </a>
                         <!--여기 일단 로그인 버튼 피룡  -->
 
-                <section class="d:flex fl-dir:column mt:6 w:100p ai:center" sec:authorize="isAuthenticated()" >
+                <section class="d:flex fl-dir:column mt:7 w:100p ai:center" sec:authorize="isAuthenticated()" >
                     <h1 class="d:none">프로필</h1>
 
                     <div class="d:flex mb:2 w:100p jc:center">
                         <div class="mr:2">
                             <a href="" class="h:100p w:100p d:block"
-                                ><img src="/icon/user.svg" alt="마이"
-                            /></a>
+                                ><img th:if="${#authorization.expression('isAuthenticated()')}"
+                                      th:src="${#authentication.principal.img}"
+                                      class="h:1 w:1 border-radius:full"
+                                      alt="마이" />
+
+                                <img th:unless="${#authorization.expression('isAuthenticated()')}"
+                                     th:src="@{/icon/user.svg}"
+                                     class="h:1 w:1 border-radius:full"
+                                     alt="마이" />
+                            </a>
                         </div>
                         <div class="ml:5 d:flex fl-dir:column jc:center">
                             <div>
@@ -67,13 +80,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d:flex my:4 ai:end jc:center h:1 w:100p">
+                    <div class="d:flex my:6 ai:end jc:center h:1 w:100p">
                         <div class="d:flex fl-dir:column jc:center ai:center">
                             <div
                                 class="icon:my-libraryd icon icon-size:5"
                             ></div>
                             <div class="m:1 w:100p d:flex jc:center">
-                                <a class="fs:2" href="">내 서재</a>
+                                <a class="fs:2" href="/bookmark/list">북마크</a>
                             </div>
                         </div>
                         <div
@@ -81,7 +94,7 @@
                         >
                             <div class="icon icon:star icon-size:5"></div>
                             <div class="m:1 w:100p d:flex jc:center">
-                                <a class="fs:2" href="">마이위드</a>
+                                <a class="fs:2" href="/mywith/list">마이위드</a>
                             </div>
                         </div>
                         <div
@@ -99,50 +112,51 @@
               
                 <span class="d:flex fl-dir:column w:100p">
                     <span class="mt:2 h:1 w:100p bg-color:base-3"></span>
-                    <li class="mt:5 px:2 py:1"
-                        th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'border-radius:6 bg-color:main-2' : ''"
+                    <li class="mt:5 px:2 py:1 book-search"
+
                     >
                         <a
-                            class="deco icon:book-searchd fs:3 fw:3 color:base-8 deco-mr:3"
-                            href="/book/list"
-                            th:classappend="${#strings.endsWith(requestURI, 'ok')} ? 'color:main-5 icon-color:main-5' : ''"
+                            class="deco icon:book-searchd fs:3 fw:3  deco-mr:3"
+                            href="/book/list?m=1"
+
 
                         >책검색</a
                         >
                     </li>
-                    <li class="mt:5 px:2 py:1"
-                        th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'border-radius:6 bg-color:main-2' : ''"
-                    >
-                        <a
-                            class="deco icon:withd fs:3 fw:3 color:base-8 deco-mr:3"
-                            href="/with/list"
-                            th:classappend="${#strings.startsWith(requestURI, '/with')} ? 'color:main-5 icon-color:main-5' : ''"
+                         <li
+                                 class="mt:5 px:2 py:1 w:100p book-shorts "
 
-                        >위드</a
-                        >
-                    </li>
-                    <li
-                        class="mt:5 px:2 py:1 w:100p "
-                        th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'border-radius:6 bg-color:main-2' : ''"
 
-                    >
+                         >
 
                         <a
-                            class="deco icon:book-shortd deco-mr:3 fs:3 fw:3 "
-                            href="/shorts/list"
-                            th:classappend="${#strings.startsWith(requestURI, '/shorts')} ? 'color:main-5 icon-color:main-5' : ''"
+                                class="deco icon:book-shortd deco-mr:3 fs:3 fw:3 "
+                                href="/shorts/list?m=2"
+
 
                         >북쇼츠</a
                         >
                     </li>
+                    <li class="mt:5 px:2 py:1 with"
 
-                    <li class="mt:5 px:2 py:1"
-                        th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'border-radius:6 bg-color:main-2' : ''"
                     >
                         <a
-                            class="deco icon:book-logd fs:3 fw:3 color:base-8 deco-mr:3"
-                            href="/booklog/list"
-                            th:classappend="${#strings.endsWith(requestURI, 'log')} ? 'color:main-5 icon-color:main-5' : ''"
+                            class="deco icon:withd fs:3 fw:3 deco-mr:3"
+                            href="/with/list?m=3&p=1"
+
+
+                        >위드</a
+                        >
+                    </li>
+
+
+                    <li class="mt:5 px:2 py:1 booklog"
+
+                    >
+                        <a
+                            class="deco icon:book-logd fs:3 fw:3  deco-mr:3"
+                            href="/booklog/list?m=4"
+
 
                             >북로그</a
                         >
@@ -152,7 +166,7 @@
                     ></span>
                     <li class="mt:5 px:2 py:1">
                         <a
-                            class="deco icon:gear_six fs:3 fw:3 color:base-8 deco-mr:3"
+                            class="deco icon:gear_six fs:3 fw:3 deco-mr:3"
                             href=""
                             >설정</a
                         >

@@ -29,8 +29,8 @@ public class WithMemberServiceImp implements WithMemberService{
 
 
     @Override
-    public Integer join(Long userId, Long withId) {
-        return withMemberRepository.add(userId, withId);
+    public Integer join(Long userId, Long withId, Long masterYn) {
+        return withMemberRepository.add(userId, withId,masterYn);
     }
 
     @Override
@@ -43,5 +43,10 @@ public class WithMemberServiceImp implements WithMemberService{
     @Override
     public Integer withdraw(Long withId, Long userId) {
         return withMemberRepository.delete(withId, userId);
+    }
+
+    @Override
+    public List<WithMember> getWithMembers(Long withId) {
+        return withMemberRepository.findAll(withId);
     }
 }

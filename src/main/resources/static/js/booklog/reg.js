@@ -38,8 +38,8 @@ window.addEventListener("load", function () {
 
             // 검색된 책이 있을 경우 검색결과 개수 띄우기
             // if (bookCount > 0) {
-                searchResultHtml = `<div class="mb:3 ml:2 fw:3 mt:3">검색결과 <span class="fw:3 mt:2">${bookCount} 개</span></div>`;
-                resultList.insertAdjacentHTML("beforeend", searchResultHtml);
+            searchResultHtml = `<div class="mb:3 ml:2 fw:3 mt:3">검색결과 <span class="fw:3 mt:2">${bookCount} 개</span></div>`;
+            resultList.insertAdjacentHTML("beforeend", searchResultHtml);
             // }
 
             // 검색된 책이 없을 경우 검색결과 없음 멘트 띄우기
@@ -48,7 +48,7 @@ window.addEventListener("load", function () {
             //                     <div class="h:100p d:flex fl-dir:column jc:center ai:center">
             //                         <div class="icon icon:file icon-color:base-5">아이콘</div>
             //                         <div class="color:base-5">'${queryInput.value}'에 대한 검색 결과가 없습니다.</div>
-            //                     </div>  
+            //                     </div>
             //     `;
             //     resultList.insertAdjacentHTML("beforeend", emptyList);
             // }
@@ -83,14 +83,12 @@ window.addEventListener("load", function () {
     resultList.onclick = async function (e) {
         // TODO 등록된 북로그라면 알려주고 리턴하기
         // 사용자가 등록한 북로그의 아이디 값들을 가져온다
-
         // 사용자가 클릭한게 책이라면
         // .book 요소를 선택한다
         // 그 요소 안에서 h1을 찾는다
         // 찾은 h1 요소의 textContent 읽는다
         // textContent를 queryInput에 넣는다
         if (e.target.closest(".book")) {
-
             const book = e.target.closest(".book");
             const bookId = book.querySelector(".book-id").textContent;
             const bookTitle = book.querySelector(".book-title").textContent;
@@ -101,9 +99,9 @@ window.addEventListener("load", function () {
             // 로컬스토리지에 저장된 책 아이디 값들 중에 선택한 책 아이디와 같은 값을 뽑아낸다.
             let booklogValid = bookIdList.filter((id) => id == bookId);
             // 만약 같은 아이디의 값이 있으면 유효성 멘트를 날리고 새로 작성하지 못하게 한다.
-            if (booklogValid.length != 0 ) {
+            if (booklogValid.length != 0) {
                 // 이미 유효성 멘트가 있는 경우엔 리턴
-                if(book.querySelector(".del")) return;
+                if (book.querySelector(".del")) return;
                 // 백그라운드 컬러를 바꾸고
                 book.classList.add("bg-color:base-2");
                 // 유효성 멘트를 삽입한다.
@@ -130,15 +128,16 @@ window.addEventListener("load", function () {
             // 월
             let month = today.getMonth() + 1;
             //해당 월이 한자리면 앞에 '0' 붙이기
-            if (month.toString.length == 1) month = "0" + month;
+            if (month < 10) month = "0" + month;
 
             // 일
             let date = today.getDate();
-            if(date.toString.length == 1) date = "0" + date;
+            // 해당 일이 한자리면 앞에 '0' 붙이기
+            if (date < 10) date = "0" + date;
 
             // 북로그 작성창 ( 책정보 + 이미지/글 작성란 )
             let sectionHTML = ` 
-                            <form action="reg" method="post" enctype="multipart/form-data" novalidate>
+                            <form name="regform" action="reg" method="post" enctype="multipart/form-data" novalidate>
                                 <section id="book-info" class="booklog-style">
                                     <h1 class="d:none">책 정보</h1>
                                     <div class="d:flex px:2 pos:relative">
@@ -227,6 +226,25 @@ window.addEventListener("load", function () {
             let logContentImg = logContentSection.querySelector("section");
             // 로그 작성 취소
             let regCantleBtn = booklogRegForm.querySelector(".reg-cantle");
+            // 등록 버튼
+            let regBtn = booklogRegForm.querySelector(".reg-btn");
+
+            // 등록 시 내용 없으면 리턴. 내용 있으면 등록 처리
+            regBtn.onclick = function (e) {
+                e.preventDefault();
+                let file = inputImg.files["0"];
+                let textarea = logContentSection.querySelector("textarea").value;
+
+                console.log(file);
+                console.log(textarea);
+
+                if (file == undefined && textarea == "") {
+                    alert("사진 또는 글을 입력해주세요!");
+                    return;
+                }
+
+                document.regform.submit();
+            };
 
             // 이미지 선택하기
             inputImg.oninput = function () {
@@ -278,6 +296,10 @@ window.addEventListener("load", function () {
                 imgDeleteBtn.classList.add("d:none");
                 // 사진 들어간 섹션 숨기기
                 logContentImg.classList.add("d:none");
+
+                // 사진 삭제 후 같은 사진 업로드 했을 때 이벤트 먹히는 현상 해결하기 위해
+                // input value 값을 빈문자열 대입.
+                inputImg.value = "";
             };
 
             // 취소 버튼 클릭시 북로그 리스트 페이지로 이동

@@ -15,14 +15,45 @@ window.addEventListener('load', function (){
 
         // URLSearchParams 객체를 사용하여 roomId와 topicId를 가져옴
         const roomId = params.get('rid');
+        const withId = params.get('wid');
         const topicId = e.target.value;
 
-        // roomId와 topicId가 모두 유효한 경우에만 컨트롤러를 호출
-        if (roomId && topicId) {
-            const url = `/with/debate/board/list?rid=${roomId}&tid=${topicId}`
+        // roomId와 withId, topicId가 모두 유효한 경우에만 컨트롤러를 호출
+        if (roomId && topicId && withId) {
+            const url = `/with/debate/board/list?wid=${withId}&rid=${roomId}&tid=${topicId}`
             window.location.href = url;
         }
     }
 
     //==================================================================================
+
+    //============================== NOTICE  ===========================================
+
+    const noticeBox = document.querySelector('#notice-box');
+    const openNotice = document.querySelector('#open-notice');
+    const closeNotice = document.querySelector('#close-notice');
+
+    openNotice.addEventListener("click", function(e){
+        noticeBox.classList.add("active");
+    })
+
+    closeNotice.addEventListener("click", function(e){
+        console.log(e.target)
+        noticeBox.classList.remove("active");
+    })
+
+
+
+    //==================================================================================
 })
+
+window.addEventListener('resize', function() {
+    const select = document.querySelector('select');
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 1200) {
+        select.style.width = '60%';
+    } else {
+        select.style.width = '40%';
+    }
+});

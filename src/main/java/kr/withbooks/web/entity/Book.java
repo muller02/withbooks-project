@@ -13,9 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Book {
-    private long id;
+    private Long id;
     private String title;
     private String purchaseLink;
+    private Long cid;
     private String author;
     private Date pubDate;
     private String description;
