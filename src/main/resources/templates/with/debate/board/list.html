@@ -51,17 +51,25 @@
             --height-1: 18px;
             --width-1: 18px;
         }
+
+        .n-btn {
+            --btn-height-2: 36px;
+            --btn-padding-2: 4px 0px;
+            --btn-font-size-2: 14px;
+            --btn-border-radius-2: 8px;
+        }
     </style>
 </head>
 
 <body>
 
-    <main class="pb:11 px:3 flex-grow:1" layout:fragment="main">
+    <main class="pb:11 px:4 flex-grow:1" layout:fragment="main">
 
         <div class="d:flex mt:3 mr:1">
-            <a class="m:1" href="" th:href="@{/with/debate/list(m=3,wid=${param.wid})}">
-                <span class="n-btn n-btn:void pl:2 fs:1" style="color: var(--color-base-5);">
-                    <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
+            <a class="" href="" th:href="@{/with/debate/list(wid=${param.wid})}">
+<!--            <a class="m:1" href="javascript:history.go(-1);">-->
+                <span class="n-btn n-btn-size:2 n-btn:void pl:1 pr:5 fs:1" style="color: var(--color-base-5);">
+                    <span class="icon icon:caret_left icon-color:base-4 icon-size:2">아이콘</span>
                     토론 서재
                 </span>
             </a>
@@ -83,7 +91,7 @@
                 </div>
             </section>
 
-            <section id="notice-box">
+            <section id="notice-box" class="zi:5">
                 <h1 class="d:none">토론방 공지사항</h1>
                 <div id="notice-contents" class="d:flex w:8 bg-color:base-2 p:4 bd border-radius:3">
                     <div class="d:flex h:6">
@@ -96,7 +104,7 @@
                 </div>
             </section>
 
-            <section class="pos:fixed right:4 lg:right:1/4 top:1/4 md:top:2 lg:top:2 zi:5 " >
+            <section class="pos:fixed right:4 lg:right:1/5 top:1/5 md:top:2 lg:top:2 zi:4 " >
                 <h1 class="d:none">공지사항 버튼</h1>
                 <div class="bg-rgb:base-9 bd border-radius:full p:3">
                     <span id="open-notice" class="icon icon:megaphone icon-size:4 icon-color:base-4">알림</span>
@@ -105,40 +113,40 @@
 
             <section class="px:1 mt:9">
                 <h1 class="d:none">토론방 목록</h1>
-                <ul class="d:flex flex-direction:column mx:7 ">
+                <ul class="d:flex flex-direction:column">
                     <li th:each="b : ${list}">
                         <h1 class="d:none">토론방</h1>
                         <div class="d:flex fl-direction:row-reverse h:3 gap:2 border-bottom border-color:base-3 py:4 ">
                             <div th:if="${b.saveImg}" class="w:2 md:w:3 lg:w:4">
                                 <img src="/image/with/debate/cat.png" th:src="@{|/image/debate/board/${b.saveImg}|}" alt="이미지" class="obj-fit:cover w:2 md:w:3 lg:w:4 h:10p border-radius:3">
                             </div>
-                            <div class="d:flex flex-direction:column gap:2 fl-grow:1 pl:2">
+                            <div class="d:flex flex-direction:column flex-grow:1 gap:2">
                                 <div>
-                                    <div class="fs:2 fw:1"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
+                                    <div class="fs:1 md:fs:2 lg:fs:2 fw:1"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
                                 </div>
                                 <div>
-                                    <hi class="fs:5 fw:2"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
+                                    <hi class="fs:3 md:fs:4 lg:fs:5 fw:2"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
                                 </div>
                                 <div class="d:flex ai:center gap:1">
                                     <div class="d:flex ai:center">
                                         <img class="profile-img h:1 w:1 bd-radius:12" th:src="${b.userImg}"/>
-                                        <span class="fs:1 color:base-5 ml:1 " th:text="${b.nickname}">뉴렉이</span>
+                                        <div class="fs:1 color:base-5 ml:1 ln-clamp:1" th:text="${b.nickname}">뉴렉이</div>
                                     </div>
-                                    <div class="d:flex   ai:center">
-                                        <span class="icon icon:calendar_blank icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 " th:text="${#temporals.format(b.regDate, 'yyyy.MM.dd HH:mm')}">2024.02.20.18:25</span>
+                                    <div class="d:flex ai:center">
+                                        <div class="icon icon:calendar_blank icon-size:2"></div>
+                                        <div class="fs:1 color:base-5 ml:1 ln-clamp:1" th:text="${#temporals.format(b.regDate, 'yyyy.MM.dd HH:mm')}">2024.02.20.18:25</div>
                                     </div>
-                                    <div class="d:flex   ai:center">
-                                        <span class="icon icon:chat_circle_text icon-size:2"></span>
-                                        <span class="fs:1 color:base-5 ml:1 " >댓글 <span th:text="${b.cmtCnt} == null ? 0 : ${b.cmtCnt}">2</span>건</span>
+                                    <div class="d:flex ai:center">
+                                        <div class="icon icon:chat_circle_text icon-size:2"></div>
+                                        <div class="fs:1 color:base-5 ml:1 ln-clamp:1" >댓글 <span th:text="${b.cmtCnt} == null ? 0 : ${b.cmtCnt}">2</span>건</div>
                                     </div>
                                 </div>
                                 <div class="ln-clamp:3">
-                                    <span th:utext="${b.content}">
+                                    <div class="fs:1 md:fs:2 lg:fs:2" th:utext="${b.content}">
                                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus,
                                         dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur
                                         amet! Ex, sunt eius.
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -146,10 +154,10 @@
                 </ul>
             </section>
 
-            <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
+            <div class="reg-btn pos:fixed right:4 lg:right:1/5 bottom:10 md:bottom:9 lg:bottom:9 zi:5">
                 <h1 class="d:none">토론카드 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
-                    <a href="reg" th:href="@{/with/debate/board/reg(m=3,wid=${param.wid},rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+                    <a href="reg" th:href="@{/with/debate/board/reg(wid=${param.wid},rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
                 </div>
             </div>
         </div>
