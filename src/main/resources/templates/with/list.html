@@ -171,7 +171,10 @@
         <button class="w:100p font-weight:3">전체 위드</button>
       </li>
       <li class="w:5p">
-        <a class="w:100p color:base-3 font-weight:3" href="/mywith/list?m=3" id="container1">나의 위드</a>
+        <a class="w:100p color:base-3 font-weight:3" href="/with/my-list?m=3" id="container1"
+        sec:authorize="isAuthenticated()"
+        >나의 위드</a>
+        <a href="javascript:alert('회원가입하여 위드를 즐겨보세요 !')" sec:authorize="isAnonymous()">나의 위드</a>
       </li>
     </ul>
   </section>

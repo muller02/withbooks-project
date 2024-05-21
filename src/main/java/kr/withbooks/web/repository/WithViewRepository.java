@@ -15,12 +15,12 @@ public interface WithViewRepository {
 
   WithView findById(Long id);
 
-    List<WithView> findAllByWithIds(List<Long> withIds);
-
     List<WithView> findByUserId(Long userId);
 
     int count(Long id, String name, String withTop);
 
     List<WithView> findByBookId(Long bookId);
+
+    List<WithView> findAllByUserId(Long userId);
 
 }

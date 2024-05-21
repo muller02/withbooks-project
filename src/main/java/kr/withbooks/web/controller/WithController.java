@@ -279,9 +279,23 @@ public class WithController {
         userId =  userDetails.getId();
 
 
-      withMemberService.withdraw(withId,userId );
+      withMemberService.withdraw(withId,userId);
 
       return "redirect:/with/detail?m=3&id="+withId;
+  }
+
+  @GetMapping("my-list")
+  public  String list(Model model, @AuthenticationPrincipal CustomUserDetails userDetails){
+
+    if(userDetails == null)
+      return "with/list?m=3&p=1";
+
+    Long userId =  userDetails.getId();
+
+    List<WithView> withList = service.getListByUserId(userId);
+    model.addAttribute("withList",withList);
+
+    return  "with/my-list";
   }
 
 
