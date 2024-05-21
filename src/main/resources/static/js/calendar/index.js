@@ -57,12 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         modal.classList.remove("d:none");
         eventStart.value = info.startStr.split("T")[0];
-        // 라이브러리 특성상 종료 날짜가 +1 되어, 이를 커스텀
-        let endDate = new Date(info.endStr);
-        endDate.setDate(endDate.getDate() - 1);
-        // ISO 8601 문자열로 변환 후, 날짜 부분만 추출
-        eventEnd.value = endDate.toISOString().split("T")[0];
+
+        // let endDate = new Date(info.endStr);
+        // endDate.setDate(endDate.getDate() - 1); // 모달에 표시될 종료일
+        // eventEnd.value = endDate.toISOString().split("T")[0];
+
+        // 모달에 표시되는 종료일 설정
+        // let modalEndDate = new Date(endDate);
+        let modalEndDate = new Date(info.endStr);
+        modalEndDate.setDate(modalEndDate.getDate() - 1); // 종료일을 하루전으로 설정하여 모달 표시
+        eventEnd.value = modalEndDate.toISOString().split("T")[0]; // 모달에 표시되는 종료일
+        console.log("modal", eventEnd.value);
+
         allDayCheckbox.checked = info.allDay;
+
         if (info.allDay) {
           timeGroup.classList.add("d:none");
           timeGroup.classList.remove("d:flex");
@@ -93,7 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!allDayCheckbox.checked) {
         start = `${start}T${startTime.value}`;
         end = `${end}T${endTime.value}`;
+      } else {
+        // 사용자가 입력한 종료일에 하루를 더해서 저장
+        let endDate = new Date(end);
+        endDate.setDate(endDate.getDate() + 1);
+        // endDate.setHours(23, 59, 59, 999);
+        end = endDate.toISOString().split("T")[0];
+        console.log("달력", end);
       }
+
       if (title && start && end) {
         calendar.addEvent({
           title: title,
