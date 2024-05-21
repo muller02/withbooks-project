@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   // calendar element 취득
-  let calendarEl = document.querySelector("#calendar");
-  let modal = document.querySelector("#calendar-modal");
+  const calendarEl = document.querySelector("#calendar-container");
+  const modal = document.querySelector("#calendar-modal");
   let selectedInfo = null; // 저장공간
-  let eventForm = modal.querySelector(".event-form");
-  let eventTitle = modal.querySelector("#event-title");
-  let eventStart = modal.querySelector("#event-start");
-  let eventEnd = modal.querySelector("#event-end");
-  let cancelBtn = modal.querySelector("#cancel-btn");
-  let allDayCheckbox = modal.querySelector("#all-day-checkbox");
-  let timeGroup = modal.querySelector(".time-group");
-  let startTime = modal.querySelector("#start-time");
-  let endTime = modal.querySelector("#end-time");
+  const eventForm = modal.querySelector(".event-form");
+  const eventTitle = modal.querySelector("#event-title");
+  const eventStart = modal.querySelector("#event-start");
+  const eventEnd = modal.querySelector("#event-end");
+  const cancelBtn = modal.querySelector("#cancel-btn");
+  const allDayCheckbox = modal.querySelector("#all-day-checkbox");
+  const timeGroup = modal.querySelector(".time-group");
+  const startTime = modal.querySelector("#start-time");
+  const endTime = modal.querySelector("#end-time");
 
-  if (calendarEl) {
+  function renderCalendar(events) {
     // full-calendar 생성하기
-    let calendar = new FullCalendar.Calendar(calendarEl, {
+    const calendar = new FullCalendar.Calendar(calendarEl, {
       height: "700px", // calendar 높이 설정
       expandRows: true, // 화면에 맞게 높이 재설정
       slotMinTime: "08:00", // Day 캘린더에서 시작 시간
@@ -39,13 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 클릭해서 이벤트 생성
       dateClick: function (info) {
+        selectedInfo = { start: info.date, end: info.date, allDay: true };
         modal.classList.remove("d:none");
         let selectedDate = info.dateStr;
         eventStart.value = selectedDate;
         eventEnd.value = selectedDate;
+        allDayCheckbox.checked = true;
+        timeGroup.classList.add("d:none");
+        timeGroup.classList.remove("d:flex");
       },
       // 드래그로 이벤트 생성
       select: function (info) {
+        selectedInfo = {
+          start: info.start,
+          end: info.end,
+          allDay: info.allDay,
+        };
         modal.classList.remove("d:none");
         eventStart.value = info.startStr.split("T")[0];
         // 라이브러리 특성상 종료 날짜가 +1 되어, 이를 커스텀
@@ -53,6 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
         endDate.setDate(endDate.getDate() - 1);
         // ISO 8601 문자열로 변환 후, 날짜 부분만 추출
         eventEnd.value = endDate.toISOString().split("T")[0];
+        allDayCheckbox.checked = info.allDay;
+        if (info.allDay) {
+          timeGroup.classList.add("d:none");
+          timeGroup.classList.remove("d:flex");
+        } else {
+          timeGroup.classList.remove("d:flex");
+          timeGroup.classList.add("d:none");
+          startTime.value = info.startStr.split("T")[1].substring(0, 5);
+          endTime.value = info.endStr.split("T")[1].substring(0, 5);
+        }
       },
     });
     calendar.render();
@@ -71,13 +90,17 @@ document.addEventListener("DOMContentLoaded", () => {
       let title = eventTitle.value.trim();
       let start = eventStart.value;
       let end = eventEnd.value;
+      if (!allDayCheckbox.checked) {
+        start = `${start}T${startTime.value}`;
+        end = `${end}T${endTime.value}`;
+      }
       if (title && start && end) {
         calendar.addEvent({
           title: title,
           start: start,
           end: end,
           // 종일 지속되는지 여부
-          allDay: selectedInfo ? selectedInfo.allDay : false,
+          allDay: allDayCheckbox.checked,
         });
         modal.classList.add("d:none");
         // 다음 이벤트를 위해 입력 필드 초기화
@@ -111,4 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  renderCalendar();
 });
