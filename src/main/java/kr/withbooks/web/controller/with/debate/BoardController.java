@@ -39,9 +39,6 @@ public class BoardController {
 
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
 
-
-
-
         // 게시글의 \r\n 을 <br> 태그로 치환
         for(DebateBoardView b : list){
             String replacedStr = b.getContent().replace("\r\n", "<br>");
@@ -154,8 +151,9 @@ public class BoardController {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             HttpServletRequest request) throws IOException {
 
-        System.out.println("wid = " + withId);
         Long userId = userDetails.getId();
+        log.info("userId = {}", userId);
+        log.info("withId = {}", withId);
 
         // board
         DebateBoard board = DebateBoard.builder()
@@ -198,7 +196,6 @@ public class BoardController {
             @RequestParam("wid") Long withId,
             @RequestParam("rid") Long roomId,
             @ModelAttribute BoardEditForm boardEditForm,
-
             HttpServletRequest request) throws IOException {
 
         // 1. 게시글 정보 수정

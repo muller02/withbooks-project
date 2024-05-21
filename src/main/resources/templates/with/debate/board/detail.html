@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity"
       layout:decorate="~{inc/layout.html}">
 <head>
     <meta charset="UTF-8">
@@ -93,21 +94,28 @@
             --btn-outline-border: 1px solid var(--color-accent-1);
             color: var(--color-accent-1);
         }
+
+        .n-btn {
+            --btn-height-2: 36px;
+            --btn-padding-2: 4px 0px;
+            --btn-font-size-2: 14px;
+            --btn-border-radius-2: 8px;
+        }
     </style>
 </head>
 <body>
-    <main class="min-width:8 pb:10 px:3 flex-grow:1" layout:fragment="main">
+    <main class="min-width:8 pb:10 px:4 flex-grow:1" layout:fragment="main">
 
         <div class="d:flex mt:3 mr:1">
-            <a class="m:1" href="" th:href="@{/with/debate/board/list(wid=${param.wid}, rid=${param.rid})}">
-                <span class="n-btn n-btn:void pl:2 fs:1" style="color: var(--color-base-5);">
-                    <span class="icon icon:caret_left icon-color:base-4 icon-size:2 mx:1">아이콘</span>
+            <a class="" href="" th:href="@{/with/debate/board/list(wid=${param.wid}, rid=${param.rid})}">
+                <span class="n-btn n-btn-size:2 n-btn:void pl:1 pr:5 fs:1" style="color: var(--color-base-5);">
+                    <span class="icon icon:caret_left icon-color:base-4 icon-size:2">아이콘</span>
                     토론 카드
                 </span>
             </a>
 
-            <section class="d:flex ml:auto">
-                <h1 class="d:none">북쇼츠 팝업버튼</h1>
+            <section class="d:flex ml:auto" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId}">
+                <h1 class="d:none">토론카드 수정 삭제 버튼</h1>
                 <div class="n-dropdown">
                     <button id="dropdown-btn" class="rg-comment-hover icon icon:dots_three_outline_vertical_fill icon-color:base-5 icon-size:2 my:3">
                         점점점
@@ -240,7 +248,7 @@
                             <h1 class="d:none">타인 댓글</h1>
                             <div class="d:flex fl-dir:column py:2">
                                 <a class="d:flex ai:center" href="">
-                                    <div class="d:flex ai:center"><img class="profile-image w:1 h:1" th:src="@{|${cmt.userImg}|}" alt="프로필사진"></div>
+                                    <div class="d:flex ai:center"><img class="profile-image w:1 h:1" th:src="${cmt.userImg}" alt="프로필사진"></div>
                                     <div class="writer fs:2 fw:3 h:10p ml:1" th:text="${cmt.userNickname}">뉴렉이</div>
                                 </a>
                                 <div class="comment-area mt:2 ml:1 mr:10">
@@ -256,7 +264,7 @@
                             <h1 class="d:none">내 댓글</h1>
                             <div class="d:flex fl-dir:column py:2">
                                 <a class="d:none" href="">
-                                    <div><img class="profile-image w:1 h:1" th:src="@{|/image/user/${cmt.userImg}|}" alt="프로필사진"></div>
+                                    <div><img class="profile-image w:1 h:1" th:src="${cmt.userImg}" alt="프로필사진"></div>
                                     <div class="writer fs:2 fw:3 h:1 ml:1">뉴렉이</div>
                                 </a>
                                 <div class="comment-area ml:6 mt:2 mr:1 pos:relative d:flex fl-dir:column ai:end">
