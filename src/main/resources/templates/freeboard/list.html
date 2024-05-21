@@ -74,7 +74,7 @@
         </section>
         
         <span id="board-list" class="board-list">
-            <section class="d:flex fl-dir:column mt:6 bd-bottom pb:3" th:each="b : ${list}">
+            <section class="d:flex fl-dir:column mt:6 bd-bottom pb:3" th:each="b : ${list}" th:classappend="${b.noticeYn} == 1 ? 'bd-color:main-4'">
                 <h1 class="d:none">게시글</h1>
                 <span class="pos:relative">
                     <section class="d:flex ai:center">

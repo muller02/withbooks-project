@@ -33,5 +33,10 @@ public class FreeCommentServiceImp implements FreeCommentService{
     public int delete(Long id) {
         return repository.remove(id);
     }
+
+    @Override
+    public void edit(Long id, String content) {
+        repository.update(id, content);
+    }
     
 }

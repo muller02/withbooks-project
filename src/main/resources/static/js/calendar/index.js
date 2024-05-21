@@ -3,11 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let calendarEl = document.querySelector("#calendar");
   let modal = document.querySelector("#calendar-modal");
   let selectedInfo = null; // 저장공간
-  let eventForm = document.getElementById("event-form");
-  let eventTitle = document.getElementById("event-title");
-  let eventStart = document.getElementById("event-start");
-  let eventEnd = document.getElementById("event-end");
-  let cancelBtn = document.getElementById("cancel-btn");
+  let eventForm = modal.querySelector(".event-form");
+  let eventTitle = modal.querySelector("#event-title");
+  let eventStart = modal.querySelector("#event-start");
+  let eventEnd = modal.querySelector("#event-end");
+  let cancelBtn = modal.querySelector("#cancel-btn");
+  let allDayCheckbox = modal.querySelector("#all-day-checkbox");
+  let timeGroup = modal.querySelector(".time-group");
+  let startTime = modal.querySelector("#start-time");
+  let endTime = modal.querySelector("#end-time");
 
   if (calendarEl) {
     // full-calendar 생성하기
@@ -31,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nowIndicator: true, // 현재 시간 마크
       dayMaxEvents: true, // +more 표시 전 최대 이벤트 갯수, 셀 높이에 의해 결정
       locale: "ko", // 한국어 설정
+      events: [],
 
       // 클릭해서 이벤트 생성
       dateClick: function (info) {
@@ -41,16 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       // 드래그로 이벤트 생성
       select: function (info) {
-        console.log("Start date: ", info.startStr);
-        console.log("End date: ", info.endStr);
-        // eventStart.value = info.startStr.split("T")[0];
-        // eventEnd.value = info.endStr.split("T")[0];
-        eventStart.value = info.dateStr;
-        eventEnd.value = info.dateStr;
         modal.classList.remove("d:none");
+        eventStart.value = info.startStr.split("T")[0];
+        // 라이브러리 특성상 종료 날짜가 +1 되어, 이를 커스텀
+        let endDate = new Date(info.endStr);
+        endDate.setDate(endDate.getDate() - 1);
+        // ISO 8601 문자열로 변환 후, 날짜 부분만 추출
+        eventEnd.value = endDate.toISOString().split("T")[0];
       },
     });
     calendar.render();
+
+    // 취소 버튼 이벤트
+    cancelBtn.addEventListener("click", () => {
+      modal.classList.add("d:none");
+      eventTitle.value = "";
+      eventStart.value = "";
+      eventEnd.value = "";
+    });
 
     // 등록 버튼 이벤트
     eventForm.addEventListener("submit", (e) => {
@@ -74,12 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
       } else alert("모든 필드를 입력하세요.");
     });
 
-    // 취소 버튼 이벤트
-    cancelBtn.addEventListener("click", () => {
-      modal.classList.add("d:none");
-      eventTitle.value = "";
-      eventStart.value = "";
-      eventEnd.value = "";
+    // 종일 체크박스 상태 변경 시 이벤트 처리
+    allDayCheckbox.addEventListener("change", () => {
+      if (allDayCheckbox.checked) {
+        // 체크되어 있다면, time-group 숨기기
+        timeGroup.classList.add("d:none");
+        timeGroup.classList.remove("d:flex");
+      } else {
+        // 체크되어 있지 않다면, time-group 표시
+        timeGroup.classList.remove("d:none");
+        timeGroup.classList.add("d:flex");
+      }
+    });
+
+    startTime.addEventListener("change", () => {
+      if (!allDayCheckbox.checked) {
+        eventStart.value = startTime.value;
+      }
+    });
+    endTime.addEventListener("change", () => {
+      if (!allDayCheckbox.checked) {
+        eventEnd.value = endTime.value;
+      }
     });
   }
 });

@@ -1,21 +1,19 @@
 package kr.withbooks.web.controller.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.service.FreeLikeService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController("apiFreeLikeController")
-@RequestMapping("/api/free-board/free-like")
+@RequestMapping("/api/free-boards/{id}/free-likes")
 public class FreeLikeController {
 
     @Autowired
@@ -23,7 +21,7 @@ public class FreeLikeController {
     
     @PostMapping
     public int postLike(
-          @RequestBody String freeBoardId
+          @PathVariable(name = "id") String freeBoardId
         , @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
 
@@ -36,10 +34,10 @@ public class FreeLikeController {
 
     @DeleteMapping
     public int deleteLike(
-          @RequestBody String freeBoardId
+          @PathVariable(name = "id") String freeBoardId
         , @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
-
+        
         if(userDetails == null)
             return 100;
 
