@@ -4,6 +4,7 @@ import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
 import kr.withbooks.web.service.DebateRoomService;
 import kr.withbooks.web.service.DebateTopicService;
+import kr.withbooks.web.service.WithMemberService;
 import kr.withbooks.web.service.WithService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class DebateController {
     private final DebateRoomService debateRoomService;
     private final DebateTopicService debateTopicService;
     private final WithService withService;
+    private final WithMemberService withMemberService;
 
     @GetMapping("/list")
     public String list(
@@ -37,8 +39,10 @@ public class DebateController {
             @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         List<DebateRoomView> list  = debateRoomService.getListById(withId);
+        List<WithMember> withMembers = withMemberService.getWithMembers(withId);
 
         log.info("list : {}", list);
+        log.info("withMembers : {}", withMembers);
 
         model.addAttribute("list", list);
 

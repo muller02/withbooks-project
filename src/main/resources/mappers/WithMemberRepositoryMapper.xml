@@ -34,6 +34,14 @@
 		and member_id = ${userId}
 	</select>
 
+	<select id="findAll" resultType="WithMember">
+		SELECT
+			*
+		FROM with_member
+		WHERE
+			with_id = #{withId}
+	</select>
+
 	<delete id="delete" parameterType="Long">
 		delete from with_member 
 		where
