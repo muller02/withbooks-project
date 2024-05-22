@@ -91,7 +91,7 @@
 
 
         ><a class="icon icon:book-logd icon-color:base-9" href="/booklog/list?m=4"
-
+        th:href="${#authentication.principal ne 'anonymousUser'}?'/booklog/list?m=4':'/user/login'"
 
         >북로그</a>
             <p class="arrow_box">북로그</p>

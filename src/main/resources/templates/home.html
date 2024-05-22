@@ -160,11 +160,11 @@
 
         <h1 class="d:none">서비스 소개 </h1>
         <div class="m:2 fw:3 fs:5 color:main-5">🔥 실시간 인기 북쇼츠</div>
-        <div class="  p:3 " >
+        <div class="p:3" >
             <div class=" d:flex overflow-y-scroll scrl-none scroll-box">
                 <div th:each="shorts, stat : ${shortsList}">
                     <!-- TODO 해당 북쇼츠 페이지로 이동 -->
-                    <a href="">
+                    <a href="" th:href="@{|/shorts/list?m=2&sid=${shorts.id}|}">
                         <div class="h:4 box-shadow-custom  min-width:6 p:3" 
                         th:classappend="${stat.index % 2 == 0} ? 'shorts-item-background-color border-radius:4 m:3 box-sizing:border-box' : 'border-radius:4 m:3 box-sizing:border-box'">
                             <div class="d:flex  justify-content:end mb:4">
