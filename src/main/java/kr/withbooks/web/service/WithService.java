@@ -10,8 +10,6 @@ public interface WithService {
 
   List<WithView> getList(Long[] categoryId, String query, Long faceYn, Long id, String name, String withTop, String sort, Integer page);
 
-  List<WithView> getListByWithIds(List<Long> withIds);
-
 
   void add(With with);
 
@@ -21,5 +19,7 @@ public interface WithService {
   boolean getName(String withName);
 
   List<WithView> getListByBookId(Long bookId);
+
+  List<WithView> getListByUserId(Long userId);
 
 }

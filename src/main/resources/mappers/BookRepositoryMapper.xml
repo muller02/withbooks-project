@@ -16,7 +16,9 @@
 				and category_id = ${categoryId}
 			</if>
 		</where>
-		<!-- limit #{offset}, #{size} -->
+		<if test="offset != null and size != null">
+			limit #{offset}, #{size}
+		</if>
 	</select>
 	
 	<select id="findById" resultType="Book" parameterType="Long" >

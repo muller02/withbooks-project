@@ -1,7 +1,10 @@
 package kr.withbooks.web.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +31,17 @@ public class UserController {
         Integer result = service.nicknameCheck(nickname);
         return result;
     }
+
+    // 회원 상태 변경
+    @PostMapping("withdrawStatusUpdate")
+    public Integer statusUpdate(
+        @RequestParam (name="ids") List<Integer> ids,
+        @RequestParam (name="status") Integer status
+    ) {
+        Integer result = service.updateWithdrawStatus(status, ids);
+
+        return result;
+    }
+    
     
 }

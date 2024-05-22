@@ -162,10 +162,10 @@
 
     <ul class="n-tabbar">
       <li class=" w:5p">
-        <a class="w:100p color:base-3 " href="/with/list?m=2&p=1">전체 위드</a>
+        <a class="w:100p color:base-3 " href="/with/list?m=3&p=1">전체 위드</a>
       </li>
       <li class="w:5p active">
-        <a class="w:100p  font-weight:3 " href="/mywith/list">나의 위드</a>
+        <a class="w:100p  font-weight:3 " href="">나의 위드</a>
       </li>
     </ul>
   </section>
@@ -173,6 +173,9 @@
 
   <section class="with-list">
     <h1 class="d:none">위드 리스트</h1>
+    <div class="p:3 d:flex jc:center mt:5" th:if="${#lists.isEmpty(withList)}">
+        <h1 class="n-font n-font:subtitle">위드에 가입해서 풍성한 withbooks를 즐겨보세요 ! :)</h1>
+    </div>
     <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list-ul">
       <li class="d:flex with-ul gap:2 flex-direction:column n-item:shadow" th:each="with: ${withList}">
         <ul class="d:flex gap:1 flex-wrap:wrap">

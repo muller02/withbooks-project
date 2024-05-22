@@ -11,7 +11,7 @@
             class="main-menu-list d:flex main-menu-width bg-color:sub-1 align-items:center main-menu-height border-top main-menu-padding justify-content:space-between"
         >
             <li>
-                <a href="/with/list" class="d:flex fl-dir:column ai:center">
+                <a href="/with/list?m=3&p=1" class="d:flex fl-dir:column ai:center">
                     <span class="menu-icon icon:with"></span>
                     <span class="main-menu-font">위드</span>
                 </a>
@@ -26,19 +26,19 @@
                 </a>
             </li>
             <li>
-                <a href="/booklog/list" class="d:flex fl-dir:column ai:center">
+                <a href="/booklog/list?m=4" class="d:flex fl-dir:column ai:center" th:href="${#authentication.principal ne 'anonymousUser'}?'/booklog/list?m=4':'/user/login'">
                     <span class="menu-icon icon:my-library"></span>
                     <span class="main-menu-font">내서재</span>
                 </a>
             </li>
             <li>
-                <a href="/book/list" class="d:flex fl-dir:column ai:center">
+                <a href="/book/list?m=1" class="d:flex fl-dir:column ai:center">
                     <span class="menu-icon icon:book-search"></span>
                     <span class="main-menu-font">책검색</span>
                 </a>
             </li>
             <li>
-                <a href="/my/index"  class="d:flex fl-dir:column ai:center" th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/login'">
+                <a href="/my/index"  class="d:flex fl-dir:column ai:center" th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/user/login'">
                     <span class="menu-icon icon:my"></span>
                     <span class="main-menu-font">마이</span>
                 </a>

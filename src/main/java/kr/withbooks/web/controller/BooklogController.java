@@ -142,7 +142,7 @@ public class BooklogController {
         
             try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-                response.sendRedirect("detail?id=" + booklogId);
+                response.sendRedirect("detail?m=4&id=" + booklogId);
             } catch (IOException e) {
                 // 리다이렉트 중 오류가 발생한 경우 처리
                 e.printStackTrace();
@@ -160,7 +160,7 @@ public class BooklogController {
         
         try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-            response.sendRedirect("list");
+            response.sendRedirect("list?m=4");
         } catch (IOException e) {
             // 리다이렉트 중 오류가 발생한 경우 처리
             e.printStackTrace();
@@ -180,7 +180,7 @@ public class BooklogController {
         
         try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-            response.sendRedirect("detail?id=" + booklogId);
+            response.sendRedirect("detail?m=4&id=" + booklogId);
         } catch (IOException e) {
             // 리다이렉트 중 오류가 발생한 경우 처리
             e.printStackTrace();
@@ -202,7 +202,7 @@ public class BooklogController {
 
         try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-            response.sendRedirect("list");
+            response.sendRedirect("list?m=4");
         } catch (IOException e) {
             // 리다이렉트 중 오류가 발생한 경우 처리
             e.printStackTrace();

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ) {
         isValid = false;
         if (!firstInvalidField) {
-          firstInvalidField = field; // 첫 번째 유효하지 않은 필드를 찾음
+          firstInvalidField = fielad; // 첫 번째 유효하지 않은 필드를 찾음
         }
       } else if (
         !field.value.trim() ||

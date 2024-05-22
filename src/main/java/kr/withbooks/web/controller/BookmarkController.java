@@ -50,6 +50,6 @@ public class BookmarkController {
         if(ids!=null && ids.size() > 0)
             service.deleteAllByIds(ids, userId);
 
-        return "redirect:list";
+        return "redirect:list?m=4";
     }
 }

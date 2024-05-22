@@ -15,7 +15,11 @@ public interface BookshrotsService {
     Bookshorts get(Long shortsId);
     void delete(Long shortsId);
     List<BookshortsView> getBestList();
-    List<BookshortsView> getView(Long bookId, Long userId, Long lastShortsId); 
+    List<BookshortsView> getView(Long bookId, Long userId, Long lastShortsId);
+    BookshortsView getById(Long shortsId, Long userId); 
+
+    // admin/user
+    List<BookshortsView> getById(Long id);
 
     
 }
