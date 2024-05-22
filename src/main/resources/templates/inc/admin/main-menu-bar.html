@@ -3,13 +3,14 @@
     <body>
         <aside class="n-panel n-side-panel">
             <nav class="n-panel n-menu-panel">
-              <h1 class="text-align:center mb:4">메뉴</h1>
+              <h1 class="text-align:center mb:4 d:none">메뉴</h1>
               <ul class="of:hidden">
-                <li class="bg-color:base-2 bd-radius:1">
+                <li class=" bd-radius:1">
                   <button title="HOME"
-                    class="deco deco-mr:3 deco-color:base-7 icon:house_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-                  >
-                    <span class="d:none lg:d:inline"><b>HOME</b></span>
+                  class="w:100p deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
+                  th:classappend="${{param.m}} == 1 ? 'bg-color:main-3'"
+                    >
+                    <a href="/admin/index?m=1"><span class="d:none lg:d:inline"><b>대시보드</b></span></a>
                   </button>
                 </li>
                 <li>
@@ -26,13 +27,13 @@
                       class="w:100p deco deco-mr:3  deco-color:base-7 icon:arrow_right d:flex ai:center p:2 pl:5 font-size:1 font-weight:2 cursor:pointer white-space:nowrap"
                       th:classappend="${{param.m}} == 2 and ${{param.sm}} == 1 ? 'bg-color:main-2'"
                       >
-                      <a class="w:100p text-align:left" href="list?&m=2&sm=1"><span class="d:none lg:d:inline"><b>DB 책 관리</b></span></a>
+                      <a class="w:100p text-align:left" href="/admin/book/list?&m=2&sm=1"><span class="d:none lg:d:inline"><b>DB 책 관리</b></span></a>
                     </button>
                     <button title="API 책 등록"
                       class="w:100p deco deco-mr:3 deco-color:base-7 icon:arrow_right d:flex ai:center p:2 pl:5 font-size:1 font-weight:2 cursor:pointer white-space:nowrap"
                       th:classappend="${{param.m}} == 2 and ${{param.sm}} == 2 ? 'bg-color:main-2'"
                       >
-                      <a class="w:100p text-align:left" href="aladinList?&m=2&sm=2"><span class="d:none lg:d:inline"><b>API 책 등록</b></span></a>
+                      <a class="w:100p text-align:left" href="/admin/book/aladinList?&m=2&sm=2"><span class="d:none lg:d:inline"><b>API 책 등록</b></span></a>
                     </button>
                     <!-- <button title="베스트셀러"
                       class="bg-color:main-1 w:100p deco deco-mr:3 deco-color:base-7 icon:arrow_right d:flex ai:center p:2 pl:5 font-size:1 font-weight:2 cursor:pointer white-space:nowrap"
@@ -45,23 +46,26 @@
                 </li>
                 <li>
                   <button title="위드 관리"
-                    class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-                  >
-                    <span class="d:none lg:d:inline"><b>위드 관리</b></span>
+                  class="w:100p deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
+                    th:classappend="${{param.m}} == 3 ? 'bg-color:main-3'"
+                    >
+                    <a class="w:100p text-align:left" href="/admin/with/list?m=3"><span class="d:none lg:d:inline"><b>위드 관리</b></span></a>
                   </button>
                 </li>
                 <li>
                   <button title="북쇼츠 관리"
-                    class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-                  >
-                    <span class="d:none lg:d:inline"><b>북쇼츠 관리</b></span>
+                  class="w:100p deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
+                    th:classappend="${{param.m}} == 4 ? 'bg-color:main-3'"
+                    >
+                  <a class="w:100p text-align:left" href=""><span class="d:none lg:d:inline"><b>북쇼츠 관리</b></span></a>
                   </button>
                 </li>
                 <li>
                   <button title="회원 관리"
-                    class="deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
-                  >
-                    <span class="d:none lg:d:inline"><b>회원 관리</b></span>
+                  class="w:100p deco deco-mr:3 deco-color:base-7 icon:squares_four_fill d:flex ai:center p:2 pl:3 font-size:2 font-weight:2 cursor:pointer white-space:nowrap"
+                    th:classappend="${{param.m}} == 5 ? 'bg-color:main-3'"
+                    >
+                  <a class="w:100p text-align:left" href="/admin/user/list?m=5"><span class="d:none lg:d:inline"><b>회원 관리</b></span></a>
                   </button>
                 </li>
               </ul>
