@@ -55,19 +55,20 @@ window.addEventListener("load", function () {
       resultList.insertAdjacentHTML("beforeend", searchResultHtml);
 
       for (book of list) {
-        var sectionHTML = `<section class="book d:flex h:2 ai:center  bg-color:main-1     pl:3  item" >
-                                        <h1 class="d:none">책정보</h1>
-                                        <div class="d:none">${book.id}</div>
-                                        <div class="w:74  mr:5 ">
-                                         <img src="${book.cover}" alt="책이미지" class="h:100p w:100p">
-                                         </div>
-                                         <div class="d:flex jc:center flex-direction:column">
-                                          <div class="fs:4 fw:3 book-title">${book.title}</div>
-                                          <div class="fs:2 fw:2 mb:1">${book.author} 저</div>
-                                         <div class="fs:2 color:base-7">${book.publisher}</div>
-                                      <div class="fs:2 color:base-7">${book.pubDate}</div>
-                                        </div>
-                                    </section>`;
+        let pubDate = book.pubDate.substr(0,10);
+        let sectionHTML = ` <section class="book item d:flex pl:3 py:3 csr:pointer">
+                                <h1 class="d:none">책정보</h1>
+                                <div class="book-id d:none">${book.id}</div>
+                                <div class="h:3 w:3 mr:5 text-align:center fl-shrink:0 box-shadow-custom">
+                                    <img src="${book.cover}" alt="책이미지" class="book-cover h:100p object-fit:cover">
+                                </div>
+                                <div class="d:flex flex-direction:column" title="${book.title}">
+                                    <div class="book-title fs:4 fw:3 mb:2 ln-clamp:2">${book.title}</div>
+                                    <div class="book-author fs:2 fw:2 mb:1 ln-clamp:1">${book.author} 저</div>
+                                    <div class="book-publisher fs:2 color:base-7 ln-clamp:1">${book.publisher}</div>
+                                    <div class="fs:2 color:base-7">${pubDate}</div>
+                                </div>
+                            </section>`;
 
         resultList.insertAdjacentHTML("beforeend", sectionHTML);
 
