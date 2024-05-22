@@ -47,6 +47,15 @@
           </label>
         </div>
 
+        <!--        <h1 class="fs:5 font-weight:3">일정 등록</h1>-->
+        <!--        <div class="modal-body">-->
+        <!--          &lt;!&ndash; 일정내용 인풋 &ndash;&gt;-->
+        <!--          <div class="my:5">-->
+        <!--            <label>-->
+        <!--              <input class="n-textbox n-textbox-label:top w:5 p:3" id="title-registered" type="text"/>-->
+        <!--            </label>-->
+        <!--          </div>-->
+
         <!-- 종일 이벤트 체크박스 -->
         <div class="all-day-group">
           <label>
@@ -59,12 +68,12 @@
             <!-- 시작 시간 입력 필드 -->
             <div class="d:inline-block flex-grow:1" id="start-time-group">
               <label class="d:none" for="start-time">시작 시간</label>
-              <input class="form-control w:100p" id="start-time" type="time" value="08:00">
+              <input class="form-control w:100p" id="start-time" type="datetime-local">
             </div>
             <!-- 종료 시간 입력 필드 -->
             <div class="d:inline-block flex-grow:1" id="end-time-group">
               <label class="d:none" for="end-time">종료 시간</label>
-              <input class="form-control w:100p" id="end-time" type="time" value="20:00">
+              <input class="form-control w:100p" id="end-time" type="datetime-local">
             </div>
           </div>
         </div>
@@ -98,6 +107,7 @@
       </div>
     </form>
   </section>
+
 </main>
 </body>
 </html>
