@@ -156,8 +156,7 @@
                         <a
                             class="deco icon:book-logd fs:3 fw:3  deco-mr:3"
                             href="/booklog/list?m=4"
-
-
+                            th:href="${#authentication.principal ne 'anonymousUser'}?'/booklog/list?m=4':'/user/login'"
                             >북로그</a
                         >
                     </li>
