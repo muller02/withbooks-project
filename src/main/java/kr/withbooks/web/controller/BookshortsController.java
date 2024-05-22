@@ -48,6 +48,7 @@ public class BookshortsController {
     @GetMapping("list")
     public String list(Model model, 
                         @RequestParam(name = "id", required = false) Long bookId,
+                        @RequestParam(name = "sid", required = false) Long shortsId,
                         @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         Long userId = null;
@@ -55,6 +56,8 @@ public class BookshortsController {
             userId = userDetails.getId();
 
         int page = 1;
+
+
 
         List<BookshortsView> list = service.getView(bookId,userId, page);
 
@@ -71,6 +74,16 @@ public class BookshortsController {
                 view.setImg(imgList);
             }
         }
+
+        // shortsId 있는 경우 
+        // 인기 북쇼츠를 가져온 후
+        // shortsId인 쇼츠를 index 0으로 넣어줌
+        if(shortsId != null){
+            BookshortsView shorts = service.getById(shortsId, userId);
+            list.add(0, shorts);
+        }
+
+        System.out.println("==================list size = "+list.size());
 
         model.addAttribute("list", list);
 

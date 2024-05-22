@@ -50,11 +50,6 @@
 
 	</select>
 
-	<select id="findRand10" resultType="BookshortsView"
-	>
-		SELECT * FROM shorts_view where like_cnt >0 and blind_yn=0 ORDER BY RAND() LIMIT 10
-
-	</select>
 	<!-- ================================================================================== -->
 	<!-- /api/bookShorts/list -->
 
@@ -93,13 +88,15 @@
 				from
 					(select 
 						st.*,
-						us.nickname,
-						us.img,
+						us.nickname userNickname,
+						us.img userImg,
+						b.title bookTitle,
 						ifnull(sc.count, 0) commentCnt,
 						ifnull(sl.count, 0) likeCnt,
 						if(stl.user_id is null, 0, 1) liked
 					from 
 						shorts st left join `user` us on st.user_id = us.id
+						left join book b on st.book_id = b.id
 						left join (select shorts_id, count(*) count from shorts_comment group by shorts_id) sc on st.id = sc.shorts_id
 						left join (select shorts_id, count(*) count from shorts_like group by shorts_id) sl on st.id = sl.shorts_id
 						left join shorts_like stl on st.id = stl.shorts_id and stl.user_id = #{userId}
@@ -114,6 +111,34 @@
 					st_view.id < ${lastShortsId}
 				limit 20
 		]]>
+	</select>
+
+
+	<!-- =============================================================== -->
+	<!-- / main -> /shorts/list?sid=n -->
+	<select id="findById" resultMap="ShortsViewMap">
+
+		select 
+			st.*,
+			us.nickname userNickname,
+			us.img userImg,
+			b.title bookTitle,
+			ifnull(sc.count, 0) commentCnt,
+			ifnull(sl.count, 0) likeCnt,
+			if(stl.user_id is null, 0, 1) liked
+		from 
+			shorts st left join `user` us on st.user_id = us.id
+			left join book b on st.book_id = b.id
+			left join (select shorts_id, count(*) count from shorts_comment group by shorts_id) sc on st.id = sc.shorts_id
+			left join (select shorts_id, count(*) count from shorts_like group by shorts_id) sl on st.id = sl.shorts_id
+			left join shorts_like stl on st.id = stl.shorts_id and stl.user_id = #{userId}
+		where
+			st.blind_yn = 0
+			and st.id = #{shortsId}
+		group by
+			st.id
+		order by
+			st.reg_date desc
 	</select>
 
 </mapper>

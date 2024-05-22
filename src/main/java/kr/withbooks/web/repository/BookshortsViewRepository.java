@@ -16,4 +16,6 @@ public interface BookshortsViewRepository {
 
     // /api/bookShorts/list
     List<BookshortsView> findAllViews(Long bookId, Long userId, Long lastShortsId);
+
+    BookshortsView findById(Long shortsId, Long userId);
 }
