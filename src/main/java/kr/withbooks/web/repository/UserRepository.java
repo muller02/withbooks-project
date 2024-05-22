@@ -1,6 +1,7 @@
 package kr.withbooks.web.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -26,9 +27,11 @@ public interface UserRepository {
     Integer countByNickname(String nickname);
 
 
-    List<User> findByAll(Long id, String nickname, String email, String birthyear, Integer gender, String startDate,
-            String endDate, Integer status);
+    // admin/user
+    List<User> findByAll(Map<String, String> params, Integer size,Integer offset);
     List<BookshortsView> findByIdShorts(Long id);
+    Integer count(Map<String, String> params, Integer size,Integer offset);
+    Integer updateWithdrawStatus(Integer status, List<Integer> ids);
 
 
 
