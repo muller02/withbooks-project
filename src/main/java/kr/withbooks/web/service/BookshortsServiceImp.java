@@ -79,7 +79,11 @@ public class BookshortsServiceImp  implements  BookshrotsService{
     public BookshortsView getById(Long shortsId, Long userId) {
         return shortsViewRepository.findById(shortsId, userId);
     }
-
+    
+    // admin/user
+    public List<BookshortsView> getById(Long userid){
+        return shortsViewRepository.findByUserId(userid);
+    }
     
 
 }

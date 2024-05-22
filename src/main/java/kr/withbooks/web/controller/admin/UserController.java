@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
+import kr.withbooks.web.service.BookshrotsService;
 import kr.withbooks.web.service.UserService;
 
 
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private BookshrotsService bookshortService;
 
     @GetMapping("list")
     public String list(
@@ -49,8 +53,10 @@ public class UserController {
         , Model model
     ) {
 
+        System.out.println("id : " + id);
+
         User user = service.getById(id);
-        List<BookshortsView> list = service.getByIdShorts(id);   
+        List<BookshortsView> list = bookshortService.getById(id);
              
         model.addAttribute("user", user);
         model.addAttribute("list", list);

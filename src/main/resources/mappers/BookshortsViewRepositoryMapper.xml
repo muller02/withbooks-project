@@ -141,4 +141,13 @@
 			st.reg_date desc
 	</select>
 
+	<select id="findByUserId" resultType="BookshortsView">
+		select 
+			*
+		from 
+			shorts_view
+		where
+			user_id = #{id}
+	</select>
+
 </mapper>

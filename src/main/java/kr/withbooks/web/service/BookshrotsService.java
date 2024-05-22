@@ -18,5 +18,8 @@ public interface BookshrotsService {
     List<BookshortsView> getView(Long bookId, Long userId, Long lastShortsId);
     BookshortsView getById(Long shortsId, Long userId); 
 
+    // admin/user
+    List<BookshortsView> getById(Long id);
+
     
 }
