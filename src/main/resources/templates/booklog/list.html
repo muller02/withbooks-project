@@ -62,12 +62,14 @@
                     <h1 class="d:none">북 리스트</h1>
 
                     <div class="p:3 d:flex fl-dir:column ai:center mt:5 gap:3" th:if="${#lists.isEmpty(list)}">
-                        <h1 class="n-font n-font:subtitle">북로그를 시작해보세요 ! :)</h1>
-                        <h2 class="n-font fs:4">하단의 
-                            <span class="bg-color:main-5 border-radius:full p:3 m:2">
-                                <span class="icon icon:plus icon-size:5 icon-color:base-1">?</span> 
-                            </span>
-                            버튼을 누르거나</h2>
+                        <h1 class="n-font n-font:subtitle">북로그를 시작해보세요 :)</h1>
+                        <h2 class="n-font fs:4 d:flex ai:center">
+                            하단의
+                            <div class="d:flex bg-color:main-5 border-radius:full p:3 m:3">
+                                <span class="icon icon:plus icon-size:5 icon-color:base-1">아이콘</span>
+                            </div>
+                            버튼을 누르거나
+                        </h2>
                         <div class="mt:4">
                             <a href="/booklog/reg?m=4" class="fs:3 color:main-5">여기를 눌러서 북로그를 작성해보세요 !</a>
                         </div>
