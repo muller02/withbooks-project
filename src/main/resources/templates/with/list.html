@@ -34,10 +34,10 @@
       transform: translateX(-10px);
     }
 
-    .cur-page{
-        background-color: var(--color-main-5);
-        color: var(--color-base-1) !important;
-        border-width: 0 !important;
+    .cur-page {
+      background-color: var(--color-main-5);
+      color: var(--color-base-1) !important;
+      border-width: 0 !important;
     }
 
   </style>
@@ -51,7 +51,7 @@
     <p class="fs:2">로그인을 하시면 조금 더 많은 서비스를 이용 할 수 있습니다. </p>
     <div class="mt:4 d:flex gap:4 jc:center">
       <button class="n-btn w:2 p:2 bg-color:main-2" id="login-close-btn" type="button">닫기</button>
-      <a class="n-btn w:3 flex-grow:1" href="/login" id="login-open-btn" type="button">로그인</a>
+      <a class="n-btn w:3 flex-grow:1" href="/user/login" id="login-open-btn" type="button">로그인</a>
     </div>
   </section>
   <div class="backdrop d:none" id="login-modal-backdrop"></div>
@@ -232,48 +232,46 @@
         </div>
       </li>
     </ul>
-    <section class="mt:5 d:flex jc:center" 
-            th:with="
+    <section class="mt:5 d:flex jc:center"
+             th:with="
                 tmpa = (${count}-1) / 10,
                 lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
                 tmp = (${{param.p}}-1) / 5,
                 startnum = ${T(java.lang.Math).floor(tmp)} * 5 + 1
             "
-        >
-        <h1 class="d:none">페이저</h1>
-        <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
-            <li th:unless="${startnum} eq 1" >
-                <a class="icon icon:caret_left" href="">이전</a>
-            </li>
+    >
+      <h1 class="d:none">페이저</h1>
+      <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
+        <li th:unless="${startnum} eq 1">
+          <a class="icon icon:caret_left" href="">이전</a>
+        </li>
 
-            <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
-                <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
-                    th:href="@{./list(p=${n})}" 
-                    th:text="${n}"
-                    th:classappend="${{param.p}} == ${n} ? 'cur-page'"
-                >1</a>
-            </li>
-            <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
-                <a class="icon icon:caret_right" href="">다음</a>
-            </li>
-        </ul>
+        <li class="ml:3" th:each="n : ${#numbers.sequence(startnum, startnum+4)}" th:if="${n le lastestPage}">
+          <a class="px:3 py:1 color:base-9 bd bd-radius:4"
+             th:classappend="${{param.p}} == ${n} ? 'cur-page'"
+             th:href="@{./list(p=${n})}"
+             th:text="${n}"
+          >1</a>
+        </li>
+        <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
+          <a class="icon icon:caret_right" href="">다음</a>
+        </li>
+      </ul>
     </section>
   </section>
 
   <section>
     <h1 class="d:none">플로팅버튼</h1>
-
-
     <div class="floting-btn">
       <a
+              class="icon icon:plus plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"
               href="/with/reg"
               style="transform: translate(-60px , 10px)"
-              class="icon icon:plus plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"
       ></a>
       <a
+              class="icon icon:arrow_up arrow icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
               href="#main"
               style="transform: translate(-36px, 9px)"
-              class="icon icon:arrow_up arrow icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
       ></a>
     </div>
   </section>

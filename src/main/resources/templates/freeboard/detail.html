@@ -86,7 +86,7 @@
                     <div><img class="profile-img h:1 w:1 bd-radius:3" src="" th:src="${user.img}" alt=""></div>
                     <span class="ml:2">
                         <div class="fs:2" th:text="${user.nickname}">뉴렉이</div>
-                        <div class="fs:1 color:base-5" th:text="${board.regDate}">10분전</div>
+                        <div class="fs:1 color:base-5" th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd')}">10분전</div>
                     </span>
                 </section>
 
