@@ -116,7 +116,7 @@
 
 	<!-- =============================================================== -->
 	<!-- / main -> /shorts/list?sid=n -->
-	<select id="findByUserId" resultMap="ShortsViewMap">
+	<select id="findById" resultMap="ShortsViewMap">
 
 		select 
 			st.*,
@@ -141,7 +141,7 @@
 			st.reg_date desc
 	</select>
 
-	<select id="findById" resultType="BookshortsView">
+	<select id="findByUserId" resultType="BookshortsView">
 		select 
 			*
 		from 
