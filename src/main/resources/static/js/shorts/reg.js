@@ -10,6 +10,7 @@ window.addEventListener("load", function () {
 
   inputReset.onclick = function (e) {
     queryInput.value = "";
+    resultList.innerHTML = "";
   };
 
   resultList.onclick = function (e) {
@@ -27,6 +28,7 @@ window.addEventListener("load", function () {
       queryInput.value = bookTitle;
 
       document.querySelector(".id-input").value = bookId;
+      queryInput.setAttribute("disabled", true);
     }
 
     resultList.innerHTML = "";
@@ -73,7 +75,6 @@ window.addEventListener("load", function () {
         resultList.insertAdjacentHTML("beforeend", sectionHTML);
 
         book = resultList.querySelector(".book");
-        console.log(book);
       }
     };
 
