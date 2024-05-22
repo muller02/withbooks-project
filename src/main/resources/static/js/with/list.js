@@ -31,7 +31,6 @@ window.addEventListener("load", function (e) {
 
   /* 로그인 안내 모달 창 */
   function loginModal() {
-    const openButton = document.getElementById("modal-btn");
     const closeButton = document.getElementById("login-close-btn");
     const modal = document.getElementById("login-modal");
     const modalBackdrop = document.getElementById("login-modal-backdrop");
