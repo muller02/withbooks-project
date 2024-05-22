@@ -60,6 +60,8 @@ window.addEventListener("load", function () {
         // XXX 리팩토링 필요
         bookMarkList.onclick = function (e) {
             let section = e.target;
+            if(section.tagName != 'SECTION')
+                return;
 
             if (section.tagName != "SECTION") return;
 

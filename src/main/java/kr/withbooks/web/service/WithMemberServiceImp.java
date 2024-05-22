@@ -1,6 +1,7 @@
 package kr.withbooks.web.service;
 
 
+import kr.withbooks.web.entity.WithMember;
 import kr.withbooks.web.entity.WithMemberView;
 import kr.withbooks.web.repository.WithMemberRepository;
 import kr.withbooks.web.repository.WithMemberViewRepository;
@@ -42,5 +43,10 @@ public class WithMemberServiceImp implements WithMemberService{
     @Override
     public Integer withdraw(Long withId, Long userId) {
         return withMemberRepository.delete(withId, userId);
+    }
+
+    @Override
+    public List<WithMember> getWithMembers(Long withId) {
+        return withMemberRepository.findAll(withId);
     }
 }

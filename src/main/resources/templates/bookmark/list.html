@@ -58,6 +58,14 @@
 
             <section id="bookmark-section">
                 <h1 class="d:none">북 리스트</h1>
+
+                <div class="p:3 d:flex fl-dir:column ai:center mt:5" th:if="${#lists.isEmpty(list)}">
+                    <h1 class="n-font n-font:subtitle">마음에 드는 책을 북마크 해보세요 ! :)</h1>
+                    <div class="mt:4">
+                        <a href="/book/list?m=1" class="fs:3 color:main-5">책 검색하러 가기<span class="icon icon:arrow_up_right"></span></a>
+                    </div>
+                </div>
+
                 <form action="/bookmark/delete" method="post" id="idsForm">
                     <div class="bookmark-list d:flex flex-wrap:wrap justify-content:flex-start">
                         <section class="bookmark jc:center ai:center p:3 m:3" th:each="b : ${list}">

@@ -45,4 +45,13 @@
 			id = #{id}
 	</delete>
 
+	<update id="update">
+		update 
+			free_comment
+		set
+			content = ${content}
+		where
+			id = #{id}
+	</update>
+
 </mapper>

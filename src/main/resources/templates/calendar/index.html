@@ -1,65 +1,94 @@
-<!DOCTYPE html>
-<html lang="en"
-      layout:decorate="~{inc/layout.html}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<!doctype html>
+<html lang="en" layout:decorate="~{inc/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset='utf-8'/>
-  <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
-  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
-        name="viewport">
-  <title>FullCalendar</title>
-  <!-- fullcalendar CDN -->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>모임일정</title>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-
-  <!-- 자바스크립트 파일 로드 -->
-  <script src="/js/calendar/index.js"></script>
+  <script defer src="/js/calendar/index.js"></script>
   <link href="/css/components/calendar.css" rel="stylesheet" type="text/css"/>
+  <style>
+    .icon {
+      color: var(--color-base-1) !important;
+    }
+  </style>
 </head>
-<body style="padding:30px;">
-<main layout:fragment="main">
+<body>
+<main class="flex-grow:1" layout:fragment="main">
+  <!-- 위드 탭 -->
+  <div class="with-tap-component">
+    <ul class="n-tabbar justify-content:space-between menu-tap">
+      <li><a class="fw:3" id="home2" th:href="@{/with/detail(id=${param.wid})}">홈</a></li>
+      <li><a id="debate" th:href="@{/with/debate/list(wid=${param.wid})}">토론서재</a></li>
+      <li class="active"><a id="calendar" th:href="@{/calendar/index(wid=${param.wid})}">모임일정</a></li>
+      <li><a id="board" th:href="@{/free-board/list(wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
+      <li><a>북추천</a></li>
+      <li><a>위드맴버</a></li>
+    </ul>
+  </div>
   <!-- calendar -->
   <section>
     <h1 class="d:none">캘린더</h1>
-    <div id='calendar'></div>
+    <div id='calendar-container'></div>
   </section>
 
   <!-- modal -->
-  <section class="n-modal d:none" id="calendar-modal" tabindex="-1">
-    <form id="event-form">
+  <section
+          class="n-modal d:none lg:pos:absolute top:4 mx:10 right:1p left: zi:5  border-color:sub-4 border-radius:5 box-shadow-custom bg-color:main-1"
+          id="calendar-modal" tabindex="-1">
+    <form class="event-form">
       <h1 class="fs:5 font-weight:3">일정 등록</h1>
       <div class="modal-body">
+        <!-- 일정내용 인풋 -->
         <div class="my:5">
           <label>
-            일정 내용
-            <input class="n-textbox n-textbox-label:top w:5" id="event-title" type="text"/>
+            <input class="n-textbox n-textbox-label:top w:5 p:3" id="event-title" placeholder="일정 내용" type="text"/>
           </label>
         </div>
 
-
-        <div class="my:5">
-          <label class="display:inline-block">
-            <input class="n-textbox n-textbox-label:top w:2 mr:3 " id="event-start" type="date"/>
-            <input class="n-textbox n-textbox-label:top w:2" id="event-end" type="date"/>
-          </label>
-        </div>
         <!-- 종일 이벤트 체크박스 -->
-        <div class="form-group">
+        <div class="all-day-group">
           <label>
-            <input checked class="n-toggle n-toggle-type:slide" id="all-day-checkbox" type="checkbox"/> 종일
+            <input checked class="n-toggle n-toggle-type:slide n-toggle-size:1" id="all-day-checkbox" type="checkbox"/>
+            종일
           </label>
 
-          <!-- 시작 시간 입력 필드 -->
-          <div class="display:inline-block" id="start-time-group">
-            <label class="d:none" for="start-time">시작 시간</label>
-            <input class="form-control w:100p	 mr:3" id="start-time" type="time" value="08:00">
+          <!-- 시간 인풋 -->
+          <div class="time-group d:none gap:2">
+            <!-- 시작 시간 입력 필드 -->
+            <div class="d:inline-block flex-grow:1" id="start-time-group">
+              <label class="d:none" for="start-time">시작 시간</label>
+              <input class="form-control w:100p" id="start-time" type="time" value="08:00">
+            </div>
+            <!-- 종료 시간 입력 필드 -->
+            <div class="d:inline-block flex-grow:1" id="end-time-group">
+              <label class="d:none" for="end-time">종료 시간</label>
+              <input class="form-control w:100p" id="end-time" type="time" value="20:00">
+            </div>
           </div>
+        </div>
 
-          <!-- 종료 시간 입력 필드 -->
-          <div class="display:inline-block" id="end-time-group">
-            <label class="d:none" for="end-time">종료 시간</label>
-            <input class="form-control w:100p	" id="end-time" type="time" value="20:00">
+        <!-- 기간 인풋 -->
+        <div class="day-group d:flex gap:2">
+          <div class="my:5 d:inline-block flex-grow:1">
+            <label class="d:none" for="event-start">시작 날짜</label>
+            <input class="n-textbox n-textbox-label:top w:100p" id="event-start" type="date"/>
           </div>
+          <div class="my:5 d:inline-block flex-grow:1">
+            <label class="d:none" for="event-end">종료 날짜</label>
+            <input class="n-textbox n-textbox-label:top w:100p" id="event-end" type="date"/>
+          </div>
+        </div>
+
+        <!-- 모임장소 인풋 -->
+        <div class="input-with-icon my:1 d:flex">
+          <!--          <label for="location">-->
+          <!--            <span class="icon icon:map_pin"></span>-->
+          <!--          </label>-->
+          <input class="n-textbox n-textbox-label:top p:3" id="location"
+                 placeholder="위치"
+                 type="text"/>
         </div>
       </div>
 
@@ -67,7 +96,6 @@
         <button class="n-btn n-btn:outline" id="cancel-btn" type="button">취소</button>
         <button class="n-btn" type="submit">등록</button>
       </div>
-
     </form>
   </section>
 </main>

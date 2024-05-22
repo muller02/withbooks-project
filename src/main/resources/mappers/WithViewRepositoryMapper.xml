@@ -98,4 +98,62 @@
 
     </select>
 
+    <!-- ========================================================================= -->
+    <!-- /with/my-with -->
+    <resultMap id="withViewMap" type="WithView">	
+		<id property="id" column="id" />
+		<result property="blindYn" column="blind_yn"/>
+		<result property="withRegId" column="with_reg_id"/>
+		<result property="faceYn" column="face_yn"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="name" column="name"/>
+		<result property="intro" column="intro"/>
+		<result property="img" column="img"/>
+		<result property="interval" column="interval"/>
+		<result property="location" column="location"/>
+		<result property="personnel" column="personnel"/>
+		<result property="memberCnt" column="member_cnt"/>
+		<result property="withTop" column="with_top"/>
+
+		<collection property="categoryNames" column="id" ofType="String" select="selectCategoryNames"/>
+	</resultMap>
+
+    <select id="selectCategoryNames" resultType="String">
+        select 
+            bc.name 
+        from 
+            book_category bc join with_category wc on bc.id = wc.category_id 
+        where 
+            wc.with_id = #{id}
+    </select>
+
+    <select id="findAllByUserId" resultMap="withViewMap">
+        select
+            wi.id,
+            wi.blind_yn,
+            wi.with_reg_id,
+            wi.face_yn,
+            wi.name,
+            wi.intro,
+            wi.img,
+            wi.interval,
+            wi.location,
+            wi.personnel,
+            wi.reg_date,
+            us.nickname with_top,
+            count(wm.member_id) member_cnt
+        from
+            `with` wi join `user` us on wi.with_reg_id = us.id
+            left join with_member wm on wi.id = wm.with_id
+        where
+            wm.member_id = #{userId}
+        group by
+            wi.id
+        order by
+            wm.join_date desc
+        
+    </select>
+
+
+
 </mapper>

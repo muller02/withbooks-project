@@ -35,7 +35,14 @@ window.addEventListener("load", (e) => {
     }
 
     // 가입신청 버튼 클릭시
-    withJoinBtn.addEventListener("click", async () => {
+    withJoinBtn.addEventListener("click", async (e) => {
+
+        // 회원이 아닌 경우
+        if(e.target.classList.contains("anonymous")){
+            loginModal();
+            return;
+        }
+
         // 위드 아이디
         let withId = withJoinDiv.querySelector("input").value;
 
@@ -74,4 +81,31 @@ window.addEventListener("load", (e) => {
             }, 800);
         });
     });
+
+
+// ===================================================================
+// 비회원 로그인 모달
+function loginModal(){
+
+    const openButton = document.getElementById('modal-btn');
+    const closeButton = document.getElementById('login-close-btn');
+    const modal = document.getElementById('login-modal');
+    const modalBackdrop = document.getElementById('login-modal-backdrop');
+    
+    modal.classList.remove('d:none');
+    modalBackdrop.classList.remove('d:none');
+    modal.classList.add('modal-fade-in');
+    
+    closeButton.addEventListener('click', function () {
+        modal.classList.replace('modal-fade-in', 'modal-fade-out');
+    
+        setTimeout(() => {
+        modal.classList.add('d:none');
+        modalBackdrop.classList.add('d:none');
+        modal.classList.remove('modal-fade-out');
+        }, 130);
+    });
+    
+    
+    }
 });

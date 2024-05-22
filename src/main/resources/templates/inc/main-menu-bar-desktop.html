@@ -86,7 +86,7 @@
                                 class="icon:my-libraryd icon icon-size:5"
                             ></div>
                             <div class="m:1 w:100p d:flex jc:center">
-                                <a class="fs:2" href="/bookmark/list">북마크</a>
+                                <a class="fs:2" href="/bookmark/list?m=4">북마크</a>
                             </div>
                         </div>
                         <div
@@ -94,7 +94,7 @@
                         >
                             <div class="icon icon:star icon-size:5"></div>
                             <div class="m:1 w:100p d:flex jc:center">
-                                <a class="fs:2" href="/mywith/list">마이위드</a>
+                                <a class="fs:2" href="/with/my-list?m=3">마이위드</a>
                             </div>
                         </div>
                         <div
@@ -167,7 +167,8 @@
                     <li class="mt:5 px:2 py:1">
                         <a
                             class="deco icon:gear_six fs:3 fw:3 deco-mr:3"
-                            href=""
+                            href="/my/index"
+                            th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/user/login'"
                             >설정</a
                         >
                     </li>
