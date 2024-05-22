@@ -19,7 +19,6 @@ public interface UserService {
     Integer emailCheck(String email);
     Integer nicknameCheck(String nickname);
     
-    List<BookshortsView> getByIdShorts(Long id);
     
     // admin/user
     List<User> get(Map<String, String> params);

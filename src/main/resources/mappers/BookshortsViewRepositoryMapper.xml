@@ -116,4 +116,13 @@
 		]]>
 	</select>
 
+	<select id="findById" resultType="BookshortsView">
+		select 
+			*
+		from 
+			shorts_view
+		where
+			user_id = #{id}
+	</select>
+
 </mapper>
