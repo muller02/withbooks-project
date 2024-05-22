@@ -1,6 +1,7 @@
 package kr.withbooks.web.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.withbooks.web.entity.Bookshorts;
 import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
+import kr.withbooks.web.service.BookshrotsService;
 import kr.withbooks.web.service.UserService;
+
 
 
 @Controller("adminUserController")
@@ -22,32 +24,25 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private BookshrotsService bookshortService;
+
     @GetMapping("list")
     public String list(
-        @RequestParam(name = "id", required = false) Long id
-        ,@RequestParam(name = "nickname", required = false) String nickname
-        ,@RequestParam(name = "email", required = false) String email
-        ,@RequestParam(name = "gender", required = false) Integer gender
-        ,@RequestParam(name = "status", required = false) Integer status
-        ,@RequestParam(name = "birthyear", required = false) String birthyear
-        ,@RequestParam(name = "start-date", required = false) String startDate
-        ,@RequestParam(name = "end-date", required = false) String endDate
+        @RequestParam Map<String, String> params
         ,Model model
     ) {
-
-        List<User> list = service.get(id, nickname, email, birthyear, gender, startDate, endDate, status); 
         
-        model.addAttribute("id", id);
-        model.addAttribute("nickname", nickname);
-        model.addAttribute("email", email);
-        model.addAttribute("gender", gender);
-        model.addAttribute("status", status);
-        model.addAttribute("birthyear", birthyear);
-        model.addAttribute("startDate", startDate);
-        model.addAttribute("endDate", endDate);
+        if(!params.containsKey("p")){
+            int page = 1;
+            params.put("p", Integer.toString(page));
+        }
+        
+        List<User> list = service.get(params); 
+        Integer count = service.getCount(params);
+        
         model.addAttribute("list", list);
-
-        System.out.println(list.get(0));
+        model.addAttribute("count", count!=0? count:1);
 
         return "admin/user/list";
     }
@@ -58,15 +53,16 @@ public class UserController {
         , Model model
     ) {
 
+        System.out.println("id : " + id);
+
         User user = service.getById(id);
-        List<BookshortsView> list = service.getByIdShorts(id);   
+        List<BookshortsView> list = bookshortService.getById(id);
              
         model.addAttribute("user", user);
         model.addAttribute("list", list);
 
         return "admin/user/detail";
-    }
-    
-    
+    }  
+
     
 }

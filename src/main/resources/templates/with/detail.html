@@ -29,12 +29,34 @@
       --height-1: 32px;
     }
 
+    .backdrop {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.06);
+      }
+      .modal-transform-xy {
+        transform: translateX(170px) !important;
+      }
+      /*  모달창*/
   </style>
   <link>
 </head>
 
 <body>
 <main class="flex-grow:1" layout:fragment="main">
+  
+    <!-- 로그인 모달 -->
+    <section id="login-modal" class="n-modal d:none  modal-transform-xy zi:5" tabindex="-1">
+      <h1 class="n-font:subtitle text-align:center fs:5 fw:2 mt:3 mb:4">로그인을 하시겠습니까?</h1>
+      <p class="fs:2">로그인을하시면 조금 더 많은 서비스를 이용 할 수 있습니다. </p>
+      <div class="mt:4 d:flex gap:4 jc:center">
+        <button id="login-close-btn" type="button" class="n-btn w:2 p:2 bg-color:main-2">닫기</button>
+        <a href="/user/login"  id="login-open-btn" type="button" class="n-btn w:3 flex-grow:1">로그인</a>
+
+      </div>
+    </section>
+    <div id="login-modal-backdrop" class="backdrop d:none zi:4"></div>
+
   <a class="m:2" href="list?m=2&p=1">
                         <span class="n-btn n-btn:void mt:3 pl:2" style="color: var(--color-base-5);">
                             <span class="	icon icon:caret_left icon-size:3 mx:1">아이콘</span>
@@ -91,9 +113,16 @@
                 class="n-btn mx:auto px:5"
                 th:classappend="${{joinYn}} == 1 ? 'joined n-btn-type:outline border-color:base-2 color:base-4': 'n-btn-type:filled'"
                 th:text="${{joinYn}} == 1 ? '탈퇴하기' : '가입 신청하기'"
+                sec:authorize="isAuthenticated()"
                 type="button"
         >
           가입 신청하기 <span class="ml:2 icon icon icon:caret_right icon-color:sub-1"></span>
+        </button>
+        <button
+                class="n-btn mx:auto px:5 anonymous"
+                sec:authorize="isAnonymous()"
+        >
+          가입 신청하기
         </button>
       </div>
     </div>
@@ -266,7 +295,7 @@
 
         <div>
           <h1 class="fs:5 fw:3 mb:3"><a th:href="@{/free-board/detail(m=3,loc=0,fid=${b.id})}">[[${b.title}]]</a></h1>
-          <p class="mb:2" th:text="${b.content}">
+          <p class="mb:2 ln-clamp:2" th:text="${b.content}">
             what i like what i like what ilike what i like what i likewhat i like what i like what ilike what i like
             what i like what i like what i like what i like what i like
             what i likewhat i like what i like what ilike what i like what i like what i like what i like what i like

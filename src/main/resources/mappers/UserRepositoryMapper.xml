@@ -76,34 +76,35 @@
 		from
 			user
 		<where>
-			<if test="id != null and id != '' ">
-				id = #{id} 
+			<if test="params.id != null and params.id != '' ">
+				id = #{params.id} 
 			</if>
-			<if test="email != null and email != '' ">
-				and email like '%#{email}%'
+			<if test="params.email != null and params.email != '' ">
+				and email like '%${params.email}%'
 			</if>
-			<if test="nickname != null and nickname != '' ">
-				and nickname like '%#{nickname}%'
+			<if test="params.nickname != null and params.nickname != '' ">
+				and nickname like '%${params.nickname}%'
 			</if>
-			<if test="gender != null and gender != '' ">
-				and gender = #{gender}
+			<if test="params.gender != null and params.gender != '' ">
+				and gender = #{params.gender}
 			</if>
-			<if test="birthyear != null and birthyear != '' ">
-				and birth_date like '#{birthyear}%'
+			<if test="params.birthyear != null and params.birthyear != '' ">
+				and birth_date like '${params.birthyear}%'
 			</if>
-			<if test="startDate != null and startDate != '' ">
-				and join_date gt #{startDate}
+			<if test="params.startDate != null and params.startDate != '' ">
+				and join_date <![CDATA[>=]]> #{params.startDate}
 			</if>
-			<if test="endDate != null and endDate != '' ">
-				and join_date lt #{endDate}
+			<if test="params.endDate != null and params.endDate != '' ">
+				and join_date <![CDATA[<=]]> #{params.endDate}
 			</if>
-			<if test="status != null and status != '' ">
-				and withdraw_status = #{status}	
+			<if test="params.status != null and params.status != '' ">
+				and withdraw_status = #{params.status}	
 			</if>
 		</where>	
 		order by join_date desc
+		limit #{offset}, #{size}
 	</select>
-
+<!-- 
 	<select id="findByIdShorts" resultType="BookshortsView">
 		select 
 			s.*, count(s.id) liked
@@ -115,6 +116,49 @@
 			s.user_id = #{id}
 		group by s.id
 		order by reg_date desc
+	</select> -->
+
+	
+	<select id="count" resultType="Integer">
+		select count(*)
+		from user
+		<if test="params != null">
+			<where>
+				<if test="params.id != null and params.id != '' ">
+					id = #{params.id} 
+				</if>
+				<if test="params.email != null and params.email != '' ">
+					and email like '%${params.email}%'
+				</if>
+				<if test="params.nickname != null and params.nickname != '' ">
+					and nickname like '%${params.nickname}%'
+				</if>
+				<if test="params.gender != null and params.gender != '' ">
+					and gender = #{params.gender}
+				</if>
+				<if test="params.birthyear != null and params.birthyear != '' ">
+					and birth_date like '${params.birthyear}%'
+				</if>
+				<if test="params.startDate != null and params.startDate != '' ">
+					and join_date <![CDATA[>=]]> #{params.startDate}
+				</if>
+				<if test="params.endDate != null and params.endDate != '' ">
+					and join_date <![CDATA[<=]]> #{params.endDate}
+				</if>
+				<if test="params.status != null and params.status != '' ">
+					and withdraw_status = #{params.status}	
+				</if>
+			</where>
+		</if>
 	</select>
+
+	<update id="updateWithdrawStatus">
+		update user set 
+			withdraw_status = #{status}
+		where id in 
+		<foreach collection="ids" item="ids" open="(" close=")" separator=",">
+			#{ids}
+		</foreach>
+	</update>
 
 </mapper>

@@ -39,7 +39,7 @@
 
 
         .item:hover{
-            background-color: #8BA3F8 !important;
+            background-color: var(--color-main-1) !important;
 
         }
 
@@ -93,24 +93,26 @@
 <main class=" p:2">
     <section id="search-book">
         <h1 class="d:none">검색창</h1>
-        <form>
+        <form class="m:2">
+            <label class="d:flex al-items:center n-textbox px:2">
+                <input type="text" class="query-input pos:relative flex-grow:1" name="title" placeholder="책 제목을 검색하세요!" />
+                <div class="d:none book-id">책 아이디</div>
+                <div class="bd bd-radius:full border-color:main-4 mr:2 fs:1">
+                    <span class="input-reset icon icon:x icon-size:2 icon-color:main-4">삭제</span>
+                </div>
+                <button class="btn icon icon:magnifying_glass icon-color:main-4">돋보기</button>
+            </label>
+        </form>
+        <!-- <form>
             <label>
                 <input type="text" class="query-input n-textbox pos:relative" name="title" placeholder="책 제목을 검색하세요!"/>
-                <!-- <button class="icon icon:magnifying_glass pos:absolute right:1 icon-size:3 mr:2"></button> -->
                 <div class="icon icon:x pos:absolute right:2 input-reset">삭제</div>
                 <button class="btn icon icon:magnifying_glass pos:absolute right:1">돋보기</button>
             </label>
-        </form>
-        <section class="result-list  ">
+        </form> -->
+        <section>
             <h1 class="d:none">검색 결과 목록</h1>
-            <!-- <div class="book-count">검색결과 : </div> -->
-            <!-- <section>
-                <h1>도둑 맞은 집중력</h1>
-                <div><img src="" alt=""></div>
-                <div>홍길동</div>
-                <div>유노북스</div>
-                <div>2023.12.12</div>
-            </section> -->
+            <div class="result-list"></div>
         </section>
     </section>
     <section class="">

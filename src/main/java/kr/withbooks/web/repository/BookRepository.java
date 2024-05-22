@@ -9,7 +9,7 @@ import java.util.Map;
 @Mapper
 public interface BookRepository {
 
-    List<Book> findAll(String query, Long categoryId);
+    List<Book> findAll(String query, Long categoryId, Long offset, Long size);
 
     Book findById(Long id);
 

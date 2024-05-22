@@ -75,6 +75,15 @@ public class BookshortsServiceImp  implements  BookshrotsService{
         return shortsViewRepository.findAllBestShorts();
     }
 
+    @Override
+    public BookshortsView getById(Long shortsId, Long userId) {
+        return shortsViewRepository.findById(shortsId, userId);
+    }
+    
+    // admin/user
+    public List<BookshortsView> getById(Long userid){
+        return shortsViewRepository.findByUserId(userid);
+    }
     
 
 }

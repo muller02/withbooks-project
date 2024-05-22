@@ -71,7 +71,7 @@
         </li>
         <li class="mt:6 book-shorts "
 
-        ><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list?m=3"
+        ><a class="icon icon:book-shortd icon-color:base-9" href="/shorts/list?m=2"
 
 
         >북쇼츠</a>
@@ -80,7 +80,7 @@
         <li class="mt:6 with "
 
 
-        ><a class="icon icon:withd icon-color:base-9" href="/with/list?m=2&p=1"
+        ><a class="icon icon:withd icon-color:base-9" href="/with/list?m=3&p=1"
 
 
         >위드</a>
@@ -91,13 +91,15 @@
 
 
         ><a class="icon icon:book-logd icon-color:base-9" href="/booklog/list?m=4"
-
+        th:href="${#authentication.principal ne 'anonymousUser'}?'/booklog/list?m=4':'/user/login'"
 
         >북로그</a>
             <p class="arrow_box">북로그</p>
         </li>
         <span class="mt:6 h:1 w:100p bg-color:base-3"></span>
-        <li class="mt:6"><a class="icon icon:gear_six icon-color:base-9" href="">설정</a>
+        <li class="mt:6"><a class="icon icon:gear_six icon-color:base-9" href=""
+            th:href="${#authentication.principal ne 'anonymousUser'}?'/my/index':'/user/login'"
+            >설정</a>
             <p class="arrow_box">설정</p>
         </li>
     </ul>

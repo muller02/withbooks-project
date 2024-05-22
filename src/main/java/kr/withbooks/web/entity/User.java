@@ -17,12 +17,12 @@ public class User {
     private String intro;
     private String email;
     private String password;
-    private int gender;
+    private Integer gender;
     private String nickname;
     private LocalDateTime birthDate;
     private LocalDateTime joinDate;
-    private int withdrawStatus;
-    private int notiYn;
+    private Integer withdrawStatus;
+    private Integer notiYn;
     private String role;
     private String img;
 

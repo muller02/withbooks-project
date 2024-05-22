@@ -42,10 +42,12 @@
     <section class="p:7 pos:relative  d:flex flex-direction:column md:flex-direction:row lg:flex-direction:column jc:center ai:center w:100p border-radius:10 bg-color:main-1 fl-wrap:wrap">
         <h1 class="d:none " th:text="${book['title']}">도둑 맞은 집중력</h1>
 
-        <div class="pos:relative">
+        <div class="pos:relative" >
             <!-- TODO 회원인지 아닌지 체크해서 회원 아닌 경우 -> 북마크 라벨을 d:none 처리. -->
             <!-- List<entity>가 아닌 Map<String, Object>로 받음 -->
-            <label id="book-mark" class="bookmark-icon icon cursor:pointer icon:bookmark_simple_fill icon-color:main-1 icon-size:5 position:absolute top:1 left:1"
+            <label id="book-mark"
+            sec:authorize="isAuthenticated()"
+            class="bookmark-icon icon cursor:pointer icon:bookmark_simple_fill icon-color:main-1 icon-size:5 position:absolute top:1 left:1"
                 th:classappend="${{book['marked']}} > 0 ? 'icon-color:main-5':''" >
                  <input type="checkbox" class="d:none"/>
             </label>
@@ -68,15 +70,18 @@
             <div class="w:100p">
                 <div class="d:flex jc:center mt:6 w:100p">
                     <div><a class="deco deco-size:4 mr:1 deco-mr:0 icon:house fs:3" href="" th:text="${book['publisher']}">어크로스</a></div>
-                    <div class="ml:10 deco deco-size:4 mr:1 deco-mr:0 icon:calendar_blank fs:3" th:text="${book['pubDate']}">2023-04-28</div>
+                    <div class="ml:10 deco deco-size:4 mr:1 deco-mr:0 icon:calendar_blank fs:3" th:text="${#dates.format(book.pubDate, 'yyyy-MM-dd')}">2023-04-28</div>
                 </div>
                 <div class="d:flex jc:center mt:6">
                     <div class="deco deco-size:4 deco-mr:0 mr:2 icon:stack fs:3">인문/사회학</div>
-                    <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:shopping_cart_simple  fs:3" >[[${book['price']}]]원</div>
+                    <div class="d:flex ai:center"> 
+                        <span class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:shopping_cart_simple  fs:3"
+                        th:text="${#numbers.formatInteger(book.price,3,'COMMA')}"></span>원
+                    </div>
                 </div>
                 <div class="d:flex jc:center mt:6">
                     <div class="deco deco-size:4 mr:2 deco-mr:0 icon:text_align_left fs:3" th:text="${book['isbn13']}">9791167740984</div>
-                    <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:text_t fs:3">464p</div><span></span>
+                    <!-- <div class="ml:10 deco deco-size:4 mr:2 deco-mr:0 icon:text_t fs:3">464p</div><span></span> -->
                 </div>
             </div>
         </span>
@@ -96,7 +101,9 @@
         <p class="mt:2 fs:2" th:text="${book['description']}">▶ 『돈의 속성』 300쇄 기념 개정증보판 발행!<br>▶ 『돈의 속성』 300쇄 기념, 김승호 회장의 추가 메시지를 담다!<br>▶ 중국, 일본, 대만, 태국 4개국 출간!이 책은 초판 발행 후, 경제경영 필도서로 자리매김한 『돈의 속성』 300쇄 기념 개정증보판이다.300쇄에 맞춰 코로나19로 바뀐 경제상황과 돈에 관한 김승호 회장의 추가 메시지를 담았다.</p>
     </section>
 
-    <section class="mt:10 p:3 border-radius:9 border border-color:base-3 ">
+    <section class="mt:10 p:3 border-radius:9 border border-color:base-3"
+    th:unless="${#lists.isEmpty(withList)}"
+    >
         <div class="d:flex jc:space-between px:1 ai:center">
         <h1 class="fs:4 fw:3 mb:3 deco icon:user">이 책으로 토론한 위드</h1>
         <div class="deco-size:3 deco-pos:right color:main-6 fs:1 fw:1 deco icon:arrow_right"><a class="fs:1 color:main-6 " href="">더보기</a></div>

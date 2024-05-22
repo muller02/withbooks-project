@@ -62,7 +62,9 @@ public class BookController {
        if(categoryId == 0)
            categoryId=null;
 
-        List<Book> list = service.getList(query, categoryId);
+
+        // List<Book> list = service.getList(query, categoryId);
+        List<Book> list = service.getList(query, categoryId, size, page);
         System.out.println("list : " + list);
 
         return list;

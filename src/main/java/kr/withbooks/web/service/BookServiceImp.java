@@ -18,14 +18,17 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<Book> getList() {
-        return repository.findAll(null, null);
+        return repository.findAll(null, null, null, null);
     }
 
     @Override
-    public List<Book> getList(String query, Long categoryId) {
+    public List<Book> getList(String query, Long categoryId, Long size, Long page) {
+        
+        Long offset = null; 
+        if(page!=null)
+            offset = (page-1)*size;
 
-
-        return repository.findAll(query,categoryId);
+        return repository.findAll(query,categoryId, offset, size);
     }
 
 
