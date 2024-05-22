@@ -35,6 +35,11 @@ window.addEventListener("load", function () {
   btn.onclick = function (e) {
     e.preventDefault();
 
+    if(queryInput.value == "" || queryInput.value.length < 2 ){
+      alert("2글자 이상 입력해주세요.");
+      return;
+    }
+
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
