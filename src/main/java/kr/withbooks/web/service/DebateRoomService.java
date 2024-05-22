@@ -17,7 +17,7 @@ public interface DebateRoomService {
 
     Long add(DebateRoom debateRoom);
 
-
     DebateRoomView getTopBoardCntbyId(Long withId);
 
+    void deleteAll(Long withId, List<Long> ids);
 }
