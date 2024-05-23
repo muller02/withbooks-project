@@ -24,4 +24,6 @@ public interface FreeBoardRepository {
 
     int update(FreeBoard freeBoard);
 
+    List<FreeBoardView> findAllNotice(Long withId);
+
 }

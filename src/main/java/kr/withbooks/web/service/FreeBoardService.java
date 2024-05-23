@@ -24,4 +24,6 @@ public interface FreeBoardService {
 
     int edit(FreeBoard freeBoard, MultipartFile[] imgs, HttpServletRequest request);
 
+    List<FreeBoardView> getNoticeList(Long withId);
+
 }

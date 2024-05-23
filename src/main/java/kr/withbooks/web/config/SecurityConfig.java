@@ -28,8 +28,8 @@ public class SecurityConfig {
          http
                  .authorizeHttpRequests((auth) -> auth
 
-                         .requestMatchers("/", "/login/**","/join", "/shorts/list","/css/**","/image/**","/icon/**","js/**").permitAll()
-                         .requestMatchers("/admin").hasRole("ADMIN")
+                 .requestMatchers("/", "/login/**","/join", "/shorts/list","/css/**","/image/**","/icon/**","js/**").permitAll()
+                 .requestMatchers("/admin").hasRole("ADMIN")
                          .anyRequest().permitAll()
                  );
 

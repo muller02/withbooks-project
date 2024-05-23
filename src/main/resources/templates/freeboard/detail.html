@@ -72,7 +72,7 @@
 </head>
 <body>
     <main layout:fragment="main">
-        <a class="m:2" --href="list" onclick="history.back()">
+        <a class="m:2" th:href="@{./list(m=3,wid=${param.wid},p=${param.p},s=${param.s})}">
             <span class="n-btn n-btn:void mt:3 pl:2" style="color: var(--color-base-5);">
                 <span class="icon icon:caret_left icon-size:3">아이콘</span>
                 목록 돌아가기

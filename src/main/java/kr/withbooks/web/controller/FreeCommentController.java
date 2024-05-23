@@ -28,6 +28,7 @@ public class FreeCommentController {
         , @AuthenticationPrincipal CustomUserDetails userDetails
     ){
 
+
       if(userDetails == null)
         return "로그인을 해 주세요";
 
