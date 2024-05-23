@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/with/debate/board/detail.js" defer></script>
+    <script src="/js/board/detail.js" defer></script>
     <title>Document</title>
     <style>
         .profile-image,
@@ -107,7 +107,7 @@
     <main class="min-width:8 pb:10 px:4 flex-grow:1" layout:fragment="main">
 
         <div class="d:flex mt:3 mr:1">
-            <a class="" href="" th:href="@{/with/debate/board/list(wid=${param.wid}, rid=${param.rid})}">
+            <a class="" href="" th:href="@{/board/list(wid=${param.wid}, rid=${param.rid})}">
                 <span class="n-btn n-btn-size:2 n-btn:void pl:1 pr:5 fs:1" style="color: var(--color-base-5);">
                     <span class="icon icon:caret_left icon-color:base-4 icon-size:2">아이콘</span>
                     토론 카드
@@ -123,7 +123,7 @@
 
                     <ul id="dropdown-list" class="w:1" style="transform: translateX(-100px)">
                         <li>
-                            <button type="button" th:onclick="|location.href='@{/with/debate/board/edit(wid=${param.wid}, rid=${param.rid}, id=${param.id})}'|">
+                            <button type="button" th:onclick="|location.href='@{/board/edit(wid=${param.wid}, rid=${param.rid}, id=${param.id})}'|">
                                 <span class="va:middle deco icon:pencil_simple deco:size:1 deco-mr:1 icon-color:base-6 fs:1">
                                     수정하기
                                 </span>

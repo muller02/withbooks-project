@@ -72,12 +72,16 @@
 
 	<select id="findByAll" resultType="User">
 		select 
-			*
+			u.*,
+			uws.status withdraw_status_name
 		from
-			user
+			user u 
+				left join 
+			user_withdraw_status uws 
+				on u.withdraw_status = uws.id
 		<where>
 			<if test="params.id != null and params.id != '' ">
-				id = #{params.id} 
+				u.id = #{params.id} 
 			</if>
 			<if test="params.email != null and params.email != '' ">
 				and email like '%${params.email}%'
@@ -91,11 +95,11 @@
 			<if test="params.birthyear != null and params.birthyear != '' ">
 				and birth_date like '${params.birthyear}%'
 			</if>
-			<if test="params.startDate != null and params.startDate != '' ">
-				and join_date <![CDATA[>=]]> #{params.startDate}
+			<if test="params.startdate != null and params.startdate != '' ">
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[>=]]> #{params.startdate}
 			</if>
 			<if test="params.endDate != null and params.endDate != '' ">
-				and join_date <![CDATA[<=]]> #{params.endDate}
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[<=]]> #{params.enddate}
 			</if>
 			<if test="params.status != null and params.status != '' ">
 				and withdraw_status = #{params.status}	
@@ -104,52 +108,37 @@
 		order by join_date desc
 		limit #{offset}, #{size}
 	</select>
-<!-- 
-	<select id="findByIdShorts" resultType="BookshortsView">
-		select 
-			s.*, count(s.id) liked
-		from
-			shorts s
-				left join
-			shorts_like l ON s.id = l.shorts_id
-		where
-			s.user_id = #{id}
-		group by s.id
-		order by reg_date desc
-	</select> -->
-
 	
 	<select id="count" resultType="Integer">
 		select count(*)
 		from user
-		<if test="params != null">
-			<where>
-				<if test="params.id != null and params.id != '' ">
-					id = #{params.id} 
-				</if>
-				<if test="params.email != null and params.email != '' ">
-					and email like '%${params.email}%'
-				</if>
-				<if test="params.nickname != null and params.nickname != '' ">
-					and nickname like '%${params.nickname}%'
-				</if>
-				<if test="params.gender != null and params.gender != '' ">
-					and gender = #{params.gender}
-				</if>
-				<if test="params.birthyear != null and params.birthyear != '' ">
-					and birth_date like '${params.birthyear}%'
-				</if>
-				<if test="params.startDate != null and params.startDate != '' ">
-					and join_date <![CDATA[>=]]> #{params.startDate}
-				</if>
-				<if test="params.endDate != null and params.endDate != '' ">
-					and join_date <![CDATA[<=]]> #{params.endDate}
-				</if>
-				<if test="params.status != null and params.status != '' ">
-					and withdraw_status = #{params.status}	
-				</if>
-			</where>
-		</if>
+		<where>
+			<if test="id != null and id != '' ">
+				id = #{id} 
+			</if>
+			<if test="email != null and email != '' ">
+				and email like '%${email}%'
+			</if>
+			<if test="nickname != null and nickname != '' ">
+				and nickname like '%${nickname}%'
+			</if>
+			<if test="gender != null and gender != '' ">
+				and gender = #{gender}
+			</if>
+			<if test="birthyear != null and birthyear != '' ">
+				and birth_date like '${birthyear}%'
+			</if>
+			<if test="startdate != null and startdate != '' ">
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[>=]]> #{startdate}
+			</if>
+			<if test="enddate != null and enddate != '' ">
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[<=]]> #{enddate}
+			</if>
+			<if test="status != null and status != '' ">
+				and withdraw_status = #{status}	
+			</if>
+		</where>	
+		order by join_date desc
 	</select>
 
 	<update id="updateWithdrawStatus">

@@ -81,8 +81,17 @@ public class BookshortsServiceImp  implements  BookshrotsService{
     }
     
     // admin/user
-    public List<BookshortsView> getById(Long userid){
-        return shortsViewRepository.findByUserId(userid);
+    public List<BookshortsView> getByUserId(Long userid, Integer page){
+
+        int size = 6;
+        int offset = (page - 1) * size;
+
+        return shortsViewRepository.findByUserId(userid, size, offset);
+    }
+
+    @Override
+    public Integer getCount(Long userid) {
+        return shortsViewRepository.count(userid);
     }
     
 
