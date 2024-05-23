@@ -110,6 +110,107 @@ window.addEventListener('load', function(e) {
         })
     })
 
+    //============================== 수정 ====================================
+    //const commentBody = document.querySelector(".comment-body");
+    const commentEditBtns = document.querySelectorAll(".comment-edit-btn");
+    const myComment = document.querySelector(".my-comment");
+
+    commentEditBtns.forEach(commentEditBtn => {
+        commentEditBtn.addEventListener("click", (e) => {
+
+            // const commentBody = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+            let commentBody = e.target.parentNode;
+            while (!commentBody.classList.contains("comment-body")) {
+                commentBody = commentBody.parentNode;
+            }
+            console.log(commentBody);
+
+            console.log(commentBody.firstElementChild);
+            let commentSection = commentBody.firstElementChild;
+            console.log(commentSection);
+            commentSection.classList.add("d:none")
+
+            const userId = e.target.getAttribute("data-userId");
+            const content = e.target.getAttribute("data-content");
+            const id = e.target.getAttribute("data-commentId");
+            const boardId = e.target.getAttribute("data-boardId");
+
+            console.log(content)
+
+            let editFormHtml = `
+                <section class="my-comment edit">
+                    <h1 class="d:none">내 댓글 수정 폼</h1>
+                    <form class="d:flex fl-dir:column py:2">
+<!--                            <div class="d:flex fl-dir:column py:2">-->
+                            <div class="comment-area ml:6 mt:2 mr:1 pos:relative d:flex fl-dir:column ai:end">
+                                <textarea id="comment-edit-body" class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:3 pt:2 pb:2 mb:1 w:fit-content">${content}</textarea>
+                                <div class="delete-button pos:absolute right:1 bottom:1"></div>
+                                
+                                <input type="hidden" id="comment-edit-commentId">
+                                <input type="hidden" id="comment-edit-boardId">
+                                <div class="d:flex ai:center">
+                                    <button type="button" id="comment-cancel-btn" class="csr:pointer icon icon:trash icon-color:base-6 icon-size:3">취소</button>
+                                    <button type="button" id="comment-update-btn" class="csr:pointer icon icon:pencil_simple icon-color:accent-3 icon-size:3">등록</button>
+                                </div>
+                            </div>
+<!--                            </div>-->
+                    </form>
+                </section>
+        `;
+
+            commentBody.insertAdjacentHTML("beforeend", editFormHtml);
+
+            document.querySelector("#comment-edit-commentId").value = id;
+            document.querySelector("#comment-edit-boardId").value = boardId;
+
+            const commentUpdateBtn = document.querySelector("#comment-update-btn");
+            console.log(commentUpdateBtn);
+
+
+            commentUpdateBtn.addEventListener("click", (e) => {
+
+                boardId: document.querySelector("#comment-edit-boardId").value;
+
+                const comment = {
+                    id: document.querySelector("#comment-edit-commentId").value,
+                    content: document.querySelector("#comment-edit-body").value,
+                }
+
+                console.log(comment.id);
+                console.log(comment.content);
+                console.log(boardId);
+
+                const url = `/with/debate/board/${boardId}/comments/${comment.id}`;
+                console.log(url)
+
+                fetch(url, {
+                    method: "PATCH",
+                    body: JSON.stringify(comment),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        console.log("댓글이 수정되었습니다.");
+                        window.location.reload();
+                    } else {
+                        response.json().then(error => {
+                            console.error("댓글 수정 실패:", error.message);
+                        });
+                    }
+
+                })
+            })
+
+        })
+
+
+
+    })
+
+
+
+
     //============================== 삭제 ====================================
     const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
     // console.log(commentDeleteBtns);

@@ -38,4 +38,12 @@ public class DebateCommentServiceImp implements DebateCommentService {
         debateCommentRepository.deleteById(id);
         return id;
     }
+
+    @Override
+    public Long edit(Long id, DebateComment debateComment) {
+        DebateComment findDebateComment = debateCommentRepository.findById(id);
+        findDebateComment.setContent(debateComment.getContent());
+        debateCommentRepository.update(findDebateComment);
+        return id;
+    }
 }

@@ -18,5 +18,6 @@ public interface DebateCommentRepository {
 
     void deleteById(Long id);
 
+    void update(DebateComment debateComment);
 //    DebateComment findByBoardId(Long boardId);
 }

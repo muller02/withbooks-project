@@ -32,8 +32,10 @@
     <select id="findById" resultType="DebateComment">
         SELECT
             <include refid="debateComment" />
-        FROM debate_comment
-        where id = #{id}
+        FROM
+            debate_comment
+        WHERE
+            id = #{id}
     </select>
 
 <!--    <select id="findByBoardId" resultType="DebateComment">-->
@@ -48,23 +50,31 @@
         SELECT
         *
         FROM
-        debate_comment_view
+            debate_comment_view
         WHERE
             blind_yn = 0
             AND board_id = #{boardId}
         ORDER BY
-        reg_date 
+            reg_date
     </select>
 
     <!-- 댓글 삭제 -->
     <delete id="deleteById" parameterType="Long">
         UPDATE debate_comment
         SET
-        blind_yn = 1
+            blind_yn = 1
         WHERE
-        id = #{id}
+            id = #{id}
     </delete>
 
+    <!-- 댓글 업데이트 -->
+    <update id="update" parameterType="DebateComment">
+        UPDATE debate_comment
+        SET
+            content = #{content}
+        WHERE
+            id = #{id}
+    </update>
 
 
 
