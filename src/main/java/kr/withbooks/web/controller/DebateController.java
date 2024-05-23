@@ -1,4 +1,4 @@
-package kr.withbooks.web.controller.with;
+package kr.withbooks.web.controller;
 
 import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/with/debate")
+@RequestMapping("/debate")
 public class DebateController {
 
     private final DebateRoomService debateRoomService;
@@ -46,12 +46,12 @@ public class DebateController {
 
         model.addAttribute("list", list);
 
-        return "with/debate/list";
+        return "debate/list";
     }
 
     @GetMapping("/reg")
     public String regForm() {
-        return "with/debate/reg";
+        return "debate/reg";
     }
 
     @PostMapping("/reg")
@@ -95,7 +95,7 @@ public class DebateController {
         log.info("withId : {}", withId);
         debateRoomService.deleteAll(withId, ids);
 
-        return "redirect:/with/debate/list?wid=" + withId;
+        return "redirect:/debate/list?wid=" + withId;
     }
 
 }

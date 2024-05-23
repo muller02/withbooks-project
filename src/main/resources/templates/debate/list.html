@@ -9,7 +9,7 @@
     <meta charset="UTF-8" />
     <title>Title</title>
 <!--    <script src="/js/book/list.js"></script>-->
-    <script src="/js/with/debate/list.js" defer></script>
+    <script src="/js/debate/list.js" defer></script>
     <style>
       .search {
         --right-1: 6px;
@@ -56,7 +56,7 @@
         <ul class="n-tabbar justify-content:space-between menu-tap">
           <li ><a class="fw:3" id="home2" th:href="@{/with/detail(id=${param.wid})}">홈</a></li>
           <li class="active"><a id="debate" >토론서재</a></li>
-          <li><a>모임일정</a></li>
+          <li><a id="calendar" th:href="@{/calendar/index(m=3,wid=${param.wid})}">모임일정</a></li>
           <li><a id="board" th:href="@{/free-board/list(wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
           <li><a>북추천</a></li>
           <li><a>위드맴버</a></li>
@@ -94,7 +94,7 @@
                 <div>
                     <input type="hidden" name="wid" th:value="${n.withId}"/>
                     <!-- XXX li 안에 a링크로 덮고 태그마다 자잘한 a링크들 제거 -->
-                    <a href="#" th:href="@{/with/debate/board/list(wid=${param.wid},rid=${n.id})} " class="">
+                    <a href="#" th:href="@{/board/list(wid=${param.wid},rid=${n.id})} " class="">
                       <input type="checkbox" name="ids" th:value="${n.id}" class="position:absolute top:0p left:0p n-toggle n-toggle-type:check-box n-toggle-size:2 d:none" />
                       <div class="book-info gap:4 d:flex fl-dir:column lg:ai:center ai:center">
                         <div class="w:100p lg:w:3 d:flex jc:center mb:2">
@@ -138,7 +138,7 @@
       <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
         <h1 class="d:none">토론카드 작성하기 버튼</h1>
         <div class="bg-color:main-5 border-radius:full p:3">
-          <a href="reg" th:href="@{/with/debate/reg(wid=${param.wid})}" th:title="${'토론방 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+          <a href="reg" th:href="@{/debate/reg(wid=${param.wid})}" th:title="${'토론방 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
         </div>
       </div>
     </main>

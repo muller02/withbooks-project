@@ -18,28 +18,13 @@
     <link rel="stylesheet" type="text/css" href="/css/util/color.css" />
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-    <script src="/js/with/debate/board/reg2.js" defer></script>
+    <script src="/js/board/edit2.js" defer></script>
     <style>
-
-        * {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 16px;
-
-            color: var(--color-base-9);
-        }
-
         .w\:74 {
             width: 80px;
             height: 80px;
         }
-
-
-        body {
-            font-family: var(--selected-font);
-            font-size: 15px;
-
-            color: var(--color-base-9);
-        }
+        
         .item:hover{
             background-color: #8BA3F8 !important;
 
@@ -87,21 +72,22 @@
     </style>
 </head>
 <body>
-<!--    <header class="d:flex jc:start ai:center h:1 px:2 pt:2">-->
+    <header class="d:flex jc:start ai:center h:1 px:2 pt:2">
 
-<!--        <h1 class="d:none">상단바</h1>-->
+        <h1 class="d:none">상단바</h1>
 
-<!--        <div class="mr:auto"><a class="icon icon:x icon-size:5" href="">나가기</a></div>-->
+        <div class="mr:auto"><a class="icon icon:x icon-size:5" href="">나가기</a></div>
 
-<!--    </header>-->
+    </header>
     <main layout:fragment="main">
         <section class="pb:4 pt:4 pl:4 pr:4">
-            <h1 class="d:none">토론 카드 작성</h1>
+            <h1 class="d:none">토론 카드 수정</h1>
 
-            <form class="form-group h:auto" action="reg" method="post" enctype="multipart/form-data">
+            <form th:object="${board}" class="form-group h:auto" action="edit" method="post" enctype="multipart/form-data">
 
-                <div><input type="hidden" name="rid" th:value="${param.rid}"></div>
+                <div><input type="hidden" name="id" th:field="*{id}"></div>
                 <div><input type="hidden" name="wid" th:value="${param.wid}"></div>
+                <div><input type="hidden" name="rid" th:value="${param.rid}"></div>
 
                 <div class="d:flex jc:end">
                     <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
@@ -109,48 +95,50 @@
                     </button>
                 </div>
 
-                <h1 class="d:none">토론카드 등록 페이지</h1>
+                <h1 class="d:none">토론카드 수정 페이지</h1>
                 <p class="fw:3 fs:5 mr:3 ml:3 mb:4 mb:8 px:2">
-                    <span class="font-size:7"> 뉴렉위드,</span><br />
-                    토론 카드를 개설 해보세요 !
+                    <span class="font-size:7"></span><br />
+
                 </p>
 
                 <section class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
                     <h1 class="pt:3 bd-bottom w:10p h:1 fw:3">💡 토론주제</h1>
                     <div class="d:flex jc:center mt:2">
-                        <div class="n-select">
-                            <select name="topicId">
-                              <option value=" ">토론주제</option>
-                              <option th:each="val : ${topicList}"
-                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>
-                            </select>
-                        </div>
+                        <div class="w:10p n-textbox color:base-3" th:text="${debateTopic.content}">토론주제</div>
+<!--                        <div class="n-select">-->
+<!--                            <select name="topicId">-->
+<!--                              <option value=" ">토론주제</option>-->
+<!--                              <option th:each="val : ${topicList}"-->
+<!--                                th:value="${val.id}" th:utext="${val.content}" th:selected="${selectedOption == val.id}">재홍이는 바지인가</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
                     </div>
                 </section>
 
                 <section class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
                     <h1 class="pt:3 bd-bottom w:10p h:1 fw:3 ">✏️ 제목</h1>
                     <div class="d:flex jc:center mt:2">
-                        <input class="w:10p n-textbox" type="text" name="title">
+                        <input class="w:10p n-textbox" type="text" name="title" th:field="*{title}">
                     </div>
                 </section>
 
-                <section class="bd-color:base-3 bd-radius:9 px:5 py:2 m:3 n-item n-item:shadow">
+                <section class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
+
                     <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">🗒️ 의견</h1>
                     <div class="mt:4">
-                      <textarea
-                              class="w:100p"
-                              placeholder="의견을 작성 하세요."
-                              name="content"
-                              id=""
-                              th:maxlength="1500"
-                              cols="30"
-                              rows="10"
-                      ></textarea>
+                        <textarea
+                                class="w:100p"
+                                name="content"
+                                th:field="*{content}"
+                                th:maxlength="1500"
+                                cols="30"
+                                rows="10"
+                        ></textarea>
                     </div>
+
                 </section>
 
-                <section class="form-group bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow ">
+                <section class="form-group bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow">
                     <h1 class="pt:3 bd-bottom w:100p h:1 fw:3">📷 이미지 등록</h1>
                     <div class="mt:4">
                         <input id="file-input" type="file" multiple="multiple" name="files" >
@@ -169,7 +157,7 @@
                 </section>
 
 
-<!--                <button class="reg-btn n-btn bg-color:main-4  pos:absolute top:1 right:1 " type="submit">등록</button>-->
+<!--                <button class="reg-btn n-btn bg-color:main-4  pos:absolute top:0 right:0 " type="submit">등록</button>-->
             </form>
         </section>
     </main>

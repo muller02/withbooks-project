@@ -35,8 +35,8 @@
                         <div class="d:flex ai:center px:2">
                             <div
                                 class="fs:1 mr:3"
-                                th:text="${user.withdrawStatus == 0 ? '정상' : user.withdrawStatus == 1 ? '탈퇴' : '정지' }"
-                                th:classappend="${user.withdrawStatus == 1 ? 'color:base-4' : user.withdrawStatus == 2 ? 'color:accent-1' : '' }"
+                                th:text="${user.withdrawStatus == 1 ? '정상' : user.withdrawStatus == 2 ? '탈퇴' : '정지' }"
+                                th:classappend="${user.withdrawStatus == 2 ? 'color:base-4' : user.withdrawStatus == 3 ? 'color:accent-1' : '' }"
                             >
                                 정상
                             </div>
@@ -73,6 +73,33 @@
                         </div>
                     </div>
                 </div>
+            </section>
+            <section class="my:8">
+                <h1 class="d:none">페이저</h1>
+                <ul
+                    class="n-pager"
+                    style="display: flex; justify-content: center"
+                    th:with="page = *{param.p} ? ${{param.p}} : 1
+                        , temp = (${page} - 1) / 5
+                        , startnum = ${T(java.lang.Math).floor(temp)} * 5 + 1
+                        ,temp1 = ${{count}}/6
+                        ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                        ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
+                        "
+                >
+                    <li>
+                        <span class="fs:1" th:if="${page} lt 6">이전</span>
+                        <a class="fs:1" th:if="${page} ge 6" href="list?p=1" th:href="@{./detail(id=${param.id},p=${startnum}-1)}">이전</a>
+                    </li>
+                    <li th:each="n : ${#numbers.sequence(startnum, endnum)}" th:class="${{param.p}} eq ${n} ? 'active' : ''">
+                        <span th:if="${n} eq ${{param.p}}" th:text="${n}"></span>
+                        <a class="fs:1" href="list?p=1" th:if="${n} ne ${{param.p}}" th:href="@{./detail(id=${param.id},p=${n})}" th:text="${n}">1</a>
+                    </li>
+                    <li>
+                        <span class="fs:1" th:if="${startnum}+4 ge ${lastnum}">다음</span>
+                        <a class="fs:1" href="list?p=6" th:if="${startnum}+4 lt ${lastnum}" th:href="@{./detail(id=${param.id},p=${startnum}+5)}">다음</a>
+                    </li>
+                </ul>
             </section>
             <!-- <section class="n-modal" tabindex="-1">
                 <h1 class="n-font:h3 font-weight:3">상태 변경</h1>

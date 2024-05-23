@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/with/debate/board/list.js" defer></script>
+    <script src="/js/board/list.js" defer></script>
     <title>list</title>
 
     <style>
@@ -66,7 +66,7 @@
     <main class="pb:11 px:4 flex-grow:1" layout:fragment="main">
 
         <div class="d:flex mt:3 mr:1">
-            <a class="" href="" th:href="@{/with/debate/list(wid=${param.wid})}">
+            <a class="" href="" th:href="@{/debate/list(wid=${param.wid})}">
 <!--            <a class="m:1" href="javascript:history.go(-1);">-->
                 <span class="n-btn n-btn-size:2 n-btn:void pl:1 pr:5 fs:1" style="color: var(--color-base-5);">
                     <span class="icon icon:caret_left icon-color:base-4 icon-size:2">아이콘</span>
@@ -122,10 +122,10 @@
                             </div>
                             <div class="d:flex flex-direction:column flex-grow:1 gap:2">
                                 <div>
-                                    <div class="fs:1 md:fs:2 lg:fs:2 fw:1"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
+                                    <div class="fs:1 md:fs:2 lg:fs:2 fw:1"><a href="" th:href="@{/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}">"<span th:text="${b.topic}">재홍이는 진짜 일뽕인가</span>"</a></div>
                                 </div>
                                 <div>
-                                    <hi class="fs:3 md:fs:4 lg:fs:5 fw:2"><a href="" th:href="@{/with/debate/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}" th:text="${b.title}">"재홍이는 바지인가"</a></hi>
+                                    <hi class="fs:3 md:fs:4 lg:fs:5 fw:2"><a href="" th:href="@{/board/detail(wid=${param.wid},rid=${param.rid},id=${b.id})}" th:text="${b.title}" class="ln-clamp:1">"재홍이는 바지인가"</a></hi>
                                 </div>
                                 <div class="d:flex ai:center gap:1">
                                     <div class="d:flex ai:center">
@@ -141,7 +141,7 @@
                                         <div class="fs:1 color:base-5 ml:1 ln-clamp:1" >댓글 <span th:text="${b.cmtCnt} == null ? 0 : ${b.cmtCnt}">2</span>건</div>
                                     </div>
                                 </div>
-                                <div class="ln-clamp:3">
+                                <div class="ln-clamp:2">
                                     <div class="fs:1 md:fs:2 lg:fs:2" th:utext="${b.content}">
                                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus,
                                         dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur
@@ -157,7 +157,7 @@
             <div class="reg-btn pos:fixed right:4 lg:right:1/5 bottom:10 md:bottom:9 lg:bottom:9 zi:5">
                 <h1 class="d:none">토론카드 작성하기 버튼</h1>
                 <div class="bg-color:main-5 border-radius:full p:3">
-                    <a href="reg" th:href="@{/with/debate/board/reg(wid=${param.wid},rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
+                    <a href="reg" th:href="@{/board/reg(wid=${param.wid},rid=${param.rid})}" th:title="${'토론카드 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>
                 </div>
             </div>
         </div>
