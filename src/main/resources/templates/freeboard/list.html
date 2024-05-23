@@ -15,11 +15,8 @@
       --height-1: 56px;
       --height-2: 68px;
     }
-    #notice{
-      --box-shadow-6: 0px 4px 20px -4px #4F74F57f,0px -2px 20px 4px #4F74F57f
-    }
-    #board-list .content{
-      --box-shadow-6: 0px 4px 20px -4px rgba(0,0,0,.08),0px -2px 20px 4px rgba(0,0,0,.01);
+    #notice-list{
+      transition: all 1s;
     }
     #del-modal-box {
       --color-base-3: rgba(30, 6, 6, 0.1);
@@ -98,9 +95,9 @@
         </div>
       </section>
 
-      <section id="notice-list" class="mt:4">
-
+      <section id="notice-list" class="d:block">
         <h1 class="d:none">공지글 목록</h1>
+
         <div >
           <section id="notice" class="mt:5 mx:4 color:base-1" th:each="n : ${noticeList}">
             <h1 class="d:none">공지글</h1>
@@ -139,7 +136,7 @@
 
       
       
-      <section id="board-list" class="mt:10 pos:relative">
+      <section id="board-list" class="pos:relative">
 
         <h1 class="d:none fs:4 fw:2 pb:3 bd-bottom bd-color:base-2 bd-w:2 mx:4 pl:4">게시글 목록</h1>
         <div>
@@ -157,7 +154,7 @@
                 <span class="d:flex box-shadow:3 bd-bl-radius:3 bd-br-radius:3">
                   <div class="d:flex flex-grow:1 pl:6 jc:start ai:center notice-bot-box bd-bl-radius:3 bd-br-radius:3 h:2 fs:3 al:stretch">
                     <span class="ln-clamp:1 color:base-9" th:text="${b.title}">푸바오 신간 샀어요 !!</span> 
-                    <span class="icon icon:image icon:size:1 ml:2 align-self:center" th:unless="${#arrays.isEmpty(b.imgs)}">이미지 아이콘</span>
+                    <span class="icon icon:image icon-size:3 icon-color:main-5 ml:1 mt:1 align-self:center" th:unless="${#arrays.isEmpty(b.imgs)}">이미지 아이콘</span>
                     <span class="ml:auto deco icon:thumbs_up icon-color:base-5" th:text="${b.likeCnt}">13</span> 
                     <span class="ml:4 mr:4 deco icon:chat icon-color:base-5" th:text="${b.commentCnt}">5</span>
                   </div>
@@ -227,10 +224,10 @@
         </span>
       </section>  
 
-      <section class="pos:fixed right:2 md:right:3 lg:right:3 bottom:9 md:bottom:4 lg:bottom:4" th:unless="${isWithMember} == null">
+      <section class="pos:fixed right:2 md:right:3 lg:right:3 bottom:9 md:bottom:4 lg:bottom:4 zi:3" th:unless="${isWithMember} == null">
         <h1 class="d:none">플로팅 버튼</h1>
         <div>
-          <a class="icon icon:plus icon-color:sub-1 icon-size:4 bg-color:main-5 border-radius:12 p:2 box-sizing:content-box zi:3" href="" th:href="@{reg(wid=${param.wid})}">등록</a>
+          <a class="icon icon:plus icon-color:sub-1 icon-size:4 bg-color:main-5 border-radius:12 p:2 box-sizing:content-box" href="" th:href="@{reg(wid=${param.wid})}">등록</a>
         </div>
       </section>
 
