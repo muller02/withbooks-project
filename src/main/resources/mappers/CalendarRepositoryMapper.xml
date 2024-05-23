@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withbooks.web.repository.CalendarRepository">
+
+    <!-- 캘린더 일정 등록 -->
+    <insert id="save">
+        INSERT INTO calendar (content, start_time, end_time, location, with_id)
+        VALUES (#{content}, #{start}, #{end}, #{location}, #{withId})
+    </insert>
+</mapper>

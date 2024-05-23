@@ -32,14 +32,14 @@
           transform:     translate(-2px, 14px)
       }
     </style>
-    <script src="/js/with/debate/reg.js"></script>
+    <script src="/js/debate/reg.js" defer></script>
   </head>
   <body>
     <main layout:fragment="main">
       <section class="pb:4 pt:4 pl:4 pr:4">
         <h1 class="d:none">위드 토론 등록 페이지</h1>
 
-        <form action="/with/debate/reg" class="" method="post">
+        <form action="/debate/reg" class="" method="post">
           <input type="hidden" name="wid"  th:value="${param.wid}">
           <div class="d:flex jc:end">
             <button type="submit" id="btn" class="n-btn mt:3 bg-color:main-5">
