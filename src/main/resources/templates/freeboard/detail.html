@@ -90,7 +90,7 @@
                     </span>
                 </section>
 
-                <section class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId}" >
+                <section class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId and isWithMember != null}" >
                     <h1 class="d:none">수정/삭제 버튼</h1>
                     <button class="board-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer" th:attr="data-id=${board.id}">점점점</button>
                     
@@ -118,10 +118,14 @@
                     </span>
                 </section>
                 
-                <section class="mt:5 pb:8 d:flex jc:center">
-                    <h1 class="d:none">좋아요 수 / 댓글 수</h1>
+                <section class="mt:5 pb:8 d:flex jc:center" th:if="${isWithMember != null}">
+                    <h1 class="d:none">좋아요 수(멤버 전용)</h1>
                     <div><button class="like-btn fs:2 color:base-5 deco icon:thumbs_up icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:2 cursor:pointer box-shadow:2" th:classappend="${isLiked ? 'liked' : 'false'}" th:text="${likeCnt}" th:data-fid="${board.id}">13</button></div>
-                    <!-- <div class="ml:2"><button class="fs:2 color:base-6 deco icon:chat_circle icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:1" th:text="${commentCnt}">13</button></div> -->
+                </section>
+
+                <section class="mt:5 pb:8 d:flex jc:center" th:unless="${isWithMember != null}">
+                    <h1 class="d:none">좋아요 수(비멤버 전용)</h1>
+                    <div><button class="fs:2 color:base-5 deco icon:thumbs_up icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:2 cursor:pointer box-shadow:2" th:classappend="${isLiked ? 'liked' : 'false'}" th:text="${likeCnt}" th:data-fid="${board.id}">13</button></div>
                 </section>
 
                 <section id="comment-list" class="d:flex fl-dir:column mt:4 pb:3">
@@ -138,7 +142,7 @@
                         </div>
                         
 
-                        <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId}">
+                        <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId and isWithMember != null}">
                             <h1 class="d:none">댓글 수정/삭제 버튼</h1>
                             <button class="comment-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer">점점점</button>
                             
@@ -156,7 +160,7 @@
 
                     </section>
 
-                    <section>
+                    <section th:unless="${isWithMember} == null">
                         <h1 class="d:none">댓글입력 부</h1>
                         <form class="d:flex pos:relative" action="/free-comment" method="post">
                             <div class="flex-grow:1">

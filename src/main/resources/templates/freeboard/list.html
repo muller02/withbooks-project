@@ -117,7 +117,7 @@
               </a>
               
               <section id="edit-del-btn-section" class="pos:relative"
-                      th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq n.userId}">
+                      th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq n.userId and isWithMember != null}">
                 <h1 class="d:none">수정/삭제 버튼</h1>
                 <button class="notice-edit-del-icon icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute top:1 right:1 cursor:pointer">점점점</button>
                 
@@ -166,7 +166,7 @@
             </a>
 
             <section id="edit-del-btn-section"
-                      th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq b.userId}">
+                      th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq b.userId and isWithMember != null}">
                 <h1 class="d:none">수정/삭제 버튼</h1>
                 <button class="icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute top:1 right:1 cursor:pointer">점점점</button>
                 
@@ -227,8 +227,7 @@
         </span>
       </section>  
 
-
-      <section class=" pos:fixed right:2 md:right:3 lg:right:3 bottom:9 md:bottom:4 lg:bottom:4">
+      <section class="pos:fixed right:2 md:right:3 lg:right:3 bottom:9 md:bottom:4 lg:bottom:4" th:unless="${isWithMember} == null">
         <h1 class="d:none">플로팅 버튼</h1>
         <div>
           <a class="icon icon:plus icon-color:sub-1 icon-size:4 bg-color:main-5 border-radius:12 p:2 box-sizing:content-box zi:3" href="" th:href="@{reg(wid=${param.wid})}">등록</a>
