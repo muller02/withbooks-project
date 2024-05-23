@@ -174,7 +174,7 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/board/list?wid=" + withId + "&rid=" + roomId;
+        return "redirect:/board/list?m=3&wid=" + withId + "&rid=" + roomId;
 
     }
 
@@ -223,7 +223,7 @@ public class BoardController {
         // 6. 파일 삭제 (from database)
         debateAttachmentService.deleteAllFileByIds(boardEditForm.getDeleteFilesId());
 
-        return "redirect:/board/detail?wid=" + withId + "&rid=" + roomId + "&id=" + id;
+        return "redirect:/board/detail?m=3&wid=" + withId + "&rid=" + roomId + "&id=" + id;
     }
 
     @PostMapping("/delete")
@@ -239,6 +239,6 @@ public class BoardController {
 
         debateBoardService.deleteById(id);
 
-        return "redirect:/board/list?wid=" + withId + "&rid=" + roomId;
+        return "redirect:/board/list?m=3&wid=" + withId + "&rid=" + roomId;
     }
 }

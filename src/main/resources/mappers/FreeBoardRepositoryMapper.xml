@@ -35,6 +35,8 @@
 			with_id = #{withId}
 			and
 			blind_yn = 0
+			and
+			notice_yn = 0
 		<choose>
 			<when test="sort == 'latest'">
 				order by reg_date desc
@@ -46,15 +48,35 @@
 		limit #{limit} offset #{offset}
 	</select>
 
+	<select id="findAllNotice" resultMap="FreeBoardViewResult" >
+		select 
+			* 
+		from 
+			free_board_view
+		where 
+			with_id = #{withId}
+			and
+			blind_yn = 0
+			and
+			notice_yn = 1
+		order by 
+			reg_date desc
+		limit 3 
+	</select>
+	
+
 
 	<select id="count" resultType="int">
 		select 
 			count(id) 
 		from 
 			free_board_view
-		where with_id = #{withId}
+		where 
+			with_id = #{withId}
 			and
-		blind_yn = 0
+			blind_yn = 0
+			and
+			notice_yn = 0
 	</select>
 
 	<select id="findById" resultType="FreeBoard">
