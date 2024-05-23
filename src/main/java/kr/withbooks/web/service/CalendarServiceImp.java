@@ -1,6 +1,7 @@
 package kr.withbooks.web.service;
 
 import kr.withbooks.web.entity.Calendar;
+import kr.withbooks.web.entity.CalendarView;
 import kr.withbooks.web.repository.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ public class CalendarServiceImp implements CalendarService {
   private CalendarRepository repository;
 
   @Override
-  public List<Calendar> getList(Long withId) {
-    repository.findAll(withId);
-    return null;
+  public List<CalendarView> getEventsById(Long withId) {
+    return repository.findAllById(withId);
+  }
+
+  @Override
+  public Calendar saveEvent(Calendar calendar) {
+    return repository.save(calendar);
   }
 }

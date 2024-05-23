@@ -5,18 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Calendar {
+public class CalendarView {
   private Long id;
-  private Long userId;
   private Long withId;
-  private LocalDateTime startDateTime;
-  private LocalDateTime endDateTime;
+  private LocalTime startDateTime;
+  private LocalTime endDateTime;
   private String content; // 일정 내용
   private String location;
 }
