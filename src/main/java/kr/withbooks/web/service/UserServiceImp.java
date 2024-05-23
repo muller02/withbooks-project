@@ -85,11 +85,6 @@ public class UserServiceImp implements UserService{
         return repository.updateWithdrawStatus(status, ids);
         
     }
-
-    // @Override
-    // public List<BookshortsView> getByIdShorts(Long id) {
-    //     return repository.findByIdShorts(id);
-    // }
     // =================================================================================
     
 }

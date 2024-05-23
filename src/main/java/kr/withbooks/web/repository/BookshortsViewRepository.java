@@ -20,5 +20,6 @@ public interface BookshortsViewRepository {
     BookshortsView findById(Long shortsId, Long userId);
 
     // admin/user
-    List<BookshortsView> findByUserId(Long userId);
+    List<BookshortsView> findByUserId(Long userId, Integer size, Integer offset);
+    Integer count(Long userid);
 }
