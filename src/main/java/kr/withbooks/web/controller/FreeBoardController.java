@@ -74,7 +74,7 @@ public class FreeBoardController {
         model.addAttribute("count", count);
 
 
-        return  "/freeboard/list_copy";
+        return  "/freeboard/list";
     }
 
 
