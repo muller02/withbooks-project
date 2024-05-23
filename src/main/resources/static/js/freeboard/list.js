@@ -108,15 +108,17 @@
             noticeToggleBtn.classList.remove("icon:speaker_simple_high_fill");
             noticeToggleBtn.classList.add("icon:speaker_simple_slash_fill");
 
-            noticeList.classList.add("h:0");
-            noticeList.classList.add("of:hidden");
+            noticeList.classList.toggle("d:none");
+            // noticeList.classList.add("h:0");
+            // noticeList.classList.add("of:hidden");
         }
         else{   // 공지가 꺼져있을 때 공지를 열기
             noticeToggleBtn.classList.remove("icon:speaker_simple_slash_fill");
             noticeToggleBtn.classList.add("icon:speaker_simple_high_fill");
 
-            noticeList.classList.remove("h:0");
-            noticeList.classList.remove("of:hidden");
+            noticeList.classList.toggle("d:none");
+            // noticeList.classList.remove("h:0");
+            // noticeList.classList.remove("of:hidden");
         }
         // 경인이가 코드 만들어씀 >< 잘해쮜??
     }
