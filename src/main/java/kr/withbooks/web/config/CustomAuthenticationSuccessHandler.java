@@ -18,17 +18,11 @@ public class CustomAuthenticationSuccessHandler  implements AuthenticationSucces
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         int sessionMaxInactiveInterval = request.getSession().getMaxInactiveInterval();
 
-
-
         Cookie cookie = new Cookie("lck","1" +
                 "");
         cookie.setMaxAge(sessionMaxInactiveInterval);
         cookie.setPath("/");
         response.addCookie(cookie);
-
-        System.out.println("커피 = " +  cookie.getMaxAge());
-
-
 
         response.sendRedirect("/");  // 로그인 성공후 갈 페이지
 
