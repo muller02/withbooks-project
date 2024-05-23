@@ -58,11 +58,11 @@
                                             </label>
                                             <label class="d:flex ai:center mr:5 fs:1">
                                                 <input type="radio" name="gender" value="1" class="mr:1" th:checked="${{param.gender}}== 1 ? true" />
-                                                여성
+                                                남성
                                             </label>
                                             <label class="d:flex ai:center mr:5 fs:1">
                                                 <input type="radio" name="gender" value="2" class="mr:1" th:checked="${{param.gender}} == 2 ? true" />
-                                                남성
+                                                여성
                                             </label>
                                         </div>
                                     </div>
@@ -156,12 +156,12 @@
                                     <div class="w:4p text-align:center fs:1" th:text="${u.email}">admin@withbooks.kr</div>
                                     <div class="w:2p text-align:center fs:1" th:text="${u.nickname}">위북이</div>
                                     <div class="w:1p text-align:center fs:1" th:text="${#temporals.format(u.birthDate, 'yyyy')}">1999</div>
-                                    <div class="w:1p text-align:center fs:1" th:text="${u.gender == 1? '여성' : '남성'}">여성</div>
+                                    <div class="w:1p text-align:center fs:1" th:text="${u.gender == 1? '남성' : '여성'}">여성</div>
                                     <div class="w:1p text-align:center fs:1 fl-shrink:0" th:text="${#temporals.format(u.joinDate, 'yyyy-MM-dd')}">2024-01-01</div>
                                     <div
                                         class="w:1p text-align:center fs:1"
+                                        th:text="${u.withdrawStatusName}"
                                         th:classappend="${u.withdrawStatus == 2 ? 'color:base-4' : u.withdrawStatus == 3 ? 'color:accent-1' : '' }"
-                                        th:text="${u.withdrawStatus == 1 ? '정상' : u.withdrawStatus == 2 ? '탈퇴' : '정지' }"
                                     >
                                         정상
                                     </div>
@@ -177,11 +177,11 @@
                 <ul
                     class="n-pager"
                     style="display: flex; justify-content: center"
-                    th:with="page = *{param.p} ? ${{param.p}} : 1
+                    th:with="page = ${param.p} eq null ? 1 : ${{param.p}}
                         , temp = (${page} - 1) / 5
                         , startnum = ${T(java.lang.Math).floor(temp)} * 5 + 1
                         ,temp1 = ${{count}}/6
-                        ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                        ,lastnum=${count} mod 6 > 0 ? ${T(java.lang.Math).floor(temp1)} + 1 : ${T(java.lang.Math).floor(temp1)}
                         ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
                         "
                 >
@@ -207,11 +207,11 @@
                         >
                     </li>
                     <li>
-                        <span class="fs:1" th:if="${startnum}+4 ge ${lastnum}">다음</span>
+                        <span class="fs:1" th:if="${startnum+4} ge ${lastnum}">다음</span>
                         <a
                             class="fs:1"
                             href="list?p=6"
-                            th:if="${startnum}+4 lt ${lastnum}"
+                            th:if="${startnum+4} lt ${lastnum}"
                             th:href="@{./list(id=${param.id},nickname=${param.nickname},email=${param.email},birthyear=${birthyear},gender=${param.gender},startdate=${param.startdate},enddate=${param.enddate},status=${param.status},p=${startnum}+5)}"
                             >다음</a
                         >
@@ -221,13 +221,11 @@
             <section id="batch-menus" class="my:4">
                 <h1 class="d:none">일괄 처리 메뉴</h1>
                 <div class="text-align:center">
-                    <!-- <form action="update" method="post"> -->
                     <div class="d:inline-flex mr:2 fs:2">일괄 처리(<span class="color:accent-1">※ 체크된 회원</span>)</div>
                     <div class="normal-status n-btn mr:2">정상 처리</div>
                     <button class="withdraw-status n-btn bg-color:main-2 color:main-6 mr:2">탈퇴 처리</button>
                     <button class="expulsion-status n-btn mr:2">정지 처리</button>
                     <div class="n-btn bg-color:main-2 color:main-6 mr:2"><a href="mailto:whdmsdo1010@gmail.com">메일보내기</a></div>
-                    <!-- </form> -->
                 </div>
             </section>
         </main>

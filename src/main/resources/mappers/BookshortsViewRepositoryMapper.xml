@@ -147,7 +147,18 @@
 		from 
 			shorts_view
 		where
-			user_id = #{id}
+			user_id = #{userId}
+		order by reg_date desc
+		limit #{offset}, #{size}
+	</select>
+
+	<select id="count" resultType="Integer">
+		select
+			count(*)
+		from 
+			shorts_view
+		where
+			user_id = #{userId}
 	</select>
 
 </mapper>

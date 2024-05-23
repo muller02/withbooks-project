@@ -19,7 +19,8 @@ public interface BookshrotsService {
     BookshortsView getById(Long shortsId, Long userId); 
 
     // admin/user
-    List<BookshortsView> getById(Long id);
+    List<BookshortsView> getByUserId(Long userid, Integer page);
+    Integer getCount(Long userid);
 
     
 }

@@ -28,10 +28,8 @@ public interface UserRepository {
 
     // admin/user
     List<User> findByAll(Map<String, String> params, Integer size,Integer offset);
-    List<BookshortsView> findByIdShorts(Long id);
     Integer count(Map<String, String> params);
+    List<BookshortsView> findByIdShorts(Long id);
     Integer updateWithdrawStatus(Integer status, List<Integer> ids);
-
-
 
 }

@@ -25,5 +25,6 @@ public class User {
     private Integer notiYn;
     private String role;
     private String img;
+    private String withdrawStatusName;
 
 }
