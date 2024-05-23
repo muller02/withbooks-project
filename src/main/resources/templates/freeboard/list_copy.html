@@ -45,8 +45,8 @@
   <div class="with-tap-component pt:4 px:2">
     <ul class="n-tabbar justify-content:space-between menu-tap">
       <li><a class="fw:3" id="home2" th:href="@{/with/detail(m=3,id=${param.wid})}">홈</a></li>
-      <li><a id="debate" th:href="@{/with/debate/list(m=3,wid=${param.wid})}">토론서재</a></li>
-      <li><a id="calendar" th:href="@{/calendar/index(wid=${param.wid})}">모임일정</a></li>
+      <li><a id="debate" th:href="@{/debate/list(m=3,wid=${param.wid})}">토론서재</a></li>
+      <li><a id="calendar" th:href="@{/calendar/index(m=3,wid=${param.wid})}">모임일정</a></li>
       <li class="active"><a id="board" th:href="@{/free-board/list(m=3,wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
       <li><a>북추천</a></li>
       <li><a>위드맴버</a></li>

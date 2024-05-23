@@ -20,7 +20,7 @@ window.addEventListener('load', function (){
 
         // roomId와 withId, topicId가 모두 유효한 경우에만 컨트롤러를 호출
         if (roomId && topicId && withId) {
-            const url = `/board/list?wid=${withId}&rid=${roomId}&tid=${topicId}`
+            const url = `/board/list?m=3&wid=${withId}&rid=${roomId}&tid=${topicId}`
             window.location.href = url;
         }
     }
