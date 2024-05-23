@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const startTime = modal.querySelector("#start-time");
   const endTime = modal.querySelector("#end-time");
 
+  // *** 캘린더 구조 렌더링
   function renderCalendar(events) {
     const calendar = new FullCalendar.Calendar(calendarEl, {
       height: "700px",
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     calendar.render();
 
+    // *** 모달창에서의 이벤트리스너(취소, 등록, 종일선택, 시간 변화)
     cancelBtn.addEventListener("click", handleCancel);
 
     eventForm.addEventListener("submit", (e) =>
@@ -51,11 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
     endTime.addEventListener("change", () => handleTimeChange(endTime));
   }
 
+  // *** 날짜 칸을 클릭해서 하루치 일정 입력할 때
   function handleDateClick(info) {
     selectedInfo = { start: info.date, end: info.date, allDay: true };
     showModal(info.dateStr, info.dateStr, true);
   }
 
+  // *** 드래그로 여러날짜 기간을 입력할 떼
   function handleSelect(info) {
     selectedInfo = {
       start: info.start,
@@ -72,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // *** 모달창을 띄움
   function showModal(start, end, allDay, info = null) {
     modal.classList.remove("d:none");
     eventStart.value = start;
@@ -90,11 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // *** 모달 입력 취소
   function handleCancel() {
     modal.classList.add("d:none");
     clearModalFields();
   }
 
+  // *** 모달 등록 전송
   function handleEventFormSubmit(e, calendar) {
     e.preventDefault();
     const title = eventTitle.value.trim();
@@ -121,15 +128,19 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       start = `${start}T${startTime.value}`;
       end = `${end}T${endTime.value}`;
+      dbEndDate = new Date(end); // Non-allDay의 경우에도 dbEndDate 설정
       console.log("end2", end);
     }
 
     if (title && start && end) {
+      // 서버로 데이터 전송
+      sendDataToServer(title, start, dbEndDate.toISOString(), allDay);
+
       // 캘린더에 추가할 때는 uiEndDate 사용
       calendar.addEvent({
         title: title,
         start: start,
-        end: uiEndDate,
+        end: allDay ? uiEndDate.toISOString() : end,
         allDay: allDayCheckbox.checked,
       });
       modal.classList.add("d:none");
@@ -139,6 +150,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function sendDataToServer(title, start, end, allDay) {
+    const data = {
+      title: title,
+      start: start,
+      end: end, // 실제 데이터베이스에 저장될 종료 날짜 사용
+      allDay: allDay,
+    };
+
+    fetch("/api/calendar/reg", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        if (responseData.success) {
+          console.log("성공! 데이터 저장 앤 전송", responseData);
+        } else {
+          console.error("Server error:", responseData.error);
+          alert("데이터 저장 실패");
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+        alert("데이터 전송 실패");
+      });
+  }
+
+  // *** 종일 토글선택유무에 따라 시작~종료시간 부분 보이거나 감추기
   function handleAllDayCheckboxChange() {
     if (allDayCheckbox.checked) {
       timeGroup.classList.add("d:none");
@@ -149,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // *** 종일 미선택시 시간 선택
   function handleTimeChange(timeInput) {
     if (!allDayCheckbox.checked) {
       const value = timeInput.value;
@@ -160,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // *** 모달에 입력된 값 비워주기
   function clearModalFields() {
     eventTitle.value = "";
     eventStart.value = "";
