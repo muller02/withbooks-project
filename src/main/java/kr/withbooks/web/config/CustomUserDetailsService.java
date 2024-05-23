@@ -42,11 +42,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         userDetails.setJoinDate(user.getJoinDate());
         userDetails.setBrithDate(user.getBirthDate());
 
-        System.out.println("==================================================");
-        System.out.println(userDetails);
-        System.out.println(userDetails.getAuthorities());
-        System.out.println("==================================================");
-
         return userDetails;
     }
 }

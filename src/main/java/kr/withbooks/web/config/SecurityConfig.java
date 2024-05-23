@@ -1,7 +1,5 @@
 package kr.withbooks.web.config;
 
-import jakarta.servlet.http.HttpSessionListener;
-import org.apache.catalina.SessionListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +17,6 @@ public class SecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -37,7 +33,6 @@ public class SecurityConfig {
                     .anyRequest()
                     .permitAll()
                 )
-
 
              // admin 페이지 이동 시로그인 페이지로 이동하는 설정
 
@@ -68,6 +63,4 @@ public class SecurityConfig {
     public LogoutHandler logoutSuccessHandler() {
         return new CustomLogoutHandler(); // 로그아웃 핸들러 등록
     }
-
-
 }
