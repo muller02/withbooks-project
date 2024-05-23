@@ -199,7 +199,7 @@
         <h1 class="d:none">페이저</h1>
         <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
           <li th:unless="${startnum} eq 1">
-            <a class="icon icon:caret_left" href="">이전</a>
+            <a class="icon icon:caret_left" href="" th:href="@{./list(m=${param.m},wid=${param.wid},p=${startnum}-1,s=${param.s})}">이전</a>
           </li>
 
           <li class="ml:3" th:each="n : ${#numbers.sequence(startnum, startnum+4)}" th:if="${n le lastestPage}">
@@ -210,7 +210,7 @@
             >1</a>
           </li>
           <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
-            <a class="icon icon:caret_right" href="">다음</a>
+            <a class="icon icon:caret_right" href="" th:href="@{./list(m=${param.m},wid=${param.wid},p=${startnum}+5,s=${param.s})}">다음</a>
           </li>
         </ul>
       </section>
