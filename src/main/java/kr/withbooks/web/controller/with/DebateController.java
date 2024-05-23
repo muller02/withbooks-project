@@ -86,4 +86,16 @@ public class DebateController {
         return "redirect:/with/detail?id=" + withId;
     }
 
+    @PostMapping("/deleteAll")
+    public String deleteAll(
+            @RequestParam(name = "wid") Long withId,
+            @RequestParam(name = "ids") List<Long> ids) {
+
+        log.info("ids : {}", ids.size());
+        log.info("withId : {}", withId);
+        debateRoomService.deleteAll(withId, ids);
+
+        return "redirect:/with/debate/list?wid=" + withId;
+    }
+
 }

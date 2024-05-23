@@ -29,7 +29,8 @@ public class CustomAuthenticationSuccessHandler  implements AuthenticationSucces
         System.out.println("커피 = " +  cookie.getMaxAge());
 
 
-        response.sendRedirect("/shorts/list");  // 로그인 성공후 갈 페이지
+
+        response.sendRedirect("/");  // 로그인 성공후 갈 페이지
 
     }
 }

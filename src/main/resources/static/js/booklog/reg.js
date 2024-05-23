@@ -17,6 +17,7 @@ window.addEventListener("load", function () {
     // 검색창 리셋
     resetBtn.onclick = function () {
         queryInput.value = "";
+        resultList.innerHTML = "";
     };
 
     // =============================== 책 검색 결과 ===================================================
@@ -60,22 +61,28 @@ window.addEventListener("load", function () {
 
             // 검색된 책 리스트 보여주기
             for (book of list) {
-                let sectionHTML = ` <section class="book item d:flex pl:3 py:3">
+                let pubDate = book.pubDate.substr(0,10);
+                let sectionHTML = ` <section class="book item d:flex pl:3 py:3 csr:pointer">
                                         <h1 class="d:none">책정보</h1>
                                         <div class="book-id d:none">${book.id}</div>
                                         <div class="h:3 w:3 mr:5 text-align:center fl-shrink:0 box-shadow-custom">
                                             <img src="${book.cover}" alt="책이미지" class="book-cover h:100p object-fit:cover">
                                         </div>
-                                        <div class="d:flex flex-direction:column">
-                                            <div class="book-title fs:4 fw:3 mb:2">${book.title}</div>
-                                            <div class="book-author fs:2 fw:2 mb:1 ">${book.author} 저</div>
-                                            <div class="book-publisher fs:2 color:base-7 ">${book.publisher}</div>
-                                            <div class="fs:2 color:base-7">${book.pubDate}</div>
+                                        <div class="d:flex flex-direction:column" title="${book.title}">
+                                            <div class="book-title fs:4 fw:3 mb:2 ln-clamp:2">${book.title}</div>
+                                            <div class="book-author fs:2 fw:2 mb:1 ln-clamp:1">${book.author} 저</div>
+                                            <div class="book-publisher fs:2 color:base-7 ln-clamp:1">${book.publisher}</div>
+                                            <div class="fs:2 color:base-7">${pubDate}</div>
                                         </div>
                                     </section>`;
 
                 resultList.insertAdjacentHTML("beforeend", sectionHTML);
             }
+
+            // count가 10개 넘을 경우 !!
+            // 다음 페이지 버튼 insert 필요함
+            // 이때, 해당 태그의 onclick function에서
+            // fetch로 템플릿 만들기
         };
 
         let q = queryInput.value;

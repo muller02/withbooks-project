@@ -9,7 +9,7 @@ import kr.withbooks.web.entity.Category;
 public interface BookService {
     List<Book> getList();
     
-    List<Book> getList(String query, Long categoryId);
+    List<Book> getList(String query, Long categoryId, Long size, Long page);
 
     Book getById(Long bookId);
 
