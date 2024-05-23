@@ -95,11 +95,11 @@
 			<if test="params.birthyear != null and params.birthyear != '' ">
 				and birth_date like '${params.birthyear}%'
 			</if>
-			<if test="params.startDate != null and params.startDate != '' ">
-				and join_date <![CDATA[>=]]> #{params.startDate}
+			<if test="params.startdate != null and params.startdate != '' ">
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[>=]]> #{params.startdate}
 			</if>
 			<if test="params.endDate != null and params.endDate != '' ">
-				and join_date <![CDATA[<=]]> #{params.endDate}
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[<=]]> #{params.enddate}
 			</if>
 			<if test="params.status != null and params.status != '' ">
 				and withdraw_status = #{params.status}	
@@ -128,11 +128,11 @@
 			<if test="birthyear != null and birthyear != '' ">
 				and birth_date like '${birthyear}%'
 			</if>
-			<if test="startDate != null and startDate != '' ">
-				and join_date <![CDATA[>=]]> #{startDate}
+			<if test="startdate != null and startdate != '' ">
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[>=]]> #{startdate}
 			</if>
-			<if test="endDate != null and endDate != '' ">
-				and join_date <![CDATA[<=]]> #{endDate}
+			<if test="enddate != null and enddate != '' ">
+				and date_format(join_date, '%Y-%m-%d') <![CDATA[<=]]> #{enddate}
 			</if>
 			<if test="status != null and status != '' ">
 				and withdraw_status = #{status}	
