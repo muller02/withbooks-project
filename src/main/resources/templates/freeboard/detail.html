@@ -164,7 +164,11 @@
                                     <textarea class="w:10p bd bd-radius:5 bd-color:main-5 px:2 py:2" rows="1" name="comment"></textarea>
                                 </label>
                             </div>
+                            <div><input type="hidden" name="m" th:value="${param.m}"></div>
                             <div><input type="hidden" name="fid" th:value="${board.id}"></div>
+                            <div><input type="hidden" name="wid" th:value="${param.wid}"></div>
+                            <div><input type="hidden" name="p" th:value="${param.p}"></div>
+                            <div><input type="hidden" name="s" th:value="${param.s}"></div>
                             <div><button class="icon icon:check_bold pos:absolute icon-size:5 icon-color:main-5 right:1 top:1 cursor:pointer pl:2 box-sizing:content-box bd-left">제출</button></div>
                         </form>
                     </section>

@@ -79,7 +79,7 @@
   <section id="free-board">
     <h1 class="d:none">자유게시판</h1>
     <div>
-      <section class="d:flex jc:end ai:center mt:3 mr:6 fs:2" id="sort">
+      <section id="sort" class="d:flex jc:end ai:center mt:3 mr:6 fs:2" th:unless="${#lists.isEmpty(noticeList)}">
         <h1 class="d:none">정렬방식</h1>
         <div class="d:flex">
           <div>
@@ -105,7 +105,7 @@
           <section id="notice" class="mt:5 mx:4 color:base-1" th:each="n : ${noticeList}">
             <h1 class="d:none">공지글</h1>
             <div>
-              <a href="" th:href="@{./detail(m=3,fid=${n.id})}">
+              <a href="" th:href="@{./detail(m=3,fid=${n.id},wid=${param.wid},p=${param.p},s=${param.s})}">
                 <div class=" d:flex jc:space-between ai:center bg-color:main-5 bd-tl-radius:3 bd-tr-radius:3 h:1 px:6">
                   <span class="d:flex">
                     <div class="d:flex ai:center"><img class="profile-img h:1 w:1 bd-radius:12" alt="" src="" th:src="${n.userImg}"></div>
