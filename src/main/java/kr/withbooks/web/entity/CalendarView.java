@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -14,8 +14,8 @@ import java.time.LocalTime;
 public class CalendarView {
   private Long id;
   private Long withId;
-  private LocalTime startDateTime;
-  private LocalTime endDateTime;
+  private LocalDateTime startDateTime;
+  private LocalDateTime endDateTime;
   private String content; // 일정 내용
   private String location;
 }

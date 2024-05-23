@@ -5,8 +5,10 @@
 <mapper namespace="kr.withbooks.web.repository.CalendarViewRepository">
 
     <!-- 캘린더 전체 목록 조회 -->
-    <select id="findByWithId" resultType="CalendarView">
-        SELECT * FROM CalendarView
+    <select id="findAllById" resultType="CalendarView">
+        SELECT
+        *
+        FROM calendar_view
         WHERE with_id = #{withId}
     </select>
 
