@@ -143,4 +143,9 @@ public class FreeBoardServiceImp implements  FreeBoardService{
 
         return 1;
     }
+
+    @Override
+    public List<FreeBoardView> getNoticeList(Long withId) {
+        return repository.findAllNotice(withId);
+    }
 }

@@ -23,17 +23,28 @@ public class FreeCommentController {
     @PostMapping
     public String detail(
           @RequestParam(name="fid") Long freeBoardId
+        , @RequestParam(name="wid") Long withId
+        , @RequestParam(name="p") int page
+        , @RequestParam(name="s") String sort
         , @RequestParam String comment
         , @RequestHeader("Referer") String referer
         , @AuthenticationPrincipal CustomUserDetails userDetails
     ){
+
 
       if(userDetails == null)
         return "로그인을 해 주세요";
 
       freeCommentService.reg(freeBoardId, userDetails.getId(), comment);
 
+      String queryString = new StringBuilder()
+                                .append("fid=").append(freeBoardId)
+                                .append("&wid=").append(withId)
+                                .append("&p=").append(page)
+                                .append("&s=").append(sort)
+                                .toString();
+
         
-      return "redirect:/free-board/detail?fid=" + freeBoardId;
+      return "redirect:/free-board/detail?" + queryString;
     }
 }

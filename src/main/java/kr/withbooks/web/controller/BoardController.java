@@ -1,7 +1,9 @@
-package kr.withbooks.web.controller.with.debate;
+package kr.withbooks.web.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.controller.form.BoardEditForm;
+import kr.withbooks.web.controller.form.BoardForm;
 import kr.withbooks.web.entity.*;
 import kr.withbooks.web.service.*;
 import kr.withbooks.web.util.FileStore;
@@ -18,7 +20,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/with/debate/board")
+@RequestMapping("/board")
 public class BoardController {
 
     private final DebateBoardService debateBoardService;
@@ -74,7 +76,7 @@ public class BoardController {
             model.addAttribute("selectedOption", findTopic.getId());
         }
 
-        return "with/debate/board/list";
+        return "board/list";
     }
 
     @GetMapping("/detail")
@@ -129,7 +131,7 @@ public class BoardController {
         log.info("board = {}", findBoard);
         log.info("debateCommentList ={} ", debateCommentList);
 
-        return "with/debate/board/detail";
+        return "board/detail2";
     }
 
     @GetMapping("/reg")
@@ -140,7 +142,7 @@ public class BoardController {
         List<DebateTopic> topicList = debateTopicService.getList(roomId);
         model.addAttribute("topicList", topicList);
 
-        return "with/debate/board/reg"; 
+        return "board/reg";
     }
 
     @PostMapping("/reg")
@@ -172,7 +174,7 @@ public class BoardController {
 
         debateAttachmentService.add(boardId, debateAttachments);
 
-        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
+        return "redirect:/board/list?m=3&wid=" + withId + "&rid=" + roomId;
 
     }
 
@@ -187,7 +189,7 @@ public class BoardController {
 
         model.addAttribute("board", debateBoard);
         model.addAttribute("debateTopic", debateTopic);
-        return "with/debate/board/edit";
+        return "board/edit";
     }
 
     @PostMapping("/edit")
@@ -221,7 +223,7 @@ public class BoardController {
         // 6. 파일 삭제 (from database)
         debateAttachmentService.deleteAllFileByIds(boardEditForm.getDeleteFilesId());
 
-        return "redirect:/with/debate/board/detail?wid=" + withId + "&rid=" + roomId + "&id=" + id;
+        return "redirect:/board/detail?m=3&wid=" + withId + "&rid=" + roomId + "&id=" + id;
     }
 
     @PostMapping("/delete")
@@ -237,6 +239,6 @@ public class BoardController {
 
         debateBoardService.deleteById(id);
 
-        return "redirect:/with/debate/board/list?wid=" + withId + "&rid=" + roomId;
+        return "redirect:/board/list?m=3&wid=" + withId + "&rid=" + roomId;
     }
 }
