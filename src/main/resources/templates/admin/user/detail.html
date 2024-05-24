@@ -8,11 +8,14 @@
     </head>
     <body>
         <main layout:fragment="main" class="n-panel flex-direction:column n-main-panel">
-            <!-- <div class="text-align:end m:2">
-                <a class="bg-color:main-2 color:main-4 px:4 py:2 bd-radius:5 fs:1" href="list">회원 목록으로</a>
-            </div> -->
             <section class="m:2">
-                <h1 class="fw:3 fs:4 mb:2">회원정보</h1>
+                <h1 class="d:none">회원정보</h1>
+                <div class="d:flex fw:3 fs:4 mb:1 ai:end">
+                    <div class="fs:title flex-grow:1">회원정보</div>
+                    <div class="page-back text-align:end">
+                        <a href="list" class="n-btn n-btn-type:outline px:4">목록으로</a>
+                    </div>
+                </div>
                 <div class="bd-top bd-bottom bd-w:2">
                     <div class="d:flex ai:center bd-bottom">
                         <div class="w:2 py:2 fs:1 text-align:center bg-color:base-2">회원정보</div>
@@ -63,7 +66,6 @@
                                 <div class="d:flex ai:center py:2">
                                     <div class="fs:2 w:1p text-align:center" th:text="${i.count}">1</div>
                                     <div class="fs:2 w:2p text-align:center" th:text="${l.id}">1335</div>
-                                    <!-- th:title -->
                                     <div class="fs:2 w:5p text-align:center ln-clamp:1" th:utext="${l.content}">이 북로그는 어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고어쩌고저쩌고</div>
                                     <div class="fs:2 w:2p text-align:center" th:text="${#temporals.format(l.regDate, 'yyyy-MM-dd')}">2024-01-01</div>
                                     <div class="fs:2 w:1p text-align:center" th:text="${l.likeCnt}">134</div>
@@ -79,11 +81,11 @@
                 <ul
                     class="n-pager"
                     style="display: flex; justify-content: center"
-                    th:with="page = *{param.p} ? ${{param.p}} : 1
+                    th:with="page =  ${param.p} eq null ? 1 : ${{param.p}}
                         , temp = (${page} - 1) / 5
                         , startnum = ${T(java.lang.Math).floor(temp)} * 5 + 1
                         ,temp1 = ${{count}}/6
-                        ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                        ,lastnum=${count} mod 6 > 0 ? ${T(java.lang.Math).floor(temp1)} + 1 : ${T(java.lang.Math).floor(temp1)}
                         ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
                         "
                 >
@@ -96,34 +98,11 @@
                         <a class="fs:1" href="list?p=1" th:if="${n} ne ${{param.p}}" th:href="@{./detail(id=${param.id},p=${n})}" th:text="${n}">1</a>
                     </li>
                     <li>
-                        <span class="fs:1" th:if="${startnum}+4 ge ${lastnum}">다음</span>
-                        <a class="fs:1" href="list?p=6" th:if="${startnum}+4 lt ${lastnum}" th:href="@{./detail(id=${param.id},p=${startnum}+5)}">다음</a>
+                        <span class="fs:1" th:if="${startnum+4} ge ${lastnum}">다음</span>
+                        <a class="fs:1" href="list?p=6" th:if="${startnum+4} lt ${lastnum}" th:href="@{./detail(id=${param.id},p=${startnum}+5)}">다음</a>
                     </li>
                 </ul>
             </section>
-            <!-- <section class="n-modal" tabindex="-1">
-                <h1 class="n-font:h3 font-weight:3">상태 변경</h1>
-                <form>
-                    <div class="my:5">
-                        <label class="mr:3">
-                            <input type="radio" name="status" class="" />
-                            정상
-                        </label>
-                        <label class="mr:3">
-                            <input type="radio" name="status" class="" />
-                            정지
-                        </label>
-                        <label class="mr:3">
-                            <input type="radio" name="status" class="" />
-                            탈퇴
-                        </label>
-                    </div>
-                    <div class="d:flex jc:flex-end gap:2 mt:8">
-                        <button type="button" class="n-btn n-btn:outline">취소</button>
-                        <button type="submit" class="n-btn">저장</button>
-                    </div>
-                </form>
-            </section> -->
         </main>
     </body>
 </html>

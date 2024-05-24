@@ -1,16 +1,14 @@
 package kr.withbooks.web.repository;
 
 import kr.withbooks.web.entity.Calendar;
-import kr.withbooks.web.entity.CalendarView;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface CalendarRepository {
 
-  List<CalendarView> findAllById(Long withId);
+//  List<CalendarView> findAllById(Long withId);
 
+  // 캘린더에 이벤트 저장하기
   Calendar save(Calendar calendar);
 
 }
