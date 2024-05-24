@@ -189,7 +189,7 @@ public class WithController {
     String nickname = userService.getNickNameById(userDetails.getId());
     model.addAttribute("nickname", nickname);
 
-    return "with/reg?m=3";
+    return "with/reg";
 
   }
 

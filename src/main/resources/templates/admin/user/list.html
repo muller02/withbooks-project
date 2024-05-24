@@ -128,8 +128,8 @@
                         </div>
                     </div>
                     <div class="d:flex ai:center bg-color:base-2 px:2 py:2">
-                        <label>
-                            <input type="checkbox" name="all" />
+                        <label class="d:flex">
+                            <input type="checkbox" name="all" style="width: 20px; height: 20px" />
                         </label>
                         <div class="fw:3 w:1p text-align:center fs:1">번호</div>
                         <div class="fw:3 w:1p text-align:center fs:1">회원번호</div>
@@ -144,8 +144,8 @@
                         <form action="update" method="post" id="idsForm">
                             <div class="result bd-bottom px:2 py:2" th:each="u,i : ${list}">
                                 <a th:href="@{|detail?id=${u.id}}" class="d:flex ai:center">
-                                    <label>
-                                        <input name="ids" type="checkbox" th:value="${u.id}" />
+                                    <label class="d:flex">
+                                        <input name="ids" type="checkbox" th:value="${u.id}" style="width: 20px; height: 20px" />
                                     </label>
                                     <div class="w:1p text-align:center fs:1" th:text="${i.count}">1</div>
                                     <div class="w:1p text-align:center fs:1" th:text="${u.id}">123</div>
