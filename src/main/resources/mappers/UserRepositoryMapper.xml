@@ -98,7 +98,7 @@
 			<if test="params.startdate != null and params.startdate != '' ">
 				and date_format(join_date, '%Y-%m-%d') <![CDATA[>=]]> #{params.startdate}
 			</if>
-			<if test="params.endDate != null and params.endDate != '' ">
+			<if test="params.enddate != null and params.enddate != '' ">
 				and date_format(join_date, '%Y-%m-%d') <![CDATA[<=]]> #{params.enddate}
 			</if>
 			<if test="params.status != null and params.status != '' ">
