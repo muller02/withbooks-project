@@ -82,11 +82,14 @@
                 class="bd-color:base-3 bd-radius:9 px:5 py:3 m:3 n-item n-item:shadow"
             >
                 <h1 class="pt:3 bd-bottom w:100p h:1 fw:3"> 📷 첨부 이미지 선택 </h1>
-                <div class="mt:2">
-                    <label class="d:inline-block w:2 h:2 icon icon:image icon-color:base-4 color:base-4 px:2 py:1 bd bd-radius:4 box-sizing:content-box cursor:pointer">
-                        사진 선택
-                        <input --class="d:none" type="file" name="imgs" accept="image/*" multiple>
-                    </label>
+                <div class="preview mt:2 d:flex of-x:scroll">
+                    
+                    <div>
+                        <label class="d:inline-block w:2 h:2 icon icon:image icon-color:base-4 color:base-4 px:2 py:1 bd bd-radius:4 box-sizing:content-box cursor:pointer">
+                            사진 선택
+                            <input class="img-input d:none" type="file" name="imgs" accept="image/*" multiple>
+                        </label>
+                    </div>
                 </div>
                 
             </section>
