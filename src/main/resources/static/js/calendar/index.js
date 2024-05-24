@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Fetched data", data);
       })
       .catch((error) => {
-        console.error("Error fetching calendar data:", error);
+        console.error("일정관리 데이터 가져오는 중 오류 발생:", error);
       });
   }
 
@@ -129,10 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (allDay) {
       dbEndDate = new Date(end);
-      dbEndDate.setTime(dbEndDate.getTime());
+      // dbEndDate.setTime(dbEndDate.getTime());
       uiEndDate = new Date(dbEndDate);
       uiEndDate.setDate(uiEndDate.getDate() + 1);
-      end = uiEndDate.toISOString().split("T")[0];
+      end = uiEndDate.toISOString();
     } else {
       start = `${start}T${startTime.value}`;
       end = `${end}T${endTime.value}`;
@@ -157,28 +157,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // *** 서버에 데이터 전송 ***
   function sendDataToServer(title, start, end, allDay) {
     const data = { title, start, end, allDay };
-    fetch("/api/calendar/reg", {
+    console.log("서버로 데이터 전송:", data); // 로그 추가
+    fetch("/api/calendar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("네트워크 응답이 정상이 아닙니다.");
         }
         return response.json();
       })
       .then((responseData) => {
         if (responseData.success) {
-          console.log("Event saved successfully:", responseData);
+          console.log("이벤트가 성공적으로 저장됨: ", responseData);
         } else {
           console.error("Server error:", responseData.error);
-          alert("Event saving failed");
+          alert("이벤트 저장 실패");
         }
       })
       .catch((error) => {
-        console.error("Error sending data:", error);
-        alert("Failed to send event data");
+        console.error("데이터 전송 오류:", error);
+        alert("이벤트 데이터 전송 실패");
       });
   }
 
@@ -212,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eventEnd.value = "";
   }
 
-  // *** URL에서 wid 추출
+  // *** url 에서 wid 추출
   function getWidFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get("wid");

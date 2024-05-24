@@ -17,6 +17,6 @@ public class Calendar {
   private Long withId;
   private LocalDateTime startDateTime;
   private LocalDateTime endDateTime;
-  private String content; // 일정 내용
+  private String title; // 일정 제목
   private String location;
 }

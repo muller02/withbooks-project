@@ -6,7 +6,7 @@
 
     <!-- 캘린더 일정 등록 -->
     <insert id="save">
-        INSERT INTO calendar (content, start_time, end_time, location, with_id)
-        VALUES (#{content}, #{start}, #{end}, #{location}, #{withId})
+        INSERT INTO calendar (start_date_time, end_date_time, title, location, user_id, with_id)
+        VALUES (#{startDateTime}, #{endDateTime}, #{title}, #{location}, #{userId}, #{withId})
     </insert>
 </mapper>
