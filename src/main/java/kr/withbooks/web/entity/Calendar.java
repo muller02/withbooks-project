@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -15,8 +16,10 @@ public class Calendar {
   private Long id;
   private Long userId;
   private Long withId;
-  private LocalDateTime startDateTime;
-  private LocalDateTime endDateTime;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private LocalDateTime start;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private LocalDateTime end;
   private String title; // 일정 제목
   private String location;
 }

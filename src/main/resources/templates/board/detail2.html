@@ -280,22 +280,6 @@
                             </div>
                         </section>
                     </div>
-
-                    <section class="my-comment edit d:none" --th:if="${valid == cmt.userId}">
-                        <h1 class="d:none">내 댓글 수정 폼</h1>
-                        <form class="d:flex ">
-                            <div class="d:flex fl-dir:column py:2">
-                                <div class="comment-area ml:6 mt:2 mr:1 pos:relative d:flex fl-dir:column ai:end">
-                                    <div id="edit-comment-body" class="fs:2 bg-color:main-2 bd-radius:4 bd-tr-radius:0 px:3 pt:2 pb:2 mb:1 w:fit-content"></div>
-                                    <div class="delete-button pos:absolute right:1 bottom:1"></div>
-                                    <div class="d:flex ai:center">
-                                        <button type="button" id="comment-cancel-btn" class="csr:pointer icon icon:trash icon-color:base-6 icon-size:3">취소</button>
-                                        <button type="button" id="comment-update-btn" class="csr:pointer icon icon:pencil_simple icon-color:accent-3 icon-size:3">등록</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
                 </section>
 
                 <section class="pt:3 px:3  d:inline-block w:10p">
