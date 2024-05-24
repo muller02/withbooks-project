@@ -7,12 +7,11 @@
     <!-- 캘린더 일정 등록 -->
     <insert id="save" parameterType="kr.withbooks.web.entity.Calendar">
         INSERT INTO calendar (start_date_time, end_date_time, title, location, user_id, with_id)
-        VALUES (#{start}, #{end}, #{title}, #{location}, #{userId},
-        (SELECT wm.with_id
-        FROM with_member wm
-        JOIN user u ON wm.member_id = u.id
-        WHERE u.id = #{userId} AND wm.kicked_yn = 0
-        LIMIT 1));
+        VALUES (#{start}, #{end}, #{title}, #{location}, #{userId}, #{withId})
+        <!--        (SELECT wm.with_id-->
+        <!--        FROM with_member wm-->
+        <!--        JOIN user u ON wm.member_id = u.id))-->
+        <!--                LIMIT 1));-->
     </insert>
 
     <!-- 캘린더 이벤트 조회 -->

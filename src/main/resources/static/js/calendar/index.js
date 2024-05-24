@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
       end: end,
       allDay: allDay,
       location: eventLocation.value.trim(),
+      withId: wid,
     };
     console.log("서버로 전송할 데이터:", data);
 
@@ -227,4 +228,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const wid = getWidFromUrl();
   getDataToServer(wid);
+  console.log(wid);
 });
