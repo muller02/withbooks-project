@@ -204,7 +204,6 @@
           th:each="s, stat : ${list}"
           th:id="${s.id}"
         >
-        <div class="fs:5 fw:3" th:text="${s.id}">asdf</div>
           <h1 class="d:none">북쇼츠</h1>
   
           <section class="shorts d:flex jc:center ai:center px:1"
@@ -259,7 +258,7 @@
               <ul class="dropdown-list ">
                 <li>
                   <button>
-                    <span class="va:middle deco deco-size:2 icon:share_fat w:100p">
+                    <span class="va:middle deco deco-size:3 icon:share_fat w:100p">
                       공유하기
                     </span>
                   </button>
@@ -268,7 +267,7 @@
   
                 <li th:if="${#authentication.principal ne 'anonymousUser'}">
                   <button>
-                    <span class="va:middle deco deco-size:2 icon:share_fat w:100p">
+                    <span class="va:middle deco deco-size:3 icon:share_fat w:100p">
                       신고하기
                     </span>
                   </button>
@@ -290,7 +289,7 @@
                   <form id="form-name" class="px:2 py:1">
                     <button
                       id="modal-btn"
-                      class="delete-btn w:100p va:middle deco deco-size:2 ai:center deco-color:accent-2 icon:trash color:accent-2 fs:2 fw:2"
+                      class="delete-btn w:100p va:middle deco deco-size:4 ai:center deco-color:accent-2 icon:trash color:accent-2 fs:2 fw:2"
                     >
                       삭제하기
                     </button>
@@ -325,7 +324,7 @@
           </section>
   
           <!--             모달창 -->
-          <span class="lg:d:flex lg:ai:start gap:2">
+          <span class="lg:d:flex lg:ai:start gap:2 lg:d:block">
             <section
               class="fl-dir:column align-self:center my:5 lg:my:0 lg:order:1 lg:mr:6 img-section gap:2"
               th:if="${s.img}"
