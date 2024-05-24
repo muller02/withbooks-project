@@ -140,7 +140,6 @@
           
         class="bd bd-color:base-3 box-shadow-custom bd-radius:6 px:4 py:4 mt:6 short-section lg:pos:relative"
         >
-        <div class="fs:5 fw:3">${shorts.id}</div>
           <h1 class="d:none">북쇼츠</h1>
 
           <section class="shorts d:flex jc:center ai:center px:1 ${classAppend}"
