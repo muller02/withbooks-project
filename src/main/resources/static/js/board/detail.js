@@ -71,13 +71,12 @@ window.addEventListener('load', function () {
 
 
 
-// 댓글 등록 삭제
+// 댓글 등록 수정 삭제
 window.addEventListener('load', function(e) {
 
-    //============================== 등록 ====================================
+    //============================== 댓글 등록 ====================================
 
     const commentCreateBtn  = document.querySelector("#comment-create-btn");
-
 
     commentCreateBtn.addEventListener('click', () => {
 
@@ -110,12 +109,13 @@ window.addEventListener('load', function(e) {
         })
     })
 
-    //============================== 수정 ====================================
+    //============================== 댓글 수정 ====================================
     //const commentBody = document.querySelector(".comment-body");
     const commentEditBtns = document.querySelectorAll(".comment-edit-btn");
-    const myComment = document.querySelector(".my-comment");
+    // const myComment = document.querySelector(".my-comment");
 
     commentEditBtns.forEach(commentEditBtn => {
+
         commentEditBtn.addEventListener("click", (e) => {
 
             // const commentBody = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
@@ -123,11 +123,11 @@ window.addEventListener('load', function(e) {
             while (!commentBody.classList.contains("comment-body")) {
                 commentBody = commentBody.parentNode;
             }
-            console.log(commentBody);
+            // console.log(commentBody);
 
-            console.log(commentBody.firstElementChild);
+            // console.log(commentBody.firstElementChild);
             let commentSection = commentBody.firstElementChild;
-            console.log(commentSection);
+            // console.log(commentSection);
             commentSection.classList.add("d:none")
 
             const userId = e.target.getAttribute("data-userId");
@@ -138,7 +138,7 @@ window.addEventListener('load', function(e) {
             console.log(content)
 
             let editFormHtml = `
-                <section class="my-comment edit">
+                <section class="my-comment-edit">
                     <h1 class="d:none">내 댓글 수정 폼</h1>
                     <form class="d:flex fl-dir:column py:2">
 <!--                            <div class="d:flex fl-dir:column py:2">-->
@@ -156,17 +156,32 @@ window.addEventListener('load', function(e) {
 <!--                            </div>-->
                     </form>
                 </section>
-        `;
+            `;
 
             commentBody.insertAdjacentHTML("beforeend", editFormHtml);
 
             document.querySelector("#comment-edit-commentId").value = id;
             document.querySelector("#comment-edit-boardId").value = boardId;
 
+            const commentCancelBtn = document.querySelector("#comment-cancel-btn");
             const commentUpdateBtn = document.querySelector("#comment-update-btn");
             console.log(commentUpdateBtn);
+            console.log(commentCancelBtn);
+
+            const myCommentSection = document.querySelector(".my-comment-edit");
+            console.log(myCommentSection);
+
+            // 수정 취소 버튼 클릭
+            commentCancelBtn.addEventListener("click", (e) => {
+                console.log(e.target);
+                myCommentSection.classList.add("d:none");
+                commentSection.classList.remove("d:none");
+
+                window.location.reload();
+            })
 
 
+            // 수정 완료 버튼 클릭
             commentUpdateBtn.addEventListener("click", (e) => {
 
                 boardId: document.querySelector("#comment-edit-boardId").value;
@@ -203,15 +218,12 @@ window.addEventListener('load', function(e) {
             })
 
         })
-
-
-
     })
 
 
 
 
-    //============================== 삭제 ====================================
+    //==============================댓글 삭제 ====================================
     const commentDeleteBtns  = document.querySelectorAll(".comment-delete-btn");
     // console.log(commentDeleteBtns);
 
@@ -242,15 +254,7 @@ window.addEventListener('load', function(e) {
         })
     })
 
-
-
-
-
-    
-
-  
-  
-  })
+})
 
       
     
@@ -268,39 +272,7 @@ window.addEventListener('load', function(e) {
     
     
 
-    //============================== 삭제 ====================================
-    // <button id="deleteButton" data-board-id="your_board_id_here" data-comment-id="your_comment_id_here">삭제</button>
 
-
-    // document.getElementById('deleteButton').addEventListener('click', function() {
-    //     const boardId = this.getAttribute('data-board-id');
-    //     const commentId = this.getAttribute('data-comment-id');
-    //     // const csrfToken = getCSRFToken(); // CSRF 토큰을 얻어오는 함수
-    //
-    //     fetch(`/${boardId}/comments/${commentId}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'X-CSRF-TOKEN': csrfToken
-    //         }
-    //     })
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //
-    //         // 성공적으로 삭제되면 해당 댓글의 HTML 요소를 삭제
-    //         const commentElement = document.getElementById(`comment_${commentId}`);
-    //         if (commentElement) {
-    //             commentElement.remove();
-    //         } else {
-    //             console.error('Failed to find comment element to delete');
-    //         }
-    //     })
-    //     .catch(error => {
-    //         console.error('Error:', error);
-    //     });
-    // });
 
 
 
