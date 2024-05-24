@@ -69,7 +69,7 @@ public class WithController {
   @Autowired
   private WithMemberService memberService;
 
-  @GetMapping("list")
+  @GetMapping("list ")
   public String list(Model model,
                      @RequestParam(name = "c", required = false) Long[] categoryIds,
                      @RequestParam(name = "q", required = false) String query,
