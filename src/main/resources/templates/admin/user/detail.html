@@ -81,11 +81,11 @@
                 <ul
                     class="n-pager"
                     style="display: flex; justify-content: center"
-                    th:with="page = *{param.p} ? ${{param.p}} : 1
+                    th:with="page =  ${param.p} eq null ? 1 : ${{param.p}}
                         , temp = (${page} - 1) / 5
                         , startnum = ${T(java.lang.Math).floor(temp)} * 5 + 1
                         ,temp1 = ${{count}}/6
-                        ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                        ,lastnum=${count} mod 6 > 0 ? ${T(java.lang.Math).floor(temp1)} + 1 : ${T(java.lang.Math).floor(temp1)}
                         ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
                         "
                 >
@@ -98,8 +98,8 @@
                         <a class="fs:1" href="list?p=1" th:if="${n} ne ${{param.p}}" th:href="@{./detail(id=${param.id},p=${n})}" th:text="${n}">1</a>
                     </li>
                     <li>
-                        <span class="fs:1" th:if="${startnum}+4 ge ${lastnum}">다음</span>
-                        <a class="fs:1" href="list?p=6" th:if="${startnum}+4 lt ${lastnum}" th:href="@{./detail(id=${param.id},p=${startnum}+5)}">다음</a>
+                        <span class="fs:1" th:if="${startnum+4} ge ${lastnum}">다음</span>
+                        <a class="fs:1" href="list?p=6" th:if="${startnum+4} lt ${lastnum}" th:href="@{./detail(id=${param.id},p=${startnum}+5)}">다음</a>
                     </li>
                 </ul>
             </section>
