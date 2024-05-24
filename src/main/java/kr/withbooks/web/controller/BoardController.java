@@ -131,7 +131,7 @@ public class BoardController {
         log.info("board = {}", findBoard);
         log.info("debateCommentList ={} ", debateCommentList);
 
-        return "board/detail";
+        return "board/detail2";
     }
 
     @GetMapping("/reg")
