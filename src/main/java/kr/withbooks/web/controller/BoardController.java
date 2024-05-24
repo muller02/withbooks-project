@@ -31,13 +31,25 @@ public class BoardController {
     private final DebateCommentService debateCommentService;
     private final FileStore fileStore;
     private final UserService userService;
+    private final WithMemberService withMemberService;
 
     @GetMapping("/list")
     public String list(
             @RequestParam(name = "rid") Long roomId,
             @RequestParam(name = "wid") Long withId,
             @RequestParam(name = "tid", required = false) Long topicId,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
+
+
+        User user = userService.getById(userDetails.getId());
+        model.addAttribute("user", user);
+
+        Integer isWithMember = 0;
+        if(userDetails != null)
+            isWithMember = withMemberService.getJoinYn(withId, userDetails.getId());
+
+        model.addAttribute("isWithMember", isWithMember);
 
         List<DebateBoardView> list = debateBoardService.getList(roomId, topicId);
 
@@ -76,6 +88,7 @@ public class BoardController {
             model.addAttribute("selectedOption", findTopic.getId());
         }
 
+
         return "board/list";
     }
 
@@ -86,6 +99,11 @@ public class BoardController {
             @RequestParam("rid") Long roomId,
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
+
+        Integer isWithMember = 0;
+        if(userDetails != null)
+            isWithMember = withMemberService.getJoinYn(withId, userDetails.getId());
+
 
         DebateBoard findBoard = debateBoardService.getById(id);
         Long userId = findBoard.getUserId();
@@ -124,6 +142,7 @@ public class BoardController {
         model.addAttribute("imgList", imgList);
         model.addAttribute("debateCommentList", debateCommentList);
         model.addAttribute("user", findUser);
+        model.addAttribute("isWithMember", isWithMember);
 //        model.addAttribute("nickname", userDetails.getNickName());
 //        model.addAttribute("userImg", userDetails.getImg());
 

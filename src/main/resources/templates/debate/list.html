@@ -71,7 +71,8 @@
               <span class="d:none">전체 선택</span>
             </label>
           </div>
-          <div class="mt:1 d:flex">
+          <div class="mt:1 d:flex"
+               th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq withRegId and isWithMember != null}" >
             <!-- 취소 버튼 빈색, 삭제버튼 빨간색 -->
             <button class="n-btn mr:2 cancel-btn d:none bg-color:base-2"><span class="color:base-1">취소</span></button>
             <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">선택 삭제</button>
@@ -135,7 +136,8 @@
 <!--              class="icon icon:plus plus write-btn icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"-->
 <!--      ></a>-->
 
-      <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5">
+      <div class="reg-btn pos:fixed right:4 lg:right:1/4 bottom:9 zi:5"
+           th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq user.id and isWithMember != null}">
         <h1 class="d:none">토론카드 작성하기 버튼</h1>
         <div class="bg-color:main-5 border-radius:full p:3">
           <a href="reg" th:href="@{/debate/reg(m=3,wid=${param.wid})}" th:title="${'토론방 작성하기'}"><span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span></a>

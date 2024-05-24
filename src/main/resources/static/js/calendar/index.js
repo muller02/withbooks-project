@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       slotMaxTime: "20:00",
       defaultTimedEventDuration: "01:00:00",
       now: new Date(),
-      // themeSystem: "bootstrap5",
+      themeSystem: "bootstrap5",
       headerToolbar: {
         left: "prev,next today",
         center: "title",

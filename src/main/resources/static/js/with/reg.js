@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* 필수 입력 항목 하이라이팅 & 스크롤 */
   function validateForm() {
-
     let isValid = true;
     let firstInvalidField = null; // 첫 번째 유효하지 않은 필드를 저장할 변수
     const requiredFields = Array.from(form.querySelectorAll("[required]")); // required 속성이 지정된 모든 요소를 배열로 변환
@@ -267,7 +266,6 @@ document.addEventListener("DOMContentLoaded", function () {
       withForm.action = "/with/reg";
       withForm.method = "post";
       withForm.submit();
-
     } else {
       // 폼이 유효하지 않은 경우 서버로 데이터 전송하지 않음
       console.log("폼이 유효하지 않습니다.");
