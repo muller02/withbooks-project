@@ -227,6 +227,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (checkBoxCnt > checkBoxMaxCnt) {
         this.checked = false;
         categoryAlert.classList.remove("d:none");
+      }else{
+        categoryAlert.classList.add("d:none");
+
       }
     });
   });

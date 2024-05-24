@@ -114,7 +114,7 @@
                 </span>
             </a>
 
-            <section class="d:flex ml:auto" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId}">
+            <section class="d:flex ml:auto" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId and isWithMember != null}">
                 <h1 class="d:none">토론카드 수정 삭제 버튼</h1>
                 <div class="n-dropdown">
                     <button id="dropdown-btn" class="rg-comment-hover icon icon:dots_three_outline_vertical_fill icon-color:base-5 icon-size:2 my:3">
