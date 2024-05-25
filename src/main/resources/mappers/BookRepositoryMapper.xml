@@ -10,7 +10,8 @@
 		FROM book
 		<where>
 			<if test="query != null and query != '' ">
-				and title like '%${query}%'
+				title like '%${query}%'
+				or author like '%${query}%'
 			</if>
 			<if test="categoryId != null and categoryId != '' ">
 				and category_id = ${categoryId}
