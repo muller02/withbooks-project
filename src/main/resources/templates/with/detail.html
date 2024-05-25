@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Document</title>
   <!--  <script src="/js/book/list.js"></script>-->
-  <link rel="stylesheet" type="text/css" href="/css/util/color.css" />
+  <link href="/css/util/color.css" rel="stylesheet" type="text/css"/>
   <script src="/js/with/detail.js"></script>
   <style>
     /* *{
@@ -68,7 +68,7 @@
   <section class="md:d:flex lg:d:block md:px:2 lg:px:0">
     <h1 class="d:none">위드 정보</h1>
     <div class="md:d:flex md:ai:center lg:d:block md:w:3 lg:h:4 lg:w:6p md:h:3 md:my:auto">
-      <img class="h:4 w:100p md:h:100p border-radius:3" src="/puppy2.png" th:src="${with.img}"/>
+      <img class="h:4 w:100p md:h:100p border-radius:3 object-fit:fill" src="/puppy2.png" th:src="${with.img}" onerror="this.src='/image/with/with_profile.png';"/>
     </div>
 
     <div class="md:flex-grow:1 md:px:3 lg:px:0" id="with-info">
@@ -132,12 +132,13 @@
   <div class="with-tap-component">
     <ul class="n-tabbar justify-content:space-between menu-tap">
       <li class="active"><a>홈</a></li>
-      <li><a id="debate" th:if="${joinYn == 0}" href="javascript:alert('회원가입이 필요합니다 :)')">토론서재</a></li>
-      <li><a id="debate" th:if="${joinYn == 1}" th:href="@{/debate/list(m=3,wid=${with.id})}">토론서재</a></li>
-      <li><a id="calendar" th:if="${joinYn == 0}" href="javascript:alert('회원가입이 필요합니다 :)')">모임일정</a></li>
-      <li><a id="calendar" th:if="${joinYn == 1}" th:href="@{/calendar/index(m=3,wid=${with.id})}">모임일정</a></li>
-      <li><a id="board" th:if="${joinYn == 0}" href="javascript:alert('박경인')">자유게시판</a></li>
-      <li><a id="board" th:if="${joinYn == 1}" th:href="@{/free-board/list(m=3,wid=${with.id},p=1,s='latest')}">자유게시판</a></li>
+      <li><a href="javascript:alert('회원가입이 필요합니다 :)')" id="debate" th:if="${joinYn == 0}">토론서재</a></li>
+      <li><a id="debate" th:href="@{/debate/list(m=3,wid=${with.id})}" th:if="${joinYn == 1}">토론서재</a></li>
+      <li><a href="javascript:alert('회원가입이 필요합니다 :)')" id="calendar" th:if="${joinYn == 0}">모임일정</a></li>
+      <li><a id="calendar" th:href="@{/calendar/index(m=3,wid=${with.id})}" th:if="${joinYn == 1}">모임일정</a></li>
+      <li><a href="javascript:alert('박경인')" id="board" th:if="${joinYn == 0}">자유게시판</a></li>
+      <li><a id="board" th:href="@{/free-board/list(m=3,wid=${with.id},p=1,s='latest')}"
+             th:if="${joinYn == 1}">자유게시판</a></li>
       <!-- <li><a>북추천</a></li> -->
       <li><a>위드맴버</a></li>
     </ul>
@@ -213,33 +214,34 @@
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
     <section class="px:3 my:5">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">모임일정</h1>
-<div class="d:flex">
-      <div
-              class="event border w:6 d:flex  ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3"
-              th:data-event-date="${dateTime}"
-              th:each="event, iter : ${calendarEvents}" th:if="${iter.index < 3}"
-              th:with="dateTime=${event.startDateTime},
+      <div class="d:flex">
+        <div
+                class="event border w:6 d:flex  ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3"
+                th:data-event-date="${dateTime}"
+                th:each="event, iter : ${calendarEvents}" th:if="${iter.index < 3}"
+                th:with="dateTime=${event.startDateTime},
                       date=${#strings.listSplit(dateTime, 'T')[0]},
                       time=${#strings.listSplit(dateTime, 'T')[1]},
                       monthDay=${#strings.substring(date, 5, 10)}"
-      >
-        <div class="w:fit-content h:fit-content border-radius:5 px:2 py:2 bg-color:main-1 box-sizing:border-box">
-          <div class="mb:1 text-align:center box-sizing:border-box fw:3 color:main-5" th:text="${monthDay}">
-            3/9
+        >
+          <div class="w:fit-content h:fit-content border-radius:5 px:2 py:2 bg-color:main-1 box-sizing:border-box">
+            <div class="mb:1 text-align:center box-sizing:border-box fw:3 color:main-5" th:text="${monthDay}">
+              3/9
+            </div>
+            <div class="text-align:center box-sizing:border-box color:base-4 fw:3" th:text="${time}">11:15</div>
           </div>
-          <div class="text-align:center box-sizing:border-box color:base-4 fw:3" th:text="${time}">11:15</div>
-        </div>
-        <div class="">
-          <div class="fs:3 mb:1" th:text="${event.title}">종이달</div>
-          <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-5 deco deco-margin-right:1"
-               th:text="${event.location}">노멤버라운지
+          <div class="">
+            <div class="fs:3 mb:1" th:text="${event.title}">종이달</div>
+            <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-5 deco deco-margin-right:1"
+                 th:text="${event.location}">노멤버라운지
+            </div>
           </div>
+          <div class="d-day fs:3 mb:1 ml:auto fw:3 fs:4 mr:2"></div>
         </div>
-        <div class="d-day fs:3 mb:1 ml:auto fw:3 fs:4 mr:2"></div>
       </div>
-</div>
 
-      <button class="fs:3 mt:4 px:2 py:1 border-radius:5 bg-color:main-1 color:main-5" id="show-more">+ more</button>
+      <button class="fs:3 mt:4 px:2 py:1 border-radius:5 bg-color:main-1 color:main-5 d:none" id="show-more">+ more
+      </button>
     </section>
 
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>

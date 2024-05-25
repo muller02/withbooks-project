@@ -179,7 +179,6 @@
     </ul>
   </section>
 
-
   <section class="with-list">
     <h1 class="d:none">위드 리스트</h1>
     <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list-ul">
@@ -232,33 +231,37 @@
         </div>
       </li>
     </ul>
-    <section class="mt:5 d:flex jc:center"
+
+    <section id="pager" class="mt:5 d:flex jc:center"
              th:with="
-                tmpa = (${count}-1) / 10,
-                lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
-                tmp = (${{param.p}}-1) / 5,
-                startnum = ${T(java.lang.Math).floor(tmp)} * 5 + 1
-            "
+                        tmpa = (${count}-1) / 10,
+                        lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
+                        tmp = (${{param.p}}-1) / 5,
+                        startnum = ${T(java.lang.Math).floor(tmp)} * 5 + 1
+                      "
     >
       <h1 class="d:none">페이저</h1>
       <ul class="d:flex jc:center ai:center" th:unless="${lastestPage} lt 1">
         <li th:unless="${startnum} eq 1">
-          <a class="icon icon:caret_left" href="">이전</a>
+          <a class="icon icon:caret_left" href="" th:href="@{./list(m=3,p=${startnum}-1)}">이전</a>
         </li>
 
         <li class="ml:3" th:each="n : ${#numbers.sequence(startnum, startnum+4)}" th:if="${n le lastestPage}">
           <a class="px:3 py:1 color:base-9 bd bd-radius:4"
              th:classappend="${{param.p}} == ${n} ? 'cur-page'"
-             th:href="@{./list(p=${n})}"
+             th:href="@{./list(m=3,p=${n})}"
              th:text="${n}"
           >1</a>
         </li>
         <li class="ml:3" th:if="${startnum + 5} le ${lastestPage}">
-          <a class="icon icon:caret_right" href="">다음</a>
+          <a class="icon icon:caret_right" href="" th:href="@{./list(m=3,p=${startnum}+5)}">다음</a>
         </li>
       </ul>
     </section>
-  </section>
+
+
+
+
 
   <section>
     <h1 class="d:none">플로팅버튼</h1>
