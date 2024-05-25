@@ -37,37 +37,50 @@
                         </li>
                         <li class="w:5p">
                             <button class="w:100p color:base-3 font-weight:3">
-                                <a href="/bookmark/list">북마크</a>
+                                <a href="/bookmark/list?m=4">북마크</a>
                             </button>
                         </li>
                     </ul>
                 </section>
 
-                <div class="book-check-all d:flex mx:3 margin:2 jc:flex-end">
-                    <div th:if="${list.size} > 0">
-                        <div>
-                            <label>
-                                <input type="checkbox" class="d:none n-toggle n-toggle-type:check-box n-toggle-size:1" />
-                                <span class="d:none">전체 선택</span>
-                            </label>
-                        </div>
-                        <div class="d:flex">
-                            <!-- 취소 버튼 빈색, 삭제버튼 빨간색 -->
-                            <button class="n-btn mr:2 cancel-btn d:none bg-color:base-2"><span class="color:base-1">취소</span></button>
-                            <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">선택 삭제</button>
-                            <button class="n-btn mr:2 delete-btn">삭제</button>
-                        </div>
+                <div class="book-check-all d:flex mx:3 justify-content:space-between margin:2" th:classappend="${list.size} == 0? 'd:none'">
+                    <div>
+                        <label>
+                            <input type="checkbox" class="d:none n-toggle n-toggle-type:check-box n-toggle-size:1" />
+                            <span class="d:none">전체 선택</span>
+                        </label>
+                    </div>
+                    <div class="d:flex">
+                        <!-- 취소 버튼 빈색, 삭제버튼 빨간색 -->
+                        <button class="n-btn mr:2 cancel-btn d:none bg-color:base-2"><span class="color:base-1">취소</span></button>
+                        <button class="n-btn n-btn-color:accent mr:2 delete-all-btn d:none">선택 삭제</button>
+                        <button class="n-btn mr:2 delete-btn">삭제</button>
                     </div>
                 </div>
 
                 <section class="book-list my:4" id="booklog-section">
                     <h1 class="d:none">북 리스트</h1>
+
+                    <div class="p:3 d:flex fl-dir:column ai:center mt:5 gap:3" th:if="${#lists.isEmpty(list)}">
+                        <h1 class="n-font n-font:subtitle">북로그를 시작해보세요 :)</h1>
+                        <h2 class="n-font fs:4 d:flex ai:center">
+                            하단의
+                            <div class="d:flex bg-color:main-5 border-radius:full p:3 m:3">
+                                <span class="icon icon:plus icon-size:5 icon-color:base-1">아이콘</span>
+                            </div>
+                            버튼을 누르거나
+                        </h2>
+                        <div class="mt:4">
+                            <a href="/booklog/reg?m=4" class="fs:3 color:main-5">여기를 눌러서 북로그를 작성해보세요 !</a>
+                        </div>
+                    </div>
+
                     <form action="/booklog/deleteAllByIds" method="post" id="idsForm">
                         <div class="booklog-list d:flex flex-wrap:wrap justify-content:flex-start">
                             <section class="jc:center ai:center p:3 m:3" th:each="l: ${list}">
                                 <div>
                                     <input type="hidden" th:value="${l.bookId}" class="book-id" />
-                                    <a th:href="@{./detail(id=${l.id})} ">
+                                    <a th:href="@{./detail(m=4,id=${l.id})} ">
                                         <input type="checkbox" name="ids" th:value="${l.id}" class="d:none position:absolute top:0p left:-1p n-toggle n-toggle-type:check-box n-toggle-size:1" />
                                         <div class="book-info gap:4 d:flex fl-dir:column">
                                             <div class="h:4 w:100p box-shadow-custom">
@@ -95,7 +108,7 @@
                 <div id="new-log-reg" class="pos:fixed right:2 bottom:9 zi:5">
                     <h1 class="d:none">새로운 북로그 작성하기 버튼</h1>
                     <div class="bg-color:main-5 border-radius:full p:3">
-                        <a href="/booklog/reg" th:title="${'새 북로그 작성하기'}">
+                        <a href="/booklog/reg?m=4" th:title="${'새 북로그 작성하기'}">
                             <span class="icon icon:plus icon-size:5 icon-color:base-1">버튼</span>
                         </a>
                     </div>

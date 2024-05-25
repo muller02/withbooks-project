@@ -31,7 +31,6 @@ public class BookmarkController {
 
         Long userId= userDetails.getId();
         List<BookmarkView> list = service.getList(p,userId);
-        System.out.println(list);
         model.addAttribute("list", list);
         
         return "bookmark/list";
@@ -45,11 +44,9 @@ public class BookmarkController {
 
         Long userId = userDetails.getId();
 
-        System.out.println(ids);
-
         if(ids!=null && ids.size() > 0)
             service.deleteAllByIds(ids, userId);
 
-        return "redirect:list";
+        return "redirect:list?m=4";
     }
 }

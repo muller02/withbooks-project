@@ -52,6 +52,7 @@
                     <input class="query-input bd bd-radius:4 w:10p h:1" type="text" name="q" th:value="${param.q}">
                 </div>
                 <div><input type="hidden" name="s" th:value="${param.s}"></div>
+                <div><input type="hidden" name="m" value="3"></div>
                 <div><input type="hidden" name="p" value="1"></div>
                 <div><button class="bg-color:main-5 color:base-1 fs:3 px:6 py:2 bd-radius:10 cursor:pointer">검색</button></div>
             </form>
@@ -60,13 +61,13 @@
         <section class="mt:3 ml:3">
             <h1 class="d:none">검색결과 상단</h1>
             <span class="d:flex ai:center">
-                <div class="fs:3 fw:3">검색결과 : <span th:text="${count}">1032</span>건</div>
-                <div class="ml:auto mr:6">
+                <!-- <div class="fs:3 fw:3">검색결과 : <span th:text="${count}">1032</span>건</div> -->
+                <!-- <div class="ml:auto mr:6">
                     <ul class="d:flex">
-                        <li><a class="latest" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=latest,p=1)}">최신순</a></li>
-                        <li class="ml:3"><a class="oldest" th:classappend="${{param.s}}=='oldest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=oldest,p=1)}">오래된순</a></li>
+                        <li><a class="latest" th:classappend="${{param.s}}=='latest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=latest,p=1,m=3)}">최신순</a></li>
+                        <li class="ml:3"><a class="oldest" th:classappend="${{param.s}}=='oldest' ? 'selected-sort'" href="" th:href="@{list(c=${param.c},q=${param.q},s=oldest,p=1,m=3)}">오래된순</a></li>
                     </ul>
-                </div>
+                </div> -->
             </span>
         </section>
         
@@ -77,7 +78,7 @@
                 <a href="">
                     <span class="bd bd-radius:4 d:flex p:4">
                         <div>
-                            <img class="h:2 w:2" src="/image/with/a1.png" th:src="@{|/image/with/${w.img}|}" alt="">
+                            <img class="h:2 w:2" src="/image/with/a1.png" th:src="@{|/image/with${w.img}|}" alt="">
                         </div>
                         <span class="d:flex fl-dir:column jc:center ml:3 w:10p">
                             <span class="d:flex bd-bottom bd-color:base-2">
@@ -119,7 +120,7 @@
                 </a>
             </section>
 
-            <section class="mt:5 d:flex jc:center" 
+            <!-- <section class="mt:5 d:flex jc:center" 
             th:with="
                 tmpa = (${count}-1) / 10,
                 lastestPage = ${T(java.lang.Math).floor(tmpa)} + 1,
@@ -135,7 +136,7 @@
 
             <li class="ml:3" th:if="${n le lastestPage}" th:each="n : ${#numbers.sequence(startnum, startnum+4)}">
                 <a class="px:3 py:1 color:base-9 bd bd-radius:4" 
-                    th:href="@{./list(c=${param.c},q=${param.q},s=${param.s},p=${n})}" 
+                    th:href="@{./list(c=${param.c},q=${param.q},s=${param.s},p=${n},m=3)}" 
                     th:text="${n}"
                     th:classappend="${{param.p}} == ${n} ? 'cur-page'"
                 >1</a>
@@ -144,7 +145,7 @@
                 <a class="icon icon:caret_right" href="">다음</a>
             </li>
         </ul>
-    </section>
+            </section> -->
         </section>
     </main>
 </body>

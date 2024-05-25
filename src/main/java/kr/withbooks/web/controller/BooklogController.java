@@ -36,13 +36,9 @@ public class BooklogController {
     public String list(Model model,
                        @AuthenticationPrincipal CustomUserDetails userDetails){
 
-        //[ ]  제거 예정
-        Long id = 4L;
-
-        // Long id = userDetails.getId();
+        Long id = null;
+        if(userDetails != null) id = userDetails.getId();
         
-        //TODO 다른 사람의 북리스트 검색시 public_yn 적용 필요
-
         List<BooklogView> list = service.getList(id);
 
         model.addAttribute("list", list);
@@ -84,8 +80,7 @@ public class BooklogController {
         HttpServletResponse response,
         @AuthenticationPrincipal CustomUserDetails userDetails) throws IOException {
             
-        Long userid = 4L;
-        // Long userid = userDetails.getId();
+        Long userid = userDetails.getId();
 
             // =============== 먼저 북로그를 저장한다 ========================================================================
             booklog = Booklog.builder()
@@ -95,15 +90,12 @@ public class BooklogController {
                                     .build();
             service.reg(booklog);
 
-            System.out.println("******북로그 저장 완료********");
-
             // =============== 다음으로 로그를 저장한다 ========================================================================
             String fileName = null;
 
             if(imgFile != null && !imgFile.isEmpty())
             {
                 fileName = imgFile.getOriginalFilename();
-                System.out.println(fileName);
 
                 String path = "/image/booklog";
 
@@ -136,13 +128,11 @@ public class BooklogController {
                                     
             service.addLogs(logs);
             
-            System.out.println("로그 저장 완료");
             //=============================================================================================================
 
-        
             try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-                response.sendRedirect("detail?id=" + booklogId);
+                response.sendRedirect("detail?m=4&id=" + booklogId);
             } catch (IOException e) {
                 // 리다이렉트 중 오류가 발생한 경우 처리
                 e.printStackTrace();
@@ -160,7 +150,7 @@ public class BooklogController {
         
         try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-            response.sendRedirect("list");
+            response.sendRedirect("list?m=4");
         } catch (IOException e) {
             // 리다이렉트 중 오류가 발생한 경우 처리
             e.printStackTrace();
@@ -180,7 +170,7 @@ public class BooklogController {
         
         try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-            response.sendRedirect("detail?id=" + booklogId);
+            response.sendRedirect("detail?m=4&id=" + booklogId);
         } catch (IOException e) {
             // 리다이렉트 중 오류가 발생한 경우 처리
             e.printStackTrace();
@@ -202,7 +192,7 @@ public class BooklogController {
 
         try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
-            response.sendRedirect("list");
+            response.sendRedirect("list?m=4");
         } catch (IOException e) {
             // 리다이렉트 중 오류가 발생한 경우 처리
             e.printStackTrace();

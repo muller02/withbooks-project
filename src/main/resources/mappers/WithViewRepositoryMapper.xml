@@ -12,8 +12,9 @@
     with_category a
     right join `with_view` b on a.with_id = b.id
     <where>
+        blind_yn = 0
         <if test="categoryIds != null">
-             a.category_id IN
+            and a.category_id IN
             <foreach collection="categoryIds" item="arr" open="(" close=")" separator=",">
                 #{arr}
             </foreach>
@@ -46,21 +47,47 @@
     
         group by
             b.id
+    order by b.reg_date desc
 
-    <choose>
-        <when test="sort == 'latest'"> 
-            order by b.reg_date desc
-        </when>
-
-        <when test="sort == 'oldest'">
-            order by b.reg_date asc
-        </when>
-    </choose>
 
     limit #{limit} offset #{offset}
-    
+
 <!--  카테고리 아이디 where 필요-->
 </select>
+
+    <select id="count">
+        select count(*) from
+        (
+        select
+            b.*
+        from
+            with_category a
+        right join `with_view` b on a.with_id = b.id
+        <where>
+            blind_yn = 0
+            <if test="categoryIds != null">
+                and a.category_id IN
+                <foreach collection="categoryIds" item="arr" open="(" close=")" separator=",">
+                    #{arr}
+                </foreach>
+            </if>
+
+            <if test="query != null">
+                and (name like '%${query}%' or location like '%${query}%')
+            </if>
+
+            <if test="faceYn != null">
+                <if test="faceYn != 2">
+                    and face_yn=#{faceYn}
+                </if>
+            </if>
+        </where>
+
+        group by
+        b.id
+        ) as subquery
+
+    </select>
 
 
 
@@ -97,5 +124,63 @@
         select * from with_view where id in(SELECT with_id FROM debate_room_view where book_id=#{bookId});
 
     </select>
+
+    <!-- ========================================================================= -->
+    <!-- /with/my-with -->
+    <resultMap id="withViewMap" type="WithView">	
+		<id property="id" column="id" />
+		<result property="blindYn" column="blind_yn"/>
+		<result property="withRegId" column="with_reg_id"/>
+		<result property="faceYn" column="face_yn"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="name" column="name"/>
+		<result property="intro" column="intro"/>
+		<result property="img" column="img"/>
+		<result property="interval" column="interval"/>
+		<result property="location" column="location"/>
+		<result property="personnel" column="personnel"/>
+		<result property="memberCnt" column="member_cnt"/>
+		<result property="withTop" column="with_top"/>
+
+		<collection property="categoryNames" column="id" ofType="String" select="selectCategoryNames"/>
+	</resultMap>
+
+    <select id="selectCategoryNames" resultType="String">
+        select 
+            bc.name 
+        from 
+            book_category bc join with_category wc on bc.id = wc.category_id 
+        where 
+            wc.with_id = #{id}
+    </select>
+
+    <select id="findAllByUserId" resultMap="withViewMap">
+        select
+            wi.id,
+            wi.blind_yn,
+            wi.with_reg_id,
+            wi.face_yn,
+            wi.name,
+            wi.intro,
+            wi.img,
+            wi.interval,
+            wi.location,
+            wi.personnel,
+            wi.reg_date,
+            us.nickname with_top,
+            count(wm.member_id) member_cnt
+        from
+            `with` wi join `user` us on wi.with_reg_id = us.id
+            left join with_member wm on wi.id = wm.with_id
+        where
+            wm.member_id = #{userId}
+        group by
+            wi.id
+        order by
+            wm.join_date desc
+        
+    </select>
+
+
 
 </mapper>

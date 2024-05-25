@@ -18,8 +18,5 @@ public class CustomLogoutHandler implements LogoutHandler {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
 
-
-
-
     }
 }

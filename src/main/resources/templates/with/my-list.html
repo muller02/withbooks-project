@@ -1,0 +1,241 @@
+ <!DOCTYPE html>
+<html lang="ko" layout:decorate="~{inc/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>위드</title>
+  <script defer src="/js/with/list.js"></script>
+  <style>
+
+
+    .fade {
+      opacity: 1;
+      transition: opacity 1s;
+    }
+
+    .n-list {
+      --card-list-column-sm: 1; /* 모바일에서 컬럼 수 */
+      --card-list-column-md: 2; /* 태블릿에서 컬럼 수 */
+      --card-list-column-lg: 2; /* PC에서 컬럼 수 */
+    }
+
+    .box-shadow {
+      box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
+    }
+
+    /*북쇼츠 , 댓글 그림자*/
+    .box-shadow-custom {
+      box-shadow: 2px 4px 14px 0 rgba(157, 157, 157, 14%);
+    }
+
+    /*돋보기 위치 수정 */
+    .translate-x {
+      transform: translateX(-10px);
+    }
+
+  </style>
+</head>
+<body>
+<main class="flex-grow:1" layout:fragment="main">
+
+  <!-- 로그인 안내 모달 -->
+  <section class="n-modal d:none  modal-transform-xy" id="login-modal" tabindex="-1">
+    <h1 class="n-font:subtitle text-align:center fs:5 fw:2 mt:3 mb:4">로그인을 하시겠습니까?</h1>
+    <p class="fs:2">로그인을 하시면 조금 더 많은 서비스를 이용 할 수 있습니다. </p>
+    <div class="mt:4 d:flex gap:4 jc:center">
+      <button class="n-btn w:2 p:2 bg-color:main-2" id="login-close-btn" type="button">닫기</button>
+      <a class="n-btn w:3 flex-grow:1" href="/login" id="login-open-btn" type="button">로그인</a>
+    </div>
+  </section>
+  <div class="backdrop d:none" id="login-modal-backdrop"></div>
+
+  <!-- 검색 섹션 -->
+  <section class="p:3 d:flex ai:center br pt:5 pb:4 pl:3 pr:3">
+    <h1 class="d:none">통합검색, 상세검색</h1>
+    <!-- 통합 검색 -->
+    <div class="d:flex pos:relative ai:center flex-grow:1">
+      <input class="query-search n-textbox n-textbox-type:outline text-align:center  mr:2" placeholder="위드명 / 지역 "
+             type="text"/>
+      <button class="query-btn icon  translate-x  icon:magnifying_glass pos:absolute right:1 mr:2"></button>
+    </div>
+    <!-- 상세 검색 -->
+<!--    <div class="d:flex ai:center">-->
+<!--      <button class="n-btn n-btn-type:outline h:100p deco-pos:right border-color:main-5 w:content-fit pr:3 pl:3 deco icon:plus deco-size:3"-->
+<!--              id="search-btn"-->
+<!--              type="button">-->
+<!--        <span class="mr:auto ml:1">상세검색</span>-->
+<!--      </button>-->
+<!--    </div>-->
+
+    <!--    <select name="space" id="pet-select" class="h:100p text-align:center">-->
+    <!--      <option value="m1">최신순</option>-->
+    <!--      <option value="m2">인기순</option>-->
+    <!--    </select>-->
+  </section>
+
+<!--  <section-->
+<!--          class="search-box lg:pos:absolute top:2 mx:3 right:1 d:none border-color:sub-4 border-radius:5 zi:4 box-shadow-custom bg-color:main-1">-->
+
+<!--    &lt;!&ndash; 상세 검색 창 &ndash;&gt;-->
+<!--    <div class=" w:full d:flex jc:start  p:3 flex-direction:column gap:3">-->
+<!--      &lt;!&ndash; 정렬 방법 &ndash;&gt;-->
+
+<!--      <div class="ml:auto d:flex ai:center">-->
+<!--        <span class="fs:3 fw:3 color:main-5">초기화</span>-->
+<!--        <span class="reset-icon icon csr:pointer	  icon:arrows_clockwise_fill icon-size:2 ml:auto"></span>-->
+
+<!--      </div>-->
+<!--      <div class="face-yn mb:3 ">-->
+<!--        <div class="margin-right:8 ml:2 mb:2 fw:3 ">📢 대면 / 비대면</div>-->
+<!--        &lt;!&ndash; 대면 여부 &ndash;&gt;-->
+
+<!--        <ul class="d:flex   ">-->
+<!--          <li class="d:flex ai:center m:1">-->
+<!--            <label class="n-toggle n-toggle-type:outline-box">-->
+<!--              전체-->
+<!--              <input checked class="d:none" name="f" type="radio" value="2"/>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="d:flex ai:center m:1">-->
+<!--            <label class="n-toggle n-toggle-type:outline-box">-->
+<!--              대면-->
+<!--              <input class="d:none" name="f" type="radio" value="1"/>-->
+<!--            </label>-->
+<!--          </li>-->
+<!--          <li class="d:flex ai:center m:1">-->
+<!--            <label class="n-toggle n-toggle-type:outline-box">-->
+<!--              비대면-->
+<!--              <input class="d:none" name="f" type="radio" value="0"/>-->
+<!--            </label>-->
+<!--          </li>-->
+
+<!--        </ul>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; 카테고리 검색 &ndash;&gt;-->
+<!--      <div class=" d:flex fl-dir:column lg:w:7     " id="category">-->
+<!--        <div class="d:flex ai:center mb:1">-->
+<!--          <div class="margin-right:8 ml:2 fw:3 mb:2 ">📢 카테고리</div>-->
+
+<!--        </div>-->
+<!--        <div class="rg:mt:3">-->
+<!--          <div class="category-list d:flex fl-wrap:wrap">-->
+<!--            <h1 class="d:none">카테고리 필터</h1>-->
+<!--            <label class="n-toggle n-toggle-type:outline-box m:1"-->
+<!--                   th:classappend="${iterStat.last} ? '' : 'lg:flex-grow:1'"-->
+<!--                   th:each="c, iterStat : ${categoryList}">-->
+<!--              <input class="d:none" th:text="${c.name}" th:value="${c.id}" type="checkbox"/>-->
+<!--            </label>-->
+<!--          </div>-->
+
+<!--          <div class="d:flex justify-content:center mt:8 gap:5 md:d:none d:none">-->
+<!--            <button class="n-btn n-btn-type:outline flex-grow:1" type="button">-->
+<!--              취소-->
+<!--            </button>-->
+<!--            <button class="n-btn n-btn-type:filled flex-grow:1" type="button">-->
+<!--              완료-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+
+  <!-- 카테고리 상세: 정렬 후 코드 -->
+  <div class="pl:3 fade d:none" id="search-detail">
+    <div class="d:flex ai:center">
+      <div class="margin-right:4 ml:3">카테고리</div>
+      <div class="icon icon:arrows_clockwise_fill icon-size:2" id="refresh"></div>
+    </div>
+    <div class="mt:3">
+      <div class="d:flex fl-wrap:wrap" id="filterBox">
+        <h1 class="d:none">카테고리 필터</h1>
+
+        <label class="n-toggle n-toggle-type:outline-box m:1 nt" id="cate-list" th:each="item:${cateList}">
+          <input class="d:none p check-box" name="c" th:text="${item.name}" th:value="${item.cid}" type="checkbox"/>
+        </label>
+      </div>
+    </div>
+  </div>
+  <section class="with-list">
+    <h1 class="d:none n-tab-grow">전체위드 / 나의위드</h1>
+
+    <ul class="n-tabbar">
+      <li class=" w:5p">
+        <a class="w:100p color:base-3 " href="/with/list?m=3&p=1">전체 위드</a>
+      </li>
+      <li class="w:5p active">
+        <a class="w:100p  font-weight:3 " href="">나의 위드</a>
+      </li>
+    </ul>
+  </section>
+
+
+  <section class="with-list">
+    <h1 class="d:none">위드 리스트</h1>
+    <div class="p:3 d:flex jc:center mt:5" th:if="${#lists.isEmpty(withList)}">
+        <h1 class="n-font n-font:subtitle">위드에 가입해서 풍성한 withbooks를 즐겨보세요 ! :)</h1>
+    </div>
+    <ul class="n-list n-card-list pt:3 pl:2 pr:2 with-list-ul">
+      <li class="d:flex with-ul gap:2 flex-direction:column n-item:shadow" th:each="with: ${withList}">
+        <ul class="d:flex gap:1 flex-wrap:wrap">
+          <li
+                  class=" bd-color:base-2 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 mr:2"
+          ><span class="" th:text="${with.faceYn == 1 ? '대면' : '비대면'}">대면</span>
+          </li>
+          <li class="border bd-color:base-3 border-radius:11 fs:1 pl:3 pr:3 pt:1 pb:1 background-color:main-6 fl-shrink:0"
+              th:each="categoryNames :${with.categoryNames}">
+            <span class="color:base-1" th:text="${categoryNames}">소설</span>
+          </li>
+        </ul>
+        <div class="d:flex pt:1 gap:5">
+          <!-- th:with img-->
+          <div class="w:2 h:2 box-shadow border-color:base-2 border-radius:3 my:auto flex-shrink:0">
+            <img class="w:100p h:100p border-radius:3" src="/image/with/puppy2.png"
+                 th:src="${with.img}"/>
+          </div>
+
+          <div class="d:flex gap:1 flex-direction:column flex-grow:1">
+            <div class="fs:6 fw:3 mb:2">
+              <a th:href="@{/with/detail(id=${with.id})}" th:text="${with.name}">책에퐁당</a>
+            </div>
+            <div class="d:flex ai:center gap:1 ai:center">
+              <div class="d:flex ai:center">
+                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="fs:2 color:base-5 ml:1"
+                      th:text="${with.memberCnt + ' / ' +with.personnel +' 명' }">5명/12명</span>
+              </div>
+              <!-- <span>·</span> -->
+              <div class="d:flex ai:center">
+                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="fs:2 color:base-5 ml:1" th:text="'월 ' + ${with.interval} + ' 회'">월 1회</span>
+              </div>
+              <!-- <span>·</span> -->
+            </div>
+
+            <div class="d:flex ai:center">
+              <span class="icon icon:chat_circle icon-size:2"></span>
+              <span class="fs:2 color:base-5 ml:1" th:text="${with.location}">노고산동</span>
+            </div>
+            <div class="ln-clamp:3">
+                                <span class=" " th:text="${with.intro}">
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam velit adipisci quae nisi ad possimus, dolores dolor ex quas molestias temporibus quidem aperiam cupiditate excepturi pariatur amet! Ex, sunt eius.
+                                </span>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h1 class="d:none">플로팅버튼</h1>
+    <a class="write-btn icon icon:plus icon-color:sub-1 bg-color:main-5 pos:fixed  bottom:9 right:8 icon-size:5 border-radius:full h:1 w:1 zi:5"
+       href="/with/reg"
+    ></a>
+    <a class="icon icon:arrow_up icon-color:sub-1 bg-color:main-5 pos:fixed bottom:9 right:1 icon-size:5 border-radius:full h:1 w:1 zi:5"
+       href="#main"></a>
+  </section>
+</main>
+</body>
+</html>

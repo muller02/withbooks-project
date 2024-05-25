@@ -201,10 +201,11 @@
 {
     let textarea = document.querySelector("textarea");
     
-    textarea.oninput = (e) => {
-        const target = e.target;
-        
-        target.style.height = 0;
-        target.style.height = 3 + target.scrollHeight + 'px';
-    };
+    if(textarea != null)
+        textarea.oninput = (e) => {
+            const target = e.target;
+            
+            target.style.height = 0;
+            target.style.height = 3 + target.scrollHeight + 'px';
+        };
 }

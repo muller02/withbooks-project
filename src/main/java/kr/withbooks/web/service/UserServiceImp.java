@@ -1,6 +1,7 @@
 package kr.withbooks.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,18 +61,30 @@ public class UserServiceImp implements UserService{
     public Integer nicknameCheck(String nickname) {
         return repository.countByNickname(nickname);
     }
-
+    
+    // ================================ admin/user ===================================
     @Override
-    public List<User> get(Long id, String nickname, String email, String birthyear, Integer gender, String startDate,
-            String endDate, Integer status) {
+    public List<User> get(Map<String, String> params) {
         
-        return repository.findByAll(id, nickname, email, birthyear, gender, startDate, endDate, status);
+        int size = 6;
+        int page = Integer.parseInt(params.get("p"));
+        int offset = (page-1)*size;
+        
+        return repository.findByAll(params, size,offset);
     }
-
+    
     @Override
-    public List<BookshortsView> getByIdShorts(Long id) {
-        return repository.findByIdShorts(id);
+    public Integer getCount(Map<String, String> params) {
+                
+        return repository.count(params);
     }
-
-
+    
+    @Override
+    public Integer updateWithdrawStatus(Integer status, List<Integer> ids) {
+        
+        return repository.updateWithdrawStatus(status, ids);
+        
+    }
+    // =================================================================================
+    
 }

@@ -45,21 +45,8 @@ public class WithServiceImp implements WithService {
     }
 
     @Override
-    public List<WithView> getListByWithIds(List<Long> withIds) {
-
-        List<WithView> list = viewRepository.findAllByWithIds(withIds);
-
-
-
-        for (WithView withView : list) {
-            Long withId = withView.getId();
-            List<String> categoryNames = withCategoryRepository.findById(withId);
-            withView.setCategoryNames(categoryNames);
-        }
-
-
-        return list;
-
+    public List<WithView> getListByUserId(Long userId) {
+        return viewRepository.findAllByUserId(userId);
     }
 
 
@@ -87,6 +74,18 @@ public class WithServiceImp implements WithService {
     @Override
     public List<WithView> getListByBookId(Long bookId) {
         return viewRepository.findByBookId(bookId);
+    }
+
+    @Override
+    public Integer getCount(Long[] categoryIds, String query, Long faceYn, Long id, String name, String withTop,
+            String sort, Integer page) {
+
+            Integer limit = null;
+            Integer offset = null;
+            Integer count = viewRepository.count(categoryIds, query, faceYn, id, name, withTop, sort, limit, offset);
+
+    
+            return count;
     }
 
 

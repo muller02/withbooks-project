@@ -8,6 +8,4 @@
 		select *  from with_member_view where with_id =#{withId}
 	</select>
 
-
-
 </mapper>
