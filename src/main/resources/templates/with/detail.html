@@ -210,9 +210,9 @@
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
     <section class="px:3 my:5">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">모임일정</h1>
-
+<div class="d:flex">
       <div
-              class="event border w:6 d:flex jc:space-between ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3"
+              class="event border w:6 d:flex  ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3"
               th:data-event-date="${dateTime}"
               th:each="event, iter : ${calendarEvents}" th:if="${iter.index < 3}"
               th:with="dateTime=${event.startDateTime},
@@ -224,16 +224,17 @@
           <div class="mb:1 text-align:center box-sizing:border-box fw:3 color:main-5" th:text="${monthDay}">
             3/9
           </div>
-          <div class="text-align:center box-sizing:border-box color:base-3 fw:3" th:text="${time}">11:15</div>
+          <div class="text-align:center box-sizing:border-box color:base-4 fw:3" th:text="${time}">11:15</div>
         </div>
         <div class="">
           <div class="fs:3 mb:1" th:text="${event.title}">종이달</div>
-          <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-3 deco deco-margin-right:1"
+          <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-5 deco deco-margin-right:1"
                th:text="${event.location}">노멤버라운지
           </div>
         </div>
-        <div class="d-day fs:3 mb:1"></div>
+        <div class="d-day fs:3 mb:1 ml:auto fw:3 fs:4 mr:2"></div>
       </div>
+</div>
 
       <button class="fs:3 mt:4 px:2 py:1 border-radius:5 bg-color:main-1 color:main-5" id="show-more">+ more</button>
     </section>
