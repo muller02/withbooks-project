@@ -36,13 +36,9 @@ public class BooklogController {
     public String list(Model model,
                        @AuthenticationPrincipal CustomUserDetails userDetails){
 
-        //[ ]  제거 예정
-        Long id = 4L;
-
-        // Long id = userDetails.getId();
+        Long id = null;
+        if(userDetails != null) id = userDetails.getId();
         
-        //TODO 다른 사람의 북리스트 검색시 public_yn 적용 필요
-
         List<BooklogView> list = service.getList(id);
 
         model.addAttribute("list", list);
