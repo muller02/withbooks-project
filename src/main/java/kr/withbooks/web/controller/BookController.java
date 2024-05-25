@@ -79,8 +79,8 @@ public class BookController {
                         , @RequestParam(name="id") Long bookId
                         , @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        Long userId =1L;
-        // Long userId = userDetails.getId();
+        Long userId = null;
+        if(userDetails != null) userId = userDetails.getId();
         
         //해당 책으로 토론한 위드 리스트
         List<WithView> withList = withService.getListByBookId(bookId);
@@ -88,9 +88,8 @@ public class BookController {
         // getView 쓰지 않고 getMapById를 쓰는 이유
         // -> 책 정보와 더불어 회원의 id로 해당 책을 북마크 했는지 여부가 함께 출력되어야 함
         Map<String, Object> bookMap = service.getMapById(bookId, userId);
-        System.out.println(bookMap);
+        
         model.addAttribute("book", bookMap);
-        System.out.println("토마토 = " + withList);
         model.addAttribute("withList",withList);
         return "book/detail";
     }
