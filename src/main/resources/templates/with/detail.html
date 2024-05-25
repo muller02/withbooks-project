@@ -68,7 +68,8 @@
   <section class="md:d:flex lg:d:block md:px:2 lg:px:0">
     <h1 class="d:none">위드 정보</h1>
     <div class="md:d:flex md:ai:center lg:d:block md:w:3 lg:h:4 lg:w:6p md:h:3 md:my:auto">
-      <img class="h:4 w:100p md:h:100p border-radius:3 object-fit:fill" src="/puppy2.png" th:src="${with.img}" onerror="this.src='/image/with/with_profile.png';"/>
+      <img class="h:4 w:100p md:h:100p border-radius:3 object-fit:fill" onerror="this.src='/image/with/with_profile.png';" src="/puppy2.png"
+           th:src="${with.img}"/>
     </div>
 
     <div class="md:flex-grow:1 md:px:3 lg:px:0" id="with-info">
@@ -240,8 +241,8 @@
         </div>
       </div>
 
-      <button class="fs:3 mt:4 px:2 py:1 border-radius:5 bg-color:main-1 color:main-5 d:none" id="show-more">+ more
-      </button>
+      <!--      <button class="fs:3 mt:4 px:2 py:1 border-radius:5 bg-color:main-1 color:main-5 d:none" id="show-more">+ more-->
+      <!--      </button>-->
     </section>
 
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>

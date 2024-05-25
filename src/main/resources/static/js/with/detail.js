@@ -134,22 +134,22 @@ window.addEventListener("DOMContentLoaded", (e) => {
     }
   });
 
-  // *** more 버튼 누르기 ***
-  const showMore = document.getElementById("showMore");
-  if (eventElements.length <= 3) {
-    showMore.style.display = "d:none";
-  }
-
-  showMore.addEventListener("click", function () {
-    const events = document.querySelectorAll(".event");
-    events.forEach(function (element, index) {
-      if (index >= 3) {
-        const dDayElement = element.querySelector(".d-day");
-        if (dDayElement) {
-          dDayElement.classList.add("d:flex");
-        }
-      }
-    });
-    this.style.display = "none";
-  });
+  // // *** more 버튼 누르기 ***
+  // const showMore = document.getElementById("showMore");
+  // if (eventElements.length <= 3) {
+  //   showMore.style.display = "d:none";
+  // }
+  //
+  // showMore.addEventListener("click", function () {
+  //   const events = document.querySelectorAll(".event");
+  //   events.forEach(function (element, index) {
+  //     if (index >= 3) {
+  //       const dDayElement = element.querySelector(".d-day");
+  //       if (dDayElement) {
+  //         dDayElement.classList.add("d:flex");
+  //       }
+  //     }
+  //   });
+  //   this.style.display = "none";
+  // });
 });
