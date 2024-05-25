@@ -20,6 +20,7 @@ window.addEventListener("load", function () {
     const bookMarkSection = this.document.querySelector("#booklog-section");
     // 책 리스트 div
     const bookMarkList = bookMarkSection.querySelector(".booklog-list");
+    const inputCheckBoxes = bookMarkList.querySelectorAll("section");
     // 래핑 div들 -> 삭제모드 시 a링크를 가로막는 역할
     const wrappingDivs = bookMarkList.querySelectorAll("section>div");
 
@@ -60,8 +61,7 @@ window.addEventListener("load", function () {
         // XXX 리팩토링 필요
         bookMarkList.onclick = function (e) {
             let section = e.target;
-            if(section.tagName != 'SECTION')
-                return;
+            if (section.tagName != "SECTION") return;
 
             if (section.tagName != "SECTION") return;
 
@@ -108,6 +108,34 @@ window.addEventListener("load", function () {
             div.classList.remove("wrapping");
         });
     };
+
+    // 리스트의 모든 체크박스에 이벤트 대입한다
+    for (const c of inputCheckBoxes) {
+        c.addEventListener("click", function (e) {
+            const a = e.target.querySelector("input[name=ids]");
+
+            // 현재 체크를 해제하면 전체체크박스 해체하고 리턴
+            if (a.checked == true) {
+                console.log("asdasd");
+                checkAllBox.checked = false;
+                return;
+            }
+
+            for (const cs of inputCheckBoxes) {
+                // 현제체크 패스
+                if (a.value == cs.querySelector("input[name=ids]").value) continue;
+
+                // 다른체크 중에 해제된게 있으면 리턴
+                if (cs.querySelector("input[name=ids]").checked == false) {
+                    checkAllBox.checked = false;
+                    return;
+                }
+
+                // 전부 체크된 상태 => 전체선택 활성화
+                checkAllBox.checked = true;
+            }
+        });
+    }
 
     deleteAllBtn.onclick = function () {
         const checkedboxes = document.querySelectorAll("input:checked");
