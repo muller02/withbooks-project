@@ -247,7 +247,7 @@ window.addEventListener("load", () => {
   shortSections.forEach((short) => {
     let pages = 0; // 현재 인덱스 번호
     let positionValue = 0; // images 위치값
-    const IMAGE_WIDTH = 350; // 한번 이동 시 IMAGE_WIDTH만큼 이동한다.
+    const IMAGE_WIDTH = 300; // 한번 이동 시 IMAGE_WIDTH만큼 이동한다.
 
     const nextBtn = short.querySelector(".next");
     const backBtn = short.querySelector(".back");
