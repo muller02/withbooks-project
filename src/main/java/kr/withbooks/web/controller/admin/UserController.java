@@ -1,5 +1,6 @@
 package kr.withbooks.web.controller.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
+import kr.withbooks.web.service.BookshrotsService;
 import kr.withbooks.web.service.UserService;
 
 
@@ -22,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private BookshrotsService bookshortService;
 
     @GetMapping("list")
     public String list(
@@ -36,24 +41,32 @@ public class UserController {
         
         List<User> list = service.get(params); 
         Integer count = service.getCount(params);
+
+        if(count == 0){;
+            list = null;
+            count = 1;
+        }
         
         model.addAttribute("list", list);
-        model.addAttribute("count", count!=0? count:1);
+        model.addAttribute("count", count);
 
         return "admin/user/list";
     }
 
     @GetMapping("detail")
     public String detail(
-        @RequestParam(name = "id", required = true) Long id
+          @RequestParam(name = "id", required = true) Long userid
+        , @RequestParam(name = "p", required = false, defaultValue = "1") Integer page
         , Model model
     ) {
 
-        User user = service.getById(id);
-        List<BookshortsView> list = service.getByIdShorts(id);   
-             
+        User user = service.getById(userid);
+        List<BookshortsView> list = bookshortService.getByUserId(userid, page);
+        Integer count = bookshortService.getCount(userid);
+
         model.addAttribute("user", user);
         model.addAttribute("list", list);
+        model.addAttribute("count", count);
 
         return "admin/user/detail";
     }  

@@ -1,22 +1,18 @@
 package kr.withbooks.web.controller.api;
 
-import kr.withbooks.web.config.CustomUserDetails;
-import kr.withbooks.web.entity.BookshortsAttachment;
-import kr.withbooks.web.entity.BookshortsView;
-import kr.withbooks.web.service.BookshortsAttachmentService;
-import kr.withbooks.web.service.BookshrotsService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import kr.withbooks.web.config.CustomUserDetails;
+import kr.withbooks.web.entity.BookshortsView;
+import kr.withbooks.web.service.BookshortsAttachmentService;
+import kr.withbooks.web.service.BookshrotsService;
 
 @RestController("apiBookShortsController")
 @RequestMapping("/api/bookShorts")

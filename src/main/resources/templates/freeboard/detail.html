@@ -39,8 +39,9 @@
             --top-2: 128px;
         }
         .liked{
-            border-color: var(--color-main-5) !important;
-            background-color: var(--color-main-2) !important;
+            --color-base-5: var(--color-main-5);
+            border-color: var(--color-main-3) !important;
+            /* background-color: var(--color-main-2) !important; */
         }
         .icon\:check_bold{
             --top-1: 8px;
@@ -71,29 +72,29 @@
 </head>
 <body>
     <main layout:fragment="main">
-        <a class="m:2" --href="list" onclick="history.back()">
+        <a class="m:2" th:href="@{./list(m=3,wid=${param.wid},p=${param.p},s=${param.s})}">
             <span class="n-btn n-btn:void mt:3 pl:2" style="color: var(--color-base-5);">
-                <span class="	icon icon:caret_left icon-size:3 mx:1">아이콘</span>
+                <span class="icon icon:caret_left icon-size:3">아이콘</span>
                 목록 돌아가기
             </span>
         </a>
-        <section id="board" class="d:flex fl-dir:column mt:4 pb:7 px:3 min-width:9">
+        <section id="board" class="d:flex fl-dir:column mt:4 pb:7 px:3">
             <h1 class="d:none">게시글</h1>
             <div class="pos:relative">
                 <section id="user-info" class="d:flex ai:center ml:2">
                     <h1 class="d:none">사용자 정보</h1>
-                    <div><img class="profile-img h:1 w:1 bd-radius:12" src="" th:src="${user.img}" alt=""></div>
+                    <div><img class="profile-img h:1 w:1 bd-radius:3" src="" th:src="${user.img}" alt=""></div>
                     <span class="ml:2">
                         <div class="fs:2" th:text="${user.nickname}">뉴렉이</div>
-                        <div class="fs:1 color:base-5" th:text="${board.regDate}">10분전</div>
+                        <div class="fs:1 color:base-5" th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd')}">10분전</div>
                     </span>
                 </section>
 
-                <section class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId}" >
+                <section class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq board.userId and isWithMember != null}" >
                     <h1 class="d:none">수정/삭제 버튼</h1>
                     <button class="board-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer" th:attr="data-id=${board.id}">점점점</button>
                     
-                    <ul class="board-popup pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 py:2 px:1 d:none">
+                    <ul class="board-popup pop-up-box pos:absolute top:1 right:3 bd bd-radius:4 bg-color:base-1 zi:3 py:2 px:1 d:none">
                         <li>
                             <a class="board-edit-btn bd-radius:4 py:1 px:4 d:inline-block deco icon:file icon-color:main-5 color:main-5"  th:href="@{edit(wid=${board.withId},fid=${board.id})}">수정하기</a>
                         </li>
@@ -117,27 +118,31 @@
                     </span>
                 </section>
                 
-                <section class="mt:5 pb:8 d:flex">
-                    <h1 class="d:none">좋아요 수 / 댓글 수</h1>
-                    <div><button class="like-btn fs:2 color:base-6 deco icon:thumbs_up icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:1 cursor:pointer" th:classappend="${isLiked ? 'liked' : 'false'}" th:text="${likeCnt}" th:data-fid="${board.id}">13</button></div>
-                    <div class="ml:3"><button class="fs:2 color:base-6 deco icon:chat_circle icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:1" th:text="${commentCnt}">13</button></div>
+                <section class="mt:5 pb:8 d:flex jc:center" th:if="${isWithMember != null}">
+                    <h1 class="d:none">좋아요 수(멤버 전용)</h1>
+                    <div><button class="like-btn fs:2 color:base-5 deco icon:thumbs_up icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:2 cursor:pointer box-shadow:2" th:classappend="${isLiked ? 'liked' : 'false'}" th:text="${likeCnt}" th:data-fid="${board.id}">13</button></div>
+                </section>
+
+                <section class="mt:5 pb:8 d:flex jc:center" th:unless="${isWithMember != null}">
+                    <h1 class="d:none">좋아요 수(비멤버 전용)</h1>
+                    <div><button class="fs:2 color:base-5 deco icon:thumbs_up icon-color:base-5 deco-mr:1 bd bd-radius:9 px:4 py:2 cursor:pointer box-shadow:2" th:classappend="${isLiked ? 'liked' : 'false'}" th:text="${likeCnt}" th:data-fid="${board.id}">13</button></div>
                 </section>
 
                 <section id="comment-list" class="d:flex fl-dir:column mt:4 pb:3">
                     <h1 class="d:none">댓글 목록</h1>
 
-                    <section class="comment d:flex fl-dir:column pos:relative bd-top pt:2 pb:9" th:each="c : ${commentList}">
+                    <section class="comment d:flex fl-dir:column pos:relative pt:2 pb:9" th:each="c : ${commentList}">
                         <h1 class="d:none">댓글</h1>
-                        <div class="d:flex ai:center">
-                            <div><img class="profile-img h:1 w:1" src="" th:src="${c.img}" alt=""></div>
-                            <div class="ml:2">
+                        <div class="d:flex ai:start">
+                            <div><img class="profile-img h:1 w:1 bd-radius:12" src="" th:src="${c.img}" alt=""></div>
+                            <div class="ml:2 d:flex ai:end">
                                 <div class="fs:3" th:text="${c.nickname}">뉴렉이</div>
-                                <div class="fs:1 color:base-5" th:text="${c.regDate}">10분전</div>
+                                <div class="fs:1 color:base-5 ml:2" th:text="${#temporals.format(c.regDate, 'yyyy-MM-dd')}">10분전</div>
                             </div>
                         </div>
                         
 
-                        <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId}">
+                        <section id="edit-del-btn-section" class="pos:relative" th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq c.userId and isWithMember != null}">
                             <h1 class="d:none">댓글 수정/삭제 버튼</h1>
                             <button class="comment-dot dotdotdot icon icon:dots_three_outline_vertical_fill icon-size:2 pos:absolute right:1 top:1 cursor:pointer">점점점</button>
                             
@@ -151,11 +156,11 @@
                             </ul>
                         </section>
 
-                        <p class="fs:2 mt:4 ml:4" th:utext="${c.content}" th:attr="data-cmt-id=${c.id}">좋아요 굿!!</p>
+                        <p class="fs:2 ml:10" th:utext="${c.content}" th:attr="data-cmt-id=${c.id}">좋아요 굿!!</p>
 
                     </section>
 
-                    <section>
+                    <section th:unless="${isWithMember} == null">
                         <h1 class="d:none">댓글입력 부</h1>
                         <form class="d:flex pos:relative" action="/free-comment" method="post">
                             <div class="flex-grow:1">
@@ -163,7 +168,11 @@
                                     <textarea class="w:10p bd bd-radius:5 bd-color:main-5 px:2 py:2" rows="1" name="comment"></textarea>
                                 </label>
                             </div>
+                            <div><input type="hidden" name="m" th:value="${param.m}"></div>
                             <div><input type="hidden" name="fid" th:value="${board.id}"></div>
+                            <div><input type="hidden" name="wid" th:value="${param.wid}"></div>
+                            <div><input type="hidden" name="p" th:value="${param.p}"></div>
+                            <div><input type="hidden" name="s" th:value="${param.s}"></div>
                             <div><button class="icon icon:check_bold pos:absolute icon-size:5 icon-color:main-5 right:1 top:1 cursor:pointer pl:2 box-sizing:content-box bd-left">제출</button></div>
                         </form>
                     </section>

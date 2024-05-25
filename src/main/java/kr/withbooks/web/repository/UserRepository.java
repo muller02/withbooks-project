@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.withbooks.web.entity.Bookshorts;
 import kr.withbooks.web.entity.BookshortsView;
 import kr.withbooks.web.entity.User;
 
@@ -29,10 +28,8 @@ public interface UserRepository {
 
     // admin/user
     List<User> findByAll(Map<String, String> params, Integer size,Integer offset);
+    Integer count(Map<String, String> params);
     List<BookshortsView> findByIdShorts(Long id);
-    Integer count(Map<String, String> params, Integer size,Integer offset);
     Integer updateWithdrawStatus(Integer status, List<Integer> ids);
-
-
 
 }

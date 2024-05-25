@@ -10,6 +10,46 @@ html, body {
     padding-right: 1em;
 }
 
+/* toolbar container */
+.fc .fc-toolbar.fc-header-toolbar {
+    margin: 0;
+    padding: 0 40px;
+    background-color: #4F74F5;
+    height: 63px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 29px;
+    color: white;
+    border-radius: 20px 20px 0px 0px;
+}
+
+/* toolbar 버튼 */
+.fc .fc-button-primary {
+    background-color: transparent;
+    border: none;
+
+    span {
+        font-weight: 500;
+        font-size: 28px;
+    }
+
+    :hover {
+        background-color: transparent;
+    }
+}
+
+.fc-scrollgrid-section fc-scrollgrid-section-header {
+    background-color: #e5edff;
+}
+
+.fc-toolbar-title {
+    font-weight: bold;
+}
+
+.fc .fc-button-group {
+    background-color: #4F74F5;
+}
+
 /* 일요일 날짜 빨간색 */
 .fc-day-sun a {
     color: red;
@@ -22,3 +62,37 @@ html, body {
     text-decoration: none;
 }
 
+/* 오늘 날짜 글씨색 */
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: #fff8bd;
+    color: #356eff;
+}
+
+/* 날짜별 그리드 */
+.fc .fc-daygrid-day-frame {
+    padding: 10px;
+}
+
+/* 날짜 ex) 2일 */
+.fc .fc-daygrid-day-top {
+    flex-direction: row;
+    margin-bottom: 3px;
+}
+
+/* 각 이벤트 요소 */
+.fc-event {
+    /*cursor: pointer;*/
+    /*padding: 5px 8px;*/
+    /*margin-bottom: 5px;*/
+    border-radius: 4px;
+    /*    font-weight: 500;*/
+    /*    font-size: 14px;*/
+}
+
+.fc-event-title-container {
+    background-color: #2FB916;
+}
+
+.fc-event-time {
+    display: none;
+}

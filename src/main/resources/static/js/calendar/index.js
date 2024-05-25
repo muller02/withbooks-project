@@ -1,155 +1,232 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // calendar element 취득
   const calendarEl = document.querySelector("#calendar-container");
   const modal = document.querySelector("#calendar-modal");
-  let selectedInfo = null; // 저장공간
+  let selectedInfo = null;
   const eventForm = modal.querySelector(".event-form");
   const eventTitle = modal.querySelector("#event-title");
   const eventStart = modal.querySelector("#event-start");
   const eventEnd = modal.querySelector("#event-end");
+  const eventLocation = modal.querySelector("#event-location");
   const cancelBtn = modal.querySelector("#cancel-btn");
   const allDayCheckbox = modal.querySelector("#all-day-checkbox");
   const timeGroup = modal.querySelector(".time-group");
   const startTime = modal.querySelector("#start-time");
   const endTime = modal.querySelector("#end-time");
 
+  // *** 서버에서 달력 데이터 가져오기 ***
+  function getDataToServer(withId) {
+    fetch("/api/calendar/events?wid=" + withId)
+      .then((response) => response.json())
+      .then((data) => {
+        renderCalendar(data);
+        console.log("Fetched data", data);
+      })
+      .catch((error) => {
+        console.error("일정관리 데이터 가져오는 중 오류 발생:", error);
+      });
+  }
+
+  // *** 캘린더 구조 렌더링 ***
   function renderCalendar(events) {
-    // full-calendar 생성하기
+    // 기존에 저장된 캘린더 이벤트 불러오기
+    console.log("Received events data:", events);
+    const formattedEvents = events.map((event) => ({
+      // entity 값 매핑하기
+      id: event.id,
+      title: event.title || event.content,
+      start: event.start || event.startDateTime,
+      end: event.end || event.endDateTime,
+      allDay: event.allDay || false,
+    }));
+
     const calendar = new FullCalendar.Calendar(calendarEl, {
-      height: "700px", // calendar 높이 설정
-      expandRows: true, // 화면에 맞게 높이 재설정
-      slotMinTime: "08:00", // Day 캘린더에서 시작 시간
-      slotMaxTime: "20:00", // Day 캘린더에서 종료 시간
-      defaultTimedEventDuration: "01:00:00", // 이벤트 기본 기간
-      now: new Date(), // 현재 시간
-      // 해더에 표시할 툴바
+      height: "700px",
+      expandRows: true,
+      slotMinTime: "08:00",
+      slotMaxTime: "20:00",
+      defaultTimedEventDuration: "01:00:00",
+      now: new Date(),
+      // themeSystem: "bootstrap5",
       headerToolbar: {
         left: "prev,next today",
         center: "title",
         right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
       },
-      initialView: "dayGridMonth", // 초기 로드 될때 보이는 캘린더
-      navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
-      editable: true, // 수정 가능?
-      selectable: true, // 달력 일자 드래그 설정가능
-      nowIndicator: true, // 현재 시간 마크
-      dayMaxEvents: true, // +more 표시 전 최대 이벤트 갯수, 셀 높이에 의해 결정
-      locale: "ko", // 한국어 설정
-      events: [],
-
-      // 클릭해서 이벤트 생성
-      dateClick: function (info) {
-        selectedInfo = { start: info.date, end: info.date, allDay: true };
-        modal.classList.remove("d:none");
-        let selectedDate = info.dateStr;
-        eventStart.value = selectedDate;
-        eventEnd.value = selectedDate;
-        allDayCheckbox.checked = true;
-        timeGroup.classList.add("d:none");
-        timeGroup.classList.remove("d:flex");
-      },
-      // 드래그로 이벤트 생성
-      select: function (info) {
-        selectedInfo = {
-          start: info.start,
-          end: info.end,
-          allDay: info.allDay,
-        };
-        modal.classList.remove("d:none");
-        eventStart.value = info.startStr.split("T")[0];
-
-        // let endDate = new Date(info.endStr);
-        // endDate.setDate(endDate.getDate() - 1); // 모달에 표시될 종료일
-        // eventEnd.value = endDate.toISOString().split("T")[0];
-
-        // 모달에 표시되는 종료일 설정
-        // let modalEndDate = new Date(endDate);
-        let modalEndDate = new Date(info.endStr);
-        modalEndDate.setDate(modalEndDate.getDate() - 1); // 종료일을 하루전으로 설정하여 모달 표시
-        eventEnd.value = modalEndDate.toISOString().split("T")[0]; // 모달에 표시되는 종료일
-        console.log("modal", eventEnd.value);
-
-        allDayCheckbox.checked = info.allDay;
-
-        if (info.allDay) {
-          timeGroup.classList.add("d:none");
-          timeGroup.classList.remove("d:flex");
-        } else {
-          timeGroup.classList.remove("d:flex");
-          timeGroup.classList.add("d:none");
-          startTime.value = info.startStr.split("T")[1].substring(0, 5);
-          endTime.value = info.endStr.split("T")[1].substring(0, 5);
-        }
-      },
+      initialView: "dayGridMonth",
+      navLinks: true,
+      editable: true,
+      selectable: true,
+      nowIndicator: true,
+      dayMaxEvents: true,
+      locale: "ko",
+      events: formattedEvents,
+      dateClick: (info) => handleDateClick(info),
+      select: (info) => handleSelect(info),
     });
+
     calendar.render();
 
-    // 취소 버튼 이벤트
-    cancelBtn.addEventListener("click", () => {
-      modal.classList.add("d:none");
-      eventTitle.value = "";
-      eventStart.value = "";
-      eventEnd.value = "";
-    });
-
-    // 등록 버튼 이벤트
-    eventForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let title = eventTitle.value.trim();
-      let start = eventStart.value;
-      let end = eventEnd.value;
-      if (!allDayCheckbox.checked) {
-        start = `${start}T${startTime.value}`;
-        end = `${end}T${endTime.value}`;
-      } else {
-        // 사용자가 입력한 종료일에 하루를 더해서 저장
-        let endDate = new Date(end);
-        endDate.setDate(endDate.getDate() + 1);
-        // endDate.setHours(23, 59, 59, 999);
-        end = endDate.toISOString().split("T")[0];
-        console.log("달력", end);
-      }
-
-      if (title && start && end) {
-        calendar.addEvent({
-          title: title,
-          start: start,
-          end: end,
-          // 종일 지속되는지 여부
-          allDay: allDayCheckbox.checked,
-        });
-        modal.classList.add("d:none");
-        // 다음 이벤트를 위해 입력 필드 초기화
-        eventTitle.value = "";
-        eventStart.value = "";
-        eventEnd.value = "";
-      } else alert("모든 필드를 입력하세요.");
-    });
-
-    // 종일 체크박스 상태 변경 시 이벤트 처리
-    allDayCheckbox.addEventListener("change", () => {
-      if (allDayCheckbox.checked) {
-        // 체크되어 있다면, time-group 숨기기
-        timeGroup.classList.add("d:none");
-        timeGroup.classList.remove("d:flex");
-      } else {
-        // 체크되어 있지 않다면, time-group 표시
-        timeGroup.classList.remove("d:none");
-        timeGroup.classList.add("d:flex");
-      }
-    });
-
-    startTime.addEventListener("change", () => {
-      if (!allDayCheckbox.checked) {
-        eventStart.value = startTime.value;
-      }
-    });
-    endTime.addEventListener("change", () => {
-      if (!allDayCheckbox.checked) {
-        eventEnd.value = endTime.value;
-      }
-    });
+    // 모달창 이벤트 리스너
+    cancelBtn.addEventListener("click", handleCancel);
+    eventForm.addEventListener("submit", (e) =>
+      handleEventFormSubmit(e, calendar),
+    );
+    allDayCheckbox.addEventListener("change", handleAllDayCheckboxChange);
+    startTime.addEventListener("change", () => handleTimeChange(startTime));
+    endTime.addEventListener("change", () => handleTimeChange(endTime));
   }
 
-  renderCalendar();
+  // *** 날짜 클릭으로 입력 ***
+  function handleDateClick(info) {
+    selectedInfo = { start: info.date, end: info.date, allDay: true };
+    showModal(info.dateStr, info.dateStr, true);
+  }
+
+  // *** 날짜 드래그로 입력  ***
+  function handleSelect(info) {
+    selectedInfo = { start: info.start, end: info.end, allDay: info.allDay };
+    // const endDate = new Date(info.endStr);
+    // endDate.setDate(endDate.getDate() - 1);
+    showModal(info.startStr, info.endStr, info.allDay, info);
+  }
+
+  // *** 모달 표시 ***
+  function showModal(start, end, allDay, info = null) {
+    modal.classList.remove("d:none");
+    eventStart.value = start;
+    eventEnd.value = end;
+    allDayCheckbox.checked = allDay;
+    if (allDay) {
+      timeGroup.classList.add("d:none");
+      timeGroup.classList.remove("d:flex");
+    } else {
+      timeGroup.classList.remove("d:none");
+      timeGroup.classList.add("d:flex");
+      if (info) {
+        startTime.value = info.startStr;
+        endTime.value = info.endStr;
+      }
+    }
+  }
+
+  // *** 모달 취소 ***
+  function handleCancel() {
+    modal.classList.add("d:none");
+    clearModalFields();
+  }
+
+  // *** 모달 제출 ***
+  function handleEventFormSubmit(e, calendar) {
+    e.preventDefault();
+    const title = eventTitle.value.trim();
+    let start = eventStart.value;
+    let end = eventEnd.value;
+    const allDay = allDayCheckbox.checked;
+
+    if (allDay) {
+      // 종일 이벤트인 경우, 종료 시간을 당일 23:59:59로 설정
+      start = `${start}T00:00:00`;
+      end = `${end}T23:59:59`;
+    } else {
+      start = `${start}T${startTime.value}`;
+      end = `${end}T${endTime.value}`;
+    }
+
+    if (title && start && end) {
+      sendDataToServer(title, start, end, allDay, calendar);
+      calendar.addEvent({
+        title: title,
+        start: start,
+        end: end,
+        allDay: allDayCheckbox.checked,
+      });
+      modal.classList.add("d:none");
+      clearModalFields();
+    } else {
+      alert("모든 필드를 입력하세요.");
+    }
+    console.log("모달 제출", start);
+    console.log("모달 제출", end);
+    console.log("모달 제출", allDay);
+  }
+
+  // *** 서버에 데이터 전송 ***
+  function sendDataToServer(title, start, end, allDay, calendar) {
+    const data = {
+      title: title,
+      start: start,
+      end: end,
+      allDay: allDay,
+      location: eventLocation.value.trim(),
+      withId: wid,
+    };
+    console.log("서버로 전송할 데이터:", data);
+
+    fetch("/api/calendar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("네트워크 응답이 정상이 아닙니다.");
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        if (responseData.id) {
+          console.log("성공적으로 저장됨: ", responseData);
+          // calendar.addEvent 추가
+          calendar.addEvent({
+            title: responseData.title,
+            start: responseData.start,
+            end: responseData.end,
+            allDay: responseData.allDay,
+          });
+        } else {
+          console.error("Server error:", responseData.error);
+          alert("저장 실패");
+        }
+      });
+  }
+
+  // *** 종일 체크박스 변경 핸들러 ***
+  function handleAllDayCheckboxChange() {
+    if (allDayCheckbox.checked) {
+      timeGroup.classList.add("d:none");
+      timeGroup.classList.remove("d:flex");
+    } else {
+      timeGroup.classList.remove("d:none");
+      timeGroup.classList.add("d:flex");
+    }
+  }
+
+  // *** 시간 변경 핸들러 ***
+  function handleTimeChange(timeInput) {
+    if (!allDayCheckbox.checked) {
+      const value = timeInput.value;
+      if (timeInput === startTime) {
+        eventStart.value = value;
+      } else {
+        eventEnd.value = value;
+      }
+    }
+  }
+
+  // *** 모달 입력 필드 초기화 ***
+  function clearModalFields() {
+    eventTitle.value = "";
+    eventStart.value = "";
+    eventEnd.value = "";
+  }
+
+  // *** url 에서 wid 추출
+  function getWidFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("wid");
+  }
+
+  const wid = getWidFromUrl();
+  getDataToServer(wid);
+  console.log(wid);
 });

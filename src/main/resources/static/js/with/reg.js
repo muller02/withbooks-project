@@ -2,21 +2,16 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
   const submitBtn = form.querySelector(".submit-btn");
+  const withForm = document.querySelector(".with-form");
 
-  /* 중복 등록된 이벤트 리스너 제거 */
-  submitBtn.removeEventListener("click", validateForm);
-
-  /* submitBtn 클릭 시 유효성 검사 */
+  // submitBtn 클릭 시 유효성 검사
   submitBtn.addEventListener("click", function (e) {
     e.preventDefault(); // 기본 동작인 폼 제출을 막음
     validateForm();
   });
 
-  const withForm = document.querySelector(".with-form");
-
-  /* 필수 입력 항목 하이라이팅 & 스크롤 */
+  // 필수 입력 항목 하이라이팅 & 스크롤
   function validateForm() {
-
     let isValid = true;
     let firstInvalidField = null; // 첫 번째 유효하지 않은 필드를 저장할 변수
     const requiredFields = Array.from(form.querySelectorAll("[required]")); // required 속성이 지정된 모든 요소를 배열로 변환
@@ -27,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ) {
         isValid = false;
         if (!firstInvalidField) {
-          firstInvalidField = fielad; // 첫 번째 유효하지 않은 필드를 찾음
+          firstInvalidField = field; // 첫 번째 유효하지 않은 필드를 찾음
         }
       } else if (
         !field.value.trim() ||
@@ -41,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    /* 유효성 검사 실패시 */
+    // 유효성 검사 실패 시
     if (!isValid) {
       if (firstInvalidField) {
         const section = firstInvalidField.closest(".n-item");
@@ -60,38 +55,29 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } else {
       // 유효성 검사 통과 시 폼 제출
-      // withReg.submit();
       withForm.submit();
     }
   }
 
-  /* 폼 제출 시 유효성 검사 */
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // 기본 동작인 폼 제출을 막음
-    validateForm();
-  });
-
-  /* input 이벤트 발생 시 하이라이팅 해제 */
-  form.addEventListener("input", function () {
-    const sections = form.querySelectorAll(".n-item");
-
-    sections.forEach(function (section) {
+  // input 이벤트 발생 시 하이라이팅 해제
+  form.addEventListener("input", function (e) {
+    const field = e.target;
+    const section = field.closest(".n-item");
+    if (section) {
       section.classList.remove("required-field");
       const requiredMsg = section.querySelector(".required-msg");
       if (requiredMsg) {
         section.removeChild(requiredMsg); // required-msg 요소 제거
       }
-    });
+    }
   });
 
-  /* 해당 섹션으로 스크롤 이동하기 */
+  // 해당 섹션으로 스크롤 이동하기
   function scrollToSection(section) {
     const yOffset = -100; // 섹션 위치 위로 100px 이동
     const y = section.getBoundingClientRect().top + window.scrollY + yOffset; // DOM 내장 메서드로 섹션 현재 위치 파악 + 현재위치 + 최종스크롤 위치
     window.scrollTo({ top: y, behavior: "smooth" });
   }
-
-  // });
 
   // --------------- 문서 로드, alert 등 기본 로드 ----------------
   // window.addEventListener("load", function () {
@@ -228,6 +214,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (checkBoxCnt > checkBoxMaxCnt) {
         this.checked = false;
         categoryAlert.classList.remove("d:none");
+      } else {
+        categoryAlert.classList.add("d:none");
       }
     });
   });
@@ -267,7 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
       withForm.action = "/with/reg";
       withForm.method = "post";
       withForm.submit();
-
     } else {
       // 폼이 유효하지 않은 경우 서버로 데이터 전송하지 않음
       console.log("폼이 유효하지 않습니다.");

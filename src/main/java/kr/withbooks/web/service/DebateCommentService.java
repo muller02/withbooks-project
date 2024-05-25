@@ -15,5 +15,6 @@ public interface DebateCommentService {
 
     Long deleteById(Long id);
 
+    Long edit(Long id, DebateComment debateComment);
 //    DebateComment getByBoardId(Long boardId);
 }

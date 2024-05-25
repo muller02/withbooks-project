@@ -58,11 +58,11 @@
                                             </label>
                                             <label class="d:flex ai:center mr:5 fs:1">
                                                 <input type="radio" name="gender" value="1" class="mr:1" th:checked="${{param.gender}}== 1 ? true" />
-                                                여성
+                                                남성
                                             </label>
                                             <label class="d:flex ai:center mr:5 fs:1">
                                                 <input type="radio" name="gender" value="2" class="mr:1" th:checked="${{param.gender}} == 2 ? true" />
-                                                남성
+                                                여성
                                             </label>
                                         </div>
                                     </div>
@@ -72,11 +72,11 @@
                                         <div class="text-align:center fw:3 fs:1 w:2 py:2 bg-color:base-2">등록일</div>
                                         <div class="d:flex ai:center jc:space-between w:5 mx:2">
                                             <div>
-                                                <input class="fs:1" name="startdate" type="date" value="" th:value="${param.startDate}" />
+                                                <input class="fs:1" name="startdate" type="date" th:value="${param.startdate}" />
                                             </div>
                                             <div>&nbsp;~&nbsp;</div>
                                             <div>
-                                                <input class="fs:1" name="enddate" type="date" th:value="${param.endDate}" />
+                                                <input class="fs:1" name="enddate" type="date" th:value="${param.enddate}" />
                                             </div>
                                         </div>
                                     </div>
@@ -122,18 +122,14 @@
                         <div class="fl-grow:1 d:flex">
                             <div class="color:base-4 fs:1">검색 결과:&nbsp;</div>
                             <div class="d:flex">
-                                <div class="color:main-4 fs:1 mr:1" th:text="${list.size} > 0 ? ${count} : ${list.size}">30</div>
+                                <div class="color:main-4 fs:1 mr:1" th:text="${list} eq null ? '0' : ${count}">30</div>
                                 <div class="color:base-4 fs:1">건</div>
                             </div>
                         </div>
-                        <!-- <label class="n-toggle n-toggle-type:outline-box">
-                            20개씩
-                            <input type="checkbox" class="d:none" />
-                        </label> -->
                     </div>
                     <div class="d:flex ai:center bg-color:base-2 px:2 py:2">
-                        <label>
-                            <input type="checkbox" name="all" />
+                        <label class="d:flex">
+                            <input type="checkbox" name="all" style="width: 20px; height: 20px" />
                         </label>
                         <div class="fw:3 w:1p text-align:center fs:1">번호</div>
                         <div class="fw:3 w:1p text-align:center fs:1">회원번호</div>
@@ -148,20 +144,20 @@
                         <form action="update" method="post" id="idsForm">
                             <div class="result bd-bottom px:2 py:2" th:each="u,i : ${list}">
                                 <a th:href="@{|detail?id=${u.id}}" class="d:flex ai:center">
-                                    <label>
-                                        <input name="ids" type="checkbox" th:value="${u.id}" />
+                                    <label class="d:flex">
+                                        <input name="ids" type="checkbox" th:value="${u.id}" style="width: 20px; height: 20px" />
                                     </label>
                                     <div class="w:1p text-align:center fs:1" th:text="${i.count}">1</div>
                                     <div class="w:1p text-align:center fs:1" th:text="${u.id}">123</div>
                                     <div class="w:4p text-align:center fs:1" th:text="${u.email}">admin@withbooks.kr</div>
                                     <div class="w:2p text-align:center fs:1" th:text="${u.nickname}">위북이</div>
                                     <div class="w:1p text-align:center fs:1" th:text="${#temporals.format(u.birthDate, 'yyyy')}">1999</div>
-                                    <div class="w:1p text-align:center fs:1" th:text="${u.gender == 1? '여성' : '남성'}">여성</div>
+                                    <div class="w:1p text-align:center fs:1" th:text="${u.gender == 1? '남성' : '여성'}">여성</div>
                                     <div class="w:1p text-align:center fs:1 fl-shrink:0" th:text="${#temporals.format(u.joinDate, 'yyyy-MM-dd')}">2024-01-01</div>
                                     <div
                                         class="w:1p text-align:center fs:1"
+                                        th:text="${u.withdrawStatusName}"
                                         th:classappend="${u.withdrawStatus == 2 ? 'color:base-4' : u.withdrawStatus == 3 ? 'color:accent-1' : '' }"
-                                        th:text="${u.withdrawStatus == 1 ? '정상' : u.withdrawStatus == 2 ? '탈퇴' : '정지' }"
                                     >
                                         정상
                                     </div>
@@ -177,11 +173,11 @@
                 <ul
                     class="n-pager"
                     style="display: flex; justify-content: center"
-                    th:with="page = *{param.p} ? ${{param.p}} : 1
+                    th:with="page = ${param.p} eq null ? 1 : ${{param.p}}
                         , temp = (${page} - 1) / 5
                         , startnum = ${T(java.lang.Math).floor(temp)} * 5 + 1
                         ,temp1 = ${{count}}/6
-                        ,lastnum=${count} mod 6 > 0 ? ${temp1} + 1 : ${temp1}
+                        ,lastnum=${count} mod 6 > 0 ? ${T(java.lang.Math).floor(temp1)} + 1 : ${T(java.lang.Math).floor(temp1)}
                         ,endnum=${startnum+4} lt ${lastnum} ? ${startnum+4} : ${lastnum}
                         "
                 >
@@ -207,11 +203,11 @@
                         >
                     </li>
                     <li>
-                        <span class="fs:1" th:if="${startnum}+4 ge ${lastnum}">다음</span>
+                        <span class="fs:1" th:if="${startnum+4} ge ${lastnum}">다음</span>
                         <a
                             class="fs:1"
                             href="list?p=6"
-                            th:if="${startnum}+4 lt ${lastnum}"
+                            th:if="${startnum+4} lt ${lastnum}"
                             th:href="@{./list(id=${param.id},nickname=${param.nickname},email=${param.email},birthyear=${birthyear},gender=${param.gender},startdate=${param.startdate},enddate=${param.enddate},status=${param.status},p=${startnum}+5)}"
                             >다음</a
                         >
@@ -221,13 +217,10 @@
             <section id="batch-menus" class="my:4">
                 <h1 class="d:none">일괄 처리 메뉴</h1>
                 <div class="text-align:center">
-                    <!-- <form action="update" method="post"> -->
                     <div class="d:inline-flex mr:2 fs:2">일괄 처리(<span class="color:accent-1">※ 체크된 회원</span>)</div>
                     <div class="normal-status n-btn mr:2">정상 처리</div>
                     <button class="withdraw-status n-btn bg-color:main-2 color:main-6 mr:2">탈퇴 처리</button>
                     <button class="expulsion-status n-btn mr:2">정지 처리</button>
-                    <div class="n-btn bg-color:main-2 color:main-6 mr:2"><a href="mailto:whdmsdo1010@gmail.com">메일보내기</a></div>
-                    <!-- </form> -->
                 </div>
             </section>
         </main>

@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Document</title>
   <!--  <script src="/js/book/list.js"></script>-->
-
+  <link rel="stylesheet" type="text/css" href="/css/util/color.css" />
   <script src="/js/with/detail.js"></script>
   <style>
     /* *{
@@ -57,7 +57,7 @@
     </section>
     <div id="login-modal-backdrop" class="backdrop d:none zi:4"></div>
 
-  <a class="m:2" href="list?m=2&p=1">
+  <a class="m:2" href="list?m=3&p=1">
                         <span class="n-btn n-btn:void mt:3 pl:2" style="color: var(--color-base-5);">
                             <span class="	icon icon:caret_left icon-size:3 mx:1">아이콘</span>
                             전체 목록 보기
@@ -130,10 +130,10 @@
   <div class="with-tap-component">
     <ul class="n-tabbar justify-content:space-between menu-tap">
       <li class="active"><a>홈</a></li>
-      <li><a id="debate" th:href="@{/with/debate/list(m=3,wid=${with.id})}">토론서재</a></li>
+      <li><a id="debate" th:href="@{/debate/list(m=3,wid=${with.id})}">토론서재</a></li>
       <li><a id="calendar" th:href="@{/calendar/index(m=3,wid=${with.id})}">모임일정</a></li>
       <li><a id="board" th:href="@{/free-board/list(m=3,wid=${with.id},p=1,s='latest')}">자유게시판</a></li>
-      <li><a>북추천</a></li>
+      <!-- <li><a>북추천</a></li> -->
       <li><a>위드맴버</a></li>
     </ul>
   </div>
@@ -264,7 +264,7 @@
         </div>
         <div class="d:flex ai:center flex-direction:column">
           <div class="mr:auto fs:3"
-               th:classappend="${wm.masterYn} ?'deco  deco-pos:right  icon-color:main-3 icon:star_fill' :''"
+               th:classappend="${wm.masterYn} ?'deco  deco-pos:right  icon-color:main-5 icon:star_fill' :''"
                th:text="${wm.nickName}">뉴렉이
           </div>
           <div class="color:base-3 fs:2" th:text="${wm.joinDate}">2023.02.23</div>

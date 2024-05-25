@@ -41,6 +41,17 @@
         </if>
     </select>
 
+    <delete id="deleteAllById">
+        UPDATE debate_room
+        SET
+        blind_yn = 1
+        WHERE
+            with_id = #{withId}
+            AND id in
+            <foreach collection="ids" item="ids" open="(" close=")" separator=",">
+                #{ids}
+            </foreach>
+    </delete>
 
 </mapper>
 
