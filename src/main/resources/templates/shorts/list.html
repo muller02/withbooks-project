@@ -211,9 +211,9 @@
           th:data-id="${s.id}"
           >
             <h1 class="d:none">북쇼츠 작성관련 정보</h1>
-            <div class="h:1 w:1 border-radius:full of:hidden">
+            <div class="h:1 w:1 border-radius:6 of:hidden">
               <img
-                class="obj-fit:contain h:10p w:10p"
+                class="h:10p w:10p"
                 src="/image/shorts/profile.png"
                 th:src="@{|${s.userImg}|}"
                 alt="프로필사진"
@@ -278,7 +278,7 @@
                     <a
                       href=""
                       th:href="@{edit(sid=${s.id},bid=${s.bookId})}"
-                      class="va:middle deco deco-size:2 icon:pencil_simple w:100p"
+                      class="va:middle deco deco-size:3 icon:pencil_simple w:100p"
                     >
                       수정하기
                     </a>

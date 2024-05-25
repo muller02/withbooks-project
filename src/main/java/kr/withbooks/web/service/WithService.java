@@ -22,4 +22,7 @@ public interface WithService {
 
   List<WithView> getListByUserId(Long userId);
 
+
+  Integer getCount(Long[] categoryId, String query, Long faceYn, Long id, String name, String withTop, String sort, Integer page);
+
 }

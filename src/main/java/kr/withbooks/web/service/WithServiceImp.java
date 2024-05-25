@@ -76,5 +76,17 @@ public class WithServiceImp implements WithService {
         return viewRepository.findByBookId(bookId);
     }
 
+    @Override
+    public Integer getCount(Long[] categoryIds, String query, Long faceYn, Long id, String name, String withTop,
+            String sort, Integer page) {
+
+            Integer limit = null;
+            Integer offset = null;
+            Integer count = viewRepository.count(categoryIds, query, faceYn, id, name, withTop, sort, limit, offset);
+
+    
+            return count;
+    }
+
 
 }

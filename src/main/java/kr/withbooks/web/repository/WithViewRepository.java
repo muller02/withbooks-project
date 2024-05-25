@@ -17,10 +17,13 @@ public interface WithViewRepository {
 
     List<WithView> findByUserId(Long userId);
 
-    int count(Long id, String name, String withTop);
+    // int count(Long id, String name, String withTop);
 
     List<WithView> findByBookId(Long bookId);
 
     List<WithView> findAllByUserId(Long userId);
+
+    Integer count(Long[] categoryIds, String query, Long faceYn, Long id, String name, String withTop, String sort,
+            Integer limit, Integer offset);
 
 }

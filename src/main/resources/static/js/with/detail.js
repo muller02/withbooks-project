@@ -78,6 +78,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
         withJoinBtn.textContent = "탈퇴하기";
         // disabled 지움
         withJoinBtn.removeAttribute("disabled");
+
+        window.location.reload();
+
       }, 800);
     });
   });

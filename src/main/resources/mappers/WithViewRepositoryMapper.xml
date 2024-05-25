@@ -12,8 +12,9 @@
     with_category a
     right join `with_view` b on a.with_id = b.id
     <where>
+        blind_yn = 0
         <if test="categoryIds != null">
-             a.category_id IN
+            and a.category_id IN
             <foreach collection="categoryIds" item="arr" open="(" close=")" separator=",">
                 #{arr}
             </foreach>
