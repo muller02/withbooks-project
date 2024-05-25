@@ -31,28 +31,30 @@ public class WithController {
 
 
         List<WithView> list = null;
+        Integer count = null;
 
         switch (category) {
             case "id":
                 if(!"".equals(query))
                     list = service.getList(null, null, null, Long.parseLong(query), null, null, sort, page);
+                    // count = service.getCount(null, null, null, Long.parseLong(query), null, null, sort, page);
                 break;
             case "with-name":
                 list = service.getList(null, null, null, null, query, null, sort, page);
+                // count = service.getCount(null, null, null, null, query, null, sort, page);
                 break;
             case "with-top":
                 list = service.getList(null, null, null, null, null, query, sort, page);
+                // count = service.getCount(null, null, null, null, null, query, sort, page);
                 break;
         }
 
         if("".equals(query))
             list = service.getList(null, null, null, null, null, null, sort, page);
 
-        
-        model.addAttribute("count", 1000);
-        model.addAttribute("list", list);
 
-        System.out.println("list " + list);
+        // model.addAttribute("count", count);
+        model.addAttribute("list", list);
 
         return "/admin/with/list";
     }
