@@ -80,8 +80,7 @@ public class BooklogController {
         HttpServletResponse response,
         @AuthenticationPrincipal CustomUserDetails userDetails) throws IOException {
             
-        Long userid = 4L;
-        // Long userid = userDetails.getId();
+        Long userid = userDetails.getId();
 
             // =============== 먼저 북로그를 저장한다 ========================================================================
             booklog = Booklog.builder()
