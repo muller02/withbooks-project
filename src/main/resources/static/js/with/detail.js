@@ -134,6 +134,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     }
   });
 
+  // *** more 버튼 누르기 ***
   const showMore = document.getElementById("showMore");
   if (eventElements.length <= 3) {
     showMore.style.display = "d:none";
