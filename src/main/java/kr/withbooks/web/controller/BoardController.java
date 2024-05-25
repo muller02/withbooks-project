@@ -100,6 +100,8 @@ public class BoardController {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             Model model) {
 
+        User loginUser = userService.getById(userDetails.getId());
+
         Integer isWithMember = 0;
         if(userDetails != null)
             isWithMember = withMemberService.getJoinYn(withId, userDetails.getId());
@@ -143,8 +145,7 @@ public class BoardController {
         model.addAttribute("debateCommentList", debateCommentList);
         model.addAttribute("user", findUser);
         model.addAttribute("isWithMember", isWithMember);
-//        model.addAttribute("nickname", userDetails.getNickName());
-//        model.addAttribute("userImg", userDetails.getImg());
+        model.addAttribute("loginUser", loginUser);
 
 
         log.info("board = {}", findBoard);
