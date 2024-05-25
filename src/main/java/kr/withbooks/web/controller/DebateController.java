@@ -2,10 +2,7 @@ package kr.withbooks.web.controller;
 
 import kr.withbooks.web.config.CustomUserDetails;
 import kr.withbooks.web.entity.*;
-import kr.withbooks.web.service.DebateRoomService;
-import kr.withbooks.web.service.DebateTopicService;
-import kr.withbooks.web.service.WithMemberService;
-import kr.withbooks.web.service.WithService;
+import kr.withbooks.web.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +28,7 @@ public class DebateController {
     private final DebateTopicService debateTopicService;
     private final WithService withService;
     private final WithMemberService withMemberService;
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(
@@ -38,13 +36,27 @@ public class DebateController {
             Model model,
             @AuthenticationPrincipal CustomUserDetails userDetails) {
 
+        With with = withService.get(withId);
+        Long withRegId = with.getWithRegId();
+
         List<DebateRoomView> list  = debateRoomService.getListById(withId);
-        List<WithMember> withMembers = withMemberService.getWithMembers(withId);
 
         log.info("list : {}", list);
-        log.info("withMembers : {}", withMembers);
+
+        Integer isWithMember = 0;
+        if(userDetails != null)
+            isWithMember = withMemberService.getJoinYn(withId, userDetails.getId());
+
+        log.info("isWithMember : {}", isWithMember);
+
+        User user = userService.getById(userDetails.getId());
+
+
 
         model.addAttribute("list", list);
+        model.addAttribute("isWithMember", isWithMember);
+        model.addAttribute("user", user);
+        model.addAttribute("withRegId", withRegId);
 
         return "debate/list";
     }

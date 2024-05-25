@@ -350,13 +350,13 @@ function getCommentList(shortsId, comments, getCommentCount) {
 
 
                           </li>
-                          <li>
-               
-                          <button class="va:middle text-align:center	  color:accent-2 ">
-                            수정하기
-                          </button>
+<!--                          <li>-->
+<!--               -->
+<!--                          <button class="va:middle text-align:center	  color:accent-2 ">-->
+<!--                            수정하기-->
+<!--                          </button>-->
 
-                        </li>
+<!--                        </li>-->
             
                           </ul>
                       </div>
@@ -381,7 +381,7 @@ function getCommentList(shortsId, comments, getCommentCount) {
 }
 
 
-window.addEventListener("load",function (e){
+
 
   document.addEventListener("click", function (e){
 
@@ -413,16 +413,16 @@ window.addEventListener("load",function (e){
 
         })
 
-    // 코멘틀 리스트  출력 , 코멘트 숫자 갱신
-    getCommentList(shortsId,comments,function (commentCount) {
+    setTimeout( getCommentList(shortsId,comments,function (commentCount) {
       countComment.innerHTML = commentCount;
-    })
+    }),2000)
+    // 코멘틀 리스트  출력 , 코멘트 숫자 갱신
+
 
 
 
   })
 
-})
 
 
 

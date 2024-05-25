@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const eventTitle = modal.querySelector("#event-title");
   const eventStart = modal.querySelector("#event-start");
   const eventEnd = modal.querySelector("#event-end");
+  const eventLocation = modal.querySelector("#event-location");
   const cancelBtn = modal.querySelector("#cancel-btn");
   const allDayCheckbox = modal.querySelector("#all-day-checkbox");
   const timeGroup = modal.querySelector(".time-group");
@@ -27,9 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // *** 캘린더 구조 렌더링 ***
   function renderCalendar(events) {
+    // 기존에 저장된 캘린더 이벤트 불러오기
     console.log("Received events data:", events);
-
     const formattedEvents = events.map((event) => ({
+      // entity 값 매핑하기
       id: event.id,
       title: event.title || event.content,
       start: event.start || event.startDateTime,
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       slotMaxTime: "20:00",
       defaultTimedEventDuration: "01:00:00",
       now: new Date(),
+      // themeSystem: "bootstrap5",
       headerToolbar: {
         left: "prev,next today",
         center: "title",
@@ -73,23 +76,18 @@ document.addEventListener("DOMContentLoaded", () => {
     endTime.addEventListener("change", () => handleTimeChange(endTime));
   }
 
-  // *** 날짜 클릭 핸들러 ***
+  // *** 날짜 클릭으로 입력 ***
   function handleDateClick(info) {
     selectedInfo = { start: info.date, end: info.date, allDay: true };
     showModal(info.dateStr, info.dateStr, true);
   }
 
-  // *** 날짜 선택 핸들러 ***
+  // *** 날짜 드래그로 입력  ***
   function handleSelect(info) {
     selectedInfo = { start: info.start, end: info.end, allDay: info.allDay };
-    const endDate = new Date(info.endStr);
-    endDate.setDate(endDate.getDate() - 1);
-    showModal(
-      info.startStr.split("T")[0],
-      endDate.toISOString().split("T")[0],
-      info.allDay,
-      info,
-    );
+    // const endDate = new Date(info.endStr);
+    // endDate.setDate(endDate.getDate() - 1);
+    showModal(info.startStr, info.endStr, info.allDay, info);
   }
 
   // *** 모달 표시 ***
@@ -105,8 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
       timeGroup.classList.remove("d:none");
       timeGroup.classList.add("d:flex");
       if (info) {
-        startTime.value = info.startStr.split("T")[1].substring(0, 5);
-        endTime.value = info.endStr.split("T")[1].substring(0, 5);
+        startTime.value = info.startStr;
+        endTime.value = info.endStr;
       }
     }
   }
@@ -123,28 +121,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = eventTitle.value.trim();
     let start = eventStart.value;
     let end = eventEnd.value;
-    let uiEndDate;
-    let dbEndDate;
     const allDay = allDayCheckbox.checked;
 
     if (allDay) {
-      dbEndDate = new Date(end);
-      // dbEndDate.setTime(dbEndDate.getTime());
-      uiEndDate = new Date(dbEndDate);
-      uiEndDate.setDate(uiEndDate.getDate() + 1);
-      end = uiEndDate.toISOString();
+      // 종일 이벤트인 경우, 종료 시간을 당일 23:59:59로 설정
+      start = `${start}T00:00:00`;
+      end = `${end}T23:59:59`;
     } else {
       start = `${start}T${startTime.value}`;
       end = `${end}T${endTime.value}`;
-      dbEndDate = new Date(end);
     }
 
     if (title && start && end) {
-      sendDataToServer(title, start, dbEndDate.toISOString(), allDay);
+      sendDataToServer(title, start, end, allDay, calendar);
       calendar.addEvent({
         title: title,
         start: start,
-        end: allDay ? uiEndDate.toISOString() : end,
+        end: end,
         allDay: allDayCheckbox.checked,
       });
       modal.classList.add("d:none");
@@ -152,12 +145,23 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       alert("모든 필드를 입력하세요.");
     }
+    console.log("모달 제출", start);
+    console.log("모달 제출", end);
+    console.log("모달 제출", allDay);
   }
 
   // *** 서버에 데이터 전송 ***
-  function sendDataToServer(title, start, end, allDay) {
-    const data = { title, start, end, allDay };
-    console.log("서버로 데이터 전송:", data); // 로그 추가
+  function sendDataToServer(title, start, end, allDay, calendar) {
+    const data = {
+      title: title,
+      start: start,
+      end: end,
+      allDay: allDay,
+      location: eventLocation.value.trim(),
+      withId: wid,
+    };
+    console.log("서버로 전송할 데이터:", data);
+
     fetch("/api/calendar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -170,16 +174,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
       })
       .then((responseData) => {
-        if (responseData.success) {
-          console.log("이벤트가 성공적으로 저장됨: ", responseData);
+        if (responseData.id) {
+          console.log("성공적으로 저장됨: ", responseData);
+          // calendar.addEvent 추가
+          calendar.addEvent({
+            title: responseData.title,
+            start: responseData.start,
+            end: responseData.end,
+            allDay: responseData.allDay,
+          });
         } else {
           console.error("Server error:", responseData.error);
-          alert("이벤트 저장 실패");
+          alert("저장 실패");
         }
-      })
-      .catch((error) => {
-        console.error("데이터 전송 오류:", error);
-        alert("이벤트 데이터 전송 실패");
       });
   }
 
@@ -221,4 +228,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const wid = getWidFromUrl();
   getDataToServer(wid);
+  console.log(wid);
 });

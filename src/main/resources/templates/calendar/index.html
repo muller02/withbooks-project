@@ -7,6 +7,7 @@
   <title>모임일정</title>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
   <script defer src="/js/calendar/index.js"></script>
+
   <link href="/css/components/calendar.css" rel="stylesheet" type="text/css"/>
   <style>
     .icon {
@@ -23,12 +24,11 @@
       <li><a id="debate" th:href="@{/debate/list(m=3,wid=${param.wid})}">토론서재</a></li>
       <li class="active"><a id="calendar" th:href="@{/calendar/index(m=3,wid=${param.wid})}">모임일정</a></li>
       <li><a id="board" th:href="@{/free-board/list(m=3,wid=${param.wid},p=1,s='latest')}">자유게시판</a></li>
-      <li><a>북추천</a></li>
       <li><a>위드맴버</a></li>
     </ul>
   </div>
   <!-- calendar -->
-  <section>
+  <section class="pt:5">
     <h1 class="d:none">캘린더</h1>
     <div id='calendar-container'></div>
   </section>
@@ -95,7 +95,7 @@
           <!--          <label for="location">-->
           <!--            <span class="icon icon:map_pin"></span>-->
           <!--          </label>-->
-          <input class="n-textbox n-textbox-label:top p:3" id="location"
+          <input class="n-textbox n-textbox-label:top p:3" id="event-location"
                  placeholder="위치"
                  type="text"/>
         </div>

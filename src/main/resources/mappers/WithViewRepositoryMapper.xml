@@ -46,16 +46,8 @@
     
         group by
             b.id
+    order by b.reg_date desc
 
-    <choose>
-        <when test="sort == 'latest'"> 
-            order by b.reg_date desc
-        </when>
-
-        <when test="sort == 'oldest'">
-            order by b.reg_date asc
-        </when>
-    </choose>
 
     limit #{limit} offset #{offset}
     

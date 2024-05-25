@@ -5,6 +5,7 @@ import kr.withbooks.web.entity.Calendar;
 import kr.withbooks.web.entity.CalendarView;
 import kr.withbooks.web.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +30,12 @@ public class CalendarController {
 
   // 새 이벤트 작성
   @PostMapping
-  public Calendar addEvent(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody Calendar calendar) {
+  public ResponseEntity<Void> addEvent(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody Calendar calendar) {
     Long userId = userDetails.getId();
-    calendar.setUserId(userId); // userId를 calendar 객체에 설정
 
-    System.out.println("Received calendar event: " + calendar); // 로그 추가
-    return service.saveEvent(calendar, userId);
+    System.out.println("전송받은 이벤트: " + calendar);
+
+    service.saveEvent(calendar, userId);
+    return ResponseEntity.ok().build();
   }
 }
