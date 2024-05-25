@@ -283,7 +283,7 @@
                 </section>
 
                 <section class="pt:3 px:3  d:inline-block w:10p"
-                         th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq loginUser.id and isWithMember != null}">
+                         th:if="${#authentication.principal ne 'anonymousUser' and #authentication.principal.id eq loginUser.id  and isWithMember != null}">
                     <h1 class="d:none">댓글 입력란</h1>
                     <form class="d:flex ">
                         <div class="flex-grow:1">
