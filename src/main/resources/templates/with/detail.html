@@ -30,32 +30,34 @@
     }
 
     .backdrop {
-        position: fixed;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.06);
-      }
-      .modal-transform-xy {
-        transform: translateX(170px) !important;
-      }
-      /*  모달창*/
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .modal-transform-xy {
+      transform: translateX(170px) !important;
+    }
+
+    /*  모달창*/
   </style>
   <link>
 </head>
 
 <body>
 <main class="flex-grow:1" layout:fragment="main">
-  
-    <!-- 로그인 모달 -->
-    <section id="login-modal" class="n-modal d:none  modal-transform-xy zi:5" tabindex="-1">
-      <h1 class="n-font:subtitle text-align:center fs:5 fw:2 mt:3 mb:4">로그인을 하시겠습니까?</h1>
-      <p class="fs:2">로그인을하시면 조금 더 많은 서비스를 이용 할 수 있습니다. </p>
-      <div class="mt:4 d:flex gap:4 jc:center">
-        <button id="login-close-btn" type="button" class="n-btn w:2 p:2 bg-color:main-2">닫기</button>
-        <a href="/user/login"  id="login-open-btn" type="button" class="n-btn w:3 flex-grow:1">로그인</a>
 
-      </div>
-    </section>
-    <div id="login-modal-backdrop" class="backdrop d:none zi:4"></div>
+  <!-- 로그인 모달 -->
+  <section class="n-modal d:none  modal-transform-xy zi:5" id="login-modal" tabindex="-1">
+    <h1 class="n-font:subtitle text-align:center fs:5 fw:2 mt:3 mb:4">로그인을 하시겠습니까?</h1>
+    <p class="fs:2">로그인을하시면 조금 더 많은 서비스를 이용 할 수 있습니다. </p>
+    <div class="mt:4 d:flex gap:4 jc:center">
+      <button class="n-btn w:2 p:2 bg-color:main-2" id="login-close-btn" type="button">닫기</button>
+      <a class="n-btn w:3 flex-grow:1" href="/user/login" id="login-open-btn" type="button">로그인</a>
+
+    </div>
+  </section>
+  <div class="backdrop d:none zi:4" id="login-modal-backdrop"></div>
 
   <a class="m:2" href="list?m=3&p=1">
                         <span class="n-btn n-btn:void mt:3 pl:2" style="color: var(--color-base-5);">
@@ -111,9 +113,9 @@
         </form>
         <button
                 class="n-btn mx:auto px:5"
+                sec:authorize="isAuthenticated()"
                 th:classappend="${{joinYn}} == 1 ? 'joined n-btn-type:outline border-color:base-2 color:base-4': 'n-btn-type:filled'"
                 th:text="${{joinYn}} == 1 ? '탈퇴하기' : '가입 신청하기'"
-                sec:authorize="isAuthenticated()"
                 type="button"
         >
           가입 신청하기 <span class="ml:2 icon icon icon:caret_right icon-color:sub-1"></span>
@@ -209,45 +211,31 @@
     <section class="px:3 my:5">
       <h1 class="fs:6 fw:3 color:base-8 mb:4">모임일정</h1>
 
-      <div class="border w:fit-content d:flex jc:center ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3">
+      <div
+              class="event border w:6 d:flex jc:space-between ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3"
+              th:data-event-date="${dateTime}"
+              th:each="event, iter : ${calendarEvents}" th:if="${iter.index < 3}"
+              th:with="dateTime=${event.startDateTime},
+                      date=${#strings.listSplit(dateTime, 'T')[0]},
+                      time=${#strings.listSplit(dateTime, 'T')[1]},
+                      monthDay=${#strings.substring(date, 5, 10)}"
+      >
         <div class="w:fit-content h:fit-content border-radius:5 px:2 py:2 bg-color:main-1 box-sizing:border-box">
-          <div class="mb:1 text-align:center box-sizing:border-box fw:3 color:main-5">3/9</div>
-          <div class="text-align:center box-sizing:border-box color:base-3 fw:3">11:15</div>
+          <div class="mb:1 text-align:center box-sizing:border-box fw:3 color:main-5" th:text="${monthDay}">
+            3/9
+          </div>
+          <div class="text-align:center box-sizing:border-box color:base-3 fw:3" th:text="${time}">11:15</div>
         </div>
         <div class="">
-          <div class="fs:3 mb:1">종이달</div>
-          <!-- ㅇ아ㅣ콘컬러 추가해야함 -->
-          <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-3 deco deco-margin-right:1">노멤버라운지</div>
-        </div>
-        <div class="d:flex">
-          <div class="w:1 h:1 border bd-radius:full bg-color:main-3 border-width:2 bd-color:main-1"></div>
-          <div class="w:1 h:1 border bd-radius:full margin:-20 bg-color:main-3 border-width:2 bd-color:main-1"></div>
-          <div class="w:1 h:1 border bd-radius:full margin:-20 bg-color:main-3 border-width:2 bd-color:main-1"></div>
-          <div class="border h:fit-content align-self:center bd-radius:7 fs:1 margin:-20 bg-color:main-5 color:sub-1 fs:1 px:1">
-            확정 + 7
+          <div class="fs:3 mb:1" th:text="${event.title}">종이달</div>
+          <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-3 deco deco-margin-right:1"
+               th:text="${event.location}">노멤버라운지
           </div>
         </div>
+        <div class="d-day fs:3 mb:1"></div>
       </div>
 
-      <div class="border w:fit-content d:flex jc:center ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mr:3 my:3">
-        <div class="w:fit-content h:fit-content border-radius:5 px:2 py:2 bg-color:main-1 box-sizing:border-box">
-          <div class="mb:1 text-align:center box-sizing:border-box fw:3 color:main-5">3/9</div>
-          <div class="text-align:center box-sizing:border-box color:base-3 fw:3">11:15</div>
-        </div>
-        <div class="">
-          <div class="fs:3 mb:1">종이달</div>
-          <!-- ㅇ아ㅣ콘컬러 추가해야함 -->
-          <div class="fs:2 color:base-5 deco icon:map_pin icon-color:main-3 deco deco-margin-right:1">노멤버라운지</div>
-        </div>
-        <div class="d:flex">
-          <div class="w:1 h:1 border bd-radius:full bg-color:main-3 border-width:2 bd-color:main-1"></div>
-          <div class="w:1 h:1 border bd-radius:full margin:-20 bg-color:main-3 border-width:2 bd-color:main-1"></div>
-          <div class="w:1 h:1 border bd-radius:full margin:-20 bg-color:main-3 border-width:2 bd-color:main-1"></div>
-          <div class="border h:fit-content align-self:center bd-radius:7 fs:1 margin:-20 bg-color:main-5 color:sub-1 fs:1 px:1">
-            확정 + 7
-          </div>
-        </div>
-      </div>
+      <button class="fs:3 mt:4 px:2 py:1 border-radius:5 bg-color:main-1 color:main-5" id="show-more">+ more</button>
     </section>
 
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
@@ -282,7 +270,7 @@
         <div class="d:flex ai:center mb:3">
           <div class="w:1 h:1 mr:2">
             <img class="w:100p h:100p border-radius:5" src="/image/shorts/uie.jpg"
-            th:src="${b.userImg}"
+                 th:src="${b.userImg}"
             />
           </div>
           <div>
@@ -304,12 +292,12 @@
           </p>
 
           <div class="border border-color:base-3 w:100p h:4 border-radius:5"
-          th:if="${b.imgs.size()>0}"
+               th:if="${b.imgs.size()>0}"
           >
-            <img src="/image/shorts/"
-            th:if="${b.imgs.size()>0}"
-            th:src="${b.imgs[0]}"
-            class="w:100p h:4"
+            <img class="w:100p h:4"
+                 src="/image/shorts/"
+                 th:if="${b.imgs.size()>0}"
+                 th:src="${b.imgs[0]}"
             />
           </div>
         </div>

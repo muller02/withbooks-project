@@ -95,15 +95,12 @@ public class BooklogController {
                                     .build();
             service.reg(booklog);
 
-            System.out.println("******북로그 저장 완료********");
-
             // =============== 다음으로 로그를 저장한다 ========================================================================
             String fileName = null;
 
             if(imgFile != null && !imgFile.isEmpty())
             {
                 fileName = imgFile.getOriginalFilename();
-                System.out.println(fileName);
 
                 String path = "/image/booklog";
 
@@ -136,10 +133,8 @@ public class BooklogController {
                                     
             service.addLogs(logs);
             
-            System.out.println("로그 저장 완료");
             //=============================================================================================================
 
-        
             try {
             // 리턴 되는 url에 requestURI 정보가 보이지 않게 처리하기 위함
                 response.sendRedirect("detail?m=4&id=" + booklogId);
