@@ -1,9 +1,10 @@
-window.addEventListener("load", (e) => {
+window.addEventListener("DOMContentLoaded", (e) => {
   let contentDiv = document.querySelector("#content");
   let menuTap = document.querySelector(".menu-tap");
   let withInfoSection = document.querySelector("#with-info");
   let withJoinDiv = withInfoSection.querySelector(".with-join-btn");
   let withJoinBtn = withJoinDiv.querySelector("button");
+  const showMore = document.querySelector("#show-more");
 
   let lis = menuTap.querySelectorAll("li");
 
@@ -77,6 +78,9 @@ window.addEventListener("load", (e) => {
         withJoinBtn.textContent = "탈퇴하기";
         // disabled 지움
         withJoinBtn.removeAttribute("disabled");
+
+        window.location.reload();
+
       }, 800);
     });
   });
@@ -132,10 +136,14 @@ window.addEventListener("load", (e) => {
     }
   });
 
-  document.getElementById("show-more").addEventListener("click", function () {
+  showMore.addEventListener("click", function () {
+    const eventElements = document.querySelectorAll(".event");
     eventElements.forEach(function (element, index) {
       if (index >= 3) {
-        element.style.display = "flex";
+        const dDayElement = element.querySelector(".d-day");
+        if (dDayElement) {
+          dDayElement.classList.add("flex");
+        }
       }
     });
     this.style.display = "none";
