@@ -153,8 +153,6 @@ public class FreeBoardController {
       FreeBoard freeBoard = service.getById(freeBoardId);
       List<FreeAttachment> freeAttachmentsList = freeAttachmentService.getList(freeBoardId);
 
-      System.out.println("보드 " + freeBoard);
-
       model.addAttribute("freeBoard", freeBoard);
       model.addAttribute("freeBoardId", freeBoardId);
       model.addAttribute("freeAttachmentsList", freeAttachmentsList);

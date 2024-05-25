@@ -82,9 +82,6 @@ public class WithController {
     if(page == null)
       page = 1;
 
-    System.out.println("userId = " + userId);
-
-
     //카테고리 모델 얻기
     List<Category> categoryList = categoryService.getList();
     model.addAttribute("categoryList", categoryList);
