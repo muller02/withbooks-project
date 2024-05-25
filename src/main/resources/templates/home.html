@@ -52,7 +52,7 @@
         .shorts-shadow{
             box-shadow: 2px 4px 12px rgba(157, 157, 157, 0.08);
             flex: 0 0 33.33%;
-            max-height: 115px;
+            /* max-height: 115px; */
         }
 
         .overflow-y-scroll {
@@ -107,7 +107,7 @@
 <body>
 <main
         layout:fragment="main"
-        class="min-w:7  pb:10 md:pb:0   ml:8 mt:2"
+        class="min-w:7  pb:10 md:pb:0   ml:8 mt:2 mr:8"
         id="main"
 >
 
@@ -142,19 +142,21 @@
 
             <article class= "d:flex flex-direction:column md:d:flex  md:flex-direction:row lg:d:flex  lg:flex-direction:row gap:4 jc:center mt:auto ">
                 <div class="border-radius:5   p:5 shorts-shadow  md:w:3p lg:w:3p border-color  ">
-                    <div class="fw:3"> ❗북쇼츠</div>
-                    <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ? <br>  짧은 글로
-                        책 선택 시간을 줄일수 있습니다.</div>
+                    <div class="fw:3"> ❗북쇼츠 ?</div>
+                    <div class="pt:3 "> 어떤 책을 읽을지 고민된다면, 내가 읽은 책을 다른 사람들은 어떤 반응인지 궁금하다면 ? <br />
+                        SNS 느낌의 짧은 줄거리를 실시간으로 만나보세요 :)
+                    </div>
                 </div>
                 <div class="border-radius:5  p:5  shorts-shadow md:w:3p border-color  lg:w:3p">
-                    <div class="fw:3"> ❗위드</div>
-                    <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ?  북쇼츠의 짧은 글로
-                        책 선택 시간을 줄일수 있습니다.</div>
+                    <div class="fw:3"> ❗위드 ?</div>
+                    <div class="pt:3 "> 내가 읽은 책을 공유하고 싶다 ! 함께 얘기를 나눠보고 싶다 ! <br/>
+                        나와 비슷한 책을 읽는 사람들과 만나보세요 :)</div>
                 </div>
                 <div class="border-radius:5   p:5  shorts-shadow md:w:3p border-color lg:w:3p">
-                    <div class="fw:3"> ❗북로그</div>
-                    <div class="pt:3 "> 어떤 책을 읽어야 할지 ? 이 책은 무슨 내용인지 ?  북쇼츠의 짧은 글로
-                        책 선택 시간을 줄일수 있습니다.</div>
+                    <div class="fw:3"> ❗북로그 ?</div>
+                    <div class="pt:3 "> 읽은 책에 대하여 말과 글로 정리할 때 독서가 완성됩니다 ! <br/>
+                        읽은 책에 대한 생각을 기록하여 독서를 완성해보세요 :)
+                    </div>
                 </div>
             </article>
         </div>
@@ -215,7 +217,7 @@
                 
                 <section class="book-content d:flex overflow-y-scroll  scroll-box  scrl-none ">
                     <h2 class="d:none  ">베스트셀러</h2>
-                <ul class=" d:flex  flex-direction:column scroll-box md:w:5p lg:w:5p fl-wrap:wrap max-height:7">
+                <ul class=" d:flex  flex-direction:column scroll-box md:w:5p lg:w:5p fl-wrap:wrap max-height:9">
                     <li class="shorts-shadow min-width:6 box-sizing:border-box"  th:each="book, stat : ${bookList}">
                         <a class="d:flex  p:3 gap:4 m:2 " href="" th:href="@{./book/detail(id=${book.id},m=1)}">
                             <div class="fw:3 fs:3" th:text="${stat.index + 1}">1. </div>
