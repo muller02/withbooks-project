@@ -67,7 +67,6 @@ public class BookshortsController {
 
             List<String> imgList = new ArrayList<>();
             // null이 아닐 떄는, attachlist만큼의 반복을 돌면서 , list.img에 attahlist의 img를 꺼내서  담아주기
-            System.out.println(attachList);
             for (BookshortsAttachment shortsAttachment : attachList) {
 
                 imgList.add(shortsAttachment.getImg());
@@ -82,8 +81,6 @@ public class BookshortsController {
             BookshortsView shorts = service.getById(shortsId, userId);
             list.add(0, shorts);
         }
-
-        System.out.println("==================list size = "+list.size());
 
         model.addAttribute("list", list);
 
@@ -112,15 +109,6 @@ public class BookshortsController {
 
         Long userId = userDetails.getId();
 
-        System.out.println("files = " + files.size());
-
-        for(MultipartFile file : files){
-
-            System.out.println("복숭아 = " + file.getOriginalFilename());
-        }
-
-
-
         Bookshorts item = Bookshorts.builder()
                             .bookId(bookId)
                             .userId(userId)
@@ -129,14 +117,7 @@ public class BookshortsController {
 
         service.add(item);   // 북쇼츠 내용 저장
 
-        // System.out.println("사이즈 = "+files.size());
-        // for(MultipartFile f : files){
-        //     System.out.println("파일네임 = "+ f.getOriginalFilename());
-        // }
-
         String fileName = null;
-
-     
 
         for(int i=0; i<files.size(); i++){
 

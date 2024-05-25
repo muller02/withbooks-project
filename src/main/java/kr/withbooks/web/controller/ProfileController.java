@@ -55,7 +55,6 @@ public class ProfileController {
 
         UserBuilder userBuilder = User.builder();
 
-        System.out.println("profileImg : " + profileImg);
         // 프로필이미지가 왔으면 서버에 저장
         if(!profileImg.isEmpty())
         {

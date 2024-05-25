@@ -350,13 +350,13 @@ function getCommentList(shortsId, comments, getCommentCount) {
 
 
                           </li>
-                          <li>
-               
-                          <button class="va:middle text-align:center	  color:accent-2 ">
-                            수정하기
-                          </button>
+<!--                          <li>-->
+<!--               -->
+<!--                          <button class="va:middle text-align:center	  color:accent-2 ">-->
+<!--                            수정하기-->
+<!--                          </button>-->
 
-                        </li>
+<!--                        </li>-->
             
                           </ul>
                       </div>

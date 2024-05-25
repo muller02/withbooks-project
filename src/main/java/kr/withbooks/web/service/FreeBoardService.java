@@ -18,12 +18,12 @@ public interface FreeBoardService {
 
     FreeBoard getById(Long freeBoardId);
 
-    int reg(FreeBoard freeBoard, MultipartFile[] imgs);
-
     Long delete(Long id);
 
     int edit(FreeBoard freeBoard, MultipartFile[] imgs, HttpServletRequest request);
 
     List<FreeBoardView> getNoticeList(Long withId);
+
+    Long reg(FreeBoard freeBoard, MultipartFile[] imgs, HttpServletRequest request);
 
 }
