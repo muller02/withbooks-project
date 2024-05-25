@@ -82,8 +82,8 @@ public class WithController {
     //  WithView list 얻기 , 쿼리 스트링 ( category id, query, faceYn 포함)
     List<WithView> list = service.getList(categoryIds, query, faceYn, null, null, null, null, page);
 
-    int count = 1000;
-    // count = service.getCount();
+    int count = service.getCount(categoryIds, query, faceYn, null, null, null, null, page);
+
 
     // 뷰에 데이터 전달
     model.addAttribute("list", list);
