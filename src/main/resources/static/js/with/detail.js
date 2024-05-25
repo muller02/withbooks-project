@@ -145,12 +145,4 @@ window.addEventListener("DOMContentLoaded", (e) => {
     });
     this.style.display = "none";
   });
-
-  //   showMore.forEach(function (element, index) {
-  //     if (index >= 3) {
-  //       showMore.class.add = "flex";
-  //     }
-  //   });
-  //   showMore.class.remove = "none";
-  // });
 });
