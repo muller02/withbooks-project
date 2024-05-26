@@ -4,7 +4,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
   let withInfoSection = document.querySelector("#with-info");
   let withJoinDiv = withInfoSection.querySelector(".with-join-btn");
   let withJoinBtn = withJoinDiv.querySelector("button");
-  const showMore = document.querySelector("#show-more");
 
   let lis = menuTap.querySelectorAll("li");
 
@@ -80,7 +79,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
         withJoinBtn.removeAttribute("disabled");
 
         window.location.reload();
-
       }, 800);
     });
   });
@@ -132,20 +130,26 @@ window.addEventListener("DOMContentLoaded", (e) => {
     element.querySelector(".d-day").textContent = dDayText;
 
     if (index >= 3) {
-      element.style.display = "none";
+      element.style.display = "d:none";
     }
   });
 
-  showMore.addEventListener("click", function () {
-    const eventElements = document.querySelectorAll(".event");
-    eventElements.forEach(function (element, index) {
-      if (index >= 3) {
-        const dDayElement = element.querySelector(".d-day");
-        if (dDayElement) {
-          dDayElement.classList.add("flex");
-        }
-      }
-    });
-    this.style.display = "none";
-  });
+  // // *** more 버튼 누르기 ***
+  // const showMore = document.getElementById("showMore");
+  // if (eventElements.length <= 3) {
+  //   showMore.style.display = "d:none";
+  // }
+  //
+  // showMore.addEventListener("click", function () {
+  //   const events = document.querySelectorAll(".event");
+  //   events.forEach(function (element, index) {
+  //     if (index >= 3) {
+  //       const dDayElement = element.querySelector(".d-day");
+  //       if (dDayElement) {
+  //         dDayElement.classList.add("d:flex");
+  //       }
+  //     }
+  //   });
+  //   this.style.display = "none";
+  // });
 });
