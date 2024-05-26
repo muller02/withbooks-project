@@ -43,10 +43,10 @@ window.addEventListener("load",function (e){
   const writeBtn = document.querySelector(".write-btn");
 
   writeBtn.addEventListener("click",(e)=>{
-    if(getJSessionID() ==null){
-      loginModal();
-      e.preventDefault();
-    }
+  //   if(getJSessionID() ==null){
+  //     loginModal();
+  //     e.preventDefault();
+  //   }
 
 
   })
@@ -67,8 +67,8 @@ window.addEventListener("load",function (e){
     console.log(regBtn);
     if (getJSessionID() !=1) {
       // alert('로그인을 먼저하세요 ')
-      loginModal();
-      regBtn.disabled  =true;
+      // loginModal();
+      // regBtn.disabled  =true;
 
     }
 
@@ -518,8 +518,8 @@ window.addEventListener("load", function (e) {
     // input에 내용이 있어야 버튼 활성화 가능 함수
     function  updateButtonState(){
       if(getJSessionID() ==null){
-        commentReg.disabled =true;
-      return
+      //   commentReg.disabled =true;
+      // return
       }
 
       if(commentContent.value.trim() === "" || commentContent.value.trim() ===null){
@@ -534,8 +534,8 @@ window.addEventListener("load", function (e) {
     //댓글 input창에 입력될 때 마다 함수 호출
     commentContent.addEventListener("input",updateButtonState);
 
-    if(getJSessionID() ==null)
-      commentReg.disabled =true;
+    // if(getJSessionID() ==null)
+    //   commentReg.disabled =true;
 
     commentReg.onclick = function (e) {
       let content = commentContent.value;
