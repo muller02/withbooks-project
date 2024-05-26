@@ -148,7 +148,7 @@
 
   <div id="content">
     <section class="pt:4 px:3">
-      <h1 class="fs:6 fw:3 color:base-8">소개</h1>
+      <h1 class="fs:6 fw:3 color:base-9">소개</h1>
       <pre class="mb:3"> <div class=" h:100p" th:text="${with.intro}">
         좋은 분들이 모여서 이야기하다 보면 공감대가 생기고 친밀감이 쌓여서 좋은 독자들로 이어나갔으면 좋겠다는 생각에 만들게 되었습니다.<br><br>
 
@@ -168,7 +168,7 @@
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
 
     <section class="my:5 px:3">
-      <h1 class="fs:6 fw:3 mb:4 color:base-8">토론서재</h1>
+      <h1 class="fs:6 fw:3 mb:4 color:base-9">토론서재</h1>
 
       <div class="mt:4 d:flex mb:4 mt:4">
         <div class="d:flex">
@@ -214,7 +214,7 @@
 
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
     <section class="px:3 my:5">
-      <h1 class="fs:6 fw:3 color:base-8 mb:4">모임일정</h1>
+      <h1 class="fs:6 fw:3 color:base-9 mb:4">모임일정</h1>
       <div class="md:d:flex rg:d:flex">
         <div
                 class="event border w:6 d:flex  ai:center h:fit-content gap:3 px:2 py:2 border-radius:5 mt:4 pl:3 mr:3 my:3"
@@ -247,13 +247,13 @@
 
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
     <section class="my:5 px:3">
-      <h1 class="fs:6 fw:3 color:base-8 mb:4">
+      <h1 class="fs:6 fw:3 color:base-9 mb:4">
         위드맴버
         <span th:text="${withMemberCnt +' 명'}">7명</span>
       </h1>
 
       <!-- 여기 inline flex 추가  -->
-      <div class="d:inline-flex mx:2 ai:center mr:4" th:each=" wm : ${withMemberList}">
+      <div class="d:inline-flex  ai:center my:2 mx:2" th:each=" wm : ${withMemberList}">
         <div class=" mr:3" style="height: 40px; width: 40px ">
           <img class="mr:5 d:inline-block h:100p w:100p border-radius:full" th:src="${wm.img}"/>
         </div>
@@ -262,7 +262,8 @@
                th:classappend="${wm.masterYn} ?'deco  deco-pos:right  icon-color:main-5 icon:star_fill' :''"
                th:text="${wm.nickName}">뉴렉이
           </div>
-          <div class="color:base-3 fs:2" th:text="${wm.joinDate}">2023.02.23</div>
+
+          <div class="color:base-3 fs:2"     th:text="${#temporals.format(wm.joinDate,'yy-MM-dd')}">2023.02.23</div>
         </div>
       </div>
     </section>
@@ -270,7 +271,7 @@
     <div class="w:100p border-bottom border-width:3 border-color:base-2"><span class="d:none">선</span></div>
 
     <section class="my:5 board-list">
-      <h1 class="fs:6 fw:3 color:base-8 mb:4">자유게시판</h1>
+      <h1 class="fs:6 fw:3 color:base-9 mb:4">자유게시판</h1>
 
       <section class="border-bottom px:3 pb:2 mb:3" th:each="b : ${freeBoardList}">
         <h1 class="d:none">게시글</h1>
