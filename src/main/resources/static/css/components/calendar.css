@@ -107,4 +107,33 @@ html, body {
     font-weight: bold;
 }
 
+/* 화살표 아이콘 크기 및 굵기 조절 */
+.fc-icon {
+    font-size: 2rem !important; /* 폰트 크기를 2rem로 설정 */
+    font-weight: bold !important; /* 글꼴 굵기를 굵게 설정 */
+    width: 2rem !important; /* 아이콘의 너비를 2rem로 설정 */
+    height: 2rem !important; /* 아이콘의 높이를 2rem로 설정 */
+    line-height: 2rem !important; /* 아이콘의 라인 높이를 2rem로 설정 */
+}
+
+/* 반응형 - 화면 크기가 414px 이하일 때 화살표 아이콘 크기 및 굵기 조절 */
+@media (max-width: 414px) {
+    .fc-icon {
+        font-size: 14px !important; /* 작은 화면에서 폰트 크기를 더 크게 설정 */
+        width: 2.5rem !important; /* 작은 화면에서 아이콘의 너비를 더 크게 설정 */
+        height: 2.5rem !important; /* 작은 화면에서 아이콘의 높이를 더 크게 설정 */
+        line-height: 2.5rem !important; /* 작은 화면에서 아이콘의 라인 높이를 더 크게 설정 */
+    }
+}
+
+/*!* 반응형 - 화면 크기가 350px 이하일 때 화살표 아이콘 크기 및 굵기 조절 *!*/
+/*@media (max-width: 350px) {*/
+/*    .fc-icon {*/
+/*        font-size: 12px !important; !* 더 작은 화면에서 폰트 크기를 더 크게 설정 *!*/
+/*        width: 3rem !important; !* 더 작은 화면에서 아이콘의 너비를 더 크게 설정 *!*/
+/*        height: 3rem !important; !* 더 작은 화면에서 아이콘의 높이를 더 크게 설정 *!*/
+/*        line-height: 3rem !important; !* 더 작은 화면에서 아이콘의 라인 높이를 더 크게 설정 *!*/
+/*    }*/
+/*}*/
+
 
