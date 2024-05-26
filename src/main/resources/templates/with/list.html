@@ -43,7 +43,7 @@
   </style>
 </head>
 <body>
-<main class="flex-grow:1" layout:fragment="main">
+<main class="flex-grow:1 pb:10" layout:fragment="main">
 
   <!-- 로그인 안내 모달 -->
   <section class="n-modal d:none  modal-transform-xy" id="login-modal" tabindex="-1">
@@ -206,20 +206,20 @@
             </div>
             <div class="d:flex ai:center gap:1 ai:center">
               <div class="d:flex ai:center">
-                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="icon icon:user icon-size:2"></span>
                 <span class="fs:2 color:base-5 ml:1"
                       th:text="${with.memberCnt + ' / ' +with.personnel +' 명' }">5명/12명</span>
               </div>
               <!-- <span>·</span> -->
               <div class="d:flex ai:center">
-                <span class="icon icon:chat_circle icon-size:2"></span>
+                <span class="icon icon:calendar_check icon-size:2"></span>
                 <span class="fs:2 color:base-5 ml:1" th:text="'월 ' + ${with.interval} + ' 회'">월 1회</span>
               </div>
               <!-- <span>·</span> -->
             </div>
             <!-- 대면인 경우만 보이기 -->
             <div class="d:flex ai:center" th:if="${with.faceYn == 1}">
-              <span class="icon icon:chat_circle icon-size:2"></span>
+              <span class="icon icon:map_pin_fill icon-size:2"></span>
               <span class="fs:2 color:base-5 ml:1" th:text="${with.location}">노고산동</span>
             </div>
             <div class="ln-clamp:3">
