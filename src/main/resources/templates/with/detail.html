@@ -108,7 +108,18 @@
                   th:text="${withMemberCnt + ' / ' + with.personnel +'명'} ">7 / 12</span></div>
         </div>
       </div>
-      <div class="with-join-btn my:4">
+      <div th:if="${with.personnel <= withMemberCnt and joinYn == 0}">
+        <button
+          class="n-btn bg-color:base-3 mx:auto px:5"
+          type="button"
+          disabled
+          >
+            정원이 가득찼습니다 :) 
+          </button>
+      </div>
+      <div class="with-join-btn my:4"
+        th:if="${with.personnel > withMemberCnt or joinYn == 1}"
+      >
         <form action="withdraw" method="post" name="deleteMember">
           <input name="with-id" th:value="${with.id}" type="hidden"/>
         </form>

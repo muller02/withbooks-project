@@ -152,9 +152,8 @@ public class WithController {
       model.addAttribute("joinYn", withJoinYn);
     }
 
-
     model.addAttribute("nickname", nickname);
-
+    
     model.addAttribute("withMemberList", withMemberList);
     // model.addAttribute("freeBoardList", freeBoardList);
     model.addAttribute("debateRoomList", debateRoomList);
