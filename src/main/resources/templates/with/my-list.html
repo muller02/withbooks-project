@@ -192,7 +192,7 @@
           <!-- th:with img-->
           <div class="w:2 h:2 box-shadow border-color:base-2 border-radius:3 my:auto flex-shrink:0">
             <img class="w:100p h:100p border-radius:3" src="/image/with/puppy2.png"
-                 th:src="${with.img}"/>
+                 th:src="${with.img}" onerror="this.src='/image/with/with_profile.png';"/>
           </div>
 
           <div class="d:flex gap:1 flex-direction:column flex-grow:1">
