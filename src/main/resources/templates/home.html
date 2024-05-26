@@ -217,7 +217,7 @@
                     <h2 class="d:none  ">베스트셀러</h2>
                 <ul class=" d:flex  flex-direction:column scroll-box md:w:5p lg:w:5p fl-wrap:wrap max-height:9">
                     <li class="shorts-shadow min-width:6 box-sizing:border-box"  th:each="book, stat : ${bookList}">
-                        <a class="d:flex  p:3 gap:4 m:2 " href="" th:href="@{./book/detail(id=${book.id},m=1)}">
+                        <a class="d:flex  p:3 gap:4 m:2 bg-color:main-1 border-radius:3 " href="" th:href="@{./book/detail(id=${book.id},m=1)}">
                             <div class="fw:3 fs:3" th:text="${stat.index + 1}">1. </div>
                             <div class="book-img-wh">
                                 <img src="/image/with/trend.png" th:src="${book.cover}" class="book-img-wh">
