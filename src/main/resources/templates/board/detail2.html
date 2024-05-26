@@ -174,16 +174,16 @@
                     <h1 class="d:none">토론카드 컨텐츠</h1>
                     <div class="mb:3 bd-bottom">
                         <section class="d:flex fl-dir:column ai:center gap:1 mx:9 pt:2 pb:5">
-                            <div class="fs:1 color:base-4" th:text="${book.title}">도둑맞은 집중력</div>
-                            <div class="fs:3">"<span th:text="${topic.content}">재홍이는 진짜 일뽕인가</span>"</div>
-                            <h1 class="fs:6" th:text="${board.title}">일뽕재홍</h1>
+                            <div class="fs:1 md:fs:2 lg:fs:2 color:base-4" th:text="${book.title}">도둑맞은 집중력</div>
+                            <div class="fs:2 md:fs:3 ls:fs:3">"<span th:text="${topic.content}">재홍이는 진짜 일뽕인가</span>"</div>
+                            <h1 class="fs:4 md:fs:6 lg:fs:6" th:text="${board.title}">일뽕재홍</h1>
                             <div class="d:flex gap:1 jc:center ai:center">
                                 <span class="d:flex jc:center">
                                     <img class="profile-image w:1 h:1" src="/image/shorts/profile.png" th:src="${user.img}" alt="이치고경인">
                                 </span>
-                                <span class="gap:1" >
-                                    <i class="fs:1">by</i>
-                                    <span class="fs=1" th:text="${user.nickname}">이치고경인</span>
+                                <span class="gap:1 fs:1 md:fs:2 lg:fs:2" >
+                                    <i class="">by</i>
+                                    <span class="" th:text="${user.nickname}">이치고경인</span>
                                 </span>
                             </div>
                             <span class="fs:1" th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm:ss')}">2024-03-27 23:03:26</span>
