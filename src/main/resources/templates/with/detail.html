@@ -7,7 +7,7 @@
   <title>위드북스</title>
   <!--  <script src="/js/book/list.js"></script>-->
   <link href="/css/util/color.css" rel="stylesheet" type="text/css"/>
-  <script src="/js/with/detail.js"></script>
+  <script src="/js/with/detail.js" defer></script>
   <style>
     /* *{
     font-family: "Noto Sans KR", sans-serif;
@@ -124,17 +124,17 @@
           <input name="with-id" th:value="${with.id}" type="hidden"/>
         </form>
         <button
-                class="n-btn mx:auto px:5"
-                sec:authorize="isAuthenticated()"
-                th:classappend="${{joinYn}} == 1 ? 'joined n-btn-type:outline border-color:base-2 color:base-4': 'n-btn-type:filled'"
-                th:text="${{joinYn}} == 1 ? '탈퇴하기' : '가입 신청하기'"
-                type="button"
+          class="n-btn mx:auto px:5"
+          sec:authorize="isAuthenticated()"
+          th:classappend="${{joinYn}} == 1 ? 'joined n-btn-type:outline border-color:base-2 color:base-4': 'n-btn-type:filled'"
+          th:text="${{joinYn}} == 1 ? '탈퇴하기' : '가입 신청하기'"
+          type="button"
         >
           가입 신청하기 <span class="ml:2 icon icon icon:caret_right icon-color:sub-1"></span>
         </button>
         <button
-                class="n-btn mx:auto px:5 anonymous"
-                sec:authorize="isAnonymous()"
+          class="n-btn mx:auto px:5 anonymous"
+          sec:authorize="isAnonymous()"
         >
           가입 신청하기
         </button>
@@ -144,10 +144,13 @@
   <div class="with-tap-component">
     <ul class="n-tabbar justify-content:space-between menu-tap">
       <li class="active"><a>홈</a></li>
+      <li><a href="javascript:loginModal()" id="debate" sec:authorize="isAnonymous()">토론서재</a></li>
       <li><a href="javascript:alert('위드가입 필요합니다 :)')" id="debate" th:if="${joinYn == 0}">토론서재</a></li>
       <li><a id="debate" th:href="@{/debate/list(m=3,wid=${with.id})}" th:if="${joinYn == 1}">토론서재</a></li>
+      <li><a href="javascript:loginModal()" id="calendar" sec:authorize="isAnonymous()">모임일정</a></li>
       <li><a href="javascript:alert('위드가입 필요합니다 :)')" id="calendar" th:if="${joinYn == 0}">모임일정</a></li>
       <li><a id="calendar" th:href="@{/calendar/index(m=3,wid=${with.id})}" th:if="${joinYn == 1}">모임일정</a></li>
+      <li><a href="javascript:loginModal()" id="board" sec:authorize="isAnonymous()">자유게시판</a></li>
       <li><a href="javascript:alert('위드가입 필요합니다 :)')" id="board" th:if="${joinYn == 0}">자유게시판</a></li>
       <li><a id="board" th:href="@{/free-board/list(m=3,wid=${with.id},p=1,s='latest')}"
              th:if="${joinYn == 1}">자유게시판</a></li>
