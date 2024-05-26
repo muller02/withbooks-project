@@ -141,7 +141,7 @@ function makeTemplate(list){
         let pubDate = book.pubDate.substr(0, 10);
         template +=  `
         <li class="shorts-shadow min-width:6 box-sizing:border-box">
-            <a class="d:flex  p:3 gap:4 m:2 " href="/book/detail?id=${book.id}&m=1">
+            <a class="d:flex  p:3 gap:4 m:2  bg-color:main-1 border-radius:3 " href="/book/detail?id=${book.id}&m=1">
                 <div class="fw:3 fs:3">${index++}</div>
                 <div class="book-img-wh">
                     <img src="${book.cover}" class="book-img-wh">
